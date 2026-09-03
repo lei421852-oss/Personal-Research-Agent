@@ -1,0 +1,37 @@
+# Virtual environments
+.venv/
+venv/
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Packaging output
+build/
+dist/
+*.egg-info/
+
+# Editors and local configuration
+.idea/
+.vscode/
+.env
+.env.*
+!.env.example
+
+# Hugging Face and model caches
+.cache/
+huggingface/
+models/
+checkpoints/
+data/chroma/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+
+# Temporary files
+*.tmp
+*.temp
+*.log
