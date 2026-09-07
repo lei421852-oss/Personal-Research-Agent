@@ -5,9 +5,11 @@ from app.agent.errors import (
     ToolExecutionError,
     ToolNotFoundError,
 )
+from app.agent.tool_calling import SingleStepToolCaller
 
 __all__ = [
     "InvalidToolArgumentsError",
     "ToolExecutionError",
     "ToolNotFoundError",
+    "SingleStepToolCaller",
 ]
