@@ -1,11 +1,21 @@
 import pytest
 from pydantic import ValidationError
 
-from app.evidence.models import FigureEvidence, RetrievedEvidence, TextEvidence, make_evidence_id
+from app.evidence.models import (
+    FigureEvidence,
+    RetrievedEvidence,
+    TextEvidence,
+    make_evidence_id,
+)
 
 
 def text_evidence(**overrides):
-    fields = dict(evidence_id="ev_test", paper_id="blip-v2", page=3, text="CapFilt context")
+    fields = {
+        "evidence_id": "ev_test",
+        "paper_id": "blip-v2",
+        "page": 3,
+        "text": "CapFilt context",
+    }
     return TextEvidence(**(fields | overrides))
 
 
@@ -13,9 +23,15 @@ def test_text_and_figure_construct_without_forcing_figure_fields_on_text():
     text = text_evidence()
     assert text.modality == "text"
     assert "asset_path" not in text.model_dump()
-    figure = FigureEvidence(evidence_id="ev_figure", paper_id="blip-v2", page=3,
-                            text="Related text", figure_id="Figure 2",
-                            caption="CapFilt", asset_path="figure2.png")
+    figure = FigureEvidence(
+        evidence_id="ev_figure",
+        paper_id="blip-v2",
+        page=3,
+        text="Related text",
+        figure_id="Figure 2",
+        caption="CapFilt",
+        asset_path="figure2.png",
+    )
     assert figure.modality == "figure"
 
 
@@ -34,7 +50,9 @@ def test_invalid_text_modality_rejected(modality):
 def test_stable_identity_and_different_locations():
     args = ("blip-v2", 3, "text", "paragraph-1")
     assert make_evidence_id(*args) == make_evidence_id(*args)
-    assert make_evidence_id(*args) != make_evidence_id("blip-v2", 4, "text", "paragraph-1")
+    assert make_evidence_id(*args) != make_evidence_id(
+        "blip-v2", 4, "text", "paragraph-1"
+    )
 
 
 def test_retrieved_evidence_does_not_modify_original():

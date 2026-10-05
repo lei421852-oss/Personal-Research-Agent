@@ -22,7 +22,7 @@ def registry() -> ToolRegistry:
     ],
 )
 def test_calculator_executes_supported_arithmetic(
-    registry: ToolRegistry, expression: str, expected: int | float
+    registry: ToolRegistry, expression: str, expected: float
 ) -> None:
     assert registry.execute("calculator", {"expression": expression}) == expected
 

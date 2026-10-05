@@ -17,3 +17,6 @@ data = ["PyMuPDF>=1.24,<2.0"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+
+[tool.setuptools.packages.find]
+include = ["app*"]

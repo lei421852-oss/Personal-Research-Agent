@@ -9,8 +9,9 @@ class TextRetriever:
         self.embedding_model = embedding_model
         self.vector_store = vector_store
 
-    def search_text(self, query: str, paper_ids: list[str] | None = None,
-                    top_k: int = 3) -> list[RetrievedEvidence]:
+    def search_text(
+        self, query: str, paper_ids: list[str] | None = None, top_k: int = 3
+    ) -> list[RetrievedEvidence]:
         if not isinstance(query, str) or not query.strip():
             raise ValueError("query must be nonempty")
         if type(top_k) is not int or top_k <= 0:

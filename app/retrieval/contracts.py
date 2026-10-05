@@ -11,11 +11,15 @@ class EmbeddingModel(Protocol):
 
 
 class TextVectorStore(Protocol):
-    def add(self, evidence: list[TextEvidence], embeddings: list[list[float]]) -> None: ...
-    def search(self, query_embedding: list[float], *, paper_ids: list[str] | None,
-               top_k: int) -> list[RetrievedEvidence]: ...
+    def add(
+        self, evidence: list[TextEvidence], embeddings: list[list[float]]
+    ) -> None: ...
+    def search(
+        self, query_embedding: list[float], *, paper_ids: list[str] | None, top_k: int
+    ) -> list[RetrievedEvidence]: ...
 
 
 class TextRetrieval(Protocol):
-    def search_text(self, query: str, paper_ids: list[str] | None,
-                    top_k: int) -> list[RetrievedEvidence]: ...
+    def search_text(
+        self, query: str, paper_ids: list[str] | None, top_k: int
+    ) -> list[RetrievedEvidence]: ...

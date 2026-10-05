@@ -16,7 +16,14 @@ def load_text_corpus(paper_dir: Path) -> list[TextEvidence]:
         for paragraph in text.split("\n\n"):
             paragraph = paragraph.strip()
             if paragraph:
-                evidence.append(TextEvidence(
-                    evidence_id=make_evidence_id(metadata["paper_id"], page, "text", paragraph),
-                    paper_id=metadata["paper_id"], page=page, text=paragraph))
+                evidence.append(
+                    TextEvidence(
+                        evidence_id=make_evidence_id(
+                            metadata["paper_id"], page, "text", paragraph
+                        ),
+                        paper_id=metadata["paper_id"],
+                        page=page,
+                        text=paragraph,
+                    )
+                )
     return list({item.evidence_id: item for item in evidence}.values())

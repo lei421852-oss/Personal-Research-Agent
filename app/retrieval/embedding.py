@@ -2,12 +2,18 @@
 
 
 class QwenEmbeddingModel:
-    def __init__(self, model_name: str = "Qwen/Qwen3-Embedding-0.6B",
-                 *, device: str = "cpu", batch_size: int = 8):
+    def __init__(
+        self,
+        model_name: str = "Qwen/Qwen3-Embedding-0.6B",
+        *,
+        device: str = "cpu",
+        batch_size: int = 8,
+    ):
         if batch_size <= 0:
             raise ValueError("batch_size must be positive")
         import torch
         from transformers import AutoModel, AutoTokenizer
+
         self.torch = torch
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModel.from_pretrained(model_name).to(device).eval()
@@ -23,8 +29,13 @@ class QwenEmbeddingModel:
     def _embed(self, texts: list[str]) -> list[list[float]]:
         vectors = []
         for start in range(0, len(texts), self.batch_size):
-            inputs = self.tokenizer(texts[start:start + self.batch_size], padding=True,
-                                    truncation=True, max_length=8192, return_tensors="pt")
+            inputs = self.tokenizer(
+                texts[start : start + self.batch_size],
+                padding=True,
+                truncation=True,
+                max_length=8192,
+                return_tensors="pt",
+            )
             inputs = {key: value.to(self.model.device) for key, value in inputs.items()}
             with self.torch.inference_mode():
                 states = self.model(**inputs).last_hidden_state
@@ -33,6 +44,13 @@ class QwenEmbeddingModel:
                     pooled = states[:, -1]
                 else:
                     lengths = mask.sum(dim=1) - 1
-                    pooled = states[self.torch.arange(states.shape[0], device=states.device), lengths]
-                vectors.extend(self.torch.nn.functional.normalize(pooled, p=2, dim=1).cpu().tolist())
+                    pooled = states[
+                        self.torch.arange(states.shape[0], device=states.device),
+                        lengths,
+                    ]
+                vectors.extend(
+                    self.torch.nn.functional.normalize(pooled, p=2, dim=1)
+                    .cpu()
+                    .tolist()
+                )
         return vectors

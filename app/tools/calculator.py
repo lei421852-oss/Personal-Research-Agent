@@ -3,6 +3,7 @@
 import ast
 import operator
 from collections.abc import Callable
+from typing import ClassVar
 
 from pydantic import BaseModel, ConfigDict, StrictStr
 
@@ -26,13 +27,13 @@ class CalculatorTool(Tool[CalculatorInput, Number]):
     description = "Evaluate an arithmetic expression using +, -, *, /, and parentheses."
     input_model = CalculatorInput
 
-    _binary_operators: dict[type[ast.operator], Callable[[Number, Number], Number]] = {
+    _binary_operators: ClassVar[dict[type[ast.operator], Callable[[Number, Number], Number]]] = {
         ast.Add: operator.add,
         ast.Sub: operator.sub,
         ast.Mult: operator.mul,
         ast.Div: operator.truediv,
     }
-    _unary_operators: dict[type[ast.unaryop], Callable[[Number], Number]] = {
+    _unary_operators: ClassVar[dict[type[ast.unaryop], Callable[[Number], Number]]] = {
         ast.UAdd: operator.pos,
         ast.USub: operator.neg,
     }
