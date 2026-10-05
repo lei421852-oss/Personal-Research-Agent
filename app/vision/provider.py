@@ -8,6 +8,7 @@ import mimetypes
 from pathlib import Path
 from typing import Any
 
+from app.tools.errors import DependencyFailure
 from app.vision.client import VLMResponse
 
 
@@ -38,22 +39,27 @@ class OpenAICompatibleVisionClient:
         if media_type not in {"image/png", "image/jpeg", "image/webp"}:
             raise ValueError("Expected a PNG, JPEG or WebP image")
         encoded = base64.b64encode(path.read_bytes()).decode("ascii")
-        response = self.client.chat.completions.create(
-            model=self.model,
-            response_format={"type": "json_object"},
-            messages=[
-                {
-                    "role": "user",
-                    "content": [
-                        {"type": "text", "text": prompt},
-                        {
-                            "type": "image_url",
-                            "image_url": {"url": f"data:{media_type};base64,{encoded}"},
-                        },
-                    ],
-                }
-            ],
-        )
+        try:
+            response = self.client.chat.completions.create(
+                model=self.model,
+                response_format={"type": "json_object"},
+                messages=[
+                    {
+                        "role": "user",
+                        "content": [
+                            {"type": "text", "text": prompt},
+                            {
+                                "type": "image_url",
+                                "image_url": {
+                                    "url": f"data:{media_type};base64,{encoded}"
+                                },
+                            },
+                        ],
+                    }
+                ],
+            )
+        except Exception as exc:
+            raise DependencyFailure("Vision provider request failed") from exc
         if not response.choices:
             raise ValueError("Vision provider returned no choices")
         choice = response.choices[0]

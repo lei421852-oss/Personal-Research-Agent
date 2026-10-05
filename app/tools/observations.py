@@ -14,6 +14,8 @@ IssueCode = Literal[
     "dependency_failure",
     "internal_failure",
     "unknown_tool",
+    "invalid_evidence",
+    "citation_validation_failure",
 ]
 
 

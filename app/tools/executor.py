@@ -7,7 +7,9 @@ from uuid import uuid4
 from pydantic import ValidationError
 
 from app.agent.errors import ToolNotFoundError
+from app.evidence.citations import CitationValidationError
 from app.evidence.errors import EvidenceDependencyError, UnknownPaperError
+from app.evidence.resolver import EvidenceResolutionError
 from app.retrieval.errors import RetrievalDependencyError
 from app.tools.errors import DependencyFailure
 from app.tools.observations import ObservationIssue, ToolExecutionTrace, ToolObservation
@@ -65,6 +67,18 @@ class ToolExecutor:
                 else "Arguments do not satisfy this tool's schema."
             )
             observation = self._error(safe_name, code, summary)
+        except EvidenceResolutionError:
+            observation = self._error(
+                safe_name,
+                "invalid_evidence",
+                "Evidence identity, modality or context scope is invalid.",
+            )
+        except CitationValidationError:
+            observation = self._error(
+                safe_name,
+                "citation_validation_failure",
+                "Model citations are empty or outside the supplied evidence.",
+            )
         except UnknownPaperError:
             observation = self._error(
                 safe_name,
