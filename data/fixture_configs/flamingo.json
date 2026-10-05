@@ -1,0 +1,106 @@
+{
+  "paper_key": "flamingo",
+  "paper_id": "flamingo-2204.14198v1",
+  "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+  "source_url": "https://arxiv.org/abs/2204.14198v1",
+  "pdf_url": "https://arxiv.org/pdf/2204.14198v1",
+  "pdf_sha256": "79d131280bc79f659212f35f940dfd3a26013c73355a58eb2263410945780c4c",
+  "page_regions": [
+    {
+      "page": 4,
+      "regions": [
+        [
+          60,
+          435,
+          537,
+          575
+        ]
+      ]
+    },
+    {
+      "page": 9,
+      "regions": [
+        [
+          60,
+          460,
+          537,
+          756
+        ]
+      ]
+    },
+    {
+      "page": 10,
+      "regions": [
+        [
+          60,
+          82,
+          537,
+          126
+        ],
+        [
+          60,
+          518,
+          537,
+          712
+        ]
+      ]
+    },
+    {
+      "page": 11,
+      "regions": [
+        [
+          60,
+          438,
+          537,
+          688
+        ]
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "figure_id": "Figure 3",
+      "page": 9,
+      "crop": [
+        60,
+        78,
+        536,
+        372
+      ],
+      "caption_region": [
+        60,
+        377,
+        536,
+        418
+      ],
+      "related_pages": [
+        9,
+        10,
+        11
+      ]
+    }
+  ],
+  "smoke_queries": [
+    {
+      "query": "How does Flamingo inject visual information into a frozen language model?",
+      "expected_pages": [
+        4,
+        10
+      ],
+      "expected_terms": [
+        "cross",
+        "frozen"
+      ]
+    },
+    {
+      "query": "What does the Perceiver Resampler do in Flamingo?",
+      "expected_pages": [
+        11
+      ],
+      "expected_terms": [
+        "fixed",
+        "visual"
+      ]
+    }
+  ]
+}

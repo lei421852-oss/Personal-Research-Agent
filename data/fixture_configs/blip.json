@@ -1,0 +1,108 @@
+{
+  "paper_id": "blip-2201.12086v2",
+  "title": "BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation",
+  "source_url": "https://arxiv.org/abs/2201.12086v2",
+  "pdf_url": "https://arxiv.org/pdf/2201.12086v2",
+  "pdf_sha256": "63e0335cdd57c3d92b907b89c93d10befdd29b8aeed108091bbde90c121ed97a",
+  "smoke_queries": [
+    {
+      "query": "How does CapFilt handle noisy image-text pairs?",
+      "expected_pages": [
+        4
+      ],
+      "expected_terms": [
+        "filter"
+      ]
+    },
+    {
+      "query": "What are the three vision-language objectives used by BLIP?",
+      "expected_pages": [
+        2,
+        3
+      ],
+      "expected_terms": [
+        "ITC",
+        "ITM",
+        "LM"
+      ]
+    },
+    {
+      "query": "What is the role of the captioner in CapFilt?",
+      "expected_pages": [
+        4
+      ],
+      "expected_terms": [
+        "caption"
+      ]
+    }
+  ],
+  "paper_key": "blip",
+  "page_regions": [
+    {
+      "page": 2,
+      "regions": [
+        [
+          50,
+          260,
+          545,
+          343
+        ]
+      ]
+    },
+    {
+      "page": 3,
+      "regions": [
+        [
+          50,
+          225,
+          295,
+          577
+        ],
+        [
+          50,
+          598,
+          295,
+          716
+        ],
+        [
+          303,
+          65,
+          546,
+          430
+        ]
+      ]
+    },
+    {
+      "page": 4,
+      "regions": [
+        [
+          50,
+          272,
+          295,
+          523
+        ]
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "figure_id": "Figure 3",
+      "page": 4,
+      "crop": [
+        55,
+        62,
+        545,
+        225
+      ],
+      "caption_region": [
+        50,
+        230,
+        545,
+        267
+      ],
+      "related_pages": [
+        4
+      ]
+    }
+  ]
+}

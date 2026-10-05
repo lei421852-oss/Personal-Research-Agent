@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "paper_key": "clip",
+  "paper_id": "clip-2103.00020v1",
+  "title": "Learning Transferable Visual Models From Natural Language Supervision",
+  "source_url": "https://arxiv.org/abs/2103.00020v1",
+  "pdf_url": "https://arxiv.org/pdf/2103.00020v1",
+  "pdf_sha256": "6478b6e571a7d6fcd846d8ef77bfd60c285f1986abb8f475eedc43de403074f5",
+  "page_numbering": "one-based PDF page index",
+  "preparation": "Manual page regions and fixed figure crops; not a general PDF parser.",
+  "pages": [
+    {
+      "page": 2,
+      "regions": [
+        [
+          50.0,
+          250.0,
+          545.0,
+          298.0
+        ]
+      ],
+      "path": "pages/page-002.txt",
+      "sha256": "dcd605d1c10c44201ad7d62e1c2fb3944f971c9e9d744ae647584c93a3d51d71"
+    },
+    {
+      "page": 4,
+      "regions": [
+        [
+          50.0,
+          396.0,
+          295.0,
+          670.0
+        ],
+        [
+          303.0,
+          65.0,
+          546.0,
+          250.0
+        ]
+      ],
+      "path": "pages/page-004.txt",
+      "sha256": "96c6ff1f46cd9f5463852a74c95b5bc562b5356bf262d2660260605dc847a801"
+    }
+  ],
+  "figures": [
+    {
+      "figure_id": "Figure 1",
+      "page": 2,
+      "crop": [
+        54.0,
+        64.0,
+        545.0,
+        243.0
+      ],
+      "caption_region": [
+        50.0,
+        250.0,
+        545.0,
+        298.0
+      ],
+      "related_pages": [
+        2,
+        4
+      ],
+      "asset_path": "figures/figure-001.png",
+      "asset_sha256": "a93ff4d58122fb908393ee98f91c4d686fcce1f18e1aa45a81eb7fde848b5399",
+      "caption": "Figure 1. Summary of our approach. While standard image models jointly train an image feature extractor and a linear classiﬁer to predict some label, CLIP jointly trains an image encoder and a text encoder to predict the correct pairings of a batch of (image, text) training examples. At test time the learned text encoder synthesizes a zero-shot linear classiﬁer by embedding the names or descriptions of the target dataset’s classes.",
+      "related_text": "Figure 1. Summary of our approach. While standard image models jointly train an image feature extractor and a linear classiﬁer to predict\n\nsome label, CLIP jointly trains an image encoder and a text encoder to predict the correct pairings of a batch of (image, text) training examples. At test time the learned text encoder synthesizes a zero-shot linear classiﬁer by embedding the names or descriptions of the target dataset’s classes.\n\nBoth these approaches share a key similarity. They try to pre- dict the exact words of the text accompanying each image. This is a difﬁcult task due to the wide variety of descriptions, comments, and related text that co-occur with images. Re- cent work in contrastive representation learning for images has found that contrastive objectives can learn better repre- sentations than their equivalent predictive objective (Tian et al., 2019). Other work has found that although generative models of images can learn high quality image representa- tions, they require over an order of magnitude more compute than contrastive models with the same performance (Chen et al., 2020a). Noting these ﬁndings, we explored training a system to solve the potentially easier proxy task of pre- dicting only which text as a whole is paired with which image and not the exact words of that text. Starting with the same bag-of-words encoding baseline, we swapped the predictive objective for a contrastive objective in Figure 2 and observed a further 4x efﬁciency improvement in the rate of zero-shot transfer to ImageNet.\n\nGiven a batch of N (image, text) pairs, CLIP is trained to predict which of the N × N possible (image, text) pairings across a batch actually occurred. To do this, CLIP learns a\n\nmulti-modal embedding space by jointly training an image encoder and text encoder to maximize the cosine similar- ity of the image and text embeddings of the N real pairs in the batch while minimizing the cosine similarity of the embeddings of the N 2 −N incorrect pairings. We opti- mize a symmetric cross entropy loss over these similarity scores. In Figure 3 we include pseudocode of the core of an implementation of CLIP. To our knowledge this batch con- struction technique and objective was ﬁrst introduced in the area of deep metric learning as the multi-class N-pair loss Sohn (2016), was popularized for contrastive representation learning by Oord et al. (2018) as the InfoNCE loss, and was recently adapted for contrastive (text, image) representation learning in the domain of medical imaging by Zhang et al. (2020)."
+    }
+  ],
+  "smoke_queries": [
+    {
+      "query": "What is the core training objective of CLIP?",
+      "expected_pages": [
+        4
+      ],
+      "expected_terms": [
+        "symmetric cross entropy",
+        "cosine"
+      ]
+    },
+    {
+      "query": "How does CLIP create a zero-shot classifier from class names?",
+      "expected_pages": [
+        2
+      ],
+      "expected_terms": [
+        "text encoder",
+        "zero-shot"
+      ]
+    }
+  ]
+}

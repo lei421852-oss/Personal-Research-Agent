@@ -72,7 +72,7 @@ def run_figure(args, metadata):
         raise ValueError(
             "Set VLM_API_KEY, VLM_MODEL and VLM_BASE_URL for a vision-capable provider"
         )
-    entry = metadata["figure"]
+    entry = metadata["figures"][0]
     figure = FigureEvidence(
         evidence_id=make_evidence_id(
             metadata["paper_id"], entry["page"], "figure", entry["figure_id"]

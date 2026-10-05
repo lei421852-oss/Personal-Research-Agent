@@ -1,0 +1,82 @@
+{
+  "paper_key": "clip",
+  "paper_id": "clip-2103.00020v1",
+  "title": "Learning Transferable Visual Models From Natural Language Supervision",
+  "source_url": "https://arxiv.org/abs/2103.00020v1",
+  "pdf_url": "https://arxiv.org/pdf/2103.00020v1",
+  "pdf_sha256": "6478b6e571a7d6fcd846d8ef77bfd60c285f1986abb8f475eedc43de403074f5",
+  "page_regions": [
+    {
+      "page": 2,
+      "regions": [
+        [
+          50,
+          250,
+          545,
+          298
+        ]
+      ]
+    },
+    {
+      "page": 4,
+      "regions": [
+        [
+          50,
+          396,
+          295,
+          670
+        ],
+        [
+          303,
+          65,
+          546,
+          250
+        ]
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "figure_id": "Figure 1",
+      "page": 2,
+      "crop": [
+        54,
+        64,
+        545,
+        243
+      ],
+      "caption_region": [
+        50,
+        250,
+        545,
+        298
+      ],
+      "related_pages": [
+        2,
+        4
+      ]
+    }
+  ],
+  "smoke_queries": [
+    {
+      "query": "What is the core training objective of CLIP?",
+      "expected_pages": [
+        4
+      ],
+      "expected_terms": [
+        "symmetric cross entropy",
+        "cosine"
+      ]
+    },
+    {
+      "query": "How does CLIP create a zero-shot classifier from class names?",
+      "expected_pages": [
+        2
+      ],
+      "expected_terms": [
+        "text encoder",
+        "zero-shot"
+      ]
+    }
+  ]
+}

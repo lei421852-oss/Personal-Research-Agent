@@ -1,0 +1,3 @@
+Figure 1. Summary of our approach. While standard image models jointly train an image feature extractor and a linear classiﬁer to predict
+
+some label, CLIP jointly trains an image encoder and a text encoder to predict the correct pairings of a batch of (image, text) training examples. At test time the learned text encoder synthesizes a zero-shot linear classiﬁer by embedding the names or descriptions of the target dataset’s classes.

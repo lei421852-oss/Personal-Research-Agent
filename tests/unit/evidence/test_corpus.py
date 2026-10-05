@@ -19,6 +19,6 @@ def test_fixed_blip_corpus_ids_pages_and_source_are_reproducible():
         hashlib.sha256((paper_dir / "paper.pdf").read_bytes()).hexdigest()
         == metadata["pdf_sha256"]
     )
-    assert (paper_dir / metadata["figure"]["asset_path"]).is_file()
-    assert metadata["figure"]["page"] == 4
-    assert "Figure 3" in metadata["figure"]["caption"]
+    assert (paper_dir / metadata["figures"][0]["asset_path"]).is_file()
+    assert metadata["figures"][0]["page"] == 4
+    assert "Figure 3" in metadata["figures"][0]["caption"]

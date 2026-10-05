@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "paper_key": "flamingo",
+  "paper_id": "flamingo-2204.14198v1",
+  "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+  "source_url": "https://arxiv.org/abs/2204.14198v1",
+  "pdf_url": "https://arxiv.org/pdf/2204.14198v1",
+  "pdf_sha256": "79d131280bc79f659212f35f940dfd3a26013c73355a58eb2263410945780c4c",
+  "page_numbering": "one-based PDF page index",
+  "preparation": "Manual page regions and fixed figure crops; not a general PDF parser.",
+  "pages": [
+    {
+      "page": 4,
+      "regions": [
+        [
+          60.0,
+          435.0,
+          537.0,
+          575.0
+        ]
+      ],
+      "path": "pages/page-004.txt",
+      "sha256": "11458251e03766aa6eff3984101030453f2b6912e469949ac8ad7a92bac852a5"
+    },
+    {
+      "page": 9,
+      "regions": [
+        [
+          60.0,
+          460.0,
+          537.0,
+          756.0
+        ]
+      ],
+      "path": "pages/page-009.txt",
+      "sha256": "f6947bc832f99d9f931e1a9d57330c5f6b846af66cdd2bd6f244a309e3112d4e"
+    },
+    {
+      "page": 10,
+      "regions": [
+        [
+          60.0,
+          82.0,
+          537.0,
+          126.0
+        ],
+        [
+          60.0,
+          518.0,
+          537.0,
+          712.0
+        ]
+      ],
+      "path": "pages/page-010.txt",
+      "sha256": "4a08e5cda5927674e81503bd1386c7f1b05c86b5a5c0fc56c9dc9198010c742b"
+    },
+    {
+      "page": 11,
+      "regions": [
+        [
+          60.0,
+          438.0,
+          537.0,
+          688.0
+        ]
+      ],
+      "path": "pages/page-011.txt",
+      "sha256": "1d4be6a63ba946d5e219f398ef0e8c0b7f5459f3213344a3701962e68ac8cccf"
+    }
+  ],
+  "figures": [
+    {
+      "figure_id": "Figure 3",
+      "page": 9,
+      "crop": [
+        60.0,
+        78.0,
+        536.0,
+        372.0
+      ],
+      "caption_region": [
+        60.0,
+        377.0,
+        536.0,
+        418.0
+      ],
+      "related_pages": [
+        9,
+        10,
+        11
+      ],
+      "asset_path": "figures/figure-001.png",
+      "asset_sha256": "cea551519eafce3ecc5c650568a9237d751ce6cdcfc4d0b54a8b0e899076ec7c",
+      "caption": "Figure 3 | Overview of the Flamingo model. The Flamingo models are a family of visual language model (VLM) that can take as input visual data interleaved with text and can produce free-form text as output. Key to its performance are novel architectural components and pretraining strategies described in Section 3.",
+      "related_text": "This section describes our approach to building the Flamingo model: a visual language model that accepts text interleaved with images/videos as input and outputs free-form text. Despite its apparent simplicity, this API is suﬃciently expressive to tackle a diverse range of tasks. In particular, it handles both open-ended tasks such as visual question-answering or captioning, which require generating text, and close-ended tasks such as classiﬁcation, which require choosing the best category or answer amongst a set. Most importantly, it is amenable to few-shot in-context learning where examples of annotated visual and text pairs are provided in an interleaved prompt to steer the model to a desired task behavior, without having to change or adapt the model weights (see Section 3.3).\n\nThe architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.\n\nSecond, those visual tokens are used to condition the frozen LM using freshly initialised cross attention layers (Section 3.1.2) that are interleaved between the pretrained LM layers. These new layers oﬀer an expressive way for the LM to incorporate visual information for the next-token prediction task.\n\nVision encoder: from pixels to features. Our model’s vision encoder is a pretrained Normalizer- Free ResNet (NFNet) (Brock et al., 2021) – we use the F6 model. We chose this family of visual backbones thanks to their excellent trade-oﬀbetween performance and eﬃciency given our hardware. We pretrain the vision encoder using a contrastive objective on our datasets of image and text pairs,\n\nusing the two-term contrastive loss from Radford et al. (2021). Contrastive similarities are computed as the dot product of the mean pooling of the image encoder output, and the mean pooled output of a BERT model (Devlin et al., 2018). The performance of our contrastive pretrained model is given in Section 4.2.3 and more details about the contrastive training are given in Appendix C.2.2. During the main training phase of the Flamingo models, we leave the vision encoder frozen as it performs favorably when compared to training the vision model directly from our text generation objective (see ablations in Section 4.4). The output of the ﬁnal stage is a 2D spatial grid of features 𝑋𝑓, which\n\nis then ﬂattened to 1D as shown in Figure 4. Our model also handles video inputs. In this setting, frames are sampled at 1 FPS, encoded independently to obtain a sequence of 𝑇feature maps 𝑋𝑓which are then concatenated before being fed to downstream components (Figure 4).\n\narchitecture in Figure 3. It takes as input a variable number of image or video features from the vision encoder and produces a ﬁxed number of visual outputs as illustrated in Figure 4 (hence the name Resampler). The motivation for re-sampling the visual input to a ﬁxed and small number (in practice 64) of outputs is to signiﬁcantly reduce the computational complexity of vision-text cross attention, particularly important when dealing with multiple long videos. In similar spirit to Perceiver (Jaegle et al., 2021) and DETR (Carion et al., 2020), we learn a predeﬁned number of latent input queries. These latent queries are fed to a transformer stack and cross attend to the ﬂattened visual features\n\n𝑋𝑓. These visual features are obtained by ﬁrst adding a learnt temporal position encoding to each spatial grid of features corresponding to a given frame of the video (an image being considered as a single-frame video). Note that we only use temporal encodings and no spatial grid position encodings; we did not observe improvements from the latter, potentially because CNNs implicitly encode space information channel-wise (Islam et al., 2021). The visual features are then ﬂattened and concatenated as illustrated in Figure 4. The number of output tokens of the Resampler is thus equal to the number of learnt latent queries. Unlike in DETR and Perceiver, the keys and values computed from the learnt latents are concatenated to the keys and values obtained from 𝑋𝑓, which we found to perform slightly better. We show later in the ablation studies (Section 4.4), that using such a vision-language resampler module outperforms a plain transformer and an MLP. More architectural details are provided in Table 13."
+    }
+  ],
+  "smoke_queries": [
+    {
+      "query": "How does Flamingo inject visual information into a frozen language model?",
+      "expected_pages": [
+        4,
+        10
+      ],
+      "expected_terms": [
+        "cross",
+        "frozen"
+      ]
+    },
+    {
+      "query": "What does the Perceiver Resampler do in Flamingo?",
+      "expected_pages": [
+        11
+      ],
+      "expected_terms": [
+        "fixed",
+        "visual"
+      ]
+    }
+  ]
+}
