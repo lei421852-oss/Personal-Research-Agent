@@ -1,6 +1,6 @@
 # Multimodal Research Agent
 
-当前状态：Day 2 三论文语料基础设施已实现，79 项离线测试通过；真实模型验收状态见下方各阶段清单。
+当前状态：Day 3 已把语料能力封装为三个工具，并建立 Observation 与执行记录；未接 LLM、未实现 Agent Loop。各阶段真实模型验收状态见下方清单。
 
 本阶段没有 Agent Loop、自动图表检测、跨论文比较或最终问答 API。现有 SingleStepToolCaller 保留原样。
 
@@ -160,3 +160,87 @@ python -m scripts.smoke_test_day2 --top-k 3
 - [ ] Retrieval：尚未运行真实 Embedding；每篇两题的 Top-K 相关性及两组跨论文证据完整性待用户确认。
 
 单元/数据库测试只证明结构、过滤和幂等性，不证明真实语义检索质量。未完成最后一项前不宣称 Day 2 Passed。
+
+
+## Day 3：Domain Capability → Agent Tool
+
+三个工具已接入同一个 ToolRegistry，并通过 ToolExecutor 作为面向 Agent 的执行入口。沿用的 registry.execute 是旧版原始执行接口；它的异常契约保留兼容性。新 Agent 集成请使用 ToolExecutor，不要绕过观察/错误/脱敏/Trace 边界。
+
+```python
+from pathlib import Path
+from app.evidence.corpus import load_paper_corpus
+from app.tools.executor import ToolExecutor
+from app.tools.paper_registry import create_paper_registry
+
+corpus = load_paper_corpus(Path("data/papers"))
+# retrieval 为已有 TextRetriever，或测试中的 FakeRetrieval。
+executor = ToolExecutor(create_paper_registry(corpus, retrieval))
+observation = executor.execute(
+    "search_text",
+    {"query": "What does the Perceiver Resampler do?", "paper_ids": ["flamingo"], "top_k": 1},
+    tool_call_id="step-1",
+)
+```
+
+### Observation 规范
+
+公共字段：status、tool_name、summary、payload，另有可选 issue（code、retryable）。成功与空结果拥有各工具自己的 payload 结构：
+
+- search_text：paper_ids、evidence；每项含 evidence_id/paper_id/page/text/retrieval_score/rerank_score。
+- find_figure：figure；含 evidence_id/paper_id/page/figure_id/caption/asset_ref。
+- read_page：paper_id/page/coverage/prepared_pages/evidence/figures。coverage 固定为 prepared_regions_only，绝不声称已读取完整 PDF 页。
+
+| 情况 | status | issue.code | retryable |
+| --- | --- | --- | --- |
+| 找到证据 | success | 无 | — |
+| 未搜到证据、图未准备、页未准备 | empty | empty_result | false |
+| 参数非法 | error | invalid_arguments | false |
+| 论文未知 | error | unknown_paper | false |
+| 存储、embedding 或证据访问依赖故障 | error | dependency_failure | true |
+| 程序或返回数据不符合契约 | error | internal_failure | false |
+| 工具未注册 | error | unknown_tool | false |
+
+未准备页面还会在 payload 中给出 reason=page_not_prepared 和 prepared_pages。例如 Flamingo 第 35 页返回 empty，不触发 PDF 解析；未知论文返回 error，不混同为无检索结果。retryable 是供未来循环使用的分类提示，当前执行器不自动重试。
+
+### 资源和安全边界
+
+Figure 的公开资源引用形如 asset:ev_<hash>。FigureAssetResolver 在后端把已登记引用映射为真实路径，不把调用者字符串当路径，不允许任意文件访问。观察里不返回 asset_path、源 PDF 路径、Chroma 细节或异常堆栈。
+
+公开 payload 由明确的 Evidence DTO 投影生成，异常只映射为固定说明。ToolExecutor 同时脱敏公开观察和 Trace 的参数：敏感字段、进程环境中的 secret 值、常见 API key 模式以及本地路径。不会修改原语料内容，也不会读取其他项目的 .env。
+
+每次 execute 留下一条 ToolExecutionTrace：tool_call_id、tool_name、arguments、status、latency_ms、result_count。success/empty/error 都记录；不记录模型内部推理。read_page 的 result_count 是文本证据与图证据数量之和。
+
+查询返回的身份或内容若不属于当前语料快照，或者违反指定论文范围，会被拒绝为 internal_failure，避免把旧索引或错误实现当成当前证据。
+
+### 不接模型的手动演示
+
+```bash
+python -m scripts.demo_day3
+```
+
+默认 fixture 模式使用真实 Flamingo 原文和固定向量排名，不调用 Embedding 模型、VLM 或 LLM。它验证的是工具协议和证据扩展流程，不是语义检索质量。
+
+由人预先选定的两步调用：
+
+1. search_text，Flamingo，Top-K=1：返回第 9 页关于 Perceiver Resampler 和固定大小视觉 tokens 的原文段落。
+2. read_page，Flamingo，第 11 页：返回两段准备好的原文，包含 64 个输出以及降低 vision-text cross-attention 复杂度的动机。
+
+报告保存实际 Observation 与 Trace 到本项目 D 盘产物目录。这里没有自动下一步决策；第二次调用是人为指定。
+
+若用户要用已有 Day 2 索引检查真实 Embedding 的返回，可显式运行：
+
+```bash
+python -m scripts.demo_day3 --backend real
+```
+
+该选项不会接 LLM，也不会自动重建索引，需要先准备好 Day 2 索引；真实检索可能返回其他相关段落。本阶段没有执行此选项。
+
+### Day 3 验收
+
+- [x] 三工具的正常、空、非法参数、未知论文和依赖失败测试。
+- [x] 搜索范围、Figure 精确匹配、准备页与未准备页边界测试。
+- [x] 观察和 Trace 不暴露测试中的路径、异常堆栈与 API key。
+- [x] 真实本地 Chroma + 固定向量的工具集成测试。
+- [x] 无 LLM 的两步人工调用演示跑通。
+
+下一步：Day 4/5 再让模型根据 Observation 决定下一次调用。Day 2 真实语义检索验收仍是独立事项，不因本阶段协议测试通过而自动完成。

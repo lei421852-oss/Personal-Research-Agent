@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from app.evidence.models import RetrievedEvidence, TextEvidence
+from app.retrieval.errors import RetrievalDependencyError
 
 
 class ChromaTextVectorStore:
@@ -51,17 +52,23 @@ class ChromaTextVectorStore:
     ) -> list[RetrievedEvidence]:
         if type(top_k) is not int or top_k <= 0:
             raise ValueError("top_k must be positive")
-        if paper_ids == [] or self.collection.count() == 0:
+        if paper_ids == []:
             return []
         where = {"modality": "text"}
         if paper_ids is not None:
             where = {"$and": [{"modality": "text"}, {"paper_id": {"$in": paper_ids}}]}
-        results = self.collection.query(
-            query_embeddings=[query_embedding],
-            n_results=min(top_k, self.collection.count()),
-            where=where,
-            include=["documents", "metadatas", "distances"],
-        )
+        try:
+            count = self.collection.count()
+            if count == 0:
+                return []
+            results = self.collection.query(
+                query_embeddings=[query_embedding],
+                n_results=min(top_k, count),
+                where=where,
+                include=["documents", "metadatas", "distances"],
+            )
+        except Exception as exc:
+            raise RetrievalDependencyError("Vector search dependency failed") from exc
         hits = []
         for identity, text, metadata, distance in zip(
             results["ids"][0],

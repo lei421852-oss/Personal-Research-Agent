@@ -4,6 +4,7 @@ from collections.abc import Mapping
 
 from app.evidence.models import RetrievedEvidence
 from app.retrieval.contracts import EmbeddingModel, TextVectorStore
+from app.retrieval.errors import RetrievalDependencyError
 
 
 class TextRetriever:
@@ -35,5 +36,8 @@ class TextRetriever:
             paper_ids = list(
                 dict.fromkeys(self.paper_aliases.get(p, p) for p in paper_ids)
             )
-        vector = self.embedding_model.embed_query(query.strip())
+        try:
+            vector = self.embedding_model.embed_query(query.strip())
+        except Exception as exc:
+            raise RetrievalDependencyError("Query embedding dependency failed") from exc
         return self.vector_store.search(vector, paper_ids=paper_ids, top_k=top_k)
