@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "questions": [
+    {
+      "question_id": "clip-1",
+      "question": "What is the core training objective of CLIP?",
+      "requests": [
+        {
+          "query": "What is the core training objective of CLIP?",
+          "expected_pages": [
+            4
+          ],
+          "expected_terms": [
+            "symmetric cross entropy",
+            "cosine"
+          ],
+          "paper_key": "clip"
+        }
+      ]
+    },
+    {
+      "question_id": "clip-2",
+      "question": "How does CLIP create a zero-shot classifier from class names?",
+      "requests": [
+        {
+          "query": "How does CLIP create a zero-shot classifier from class names?",
+          "expected_pages": [
+            2
+          ],
+          "expected_terms": [
+            "text encoder",
+            "zero-shot"
+          ],
+          "paper_key": "clip"
+        }
+      ]
+    },
+    {
+      "question_id": "blip-1",
+      "question": "How does CapFilt handle noisy image-text pairs?",
+      "requests": [
+        {
+          "query": "How does CapFilt handle noisy image-text pairs?",
+          "expected_pages": [
+            4
+          ],
+          "expected_terms": [
+            "filter"
+          ],
+          "paper_key": "blip"
+        }
+      ]
+    },
+    {
+      "question_id": "blip-2",
+      "question": "Why does BLIP support both understanding and generation?",
+      "requests": [
+        {
+          "paper_key": "blip",
+          "query": "Why does BLIP support both understanding and generation?",
+          "expected_pages": [
+            3
+          ],
+          "expected_terms": [
+            "understanding",
+            "generation"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "flamingo-1",
+      "question": "How does Flamingo inject visual information into a frozen language model?",
+      "requests": [
+        {
+          "query": "How does Flamingo inject visual information into a frozen language model?",
+          "expected_pages": [
+            4,
+            10
+          ],
+          "expected_terms": [
+            "cross",
+            "frozen"
+          ],
+          "paper_key": "flamingo"
+        }
+      ]
+    },
+    {
+      "question_id": "flamingo-2",
+      "question": "What does the Perceiver Resampler do in Flamingo?",
+      "requests": [
+        {
+          "query": "What does the Perceiver Resampler do in Flamingo?",
+          "expected_pages": [
+            11
+          ],
+          "expected_terms": [
+            "fixed",
+            "visual"
+          ],
+          "paper_key": "flamingo"
+        }
+      ]
+    },
+    {
+      "question_id": "clip-vs-blip",
+      "question": "How do CLIP and BLIP differ in image-text interaction?",
+      "requests": [
+        {
+          "paper_key": "clip",
+          "query": "How does CLIP align image and text embeddings?",
+          "expected_pages": [
+            4
+          ],
+          "expected_terms": [
+            "cosine",
+            "image encoder"
+          ]
+        },
+        {
+          "paper_key": "blip",
+          "query": "How does BLIP use cross-attention in its image-grounded text encoder?",
+          "expected_pages": [
+            2,
+            3
+          ],
+          "expected_terms": [
+            "cross-attention",
+            "encoder"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "blip-vs-flamingo",
+      "question": "How do BLIP and Flamingo condition language generation on visual information?",
+      "requests": [
+        {
+          "paper_key": "blip",
+          "query": "How does the image-grounded text decoder generate captions in BLIP?",
+          "expected_pages": [
+            2,
+            3
+          ],
+          "expected_terms": [
+            "decoder",
+            "LM"
+          ]
+        },
+        {
+          "paper_key": "flamingo",
+          "query": "How does Flamingo condition its frozen language model using visual tokens?",
+          "expected_pages": [
+            9,
+            10
+          ],
+          "expected_terms": [
+            "frozen",
+            "cross attention"
+          ]
+        }
+      ]
+    }
+  ]
+}

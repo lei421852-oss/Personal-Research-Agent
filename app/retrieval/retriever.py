@@ -1,13 +1,22 @@
 """Adapted from Personal RAG: src/rag/retriever.py."""
 
+from collections.abc import Mapping
+
 from app.evidence.models import RetrievedEvidence
 from app.retrieval.contracts import EmbeddingModel, TextVectorStore
 
 
 class TextRetriever:
-    def __init__(self, embedding_model: EmbeddingModel, vector_store: TextVectorStore):
+    def __init__(
+        self,
+        embedding_model: EmbeddingModel,
+        vector_store: TextVectorStore,
+        *,
+        paper_aliases: Mapping[str, str] | None = None,
+    ):
         self.embedding_model = embedding_model
         self.vector_store = vector_store
+        self.paper_aliases = dict(paper_aliases or {})
 
     def search_text(
         self, query: str, paper_ids: list[str] | None = None, top_k: int = 3
@@ -23,5 +32,8 @@ class TextRetriever:
                 raise ValueError("paper_ids must contain nonempty strings")
             if not paper_ids:
                 return []  # Empty selection searches no papers, never the full corpus.
+            paper_ids = list(
+                dict.fromkeys(self.paper_aliases.get(p, p) for p in paper_ids)
+            )
         vector = self.embedding_model.embed_query(query.strip())
         return self.vector_store.search(vector, paper_ids=paper_ids, top_k=top_k)
