@@ -1,0 +1,68 @@
+{
+  "paper_id": "blip-2201.12086v2",
+  "title": "BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation",
+  "source_url": "https://arxiv.org/abs/2201.12086v2",
+  "pdf_url": "https://arxiv.org/pdf/2201.12086v2",
+  "pdf_sha256": "63e0335cdd57c3d92b907b89c93d10befdd29b8aeed108091bbde90c121ed97a",
+  "page_numbering": "one-based PDF page index",
+  "preparation": "Manually selected page regions and fixed figure crop, not a general PDF parser.",
+  "pages": [
+    {
+      "page": 2,
+      "path": "pages/page-002.txt"
+    },
+    {
+      "page": 3,
+      "path": "pages/page-003.txt"
+    },
+    {
+      "page": 4,
+      "path": "pages/page-004.txt"
+    }
+  ],
+  "figure": {
+    "figure_id": "Figure 3",
+    "page": 4,
+    "asset_path": "figures/figure-3.png",
+    "caption": "Figure 3. Learning framework of BLIP. We introduce a captioner to produce synthetic captions for web images, and a ﬁlter to remove noisy image-text pairs. The captioner and ﬁlter are initialized from the same pre-trained model and ﬁnetuned individually on a small-scale human-annotated dataset. The bootstrapped dataset is used to pre-train a new model.",
+    "related_text": "We propose Captioning and Filtering (CapFilt), a new method to improve the quality of the text corpus. Figure 3 gives an illustration of CapFilt. It introduces two modules: a captioner to generate captions given web images, and a ﬁlter to remove noisy image-text pairs. Both the captioner and the ﬁlter are initialized from the same pre-trained MED model, and ﬁnetuned individually on the COCO dataset. The ﬁnetuning is a lightweight procedure.\n\nSpeciﬁcally, the captioner is an image-grounded text de- coder. It is ﬁnetuned with the LM objective to decode texts given images. Given the web images Iw, the captioner gen- erates synthetic captions Ts with one caption per image. The ﬁlter is an image-grounded text encoder. It is ﬁnetuned with the ITC and ITM objectives to learn whether a text matches an image. The ﬁlter removes noisy texts in both the original web texts Tw and the synthetic texts Ts, where a text is considered to be noisy if the ITM head predicts it as unmatched to the image. Finally, we combine the ﬁltered image-text pairs with the human-annotated pairs to form a new dataset, which we use to pre-train a new model.",
+    "crop_pdf_points": [
+      55,
+      62,
+      545,
+      225
+    ]
+  },
+  "smoke_queries": [
+    {
+      "query": "How does CapFilt handle noisy image-text pairs?",
+      "expected_pages": [
+        4
+      ],
+      "expected_terms": [
+        "filter"
+      ]
+    },
+    {
+      "query": "What are the three vision-language objectives used by BLIP?",
+      "expected_pages": [
+        2,
+        3
+      ],
+      "expected_terms": [
+        "ITC",
+        "ITM",
+        "LM"
+      ]
+    },
+    {
+      "query": "What is the role of the captioner in CapFilt?",
+      "expected_pages": [
+        4
+      ],
+      "expected_terms": [
+        "caption"
+      ]
+    }
+  ]
+}
