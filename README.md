@@ -1,6 +1,6 @@
 # Multimodal Research Agent
 
-当前状态：Day 3 已把语料能力封装为三个工具，并建立 Observation 与执行记录；未接 LLM、未实现 Agent Loop。各阶段真实模型验收状态见下方清单。
+当前状态：Day 4 已接入 analyze_figure、引用身份校验与固定多模态 QA 流程；未实现 Agent Loop。真实 VLM 两案例验收待配置后执行，各阶段状态见下方清单。
 
 本阶段没有 Agent Loop、自动图表检测、跨论文比较或最终问答 API。现有 SingleStepToolCaller 保留原样。
 
@@ -243,4 +243,64 @@ python -m scripts.demo_day3 --backend real
 - [x] 真实本地 Chroma + 固定向量的工具集成测试。
 - [x] 无 LLM 的两步人工调用演示跑通。
 
-下一步：Day 4/5 再让模型根据 Observation 决定下一次调用。Day 2 真实语义检索验收仍是独立事项，不因本阶段协议测试通过而自动完成。
+下一步：Day 4 先完成固定多模态 QA；动态模型决策留到后续阶段。Day 2 真实语义检索验收仍是独立事项，不因本阶段协议测试通过而自动完成。
+
+
+## Day 4：Figure Tool 与固定多模态 QA
+
+`analyze_figure(question, figure_evidence_id, context_evidence_ids)` 已注册到工具层。
+使用 `create_paper_registry(corpus, retrieval, analyzer=FigureAnalyzer(client))` 注册四个工具，
+通过 `ToolExecutor` 执行，沿用公共 Observation、错误脱敏和执行记录。
+没有 analyzer 时保持 Day 3 的三个工具接口兼容。
+
+EvidenceResolver 只解析当前 corpus 内的 ID。Figure ID 必须对应图片；context IDs 必须
+对应当前 corpus 的同论文文本。工具 schema 不接受 filesystem path。内部图片路径只传给
+已有 FigureAnalyzer / VisionLanguageClient；公开结果只有 opaque asset reference。
+
+FigureAnalyzer 的扩展接口将图片、caption、带 ID / 页码的文本一起送入 VLM。
+`observations` 与 `interpretation` 保持分离。未显式提供 context 的 Day 1 接口继续兼容；
+工具接口则只使用显式传入的文本证据，不暗中附加其他页面。
+
+CitationValidator 要求非空 `evidence_used`，且其 ID 为本次 supplied IDs 的子集。
+虚假或空引用返回 `citation_validation_failure`，非法/跨 corpus/错误模态/异论文 context
+返回 `invalid_evidence`，均不可通过原参数重试。VLM 请求失败为可重试的 dependency_failure。
+这只检查身份，不声称语义支持已经验证。
+
+```python
+from app.evidence.resolver import EvidenceResolver
+from app.qa.service import MultimodalQAService
+from app.tools.executor import ToolExecutor
+from app.tools.paper_registry import create_paper_registry
+from app.vision.analysis import FigureAnalyzer
+
+executor = ToolExecutor(create_paper_registry(corpus, retrieval, analyzer=FigureAnalyzer(client)))
+service = MultimodalQAService(executor, EvidenceResolver(corpus))
+result = service.answer(
+    "Figure 3 为什么证明 BLIP 性能更强？请核实问题前提。", "blip", "Figure 3"
+)
+```
+
+流程固定为 find_figure → read_page → analyze_figure → validate citations → assemble answer。
+默认 read_page 读取 Figure 所在页；调用者可显式指定 `context_page`，模型不做页面选择。
+任一步 error / empty 立即停止，没有自动重试、动态 routing 或 Agent Loop。
+
+MultimodalQAResult 包含 status、answer、citations、observations、limitations、trace、
+total_latency_ms、tool_calls、citations_validated。Citation 包含 paper_id / page / figure_id，
+可直接映射成可读引用。失败时 answer 为 None，无 citations；重复使用服务时每次 trace 只记录本次调用。
+计时覆盖固定 QA 调用，不包含 corpus 加载及 provider 初始化，后续成本比较须使用相同口径。
+
+### 真实 VLM 两案例
+
+在当前进程中配置 VLM_API_KEY、VLM_MODEL、VLM_BASE_URL（密钥不提交到 Git），安装 vision 可选依赖后：
+
+```bash
+.venv/bin/python -m scripts.smoke_test_day4
+```
+
+脚本执行 BLIP false-premise 和 Flamingo Figure 3 两条固定流程，保存公开结果与 Trace 至
+本对话的 D 盘产物目录。Flamingo 使用已准备的 PDF 第 9 页上下文；没有临时解析新页面。
+真实结果需人工核对 BLIP 是否拒绝错误前提，以及 Flamingo 对视觉输入、encoder、resampler、
+cross-attention、frozen LM 的说明是否有提供的证据支持。运行 success 和 ID 子集校验不等于语义验收。
+
+当前运行环境没有上述三个变量，项目内仅有 `.env.example`；本次尚未运行真实 VLM，
+不得据 Fake 测试宣称 BLIP / Flamingo 真实验收通过。
