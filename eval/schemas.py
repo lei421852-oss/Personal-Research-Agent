@@ -128,3 +128,61 @@ class EvaluationDataset(Record):
     corpus_snapshot: list[PaperSnapshot] = Field(min_length=1)
     notes: list[NonEmpty] = Field(min_length=1)
     cases: list[EvaluationCase] = Field(min_length=1)
+
+
+class EvaluationRun(Record):
+    """One system/case result. Null semantic scores mean unreviewed, not zero."""
+
+    run_id: NonEmpty
+    case_id: NonEmpty
+    split: Literal["dev", "test"]
+    category: Category
+    system: Literal["text_rag", "fixed_multimodal_rag", "multimodal_agent"]
+    backend: Literal["fake", "real"]
+    answer: str | None
+    citations: list[EvidenceReference]
+    retrieved_evidence_ids: list[NonEmpty]
+    status: NonEmpty
+    limitations: list[str]
+    latency_ms: float = Field(ge=0, allow_inf_nan=False)
+    model_calls: StrictInt = Field(ge=0)
+    vlm_calls: StrictInt = Field(ge=0)
+    tool_calls: StrictInt = Field(ge=0)
+    llm_latency_ms: float = Field(ge=0, allow_inf_nan=False)
+    vlm_latency_ms: float = Field(ge=0, allow_inf_nan=False)
+    tool_latency_ms: float = Field(ge=0, allow_inf_nan=False)
+    task_success: bool | None = None
+    task_success_source: Literal[
+        "pending_review", "automatic_failure", "human_review"
+    ] = "pending_review"
+    citation_correctness: float | None = Field(
+        default=None, ge=0, le=1, allow_inf_nan=False
+    )
+    citation_correctness_source: Literal[
+        "pending_review", "not_applicable", "human_review"
+    ] = "pending_review"
+    citation_identity_valid: bool
+    citation_relevance_precision: float | None = Field(default=None, ge=0, le=1)
+    text_recall_at_k: float | None = Field(default=None, ge=0, le=1)
+    text_recall_k: StrictInt | None = Field(default=None, gt=0)
+    text_evidence_recall: float | None = Field(default=None, ge=0, le=1)
+    figure_recall_at_k: float | None = Field(default=None, ge=0, le=1)
+    figure_recall_k: StrictInt = Field(gt=0)
+    figure_recall_protocol: Literal[
+        "first_k_acquired_figures_not_ranked_image_search"
+    ] = "first_k_acquired_figures_not_ranked_image_search"
+    trace: list[dict] = Field(default_factory=list)
+    llm_events: list[dict] = Field(default_factory=list)
+    vlm_events: list[dict] = Field(default_factory=list)
+    errors: list[dict] = Field(default_factory=list)
+
+
+class EvaluationReview(Record):
+    run_id: NonEmpty
+    reviewer: NonEmpty
+    reviewed_at: datetime
+    task_success: bool | None = None
+    citation_correctness: float | None = Field(
+        default=None, ge=0, le=1, allow_inf_nan=False
+    )
+    notes: list[str] = Field(default_factory=list)
