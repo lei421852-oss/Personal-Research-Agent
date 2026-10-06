@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Multimodal Research Agent</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="masthead"><div><p class="eyebrow">PAPER RESEARCH / LOCAL DEMO</p><h1>Multimodal Research Agent</h1><p class="subtitle">CLIP · BLIP · Flamingo <span>从问题出发，跟随可观察的工具执行。</span></p></div><span class="corpus-tag">3 篇论文 · 已准备证据</span></header>
+    <section class="panel ask-panel" aria-labelledby="ask-title">
+      <h2 id="ask-title">Ask about the papers</h2>
+      <form id="ask-form"><label for="question">你的问题</label><textarea id="question" name="question" rows="3" maxlength="4000" required placeholder="Why does Flamingo use the Perceiver Resampler?"></textarea><div class="ask-actions"><p>模型选择一个动作，取得观察结果，再决定下一步。</p><button id="ask-button" type="submit">Ask Agent <span aria-hidden="true">↗</span></button></div></form>
+      <div class="examples" aria-label="示例问题"><button type="button" data-example="text">Text QA</button><button type="button" data-example="figure">Figure QA</button><button type="button" data-example="recheck">Agent Re-check</button><button type="button" data-example="insufficient">Insufficient Evidence</button></div>
+      <p id="request-state" role="status" aria-live="polite"></p><p id="api-error" role="alert" hidden></p>
+    </section>
+    <section id="result" hidden>
+      <div class="result-heading"><span id="run-status" class="badge"></span><span id="retrieval-mode"></span></div>
+      <section class="panel" aria-labelledby="answer-title"><h2 id="answer-title">Answer</h2><div id="answer" class="answer"></div><h3>Sources</h3><div id="citations" class="sources"></div><div id="limitations-section" hidden><h3>Limitations</h3><ul id="limitations"></ul></div><details id="stop-section" hidden><summary>停止原因</summary><pre id="stop-details"></pre></details></section>
+      <section id="figures-section" class="panel" aria-labelledby="figures-title" hidden><h2 id="figures-title">Figure Evidence</h2><div id="figures"></div></section>
+      <section class="panel" aria-labelledby="trace-title"><div class="section-heading"><h2 id="trace-title">Agent Trace</h2><span>工具调用与返回结果</span></div><ol id="trace" class="trace-list"></ol></section>
+      <footer id="metrics" class="metrics" aria-label="运行指标"></footer>
+    </section>
+    <section id="empty-state" class="empty-state"><p>Question → Tool → Observation → Next action / Finish</p><span>提交问题后，这里会展示答案、引用和实际执行轨迹。</span></section>
+  </main>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # Multimodal Research Agent
 
-当前状态：Day 5 已实现有限步单 Agent Tool Loop、Observation 反馈与 observed-evidence finish 校验。Fake 行为与回归测试通过；Day 4 真实 VLM 两案例仍待配置后执行。
+当前状态：Day 6 已增加本地 FastAPI 与轻量 Web UI；Day 5 决策、Prompt、工具与检索规则不变。API/浏览器验证通过，真实 Agent 的任务语义缺口仍按 Day 5.5 记录。
 
 本阶段没有 Agent Loop、自动图表检测、跨论文比较或最终问答 API。现有 SingleStepToolCaller 保留原样。
 
@@ -450,3 +450,84 @@ DeepSeek 即使收到 parallel_tool_calls=False 仍可能返回多个 tool_calls
 任务语义验收仍不全通过：CLIP 猜错论文版本 ID 后错误推断没有该论文；Figure 根据图注/正文
 拒绝错误前提但未调用 analyze_figure；Flamingo 与不足题均安全耗尽预算、未 finish。
 完整 Trace 与逐题审阅放在 D 盘现有对话产物目录。不能将 completed 当作 Task Success。
+
+
+## Day 6：稳定 HTTP API 与轻量 Demo UI
+
+服务入口 `app.main:app`，页面 `/`，核心接口 `POST /api/agent/run`。
+原生 HTML/CSS/JS，没有前端构建、账号、数据库、会话、历史、WebSocket 或流式返回。
+
+### 本地启动
+
+在本项目目录，已有模型配置仍可显式指定。本对话实际使用了本地 `.env.example` 中的配置，
+该用户改动未提交；也可以把配置放到 Git 忽略的 `.env` 后使用相应文件：
+
+```bash
+AGENT_ENV_FILE=.env.example .venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+```
+
+浏览器打开 `http://localhost:8000`，API 文档 `http://localhost:8000/docs`。
+需要安装依赖时使用 api / llm / vision 可选项；真实检索另需 retrieval 可选项。
+
+```bash
+.venv/bin/python -m pip install -e '.[api,llm,vision]'
+```
+
+默认 `AGENT_RETRIEVAL_BACKEND=day5-controlled`，与 Day 5.5 原运行后端一致；页面明确标注
+受控检索。显式 `AGENT_RETRIEVAL_BACKEND=real` 接现有 Day 2 Qwen/Chroma，
+不自动 ingestion，也不改变检索规则。env 文件仅通过 AGENT_ENV_FILE 显式加载。
+未配置或初始化失败时页面仍可访问，Agent 请求返回稳定 503。
+
+### API Contract
+
+```json
+{"question":"Why does Flamingo use the Perceiver Resampler?"}
+```
+
+AgentResult 经 `app/api/mapping.py` 投影成 `app/api/schemas/agent.py` 中独立 DTO。
+顶层字段：status、answer、citations、limitations、trace、metrics、figures、stop_details、retrieval_mode。
+不返回 AgentState、messages、System Prompt、原始 Observation、provider 对象、真实文件路径或 CoT。
+
+Trace DTO 是实际执行事实：step、tool_name、arguments、status、latency_ms、evidence_ids、failure。
+finish 从其已有动作/Observation 投影；未计时的 finish 延迟为 null，不伪造 0 ms。
+预算超限且未执行的工具请求不作为执行步骤展示。N_tools 不包含 finish。
+
+Citation DTO 明确 evidence_id、paper_id、page、figure_id。Figure DTO 额外含 caption、opaque
+image_url 及可选 analysis。图片 GET `/api/evidence/{evidence_id}/image` 只允许注册 Figure ID，
+不接受文件路径、不公开整个 data 目录。analysis 只投影实际 analyze_figure 返回的
+observations / interpretation / evidence_used / limitations；仅 find_figure/read_page 取得图片时
+analysis=None，UI 明确表示尚未执行视觉分析。
+
+HTTP 状态：有效 Agent 运行（包括 insufficient_evidence、step_exhaustion、model_failure 等）
+返回 200 + 实际领域 status；请求无效 422；配置不可用 503；未知 Figure 404；
+未预期异常或响应投影错误 500。Error envelope 为 status=error + error(code/message/retryable/fields)，
+不回传异常堆栈或输入值。
+
+### 资源与页面
+
+lifespan 初始化语料及检索依赖；每个请求独立创建 LLM/VLM 客户端、AgentState、Executor 和计数器。
+请求结束/失败后关闭 provider 客户端，不混用前次 Trace，无多会话存储。
+页面提供原四题，展示答案/来源、限制说明、Figure 与 VLM 分析、实际 Trace 和
+N_tools / N_model / N_VLM / T_total。失败/预算耗尽保持实际状态，不包装成成功。
+
+### 验证
+
+- 全部 204 项 pytest 通过，原有 186 项未回归。
+- HTTP 测试覆盖文本、Figure 引用/图片/分析、不足证据、预算耗尽、模型故障、
+  内部异常、请求验证、未配置服务、未知/文本 ID 图片拒绝、请求隔离、资源关闭和 DTO 错误。
+- 浏览器检查验证 answer/citation/trace/metrics、四示例、Figure 图片与观察/解释分区、
+  390px 移动端、无 HTML 注入、API 错误恢复和无 JS 错误。
+- 浏览器检查使用明确标记的 Fake 模型，仅验证 HTTP/UI，不声称真实 Agent 智能通过。
+- 一次真实 DeepSeek HTTP 检查返回 200 + step_exhaustion，DTO 与 UI 边界工作正常，
+  不将此结果当作 CLIP 任务语义通过。
+
+```bash
+.venv/bin/python -m pytest -q
+# 以下仅为可选浏览器验证，浏览器缓存放临时目录。
+PLAYWRIGHT_BROWSERS_PATH=/tmp/personal-agent-browser .venv/bin/python -m playwright install chromium --only-shell
+PLAYWRIGHT_BROWSERS_PATH=/tmp/personal-agent-browser .venv/bin/python -m scripts.check_day6_ui
+```
+
+API、浏览器验收及截图继续保存在既有 D 盘对话目录；截图文件标记“测试模型”。
+参考：[FastAPI lifespan](https://fastapi.tiangolo.com/advanced/events/)、
+[Response Model](https://fastapi.tiangolo.com/tutorial/response-model/)。
