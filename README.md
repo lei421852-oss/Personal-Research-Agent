@@ -1,6 +1,6 @@
 # Multimodal Research Agent
 
-当前状态：Day 8 已实现三系统统一评测 Runner、指标、运行与汇总命令；真实模型完成 10 条 dev × 3 系统共 30 次运行。test 未运行，答案语义评分待人工审阅。Day 5 Agent 决策逻辑、Tool Contract、Retrieval 与数据集保持原样。
+当前状态：Day 8 已封板。统一三系统 Runner 和 EvaluationRun 已建立；本次收尾仅执行 1 条 dev case × 3 systems 的 Fake 冒烟，不调用真实模型。完整实验留作可选，入口与范围见 [eval/README.md](eval/README.md)。此前 30 次真实 dev 为历史记录，test 未执行。
 
 实现历史按 Day 1–8 保留在下文；当前已具备有限步 Agent Loop、固定多模态 QA、API/UI 和评测入口。
 
