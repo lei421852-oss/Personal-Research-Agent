@@ -1,4 +1,4 @@
-"""Provider-neutral LLM boundary."""
+"""与模型提供方无关的 LLM 接口。"""
 
 from app.llm.client import LLMClient, Message, ToolSchema
 from app.llm.fake import FakeLLMClient

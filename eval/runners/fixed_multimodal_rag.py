@@ -1,4 +1,4 @@
-"""Explicit-figure questions use Day 4's fixed service; other inputs use fixed Text RAG."""
+"""明确 Figure 的问题复用 Day 4 固定服务，其余输入使用固定文本 RAG。"""
 
 from time import perf_counter
 
@@ -54,7 +54,7 @@ class FixedMultimodalRAGRunner(TextRAGRunner):
             service = MultimodalQAService(
                 executor, EvidenceResolver(self.resources.corpus)
             )
-            # Do not read gold target_figures, relevant_evidence_ids or the expected context pages.
+            # 不读取标注中的 target_figures、relevant_evidence_ids 或最佳上下文页。
             result = service.answer(case.question, target[0], target[1])
             status = {
                 "success": "completed",

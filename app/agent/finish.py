@@ -1,4 +1,4 @@
-"""Explicit final action grounded in evidence observed during this run."""
+"""明确的终止动作：最终引用必须来自本次运行已经观察到的证据。"""
 
 from pydantic import BaseModel, ConfigDict
 

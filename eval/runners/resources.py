@@ -1,4 +1,4 @@
-"""Explicit fake/real dependencies for smoke versus actual evaluation."""
+"""显式区分模拟与真实依赖，分别用于冒烟验证和真实评测。"""
 
 import json
 from pathlib import Path

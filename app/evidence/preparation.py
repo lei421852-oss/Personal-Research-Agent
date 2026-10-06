@@ -1,4 +1,4 @@
-"""One extraction mechanism, manually selected coordinates per paper."""
+"""共用提取机制，各论文的区域和裁剪坐标由人工配置。"""
 
 import hashlib
 import shutil
@@ -23,7 +23,7 @@ def prepare_fixture(
         raise ValueError("PDF SHA256 mismatch: coordinates require the pinned version")
     import pymupdf
 
-    # Validate all page bounds before creating any output.
+    # 创建任何输出前先校验全部页码，避免失败时留下部分产物。
     with pymupdf.open(pdf_path) as doc:
         page_rectangles = [(p.page, r) for p in config.page_regions for r in p.regions]
         page_rectangles += [

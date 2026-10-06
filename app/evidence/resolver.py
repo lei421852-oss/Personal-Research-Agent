@@ -1,11 +1,11 @@
-"""Resolve only identities in the current, provenance-checked corpus snapshot."""
+"""只解析当前已校验来源的语料快照中的证据 ID。"""
 
 from app.evidence.corpus import PaperCorpus
 from app.evidence.models import FigureEvidence, TextEvidence
 
 
 class EvidenceResolutionError(ValueError):
-    """Unknown evidence or a modality/scope mismatch; unchanged retries cannot help."""
+    """证据不存在、模态错误或范围不符；原参数不变的重试无法修复。"""
 
 
 class EvidenceResolver:
@@ -20,6 +20,7 @@ class EvidenceResolver:
 
     @property
     def paper_catalog(self) -> list[dict[str, str]]:
+        """返回目录副本；只公开论文名和版本 ID，不暴露本地路径。"""
         return [
             {"name": name, "paper_id": paper_id}
             for name, paper_id in self._paper_catalog

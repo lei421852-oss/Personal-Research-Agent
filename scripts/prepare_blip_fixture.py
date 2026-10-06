@@ -1,4 +1,4 @@
-"""Compatibility entry point; BLIP coordinates live in its JSON config."""
+"""兼容入口；BLIP 的人工坐标保存在 JSON 配置中。"""
 
 import argparse
 from pathlib import Path

@@ -1,4 +1,4 @@
-"""Adapted from Personal RAG: src/rag/retriever.py."""
+"""适配自 Personal RAG 的 src/rag/retriever.py。"""
 
 from collections.abc import Mapping
 
@@ -32,7 +32,7 @@ class TextRetriever:
             ):
                 raise ValueError("paper_ids must contain nonempty strings")
             if not paper_ids:
-                return []  # Empty selection searches no papers, never the full corpus.
+                return []  # 空列表表示不检索任何论文，不能退化成全库搜索。
             paper_ids = list(
                 dict.fromkeys(self.paper_aliases.get(p, p) for p in paper_ids)
             )

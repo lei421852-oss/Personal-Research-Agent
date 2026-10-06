@@ -1,4 +1,4 @@
-"""Small retrieval-only questions; no answer generation or formal benchmark."""
+"""小规模检索冒烟问题，不生成答案，也不作为正式评测集。"""
 
 import json
 from pathlib import Path

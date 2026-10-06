@@ -1,4 +1,4 @@
-"""Immutable paper evidence, independent of query-specific ranking."""
+"""不可变的论文证据，与具体查询的排序结果分开。"""
 
 import hashlib
 import json
@@ -13,7 +13,7 @@ Page = Annotated[StrictInt, Field(gt=0)]
 def make_evidence_id(
     paper_id: str, page: int, modality: str, local_identifier: str
 ) -> str:
-    """Reproducible for a fixed paper version and fixed local identifier."""
+    """固定论文版本、页码、模态和局部标识时生成稳定的证据 ID。"""
     if not paper_id.strip() or not local_identifier.strip():
         raise ValueError("paper_id and local_identifier must be nonempty")
     if type(page) is not int or page <= 0 or modality not in ("text", "figure"):
@@ -29,7 +29,7 @@ class Evidence(BaseModel):
     evidence_id: NonEmpty
     paper_id: NonEmpty
     modality: Literal["text", "figure"]
-    page: Page  # One-based PDF page number, not a printed-page label.
+    page: Page  # 从 1 开始的 PDF 页序号，不是论文印刷页码。
     text: NonEmpty
 
 

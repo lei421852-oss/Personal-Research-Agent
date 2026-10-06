@@ -1,4 +1,4 @@
-"""Abstract interface implemented by model-provider adapters."""
+"""由各模型提供方适配器实现的抽象接口。"""
 
 from abc import ABC, abstractmethod
 from typing import Any, TypeAlias
@@ -10,7 +10,7 @@ ToolSchema: TypeAlias = dict[str, Any]
 
 
 class LLMClient(ABC):
-    """Complete messages using the supplied tools and normalize the response."""
+    """用给定工具处理消息，并将模型响应转换为统一结构。"""
 
     @abstractmethod
     def complete(
@@ -19,8 +19,7 @@ class LLMClient(ABC):
         messages: list[Message],
         tools: list[ToolSchema],
     ) -> LLMResponse:
-        """Return a provider-neutral response.
+        """返回与提供方无关的响应。
 
-        Concrete adapters are responsible for translating both outbound schemas
-        and the provider's raw response format at this boundary.
+        具体适配器负责在此边界转换工具 Schema 和模型提供方的原始响应格式。
         """

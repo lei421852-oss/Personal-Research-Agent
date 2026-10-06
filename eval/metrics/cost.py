@@ -1,7 +1,8 @@
-"""Measured wall time and request counts only; no inferred token or dollar prices."""
+"""只统计实际耗时和调用次数，不推测 token 或费用。"""
 
 
 def cost_metrics(latency_ms, llm_events, vlm_events, traces):
+    # 冗余搜索仅记录拦截事实，没有执行工具；调用数和工具耗时均排除它。
     traces = [
         t for t in traces if not t.failure or t.failure.get("executed") is not False
     ]

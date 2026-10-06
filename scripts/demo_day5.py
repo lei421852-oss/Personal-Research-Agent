@@ -1,4 +1,4 @@
-"""Four bounded Agent traces with scripted decisions and controlled evidence; no real ranking claims."""
+"""四条脚本决策与受控证据下的有限步 Agent Trace，不声称真实排序效果。"""
 
 import argparse
 import json
@@ -28,7 +28,7 @@ def action(identity, name, **arguments):
 
 
 class ControlledRetrieval:
-    """Explicit test fixture; does not modify real embeddings or ranking."""
+    """显式测试 fixture，不修改真实嵌入或检索排序。"""
 
     def __init__(self, corpus):
         self.corpus = corpus

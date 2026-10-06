@@ -1,4 +1,4 @@
-"""Load all prepared papers through one provenance-checked contract."""
+"""按统一来源契约加载所有已准备的论文。"""
 
 from collections.abc import Mapping
 from dataclasses import dataclass
@@ -107,7 +107,7 @@ def _load_paper(paper_dir: Path):
 
 
 def load_text_corpus(paper_dir: Path) -> list[TextEvidence]:
-    """Day 1 compatibility: the same loader, limited to one prepared paper."""
+    """兼容 Day 1 的单论文入口，仍使用同一套加载器。"""
     return _load_paper(paper_dir)[1]
 
 

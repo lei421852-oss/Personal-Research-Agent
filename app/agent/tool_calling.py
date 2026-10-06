@@ -1,4 +1,4 @@
-"""Minimal single-step orchestration from an LLM decision to a tool result."""
+"""从一次模型决策执行到工具结果的最小单步编排。"""
 
 from typing import Any
 
@@ -7,10 +7,10 @@ from app.tools.registry import ToolRegistry
 
 
 class SingleStepToolCaller:
-    """Execute at most the first tool call from one LLM response.
+    """仅执行一次模型响应中的第一个工具调用。
 
-    This deliberately does not send the tool result back to the LLM and does
-    not loop. If the model requests multiple tools, only the first is executed.
+    此历史单步实现不会把结果送回模型，也不会循环；多工具响应只执行第一个。
+    当前有限步 Agent 的核心执行逻辑位于 BoundedToolAgent。
     """
 
     def __init__(self, llm: LLMClient, registry: ToolRegistry) -> None:
@@ -18,7 +18,7 @@ class SingleStepToolCaller:
         self._registry = registry
 
     def run(self, user_message: str) -> Any:
-        """Return direct model text or the first requested tool's result."""
+        """返回模型的直接文本，或其请求的第一个工具结果。"""
         response = self._llm.complete(
             messages=[{"role": "user", "content": user_message}],
             tools=self._registry.schemas(),

@@ -1,4 +1,4 @@
-"""API resource composition only; the existing Agent runs unchanged."""
+"""只组合 API 所需资源，Agent 的动作选择仍交给现有运行时。"""
 
 import os
 from contextlib import ExitStack
@@ -34,7 +34,7 @@ class AgentAPIRuntime:
         self.client_factory, self.retrieval_mode = client_factory, retrieval_mode
 
     def run(self, question):
-        # Separate clients/counters/executor/state per HTTP request, no history or sessions.
+        # 每个 HTTP 请求独享客户端、计数器、执行器和状态，不共享历史或会话。
         with ExitStack() as stack:
             llm, vision = self.client_factory(stack)
             counted = CountingVisionClient(vision)
@@ -54,7 +54,7 @@ class AgentAPIRuntime:
             )
 
     def close(self):
-        pass  # Clients are already closed per request; corpus/retriever contain no open provider sessions.
+        pass  # 客户端已按请求关闭；语料库和检索器不持有模型提供方的会话。
 
 
 def create_configured_runtime():
@@ -95,7 +95,7 @@ def create_configured_runtime():
         retrieval = TextRetriever(embedding, store, paper_aliases=corpus.paper_aliases)
     else:
         raise ConfigurationUnavailable("Unknown retrieval backend")
-    # Snapshot configuration, never include credentials in DTOs, logging or repr output.
+    # 固定本次配置快照；凭据不得进入 DTO、日志或对象的 repr 输出。
     config = {k: os.environ[k] for k in required}
 
     def client_factory(stack):

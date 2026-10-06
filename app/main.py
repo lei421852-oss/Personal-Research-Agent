@@ -1,4 +1,4 @@
-"""Local API/UI application; importing this module does not load or call models."""
+"""本地 API/UI 应用入口；导入模块不会加载或调用模型。"""
 
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -20,7 +20,7 @@ def create_app(*, runtime_factory=None):
     async def lifespan(application):
         try:
             application.state.runtime = (runtime_factory or create_configured_runtime)()
-        except Exception:  # noqa: BLE001 - unavailable resources must leave local UI accessible
+        except Exception:  # noqa: BLE001 - 资源不可用时仍应允许访问本地 UI
             application.state.runtime = None
         try:
             yield

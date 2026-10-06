@@ -1,6 +1,6 @@
-"""Adapted from Personal RAG: src/rag/vector_store.py.
+"""适配自 Personal RAG 的 src/rag/vector_store.py。
 
-Fresh, independent collections only; no implicit deletion or rebuilding.
+使用独立集合，不隐式删除或重建已有索引。
 """
 
 from pathlib import Path

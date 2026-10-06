@@ -1,4 +1,4 @@
-"""Figure analysis accepts identities, never caller-selected filesystem paths."""
+"""Figure 分析只接受证据 ID，不接受调用方指定的文件路径。"""
 
 from pydantic import ValidationError
 

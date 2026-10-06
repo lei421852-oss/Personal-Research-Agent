@@ -1,4 +1,4 @@
-"""Shared, versioned contract for manually configured paper fixtures."""
+"""人工论文 fixture 的统一版本契约。"""
 
 import math
 from typing import Annotated, Literal

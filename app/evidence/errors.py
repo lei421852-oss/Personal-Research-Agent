@@ -1,4 +1,4 @@
-"""Prepared evidence access failures, independent of the Agent tool layer."""
+"""已准备证据的访问异常，与 Agent 工具层独立。"""
 
 
 class UnknownPaperError(Exception):

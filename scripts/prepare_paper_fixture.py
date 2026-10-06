@@ -1,4 +1,4 @@
-"""Prepare one pinned PDF from a manual JSON config; no downloads or models."""
+"""用人工 JSON 配置准备固定版本 PDF，不下载文件或加载模型。"""
 
 import argparse
 from pathlib import Path

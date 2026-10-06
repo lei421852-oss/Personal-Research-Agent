@@ -1,4 +1,4 @@
-"""Deterministic action comparisons and actionable feedback, never auto-routing."""
+"""比较动作并提供可操作的恢复反馈；不自动选择工具或修改论文范围。"""
 
 import re
 import unicodedata
@@ -15,6 +15,8 @@ QUERY_POLARITY_TOKENS = frozenset({"not", "no", "without", "versus", "vs"})
 
 @dataclass(frozen=True)
 class SearchActionFingerprint:
+    """查询、论文范围和 K 构成搜索指纹，词元集合用于近重复比较。"""
+
     query: str
     tokens: frozenset[str]
     paper_ids: tuple[str, ...] | None
@@ -26,23 +28,27 @@ class SearchActionFingerprint:
             args = SearchTextInput.model_validate(arguments)
         except ValidationError:
             return None
+        # 统一全角/半角及大小写，再把标点和连续空白转换为词元间的单个空格。
         query = unicodedata.normalize("NFKC", args.query).lower()
         query = " ".join(re.findall(r"\w+", query))
+        # 范围去重并排序，使论文列表顺序不影响比较；None（全库）与空列表分开。
         scope = None if args.paper_ids is None else tuple(sorted(set(args.paper_ids)))
         return cls(query, frozenset(query.split()), scope, args.top_k)
 
     def duplicates(self, previous):
-        # Increasing K or changing scope is a materially different evidence request.
+        # 修改 K 或论文范围可能是在请求不同证据，不能只因查询相似就拦截。
         if self.paper_ids != previous.paper_ids or self.top_k != previous.top_k:
             return False
         if self.query == previous.query:
             return True
-        # Numeric targets and negation/comparison changes can alter the information need.
+        # 数字目标、否定或比较词变化可能改变信息需求，保守放行这类查询。
+        # ^ 是集合对称差：只留下两条查询之间新增或删去的词元。
         changed = self.tokens ^ previous.tokens
         if changed & QUERY_POLARITY_TOKENS or any(
             any(c.isdigit() for c in t) for t in changed
         ):
             return False
+        # Jaccard = 共同词元数 / 全部不同词元数；空集合不参与除法。
         union = self.tokens | previous.tokens
         return bool(union) and (
             len(self.tokens & previous.tokens) / len(union) >= SEARCH_JACCARD_THRESHOLD
@@ -50,6 +56,7 @@ class SearchActionFingerprint:
 
 
 def redundant_observation(name, previous_action, evidence_ids):
+    """返回未执行的原因和可用证据，让模型自行结束或改换调查动作。"""
     return ToolObservation(
         status="error",
         tool_name=name,
@@ -71,6 +78,7 @@ def redundant_observation(name, previous_action, evidence_ids):
 
 
 def recovery_feedback(observation, valid_paper_ids):
+    """在原观察结果上补充恢复建议，不改写调用参数，也不自动重试。"""
     if observation.status == "success":
         return observation
     code = observation.issue.code
@@ -92,7 +100,7 @@ def recovery_feedback(observation, valid_paper_ids):
         payload["instruction"] = (
             "The tool failed internally. Change strategy or finish with explicit limitations; do not fabricate evidence."
         )
-    # Unknown paper is invalid input at the policy boundary; retain domain diagnosis.
+    # 对模型而言未知论文属于非法参数；同时保留原领域错误码便于排查。
     if code == "unknown_paper":
         payload["domain_issue_code"] = code
     return ToolObservation(

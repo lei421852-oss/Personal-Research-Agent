@@ -1,6 +1,6 @@
-"""Opt-in adapter for providers supporting vision Chat Completions.
+"""显式启用支持视觉输入的 Chat Completions 提供方适配器。
 
-No model is selected implicitly. Compatibility is verified by the user's smoke test.
+不默认选择模型；兼容性由用户的真实冒烟测试验证。
 """
 
 import base64

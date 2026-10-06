@@ -36,7 +36,7 @@ def test_unified_contract_text_and_unreviewed_semantics(resources, runner):
     result = runner(resources).run(case("text_qa"))
     assert result.status == "completed" and result.answer
     assert result.citation_identity_valid
-    assert result.task_success is None  # Dataset approval is not answer approval.
+    assert result.task_success is None  # 数据集已批准，不代表生成答案也已通过审阅。
     assert result.citation_correctness is None
     assert result.task_success_source == "pending_review"
     assert result.model_calls >= 1 and result.vlm_calls == 0

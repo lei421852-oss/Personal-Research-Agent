@@ -1,7 +1,7 @@
-"""Opt-in REAL model checks. Never executed by unit tests or during implementation.
+"""需显式运行的真实模型检查；单元测试和实现过程不会执行。
 
-Run from the repository root: python -m scripts.smoke_test_day1 --mode text
-Output is evidence for human review, never an automatic Day 1 Passed claim.
+在仓库根目录运行：python -m scripts.smoke_test_day1 --mode text。
+输出供人工核查，不能自动宣称 Day 1 验收通过。
 """
 
 import argparse
@@ -28,8 +28,8 @@ def run_text(args, metadata):
         raise ValueError("No prepared text evidence")
     embedding = QwenEmbeddingModel(args.embedding_model, device=args.device)
     store = ChromaTextVectorStore(args.index_dir, "blip-day1-text", create=True)
-    # Idempotent upsert; never deletes a collection. Use a new index directory
-    # after changing corpus/model identity or vector dimensions.
+    # 幂等 upsert，不删除集合；语料、模型标识或向量维度改变后，
+    # 使用新的索引目录，避免复用不兼容索引。
     store.add(evidence, embedding.embed_documents([item.text for item in evidence]))
     retriever = TextRetriever(embedding, store)
     reports = []
@@ -64,7 +64,7 @@ def run_figure(args, metadata):
     from app.vision.analysis import FigureAnalyzer
     from app.vision.provider import OpenAICompatibleVisionClient
 
-    # Environment only. Do not read another project's credentials.
+    # 只用环境配置，不读取其他项目的凭据。
     api_key = os.environ.get("VLM_API_KEY")
     model = os.environ.get("VLM_MODEL")
     base_url = os.environ.get("VLM_BASE_URL")

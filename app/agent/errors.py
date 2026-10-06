@@ -1,14 +1,14 @@
-"""Domain errors raised by the tool infrastructure."""
+"""工具基础设施使用的领域异常。"""
 
 from typing import Any
 
 
 class ToolError(Exception):
-    """Base class for errors exposed by the tool domain."""
+    """工具领域对外异常的基类。"""
 
 
 class ToolNotFoundError(ToolError):
-    """Raised when a requested tool has not been registered."""
+    """请求的工具未注册时抛出。"""
 
     def __init__(self, tool_name: str) -> None:
         self.tool_name = tool_name
@@ -16,7 +16,7 @@ class ToolNotFoundError(ToolError):
 
 
 class InvalidToolArgumentsError(ToolError):
-    """Raised when arguments do not satisfy a tool's input model."""
+    """参数不满足工具输入模型时抛出。"""
 
     def __init__(self, tool_name: str, errors: list[dict[str, Any]]) -> None:
         self.tool_name = tool_name
@@ -25,7 +25,7 @@ class InvalidToolArgumentsError(ToolError):
 
 
 class ToolExecutionError(ToolError):
-    """Raised when a tool fails after its arguments have been validated."""
+    """参数已通过校验，但工具执行失败时抛出。"""
 
     def __init__(self, tool_name: str, message: str) -> None:
         self.tool_name = tool_name

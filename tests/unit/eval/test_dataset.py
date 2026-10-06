@@ -1,4 +1,4 @@
-"""Static validation tests only; no model decisions, retrieval changes or evaluation runner."""
+"""只测静态校验，不执行模型决策、改变检索或运行评测。"""
 
 from pathlib import Path
 

@@ -1,4 +1,4 @@
-"""Register corpus tools and optionally the grounded VLM analysis tool."""
+"""注册论文工具，并按需加入基于证据的 VLM 分析工具。"""
 
 from app.evidence.corpus import PaperCorpus
 from app.evidence.repository import PaperEvidenceRepository

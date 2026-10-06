@@ -1,4 +1,4 @@
-"""Safe failure facts for manual debugging; no traceback or raw request bodies."""
+"""供人工排查的安全失败信息，不包含异常堆栈或原始请求体。"""
 
 from pydantic import ValidationError
 
@@ -52,7 +52,7 @@ def failure_details(exc: Exception, *, phase: str, summary: str) -> dict:
         details["hint"] = hints.get(
             status, "Check provider availability and HTTP status."
         )
-        # OpenAI-compatible SDK exposes the provider's structured error separately from request/headers.
+        # 兼容 OpenAI 的 SDK 单独提供结构化错误；不读取其中的请求头或原始请求。
         if type(cause).__module__.startswith("openai"):
             body = getattr(cause, "body", None)
             if isinstance(body, dict):

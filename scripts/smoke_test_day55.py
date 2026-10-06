@@ -1,4 +1,4 @@
-"""Run four REAL decision-model cases through the unchanged Day 5 controller."""
+"""通过现有有限步控制器运行四条真实模型决策案例。"""
 
 import argparse
 import json
@@ -37,7 +37,7 @@ CASES = [
 
 
 class TimedVisionClient:
-    """Instrumentation only; delegates unchanged requests to the existing VLM."""
+    """仅增加测量；原请求直接委托给已有 VLM。"""
 
     def __init__(self, client, decision_client):
         self.client, self.calls = client, []
@@ -215,7 +215,7 @@ def main():
     if missing:
         parser.error("Missing model configuration variables: " + ", ".join(missing))
     corpus = load_paper_corpus(ROOT / "data/papers")
-    # Same domain implementations and existing index; no automatic ingestion or ranking modification.
+    # 使用同一领域实现和已有索引，不自动摄取语料或修改排序。
     if args.retrieval_backend == "day5-controlled":
         retrieval = ControlledRetrieval(corpus)
     else:

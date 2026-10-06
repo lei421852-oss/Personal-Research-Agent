@@ -1,4 +1,4 @@
-"""Explicit allowlisted projection; never expose messages, prompts or local assets."""
+"""按字段白名单映射公开响应，不暴露消息历史、提示词或本地资源路径。"""
 
 import json
 
@@ -44,6 +44,7 @@ def public_failure(value):
 def map_agent_result(
     result: AgentResult, corpus: PaperCorpus, *, vlm_calls: int, retrieval_mode: str
 ) -> AgentRunResponse:
+    # 用 tool_call_id 关联动作与结果，不依赖不同列表中的位置恰好一致。
     observations = {}
     for message in result.state.messages:
         if message.get("role") == "tool":
@@ -63,7 +64,7 @@ def map_agent_result(
     for action in ordered:
         identity = action["tool_call_id"]
         trace, observation = traces.get(identity), observations.get(identity)
-        # A budget-rejected request is not an executed step. Protocol failures stay in stop_details.
+        # 因预算被拒绝的请求不是已执行步骤；协议错误留在 stop_details 中。
         if trace is None and (action["tool_name"] != "finish" or observation is None):
             continue
         payload = observation.get("payload", {}) if observation else {}
@@ -75,6 +76,7 @@ def map_agent_result(
                 analyses[payload["figure"]["evidence_id"]] = payload["analysis"]
         for figure in payload.get("figures", []):
             seen_figures.add(figure["evidence_id"])
+        # dict.fromkeys 保留证据首次出现的顺序，同时去除重复 ID。
         ids = list(
             dict.fromkeys(
                 e["evidence_id"]
@@ -84,7 +86,7 @@ def map_agent_result(
         )
         if action["tool_name"] == "finish" and observation["status"] == "success":
             ids = [c["evidence_id"] for c in payload.get("citations", [])]
-        # The final answer is shown separately; only finish citation IDs/limitations are needed here.
+        # 最终答案单独展示；finish 的 Trace 仅保留引用 ID 和限制说明。
         arguments = (
             action["arguments"]
             if action["tool_name"] != "finish"

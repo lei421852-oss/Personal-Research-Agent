@@ -1,4 +1,4 @@
-"""Deterministic find -> prepared page -> analyze -> validate -> answer."""
+"""固定执行：查 Figure → 读取准备页 → 分析图片 → 校验引用 → 组装答案。"""
 
 from time import perf_counter
 
@@ -44,8 +44,8 @@ class MultimodalQAService:
         *,
         context_page: int | None = None,
     ) -> MultimodalQAResult:
-        # Validate before executing any capability. Context page is caller-selected or figure page,
-        # never chosen by a model. Each request slices its own traces on repeated service use.
+        # 先校验参数，再执行能力；上下文页由调用方指定，未指定时使用 Figure 所在页。
+        # 不由模型选择上下文页；服务重复使用时，每次只截取本次请求产生的 Trace。
         from app.tools.figure import AnalyzeFigureInput
         from app.tools.paper import FindFigureInput, ReadPageInput
 

@@ -1,4 +1,4 @@
-"""Real local Chroma + fixed vectors; no real model inference."""
+"""本地真实 Chroma 配合固定向量，不进行真实模型推理。"""
 
 from pathlib import Path
 
@@ -51,7 +51,7 @@ def test_persistent_corpus_idempotent_ingestion_and_prequery_filter(tmp_path, pa
     assert {hit.evidence.paper_id for hit in hits} == allowed
     original = {e.evidence_id: e for e in corpus.text_evidence}
     assert all(hit.evidence == original[hit.evidence.evidence_id] for hit in hits)
-    # All-library top-1 is BLIP-like; the identical query scoped to CLIP must be CLIP.
+    # 全库 Top-1 刻意接近 BLIP；同一查询限制为 CLIP 时必须返回 CLIP。
     retriever = TextRetriever(embedding, reopened, paper_aliases=corpus.paper_aliases)
     assert (
         retriever.search_text("BLIP", None, 1)[0].evidence.paper_id

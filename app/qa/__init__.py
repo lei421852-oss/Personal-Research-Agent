@@ -1,1 +1,1 @@
-"""Fixed multimodal QA; no agent decisions or routing."""
+"""固定多模态问答服务，不包含 Agent 决策或动态路由。"""

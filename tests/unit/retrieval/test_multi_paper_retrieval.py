@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[3]
 
 
 class FakeEmbedding:
-    """Fixed vectors exercise contracts only, not real semantic retrieval."""
+    """固定向量只验证契约，不代表真实语义检索效果。"""
 
     def __init__(self, corpus):
         keys = ["clip", "blip", "flamingo"]
@@ -24,7 +24,7 @@ class FakeEmbedding:
         return [self.vectors[text] for text in texts]
 
     def embed_query(self, query):
-        return [0.0, 1.0, 0.0]  # Deliberately BLIP-like for all filter checks.
+        return [0.0, 1.0, 0.0]  # 筛选测试刻意使用接近 BLIP 的查询。
 
 
 class FixedVectorStore:

@@ -1,4 +1,4 @@
-"""Browser checks over a real HTTP server with explicitly fake model decisions."""
+"""使用真实 HTTP 服务与明确标记的模拟模型检查浏览器展示。"""
 
 import argparse
 import json
@@ -101,8 +101,8 @@ def main():
     parser.add_argument("--output-dir", type=Path, default=OUTPUT)
     args = parser.parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    # Headless Linux may lack CJK fonts; use existing local fonts for screenshots only.
-    # No proprietary font is copied into the application or user-facing artifacts.
+    # 无界面的 Linux 可能缺少中文字形，截图时使用已有本地字体。
+    # 不将专有字体复制进应用或用户产物。
     local_fonts = list(Path("/mnt/c/Windows/Fonts").glob("msyh*.ttc"))
     if local_fonts:
         font_dir = Path("/tmp/personal-agent-ui-fonts")

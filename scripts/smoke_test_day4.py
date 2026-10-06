@@ -1,4 +1,4 @@
-"""Run two real fixed multimodal QA cases; requires explicit VLM environment configuration."""
+"""运行两条真实固定多模态问答，需要显式配置 VLM 环境。"""
 
 import argparse
 import json

@@ -1,4 +1,4 @@
-"""One global text search, one grounded generation. No Agent Loop or gold filtering."""
+"""全库检索一次再基于证据生成一次，不使用 Agent 循环或标注范围。"""
 
 import json
 from time import perf_counter
@@ -102,7 +102,7 @@ class TextRAGRunner:
                         ).finalize(response.tool_calls[0].arguments, provided)
                         answer, limitations = args.answer, args.limitations
                         status = "completed" if citations else "insufficient_evidence"
-                except Exception as exc:  # noqa: BLE001 - record failure without exposing raw provider state
+                except Exception as exc:  # noqa: BLE001 - 保存安全失败信息，不暴露提供方原始状态
                     status = (
                         "model_failure"
                         if phase == "generation"

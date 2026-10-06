@@ -1,4 +1,4 @@
-"""Provider-neutral data models used at the LLM boundary."""
+"""LLM 接口使用的统一数据模型。"""
 
 from typing import Any
 
@@ -6,7 +6,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 
 
 class ToolCall(BaseModel):
-    """A normalized request from an LLM to invoke one tool."""
+    """模型请求调用一个工具的标准结构。"""
 
     model_config = ConfigDict(extra="forbid")
 
@@ -16,7 +16,7 @@ class ToolCall(BaseModel):
 
 
 class LLMResponse(BaseModel):
-    """A normalized LLM response independent of any provider SDK."""
+    """不依赖具体模型 SDK 的标准响应结构。"""
 
     model_config = ConfigDict(extra="forbid")
 

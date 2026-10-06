@@ -1,4 +1,4 @@
-"""Bounded single-agent decision loop; no fixed capability sequence."""
+"""有限步单智能体循环：下一动作由模型决定，不预设固定工具流程。"""
 
 import json
 from copy import deepcopy
@@ -103,7 +103,7 @@ class BoundedToolAgent:
         *,
         max_tool_calls: int = 6,
     ):
-        # Strict validation rejects bool and budgets above the hard ceiling.
+        # 严格校验预算：拒绝把 bool 当整数，也拒绝超过硬上限的预算。
         AgentState(question="validate", max_tool_calls=max_tool_calls)
         self.llm, self.executor, self.resolver = llm, executor, resolver
         self.max_tool_calls = max_tool_calls
@@ -118,6 +118,7 @@ class BoundedToolAgent:
         started = perf_counter()
         previous_failure = None
         call_ids = set()
+        # 只缓存本轮成功搜索的指纹；失败和空结果仍走各自恢复规则。
         successful_searches = []
 
         def result(status, answer=None, citations=None, limitations=None, details=None):
@@ -148,7 +149,7 @@ class BoundedToolAgent:
             )
 
         def feedback(call, observation):
-            # Preserve provider-standard tool call ID pairing. Never store assistant reasoning content.
+            # 保留标准的 tool_call_id 配对；只记录工具动作，不保存模型的隐藏推理内容。
             observation = ToolObservation.model_validate(
                 public_value(observation.model_dump(mode="json"))
             )
@@ -180,7 +181,7 @@ class BoundedToolAgent:
             )
             state.observations.append(observation)
 
-        # Up to six domain calls plus one final decision. Invalid finish attempts also consume model turns.
+        # 最多执行六次领域工具，再给一次结束机会；非法 finish 也占用模型决策次数。
         for _ in range(state.max_tool_calls + 1):
             schemas = (
                 self.executor.registry.schemas()
@@ -188,6 +189,7 @@ class BoundedToolAgent:
                 else []
             )
             schemas = [*schemas, self.finish.schema()]
+            # 刷新原 system 消息，不插入新的角色消息，以免打断工具调用与结果的配对。
             state.messages[0]["content"] = (
                 POLICY
                 + "\nCurrent decision context (data):\n"
@@ -200,7 +202,7 @@ class BoundedToolAgent:
                 response = self.llm.complete(
                     messages=deepcopy(state.messages), tools=deepcopy(schemas)
                 )
-            except Exception as exc:  # noqa: BLE001 - provider boundary must return a safe termination
+            except Exception as exc:  # noqa: BLE001 - 模型提供方边界需要将异常转换为安全的终止结果
                 return result(
                     "model_failure",
                     limitations=[
@@ -279,6 +281,7 @@ class BoundedToolAgent:
                         call.name,
                         json.dumps(call.arguments, sort_keys=True, ensure_ascii=False),
                     )
+                    # 与紧邻的失败动作比较，避免原参数连续失败却无限重试。
                     if signature == previous_failure:
                         return result(
                             "repeated_failure",
@@ -317,6 +320,7 @@ class BoundedToolAgent:
                 if call.name == "search_text"
                 else None
             )
+            # 找到任意一次已成功执行的相似搜索即可；没有命中时 next 返回 None。
             duplicate = next(
                 (
                     entry
@@ -326,6 +330,7 @@ class BoundedToolAgent:
                 None,
             )
             if duplicate:
+                # 记录拦截事实并回传模型；不进入 Executor，也不增加实际工具调用数。
                 observation = redundant_observation(
                     call.name, duplicate[1], duplicate[2]
                 )
@@ -364,6 +369,7 @@ class BoundedToolAgent:
                 ]
                 if observation.payload.get("figure"):
                     records.append(observation.payload["figure"])
+                # 只有能在当前语料解析且来源字段一致的证据，才允许用于最终引用。
                 for record in records:
                     if not isinstance(record, dict):
                         continue

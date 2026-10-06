@@ -1,4 +1,4 @@
-"""Thin adapter to the unchanged bounded Agent; no evaluation-time policy fixes."""
+"""封装已有有限步 Agent 的评测适配器，不在评测时单独修正策略。"""
 
 from time import perf_counter
 
@@ -30,7 +30,7 @@ class MultimodalAgentRunner(TextRAGRunner):
             result = BoundedToolAgent(
                 llm, executor, EvidenceResolver(self.resources.corpus)
             ).run(case.question)
-            # Finish observations are not domain calls; pair only actual executor traces.
+            # finish 不属于领域工具；其余 Observation 与动作 Trace 按顺序配对。
             observations = [
                 o for o in result.state.observations if o.tool_name != "finish"
             ]

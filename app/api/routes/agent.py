@@ -39,7 +39,7 @@ def run_agent(
     try:
         return runtime.run(body.question.strip())
     except Exception as exc:
-        # Transport boundary: unexpected errors never become raw exception JSON.
+        # HTTP 边界统一处理意外异常，不能把原始异常直接作为 JSON 返回。
         raise APIError(
             500, "internal_error", "运行发生内部错误，请检查服务端配置与运行环境。"
         ) from exc
@@ -49,7 +49,7 @@ def run_agent(
 def figure_image(
     evidence_id: str, runtime: Annotated[AgentAPIRuntime, Depends(get_runtime)]
 ):
-    # Exact registered identity lookup; clients never choose a filesystem path.
+    # 只查已登记的证据 ID；客户端不能选择文件系统路径。
     figure = next(
         (e for e in runtime.corpus.figure_evidence if e.evidence_id == evidence_id),
         None,

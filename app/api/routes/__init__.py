@@ -1,1 +1,1 @@
-"""HTTP endpoints."""
+"""HTTP 路由入口。"""

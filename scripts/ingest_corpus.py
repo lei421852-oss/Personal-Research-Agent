@@ -1,4 +1,4 @@
-"""Inspect prepared papers by default; --execute explicitly runs real embedding."""
+"""默认检查已准备论文；只有 --execute 才运行真实嵌入。"""
 
 import argparse
 from dataclasses import asdict

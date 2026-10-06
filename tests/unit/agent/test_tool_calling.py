@@ -34,9 +34,7 @@ def test_valid_calculator_tool_call_executes_and_receives_registry_schemas() -> 
     assert result == 20
     assert llm.calls == [
         {
-            "messages": [
-                {"role": "user", "content": "Calculate (2 + 3) * 4"}
-            ],
+            "messages": [{"role": "user", "content": "Calculate (2 + 3) * 4"}],
             "tools": registry.schemas(),
         }
     ]
@@ -68,9 +66,7 @@ def test_invalid_llm_arguments_are_validated_by_registry(
 ) -> None:
     llm = FakeLLMClient(
         LLMResponse(
-            tool_calls=[
-                ToolCall(id="call-1", name="calculator", arguments=arguments)
-            ]
+            tool_calls=[ToolCall(id="call-1", name="calculator", arguments=arguments)]
         )
     )
 

@@ -1,4 +1,4 @@
-"""One ingestion path for every paper; fixed-source upserts are idempotent."""
+"""所有论文共用摄取流程；固定来源重复 upsert 不增加重复记录。"""
 
 from dataclasses import dataclass
 
@@ -10,7 +10,7 @@ from app.retrieval.contracts import EmbeddingModel, TextVectorStore
 class IngestionResult:
     papers: int
     indexed_text: int
-    available_figures: int  # Figures are located via corpus, not in this text index.
+    available_figures: int  # Figure 通过 Corpus 定位，不写入这个文本索引。
 
 
 def ingest_text_corpus(

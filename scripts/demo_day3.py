@@ -1,8 +1,7 @@
-"""Two manually chosen tool calls, no LLM/Agent Loop.
+"""人工安排的两次工具调用，不接 LLM，也没有 Agent 循环。
 
-Default fixture mode ranks REAL corpus paragraphs with fixed vectors. This is
-an observation-contract demonstration, not a real semantic-retrieval result.
---backend real explicitly uses the existing Day 2 index and Qwen model.
+默认 fixture 模式用固定向量排序真实语料段落，只展示 Observation 契约，
+不代表真实语义检索效果。--backend real 才使用 Day 2 索引与 Qwen 模型。
 """
 
 import argparse
@@ -25,7 +24,7 @@ DEFAULT_OUTPUT = Path(
 
 
 class FixtureEmbedding:
-    """Choose a real page-9 paragraph deterministically, not by semantic quality."""
+    """按固定规则选择真实第 9 页段落，不以语义质量作为选择依据。"""
 
     def __init__(self, corpus):
         paper_id = corpus.paper_aliases["flamingo"]
@@ -69,7 +68,7 @@ class FixedVectorStore:
 
 def run_demo(corpus, retrieval, backend):
     executor = ToolExecutor(create_paper_registry(corpus, retrieval))
-    # Fixed sequence chosen by a person: there is no automatic next-action policy.
+    # 固定顺序由人工安排，没有自动选择下一动作的策略。
     first = executor.execute(
         "search_text",
         {

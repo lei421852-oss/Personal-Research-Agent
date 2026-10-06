@@ -1,4 +1,4 @@
-"""Small dependency-free contracts for paper-aware text retrieval."""
+"""论文范围文本检索的轻量契约，不引入额外依赖。"""
 
 from typing import Protocol
 

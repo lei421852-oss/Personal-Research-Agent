@@ -1,4 +1,4 @@
-"""Sanitize public observations/traces, without altering domain evidence."""
+"""对公开观察结果和 Trace 脱敏，不修改领域证据。"""
 
 import math
 import os
@@ -19,7 +19,7 @@ _SENSITIVE_NAMES = re.compile(
 
 
 def redact_text(value: str) -> str:
-    # Read only process environment; never inspect sibling .env files.
+    # 只读取进程环境，不查找其他项目的 .env 配置。
     secrets = [
         v for k, v in os.environ.items() if _SENSITIVE_NAMES.search(k) and len(v) >= 8
     ]
@@ -48,4 +48,4 @@ def public_value(value: Any) -> JsonValue:
         }
     if isinstance(value, (list, tuple)):
         return [public_value(v) for v in value]
-    return "[unsupported value]"  # Never repr arbitrary objects or exceptions.
+    return "[unsupported value]"  # 不对任意对象或异常调用 repr，避免间接泄露内部信息。

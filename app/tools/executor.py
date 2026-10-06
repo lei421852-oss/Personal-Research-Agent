@@ -1,4 +1,4 @@
-"""One-call execution boundary. No LLM, planning, retries, or Agent Loop."""
+"""单次工具执行边界，不调用模型、不规划、不重试，也不承担 Agent 循环。"""
 
 from time import perf_counter
 from typing import Any
@@ -52,7 +52,7 @@ class ToolExecutor:
             result = tool.execute(validated)
             if not isinstance(result, ToolObservation) or result.tool_name != name:
                 raise TypeError("Tool does not implement the observation contract")
-            # Construct a validated, redacted copy; original corpus stays untouched.
+            # 创建校验后的脱敏副本，保留原语料数据。
             observation = ToolObservation.model_validate(
                 public_value(result.model_dump(mode="json"))
             )
@@ -63,7 +63,7 @@ class ToolExecutor:
             )
         except ValidationError as exc:
             failure_exc = exc
-            # Only argument validation is invalid_arguments; malformed tool output is internal_failure.
+            # 参数校验失败归为 invalid_arguments；工具输出格式错误归为 internal_failure。
             code = "internal_failure" if phase == "execution" else "invalid_arguments"
             summary = (
                 "Tool returned an invalid result."
@@ -106,7 +106,7 @@ class ToolExecutor:
                 "dependency_failure",
                 "A tool dependency is temporarily unavailable.",
             )
-        except Exception as exc:  # noqa: BLE001 - public boundary must not expose unexpected failures
+        except Exception as exc:  # noqa: BLE001 - 公开边界不得暴露意外异常的内部信息
             failure_exc = exc
             observation = self._error(
                 safe_name, "internal_failure", "Tool execution failed internally."

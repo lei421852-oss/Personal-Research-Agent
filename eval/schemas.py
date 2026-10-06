@@ -1,4 +1,4 @@
-"""Candidate annotation contracts. Static validity is not human Ground Truth approval."""
+"""候选标注的数据契约；静态合法不等于人工已批准 Ground Truth。"""
 
 from datetime import datetime
 from typing import Annotated, Literal
@@ -131,7 +131,7 @@ class EvaluationDataset(Record):
 
 
 class EvaluationRun(Record):
-    """One system/case result. Null semantic scores mean unreviewed, not zero."""
+    """一个系统对一道题的运行结果；语义分数为 null 表示未审阅，而不是零分。"""
 
     run_id: NonEmpty
     case_id: NonEmpty

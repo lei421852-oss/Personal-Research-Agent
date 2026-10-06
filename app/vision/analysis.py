@@ -1,4 +1,4 @@
-"""Grounded figure analysis; observation is distinct from interpretation."""
+"""基于证据分析 Figure，分开记录可见观察与解释。"""
 
 from pathlib import Path
 from typing import Any

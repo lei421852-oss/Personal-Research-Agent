@@ -1,4 +1,4 @@
-"""Local database test only: no model, network, or downloaded weights."""
+"""仅测试本地数据库，不调用模型、网络或下载权重。"""
 
 import pytest
 

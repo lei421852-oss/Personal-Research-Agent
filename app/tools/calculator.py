@@ -1,4 +1,4 @@
-"""A calculator implemented with a strict arithmetic AST evaluator."""
+"""用严格的算术 AST 求值实现计算器。"""
 
 import ast
 import operator
@@ -13,7 +13,7 @@ Number = int | float
 
 
 class CalculatorInput(BaseModel):
-    """Validated input accepted by the calculator."""
+    """计算器接受的已校验输入。"""
 
     model_config = ConfigDict(extra="forbid")
 
@@ -21,13 +21,15 @@ class CalculatorInput(BaseModel):
 
 
 class CalculatorTool(Tool[CalculatorInput, Number]):
-    """Evaluate arithmetic without executing arbitrary Python code."""
+    """仅计算允许的算术表达式，不执行任意 Python 代码。"""
 
     name = "calculator"
     description = "Evaluate an arithmetic expression using +, -, *, /, and parentheses."
     input_model = CalculatorInput
 
-    _binary_operators: ClassVar[dict[type[ast.operator], Callable[[Number, Number], Number]]] = {
+    _binary_operators: ClassVar[
+        dict[type[ast.operator], Callable[[Number, Number], Number]]
+    ] = {
         ast.Add: operator.add,
         ast.Sub: operator.sub,
         ast.Mult: operator.mul,

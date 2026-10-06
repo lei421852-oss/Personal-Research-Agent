@@ -1,4 +1,4 @@
-"""Load separate dev/test files; human-reviewed data can be explicitly required."""
+"""分别加载 dev/test，可显式要求数据已通过人工审阅。"""
 
 from pathlib import Path
 from typing import Literal

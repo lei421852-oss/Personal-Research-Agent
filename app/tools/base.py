@@ -1,4 +1,4 @@
-"""Common abstraction implemented by every tool."""
+"""所有工具实现的共同抽象。"""
 
 from abc import ABC, abstractmethod
 from typing import Any, ClassVar, Generic, TypeVar
@@ -10,14 +10,14 @@ ToolResult = TypeVar("ToolResult")
 
 
 class Tool(ABC, Generic[ToolInput, ToolResult]):
-    """A named capability with documented, validated input and execution."""
+    """带名称、说明和输入校验的可执行能力。"""
 
     name: ClassVar[str]
     description: ClassVar[str]
     input_model: ClassVar[type[BaseModel]]
 
     def schema(self) -> dict[str, Any]:
-        """Return the tool metadata and JSON Schema for its input."""
+        """返回工具名称、说明及输入的 JSON Schema。"""
         return {
             "name": self.name,
             "description": self.description,
@@ -26,4 +26,4 @@ class Tool(ABC, Generic[ToolInput, ToolResult]):
 
     @abstractmethod
     def execute(self, arguments: ToolInput) -> ToolResult:
-        """Execute the capability with already validated arguments."""
+        """执行已经完成参数校验的工具能力。"""

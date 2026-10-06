@@ -1,4 +1,4 @@
-"""Public tool observations and execution facts, never model reasoning."""
+"""公开工具观察结果与执行事实，不包含模型隐藏推理。"""
 
 from typing import Literal
 
@@ -36,6 +36,7 @@ class ToolObservation(BaseModel):
 
     @property
     def result_count(self) -> int:
+        """兼容文本列表、图像列表和单张 Figure 三种 payload，统计返回证据数。"""
         count = len(self.payload.get("evidence", [])) + len(
             self.payload.get("figures", [])
         )
@@ -43,6 +44,7 @@ class ToolObservation(BaseModel):
 
     @model_validator(mode="after")
     def check_status(self):
+        """约束状态与证据、错误码一致，防止将空结果误报为工具故障。"""
         for key in ["evidence", "figures"]:
             if key in self.payload and not isinstance(self.payload[key], list):
                 raise ValueError("Evidence collections must be lists")

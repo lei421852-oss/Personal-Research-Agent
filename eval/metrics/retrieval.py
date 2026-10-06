@@ -1,4 +1,4 @@
-"""Explicit ID recall protocols; absence of gold positives is not a zero score."""
+"""按明确的证据 ID 计算召回；没有正向标注时记为不适用，而不是零分。"""
 
 
 def unique(ids):

@@ -1,4 +1,4 @@
-"""Summarize observed costs/recall; semantic quality remains unknown until reviewed."""
+"""汇总已测成本与召回；未经人工审阅的语义质量仍记为未知。"""
 
 import argparse
 import json

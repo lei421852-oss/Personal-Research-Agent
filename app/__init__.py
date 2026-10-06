@@ -1,1 +1,1 @@
-"""Personal agent application package."""
+"""应用代码包：包含论文研究智能体及其服务入口。"""

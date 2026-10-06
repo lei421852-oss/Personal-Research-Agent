@@ -1,4 +1,4 @@
-"""Adapted from Personal RAG: src/rag/embedding.py; optional heavy imports."""
+"""适配自 Personal RAG 的 src/rag/embedding.py；重型依赖仅按需导入。"""
 
 
 class QwenEmbeddingModel:

@@ -1,4 +1,4 @@
-"""Explicit real retrieval smoke: eight questions, no generated answers or VLM."""
+"""显式运行八个真实检索冒烟问题，不生成答案或调用 VLM。"""
 
 import argparse
 import json

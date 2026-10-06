@@ -1,4 +1,4 @@
-"""Identity and gold-ID relevance are distinct from semantic citation correctness."""
+"""引用身份和标注 ID 命中率，与语义引用正确性分开统计。"""
 
 
 def citation_identity_valid(citations, provided_ids, corpus):

@@ -1,4 +1,4 @@
-"""Static corpus/annotation checks only. No inference, grading, or Agent changes."""
+"""只静态检查语料和标注，不推理、不判分、不修改 Agent。"""
 
 import argparse
 import json

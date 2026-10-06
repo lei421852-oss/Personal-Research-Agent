@@ -1,4 +1,4 @@
-"""Deterministic LLM client for unit tests and local architecture checks."""
+"""用于单元测试和本地架构检查的确定性模型客户端。"""
 
 from copy import deepcopy
 
@@ -7,7 +7,7 @@ from app.llm.models import LLMResponse
 
 
 class FakeLLMClient(LLMClient):
-    """Return a configured response while recording the request."""
+    """返回预设响应，同时保存调用请求供测试核对。"""
 
     def __init__(self, response: LLMResponse) -> None:
         self.response = response
@@ -29,7 +29,7 @@ class FakeLLMClient(LLMClient):
 
 
 class ScriptedLLMClient(LLMClient):
-    """Sequence of responses or context-aware callbacks, with complete request snapshots."""
+    """按顺序返回预设响应或调用上下文回调，并保存每次完整请求快照。"""
 
     def __init__(self, responses):
         self.responses = list(responses)

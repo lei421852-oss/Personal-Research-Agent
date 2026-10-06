@@ -1,4 +1,4 @@
-"""Provider-independent boundary for a single visual-evidence request."""
+"""单次视觉证据请求的统一接口。"""
 
 from typing import Any, Protocol
 

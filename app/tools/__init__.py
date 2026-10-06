@@ -1,4 +1,4 @@
-"""Public tool infrastructure API."""
+"""工具基础设施的公开接口。"""
 
 from app.tools.base import Tool
 from app.tools.calculator import CalculatorInput, CalculatorTool

@@ -1,4 +1,4 @@
-"""Transport/projection checks against the unchanged bounded Agent and fake providers."""
+"""用有限步 Agent 和模拟提供方检查 HTTP 传输及结果映射。"""
 
 from pathlib import Path
 
@@ -129,7 +129,7 @@ def test_text_http_projection_and_finish_trace(corpus):
     assert [s["tool_name"] for s in body["trace"]] == ["search_text", "finish"]
     assert body["trace"][0]["evidence_ids"]
     assert body["trace"][0]["latency_ms"] >= 0
-    assert body["trace"][1]["latency_ms"] is None  # No invented finish timing.
+    assert body["trace"][1]["latency_ms"] is None  # 不虚构 finish 的执行耗时。
     assert body["metrics"]["tool_calls"] == 1 and body["metrics"]["model_calls"] == 2
     assert body["metrics"]["vlm_calls"] == 0
     assert set(body) == {
@@ -194,7 +194,7 @@ def test_domain_stops_are_http_200(corpus, mode, status):
         assert response.json()["metrics"]["tool_calls"] == 6
         assert (
             len(response.json()["trace"]) == 6
-        )  # Rejected seventh call never becomes an executed step.
+        )  # 第七次被拒绝的请求不能计为已执行步骤。
 
 
 def test_unexpected_exception_stable_error_and_lifespan_close():

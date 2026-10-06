@@ -1,6 +1,6 @@
-"""Chat Completions adapter for the existing provider-neutral LLMClient.
+"""为统一 LLMClient 接入 Chat Completions。
 
-Only public tool actions and request timing are retained; never assistant reasoning.
+只保留公开工具动作与请求耗时，不保存模型隐藏推理。
 """
 
 import json
@@ -85,7 +85,7 @@ class OpenAICompatibleLLMClient(LLMClient):
                 calls.append(
                     ToolCall(id=call.id, name=call.function.name, arguments=arguments)
                 )
-            # Discard content/reasoning fields rather than persisting raw SDK responses.
+            # 丢弃正文及隐藏推理字段，不持久化原始 SDK 响应。
             normalized = LLMResponse(content=None, tool_calls=calls)
             event = {
                 "status": "success",

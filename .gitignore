@@ -1,26 +1,26 @@
-# Virtual environments
+# 虚拟环境
 .venv/
 venv/
 
-# Python bytecode and caches
+# Python 字节码与缓存
 __pycache__/
 *.py[cod]
 .pytest_cache/
 .ruff_cache/
 
-# Packaging output
+# 打包产物
 build/
 dist/
 *.egg-info/
 
-# Editors and local configuration
+# 编辑器文件与本地配置
 .idea/
 .vscode/
 .env
 .env.*
 !.env.example
 
-# Hugging Face and model caches
+# Hugging Face 与模型缓存
 .cache/
 huggingface/
 models/
@@ -31,7 +31,7 @@ data/chroma/
 *.pt
 *.pth
 
-# Temporary files
+# 临时文件
 *.tmp
 *.temp
 *.log

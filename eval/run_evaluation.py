@@ -1,4 +1,4 @@
-"""Sequential, gold-isolated evaluation; streams completed run records to JSONL."""
+"""顺序执行且隔离答案标注；每次完成后立即写入 JSONL。"""
 
 import argparse
 import hashlib
@@ -157,7 +157,7 @@ def main():
                         f"  {run.status}: tools={run.tool_calls}, LLM={run.model_calls}, VLM={run.vlm_calls}, ms={run.latency_ms:.2f}",
                         flush=True,
                     )
-    except Exception as exc:  # noqa: BLE001 - record failure without exposing raw provider state
+    except Exception as exc:  # noqa: BLE001 - 保存安全失败信息，不暴露提供方原始状态
         manifest["status"] = "interrupted"
         manifest["failure"] = failure_details(
             exc,

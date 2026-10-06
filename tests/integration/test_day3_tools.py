@@ -1,4 +1,4 @@
-"""Actual Chroma + prepared corpus + fixed vectors, with no model calls."""
+"""真实 Chroma、准备语料与固定向量组合测试，不调用模型。"""
 
 from pathlib import Path
 

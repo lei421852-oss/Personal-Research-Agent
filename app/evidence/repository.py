@@ -1,4 +1,4 @@
-"""Prepared-corpus access only; no on-demand PDF parsing."""
+"""只访问已准备的语料，不按需解析 PDF。"""
 
 from dataclasses import dataclass
 from pathlib import Path
@@ -74,7 +74,7 @@ class PaperEvidenceRepository:
 
 
 class FigureAssetResolver:
-    """Private backend mapping. Asset references are never interpreted as paths."""
+    """后端私有资源映射：资源引用不能被当成文件路径解释。"""
 
     def __init__(self, corpus: PaperCorpus):
         self._assets = {

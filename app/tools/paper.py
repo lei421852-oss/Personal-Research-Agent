@@ -1,4 +1,4 @@
-"""Paper domain capabilities projected into path-free Agent observations."""
+"""将论文领域能力转换为不含本地路径的 Agent 观察结果。"""
 
 from typing import Annotated
 
@@ -108,6 +108,7 @@ class SearchTextTool(Tool[SearchTextInput, ToolObservation]):
         self.retrieval, self.papers = retrieval, papers
 
     def execute(self, arguments: SearchTextInput) -> ToolObservation:
+        # 在检索前解析调用方给出的范围；None 保持全库，不从用户问题猜论文。
         scopes = (
             None
             if arguments.paper_ids is None
@@ -120,6 +121,7 @@ class SearchTextTool(Tool[SearchTextInput, ToolObservation]):
             raise ValueError("Retrieval violated the requested Top-K limit")
         evidence = []
         for result in results:
+            # 再核对返回结果的范围，防止后端未执行过滤却悄悄返回其他论文。
             if scopes is not None and result.evidence.paper_id not in scopes:
                 raise ValueError("Retrieval violated paper scope")
             self.papers.validate_text(result.evidence)

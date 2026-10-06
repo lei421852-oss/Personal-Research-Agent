@@ -1,1 +1,1 @@
-"""HTTP delivery layer, separate from Agent decisions and tool contracts."""
+"""HTTP 交付层，与 Agent 决策及工具契约分开。"""

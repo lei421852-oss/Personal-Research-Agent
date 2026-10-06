@@ -1,4 +1,4 @@
-"""Two adapter-only checks; existing runtime tests remain unchanged."""
+"""仅新增两项适配器检查，保留已有运行时测试。"""
 
 import json
 from types import SimpleNamespace

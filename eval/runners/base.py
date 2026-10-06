@@ -1,4 +1,4 @@
-"""Shared measurement/projection, never an alternative Agent controller."""
+"""共用测量与结果映射，不另建 Agent 控制器。"""
 
 import re
 from collections.abc import Callable
@@ -84,7 +84,7 @@ def measured_clients(resources):
 
 
 def figure_from_question(question, corpus):
-    """Fixed baseline input extraction only. Never consult gold target_figures or answer points."""
+    """只为固定基线从问题提取目标，不读取标注 Figure 或答案要点。"""
     figures = list(
         dict.fromkeys(re.findall(r"figure\s*(\d+)", question, re.IGNORECASE))
     )
@@ -129,6 +129,7 @@ def build_run(
     text_k = None
     events = []
     errors = list(extra_errors or [])
+    # strict=True 要求动作与结果一一配对；数量不符直接报错，不能截断后伪造指标。
     for trace, observation in zip(traces, observations, strict=True):
         ids = []
         if observation.status == "success":
@@ -142,6 +143,7 @@ def build_run(
                 if isinstance(r, dict) and r.get("evidence_id") in items
             ]
             acquired.extend(ids)
+        # 首次检索衡量 Recall@K；后续 read_page 等补证据另计累计覆盖率。
         if trace.tool_name == "search_text" and first_text is None:
             first_text = ids
             first_text_status = observation.status
@@ -162,6 +164,7 @@ def build_run(
                     "failure": observation.payload.get("failure", {}),
                 }
             )
+    # 去重后按模态拆分：多次读到同一证据不会重复增加召回分数。
     acquired = unique(acquired)
     gold_text = [
         i

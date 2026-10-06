@@ -1,8 +1,8 @@
-"""Identity validation only: this does not assess semantic support."""
+"""仅校验引用身份，不判断证据在语义上是否支持答案。"""
 
 
 class CitationValidationError(ValueError):
-    """Model output did not cite nonempty, supplied evidence identities."""
+    """模型未引用非空且确实提供过的证据 ID。"""
 
 
 class CitationValidator:

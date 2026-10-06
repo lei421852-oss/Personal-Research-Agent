@@ -1,4 +1,4 @@
-"""One frozen dev case across three fake systems; never loads real adapters."""
+"""固定一条 dev 题验证三个模拟系统，不加载真实模型适配器。"""
 
 import json
 
@@ -20,7 +20,7 @@ def run_smoke() -> list[EvaluationRun]:
     runs = []
     for runner in (TextRAGRunner, FixedMultimodalRAGRunner, MultimodalAgentRunner):
         result = runner(resources).run(case)
-        # Validate the public serialized result, not only the Python return type.
+        # 验证公开结果能正确序列化和重新校验，不只检查 Python 返回类型。
         validated = EvaluationRun.model_validate_json(result.model_dump_json())
         if validated.backend != "fake" or validated.status != "completed":
             raise RuntimeError(f"Smoke failed: {validated.system}")

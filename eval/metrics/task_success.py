@@ -1,4 +1,4 @@
-"""No keyword matching or automatic claim that a completed answer is correct."""
+"""不按关键词判分，也不把执行 completed 自动当成答案正确。"""
 
 
 def initial_task_success(case, status, answer):
