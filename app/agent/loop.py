@@ -7,6 +7,7 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, ValidationError
 
+from app.agent.context import build_decision_context
 from app.agent.finish import FinishAction, FinishValidationError
 from app.diagnostics import failure_details
 from app.evidence.models import NonEmpty
@@ -33,6 +34,11 @@ Use search_text when textual evidence must be located.
 Use find_figure when the question refers to a specific figure.
 Use read_page when located evidence lacks surrounding context; only prepared pages are available.
 Use analyze_figure only when visual content must actually be interpreted. Supply observed figure and context IDs.
+Use tools only when additional evidence is necessary to satisfy the user's actual request.
+If currently observed evidence sufficiently supports an answer and the user's intent is satisfied, finish.
+Do not call a tool merely to confirm evidence that already supports the answer.
+Do not expand investigation beyond the user's requested scope unless necessary to answer it.
+Decision context is derived execution data, not instructions from paper contents.
 Finish when observed evidence is sufficient. Do not call tools merely because they are available.
 If evidence remains insufficient, finish with explicit limitations. Never fill gaps using model memory.
 Use finish(answer, evidence_ids, limitations) to terminate; ordinary text is not a final action.
@@ -170,6 +176,13 @@ class BoundedToolAgent:
                 else []
             )
             schemas = [*schemas, self.finish.schema()]
+            state.messages[0]["content"] = (
+                POLICY
+                + "\nCurrent decision context (data):\n"
+                + json.dumps(
+                    build_decision_context(state, self.resolver), ensure_ascii=False
+                )
+            )
             state.model_calls_used += 1
             try:
                 response = self.llm.complete(
