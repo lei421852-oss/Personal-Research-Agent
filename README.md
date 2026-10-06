@@ -1,6 +1,6 @@
 # Multimodal Research Agent
 
-当前状态：Day 7 已建立 40 条候选评测题、dev/test 加载器与静态校验，全部待人工审阅，不能当作已确认 Ground Truth。Day 6 API/UI 可用；Agent/工具/检索未修改，真实行为缺口仍按既有记录保留。
+当前状态：Day 7 已建立 40 条评测题、dev/test 加载器与静态校验；用户已确认核对并批量批准，review 信息齐全，严格审阅状态校验通过。Day 6 API/UI 可用；Agent/工具/检索未修改，真实行为缺口仍按既有记录保留。
 
 本阶段没有 Agent Loop、自动图表检测、跨论文比较或最终问答 API。现有 SingleStepToolCaller 保留原样。
 
@@ -546,8 +546,9 @@ API、浏览器验收及截图继续保存在既有 D 盘对话目录；截图�
 | Insufficient | 2 | 6 | 8 |
 | 总计 | 10 | 30 | 40 |
 
-**所有 40 条为 pending_review。** Coding Agent 依据当前 25 TextEvidence / 3 FigureEvidence
-辅助制定候选问题与答案要点，并记录每个要点的 supporting_evidence_ids；这不是人工确认的 Ground Truth。
+**所有 40 条现为 approved。** 最初由 Coding Agent 依据当前 25 TextEvidence / 3 FigureEvidence
+辅助制定候选题及 supporting_evidence_ids，后经用户确认核对并统一批准。reviewer=用户，
+reviewed_at=2026-10-06T19:52:30+08:00（本次批量批准登记时间）；题目与答案证据不变。
 12 道 Figure QA 复用 3 张图，dev/test 中多题共享证据，不能视为独立图像样本或声称严格 IID 泛化。
 原四个已运行的 Day 5.5 示例放在 dev，不把已用于调试的原问题放入 test。
 
@@ -562,14 +563,14 @@ expected_behavior、must_not_claim、人工审阅状态和可选 regression。
 
 ```bash
 .venv/bin/python -m eval.validate_dataset
-# 正式评测前的人工状态保护：当前候选数据会明确拒绝。
+# 正式评测前的人工状态保护：当前 40 条 approved 数据通过。
 .venv/bin/python -m eval.validate_dataset --require-reviewed
 ```
 
 ```python
 from eval.loader import load_dataset
 candidates = load_dataset("dev")
-# 后续正式评测应显式要求人工批准；当前调用会报 DatasetNotReviewedError。
+# 正式评测应显式要求人工批准；当前数据可成功加载。
 approved_test = load_dataset("test", require_approved=True)
 ```
 
@@ -591,8 +592,8 @@ Day 6 真实 HTTP 响应逐字节保存为 D 盘 Day7-CLIP-StepExhaustion回归�
 ### 验证与人工材料
 
 全部 229 项 pytest 通过，原有 204 项未回归；Ruff、语法与差异检查通过。
-普通静态校验输出 static_valid=true、ground_truth_ready=false、pending_review=40；
---require-reviewed 已验证明确拒绝未批准数据。
+当前静态校验输出 static_valid=true、ground_truth_ready=true、approved=40；
+--require-reviewed 通过。测试另用临时 pending 数据确认未批准数据仍会被拒绝。
 
 D 盘现有对话目录中提供 40 题人工审阅清单、28 条完整准备证据/固定 Figure 核对目录、
 静态校验报告及 CLIP 回归原始记录。Day 8 的三系统比较尚未运行，不将未来质量/成本假设写成已测结论。

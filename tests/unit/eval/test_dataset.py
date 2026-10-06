@@ -18,7 +18,7 @@ def prepared():
     return load_paper_corpus(ROOT / "data/papers")
 
 
-def test_distribution_provenance_and_pending_review(prepared):
+def test_distribution_provenance_and_approved_review(prepared):
     dev, test = load_datasets()
     report = validate_datasets(dev, test, prepared)
     assert report["total_cases"] == 40 and report["splits"] == {"dev": 10, "test": 30}
@@ -28,13 +28,19 @@ def test_distribution_provenance_and_pending_review(prepared):
         "cross_paper": 10,
         "insufficient": 8,
     }
-    assert report["review_status"] == {"pending_review": 40}
-    assert report["ground_truth_ready"] is False
+    assert report["review_status"] == {"approved": 40}
+    assert report["ground_truth_ready"] is True
 
 
-def test_candidates_cannot_silently_be_loaded_as_ground_truth():
+def test_candidates_cannot_silently_be_loaded_as_ground_truth(tmp_path):
+    data = load_dataset("test").model_dump(mode="json")
+    for case in data["cases"]:
+        case.update(annotation_status="pending_review", reviewer=None, reviewed_at=None)
+    import json
+
+    (tmp_path / "test.json").write_text(json.dumps(data), encoding="utf-8")
     with pytest.raises(DatasetNotReviewedError):
-        load_dataset("test", require_approved=True)
+        load_dataset("test", dataset_dir=tmp_path, require_approved=True)
 
 
 @pytest.mark.parametrize("split", ["../dev", "train", "all"])
@@ -162,7 +168,9 @@ def test_schema_rejects_incomplete_annotation(defect):
             "must_not_claim"
         ] = []
     elif defect == "fake_approval":
-        data["cases"][0]["annotation_status"] = "approved"
+        data["cases"][0].update(
+            annotation_status="approved", reviewer=None, reviewed_at=None
+        )
     with pytest.raises(ValidationError):
         EvaluationDataset.model_validate(data)
 

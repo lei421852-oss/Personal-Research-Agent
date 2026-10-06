@@ -42,7 +42,7 @@
     }
   ],
   "notes": [
-    "40 条为 Coding Agent 辅助候选标注，不是已人工确认的 Ground Truth。",
+    "40 条最初由 Coding Agent 辅助制定的候选标注，现经用户确认核对并统一批准；人工批准元数据记录在各 case。",
     "仅引用当前固定 PDF 版本的 prepared text/figure；页码为 one-based PDF page index。",
     "paper_ids/relevant_evidence_ids/answer_points 是离线标注，不自动注入 Agent prompt 或补 Tool scope。",
     "12 道 Figure QA 复用 3 张图；多题共享证据，不能视为独立图像样本。",
@@ -94,12 +94,12 @@
       "must_not_claim": [
         "不能把 N×N 候选数说成只有 N 个配对。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -134,12 +134,12 @@
       "must_not_claim": [
         "不能声称必须为每个新分类任务训练新的监督线性分类头。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -180,12 +180,12 @@
       "must_not_claim": [
         "不能把该 4 倍迁移速率提升当成所有任务准确率提高 4 倍。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -226,12 +226,12 @@
       "must_not_claim": [
         "不能声称 hard negatives 是均匀随机抽取，或 ITM 是自回归语言损失。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -279,12 +279,12 @@
       "must_not_claim": [
         "不能把 decoder 说成保持双向 self-attention，或把 LM 当作 MLM。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -341,12 +341,12 @@
       "must_not_claim": [
         "不能声称所有 pretrained LM 层在 Flamingo 主训练中都重新训练。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -395,12 +395,12 @@
       "must_not_claim": [
         "不能把 1 FPS 当成推理吞吐量，或声称该文本使用了 spatial grid position encoding。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -463,13 +463,12 @@
       "must_not_claim": [
         "不能把高亮对角线理解为 token-level cross-attention 权重。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
-        "必须人工打开固定 crop，核对可见元素；图注/文字支持和图像观察不能混为一谈。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -524,13 +523,12 @@
       "must_not_claim": [
         "不能把图示类别描述选择当成自回归自由生成任意 caption。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
-        "必须人工打开固定 crop，核对可见元素；图注/文字支持和图像观察不能混为一谈。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -579,13 +577,12 @@
       "must_not_claim": [
         "不能因输出含 A photo of a dog. 就声称图中存在自回归 text decoder。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
-        "必须人工打开固定 crop，核对可见元素；图注/文字支持和图像观察不能混为一谈。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -641,13 +638,12 @@
       "must_not_claim": [
         "不能交换 captioner 和 filter 的目标。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
-        "必须人工打开固定 crop，核对可见元素；图注/文字支持和图像观察不能混为一谈。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -703,13 +699,12 @@
       "must_not_claim": [
         "不能声称最终数据集只包含合成字幕，或编造过滤后的样本数量。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
-        "必须人工打开固定 crop，核对可见元素；图注/文字支持和图像观察不能混为一谈。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -750,13 +745,12 @@
       "must_not_claim": [
         "不能把箭头颜色解读为定量性能、置信度或数据集规模。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
-        "必须人工打开固定 crop，核对可见元素；图注/文字支持和图像观察不能混为一谈。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -819,13 +813,12 @@
       "must_not_claim": [
         "不能把紫色模块也说成预训练后冻结，或声称雪花表示 dropout。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
-        "必须人工打开固定 crop，核对可见元素；图注/文字支持和图像观察不能混为一谈。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -872,13 +865,12 @@
       "must_not_claim": [
         "不能把图示一次输出当作 captioning accuracy 或性能基准。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
-        "必须人工打开固定 crop，核对可见元素；图注/文字支持和图像观察不能混为一谈。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -933,13 +925,12 @@
       "must_not_claim": [
         "不能声称 Figure 3 本身标出了 64 个 outputs 或 attention heads。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
-        "必须人工打开固定 crop，核对可见元素；图注/文字支持和图像观察不能混为一谈。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -996,12 +987,12 @@
       "must_not_claim": [
         "不能声称 Flamingo 与 CLIP 所有训练阶段相同，或 CLIP 只能使用 NFNet。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -1066,12 +1057,12 @@
       "must_not_claim": [
         "不能声称两篇这里都使用 ViT，或 BLIP CLS 就是 Flamingo 64 个 Resampler outputs。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -1120,12 +1111,12 @@
       "must_not_claim": [
         "不能把 Flamingo in-context 示例说成必须对每个新任务执行权重微调。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -1182,12 +1173,12 @@
       "must_not_claim": [
         "不能把 Resampler 说成专门清洗训练 caption 的 filter，或把 CapFilt 当作视觉 token 压缩层。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -1258,12 +1249,12 @@
       "must_not_claim": [
         "不能把三者统一说成简单输入拼接，或推断哪个模型必然性能最好。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -1321,12 +1312,12 @@
       "must_not_claim": [
         "不能用论文记忆为 CLIP 补一个唯一 image encoder 类型；限制仅指 prepared passages。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -1391,12 +1382,12 @@
       "must_not_claim": [
         "不能因 BLIP 提到 momentum encoder 就声称当前 CLIP 证据也采用了相同机制。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -1445,12 +1436,12 @@
       "must_not_claim": [
         "不能把 pair matching 当作逐词 caption generation，或由任务差异编造统一计算成本排名。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -1474,13 +1465,12 @@
       "must_not_claim": [
         "不能用模型记忆补具体 checkpoint 路径、版本或 SHA-256。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
-        "缺失结论仅针对当前 Prepared Corpus，不声称完整论文或作者从未公开相关信息。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -1510,13 +1500,12 @@
       "must_not_claim": [
         "不能把图中相似度矩阵当作准确率表，或把 4x 迁移速率当作 top-1 accuracy。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
-        "缺失结论仅针对当前 Prepared Corpus，不声称完整论文或作者从未公开相关信息。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -1540,13 +1529,12 @@
       "must_not_claim": [
         "不能由 encoder 示意图推断 GPU 型号/数量或训练时间。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
-        "缺失结论仅针对当前 Prepared Corpus，不声称完整论文或作者从未公开相关信息。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -1576,13 +1564,12 @@
       "must_not_claim": [
         "不能把 Iw/Tw/Ts 符号当作样本数量，或编造过滤比例。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
-        "缺失结论仅针对当前 Prepared Corpus，不声称完整论文或作者从未公开相关信息。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -1613,13 +1600,12 @@
         "不能把 Resampler 64 个 outputs 当作所有 attention heads 数。",
         "不能把图中 1st/n-th 标签猜成具体层数或 tensor shape。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
-        "缺失结论仅针对当前 Prepared Corpus，不声称完整论文或作者从未公开相关信息。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     },
@@ -1650,13 +1636,12 @@
         "不能从 fixed visual outputs 或冻结权重推导未经测量的 memory/latency 数值。",
         "不能用本项目 API/LLM 延迟代替原 Flamingo 模型 benchmark。"
       ],
-      "annotation_status": "pending_review",
-      "reviewer": null,
-      "reviewed_at": null,
+      "annotation_status": "approved",
+      "reviewer": "用户",
+      "reviewed_at": "2026-10-06T19:52:30+08:00",
       "review_notes": [
-        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
-        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
-        "缺失结论仅针对当前 Prepared Corpus，不声称完整论文或作者从未公开相关信息。"
+        "用户已确认核对候选题，本次统一登记为 approved。",
+        "reviewed_at 记录本次批量批准登记时间；题目、支持证据、答案要点及历史回归记录保持不变。"
       ],
       "regression": null
     }
