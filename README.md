@@ -433,3 +433,20 @@ BLIP 私有训练数据 manifest SHA-256 与内部去重数量（当前 prepared
 
 DeepSeek 即使收到 parallel_tool_calls=False 仍可能返回多个 tool_calls；现有控制器继续
 完整拒绝该批次，明确记录 actual_tool_calls，而不偷偷只执行第一个或改变单 Agent 规则。
+
+
+### Day 5.5 Single-Action 协议提示修正
+
+仅强化 app/agent/loop.py 中的 System Prompt：每轮恰好一个动作；多个检索需求先选一个，
+等待 Observation；两个调用整批无效；只调用本轮提供的工具。没有规定工具路线。
+
+已有 parallel_tool_calls=False 保留。DeepSeek 实测在旧提示下仍会返回多个调用，因此不能
+把 SDK 参数传入视为服务端已保证单动作。Controller 对调用数不等于 1 的拒绝检查保持不变，
+不使用 tool_calls[:1]，不添加自动过滤或修改 Corpus/检索。
+
+最终原四题真实重跑：24 次模型决策全部返回一个动作，没有 protocol_failure。
+这只是一轮 smoke 结果，不保证未来所有请求均合规。186 项回归测试通过。
+
+任务语义验收仍不全通过：CLIP 猜错论文版本 ID 后错误推断没有该论文；Figure 根据图注/正文
+拒绝错误前提但未调用 analyze_figure；Flamingo 与不足题均安全耗尽预算、未 finish。
+完整 Trace 与逐题审阅放在 D 盘现有对话产物目录。不能将 completed 当作 Task Success。
