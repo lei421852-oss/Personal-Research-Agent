@@ -1,6 +1,6 @@
 # Multimodal Research Agent
 
-当前状态：Day 8 已封板。统一三系统 Runner 和 EvaluationRun 已建立；本次收尾仅执行 1 条 dev case × 3 systems 的 Fake 冒烟，不调用真实模型。完整实验留作可选，入口与范围见 [eval/README.md](eval/README.md)。此前 30 次真实 dev 为历史记录，test 未执行。
+当前状态：Day 9 已完成决策上下文、重复搜索拦截与恢复反馈；254 项测试通过。仅运行 Fake 行为验证，真实 dev-text-01 停止表现待用户手动核查。Day 8 评测接口已封板，test 未运行，历史真实 dev 记录保留。
 
 实现历史按 Day 1–8 保留在下文；当前已具备有限步 Agent Loop、固定多模态 QA、API/UI 和评测入口。
 
@@ -655,3 +655,36 @@ summary.md、review-template.json；逐次保存运行记录。manifest 保存�
 
 全部 244 项 pytest 通过，Ruff、语法与差异检查通过；新增测试覆盖三 Runner 输出、标注隔离、
 空结果与依赖失败、引用身份/语义区别、实际 K、计数隔离、人工评分匹配及 fake/real 混用拒绝。
+
+## Day 9：决策上下文与失败恢复
+
+当前增加范围为 Agent policy/controller 的轻量优化，不修改 Retriever、Corpus、工具数量、API/UI。
+`app/agent/context.py` 从现有 State 派生任务、已观察证据摘要、历史动作/失败、剩余工具与决策预算；
+每次更新原 system message，不打断 assistant/tool 配对，完整原始 Observation 仍在消息历史中。
+Policy 判断证据是否充分与是否 finish，Controller 只执行确定性约束。
+
+`app/agent/recovery.py` 的 SearchActionFingerprint 使用 NFKC/lowercase/词元与空白规范化，
+论文 scope 排序去重、区分 None 与 []，并保留 top_k。相同 scope/K 时，规范化 exact 或
+Jaccard≥0.85 的近似查询可拦截；scope/K 改变、明显不同信息需求以及数字/否定/比较目标变化放行。
+只与本次运行已成功取得证据的 search 比较；失败/空结果保留原有连续相同失败限制。
+这不是语义相似模型，不能保证识别所有重复或理解所有改写。
+
+重复请求不执行 ToolExecutor/Retriever，不强制 finish；反馈提供历史动作、已有证据 ID 与改变
+信息需求的建议。为保持 API/UI 契约，Observation/Trace status 仍为 error，issue_code=redundant_action，
+failure message 明确 not executed，内部 failure.executed=false。已有 UI 可显示失败原因。
+真实工具计数排除被拦截的请求；沿用 6 次工具预算和最多 7 次模型决策，不允许无限重复。
+
+unknown_paper 在 Agent feedback 中归为 invalid_arguments，保留 domain_issue_code 和合法版本 ID；
+原参数不改写，由模型修正。empty 保持 empty/empty_result，明确调用完成但无证据；依赖/内部失败
+提供不同恢复建议，不自动重试。工具层原始 unknown_paper 契约不变。
+
+本次新增 10 项 Fake 行为测试，全量 254 项通过（原有 244 项无回归），Ruff 与差异检查通过。不调用真实模型，不宣称真实 CLIP 停止失败已修复。
+如需手动复查单条 dev-text-01，可在确认配置后自行运行：
+
+```bash
+.venv/bin/python -m eval.run_evaluation --backend real --split dev --systems multimodal_agent --case-id dev-text-01 --env-file .env.example
+```
+
+该命令仅运行 1 条 dev 的 Agent，输出 status/answer/citations/trace 和实际调用指标；当前配置若采用
+ day5-controlled 检索，结果须保留该限制。与历史 step_exhaustion、6 tools/7 model calls 对比时，
+同时人工核对证据充分性与答案，不能用 completed 状态替代语义验收。

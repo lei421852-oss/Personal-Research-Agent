@@ -14,6 +14,10 @@ class EvidenceResolver:
             e.evidence_id: e for e in (*corpus.text_evidence, *corpus.figure_evidence)
         }
 
+    @property
+    def paper_ids(self) -> list[str]:
+        return sorted({item.paper_id for item in self._items.values()})
+
     def resolve(self, evidence_id: str) -> TextEvidence | FigureEvidence:
         try:
             return self._items[evidence_id]

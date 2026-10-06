@@ -2,6 +2,9 @@
 
 
 def cost_metrics(latency_ms, llm_events, vlm_events, traces):
+    traces = [
+        t for t in traces if not t.failure or t.failure.get("executed") is not False
+    ]
     return {
         "latency_ms": latency_ms,
         "model_calls": len(llm_events),

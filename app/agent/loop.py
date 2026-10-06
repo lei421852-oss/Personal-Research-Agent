@@ -9,6 +9,11 @@ from pydantic import BaseModel, ConfigDict, Field, StrictInt, ValidationError
 
 from app.agent.context import build_decision_context
 from app.agent.finish import FinishAction, FinishValidationError
+from app.agent.recovery import (
+    SearchActionFingerprint,
+    recovery_feedback,
+    redundant_observation,
+)
 from app.diagnostics import failure_details
 from app.evidence.models import NonEmpty
 from app.evidence.resolver import EvidenceResolutionError, EvidenceResolver
@@ -107,6 +112,7 @@ class BoundedToolAgent:
         started = perf_counter()
         previous_failure = None
         call_ids = set()
+        successful_searches = []
 
         def result(status, answer=None, citations=None, limitations=None, details=None):
             return AgentResult(
@@ -300,11 +306,50 @@ class BoundedToolAgent:
                         "Tool budget exhausted; no additional tool was executed."
                     ],
                 )
+            fingerprint = (
+                SearchActionFingerprint.from_arguments(call.arguments)
+                if call.name == "search_text"
+                else None
+            )
+            duplicate = next(
+                (
+                    entry
+                    for entry in successful_searches
+                    if fingerprint and fingerprint.duplicates(entry[0])
+                ),
+                None,
+            )
+            if duplicate:
+                observation = redundant_observation(
+                    call.name, duplicate[1], duplicate[2]
+                )
+                state.trace.append(
+                    ToolExecutionTrace(
+                        tool_call_id=redact_text(call.id),
+                        tool_name=call.name,
+                        arguments=public_value(call.arguments),
+                        status="error",
+                        latency_ms=0,
+                        result_count=0,
+                        failure=observation.payload["failure"],
+                    )
+                )
+                feedback(call, observation)
+                continue
             state.tool_calls_used += 1
             observation = self.executor.execute(
                 call.name, call.arguments, tool_call_id=call.id
             )
-            state.trace.append(self.executor.traces[-1])
+            trace = self.executor.traces[-1]
+            observation = recovery_feedback(observation, self.resolver.paper_ids)
+            if trace.failure and observation.issue:
+                trace = trace.model_copy(
+                    update={
+                        "failure": trace.failure
+                        | {"issue_code": observation.issue.code}
+                    }
+                )
+            state.trace.append(trace)
             feedback(call, observation)
             if observation.status == "success":
                 records = [
@@ -328,6 +373,14 @@ class BoundedToolAgent:
                         and record.get("page") == item.page
                     ):
                         state.observed_evidence_ids.add(identity)
+                if fingerprint:
+                    successful_searches.append(
+                        (
+                            fingerprint,
+                            state.model_actions[-1],
+                            set(state.observed_evidence_ids),
+                        )
+                    )
                 previous_failure = None
             else:
                 signature = (

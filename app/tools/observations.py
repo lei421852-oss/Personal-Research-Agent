@@ -8,6 +8,7 @@ from app.evidence.models import NonEmpty
 
 Status = Literal["success", "empty", "error"]
 IssueCode = Literal[
+    "redundant_action",
     "invalid_arguments",
     "unknown_paper",
     "empty_result",
