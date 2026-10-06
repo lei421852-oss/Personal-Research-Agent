@@ -80,7 +80,9 @@ def test_normal_result_and_execution_trace(corpus, tool):
         "status",
         "latency_ms",
         "result_count",
+        "failure",
     }
+    assert trace.failure is None
 
 
 @pytest.mark.parametrize("tool", TOOLS)
@@ -211,7 +213,8 @@ def test_search_rejects_out_of_scope_or_stale_evidence(corpus):
         create_paper_registry(corpus, LeakingRetrieval(corpus))
     ).execute("search_text", {"query": "BLIP", "paper_ids": ["clip"], "top_k": 1})
     assert result.status == "error" and result.issue.code == "internal_failure"
-    assert result.payload == {}
+    assert result.payload["failure"]["message"] == "Retrieval violated paper scope"
+    assert "evidence" not in result.payload
 
 
 def test_figure_exact_lookup_and_private_asset_resolution(corpus):

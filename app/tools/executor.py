@@ -7,6 +7,7 @@ from uuid import uuid4
 from pydantic import ValidationError
 
 from app.agent.errors import ToolNotFoundError
+from app.diagnostics import failure_details
 from app.evidence.citations import CitationValidationError
 from app.evidence.errors import EvidenceDependencyError, UnknownPaperError
 from app.evidence.resolver import EvidenceResolutionError
@@ -41,6 +42,7 @@ class ToolExecutor:
             else uuid4().hex
         )
         phase = "arguments"
+        failure_exc = None
         try:
             if not isinstance(name, str) or not name.strip():
                 raise ToolNotFoundError("invalid")
@@ -54,11 +56,13 @@ class ToolExecutor:
             observation = ToolObservation.model_validate(
                 public_value(result.model_dump(mode="json"))
             )
-        except ToolNotFoundError:
+        except ToolNotFoundError as exc:
+            failure_exc = exc
             observation = self._error(
                 safe_name, "unknown_tool", "Tool is not registered."
             )
-        except ValidationError:
+        except ValidationError as exc:
+            failure_exc = exc
             # Only argument validation is invalid_arguments; malformed tool output is internal_failure.
             code = "internal_failure" if phase == "execution" else "invalid_arguments"
             summary = (
@@ -67,19 +71,22 @@ class ToolExecutor:
                 else "Arguments do not satisfy this tool's schema."
             )
             observation = self._error(safe_name, code, summary)
-        except EvidenceResolutionError:
+        except EvidenceResolutionError as exc:
+            failure_exc = exc
             observation = self._error(
                 safe_name,
                 "invalid_evidence",
                 "Evidence identity, modality or context scope is invalid.",
             )
-        except CitationValidationError:
+        except CitationValidationError as exc:
+            failure_exc = exc
             observation = self._error(
                 safe_name,
                 "citation_validation_failure",
                 "Model citations are empty or outside the supplied evidence.",
             )
-        except UnknownPaperError:
+        except UnknownPaperError as exc:
+            failure_exc = exc
             observation = self._error(
                 safe_name,
                 "unknown_paper",
@@ -92,15 +99,29 @@ class ToolExecutor:
             OSError,
             TimeoutError,
             ConnectionError,
-        ):
+        ) as exc:
+            failure_exc = exc
             observation = self._error(
                 safe_name,
                 "dependency_failure",
                 "A tool dependency is temporarily unavailable.",
             )
-        except Exception:  # noqa: BLE001 - public boundary must not expose unexpected failures
+        except Exception as exc:  # noqa: BLE001 - public boundary must not expose unexpected failures
+            failure_exc = exc
             observation = self._error(
                 safe_name, "internal_failure", "Tool execution failed internally."
+            )
+        if observation.status != "success":
+            failure = (
+                failure_details(failure_exc, phase=phase, summary=observation.summary)
+                if failure_exc is not None
+                else {"phase": phase, "message": observation.summary}
+            )
+            failure["issue_code"] = observation.issue.code
+            failure["retryable"] = observation.issue.retryable
+            observation = ToolObservation.model_validate(
+                observation.model_dump()
+                | {"payload": observation.payload | {"failure": failure}}
             )
         safe_arguments = public_value(arguments)
         if not isinstance(safe_arguments, dict):
@@ -113,6 +134,7 @@ class ToolExecutor:
                 status=observation.status,
                 latency_ms=(perf_counter() - started) * 1000,
                 result_count=observation.result_count,
+                failure=observation.payload.get("failure"),
             )
         )
         return observation

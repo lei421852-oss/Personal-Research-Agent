@@ -6,7 +6,9 @@ Only public tool actions and request timing are retained; never assistant reason
 import json
 from time import perf_counter
 from typing import Any
+from urllib.parse import urlparse
 
+from app.diagnostics import failure_details
 from app.llm.client import LLMClient, Message, ToolSchema
 from app.llm.models import LLMResponse, ToolCall
 from app.tools.redaction import public_value
@@ -33,6 +35,7 @@ class OpenAICompatibleLLMClient(LLMClient):
                 api_key=api_key, base_url=base_url, timeout=timeout, max_retries=0
             )
         self.client, self.model = sdk_client, model
+        self._deepseek = urlparse(base_url).hostname == "api.deepseek.com"
         self.calls: list[dict[str, Any]] = []
 
     def complete(
@@ -40,6 +43,7 @@ class OpenAICompatibleLLMClient(LLMClient):
     ) -> LLMResponse:
         started = perf_counter()
         event = {"status": "error", "tool_calls": []}
+        phase = "llm_request"
         try:
             provider_tools = [
                 {
@@ -52,13 +56,20 @@ class OpenAICompatibleLLMClient(LLMClient):
                 }
                 for t in tools
             ]
+            provider_options = (
+                {"extra_body": {"thinking": {"type": "disabled"}}}
+                if self._deepseek
+                else {}
+            )
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
                 tools=provider_tools,
                 tool_choice="required",
                 parallel_tool_calls=False,
+                **provider_options,
             )
+            phase = "llm_response_parsing"
             if not response.choices:
                 raise ValueError("Provider returned no choices")
             choice = response.choices[0]
@@ -82,6 +93,17 @@ class OpenAICompatibleLLMClient(LLMClient):
                 "finish_reason": choice.finish_reason,
             }
             return normalized
+        except Exception as exc:
+            event["failure"] = failure_details(
+                exc,
+                phase=phase,
+                summary="Model request or action parsing failed.",
+            )
+            event["error_type"] = type(exc).__name__
+            status_code = getattr(exc, "status_code", None)
+            if isinstance(status_code, int):
+                event["http_status"] = status_code
+            raise
         finally:
             event["latency_ms"] = (perf_counter() - started) * 1000
             self.calls.append(event)

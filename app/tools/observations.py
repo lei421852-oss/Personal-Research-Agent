@@ -80,3 +80,4 @@ class ToolExecutionTrace(BaseModel):
     status: Status
     latency_ms: float = Field(ge=0, allow_inf_nan=False)
     result_count: int = Field(ge=0)
+    failure: dict[str, JsonValue] | None = None

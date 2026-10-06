@@ -412,3 +412,24 @@ BLIP 私有训练数据 manifest SHA-256 与内部去重数量（当前 prepared
 
 当前进程没有六项配置变量，项目内也没有实际 .env，四条真实运行尚未完成。
 不会把适配器 mock 测试或配置检查失败作为真实模型验收通过。
+
+
+### DeepSeek 兼容与逐步失败诊断
+
+针对官方 api.deepseek.com 的 LLM 请求，适配器显式发送
+`extra_body={"thinking": {"type": "disabled"}}`，避免 Thinking 模式与
+`tool_choice=required` 冲突。其他 provider 不注入 DeepSeek 参数。
+
+失败不再只保留 model_failure / error：
+
+- llm_requests[].failure：请求或解析阶段、error_type、可用的 http_status、脱敏 provider message 和排查 hint。
+- tools[].failure / Observation.payload.failure：参数或执行阶段、issue_code、retryable、异常/底层原因类型；参数验证仅列字段及错误类型，不列输入值。
+- vlm_requests[].failure：VLM 请求原因，并关联实际 tool_call_id。
+- stop_details：控制器停止原因，包括协议期望/实际 Tool Call 数量、请求工具名、预算用量等。
+- finish 的失败 Observation 包含 finish_validation 诊断。
+
+不保存 traceback、请求 headers、API Key 或原始模型 reasoning；未知异常保留类型与稳定描述，
+不会直接公开任意 exception 字符串。empty 保持 empty，并记录没有证据的原因。
+
+DeepSeek 即使收到 parallel_tool_calls=False 仍可能返回多个 tool_calls；现有控制器继续
+完整拒绝该批次，明确记录 actual_tool_calls，而不偷偷只执行第一个或改变单 Agent 规则。

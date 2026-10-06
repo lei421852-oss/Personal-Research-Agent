@@ -8,6 +8,7 @@ from typing import Any, Literal
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, ValidationError
 
 from app.agent.finish import FinishAction, FinishValidationError
+from app.diagnostics import failure_details
 from app.evidence.models import NonEmpty
 from app.evidence.resolver import EvidenceResolutionError, EvidenceResolver
 from app.llm.client import LLMClient
@@ -62,6 +63,7 @@ class AgentResult(BaseModel):
     total_latency_ms: float
     tool_calls: int
     model_calls: int
+    stop_details: dict[str, Any] = Field(default_factory=dict)
 
 
 class BoundedToolAgent:
@@ -89,7 +91,7 @@ class BoundedToolAgent:
         previous_failure = None
         call_ids = set()
 
-        def result(status, answer=None, citations=None, limitations=None):
+        def result(status, answer=None, citations=None, limitations=None, details=None):
             return AgentResult(
                 status=status,
                 answer=answer,
@@ -99,6 +101,21 @@ class BoundedToolAgent:
                 total_latency_ms=(perf_counter() - started) * 1000,
                 tool_calls=state.tool_calls_used,
                 model_calls=state.model_calls_used,
+                stop_details=public_value(
+                    details
+                    or (
+                        {
+                            "phase": "controller",
+                            "reason": status,
+                            "tool_calls_used": state.tool_calls_used,
+                            "max_tool_calls": state.max_tool_calls,
+                            "model_calls_used": state.model_calls_used,
+                            "message": (limitations or [status])[0],
+                        }
+                        if status not in {"completed", "insufficient_evidence"}
+                        else {}
+                    )
+                ),
             )
 
         def feedback(call, observation):
@@ -147,12 +164,17 @@ class BoundedToolAgent:
                 response = self.llm.complete(
                     messages=deepcopy(state.messages), tools=deepcopy(schemas)
                 )
-            except Exception:  # noqa: BLE001 - provider boundary must return a safe termination
+            except Exception as exc:  # noqa: BLE001 - provider boundary must return a safe termination
                 return result(
                     "model_failure",
                     limitations=[
                         "Decision model unavailable; no final answer was fabricated."
                     ],
+                    details=failure_details(
+                        exc,
+                        phase="llm_complete",
+                        summary="Decision model request or action parsing failed.",
+                    ),
                 )
             if not isinstance(response, LLMResponse) or len(response.tool_calls) != 1:
                 return result(
@@ -160,6 +182,18 @@ class BoundedToolAgent:
                     limitations=[
                         "Model must request exactly one tool or finish action."
                     ],
+                    details={
+                        "phase": "llm_action_validation",
+                        "reason": "tool_call_count_or_response_type",
+                        "expected_tool_calls": 1,
+                        "actual_tool_calls": len(response.tool_calls)
+                        if isinstance(response, LLMResponse)
+                        else None,
+                        "requested_tools": [c.name for c in response.tool_calls]
+                        if isinstance(response, LLMResponse)
+                        else [],
+                        "hint": "Check provider single-call support; no partial batch was executed.",
+                    },
                 )
             call = response.tool_calls[0]
             if not call.id.strip() or call.id in call_ids:
@@ -188,12 +222,18 @@ class BoundedToolAgent:
                     ValidationError,
                     FinishValidationError,
                     EvidenceResolutionError,
-                ):
+                ) as exc:
                     observation = ToolObservation(
                         status="error",
                         tool_name="finish",
                         summary="Finish arguments are invalid or cite evidence not observed in this run.",
-                        payload={},
+                        payload={
+                            "failure": failure_details(
+                                exc,
+                                phase="finish_validation",
+                                summary="Finish schema is invalid or citations were not observed in this run.",
+                            )
+                        },
                         issue=ObservationIssue(
                             code="invalid_arguments", retryable=False
                         ),

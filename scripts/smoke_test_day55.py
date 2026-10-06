@@ -9,6 +9,7 @@ from time import perf_counter
 from zoneinfo import ZoneInfo
 
 from app.agent.loop import BoundedToolAgent
+from app.diagnostics import failure_details
 from app.evidence.corpus import load_paper_corpus
 from app.evidence.resolver import EvidenceResolver
 from app.llm.provider import OpenAICompatibleLLMClient
@@ -45,16 +46,23 @@ class TimedVisionClient:
     def analyze(self, image_path, prompt):
         started = perf_counter()
         status = "error"
+        failure = None
         try:
             response = self.client.analyze(image_path, prompt)
             status = "success"
             return response
+        except Exception as exc:
+            failure = failure_details(
+                exc, phase="vlm_request", summary="Vision model request failed."
+            )
+            raise
         finally:
             actions = self.decision_client.calls[-1].get("tool_calls", [])
             call_id = actions[0]["id"] if len(actions) == 1 else None
             self.calls.append(
                 {
                     "tool_call_id": call_id,
+                    "failure": failure,
                     "status": status,
                     "latency_ms": (perf_counter() - started) * 1000,
                 }
@@ -84,6 +92,9 @@ def run_cases(corpus, retrieval, llm, vision):
         result = BoundedToolAgent(llm, executor, EvidenceResolver(corpus)).run(question)
         serialized = public_value(result.model_dump(mode="json"))
         llm_events, vlm_events = llm.calls[llm_start:], vision.calls[vlm_start:]
+        llm_events = [
+            {"model_step": i, **event} for i, event in enumerate(llm_events, 1)
+        ]
         tools = []
         for trace in result.state.trace:
             paired = [
@@ -131,6 +142,7 @@ def run_cases(corpus, retrieval, llm, vision):
             "citations": serialized["citations"],
             "limitations": serialized["limitations"],
             "stop_reason": result.status,
+            "stop_details": serialized["stop_details"],
             "agent_state": serialized["state"],
             "checks": {
                 "tool_budget_respected": result.tool_calls <= 6,
@@ -156,6 +168,17 @@ def run_cases(corpus, retrieval, llm, vision):
         print(
             f"{name}: {result.status}, N_tools={result.tool_calls}, N_model={result.model_calls}, N_VLM={len(vlm_events)}"
         )
+        if result.stop_details:
+            print(
+                "  Stop details:",
+                json.dumps(public_value(result.stop_details), ensure_ascii=False),
+            )
+        for tool_event in tools:
+            if tool_event.get("failure"):
+                print(
+                    f"  Tool {tool_event['tool_name']} ({tool_event['status']}):",
+                    json.dumps(tool_event["failure"], ensure_ascii=False),
+                )
     return reports
 
 

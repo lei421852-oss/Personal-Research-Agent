@@ -100,3 +100,24 @@ def test_adapter_rejects_invalid_json_without_storing_raw_content():
         adapter.complete(messages=[], tools=[])
     assert adapter.calls[0]["status"] == "error"
     assert "not-json" not in json.dumps(adapter.calls)
+
+
+def test_deepseek_disables_thinking_without_changing_tool_policy():
+    class Completions:
+        def create(self, **kwargs):
+            self.request = kwargs
+            return sdk_response(
+                '{"answer":"Insufficient","evidence_ids":[],"limitations":["No evidence"]}'
+            )
+
+    endpoint = Completions()
+    adapter = OpenAICompatibleLLMClient(
+        api_key="fake",
+        model="deepseek-flash",
+        base_url="https://api.deepseek.com",
+        sdk_client=SimpleNamespace(chat=SimpleNamespace(completions=endpoint)),
+    )
+    adapter.complete(messages=[], tools=[])
+    assert endpoint.request["extra_body"] == {"thinking": {"type": "disabled"}}
+    assert endpoint.request["tool_choice"] == "required"
+    assert endpoint.request["parallel_tool_calls"] is False
