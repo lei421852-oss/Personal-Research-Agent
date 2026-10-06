@@ -370,3 +370,45 @@ Observation、模型动作与每轮模型请求快照：
 
 Day 4 真实 BLIP / Flamingo 验收仍未完成；本阶段没有运行真实决策模型，
 不据 Fake Trace 宣称真实策略质量或成本优势。
+
+
+## Day 5.5：真实 LLM 适配与四案例 Smoke Run
+
+新增 `app.llm.provider.OpenAICompatibleLLMClient`，仅转换现有 tool schema 和 SDK
+function tool_calls / JSON arguments；输入 messages（包括已有 Observation）原样传给 provider。
+不改变 BoundedToolAgent、AgentState、Policy、ToolRegistry、ToolExecutor、Evidence 或原有 Trace。
+
+适配采用 Chat Completions 工具格式，`tool_choice=required` 表示模型必须选择一个 action，
+仍可自行选择 finish 或任一领域工具；`parallel_tool_calls=False` 与已有单 action Runtime 一致。
+SDK 自动重试关闭。模型 assistant content / reasoning 字段不保存，只保留公开 tool action 和请求耗时。
+格式依据 [官方 Function Calling 文档](https://developers.openai.com/api/docs/guides/function-calling)。
+
+配置 `.env.example` 中六项 LLM / VLM 参数，实际密钥只放 Git 忽略的 `.env`，或配置当前进程变量。
+没有隐式跨项目凭据读取；只有显式 --env-file 才加载配置文件。
+
+```bash
+.venv/bin/python -m scripts.smoke_test_day55 --env-file .env
+```
+
+默认直接复用 Day 5 已有 ControlledRetrieval，不更换检索规则；真实决策 LLM 与真实 VLM 通过原有接口注入。
+如显式指定 `--retrieval-backend real`，则复用 Day 2 的 `papers-day2-text` 索引、Qwen Embedding 与原有 TextRetriever。
+不执行自动 ingestion，不修改排名、不强制增加工具步骤。
+四题依次为 CLIP objective、BLIP Figure 3 false-premise、Flamingo Perceiver Resampler、
+BLIP 私有训练数据 manifest SHA-256 与内部去重数量（当前 prepared corpus 没有这些信息）。
+每题独立 AgentState / ToolExecutor，真实模型自行选择下一 action。
+
+每题保存 N_tools、N_model、N_VLM、T_total、逐次 T_LLM、工具名/参数/状态/耗时/Evidence IDs、
+独立 T_VLM、完整公开 Observation 与模型上下文、answer / citations / limitations / stop_reason。
+结果写入既有 D 盘对话产物目录，不保存原始 provider 响应或隐藏 Chain-of-Thought。
+
+**计时嵌套关系：** analyze_figure 工具耗时已经包含 VLM 请求。
+因此使用 `T_total ≈ T_LLM + T_Tool_exclusive + T_VLM + controller_overhead`；
+不能在 Tool-inclusive 上再加一次 VLM。计时不包含模型/索引加载及 provider 初始化。
+
+路径检查、预算和 observed citations 检查自动记录；答案任务成功需人工检查提供证据，
+尤其 BLIP 错误前提、Flamingo why 的证据支持与不足问题是否明确拒答。
+默认保留 Day 5 检索后端，以限制变量。Day 5 演示 VLM 仍是 Fake，本次视觉验收使用现有真实 VLM；
+做正式 Policy 成本消融时，两种 Policy 必须都使用相同真实 VLM，不能把 Fake 延迟当作比较基线。
+
+当前进程没有六项配置变量，项目内也没有实际 .env，四条真实运行尚未完成。
+不会把适配器 mock 测试或配置检查失败作为真实模型验收通过。
