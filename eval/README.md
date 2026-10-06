@@ -1,6 +1,6 @@
 # Day 8 封板：比较评测接口
 
-当前验收范围仅为冻结数据集可加载、统一 Runner/结果契约，以及 **1 条 dev case × 3 systems 的 Fake/Scripted Smoke Test**。本次收尾不调用真实模型，不执行 10×3 或 30×3 评测，不调整 Agent、工具、检索或标注数据。
+当前验收范围仅为冻结数据集可加载、统一 Runner/结果契约，以及 **1 条 dev case × 3 systems 的 Fake/Scripted Smoke Test**。封板验收不调用真实模型，不执行 10×3 或 30×3 评测，不调整 Agent、工具、检索或标注数据。
 
 ## 统一接口
 
@@ -19,7 +19,7 @@ run(case: EvaluationCase) -> EvaluationRun
 
 - `TextRAGRunner`：复用 ToolExecutor 文本检索、现有 LLM Client 和 finish 引用验证。
 - `FixedMultimodalRAGRunner`：明确 Figure 问题复用 Day 4 MultimodalQAService；其他问题复用文本 Runner。目标来自用户问题和公开语料目录，不读取答案标注。
-- `MultimodalAgentRunner`：复用原 BoundedToolAgent，保留原策略及 6 次工具预算。
+- `MultimodalAgentRunner`：复用原 BoundedToolAgent，使用当前策略及最多 6 次工具执行、7 次模型决策预算。
 
 `base.py` 提供依赖与结果映射。数据集标注只用于离线评估，不进入生成提示、不自动补论文过滤。现有结果中的扩展指标字段可保留 null，不要求本次完成语义评分。
 
@@ -55,3 +55,13 @@ run(case: EvaluationCase) -> EvaluationRun
 ## 历史记录与本次范围
 
 此前按用户“先跑 dev”的选择，已运行并保存过 30 次真实 dev 记录；本次缩小范围后不重跑、不删除、不将其写成本次 Smoke Test 的结果。真实记录当时使用真实 DeepSeek 模型与 day5-controlled 检索，不能视为真实 Embedding 检索实验。test 尚未执行。
+
+## 可选单题真实复查
+
+以下由使用者显式执行，会调用真实模型；作品集打包不自动运行：
+
+```bash
+python -m eval.run_evaluation --backend real --split dev --systems multimodal_agent --case-id dev-text-01 --env-file .env --output-dir artifacts
+```
+
+本地配置使用 Git 忽略的 `.env`，`.env.example` 仅作为无密钥模板。评测/演示默认输出至仓库的 `artifacts/`（Git 忽略），可用 `--output-dir` 指定其他位置。

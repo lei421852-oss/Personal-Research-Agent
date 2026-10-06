@@ -1,0 +1,455 @@
+{
+  "verification": "real_model_historical_record",
+  "scope": "Historical Agent run of the Chinese false-premise question; not the exact English demo wording.",
+  "source": {
+    "original_file": "2026-10-06-多模态论文研究智能体-Day5.5-FigureQA-真实Trace-161738-860780.json",
+    "sha256": "d5985a6bfc163bc5acabdfef50780d1217489381ac468c661af8e065d520c313",
+    "record_date": "2026-10-06",
+    "replayed_during_packaging": false
+  },
+  "question": "Figure 3 为什么证明 BLIP 性能更强？请核实问题前提。",
+  "status": "completed",
+  "answer": "问题前提不成立，需要更正。\n\n在 BLIP 论文（arXiv:2201.12086v2）中，Figure 3 是 \"Learning framework of BLIP\" 的示意图，展示的是 CapFilt 学习框架（captioner 生成合成标题、filter 去除噪声图文对，两者由同一预训练模型初始化并在小规模人工标注数据上分别微调，再用自举得到的数据集预训练新模型）。它是一张流程/框图，不含任何数值坐标、指标、基准名称或基线模型名称，因此 Figure 3 本身并不能证明 BLIP 性能更强。\n\nFigure 3 所能支持的只是方法层面的说明：它图示了 CapFilt 如何提升文本语料质量（用 captioner 补充合成标题、用 filter 过滤原始网页文本和合成文本中的噪声），从机制上解释了为什么经过自举的数据集可能带来更好的预训练效果（属于\"方法论动机\"，而非\"性能证据\"）。论文中\"性能更强\"的证据应来自后续的实验结果表格（如检索与描述任务的指标对比），但这些内容不在 Figure 3 中，也不在我已检视的证据范围内。\n\n因此正确的表述应为：Figure 3 说明的是 BLIP 的 CapFilt 数据自举框架及其提升语料质量的机制，而非直接证明 BLIP 性能更优；性能优势需由实验章节的结果表来支撑。",
+  "citations": [
+    {
+      "evidence_id": "ev_e86cf697f7388bf7dca291a648f630b1",
+      "paper_id": "blip-2201.12086v2",
+      "page": 4,
+      "figure_id": "Figure 3"
+    },
+    {
+      "evidence_id": "ev_03f0209e1af23ec5c3e017db94ac940e",
+      "paper_id": "blip-2201.12086v2",
+      "page": 4,
+      "figure_id": null
+    },
+    {
+      "evidence_id": "ev_0ef849392533fb9fe735d1fe7cd8ebf9",
+      "paper_id": "blip-2201.12086v2",
+      "page": 4,
+      "figure_id": null
+    },
+    {
+      "evidence_id": "ev_03c68854d5c7f6b3d56efa68b5d371b1",
+      "paper_id": "blip-2201.12086v2",
+      "page": 3,
+      "figure_id": null
+    }
+  ],
+  "limitations": [
+    "Figure 3 为概念性流程框图，不含任何定量结果、指标数值或基线模型名称，因此无法从该图直接得出性能对比结论。",
+    "本次仅能访问论文第 2–4 页的预备区域，未检索到实验章节的结果表格，故无法在本次证据范围内核实 BLIP 相对于其他模型的具体性能优势数值。",
+    "回答仅基于已观察到的证据；对'性能更强'的判断需以论文实验结果章节为据，此处不作推断。"
+  ],
+  "backend": "real_llm + injected_unchanged_retrieval + real_vlm",
+  "retrieval_backend": "day5-controlled",
+  "metrics": {
+    "tool_calls": 6,
+    "model_calls": 7,
+    "vlm_calls": 1,
+    "latency_ms": 16310.708993987646
+  },
+  "trace": [
+    {
+      "T_VLM_ms": 0,
+      "tool_call_id": "call_00_gBSlBaVSFXW7L799D1zs4647",
+      "tool_name": "search_text",
+      "arguments": {
+        "query": "BLIP Figure 3",
+        "top_k": 5
+      },
+      "status": "success",
+      "latency_ms": 1.7362449871143326,
+      "result_count": 5,
+      "failure": null,
+      "evidence_ids": [
+        "ev_af27e6e725903c009c8bbfb55bd100fc",
+        "ev_3ff09fcd2b0d1148ec95118fdd204b78",
+        "ev_336da108cea409a395b7aee74def2593",
+        "ev_197064d097092640e20dc38ce8045682",
+        "ev_03c68854d5c7f6b3d56efa68b5d371b1"
+      ],
+      "observation": {
+        "status": "success",
+        "tool_name": "search_text",
+        "summary": "Retrieved 5 text evidence items.",
+        "payload": {
+          "paper_ids": null,
+          "evidence": [
+            {
+              "evidence_id": "ev_af27e6e725903c009c8bbfb55bd100fc",
+              "paper_id": "blip-2201.12086v2",
+              "page": 2,
+              "text": "Figure 2. Pre-training model architecture and objectives of BLIP (same parameters have the same color). We propose multimodal mixture",
+              "retrieval_score": 1.0,
+              "rerank_score": null
+            },
+            {
+              "evidence_id": "ev_3ff09fcd2b0d1148ec95118fdd204b78",
+              "paper_id": "blip-2201.12086v2",
+              "page": 2,
+              "text": "of encoder-decoder, a uniﬁed vision-language model which can operate in one of the three functionalities: (1) Unimodal encoder is trained with an image-text contrastive (ITC) loss to align the vision and language representations. (2) Image-grounded text encoder uses additional cross-attention layers to model vision-language interactions, and is trained with a image-text matching (ITM) loss to distinguish between positive and negative image-text pairs. (3) Image-grounded text decoder replaces the bi-directional self-attention layers with causal self-attention layers, and shares the same cross-attention layers and feed forward networks as the encoder. The decoder is trained with a language modeling (LM) loss to generate captions given images.",
+              "retrieval_score": 1.0,
+              "rerank_score": null
+            },
+            {
+              "evidence_id": "ev_336da108cea409a395b7aee74def2593",
+              "paper_id": "blip-2201.12086v2",
+              "page": 3,
+              "text": "We employ a visual transformer (Dosovitskiy et al., 2021) as our image encoder, which divides an input image into patches and encodes them as a sequence of embeddings, with an additional [CLS] token to represent the global im- age feature. Compared to using pre-trained object detectors for visual feature extraction (Chen et al., 2020), using a ViT is more computation-friendly and has been adopted by the more recent methods (Li et al., 2021a; Kim et al., 2021).",
+              "retrieval_score": 1.0,
+              "rerank_score": null
+            },
+            {
+              "evidence_id": "ev_197064d097092640e20dc38ce8045682",
+              "paper_id": "blip-2201.12086v2",
+              "page": 3,
+              "text": "In order to pre-train a uniﬁed model with both understanding and generation capabilities, we propose multimodal mixture of encoder-decoder (MED), a multi-task model which can operate in one of the three functionalities: (1) Unimodal encoder, which separately encodes image and text. The text encoder is the same as BERT (Devlin et al., 2019), where a [CLS] token is appended to the beginning of the text input to summarize the sentence. (2) Image-grounded text encoder, which injects visual information by inserting one additional cross-attention (CA) layer between the self-attention (SA) layer and the feed forward network (FFN) for each transformer block of the text encoder. A task-speciﬁc [Encode] token is appended to the text, and the output embedding of [Encode] is used as the multimodal representation of the image-text pair. (3) Image-grounded text decoder, which replaces the bi- directional self-attention layers in the image-grounded text encoder with causal self-attention layers. A [Decode] token is used to signal the beginning of a sequence, and an end-of-sequence token is used to signal its end.",
+              "retrieval_score": 1.0,
+              "rerank_score": null
+            },
+            {
+              "evidence_id": "ev_03c68854d5c7f6b3d56efa68b5d371b1",
+              "paper_id": "blip-2201.12086v2",
+              "page": 3,
+              "text": "We jointly optimize three objectives during pre-training, with two understanding-based objectives and one generation- based objective. Each image-text pair only requires one for- ward pass through the computational-heavier visual trans- former, and three forward passes through the text trans- former, where different functionalities are activated to com- pute the three losses as delineated below.",
+              "retrieval_score": 1.0,
+              "rerank_score": null
+            }
+          ]
+        },
+        "issue": null
+      }
+    },
+    {
+      "T_VLM_ms": 0,
+      "tool_call_id": "call_00_ZWKBEagyFwNdnHm12Emd6113",
+      "tool_name": "find_figure",
+      "arguments": {
+        "paper_id": "blip-2201.12086v2",
+        "figure_id": "Figure 3"
+      },
+      "status": "success",
+      "latency_ms": 0.9921599994413555,
+      "result_count": 1,
+      "failure": null,
+      "evidence_ids": [
+        "ev_e86cf697f7388bf7dca291a648f630b1"
+      ],
+      "observation": {
+        "status": "success",
+        "tool_name": "find_figure",
+        "summary": "Found the requested prepared figure.",
+        "payload": {
+          "figure": {
+            "evidence_id": "ev_e86cf697f7388bf7dca291a648f630b1",
+            "paper_id": "blip-2201.12086v2",
+            "page": 4,
+            "figure_id": "Figure 3",
+            "caption": "Figure 3. Learning framework of BLIP. We introduce a captioner to produce synthetic captions for web images, and a ﬁlter to remove noisy image-text pairs. The captioner and ﬁlter are initialized from the same pre-trained model and ﬁnetuned individually on a small-scale human-annotated dataset. The bootstrapped dataset is used to pre-train a new model.",
+            "asset_ref": "asset:ev_e86cf697f7388bf7dca291a648f630b1"
+          }
+        },
+        "issue": null
+      }
+    },
+    {
+      "T_VLM_ms": 0,
+      "tool_call_id": "call_00_jAU9fSAZhEuRZgtF8Qna6284",
+      "tool_name": "search_text",
+      "arguments": {
+        "query": "CapFilt captioner filter noisy image-text pairs bootstrapping",
+        "paper_ids": [
+          "blip-2201.12086v2"
+        ],
+        "top_k": 5
+      },
+      "status": "success",
+      "latency_ms": 2.0397610060172155,
+      "result_count": 5,
+      "failure": null,
+      "evidence_ids": [
+        "ev_af27e6e725903c009c8bbfb55bd100fc",
+        "ev_3ff09fcd2b0d1148ec95118fdd204b78",
+        "ev_336da108cea409a395b7aee74def2593",
+        "ev_197064d097092640e20dc38ce8045682",
+        "ev_03c68854d5c7f6b3d56efa68b5d371b1"
+      ],
+      "observation": {
+        "status": "success",
+        "tool_name": "search_text",
+        "summary": "Retrieved 5 text evidence items.",
+        "payload": {
+          "paper_ids": [
+            "blip-2201.12086v2"
+          ],
+          "evidence": [
+            {
+              "evidence_id": "ev_af27e6e725903c009c8bbfb55bd100fc",
+              "paper_id": "blip-2201.12086v2",
+              "page": 2,
+              "text": "Figure 2. Pre-training model architecture and objectives of BLIP (same parameters have the same color). We propose multimodal mixture",
+              "retrieval_score": 1.0,
+              "rerank_score": null
+            },
+            {
+              "evidence_id": "ev_3ff09fcd2b0d1148ec95118fdd204b78",
+              "paper_id": "blip-2201.12086v2",
+              "page": 2,
+              "text": "of encoder-decoder, a uniﬁed vision-language model which can operate in one of the three functionalities: (1) Unimodal encoder is trained with an image-text contrastive (ITC) loss to align the vision and language representations. (2) Image-grounded text encoder uses additional cross-attention layers to model vision-language interactions, and is trained with a image-text matching (ITM) loss to distinguish between positive and negative image-text pairs. (3) Image-grounded text decoder replaces the bi-directional self-attention layers with causal self-attention layers, and shares the same cross-attention layers and feed forward networks as the encoder. The decoder is trained with a language modeling (LM) loss to generate captions given images.",
+              "retrieval_score": 1.0,
+              "rerank_score": null
+            },
+            {
+              "evidence_id": "ev_336da108cea409a395b7aee74def2593",
+              "paper_id": "blip-2201.12086v2",
+              "page": 3,
+              "text": "We employ a visual transformer (Dosovitskiy et al., 2021) as our image encoder, which divides an input image into patches and encodes them as a sequence of embeddings, with an additional [CLS] token to represent the global im- age feature. Compared to using pre-trained object detectors for visual feature extraction (Chen et al., 2020), using a ViT is more computation-friendly and has been adopted by the more recent methods (Li et al., 2021a; Kim et al., 2021).",
+              "retrieval_score": 1.0,
+              "rerank_score": null
+            },
+            {
+              "evidence_id": "ev_197064d097092640e20dc38ce8045682",
+              "paper_id": "blip-2201.12086v2",
+              "page": 3,
+              "text": "In order to pre-train a uniﬁed model with both understanding and generation capabilities, we propose multimodal mixture of encoder-decoder (MED), a multi-task model which can operate in one of the three functionalities: (1) Unimodal encoder, which separately encodes image and text. The text encoder is the same as BERT (Devlin et al., 2019), where a [CLS] token is appended to the beginning of the text input to summarize the sentence. (2) Image-grounded text encoder, which injects visual information by inserting one additional cross-attention (CA) layer between the self-attention (SA) layer and the feed forward network (FFN) for each transformer block of the text encoder. A task-speciﬁc [Encode] token is appended to the text, and the output embedding of [Encode] is used as the multimodal representation of the image-text pair. (3) Image-grounded text decoder, which replaces the bi- directional self-attention layers in the image-grounded text encoder with causal self-attention layers. A [Decode] token is used to signal the beginning of a sequence, and an end-of-sequence token is used to signal its end.",
+              "retrieval_score": 1.0,
+              "rerank_score": null
+            },
+            {
+              "evidence_id": "ev_03c68854d5c7f6b3d56efa68b5d371b1",
+              "paper_id": "blip-2201.12086v2",
+              "page": 3,
+              "text": "We jointly optimize three objectives during pre-training, with two understanding-based objectives and one generation- based objective. Each image-text pair only requires one for- ward pass through the computational-heavier visual trans- former, and three forward passes through the text trans- former, where different functionalities are activated to com- pute the three losses as delineated below.",
+              "retrieval_score": 1.0,
+              "rerank_score": null
+            }
+          ]
+        },
+        "issue": null
+      }
+    },
+    {
+      "T_VLM_ms": 0,
+      "tool_call_id": "call_00_ohr47pR85SIIMP4JY3jq6580",
+      "tool_name": "read_page",
+      "arguments": {
+        "paper_id": "blip-2201.12086v2",
+        "page": 4
+      },
+      "status": "success",
+      "latency_ms": 1.3652390043716878,
+      "result_count": 3,
+      "failure": null,
+      "evidence_ids": [
+        "ev_03f0209e1af23ec5c3e017db94ac940e",
+        "ev_0ef849392533fb9fe735d1fe7cd8ebf9",
+        "ev_e86cf697f7388bf7dca291a648f630b1"
+      ],
+      "observation": {
+        "status": "success",
+        "tool_name": "read_page",
+        "summary": "Read 2 text items and 1 figures from prepared regions; this is not a full-page PDF read.",
+        "payload": {
+          "paper_id": "blip-2201.12086v2",
+          "page": 4,
+          "coverage": "prepared_regions_only",
+          "prepared_pages": [
+            2,
+            3,
+            4
+          ],
+          "evidence": [
+            {
+              "evidence_id": "ev_03f0209e1af23ec5c3e017db94ac940e",
+              "paper_id": "blip-2201.12086v2",
+              "page": 4,
+              "text": "We propose Captioning and Filtering (CapFilt), a new method to improve the quality of the text corpus. Figure 3 gives an illustration of CapFilt. It introduces two modules: a captioner to generate captions given web images, and a ﬁlter to remove noisy image-text pairs. Both the captioner and the ﬁlter are initialized from the same pre-trained MED model, and ﬁnetuned individually on the COCO dataset. The ﬁnetuning is a lightweight procedure."
+            },
+            {
+              "evidence_id": "ev_0ef849392533fb9fe735d1fe7cd8ebf9",
+              "paper_id": "blip-2201.12086v2",
+              "page": 4,
+              "text": "Speciﬁcally, the captioner is an image-grounded text de- coder. It is ﬁnetuned with the LM objective to decode texts given images. Given the web images Iw, the captioner gen- erates synthetic captions Ts with one caption per image. The ﬁlter is an image-grounded text encoder. It is ﬁnetuned with the ITC and ITM objectives to learn whether a text matches an image. The ﬁlter removes noisy texts in both the original web texts Tw and the synthetic texts Ts, where a text is considered to be noisy if the ITM head predicts it as unmatched to the image. Finally, we combine the ﬁltered image-text pairs with the human-annotated pairs to form a new dataset, which we use to pre-train a new model."
+            }
+          ],
+          "figures": [
+            {
+              "evidence_id": "ev_e86cf697f7388bf7dca291a648f630b1",
+              "paper_id": "blip-2201.12086v2",
+              "page": 4,
+              "figure_id": "Figure 3",
+              "caption": "Figure 3. Learning framework of BLIP. We introduce a captioner to produce synthetic captions for web images, and a ﬁlter to remove noisy image-text pairs. The captioner and ﬁlter are initialized from the same pre-trained model and ﬁnetuned individually on a small-scale human-annotated dataset. The bootstrapped dataset is used to pre-train a new model.",
+              "asset_ref": "asset:ev_e86cf697f7388bf7dca291a648f630b1"
+            }
+          ]
+        },
+        "issue": null
+      }
+    },
+    {
+      "T_VLM_ms": 0,
+      "tool_call_id": "call_00_JftcdUdi1YSM30tlg1qO1757",
+      "tool_name": "search_text",
+      "arguments": {
+        "query": "BLIP achieves state-of-the-art results image-text retrieval captioning gains",
+        "paper_ids": [
+          "blip-2201.12086v2"
+        ],
+        "top_k": 5
+      },
+      "status": "success",
+      "latency_ms": 1.8372610065853223,
+      "result_count": 5,
+      "failure": null,
+      "evidence_ids": [
+        "ev_af27e6e725903c009c8bbfb55bd100fc",
+        "ev_3ff09fcd2b0d1148ec95118fdd204b78",
+        "ev_336da108cea409a395b7aee74def2593",
+        "ev_197064d097092640e20dc38ce8045682",
+        "ev_03c68854d5c7f6b3d56efa68b5d371b1"
+      ],
+      "observation": {
+        "status": "success",
+        "tool_name": "search_text",
+        "summary": "Retrieved 5 text evidence items.",
+        "payload": {
+          "paper_ids": [
+            "blip-2201.12086v2"
+          ],
+          "evidence": [
+            {
+              "evidence_id": "ev_af27e6e725903c009c8bbfb55bd100fc",
+              "paper_id": "blip-2201.12086v2",
+              "page": 2,
+              "text": "Figure 2. Pre-training model architecture and objectives of BLIP (same parameters have the same color). We propose multimodal mixture",
+              "retrieval_score": 1.0,
+              "rerank_score": null
+            },
+            {
+              "evidence_id": "ev_3ff09fcd2b0d1148ec95118fdd204b78",
+              "paper_id": "blip-2201.12086v2",
+              "page": 2,
+              "text": "of encoder-decoder, a uniﬁed vision-language model which can operate in one of the three functionalities: (1) Unimodal encoder is trained with an image-text contrastive (ITC) loss to align the vision and language representations. (2) Image-grounded text encoder uses additional cross-attention layers to model vision-language interactions, and is trained with a image-text matching (ITM) loss to distinguish between positive and negative image-text pairs. (3) Image-grounded text decoder replaces the bi-directional self-attention layers with causal self-attention layers, and shares the same cross-attention layers and feed forward networks as the encoder. The decoder is trained with a language modeling (LM) loss to generate captions given images.",
+              "retrieval_score": 1.0,
+              "rerank_score": null
+            },
+            {
+              "evidence_id": "ev_336da108cea409a395b7aee74def2593",
+              "paper_id": "blip-2201.12086v2",
+              "page": 3,
+              "text": "We employ a visual transformer (Dosovitskiy et al., 2021) as our image encoder, which divides an input image into patches and encodes them as a sequence of embeddings, with an additional [CLS] token to represent the global im- age feature. Compared to using pre-trained object detectors for visual feature extraction (Chen et al., 2020), using a ViT is more computation-friendly and has been adopted by the more recent methods (Li et al., 2021a; Kim et al., 2021).",
+              "retrieval_score": 1.0,
+              "rerank_score": null
+            },
+            {
+              "evidence_id": "ev_197064d097092640e20dc38ce8045682",
+              "paper_id": "blip-2201.12086v2",
+              "page": 3,
+              "text": "In order to pre-train a uniﬁed model with both understanding and generation capabilities, we propose multimodal mixture of encoder-decoder (MED), a multi-task model which can operate in one of the three functionalities: (1) Unimodal encoder, which separately encodes image and text. The text encoder is the same as BERT (Devlin et al., 2019), where a [CLS] token is appended to the beginning of the text input to summarize the sentence. (2) Image-grounded text encoder, which injects visual information by inserting one additional cross-attention (CA) layer between the self-attention (SA) layer and the feed forward network (FFN) for each transformer block of the text encoder. A task-speciﬁc [Encode] token is appended to the text, and the output embedding of [Encode] is used as the multimodal representation of the image-text pair. (3) Image-grounded text decoder, which replaces the bi- directional self-attention layers in the image-grounded text encoder with causal self-attention layers. A [Decode] token is used to signal the beginning of a sequence, and an end-of-sequence token is used to signal its end.",
+              "retrieval_score": 1.0,
+              "rerank_score": null
+            },
+            {
+              "evidence_id": "ev_03c68854d5c7f6b3d56efa68b5d371b1",
+              "paper_id": "blip-2201.12086v2",
+              "page": 3,
+              "text": "We jointly optimize three objectives during pre-training, with two understanding-based objectives and one generation- based objective. Each image-text pair only requires one for- ward pass through the computational-heavier visual trans- former, and three forward passes through the text trans- former, where different functionalities are activated to com- pute the three losses as delineated below.",
+              "retrieval_score": 1.0,
+              "rerank_score": null
+            }
+          ]
+        },
+        "issue": null
+      }
+    },
+    {
+      "T_VLM_ms": 6277.428469998995,
+      "tool_call_id": "call_00_sNvD2CLpMnandMZp7Jzn0575",
+      "tool_name": "analyze_figure",
+      "arguments": {
+        "question": "What does Figure 3 depict? Does it present any performance comparison or quantitative results showing BLIP performing better than other models?",
+        "figure_evidence_id": "ev_e86cf697f7388bf7dca291a648f630b1",
+        "context_evidence_ids": [
+          "ev_03f0209e1af23ec5c3e017db94ac940e",
+          "ev_0ef849392533fb9fe735d1fe7cd8ebf9"
+        ]
+      },
+      "status": "success",
+      "latency_ms": 6279.947258997709,
+      "result_count": 3,
+      "failure": null,
+      "evidence_ids": [
+        "ev_03f0209e1af23ec5c3e017db94ac940e",
+        "ev_0ef849392533fb9fe735d1fe7cd8ebf9",
+        "ev_e86cf697f7388bf7dca291a648f630b1"
+      ],
+      "observation": {
+        "status": "success",
+        "tool_name": "analyze_figure",
+        "summary": "Analyzed figure and supplied context; citation identities validated.",
+        "payload": {
+          "figure": {
+            "evidence_id": "ev_e86cf697f7388bf7dca291a648f630b1",
+            "paper_id": "blip-2201.12086v2",
+            "page": 4,
+            "figure_id": "Figure 3",
+            "caption": "Figure 3. Learning framework of BLIP. We introduce a captioner to produce synthetic captions for web images, and a ﬁlter to remove noisy image-text pairs. The captioner and ﬁlter are initialized from the same pre-trained model and ﬁnetuned individually on a small-scale human-annotated dataset. The bootstrapped dataset is used to pre-train a new model.",
+            "asset_ref": "asset:ev_e86cf697f7388bf7dca291a648f630b1"
+          },
+          "evidence": [
+            {
+              "evidence_id": "ev_03f0209e1af23ec5c3e017db94ac940e",
+              "paper_id": "blip-2201.12086v2",
+              "page": 4,
+              "text": "We propose Captioning and Filtering (CapFilt), a new method to improve the quality of the text corpus. Figure 3 gives an illustration of CapFilt. It introduces two modules: a captioner to generate captions given web images, and a ﬁlter to remove noisy image-text pairs. Both the captioner and the ﬁlter are initialized from the same pre-trained MED model, and ﬁnetuned individually on the COCO dataset. The ﬁnetuning is a lightweight procedure."
+            },
+            {
+              "evidence_id": "ev_0ef849392533fb9fe735d1fe7cd8ebf9",
+              "paper_id": "blip-2201.12086v2",
+              "page": 4,
+              "text": "Speciﬁcally, the captioner is an image-grounded text de- coder. It is ﬁnetuned with the LM objective to decode texts given images. Given the web images Iw, the captioner gen- erates synthetic captions Ts with one caption per image. The ﬁlter is an image-grounded text encoder. It is ﬁnetuned with the ITC and ITM objectives to learn whether a text matches an image. The ﬁlter removes noisy texts in both the original web texts Tw and the synthetic texts Ts, where a text is considered to be noisy if the ITM head predicts it as unmatched to the image. Finally, we combine the ﬁltered image-text pairs with the human-annotated pairs to form a new dataset, which we use to pre-train a new model."
+            }
+          ],
+          "analysis": {
+            "observations": [
+              "Figure 3 is a schematic/flow diagram titled 'Learning framework of BLIP', not a chart, plot, or results table.",
+              "The diagram is divided into two dashed-outline regions labeled 'Model Pretraining' on the left and 'Dataset Bootstrapping' on the right.",
+              "Left region: an input box shown as D = {(I_w, T_w) + (I_h, T_h)} with a 'Pre-train' arrow leading down into a rounded box labeled 'Multimodal Mixture of Encoder-Decoder', which then points down to a box labeled 'Downstream Tasks'.",
+              "Right region: two rounded boxes labeled 'Filter (Image-grounded Text Encoder)' and 'Captioner (Image-grounded Text Decoder)', both receiving arrows from the same pretraining module; the Filter is annotated 'ITC&ITM finetune' from {(I_h, T_h)}, and the Captioner is annotated 'LM finetune' also from {(I_h, T_h)}.",
+              "The Filter box outputs upward via an arrow labeled 'Filtering' to a box labeled {(I_w, T_w)} + {(I_w, T_s)}; the Captioner box outputs via an arrow labeled 'Captioning' to a box labeled {(I_w, T_s)}.",
+              "A further box shows D = {(I_w, T_w)} + {(I_w, T_s)} + {(I_h, T_h)}, feeding back via an arrow to the pretraining region.",
+              "A legend at right defines the symbols: I_w web images, I_h human-annotated images, T_w web texts, T_w filtered web texts, T_s synthetic texts, T_s filtered synthetic texts, T_h human-annotated texts; arrow keys say 'To model' and 'To data'.",
+              "No numerical axes, bars, values, percentages, benchmark names, or baseline model names appear anywhere in the figure."
+            ],
+            "interpretation": "Figure 3 depicts the CapFilt learning framework of BLIP as a block/flow diagram: a multimodal mixture of encoder-decoder is pre-trained, then used to initialize a captioner and a filter that are individually finetuned on human-annotated pairs (LM objective for the captioner; ITC and ITM for the filter); the captioner generates synthetic captions for web images and the filter removes noisy web and synthetic texts, and the resulting bootstrapped dataset is used to pre-train a new model. The figure is purely architectural and procedural. It presents no performance comparison and no quantitative results, and therefore provides no evidence in itself that BLIP performs better than other models. The premise that this figure shows BLIP outperforming other models is not supported by the figure.",
+            "evidence_used": [
+              "ev_e86cf697f7388bf7dca291a648f630b1",
+              "ev_03f0209e1af23ec5c3e017db94ac940e",
+              "ev_0ef849392533fb9fe735d1fe7cd8ebf9"
+            ],
+            "limitations": [
+              "The figure is a conceptual diagram only; any claim of superior performance by BLIP would require results tables or benchmark figures that are not part of this figure and were not supplied.",
+              "The supplied context describes CapFilt's mechanism (captioner, filter, finetuning objectives, dataset construction) but contains no metric values or baseline comparisons.",
+              "Some internal diagram labels are small; the main box labels and legend are legible, but no quantitative content exists in the image to read even if resolution were higher.",
+              "No information is available here about which downstream tasks or datasets were evaluated or how BLIP compared with other models; that cannot be inferred from this figure."
+            ],
+            "usage": {
+              "completion_tokens": "[redacted]",
+              "prompt_tokens": "[redacted]",
+              "total_tokens": "[redacted]",
+              "completion_tokens_details": "[redacted]",
+              "prompt_tokens_details": "[redacted]",
+              "prompt_cache_hit_tokens": "[redacted]",
+              "prompt_cache_miss_tokens": "[redacted]"
+            },
+            "finish_reason": "stop"
+          },
+          "citations_validated": true
+        },
+        "issue": null
+      }
+    }
+  ],
+  "semantic_review": "pending: inspect actual answers and supplied evidence; path checks do not prove task success"
+}

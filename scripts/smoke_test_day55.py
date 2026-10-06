@@ -24,7 +24,7 @@ from app.vision.provider import OpenAICompatibleVisionClient
 from scripts.demo_day5 import ControlledRetrieval
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = Path("/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体")
+OUTPUT = ROOT / "artifacts"
 CASES = [
     ("TextQA", "What training objective does CLIP use to align images and text?"),
     ("FigureQA", "Figure 3 为什么证明 BLIP 性能更强？请核实问题前提。"),

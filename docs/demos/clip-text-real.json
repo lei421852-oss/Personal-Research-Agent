@@ -1,0 +1,98 @@
+{
+  "verification": "real_model_historical_record",
+  "scope": "One dev case; controlled retrieval, not a comparative benchmark.",
+  "source": {
+    "original_file": "2026-10-06-多模态论文研究智能体-Day8-real-dev-230343-332337-runs.jsonl",
+    "sha256": "ff2711a1923ca9eb6a7da3796e5f6135badba34454a9c76dcc3eff8ee6ce5774",
+    "record_date": "2026-10-06",
+    "replayed_during_packaging": false
+  },
+  "question": "What training objective does CLIP use to align images and text?",
+  "status": "completed",
+  "answer": "CLIP uses a contrastive objective rather than a predictive one. It jointly trains an image encoder and a text encoder to predict the correct pairings of a batch of (image, text) training examples (i.e., predicting only which text as a whole is paired with which image, not the exact words). The paper reports that swapping the predictive objective for a contrastive objective yielded a further 4x improvement in the rate of zero-shot transfer to ImageNet.",
+  "citations": [
+    {
+      "evidence_id": "ev_7e22d464b738e57a92e8a2d4cf3b38a4",
+      "paper_id": "clip-2103.00020v1",
+      "page": 2,
+      "figure_id": null
+    },
+    {
+      "evidence_id": "ev_075e49db551983dab13b66fb666c8fc9",
+      "paper_id": "clip-2103.00020v1",
+      "page": 4,
+      "figure_id": null
+    }
+  ],
+  "limitations": [
+    "The retrieved evidence describes the objective conceptually (contrastive, predicting correct image-text pairings); exact loss formulation details (e.g., InfoNCE/temperature) were not in the observed text."
+  ],
+  "metrics": {
+    "tool_calls": 1,
+    "model_calls": 2,
+    "vlm_calls": 0,
+    "latency_ms": 6735.702356003458
+  },
+  "retrieval_backend": "day5-controlled",
+  "LLM_model": "deepseek-flash",
+  "agent_policy_sha256": "ee84554dc31d3773aa04381ce6fb1eccd15aadc3f04f11363c1ade1e55810b76",
+  "trace": [
+    {
+      "tool_call_id": "call_00_IPuGxDg1T0HRYVyVltEn0341",
+      "tool_name": "search_text",
+      "arguments": {
+        "query": "CLIP training objective contrastive loss align images and text",
+        "paper_ids": [
+          "clip-2103.00020v1"
+        ]
+      },
+      "status": "success",
+      "latency_ms": 1.640008995309472,
+      "result_count": 3,
+      "failure": null,
+      "evidence_ids": [
+        "ev_09b8349bf660b9769a099fb65efbfdf6",
+        "ev_7e22d464b738e57a92e8a2d4cf3b38a4",
+        "ev_075e49db551983dab13b66fb666c8fc9"
+      ],
+      "observation": {
+        "status": "success",
+        "tool_name": "search_text",
+        "summary": "Retrieved 3 text evidence items.",
+        "payload": {
+          "paper_ids": [
+            "clip-2103.00020v1"
+          ],
+          "evidence": [
+            {
+              "evidence_id": "ev_09b8349bf660b9769a099fb65efbfdf6",
+              "paper_id": "clip-2103.00020v1",
+              "page": 2,
+              "text": "Figure 1. Summary of our approach. While standard image models jointly train an image feature extractor and a linear classiﬁer to predict",
+              "retrieval_score": 1.0,
+              "rerank_score": null
+            },
+            {
+              "evidence_id": "ev_7e22d464b738e57a92e8a2d4cf3b38a4",
+              "paper_id": "clip-2103.00020v1",
+              "page": 2,
+              "text": "some label, CLIP jointly trains an image encoder and a text encoder to predict the correct pairings of a batch of (image, text) training examples. At test time the learned text encoder synthesizes a zero-shot linear classiﬁer by embedding the names or descriptions of the target dataset’s classes.",
+              "retrieval_score": 1.0,
+              "rerank_score": null
+            },
+            {
+              "evidence_id": "ev_075e49db551983dab13b66fb666c8fc9",
+              "paper_id": "clip-2103.00020v1",
+              "page": 4,
+              "text": "Both these approaches share a key similarity. They try to pre- dict the exact words of the text accompanying each image. This is a difﬁcult task due to the wide variety of descriptions, comments, and related text that co-occur with images. Re- cent work in contrastive representation learning for images has found that contrastive objectives can learn better repre- sentations than their equivalent predictive objective (Tian et al., 2019). Other work has found that although generative models of images can learn high quality image representa- tions, they require over an order of magnitude more compute than contrastive models with the same performance (Chen et al., 2020a). Noting these ﬁndings, we explored training a system to solve the potentially easier proxy task of pre- dicting only which text as a whole is paired with which image and not the exact words of that text. Starting with the same bag-of-words encoding baseline, we swapped the predictive objective for a contrastive objective in Figure 2 and observed a further 4x efﬁciency improvement in the rate of zero-shot transfer to ImageNet.",
+              "retrieval_score": 1.0,
+              "rerank_score": null
+            }
+          ]
+        },
+        "issue": null
+      }
+    }
+  ],
+  "semantic_review": "No aggregate semantic score; inspect answer against actual evidence."
+}

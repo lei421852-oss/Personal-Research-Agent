@@ -18,7 +18,8 @@ from eval.runners.text_rag import GENERATION_POLICY, TextRAGRunner
 from eval.summarize_results import write_summary
 from eval.validate_dataset import validate_datasets
 
-OUTPUT = Path("/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体")
+ROOT = Path(__file__).resolve().parents[1]
+OUTPUT = ROOT / "artifacts"
 SYSTEMS = {
     "text_rag": TextRAGRunner,
     "fixed_multimodal_rag": FixedMultimodalRAGRunner,

@@ -12,9 +12,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_OUTPUT = Path(
-    "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体"
-)
+DEFAULT_OUTPUT = ROOT / "artifacts"
 
 
 def run_text(args, metadata):

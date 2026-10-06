@@ -25,7 +25,7 @@ from scripts.demo_day5 import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = Path("/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体")
+OUTPUT = ROOT / "artifacts"
 
 
 def make_test_runtime():
@@ -103,7 +103,9 @@ def main():
     args.output_dir.mkdir(parents=True, exist_ok=True)
     # 无界面的 Linux 可能缺少中文字形，截图时使用已有本地字体。
     # 不将专有字体复制进应用或用户产物。
-    local_fonts = list(Path("/mnt/c/Windows/Fonts").glob("msyh*.ttc"))
+    # 字体可由调用方显式指定；默认使用系统字体，不依赖开发者的 Windows 目录。
+    font_root = os.environ.get("AGENT_UI_FONT_DIR")
+    local_fonts = list(Path(font_root).glob("*.ttc")) if font_root else []
     if local_fonts:
         font_dir = Path("/tmp/personal-agent-ui-fonts")
         font_dir.mkdir(exist_ok=True)

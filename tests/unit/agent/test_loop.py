@@ -74,7 +74,9 @@ def test_four_complete_routes(corpus):
     assert reports[-1]["model_requests"][-1]["tools"][0]["name"] == "finish"
     assert len(reports[-1]["model_requests"][-1]["tools"]) == 1
     assert len(reports[-1]["result"]["state"]["model_actions"]) == 7
-    assert reports[-1]["result"]["state"]["model_actions"][-1]["tool_name"] == "read_page"
+    assert (
+        reports[-1]["result"]["state"]["model_actions"][-1]["tool_name"] == "read_page"
+    )
 
 
 def test_unobserved_corpus_id_cannot_finish(corpus):

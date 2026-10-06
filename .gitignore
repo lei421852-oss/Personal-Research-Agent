@@ -35,3 +35,6 @@ data/chroma/
 *.tmp
 *.temp
 *.log
+
+# 本地演示、评测和浏览器检查输出
+artifacts/
