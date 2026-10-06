@@ -26,3 +26,19 @@ class FakeLLMClient(LLMClient):
             }
         )
         return self.response.model_copy(deep=True)
+
+
+class ScriptedLLMClient(LLMClient):
+    """Sequence of responses or context-aware callbacks, with complete request snapshots."""
+
+    def __init__(self, responses):
+        self.responses = list(responses)
+        self.calls = []
+
+    def complete(self, *, messages, tools):
+        self.calls.append({"messages": deepcopy(messages), "tools": deepcopy(tools)})
+        if not self.responses:
+            raise RuntimeError("Scripted response sequence exhausted")
+        step = self.responses.pop(0)
+        response = step(messages, tools) if callable(step) else step
+        return response.model_copy(deep=True)
