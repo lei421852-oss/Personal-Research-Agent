@@ -20,6 +20,7 @@ def build_decision_context(state, resolver):
     return public_value(
         {
             "question": state.question,
+            "available_papers": resolver.paper_catalog,
             "observed_evidence": evidence,
             "previous_actions": state.model_actions,
             "previous_failures": [

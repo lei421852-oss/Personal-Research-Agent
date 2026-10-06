@@ -319,3 +319,62 @@ def test_figure_analysis_can_finish_without_forced_page(corpus):
         "find_figure",
         "analyze_figure",
     ]
+
+
+def test_catalog_and_scoped_search_are_model_choices(corpus):
+    def choose_scope(messages, tools):
+        catalog = context(messages)["available_papers"]
+        assert catalog == [
+            {"name": metadata.paper_key.upper(), "paper_id": metadata.paper_id}
+            for metadata in corpus.metadata
+        ]
+        schema = next(t for t in tools if t["name"] == "search_text")
+        assert "MUST restrict paper_ids" in schema["description"]
+        assert (
+            "MUST supply"
+            in schema["input_schema"]["properties"]["paper_ids"]["description"]
+        )
+        scope = next(p["paper_id"] for p in catalog if p["name"] == "CLIP")
+        return action(
+            "scoped", "search_text", query="contrastive objective", paper_ids=[scope]
+        )
+
+    agent, _, retrieval, _ = build(corpus, [choose_scope, finish_observed])
+    result = agent.run("What training objective does CLIP use?")
+    assert result.status == "completed"
+    assert retrieval.calls[0][1] == [CLIP]
+    assert all(c.paper_id == CLIP for c in result.citations)
+
+
+def test_missing_scope_is_not_silently_rewritten(corpus):
+    agent, _, retrieval, _ = build(
+        corpus,
+        [
+            action("unscoped", "search_text", query="CLIP training objective"),
+            finish_observed,
+        ],
+    )
+    result = agent.run("What training objective does CLIP use?")
+    assert result.status == "completed"
+    assert retrieval.calls[0][1] is None
+    assert result.state.trace[0].arguments.get("paper_ids") is None
+
+
+def test_reported_queries_are_not_duplicates_and_scope_recovery_is_allowed(corpus):
+    first_query = "CLIP training objective align images and text contrastive"
+    revised_query = "CLIP contrastive loss image-text alignment Radford"
+    first = SearchActionFingerprint.from_arguments({"query": first_query})
+    second = SearchActionFingerprint.from_arguments({"query": revised_query})
+    assert not second.duplicates(first)
+    agent, _, retrieval, _ = build(
+        corpus,
+        [
+            action("first", "search_text", query=first_query),
+            action("scoped", "search_text", query=revised_query, paper_ids=[CLIP]),
+            finish_observed,
+        ],
+    )
+    result = agent.run("What objective does CLIP use?")
+    assert result.status == "completed" and result.tool_calls == 2
+    assert [call[1] for call in retrieval.calls] == [None, [CLIP]]
+    assert all(t.status == "success" for t in result.state.trace)

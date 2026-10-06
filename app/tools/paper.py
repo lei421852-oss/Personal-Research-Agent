@@ -17,7 +17,16 @@ class PaperToolInput(BaseModel):
 
 class SearchTextInput(PaperToolInput):
     query: NonEmpty
-    paper_ids: list[NonEmpty] | None = None
+    paper_ids: list[NonEmpty] | None = Field(
+        default=None,
+        description=(
+            "When the user explicitly names one or more known papers, you MUST supply "
+            "their corresponding paper IDs from the available papers catalog. Use null "
+            "only for whole-corpus questions, cross-paper discovery, or when no paper "
+            "is explicitly specified. A comparison of named papers must include all "
+            "named paper IDs. [] searches no papers."
+        ),
+    )
     top_k: Annotated[StrictInt, Field(gt=0)] = 3
 
 
@@ -83,7 +92,16 @@ def _empty(tool_name: str, summary: str, payload: dict) -> ToolObservation:
 
 class SearchTextTool(Tool[SearchTextInput, ToolObservation]):
     name = "search_text"
-    description = "Retrieve prepared paper text with pre-search paper filtering. None searches all papers; [] searches none. Unknown papers are errors."
+    description = (
+        "Retrieve prepared paper text with pre-search paper filtering. When the user "
+        "explicitly names one or more known papers, you MUST restrict paper_ids to "
+        "the corresponding IDs in the available papers catalog. This also applies "
+        "to comparisons of explicitly named papers: include all named paper IDs. "
+        "Use paper_ids=null only for whole-corpus questions, cross-paper discovery, "
+        "or when no paper is explicitly specified. [] searches none. Unknown papers "
+        "are errors. The model must select scope; the controller does not infer or "
+        "rewrite paper IDs from the question."
+    )
     input_model = SearchTextInput
 
     def __init__(self, retrieval: TextRetrieval, papers: PaperEvidenceAccess):

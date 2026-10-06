@@ -10,9 +10,20 @@ class EvidenceResolutionError(ValueError):
 
 class EvidenceResolver:
     def __init__(self, corpus: PaperCorpus):
+        self._paper_catalog = tuple(
+            (metadata.paper_key.upper(), metadata.paper_id)
+            for metadata in corpus.metadata
+        )
         self._items = {
             e.evidence_id: e for e in (*corpus.text_evidence, *corpus.figure_evidence)
         }
+
+    @property
+    def paper_catalog(self) -> list[dict[str, str]]:
+        return [
+            {"name": name, "paper_id": paper_id}
+            for name, paper_id in self._paper_catalog
+        ]
 
     @property
     def paper_ids(self) -> list[str]:

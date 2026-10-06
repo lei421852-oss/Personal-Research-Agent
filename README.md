@@ -1,6 +1,6 @@
 # Multimodal Research Agent
 
-当前状态：Day 9 已完成决策上下文、重复搜索拦截与恢复反馈；254 项测试通过。仅运行 Fake 行为验证，真实 dev-text-01 停止表现待用户手动核查。Day 8 评测接口已封板，test 未运行，历史真实 dev 记录保留。
+当前状态：Day 9.5 已强化 search_text 论文范围契约并加入 metadata 派生 Corpus Catalog；257 项测试通过。模型负责选择 paper_ids，Controller 不按问题改写参数。近重复阈值保持 0.85。本轮仅模拟回归，无真实模型调用。
 
 实现历史按 Day 1–8 保留在下文；当前已具备有限步 Agent Loop、固定多模态 QA、API/UI 和评测入口。
 
@@ -688,3 +688,18 @@ unknown_paper 在 Agent feedback 中归为 invalid_arguments，保留 domain_iss
 该命令仅运行 1 条 dev 的 Agent，输出 status/answer/citations/trace 和实际调用指标；当前配置若采用
  day5-controlled 检索，结果须保留该限制。与历史 step_exhaustion、6 tools/7 model calls 对比时，
 同时人工核对证据充分性与答案，不能用 completed 状态替代语义验收。
+
+## Day 9.5：论文范围契约与小型 Corpus Catalog
+
+`search_text` 工具说明、paper_ids 参数 JSON Schema 与 Agent policy 均明确：用户指定一个或多个
+已知论文时必须用目录中的 paper IDs 限定检索；比较明确指定的论文时包含所有指定 ID。
+只有全 Corpus 问题、跨论文发现或没有明确论文的请求才允许 paper_ids=null。
+
+Decision Context 的 available_papers 从 Corpus metadata 派生，仅 name/paper_id，不含路径。
+由 LLM 解释问题并选择 scope；Controller 仍仅验证结构/合法参数/确定性约束，不按关键词推断 ID，
+不自动补 scope，不偷偷改写 null。这个 MUST 是提供给模型的语义契约，不是 Controller 的论文实体识别规则。
+
+Near-Duplicate Guard 实现及阈值 0.85 不变。所报告两条 CLIP query 的词元 Jaccard 为 0.25，
+不满足近重复条件；相同 Evidence IDs 不作为降低阈值的理由。null → 明确 CLIP scope 的补搜仍可执行。
+本次新增三个测试验证目录进入模型请求、模型选择 scope、Controller 不改写遗漏 scope、上述恢复查询放行。
+全量 257 项测试通过，Ruff 与差异检查通过；未调用真实模型，未改 Retriever/Chroma/Corpus/VLM/API/UI。
