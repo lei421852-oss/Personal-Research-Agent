@@ -2,6 +2,7 @@
 
 from pydantic import BaseModel, ConfigDict
 
+from app.evidence.citations import CitationValidationError, CitationValidator
 from app.evidence.models import FigureEvidence, NonEmpty
 from app.evidence.resolver import EvidenceResolver
 from app.qa.service import Citation
@@ -34,8 +35,13 @@ class FinishAction:
 
     def finalize(self, arguments: dict, observed_ids: set[str]):
         args = FinishInput.model_validate(arguments)
-        if not set(args.evidence_ids).issubset(observed_ids):
-            raise FinishValidationError("Final citations include unobserved evidence")
+        if args.evidence_ids:
+            try:
+                CitationValidator().validate(args.evidence_ids, list(observed_ids))
+            except CitationValidationError as exc:
+                raise FinishValidationError(
+                    "Final citations include unobserved evidence"
+                ) from exc
         if not args.evidence_ids and not args.limitations:
             raise FinishValidationError(
                 "An uncited finish must state evidence limitations"

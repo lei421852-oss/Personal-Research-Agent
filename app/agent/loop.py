@@ -42,6 +42,7 @@ class AgentState(BaseModel):
     max_tool_calls: StrictInt = Field(default=6, ge=1, le=6)
     model_calls_used: int = 0
     observed_evidence_ids: set[str] = Field(default_factory=set)
+    model_actions: list[dict[str, Any]] = Field(default_factory=list)
 
 
 class AgentResult(BaseModel):
@@ -169,6 +170,15 @@ class BoundedToolAgent:
                     ],
                 )
             call_ids.add(call.id)
+            state.model_actions.append(
+                public_value(
+                    {
+                        "tool_call_id": call.id,
+                        "tool_name": call.name,
+                        "arguments": call.arguments,
+                    }
+                )
+            )
             if call.name == "finish":
                 try:
                     args, citations = self.finish.finalize(

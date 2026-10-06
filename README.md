@@ -1,6 +1,6 @@
 # Multimodal Research Agent
 
-当前状态：Day 4 已接入 analyze_figure、引用身份校验与固定多模态 QA 流程；未实现 Agent Loop。真实 VLM 两案例验收待配置后执行，各阶段状态见下方清单。
+当前状态：Day 5 已实现有限步单 Agent Tool Loop、Observation 反馈与 observed-evidence finish 校验。Fake 行为与回归测试通过；Day 4 真实 VLM 两案例仍待配置后执行。
 
 本阶段没有 Agent Loop、自动图表检测、跨论文比较或最终问答 API。现有 SingleStepToolCaller 保留原样。
 
@@ -304,3 +304,69 @@ cross-attention、frozen LM 的说明是否有提供的证据支持。运行 suc
 
 当前运行环境没有上述三个变量，项目内仅有 `.env.example`；本次尚未运行真实 VLM，
 不得据 Fake 测试宣称 BLIP / Flamingo 真实验收通过。
+
+
+## Day 5：有限步单 Agent Tool Loop
+
+核心入口是 `app.agent.loop.BoundedToolAgent`，不再以 SingleStepToolCaller 执行多步任务。
+保留旧类仅用于旧接口兼容。新增 AgentState / AgentResult / FinishAction 与 ScriptedLLMClient。
+
+```python
+from app.agent.loop import BoundedToolAgent
+from app.evidence.resolver import EvidenceResolver
+
+agent = BoundedToolAgent(llm, executor, EvidenceResolver(corpus))
+result = agent.run("Why does Flamingo use the Perceiver Resampler?")
+```
+
+依赖传入现有 LLMClient、注册 corpus 工具的 ToolExecutor；模型每轮请求一个 action。
+下一动作由该轮 LLMResponse 决定。Policy 只约束证据、工具使用条件和停止原则，未规定工具顺序。
+工具调用和完整 ToolObservation 以 assistant tool_calls / tool 消息配对追加，
+每轮 complete 都收到之前消息的独立快照。assistant content 不写入状态或 Trace。
+
+`finish(answer, evidence_ids, limitations)` 为独立终止 action，与领域工具一起提供 schema。
+复用 CitationValidator 检查 finish IDs 是本次成功工具 Observation 中注册证据 ID 的子集。
+Corpus 中存在但本次未观察到的 ID 同样被拒绝；上一次 run 的证据不继承。
+没有引用时必须给出 limitations，结果为 insufficient_evidence。引用存在时 completed
+只表示动作和身份校验完成，不表示语义支持已经评测。
+非法 finish 反馈 error Observation，允许改正；普通模型文本不能代替 finish。
+
+### 预算与失败规则
+
+- 默认 max_tool_calls=6，参数可以调低，不能高于 6，拒绝 bool / 非整数。
+- N_tools 只计通过 ToolExecutor 的调用尝试，empty、error、unknown tool 都消耗预算。
+- finish 不计 N_tools。最多 max_tool_calls+1 次决策模型请求；非法 finish 同样消耗模型次数。
+- 第 6 次工具 Observation 后仍允许第 7 次模型请求，但只提供 finish schema。
+- 模型继续请求领域工具时直接 step_exhaustion，绝不执行第 7 个工具。
+- 连续相同名称及 JSON arguments 的 empty / error 调用，在第二次失败后 repeated_failure。
+  非法 finish 同样受保护；没有自动重试。不同动作/参数可以继续，仍受总预算限制。
+- 模型故障、无 action、多 action、重复/空 call ID 均安全终止，不采纳普通文本答案。
+
+result 含 state、可读 citations、limitations、total_latency_ms、tool_calls、model_calls。
+state 保存 question、messages、observations、实际工具 trace、预算、observed IDs 与模型 action
+（仅工具名/参数/ID，包括未执行的预算超限请求）。Trace 不记录隐藏 Chain-of-Thought。
+N_model 仅统计决策 LLM complete 次数；analyze_figure 内部 VLM 调用未合并到此数。
+总延迟从 run 开始至结果装配，不含 corpus / provider 初始化，Fake 延迟不能代表真实成本。
+
+### 四条可复现 Trace
+
+```bash
+.venv/bin/python -m scripts.demo_day5
+```
+
+产物继续保存在既有 D 盘对话目录，以当天日期命名。输出含四条完整状态、执行 Trace、
+Observation、模型动作与每轮模型请求快照：
+
+| Case | 实际路径 | N_tools | N_model |
+| --- | --- | --- | --- |
+| Text QA | search_text → finish | 1 | 2 |
+| Figure QA | find_figure → analyze_figure → finish | 2 | 3 |
+| Evidence insufficient then adjust | search_text(empty) → search_text(new query) → finish | 2 | 3 |
+| Step Exhaustion | 六次 read_page → 第七次工具请求被拒绝 | 6 | 7 |
+
+演示使用 ScriptedLLM、明确的受控检索和 Fake VLM：没有调整真实 Embedding 排名，也不代表
+真实模型自主决策。动态分支通过 callback 在下一轮实际读取 Observation 后选择动作验证。
+另有测试覆盖 find → read → analyze → finish，以及调整查询后仍为空 → finish(insufficient)。
+
+Day 4 真实 BLIP / Flamingo 验收仍未完成；本阶段没有运行真实决策模型，
+不据 Fake Trace 宣称真实策略质量或成本优势。
