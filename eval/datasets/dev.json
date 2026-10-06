@@ -1,0 +1,637 @@
+{
+  "schema_version": 1,
+  "split": "dev",
+  "annotation_origin": "coding_agent_candidates",
+  "page_numbering": "one-based PDF page index",
+  "corpus_snapshot": [
+    {
+      "paper_id": "blip-2201.12086v2",
+      "pdf_sha256": "63e0335cdd57c3d92b907b89c93d10befdd29b8aeed108091bbde90c121ed97a",
+      "prepared_pages": [
+        2,
+        3,
+        4
+      ],
+      "prepared_figure_ids": [
+        "Figure 3"
+      ]
+    },
+    {
+      "paper_id": "clip-2103.00020v1",
+      "pdf_sha256": "6478b6e571a7d6fcd846d8ef77bfd60c285f1986abb8f475eedc43de403074f5",
+      "prepared_pages": [
+        2,
+        4
+      ],
+      "prepared_figure_ids": [
+        "Figure 1"
+      ]
+    },
+    {
+      "paper_id": "flamingo-2204.14198v1",
+      "pdf_sha256": "79d131280bc79f659212f35f940dfd3a26013c73355a58eb2263410945780c4c",
+      "prepared_pages": [
+        4,
+        9,
+        10,
+        11
+      ],
+      "prepared_figure_ids": [
+        "Figure 3"
+      ]
+    }
+  ],
+  "notes": [
+    "40 条为 Coding Agent 辅助候选标注，不是已人工确认的 Ground Truth。",
+    "仅引用当前固定 PDF 版本的 prepared text/figure；页码为 one-based PDF page index。",
+    "paper_ids/relevant_evidence_ids/answer_points 是离线标注，不自动注入 Agent prompt 或补 Tool scope。",
+    "12 道 Figure QA 复用 3 张图；多题共享证据，不能视为独立图像样本。",
+    "dev 用于后续开发检查；test 在人工审阅后冻结，不能拿 test 反复调 Prompt 再报告未见测试表现。"
+  ],
+  "cases": [
+    {
+      "case_id": "dev-text-01",
+      "category": "text_qa",
+      "question": "What training objective does CLIP use to align images and text?",
+      "paper_ids": [
+        "clip-2103.00020v1"
+      ],
+      "relevant_evidence_ids": [
+        "ev_b1dfdf019f902850d235d5e5f8f3ffeb",
+        "ev_13217652070eda7adeb0e42abcf728eb"
+      ],
+      "evidence_references": [
+        {
+          "evidence_id": "ev_b1dfdf019f902850d235d5e5f8f3ffeb",
+          "paper_id": "clip-2103.00020v1",
+          "page": 4,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_13217652070eda7adeb0e42abcf728eb",
+          "paper_id": "clip-2103.00020v1",
+          "page": 4,
+          "figure_id": null
+        }
+      ],
+      "target_figures": [],
+      "answer_points": [
+        {
+          "text": "联合训练图像编码器和文本编码器，在一个 batch 内预测真实图文配对。",
+          "supporting_evidence_ids": [
+            "ev_b1dfdf019f902850d235d5e5f8f3ffeb",
+            "ev_13217652070eda7adeb0e42abcf728eb"
+          ]
+        },
+        {
+          "text": "最大化真实配对的余弦相似度、最小化错误配对相似度，并优化对称交叉熵。",
+          "supporting_evidence_ids": [
+            "ev_13217652070eda7adeb0e42abcf728eb"
+          ]
+        }
+      ],
+      "expected_behavior": "answer",
+      "must_not_claim": [
+        "不能把 BLIP 的 ITC/ITM/LM 三目标作为 CLIP 的训练目标。",
+        "不能因无过滤检索返回 BLIP 就声称当前 Corpus 没有 CLIP。"
+      ],
+      "annotation_status": "pending_review",
+      "reviewer": null,
+      "reviewed_at": null,
+      "review_notes": [
+        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
+        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+      ],
+      "regression": {
+        "source_artifact": "2026-10-06-多模态论文研究智能体-Day7-CLIP-StepExhaustion回归原始记录.json",
+        "source_sha256": "753d6fb4f8413f3de6797096e09ea48f67b6bf947370d58f7897ed9d8c9d8a8f",
+        "observed_status": "step_exhaustion",
+        "observed_tool_calls": 6,
+        "observed_model_calls": 7,
+        "observed_vlm_calls": 0,
+        "total_latency_ms": 8911.600072999136,
+        "backend": "DeepSeek deepseek-flash; existing Day 5 controlled retrieval; API delivery",
+        "notes": [
+          "历史真实结果为 step_exhaustion；不把该失败状态设为期望答案。",
+          "原始 HTTP/Trace 文件逐字节保留，source_sha256 用于核对。",
+          "Day 7 没有重新运行、修复或优化 Agent。",
+          "原始 API Response 不回显 question；题目关联来自 Day 6 的实际 HTTP 调用记录。"
+        ],
+        "question": "What training objective does CLIP use to align images and text?"
+      }
+    },
+    {
+      "case_id": "dev-text-05",
+      "category": "text_qa",
+      "question": "Which three pretraining objectives does BLIP optimize, and which MED functionality does each activate?",
+      "paper_ids": [
+        "blip-2201.12086v2"
+      ],
+      "relevant_evidence_ids": [
+        "ev_3ff09fcd2b0d1148ec95118fdd204b78",
+        "ev_6228bca0d420f2db5c71a0397f93e262"
+      ],
+      "evidence_references": [
+        {
+          "evidence_id": "ev_3ff09fcd2b0d1148ec95118fdd204b78",
+          "paper_id": "blip-2201.12086v2",
+          "page": 2,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_6228bca0d420f2db5c71a0397f93e262",
+          "paper_id": "blip-2201.12086v2",
+          "page": 3,
+          "figure_id": null
+        }
+      ],
+      "target_figures": [],
+      "answer_points": [
+        {
+          "text": "ITC 激活 unimodal encoder 做图文表示对齐；ITM 激活 image-grounded text encoder 判断配对。",
+          "supporting_evidence_ids": [
+            "ev_3ff09fcd2b0d1148ec95118fdd204b78"
+          ]
+        },
+        {
+          "text": "LM 激活 image-grounded text decoder 根据图像生成文本。",
+          "supporting_evidence_ids": [
+            "ev_3ff09fcd2b0d1148ec95118fdd204b78",
+            "ev_6228bca0d420f2db5c71a0397f93e262"
+          ]
+        }
+      ],
+      "expected_behavior": "answer",
+      "must_not_claim": [
+        "不能将 ITM 说成 caption generation。"
+      ],
+      "annotation_status": "pending_review",
+      "reviewer": null,
+      "reviewed_at": null,
+      "review_notes": [
+        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
+        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+      ],
+      "regression": null
+    },
+    {
+      "case_id": "dev-text-08",
+      "category": "text_qa",
+      "question": "Why does Flamingo use the Perceiver Resampler?",
+      "paper_ids": [
+        "flamingo-2204.14198v1"
+      ],
+      "relevant_evidence_ids": [
+        "ev_9262472c69770e9a098422d6b46534f9"
+      ],
+      "evidence_references": [
+        {
+          "evidence_id": "ev_9262472c69770e9a098422d6b46534f9",
+          "paper_id": "flamingo-2204.14198v1",
+          "page": 11,
+          "figure_id": null
+        }
+      ],
+      "target_figures": [],
+      "answer_points": [
+        {
+          "text": "把可变数量的图像/视频特征转为固定且较少的视觉输出，实践中为 64 个。",
+          "supporting_evidence_ids": [
+            "ev_9262472c69770e9a098422d6b46534f9"
+          ]
+        },
+        {
+          "text": "减少 vision-text cross-attention 计算复杂度，处理多个长视频时尤其重要。",
+          "supporting_evidence_ids": [
+            "ev_9262472c69770e9a098422d6b46534f9"
+          ]
+        }
+      ],
+      "expected_behavior": "answer",
+      "must_not_claim": [
+        "不能声称 Resampler 主要作用是生成语言 token，或把 64 说成 attention head 数。"
+      ],
+      "annotation_status": "pending_review",
+      "reviewer": null,
+      "reviewed_at": null,
+      "review_notes": [
+        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
+        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+      ],
+      "regression": null
+    },
+    {
+      "case_id": "dev-figure-01",
+      "category": "figure_qa",
+      "question": "Explain the three numbered stages shown in CLIP Figure 1 and how they connect.",
+      "paper_ids": [
+        "clip-2103.00020v1"
+      ],
+      "relevant_evidence_ids": [
+        "ev_edcabcefe69b753fbc214b2012af9d79",
+        "ev_7e22d464b738e57a92e8a2d4cf3b38a4"
+      ],
+      "evidence_references": [
+        {
+          "evidence_id": "ev_edcabcefe69b753fbc214b2012af9d79",
+          "paper_id": "clip-2103.00020v1",
+          "page": 2,
+          "figure_id": "Figure 1"
+        },
+        {
+          "evidence_id": "ev_7e22d464b738e57a92e8a2d4cf3b38a4",
+          "paper_id": "clip-2103.00020v1",
+          "page": 2,
+          "figure_id": null
+        }
+      ],
+      "target_figures": [
+        {
+          "paper_id": "clip-2103.00020v1",
+          "page": 2,
+          "figure_id": "Figure 1"
+        }
+      ],
+      "answer_points": [
+        {
+          "text": "图中三个阶段是 contrastive pre-training、用 label text 创建 dataset classifier、zero-shot prediction。",
+          "supporting_evidence_ids": [
+            "ev_edcabcefe69b753fbc214b2012af9d79"
+          ]
+        },
+        {
+          "text": "训练得到图文编码器；类别文本产生类别表示，测试图像表示与类别文本表示比较。",
+          "supporting_evidence_ids": [
+            "ev_edcabcefe69b753fbc214b2012af9d79",
+            "ev_7e22d464b738e57a92e8a2d4cf3b38a4"
+          ]
+        }
+      ],
+      "expected_behavior": "answer",
+      "must_not_claim": [
+        "不能把三个阶段说成三个独立的 captioning 模型。"
+      ],
+      "annotation_status": "pending_review",
+      "reviewer": null,
+      "reviewed_at": null,
+      "review_notes": [
+        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
+        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
+        "必须人工打开固定 crop，核对可见元素；图注/文字支持和图像观察不能混为一谈。"
+      ],
+      "regression": null
+    },
+    {
+      "case_id": "dev-figure-05",
+      "category": "figure_qa",
+      "question": "Figure 3 为什么证明 BLIP 性能更强？请核实问题前提。",
+      "paper_ids": [
+        "blip-2201.12086v2"
+      ],
+      "relevant_evidence_ids": [
+        "ev_e86cf697f7388bf7dca291a648f630b1",
+        "ev_03f0209e1af23ec5c3e017db94ac940e",
+        "ev_0ef849392533fb9fe735d1fe7cd8ebf9"
+      ],
+      "evidence_references": [
+        {
+          "evidence_id": "ev_e86cf697f7388bf7dca291a648f630b1",
+          "paper_id": "blip-2201.12086v2",
+          "page": 4,
+          "figure_id": "Figure 3"
+        },
+        {
+          "evidence_id": "ev_03f0209e1af23ec5c3e017db94ac940e",
+          "paper_id": "blip-2201.12086v2",
+          "page": 4,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_0ef849392533fb9fe735d1fe7cd8ebf9",
+          "paper_id": "blip-2201.12086v2",
+          "page": 4,
+          "figure_id": null
+        }
+      ],
+      "target_figures": [
+        {
+          "paper_id": "blip-2201.12086v2",
+          "page": 4,
+          "figure_id": "Figure 3"
+        }
+      ],
+      "answer_points": [
+        {
+          "text": "拒绝问题前提：Figure 3 是 CapFilt 学习/数据自举流程图，不是性能对比证据。",
+          "supporting_evidence_ids": [
+            "ev_e86cf697f7388bf7dca291a648f630b1",
+            "ev_03f0209e1af23ec5c3e017db94ac940e"
+          ]
+        },
+        {
+          "text": "Captioner 为网页图像生成合成字幕，filter 去除噪声图文对，自举数据用于预训练新模型。",
+          "supporting_evidence_ids": [
+            "ev_e86cf697f7388bf7dca291a648f630b1",
+            "ev_0ef849392533fb9fe735d1fe7cd8ebf9"
+          ]
+        }
+      ],
+      "expected_behavior": "reject_false_premise",
+      "must_not_claim": [
+        "不能从架构箭头推出 BLIP 比某 baseline 更强或编造具体性能提升数值。"
+      ],
+      "annotation_status": "pending_review",
+      "reviewer": null,
+      "reviewed_at": null,
+      "review_notes": [
+        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
+        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
+        "必须人工打开固定 crop，核对可见元素；图注/文字支持和图像观察不能混为一谈。"
+      ],
+      "regression": null
+    },
+    {
+      "case_id": "dev-figure-09",
+      "category": "figure_qa",
+      "question": "Explain how Figure 3 of Flamingo connects visual inputs to the language model.",
+      "paper_ids": [
+        "flamingo-2204.14198v1"
+      ],
+      "relevant_evidence_ids": [
+        "ev_b30b665ded152d9c1aa77862063b1663",
+        "ev_1f60e62600f7a79eae799d5ed285f571",
+        "ev_a802881b56aa396b45e4431996b61ae5"
+      ],
+      "evidence_references": [
+        {
+          "evidence_id": "ev_b30b665ded152d9c1aa77862063b1663",
+          "paper_id": "flamingo-2204.14198v1",
+          "page": 9,
+          "figure_id": "Figure 3"
+        },
+        {
+          "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+          "paper_id": "flamingo-2204.14198v1",
+          "page": 9,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+          "paper_id": "flamingo-2204.14198v1",
+          "page": 10,
+          "figure_id": null
+        }
+      ],
+      "target_figures": [
+        {
+          "paper_id": "flamingo-2204.14198v1",
+          "page": 9,
+          "figure_id": "Figure 3"
+        }
+      ],
+      "answer_points": [
+        {
+          "text": "视觉输入经 vision encoder 和 Perceiver Resampler，把视觉信息传往 GATED XATTN-DENSE 层。",
+          "supporting_evidence_ids": [
+            "ev_b30b665ded152d9c1aa77862063b1663",
+            "ev_1f60e62600f7a79eae799d5ed285f571"
+          ]
+        },
+        {
+          "text": "新 cross-attention 层与 frozen LM blocks 交错，使文本生成受视觉信息条件化。",
+          "supporting_evidence_ids": [
+            "ev_b30b665ded152d9c1aa77862063b1663",
+            "ev_a802881b56aa396b45e4431996b61ae5"
+          ]
+        },
+        {
+          "text": "图中接受交错的视觉与文本输入，输出文本。",
+          "supporting_evidence_ids": [
+            "ev_b30b665ded152d9c1aa77862063b1663"
+          ]
+        }
+      ],
+      "expected_behavior": "answer",
+      "must_not_claim": [
+        "不能补上图和所列文本未提供的所有 tensor shape 或性能数值。"
+      ],
+      "annotation_status": "pending_review",
+      "reviewer": null,
+      "reviewed_at": null,
+      "review_notes": [
+        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
+        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
+        "必须人工打开固定 crop，核对可见元素；图注/文字支持和图像观察不能混为一谈。"
+      ],
+      "regression": null
+    },
+    {
+      "case_id": "dev-cross-01",
+      "category": "cross_paper",
+      "question": "Compare the pretraining objectives documented for CLIP and BLIP in the prepared corpus.",
+      "paper_ids": [
+        "clip-2103.00020v1",
+        "blip-2201.12086v2"
+      ],
+      "relevant_evidence_ids": [
+        "ev_b1dfdf019f902850d235d5e5f8f3ffeb",
+        "ev_13217652070eda7adeb0e42abcf728eb",
+        "ev_3ff09fcd2b0d1148ec95118fdd204b78",
+        "ev_03c68854d5c7f6b3d56efa68b5d371b1"
+      ],
+      "evidence_references": [
+        {
+          "evidence_id": "ev_b1dfdf019f902850d235d5e5f8f3ffeb",
+          "paper_id": "clip-2103.00020v1",
+          "page": 4,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_13217652070eda7adeb0e42abcf728eb",
+          "paper_id": "clip-2103.00020v1",
+          "page": 4,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_3ff09fcd2b0d1148ec95118fdd204b78",
+          "paper_id": "blip-2201.12086v2",
+          "page": 2,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_03c68854d5c7f6b3d56efa68b5d371b1",
+          "paper_id": "blip-2201.12086v2",
+          "page": 3,
+          "figure_id": null
+        }
+      ],
+      "target_figures": [],
+      "answer_points": [
+        {
+          "text": "CLIP 优化真实/错误图文 batch 配对上的对比对齐与对称交叉熵。",
+          "supporting_evidence_ids": [
+            "ev_b1dfdf019f902850d235d5e5f8f3ffeb",
+            "ev_13217652070eda7adeb0e42abcf728eb"
+          ]
+        },
+        {
+          "text": "BLIP 同时使用 ITC、ITM、LM，分别支持表示对齐、匹配判断和生成。",
+          "supporting_evidence_ids": [
+            "ev_3ff09fcd2b0d1148ec95118fdd204b78",
+            "ev_03c68854d5c7f6b3d56efa68b5d371b1"
+          ]
+        }
+      ],
+      "expected_behavior": "answer",
+      "must_not_claim": [
+        "不能把 BLIP 三损失直接归给 CLIP，或据目标差异推断性能排名。"
+      ],
+      "annotation_status": "pending_review",
+      "reviewer": null,
+      "reviewed_at": null,
+      "review_notes": [
+        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
+        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+      ],
+      "regression": null
+    },
+    {
+      "case_id": "dev-cross-03",
+      "category": "cross_paper",
+      "question": "Compare how BLIP and Flamingo support image-conditioned language generation.",
+      "paper_ids": [
+        "blip-2201.12086v2",
+        "flamingo-2204.14198v1"
+      ],
+      "relevant_evidence_ids": [
+        "ev_197064d097092640e20dc38ce8045682",
+        "ev_6228bca0d420f2db5c71a0397f93e262",
+        "ev_1f60e62600f7a79eae799d5ed285f571",
+        "ev_a802881b56aa396b45e4431996b61ae5"
+      ],
+      "evidence_references": [
+        {
+          "evidence_id": "ev_197064d097092640e20dc38ce8045682",
+          "paper_id": "blip-2201.12086v2",
+          "page": 3,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_6228bca0d420f2db5c71a0397f93e262",
+          "paper_id": "blip-2201.12086v2",
+          "page": 3,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+          "paper_id": "flamingo-2204.14198v1",
+          "page": 9,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+          "paper_id": "flamingo-2204.14198v1",
+          "page": 10,
+          "figure_id": null
+        }
+      ],
+      "target_figures": [],
+      "answer_points": [
+        {
+          "text": "BLIP MED 使用 image-grounded text decoder，以 causal self-attention 和 LM 目标生成文本。",
+          "supporting_evidence_ids": [
+            "ev_197064d097092640e20dc38ce8045682",
+            "ev_6228bca0d420f2db5c71a0397f93e262"
+          ]
+        },
+        {
+          "text": "Flamingo 将视觉 token 经新 cross-attention 层传给预训练 frozen autoregressive LM。",
+          "supporting_evidence_ids": [
+            "ev_1f60e62600f7a79eae799d5ed285f571",
+            "ev_a802881b56aa396b45e4431996b61ae5"
+          ]
+        }
+      ],
+      "expected_behavior": "answer",
+      "must_not_claim": [
+        "不能将 BLIP MED decoder 和 Flamingo frozen LM 说成相同训练机制。"
+      ],
+      "annotation_status": "pending_review",
+      "reviewer": null,
+      "reviewed_at": null,
+      "review_notes": [
+        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
+        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。"
+      ],
+      "regression": null
+    },
+    {
+      "case_id": "dev-insufficient-01",
+      "category": "insufficient",
+      "question": "What is the exact SHA-256 of the private dataset manifest used to train BLIP, and the number of duplicate files removed during preprocessing? Use only the prepared corpus.",
+      "paper_ids": [
+        "blip-2201.12086v2"
+      ],
+      "relevant_evidence_ids": [],
+      "evidence_references": [],
+      "target_figures": [],
+      "answer_points": [
+        {
+          "text": "明确说明当前 prepared corpus 不提供私有训练 manifest 的 SHA-256 或内部文件去重数量，无法给出所请求的精确值。",
+          "supporting_evidence_ids": []
+        },
+        {
+          "text": "如仍不足，结束并说明限制；不得用模型记忆补齐。",
+          "supporting_evidence_ids": []
+        }
+      ],
+      "expected_behavior": "insufficient_evidence",
+      "must_not_claim": [
+        "不能编造 manifest hash 或 duplicate count。",
+        "不能把 fixture paper.pdf 的 hash 当作训练数据 manifest hash。"
+      ],
+      "annotation_status": "pending_review",
+      "reviewer": null,
+      "reviewed_at": null,
+      "review_notes": [
+        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
+        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
+        "缺失结论仅针对当前 Prepared Corpus，不声称完整论文或作者从未公开相关信息。"
+      ],
+      "regression": null
+    },
+    {
+      "case_id": "dev-insufficient-04",
+      "category": "insufficient",
+      "question": "Rank CLIP, BLIP and Flamingo on one shared benchmark using exact scores from the prepared pages.",
+      "paper_ids": [
+        "clip-2103.00020v1",
+        "blip-2201.12086v2",
+        "flamingo-2204.14198v1"
+      ],
+      "relevant_evidence_ids": [],
+      "evidence_references": [],
+      "target_figures": [],
+      "answer_points": [
+        {
+          "text": "当前 prepared corpus 没有三者在同一 benchmark、同一 protocol 下的完整可比得分，不能给出排名。",
+          "supporting_evidence_ids": []
+        }
+      ],
+      "expected_behavior": "insufficient_evidence",
+      "must_not_claim": [
+        "不能从架构或单独效率描述推断三者性能排名。",
+        "不能补充未准备的实验表格或网络检索/模型记忆中的分数。"
+      ],
+      "annotation_status": "pending_review",
+      "reviewer": null,
+      "reviewed_at": null,
+      "review_notes": [
+        "候选标注：已按当前 Prepared Corpus 选择证据，尚未由用户完成人工审阅。",
+        "检查每个答案要点是否由列出的证据真正支持；不使用完整 PDF 未准备区域或模型记忆补齐。",
+        "缺失结论仅针对当前 Prepared Corpus，不声称完整论文或作者从未公开相关信息。"
+      ],
+      "regression": null
+    }
+  ]
+}

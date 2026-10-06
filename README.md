@@ -1,6 +1,6 @@
 # Multimodal Research Agent
 
-当前状态：Day 6 已增加本地 FastAPI 与轻量 Web UI；Day 5 决策、Prompt、工具与检索规则不变。API/浏览器验证通过，真实 Agent 的任务语义缺口仍按 Day 5.5 记录。
+当前状态：Day 7 已建立 40 条候选评测题、dev/test 加载器与静态校验，全部待人工审阅，不能当作已确认 Ground Truth。Day 6 API/UI 可用；Agent/工具/检索未修改，真实行为缺口仍按既有记录保留。
 
 本阶段没有 Agent Loop、自动图表检测、跨论文比较或最终问答 API。现有 SingleStepToolCaller 保留原样。
 
@@ -531,3 +531,68 @@ PLAYWRIGHT_BROWSERS_PATH=/tmp/personal-agent-browser .venv/bin/python -m scripts
 API、浏览器验收及截图继续保存在既有 D 盘对话目录；截图文件标记“测试模型”。
 参考：[FastAPI lifespan](https://fastapi.tiangolo.com/advanced/events/)、
 [Response Model](https://fastapi.tiangolo.com/tutorial/response-model/)。
+
+
+## Day 7：候选评测数据与静态校验
+
+新增范围仅为 eval/datasets/dev.json、test.json、schemas.py、loader.py、validate_dataset.py，
+以及静态检查测试/说明。不实现评测 Runner，不调用 LLM，不修改 Agent / Tool / Retrieval / Corpus。
+
+| 类别 | Dev | Test | 总计 |
+| --- | ---: | ---: | ---: |
+| Text QA | 3 | 7 | 10 |
+| Figure QA | 3 | 9 | 12 |
+| Cross-paper | 2 | 8 | 10 |
+| Insufficient | 2 | 6 | 8 |
+| 总计 | 10 | 30 | 40 |
+
+**所有 40 条为 pending_review。** Coding Agent 依据当前 25 TextEvidence / 3 FigureEvidence
+辅助制定候选问题与答案要点，并记录每个要点的 supporting_evidence_ids；这不是人工确认的 Ground Truth。
+12 道 Figure QA 复用 3 张图，dev/test 中多题共享证据，不能视为独立图像样本或声称严格 IID 泛化。
+原四个已运行的 Day 5.5 示例放在 dev，不把已用于调试的原问题放入 test。
+
+EvaluationCase 包含 case_id、category、question、paper_ids、relevant_evidence_ids、
+evidence_references（paper/page/figure）、target_figures、answer_points（text/support IDs）、
+expected_behavior、must_not_claim、人工审阅状态和可选 regression。
+数据集顶层固定 PDF hash、准备页码与 Figure ID，便于识别 fixture 版本变化。
+
+静态检查保证 40/10/30 及类别计数、唯一 ID/问题、合法版本 ID、真实 Evidence、来源页码/模态、
+存在的 Figure、Figure QA 的图像证据、Cross-paper 的多论文证据、非空答案要点和要点引用子集。
+不足题 expected_behavior=insufficient_evidence，可以没有正向 evidence IDs，但必须有禁止声称的内容。
+
+```bash
+.venv/bin/python -m eval.validate_dataset
+# 正式评测前的人工状态保护：当前候选数据会明确拒绝。
+.venv/bin/python -m eval.validate_dataset --require-reviewed
+```
+
+```python
+from eval.loader import load_dataset
+candidates = load_dataset("dev")
+# 后续正式评测应显式要求人工批准；当前调用会报 DatasetNotReviewedError。
+approved_test = load_dataset("test", require_approved=True)
+```
+
+paper_ids/relevant_evidence_ids/answer_points 为离线标注，不应自动注入模型或为 Tool 补 scope。
+静态有效不代表语义正确；人工需要逐题核对支持证据，尤其 Figure 可见元素、跨论文答案要点和
+不足题的缺失边界。审阅通过后记录 approved、reviewer、实际 reviewed_at，并更新 review_notes。
+如需修订/拒绝，保持对应状态并重新校验计数和 Corpus 边界。test 经审阅后冻结，不用于反复调 Prompt。
+
+### CLIP 回归案例
+
+`dev-text-01` 保留原问题 What training objective does CLIP use to align images and text?。
+期望仍是由 CLIP prepared evidence 正确回答；regression 另记真实历史 step_exhaustion、
+6 tool calls / 7 model calls / 0 VLM calls、原始产物名称和 SHA-256。
+
+Day 6 真实 HTTP 响应逐字节保存为 D 盘 Day7-CLIP-StepExhaustion回归原始记录.json，
+未重跑或修复 Agent。原始 API response 不回显 question，题目关联来自 Day 6 的实际 HTTP 调用记录。
+修改回归题 question 会被拒绝，避免把新问题误当成旧失败的再现。
+
+### 验证与人工材料
+
+全部 229 项 pytest 通过，原有 204 项未回归；Ruff、语法与差异检查通过。
+普通静态校验输出 static_valid=true、ground_truth_ready=false、pending_review=40；
+--require-reviewed 已验证明确拒绝未批准数据。
+
+D 盘现有对话目录中提供 40 题人工审阅清单、28 条完整准备证据/固定 Figure 核对目录、
+静态校验报告及 CLIP 回归原始记录。Day 8 的三系统比较尚未运行，不将未来质量/成本假设写成已测结论。
