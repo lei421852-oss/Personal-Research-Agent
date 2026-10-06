@@ -1,8 +1,8 @@
 # Multimodal Research Agent
 
-当前状态：Day 7 已建立 40 条评测题、dev/test 加载器与静态校验；用户已确认核对并批量批准，review 信息齐全，严格审阅状态校验通过。Day 6 API/UI 可用；Agent/工具/检索未修改，真实行为缺口仍按既有记录保留。
+当前状态：Day 8 已实现三系统统一评测 Runner、指标、运行与汇总命令；真实模型完成 10 条 dev × 3 系统共 30 次运行。test 未运行，答案语义评分待人工审阅。Day 5 Agent 决策逻辑、Tool Contract、Retrieval 与数据集保持原样。
 
-本阶段没有 Agent Loop、自动图表检测、跨论文比较或最终问答 API。现有 SingleStepToolCaller 保留原样。
+实现历史按 Day 1–8 保留在下文；当前已具备有限步 Agent Loop、固定多模态 QA、API/UI 和评测入口。
 
 ## 已建立的接口
 
@@ -597,3 +597,61 @@ Day 6 真实 HTTP 响应逐字节保存为 D 盘 Day7-CLIP-StepExhaustion回归�
 
 D 盘现有对话目录中提供 40 题人工审阅清单、28 条完整准备证据/固定 Figure 核对目录、
 静态校验报告及 CLIP 回归原始记录。Day 8 的三系统比较尚未运行，不将未来质量/成本假设写成已测结论。
+
+## Day 8：统一三系统评测
+
+三个 Runner 均接受 `EvaluationCase` 并返回 `EvaluationRun`，包含答案、引用、实际取得的证据、
+状态、延迟、LLM/VLM/工具调用数及质量指标。Domain 对象没有直接作为评测输出使用。
+
+- `text_rag`：全库一次 search_text（默认 K=5），一次模型 finish；不调用 VLM。
+- `fixed_multimodal_rag`：问题明确指定唯一论文及 Figure 时，复用 Day 4 的 find_figure → read_page → analyze_figure；其他问题采用上述文本流程。固定目标只从问题和公开 Corpus catalog 提取，不读标注答案。
+- `multimodal_agent`：复用原 BoundedToolAgent，模型决定动作，程序限制最多 6 次工具调用。
+
+`paper_ids`、`relevant_evidence_ids`、`target_figures`、`answer_points` 仅供离线评价，
+不会注入模型、自动补检索过滤条件或为固定流程选择最佳上下文。
+
+```bash
+# 默认 fake，用于验证输出和统计链路，不作为真实质量/成本实验。
+.venv/bin/python -m eval.run_evaluation --backend fake --split dev
+# 当前用户配置文件；运行会调用真实 API。
+.venv/bin/python -m eval.run_evaluation --backend real --split dev --env-file .env.example
+```
+
+默认产物保存在既有 D 盘对话目录。每次写出 runs.jsonl、manifest.json、summary.json、
+summary.md、review-template.json；逐次保存运行记录。manifest 保存数据集、PDF、策略 hash、
+实际模型与检索后端，便于追踪版本。计时包含本次请求执行，不包含共享 Corpus/客户端初始化。
+
+### 指标口径
+
+- text_recall_at_k：首次文本检索的实际 K 下命中标注文本的比例；按 K 分组。无文本标注或检索失败为 null，成功但为空为 0。另报累计 text_evidence_recall，包含 read_page 获得的文本。
+- figure_recall_at_k：本阶段是前 K 个实际取得的 Figure 对标注 Figure 的覆盖率；它是 Figure 获取指标，不是图像向量排名 Recall。无 Figure 标注为 null。
+- citation_identity_valid：检查引用确实来自当前 Corpus、实际取得的 Evidence，且来源字段一致。
+- citation_relevance_precision：标注证据 ID 命中精度，不能替代语义 citation_correctness。
+- task_success / citation_correctness：有答案时留待人工逐条评分；明确执行失败可自动标 False。completed 不等于回答正确。存在未评分记录时整体成功率为 null。
+- latency_ms、model_calls、vlm_calls、tool_calls：实际测量；finish 不计领域工具调用。工具延迟已包含内部 VLM 时间，不能再相加一次。未估算 token 或金额。
+
+人工评分模板包含问题、实际答案/Observation/引用、批准的答案要点及禁止声称内容。
+填写 task_success、citation_correctness、reviewer、reviewed_at 后，可用以下命令重新汇总：
+
+```bash
+.venv/bin/python -m eval.summarize_results --runs /absolute/path/runs.jsonl --reviews /absolute/path/review-template.json --output-prefix /absolute/path/reviewed-summary
+```
+
+### 本轮 dev 结果与限制
+
+真实运行使用 LLM/VLM `deepseek-flash`，共享现有 `day5-controlled` 检索后端。
+因此是真实模型策略/生成与工具成本实验，不能视为真实 Embedding 排名效果的验证。
+10 条 dev、三系统共 30 次；30 条 test 保持未运行。
+
+| 系统 | 执行状态 | 平均总延迟 | 平均 LLM | 平均 VLM | 平均工具 |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Text RAG | 10 completed | 2.90 s | 1.0 | 0 | 1.0 |
+| Fixed Multimodal RAG | 9 completed、1 tool_failure | 6.55 s | 0.7 | 0.3 | 1.6 |
+| Multimodal Agent | 6 completed、1 insufficient_evidence、3 step_exhaustion | 11.66 s | 5.8 | 0.1 | 4.8 |
+
+25 条生成答案待语义审阅，5 条明确失败已记录。Agent 的 insufficient_evidence 发生在可回答题，
+故为自动任务失败。BLIP `dev-figure-05` 固定流程中 VLM 返回多余 `type` 字段，被原有严格契约拒绝；
+保留该失败，不修改 Vision Contract。上述状态/成本不能直接推出三系统质量排名。
+
+全部 244 项 pytest 通过，Ruff、语法与差异检查通过；新增测试覆盖三 Runner 输出、标注隔离、
+空结果与依赖失败、引用身份/语义区别、实际 K、计数隔离、人工评分匹配及 fake/real 混用拒绝。
