@@ -11,6 +11,7 @@ from app.diagnostics import failure_details
 from app.evidence.citations import CitationValidationError
 from app.evidence.errors import EvidenceDependencyError, UnknownPaperError
 from app.evidence.resolver import EvidenceResolutionError
+from app.papers.evidence_access import PaperEvidenceUnavailable
 from app.retrieval.errors import RetrievalDependencyError
 from app.tools.errors import DependencyFailure
 from app.tools.observations import ObservationIssue, ToolExecutionTrace, ToolObservation
@@ -84,6 +85,20 @@ class ToolExecutor:
                 safe_name,
                 "citation_validation_failure",
                 "Model citations are empty or outside the supplied evidence.",
+            )
+        except PaperEvidenceUnavailable as exc:
+            failure_exc = exc
+            observation = ToolObservation(
+                status="empty",
+                tool_name=safe_name,
+                summary="Discovered paper has no prepared evidence; no PDF was parsed.",
+                payload={
+                    "paper_discovered": True,
+                    "paper_evidence_available": False,
+                    "availability_status": "unavailable",
+                    "unavailable_paper_ids": [exc.paper_id],
+                },
+                issue=ObservationIssue(code="empty_result", retryable=False),
             )
         except UnknownPaperError as exc:
             failure_exc = exc

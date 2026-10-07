@@ -40,12 +40,13 @@ class ToolObservation(BaseModel):
         count = len(self.payload.get("evidence", [])) + len(
             self.payload.get("figures", [])
         )
+        count += len(self.payload.get("papers", []))
         return count + int(self.payload.get("figure") is not None)
 
     @model_validator(mode="after")
     def check_status(self):
         """约束状态与证据、错误码一致，防止将空结果误报为工具故障。"""
-        for key in ["evidence", "figures"]:
+        for key in ["evidence", "figures", "papers"]:
             if key in self.payload and not isinstance(self.payload[key], list):
                 raise ValueError("Evidence collections must be lists")
         if self.payload.get("figure") is not None and not isinstance(
@@ -63,7 +64,8 @@ class ToolObservation(BaseModel):
         if self.status != "success" and self.result_count:
             raise ValueError("Failed/empty observations cannot contain evidence")
         if (
-            self.tool_name in {"search_text", "find_figure", "read_page"}
+            self.tool_name
+            in {"search_text", "find_figure", "read_page", "search_papers"}
             and self.status == "success"
             and not self.result_count
         ):

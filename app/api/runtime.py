@@ -29,9 +29,19 @@ class CountingVisionClient:
 
 
 class AgentAPIRuntime:
-    def __init__(self, corpus, retrieval, client_factory, *, retrieval_mode="test"):
+    def __init__(
+        self,
+        corpus,
+        retrieval,
+        client_factory,
+        *,
+        retrieval_mode="test",
+        paper_retriever=None,
+        paper_catalog=None,
+    ):
         self.corpus, self.retrieval = corpus, retrieval
         self.client_factory, self.retrieval_mode = client_factory, retrieval_mode
+        self.paper_retriever, self.paper_catalog = paper_retriever, paper_catalog
 
     def run(self, question):
         # 每个 HTTP 请求独享客户端、计数器、执行器和状态，不共享历史或会话。
@@ -40,12 +50,18 @@ class AgentAPIRuntime:
             counted = CountingVisionClient(vision)
             executor = ToolExecutor(
                 create_paper_registry(
-                    self.corpus, self.retrieval, analyzer=FigureAnalyzer(counted)
+                    self.corpus,
+                    self.retrieval,
+                    analyzer=FigureAnalyzer(counted),
+                    paper_retriever=self.paper_retriever,
+                    paper_catalog=self.paper_catalog,
                 )
             )
-            result = BoundedToolAgent(llm, executor, EvidenceResolver(self.corpus)).run(
-                question
-            )
+            result = BoundedToolAgent(
+                llm,
+                executor,
+                EvidenceResolver(self.corpus, paper_catalog=self.paper_catalog),
+            ).run(question)
             return map_agent_result(
                 result,
                 self.corpus,
@@ -95,6 +111,30 @@ def create_configured_runtime():
         retrieval = TextRetriever(embedding, store, paper_aliases=corpus.paper_aliases)
     else:
         raise ConfigurationUnavailable("Unknown retrieval backend")
+    paper_catalog, paper_retriever = None, None
+    if os.environ.get("AGENT_PAPER_DISCOVERY", "0") == "1":
+        from app.papers.catalog import DEFAULT_FIXTURE, load_paper_catalog
+        from app.papers.retriever import PaperRetriever
+        from app.papers.store import DEFAULT_INDEX, ChromaPaperVectorStore
+        from app.retrieval.embedding import QwenEmbeddingModel
+
+        paper_catalog = load_paper_catalog()
+        paper_model = os.environ.get(
+            "AGENT_PAPER_EMBEDDING_MODEL", "Qwen/Qwen3-Embedding-0.6B"
+        )
+        paper_store = ChromaPaperVectorStore(
+            os.environ.get("AGENT_PAPER_INDEX_DIR", str(DEFAULT_INDEX))
+        )
+        paper_store.validate_provenance(DEFAULT_FIXTURE, paper_model)
+        if mode == "real" and paper_model == os.environ.get(
+            "AGENT_EMBEDDING_MODEL", "Qwen/Qwen3-Embedding-0.6B"
+        ):
+            paper_embedding = embedding
+        else:
+            paper_embedding = QwenEmbeddingModel(
+                paper_model, device=os.environ.get("AGENT_DEVICE", "cpu")
+            )
+        paper_retriever = PaperRetriever(paper_embedding, paper_store)
     # 固定本次配置快照；凭据不得进入 DTO、日志或对象的 repr 输出。
     config = {k: os.environ[k] for k in required}
 
@@ -116,4 +156,11 @@ def create_configured_runtime():
         stack.callback(vision.close)
         return llm, vision
 
-    return AgentAPIRuntime(corpus, retrieval, client_factory, retrieval_mode=mode)
+    return AgentAPIRuntime(
+        corpus,
+        retrieval,
+        client_factory,
+        retrieval_mode=mode,
+        paper_retriever=paper_retriever,
+        paper_catalog=paper_catalog,
+    )

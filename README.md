@@ -4,7 +4,7 @@
 
 > A bounded multimodal research agent that retrieves, analyzes, and reasons over text and figures in scientific papers with traceable evidence.
 
-这是面向 **CLIP、BLIP、Flamingo 三篇论文的证据约束问答与 Agent 决策原型**。V0.1 已进入 Feature Freeze；它不是通用自主科研系统。
+这是面向 **CLIP、BLIP、Flamingo 三篇论文的证据约束问答与 Agent 决策原型**。V0.1 已封板；当前 V0.2 Phase 1 仅增加论文发现与分层检索基础能力，它不是通用自主科研系统。
 
 | 核心能力 | 如何体现 |
 | --- | --- |
@@ -12,9 +12,23 @@
 | **Understand · 读图** | 将 Figure、caption 与已准备的页面文本一起交给 VLM，分开记录观察与解释 |
 | **Decide · 选动作** | 模型看到每轮 Observation 后，自主选择工具、补充上下文或调用 `finish` |
 
-**当前规模：3 篇论文、25 条 TextEvidence、3 条 FigureEvidence；冻结评测集 40 题。** 本地完整测试为 **257 passed**（2026-10-07）。真实 Demo 与模拟验证分别标记；完整三系统正式比较尚未完成。
+**当前规模：25 篇论文发现元数据；其中 3 篇具备 25 条 TextEvidence、3 条 FigureEvidence。V0.1 冻结评测集仍为 40 题。** V0.1 基线为 **257 passed**；当前全量 **284 passed**（2026-10-07）。真实 Demo 与模拟验证分别标记；完整三系统正式比较尚未完成。
 
 快速阅读：[架构](#系统架构) · [三个-demo](#三个-demo) · [失败分析](#失败分析) · [快速开始](#快速开始) · [限制](#当前限制)
+
+## V0.2 Phase 1 · 论文发现
+
+开放问题可先调用 `search_papers` 发现候选论文，再由模型选择 `paper_ids` 调用 `search_text`。
+已知论文问题直接使用 scope；发现元数据不等于可引用正文。未准备正文的候选返回结构化 unavailable/empty，不生成虚假 Evidence。
+
+新增独立 Paper Index，复用既有 Qwen Embedding/Chroma；8 条开发查询的真实宏平均 Recall@5=0.8708、Recall@10=0.8958。fixture 摘要为来源摘要简述，keywords 为空，开发相关性标签尚非正式人工 Ground Truth。详见 [Phase 1 实现与运行说明](docs/paper-discovery.md)。
+
+```bash
+python -m scripts.ingest_papers --device cpu
+python -m eval.paper_discovery --output artifacts/paper-discovery-evaluation.json
+```
+
+索引就绪后在 `.env` 设置 `AGENT_PAPER_DISCOVERY=1` 并重启服务；默认 0 保留 V0.1 模式。不引入 Multi-Agent/Planner/Reviewer 或并发运行时。
 
 ## 为什么做这个项目？
 
@@ -51,7 +65,7 @@ flowchart TB
         AG --- C
     end
     subgraph T[Tool / Capability Layer · 工具与能力]
-        TOOLS[search_text / find_figure / read_page / analyze_figure]
+        TOOLS[search_papers / search_text / find_figure / read_page / analyze_figure]
         F[finish · 终止动作]
     end
     subgraph E[Evidence Layer · 证据]
@@ -256,6 +270,7 @@ Corpus Catalog → Decision Context → LLM 选择 CLIP ID
 
 ```text
 app/
+├── papers/      # 论文领域模型、发现目录与独立索引
 ├── agent/       # 有限步循环、决策上下文、恢复、finish
 ├── tools/       # 工具契约、注册、执行器、Observation
 ├── evidence/    # fixture、来源校验、证据解析与引用校验
@@ -267,6 +282,7 @@ app/
 └── main.py      # 服务入口
 
 data/
+├── paper_discovery/  # 25 篇元数据与 8 条开发查询
 ├── fixture_configs/  # 人工 region/crop 配置
 ├── papers/           # CLIP、BLIP、Flamingo 的固定 PDF/metadata/pages/figures
 └── smoke/            # 跨论文检索冒烟问题
@@ -361,10 +377,10 @@ python -m scripts.demo_day5 --output-dir artifacts
 
 ## 当前限制
 
-1. **语料受控**：仅 3 篇论文、人工选择的页面区域；`read_page` 不是整页或任意 PDF 阅读器。
+1. **语料受控**：发现目录有 25 篇，但正文仍仅 3 篇论文、人工选择的页面区域；`read_page` 不是整页或任意 PDF 阅读器。
 2. **Figure 人工准备**：每篇 1 张关键图，裁剪与图注由固定版本配置并人工检查；无任意 PDF 自动 Figure Extraction。
 3. **没有图像向量检索**：Figure 主要按论文 ID 与图编号定位，返回 caption；没有任意图片相似度搜索或跨模态向量排名。
-4. **动作空间有限**：Agent 使用四个领域工具和 finish，通用工具基础设施中的 calculator 不属于论文 Agent 动作集。
+4. **动作空间有限**：V0.1 使用四个领域工具和 finish；V0.2 显式启用后增加 search_papers。calculator 不属于论文 Agent 动作集。
 5. **有限步不保证成功**：可能协议失败、依赖失败、重复失败或预算耗尽；严格引用校验不保证语义正确。
 6. **单 Agent**：没有 Multi-Agent、Planner/Executor 双 Agent 或 LangGraph Runtime。
 7. **检索模式需区分**：默认演示是受控检索；真实 Embedding/Chroma 必须显式安装、ingest 并启用。

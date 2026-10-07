@@ -9,11 +9,13 @@ class EvidenceResolutionError(ValueError):
 
 
 class EvidenceResolver:
-    def __init__(self, corpus: PaperCorpus):
+    def __init__(self, corpus: PaperCorpus, *, paper_catalog=None):
         self._paper_catalog = tuple(
             (metadata.paper_key.upper(), metadata.paper_id)
             for metadata in corpus.metadata
         )
+        self._discovery_catalog = paper_catalog
+        self._prepared_ids = frozenset(m.paper_id for m in corpus.metadata)
         self._items = {
             e.evidence_id: e for e in (*corpus.text_evidence, *corpus.figure_evidence)
         }
@@ -21,6 +23,17 @@ class EvidenceResolver:
     @property
     def paper_catalog(self) -> list[dict[str, str]]:
         """返回目录副本；只公开论文名和版本 ID，不暴露本地路径。"""
+        if self._discovery_catalog is not None:
+            return [
+                {
+                    "name": r.name,
+                    "paper_id": r.document.paper_id,
+                    "paper_discovered": True,
+                    "paper_evidence_available": r.document.paper_id
+                    in self._prepared_ids,
+                }
+                for r in self._discovery_catalog.records
+            ]
         return [
             {"name": name, "paper_id": paper_id}
             for name, paper_id in self._paper_catalog
@@ -28,7 +41,10 @@ class EvidenceResolver:
 
     @property
     def paper_ids(self) -> list[str]:
-        return sorted({item.paper_id for item in self._items.values()})
+        ids = {item.paper_id for item in self._items.values()}
+        if self._discovery_catalog is not None:
+            ids.update(self._discovery_catalog.documents)
+        return sorted(ids)
 
     def resolve(self, evidence_id: str) -> TextEvidence | FigureEvidence:
         try:

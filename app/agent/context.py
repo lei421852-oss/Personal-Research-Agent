@@ -24,6 +24,13 @@ def build_decision_context(state, resolver):
             "question": state.question,
             "available_papers": resolver.paper_catalog,
             "observed_evidence": evidence,
+            "discovered_papers": [
+                candidate
+                for observation in state.observations
+                if observation.tool_name == "search_papers"
+                and observation.status == "success"
+                for candidate in observation.payload.get("papers", [])
+            ],
             "previous_actions": state.model_actions,
             "previous_failures": [
                 o.model_dump(mode="json")
