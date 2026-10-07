@@ -147,3 +147,118 @@ class ResearchPreparation(ResearchModel):
     requirements: list[EvidenceRequirement]
     worker_tasks: list[WorkerTask]
     trace: PlannerTrace
+
+
+class WorkerStatus(StrEnum):
+    COMPLETED = "completed"
+    PARTIAL_SUCCESS = "partial_success"
+    FAILED = "failed"
+    CANCELLED = "cancelled"
+
+
+class WorkerError(ResearchModel):
+    """公开错误摘要；不保存异常正文、提示词或模型内部推理。"""
+
+    code: NonEmpty
+    message: NonEmpty
+    requirement_ids: list[NonEmpty] = Field(default_factory=list)
+    details: dict[str, JsonValue] | None = None
+
+
+class WorkerTrace(ResearchModel):
+    worker_task_id: NonEmpty
+    paper_id: NonEmpty
+    requirement_count: int = Field(ge=1)
+    resolved_count: int = Field(ge=0)
+    status: WorkerStatus
+    tool_calls: int = Field(default=0, ge=0)
+    model_calls: int = Field(default=0, ge=0)
+    llm_calls: int = Field(default=0, ge=0)
+    vlm_tool_attempts: int = Field(default=0, ge=0)
+    retry_count: int = Field(default=0, ge=0)
+    # 分母统计逻辑依赖调用；物理重试次数单独计数。
+    dependency_calls: int = Field(default=0, ge=0)
+    retried_dependency_calls: int = Field(default=0, ge=0)
+    latency_ms: float = Field(default=0, ge=0)
+    # 只保存工具/需求更新的公开动作；调用方须脱敏，不保存模型推理。
+    actions: list[dict[str, JsonValue]] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def count_invariants(self):
+        if self.resolved_count > self.requirement_count:
+            raise ValueError("Resolved count exceeds requirement count")
+        if self.retried_dependency_calls > self.dependency_calls:
+            raise ValueError("Retried calls exceed logical dependency calls")
+        if self.retried_dependency_calls > self.retry_count:
+            raise ValueError("Retried calls exceed physical retry attempts")
+        return self
+
+
+class WorkerResult(ResearchModel):
+    worker_task_id: NonEmpty
+    paper_id: NonEmpty
+    status: WorkerStatus
+    requirements: list[EvidenceRequirement] = Field(min_length=1)
+    error: WorkerError | None = None
+    attempts: int = Field(default=1, ge=0)
+    latency_ms: float = Field(default=0, ge=0)
+    trace: WorkerTrace | None = None
+
+    @model_validator(mode="after")
+    def execution_invariants(self):
+        ids = [item.requirement_id for item in self.requirements]
+        if len(ids) != len(set(ids)):
+            raise ValueError("Duplicate worker result requirement")
+        if any(item.paper_id != self.paper_id for item in self.requirements):
+            raise ValueError("Worker result requirements must belong to one paper")
+        if any(item.status == RequirementStatus.PENDING for item in self.requirements):
+            raise ValueError("Worker result cannot retain pending requirements")
+        resolved = sum(
+            item.status
+            in (RequirementStatus.SUPPORTED, RequirementStatus.INSUFFICIENT_EVIDENCE)
+            for item in self.requirements
+        )
+        if self.status == WorkerStatus.COMPLETED and resolved != len(self.requirements):
+            raise ValueError("Completed worker needs every requirement resolved")
+        if self.status == WorkerStatus.PARTIAL_SUCCESS and not (
+            0 < resolved < len(self.requirements)
+        ):
+            raise ValueError("Partial success needs resolved and failed requirements")
+        if self.status == WorkerStatus.FAILED and resolved:
+            raise ValueError("Failed worker cannot contain resolved requirements")
+        if self.status == WorkerStatus.CANCELLED and not any(
+            item.status == RequirementStatus.CANCELLED for item in self.requirements
+        ):
+            raise ValueError("Cancelled worker needs a cancelled requirement")
+        if self.trace is not None and (
+            self.trace.worker_task_id != self.worker_task_id
+            or self.trace.paper_id != self.paper_id
+            or self.trace.status != self.status
+            or self.trace.requirement_count != len(self.requirements)
+            or self.trace.resolved_count != resolved
+        ):
+            raise ValueError("Worker trace does not match result")
+        return self
+
+
+class OrchestratorTrace(ResearchModel):
+    """池级公开计数；不包含 Worker 提示词或研究过程的隐藏推理。"""
+
+    worker_task_count: int = Field(ge=0)
+    completed_count: int = Field(default=0, ge=0)
+    partial_success_count: int = Field(default=0, ge=0)
+    failed_count: int = Field(default=0, ge=0)
+    cancelled_count: int = Field(default=0, ge=0)
+    peak_worker_concurrency: int = Field(default=0, ge=0)
+    peak_llm_concurrency: int = Field(default=0, ge=0)
+    peak_vlm_concurrency: int = Field(default=0, ge=0)
+    peak_retrieval_concurrency: int = Field(default=0, ge=0)
+    total_latency_ms: float = Field(default=0, ge=0)
+    resolution_rate: float = Field(default=0, ge=0, le=1)
+    coverage: float = Field(default=0, ge=0, le=1)
+    worker_success_rate: float = Field(default=0, ge=0, le=1)
+    partial_failure_rate: float = Field(default=0, ge=0, le=1)
+    retry_rate: float = Field(default=0, ge=0, le=1)
+    dependency_calls: int = Field(default=0, ge=0)
+    retried_dependency_calls: int = Field(default=0, ge=0)
+    retry_count: int = Field(default=0, ge=0)
