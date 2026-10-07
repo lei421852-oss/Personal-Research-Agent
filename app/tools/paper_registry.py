@@ -15,6 +15,7 @@ def create_paper_registry(
     analyzer: FigureAnalyzer | None = None,
     paper_retriever=None,
     paper_catalog=None,
+    query_expander=None,
 ) -> ToolRegistry:
     if paper_catalog is None:
         papers = PaperEvidenceRepository(corpus)
@@ -36,6 +37,12 @@ def create_paper_registry(
                 paper_retriever, paper_catalog, [m.paper_id for m in corpus.metadata]
             )
         )
+    if query_expander is not None:
+        if paper_retriever is None:
+            raise ValueError("Query expansion requires paper discovery")
+        from app.tools.expansion import ExpandSearchQueryTool
+
+        registry.register(ExpandSearchQueryTool(query_expander))
     registry.register(FindFigureTool(papers))
     registry.register(ReadPageTool(papers))
     if analyzer is not None:

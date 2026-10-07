@@ -2,13 +2,22 @@
 
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, JsonValue, model_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    JsonValue,
+    model_serializer,
+    model_validator,
+)
 
 from app.evidence.models import NonEmpty
 
 Status = Literal["success", "empty", "error"]
 IssueCode = Literal[
     "redundant_action",
+    "expansion_budget_exceeded",
+    "invalid_expansion",
     "invalid_arguments",
     "unknown_paper",
     "empty_result",
@@ -85,4 +94,13 @@ class ToolExecutionTrace(BaseModel):
     status: Status
     latency_ms: float = Field(ge=0, allow_inf_nan=False)
     result_count: int = Field(ge=0)
+    retrieved_paper_ids: list[NonEmpty] = Field(default_factory=list)
     failure: dict[str, JsonValue] | None = None
+
+    @model_serializer(mode="wrap")
+    def omit_empty_paper_ids(self, handler):
+        # 仅论文发现 Trace 增加来源字段；保持旧文本/图像工具的序列化契约。
+        data = handler(self)
+        if not self.retrieved_paper_ids:
+            data.pop("retrieved_paper_ids", None)
+        return data

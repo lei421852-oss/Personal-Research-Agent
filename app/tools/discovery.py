@@ -54,7 +54,11 @@ class SearchPapersTool(Tool[SearchPapersInput, ToolObservation]):
             status="success" if candidates else "empty",
             tool_name=self.name,
             summary=f"Discovered {len(candidates)} candidate papers; metadata is not citable evidence.",
-            payload={"papers": candidates},
+            payload={
+                "query": arguments.query,
+                "top_k": arguments.top_k,
+                "papers": candidates,
+            },
             issue=None
             if candidates
             else ObservationIssue(code="empty_result", retryable=False),

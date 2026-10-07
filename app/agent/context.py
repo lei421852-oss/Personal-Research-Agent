@@ -1,5 +1,8 @@
 """从现有状态派生模型可见的决策上下文，不另建状态，也不代替模型判断证据充分性。"""
 
+from app.agent.query_guard import approved_queries, expansion_calls_used
+from app.papers.candidates import paper_searches, union_candidates
+from app.papers.expansion import MAX_EXPANDED_QUERIES, MAX_EXPANSION_CALLS
 from app.tools.redaction import public_value
 
 EVIDENCE_SUMMARY_CHARS = 400
@@ -24,13 +27,15 @@ def build_decision_context(state, resolver):
             "question": state.question,
             "available_papers": resolver.paper_catalog,
             "observed_evidence": evidence,
-            "discovered_papers": [
-                candidate
-                for observation in state.observations
-                if observation.tool_name == "search_papers"
-                and observation.status == "success"
-                for candidate in observation.payload.get("papers", [])
-            ],
+            "discovered_papers": union_candidates(state.observations),
+            "paper_searches": paper_searches(state.observations),
+            "query_expansion": {
+                "original_query": state.question,
+                "calls_used": expansion_calls_used(state),
+                "calls_remaining": MAX_EXPANSION_CALLS - expansion_calls_used(state),
+                "max_expanded_queries": MAX_EXPANDED_QUERIES,
+                "approved_queries": approved_queries(state),
+            },
             "previous_actions": state.model_actions,
             "previous_failures": [
                 o.model_dump(mode="json")

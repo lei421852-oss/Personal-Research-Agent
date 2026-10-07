@@ -48,6 +48,9 @@ class AgentAPIRuntime:
         with ExitStack() as stack:
             llm, vision = self.client_factory(stack)
             counted = CountingVisionClient(vision)
+            from app.papers.expansion import QueryExpander
+
+            expander = QueryExpander(llm) if self.paper_retriever is not None else None
             executor = ToolExecutor(
                 create_paper_registry(
                     self.corpus,
@@ -55,6 +58,7 @@ class AgentAPIRuntime:
                     analyzer=FigureAnalyzer(counted),
                     paper_retriever=self.paper_retriever,
                     paper_catalog=self.paper_catalog,
+                    query_expander=expander,
                 )
             )
             result = BoundedToolAgent(
@@ -63,7 +67,12 @@ class AgentAPIRuntime:
                 EvidenceResolver(self.corpus, paper_catalog=self.paper_catalog),
             ).run(question)
             return map_agent_result(
-                result,
+                result.model_copy(
+                    update={
+                        "model_calls": result.model_calls
+                        + (expander.calls if expander else 0)
+                    }
+                ),
                 self.corpus,
                 vlm_calls=counted.calls,
                 retrieval_mode=self.retrieval_mode,

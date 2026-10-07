@@ -104,6 +104,7 @@ def map_agent_result(
                 status=trace.status if trace else observation["status"],
                 latency_ms=trace.latency_ms if trace else None,
                 evidence_ids=ids,
+                retrieved_paper_ids=trace.retrieved_paper_ids if trace else [],
                 failure=public_failure(
                     trace.failure if trace else payload.get("failure")
                 ),

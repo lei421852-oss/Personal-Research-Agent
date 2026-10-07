@@ -12,6 +12,7 @@ from app.evidence.citations import CitationValidationError
 from app.evidence.errors import EvidenceDependencyError, UnknownPaperError
 from app.evidence.resolver import EvidenceResolutionError
 from app.papers.evidence_access import PaperEvidenceUnavailable
+from app.papers.expansion import QueryExpansionError
 from app.retrieval.errors import RetrievalDependencyError
 from app.tools.errors import DependencyFailure
 from app.tools.observations import ObservationIssue, ToolExecutionTrace, ToolObservation
@@ -72,6 +73,13 @@ class ToolExecutor:
                 else "Arguments do not satisfy this tool's schema."
             )
             observation = self._error(safe_name, code, summary)
+        except QueryExpansionError as exc:
+            failure_exc = exc
+            observation = self._error(
+                safe_name,
+                "invalid_expansion",
+                "Expansion output violated the original-query, nonempty or duplicate constraints.",
+            )
         except EvidenceResolutionError as exc:
             failure_exc = exc
             observation = self._error(
@@ -149,6 +157,14 @@ class ToolExecutor:
                 status=observation.status,
                 latency_ms=(perf_counter() - started) * 1000,
                 result_count=observation.result_count,
+                retrieved_paper_ids=[
+                    p["paper_id"]
+                    for p in observation.payload.get("papers", [])
+                    if observation.status == "success"
+                    and isinstance(p, dict)
+                    and isinstance(p.get("paper_id"), str)
+                    and p["paper_id"].strip()
+                ],
                 failure=observation.payload.get("failure"),
             )
         )

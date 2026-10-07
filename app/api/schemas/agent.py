@@ -1,6 +1,13 @@
 from typing import Annotated, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, JsonValue, StrictStr
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    JsonValue,
+    StrictStr,
+    model_serializer,
+)
 
 
 class DTO(BaseModel):
@@ -26,7 +33,15 @@ class TraceStepDTO(DTO):
     status: Literal["success", "empty", "error"]
     latency_ms: float | None = Field(default=None, ge=0, allow_inf_nan=False)
     evidence_ids: list[str]
+    retrieved_paper_ids: list[str] = Field(default_factory=list)
     failure: dict[str, JsonValue] | None = None
+
+    @model_serializer(mode="wrap")
+    def omit_empty_paper_ids(self, handler):
+        data = handler(self)
+        if not self.retrieved_paper_ids:
+            data.pop("retrieved_paper_ids", None)
+        return data
 
 
 class AnalysisDTO(DTO):

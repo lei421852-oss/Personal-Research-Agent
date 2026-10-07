@@ -12,7 +12,7 @@
 | **Understand · 读图** | 将 Figure、caption 与已准备的页面文本一起交给 VLM，分开记录观察与解释 |
 | **Decide · 选动作** | 模型看到每轮 Observation 后，自主选择工具、补充上下文或调用 `finish` |
 
-**当前规模：25 篇论文发现元数据；其中 3 篇具备 25 条 TextEvidence、3 条 FigureEvidence。V0.1 冻结评测集仍为 40 题。** V0.1 基线为 **257 passed**；当前全量 **284 passed**（2026-10-07）。真实 Demo 与模拟验证分别标记；完整三系统正式比较尚未完成。
+**当前规模：25 篇论文发现元数据；其中 3 篇具备 25 条 TextEvidence、3 条 FigureEvidence。V0.1 冻结评测集仍为 40 题。** V0.1 基线为 **257 passed**；当前全量 **306 passed**（2026-10-07）。真实 Demo 与模拟验证分别标记；完整三系统正式比较尚未完成。
 
 快速阅读：[架构](#系统架构) · [三个-demo](#三个-demo) · [失败分析](#失败分析) · [快速开始](#快速开始) · [限制](#当前限制)
 
@@ -29,6 +29,14 @@ python -m eval.paper_discovery --output artifacts/paper-discovery-evaluation.jso
 ```
 
 索引就绪后在 `.env` 设置 `AGENT_PAPER_DISCOVERY=1` 并重启服务；默认 0 保留 V0.1 模式。不引入 Multi-Agent/Planner/Reviewer 或并发运行时。
+
+## 智能体控制的多查询发现
+
+新增 `expand_search_query`：只生成最多两条保持原意的检索查询，不自动检索。每请求最多调用一次，由模型根据原查询的 Observation 判断是否需要；Controller 只验证参数、重复与预算。
+候选按 paper_id 取并集，Trace 的 retrieved_paper_ids 保留 Query → Papers 关系，不混入 Evidence 引用。
+
+完全相同的 Phase 1 八题真实评测中，ExpansionRate=37.5%，额外 26 次 LLM / 4 次 Embedding 调用，Recall@5/10 仍为 0.8708/0.8958；InstructBLIP 和 OFA 未被新增查询召回。固定 shortlist 与各查询并集覆盖分开统计，没有包装为提升。
+详见 [多查询发现设计、指标与真实结果](docs/query-expansion.md)。
 
 ## 为什么做这个项目？
 
@@ -65,7 +73,7 @@ flowchart TB
         AG --- C
     end
     subgraph T[Tool / Capability Layer · 工具与能力]
-        TOOLS[search_papers / search_text / find_figure / read_page / analyze_figure]
+        TOOLS[expand_search_query / search_papers / search_text / find_figure / read_page / analyze_figure]
         F[finish · 终止动作]
     end
     subgraph E[Evidence Layer · 证据]
@@ -219,7 +227,7 @@ Decision Context 提供 metadata 派生的 Corpus Catalog；模型按工具契�
 
 ### 4. Bounded Execution
 
-默认最多 **6 次领域工具执行、7 次模型决策**，包含最后一次 finish 机会。拦截请求占决策机会而不占工具执行预算。相同参数连续失败还有单独的停止保护。
+默认最多 **6 次工具执行、7 次主策略模型决策**，包含最后一次 finish 机会。查询生成最多额外一次 LLM 请求，单独计数且计入总模型调用指标。拦截请求占决策机会而不占工具执行预算。相同参数连续失败还有单独的停止保护。
 
 近重复搜索只比较本轮成功取得证据的搜索：规范化 query、同论文 scope、同 K，Jaccard 阈值为 0.85；改变 scope/K 或明显不同信息需求可继续执行。不自动 finish，也不使用 Embedding 判重复。
 
@@ -380,7 +388,7 @@ python -m scripts.demo_day5 --output-dir artifacts
 1. **语料受控**：发现目录有 25 篇，但正文仍仅 3 篇论文、人工选择的页面区域；`read_page` 不是整页或任意 PDF 阅读器。
 2. **Figure 人工准备**：每篇 1 张关键图，裁剪与图注由固定版本配置并人工检查；无任意 PDF 自动 Figure Extraction。
 3. **没有图像向量检索**：Figure 主要按论文 ID 与图编号定位，返回 caption；没有任意图片相似度搜索或跨模态向量排名。
-4. **动作空间有限**：V0.1 使用四个领域工具和 finish；V0.2 显式启用后增加 search_papers。calculator 不属于论文 Agent 动作集。
+4. **动作空间有限**：V0.1 使用四个领域工具和 finish；V0.2 显式启用论文发现后增加 search_papers 和受限的 expand_search_query。calculator 不属于论文 Agent 动作集。
 5. **有限步不保证成功**：可能协议失败、依赖失败、重复失败或预算耗尽；严格引用校验不保证语义正确。
 6. **单 Agent**：没有 Multi-Agent、Planner/Executor 双 Agent 或 LangGraph Runtime。
 7. **检索模式需区分**：默认演示是受控检索；真实 Embedding/Chroma 必须显式安装、ingest 并启用。
