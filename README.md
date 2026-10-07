@@ -12,7 +12,7 @@
 | **Understand · 读图** | 将 Figure、caption 与已准备的页面文本一起交给 VLM，分开记录观察与解释 |
 | **Decide · 选动作** | 模型看到每轮 Observation 后，自主选择工具、补充上下文或调用 `finish` |
 
-**当前规模：25 篇论文发现元数据；其中 3 篇具备 25 条 TextEvidence、3 条 FigureEvidence。V0.1 冻结评测集仍为 40 题。** V0.1 基线为 **257 passed**；当前全量 **372 passed**（2026-10-07）。真实 Demo 与模拟验证分别标记；完整三系统正式比较尚未完成。
+**当前规模：25 篇论文发现元数据；其中 3 篇具备 25 条 TextEvidence、3 条 FigureEvidence。V0.1 冻结评测集仍为 40 题。** V0.1 基线为 **257 passed**；当前全量 **473 passed**（2026-10-08）。真实 Demo 与模拟验证分别标记；完整三系统正式比较尚未完成。
 
 快速阅读：[架构](#系统架构) · [三个-demo](#三个-demo) · [失败分析](#失败分析) · [快速开始](#快速开始) · [限制](#当前限制)
 
@@ -64,6 +64,21 @@ python -m scripts.smoke_research_planner --env-file .env \
 ```
 
 最终三个真实 smoke 分别生成 5/5/4 个维度、15/15/8 条需求和 3/3/2 个 WorkerTask，每题一次模型调用。窄成本问题没有独立的下游性能维度；广问题的描述仍含可能引导答案的例子，记录为语义警告。该验证不等于 Worker 执行或中立性的普遍保证。详见 [Planner 契约与真实验收](docs/research-planner.md)。
+
+## 有界异步 Research Worker Pool
+
+已有 ResearchPlan 可展开为逐论文 WorkerTask，再由 `AsyncResearchOrchestrator` 并发执行。每个 Worker 在共享论文上下文中逐项或批量解决需求，复用已观察证据；没有为每条需求重启 Agent。`supported / insufficient_evidence` 是研究结果，`execution_failed / cancelled` 保留执行故障和取消语义。
+
+Worker 槽、LLM/VLM/Retrieval 资源槽分别限流。同步 Provider 和冻结 ToolExecutor 在集中线程适配边界调用，原生 async 直接 await；只有明确瞬态故障进行有界重试。取消沿 asyncio Task 传播，保存已有结果并重新抛出 CancelledError；取消线程等待不保证线程立即停止。
+
+```bash
+# 复用已生成的 Planner 结果；本阶段没有代使用者执行真实 Worker smoke。
+python -m scripts.smoke_async_research --plan artifacts/research-planner-smoke.json \
+  --case-id planner-smoke-01 --validate-only --output artifacts/worker-plan-validation.json
+# 去掉 --validate-only 后才会调用真实模型并执行 Worker。
+```
+
+本阶段新增 101 项 Fake/确定性测试，包括 10 Workers / 上限 3 的真实重叠、独立资源峰值、共享证据、故障隔离、取消、重试及物理预算。它们验证工程行为，不是正式研究性能结果。现有 API/UI 未切换到 Worker Pool，未实现 Reviewer 或跨论文 Synthesis。详见 [Worker Pool 接口、指标和真实运行方式](docs/async-research.md)。
 
 ## 为什么做这个项目？
 
