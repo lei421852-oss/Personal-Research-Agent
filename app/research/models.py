@@ -175,6 +175,8 @@ class WorkerTrace(ResearchModel):
     model_calls: int = Field(default=0, ge=0)
     llm_calls: int = Field(default=0, ge=0)
     vlm_tool_attempts: int = Field(default=0, ge=0)
+    # 已提供的策略纠正机会，独立于 Provider 的物理重试次数。
+    protocol_corrections: int = Field(default=0, ge=0)
     retry_count: int = Field(default=0, ge=0)
     # 分母统计逻辑依赖调用；物理重试次数单独计数。
     dependency_calls: int = Field(default=0, ge=0)

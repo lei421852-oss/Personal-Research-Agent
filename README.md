@@ -12,7 +12,7 @@
 | **Understand · 读图** | 将 Figure、caption 与已准备的页面文本一起交给 VLM，分开记录观察与解释 |
 | **Decide · 选动作** | 模型看到每轮 Observation 后，自主选择工具、补充上下文或调用 `finish` |
 
-**当前规模：25 篇论文发现元数据；其中 3 篇具备 25 条 TextEvidence、3 条 FigureEvidence。V0.1 冻结评测集仍为 40 题。** V0.1 基线为 **257 passed**；当前全量 **473 passed**（2026-10-08）。真实 Demo 与模拟验证分别标记；完整三系统正式比较尚未完成。
+**当前规模：25 篇论文发现元数据；其中 3 篇具备 25 条 TextEvidence、3 条 FigureEvidence。V0.1 冻结评测集仍为 40 题。** V0.1 基线为 **257 passed**；当前全量 **492 passed**（2026-10-08）。真实 Demo 与模拟验证分别标记；完整三系统正式比较尚未完成。
 
 快速阅读：[架构](#系统架构) · [三个-demo](#三个-demo) · [失败分析](#失败分析) · [快速开始](#快速开始) · [限制](#当前限制)
 
@@ -70,6 +70,8 @@ python -m scripts.smoke_research_planner --env-file .env \
 已有 ResearchPlan 可展开为逐论文 WorkerTask，再由 `AsyncResearchOrchestrator` 并发执行。每个 Worker 在共享论文上下文中逐项或批量解决需求，复用已观察证据；没有为每条需求重启 Agent。`supported / insufficient_evidence` 是研究结果，`execution_failed / cancelled` 保留执行故障和取消语义。
 
 Worker 槽、LLM/VLM/Retrieval 资源槽分别限流。同步 Provider 和冻结 ToolExecutor 在集中线程适配边界调用，原生 async 直接 await；只有明确瞬态故障进行有界重试。取消沿 asyncio Task 传播，保存已有结果并重新抛出 CancelledError；取消线程等待不保证线程立即停止。
+
+一次模型响应包含多个动作时，Controller 整批拒绝执行，将结构化协议反馈交给下一轮 Policy。每个 Worker 默认最多提供两次纠正机会；拒绝消耗模型预算，不消耗工具预算，纠正耗尽时保留已有结果。该机制独立于 Provider 的瞬态重试，另有 19 项确定性回归测试。
 
 ```bash
 # 复用已生成的 Planner 结果；本阶段没有代使用者执行真实 Worker smoke。

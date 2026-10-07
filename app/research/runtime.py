@@ -21,6 +21,8 @@ class ResearchRuntimeConfig(BaseModel):
     max_concurrent_retrieval: PositiveInt = 1
     max_tool_calls_per_worker: PositiveInt = 8
     max_model_calls_per_worker: PositiveInt = 20
+    # 策略协议纠正与依赖重试独立计数；0 表示不提供纠正机会。
+    max_protocol_corrections: Annotated[StrictInt, Field(ge=0)] = 2
     recent_observations: PositiveInt = 4
     max_context_evidence: PositiveInt = 20
     operation_timeout_seconds: float = Field(default=60, gt=0, allow_inf_nan=False)

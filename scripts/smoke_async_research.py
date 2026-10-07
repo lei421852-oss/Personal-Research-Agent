@@ -173,6 +173,7 @@ def main():
         "max-retrieval": "max_concurrent_retrieval",
         "max-tool-calls": "max_tool_calls_per_worker",
         "max-model-calls": "max_model_calls_per_worker",
+        "max-protocol-corrections": "max_protocol_corrections",
         "max-retries": "max_retries",
     }
     for flag in flags:

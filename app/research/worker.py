@@ -4,9 +4,9 @@ import asyncio
 import json
 from dataclasses import dataclass, field
 from time import perf_counter
-from typing import Literal
+from typing import Annotated, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, ValidationError
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, ValidationError
 
 from app.agent.errors import ToolNotFoundError
 from app.diagnostics import failure_details
@@ -78,15 +78,42 @@ class RequirementResolutions(BaseModel):
     )
 
 
+class ProtocolViolationDetails(BaseModel):
+    """只描述公开协议违规事实，不保存被拒绝的动作或模型推理。"""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+    issue_code: Literal["multiple_actions"] = "multiple_actions"
+    expected: Literal["exactly_one_action"] = "exactly_one_action"
+    actual_action_count: Annotated[StrictInt, Field(gt=1)]
+    recovery_instruction: NonEmpty = (
+        "Choose exactly one action using the existing evidence and requirements. "
+        "No rejected actions were executed. Wait for its observation before choosing another."
+    )
+
+
+class ProtocolViolationObservation(BaseModel):
+    """Worker 本地策略反馈；与工具失败及 Provider 重试保持独立。"""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+    status: Literal["error"] = "error"
+    tool_name: Literal["worker_policy"] = "worker_policy"
+    summary: NonEmpty = "Policy response rejected: multiple actions were requested; no actions were executed."
+    payload: ProtocolViolationDetails
+
+
 @dataclass
 class WorkerState:
     paper_id: str
     requirements: list[EvidenceRequirement]
-    observations: list[ToolObservation] = field(default_factory=list)
+    observations: list[ToolObservation | ProtocolViolationObservation] = field(
+        default_factory=list
+    )
     collected_evidence: dict[str, dict] = field(default_factory=dict)
     actions: list[dict] = field(default_factory=list)
     executed_actions: set[str] = field(default_factory=set)
     vlm_attempts: int = 0
+    protocol_corrections_used: int = 0
+    awaiting_protocol_recovery: bool = False
 
 
 def compact_value(value):
@@ -210,6 +237,8 @@ class PaperResearchWorker:
                 - counts["tool_calls"],
                 "model_calls": self.config.max_model_calls_per_worker
                 - counts["model_calls"],
+                "protocol_corrections": self.config.max_protocol_corrections
+                - state.protocol_corrections_used,
             },
         }
 
@@ -376,6 +405,7 @@ class PaperResearchWorker:
             status=draft.status,
             latency_ms=draft.latency_ms,
             actions=public_value(self.state.actions),
+            protocol_corrections=self.state.protocol_corrections_used,
             **self._counts(),
         )
         result = WorkerResult.model_validate(draft.model_dump() | {"trace": trace})
@@ -463,6 +493,7 @@ class PaperResearchWorker:
                             message="Worker model-call budget exhausted.",
                         ),
                     )
+                decision_started = self.clock()
                 response = await self.llm.complete(
                     messages=[
                         {"role": "system", "content": WORKER_POLICY},
@@ -476,7 +507,56 @@ class PaperResearchWorker:
                     tools=self._schemas(),
                     attempt_budget=remaining,
                 )
-                if len(response.tool_calls) != 1:
+                action_count = len(response.tool_calls)
+                if action_count > 1:
+                    observation = ProtocolViolationObservation(
+                        payload=ProtocolViolationDetails(
+                            actual_action_count=action_count
+                        )
+                    )
+                    self._remember(observation)
+                    exhausted = (
+                        self.state.protocol_corrections_used
+                        >= self.config.max_protocol_corrections
+                    )
+                    if not exhausted:
+                        self.state.protocol_corrections_used += 1
+                    self.state.actions.append(
+                        {
+                            "step": len(self.state.actions) + 1,
+                            "tool_name": observation.tool_name,
+                            "status": "rejected",
+                            "execution_status": "not_executed",
+                            "summary": observation.summary,
+                            **observation.payload.model_dump(mode="json"),
+                            "correction_allowed": not exhausted,
+                            "protocol_corrections": self.state.protocol_corrections_used,
+                            "model_calls": self._counts()["model_calls"],
+                            "tool_calls": self._counts()["tool_calls"],
+                            "latency_ms": max(
+                                0, (self.clock() - decision_started) * 1000
+                            ),
+                        }
+                    )
+                    if exhausted:
+                        return self._result(
+                            task,
+                            started,
+                            error=WorkerError(
+                                code="protocol_correction_exhausted",
+                                message="Worker policy exhausted its multiple-action correction allowance.",
+                                details={
+                                    "issue_code": "multiple_actions",
+                                    "actual_action_count": action_count,
+                                    "max_protocol_corrections": self.config.max_protocol_corrections,
+                                    "protocol_corrections_used": self.state.protocol_corrections_used,
+                                },
+                            ),
+                        )
+                    self.state.awaiting_protocol_recovery = True
+                    # 不解析任何被拒绝动作；下一轮由 Policy 读取反馈后重新选择。
+                    continue
+                if action_count != 1:
                     return self._result(
                         task,
                         started,
@@ -486,6 +566,8 @@ class PaperResearchWorker:
                         ),
                     )
                 action = response.tool_calls[0]
+                protocol_recovery = self.state.awaiting_protocol_recovery
+                self.state.awaiting_protocol_recovery = False
                 action_started = self.clock()
                 try:
                     if action.name in {"resolve_requirement", "resolve_requirements"}:
@@ -593,6 +675,7 @@ class PaperResearchWorker:
                                 action.name, action.arguments
                             ),
                             "status": observation.status,
+                            "protocol_recovery": protocol_recovery,
                             "summary": observation.summary,
                             "issue_code": observation.issue.code
                             if observation.issue

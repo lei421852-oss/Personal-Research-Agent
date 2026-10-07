@@ -56,6 +56,7 @@ insufficient_evidence 是合法 resolved 结果，无 claim/证据。模型/工�
 | max_concurrent_retrieval | 1 |
 | max_tool_calls_per_worker | 8 |
 | max_model_calls_per_worker | 20 |
+| max_protocol_corrections | 2 |
 | recent_observations | 4 |
 | max_context_evidence | 20 |
 | operation_timeout_seconds | 60 |
@@ -66,6 +67,18 @@ insufficient_evidence 是合法 resolved 结果，无 claim/证据。模型/工�
 模型只接收未解决问题、已解决摘要、去重证据引用和最近 Observation，不接收无限增长的完整对话。上下文字符串副本有长度限制，原证据和最终 claim 不被截断。相同成功/空 lookup 不再次执行，通过 redundant_action 反馈让模型改动或复用。
 
 tool_calls 统计进入 ToolExecutor 的物理执行尝试，重试也消耗工具预算；Controller 拒绝的参数和需求更新不计工具调用。model_calls 是保守的模型预算计数：LLM 适配调用 + analyze_figure 执行尝试，分别提供 llm_calls、vlm_tool_attempts。VLM 预处理可能在实际 client 调用前失败，因此这些数不是 Provider 计费次数；取消结果也是当时快照。VLM 重试同时受剩余模型/工具预算限制。
+
+## 策略协议自纠错
+
+Controller 每个决策步仍要求 exactly one action。一次响应中的多个动作整批拒绝，不选择第一个，不解析或执行其中任何工具和需求更新。零动作响应保留原来的 protocol_failure 终止语义。
+
+多动作拒绝产生 Worker 本地的 ProtocolViolationObservation，保留 status/tool_name/summary/payload 封装；payload 明确包含 issue_code=multiple_actions、expected=exactly_one_action、actual_action_count 和简短 recovery_instruction。它进入下一轮 Decision Context 的 recent_observations；由 LLM 自行选择一个新动作，Controller 不替它做选择。
+
+max_protocol_corrections 默认 2，表示每个 Worker 累计最多提供两次反馈后的纠正机会；第三次多动作以 protocol_correction_exhausted 终止。0 表示首次违规立即终止。合法动作不会重置纠正计数，remaining_budget.protocol_corrections 显示剩余额度。原模型预算依然是硬上限，每次被拒绝的响应已经消耗模型调用；不会额外赠送模型额度，也不消耗工具额度。
+
+Trace 拒绝条目包含 status=rejected、execution_status=not_executed、issue_code、实际动作数和预算快照；随后第一个合法单动作标记 protocol_recovery=true，表示动作数量已恢复合规，具体业务结果仍由该动作的 status 表达。WorkerTrace.protocol_corrections 单独统计已提供的纠正机会，不包含超限后最后一次拒绝，不计入 RetryRate/retry_count。不保存模型 response.content、被拒绝动作列表或隐藏思维链。
+
+纠正额度或模型预算耗尽后，只将尚未解决的需求标为 execution_failed；已经 supported/insufficient_evidence 的结果继续保留，按已有规则返回 partial_success 或 failed。该机制是 Agent Policy Recovery，不调用 HTTP/Provider RetryPolicy；瞬态重试、Semaphore、线程 offload、超时和取消逻辑保持原样。
 
 ## 重试和取消
 
@@ -101,7 +114,7 @@ python -m scripts.smoke_async_research --plan artifacts/research-planner-smoke.j
   --output artifacts/async-research-smoke.json
 ```
 
-其他可调 CLI 参数包括 --max-tool-calls、--max-model-calls、--max-retries、--operation-timeout。输出 Worker/requirement 状态、证据 IDs、预算/重试/错误、Worker 和资源 peaks 及延迟。
+其他可调 CLI 参数包括 --max-tool-calls、--max-model-calls、--max-protocol-corrections、--max-retries、--operation-timeout。输出 Worker/requirement 状态、证据 IDs、预算/重试/错误、Worker 和资源 peaks 及延迟。
 
 serial_estimated_latency_ms 是并行运行中各 Worker latency 的和，包含资源队列等待；actual_parallel_latency_ms 是池执行耗时。前者是代理估计，不是另跑一次串行实验，不可据此声称正式性能提升。默认 BLIP-2/LLaVA 只有发现元数据，没有 prepared 正文/图像；它们可以完成为 insufficient，不能产生伪引用。
 
@@ -109,6 +122,8 @@ serial_estimated_latency_ms 是并行运行中各 Worker latency 的和，包含
 
 ResolutionRate=resolved requirements/total；Coverage=supported/total；WorkerSuccessRate=completed workers/total；PartialFailureRate=(partial_success+failed)/total。取消 Worker 不归入 partial failure 分子，但仍在总 Worker 分母。RetryRate=发生重试的逻辑依赖调用/全部逻辑依赖调用，物理 retry_count 单独记录。
 
-新增 101 项 Fake/确定性测试，原有 372 项保留，全量 473 passed。事件屏障验证 10 tasks / cap=3 真重叠及独立 Worker/resource caps，覆盖 shared evidence、scope/citation、原子 batch、partial failure、瞬态/永久重试、注入式退避、物理预算、取消和线程资源槽保留。不依赖真实模型或实际退避 sleep。Ruff、formatter 和冻结文件校验通过。
+Worker Pool 初始实现新增 101 项 Fake/确定性测试，原有 372 项保留，当时全量 473 passed。事件屏障验证 10 tasks / cap=3 真重叠及独立 Worker/resource caps，覆盖 shared evidence、scope/citation、原子 batch、partial failure、瞬态/永久重试、注入式退避、物理预算、取消和线程资源槽保留。不依赖真实模型或实际退避 sleep。
 
-本次仅验证真实 Runner 的计划模式，没有执行真实 Worker smoke、正式研究实验或 Benchmark。没有 Reviewer、Synthesis、跨论文答案、Checkpoint、消息队列、ProcessPool 或新检索算法。
+协议恢复修复另增 19 项确定性测试，原有 473 项全部保留，当前全量 492 passed。覆盖多动作拒绝到单动作恢复、纠正次数耗尽、模型预算优先、工具预算不扣、多动作 resolution 无副作用、已有结果保留、上下文反馈和公开 Trace 安全性。Ruff、147 个 Python 文件格式检查、97 个冻结文件指纹以及原 Planner 的 11 个模型 AST 比对通过。
+
+Worker Pool 初始验收仅验证真实 Runner 的计划模式；本次协议恢复采用 Fake/确定性验证，没有重跑真实 Worker smoke、正式研究实验或 Benchmark。真实模型收到反馈后是否恢复合规仍需由真实 Smoke 确认。没有 Reviewer、Synthesis、跨论文答案、Checkpoint、消息队列、ProcessPool 或新检索算法。
