@@ -4,7 +4,7 @@
 
 > A bounded multimodal research agent that retrieves, analyzes, and reasons over text and figures in scientific papers with traceable evidence.
 
-这是面向 **CLIP、BLIP、Flamingo 三篇论文的证据约束问答与 Agent 决策原型**。V0.1 已封板；V0.2 增加论文发现、模型控制的查询扩展及离线论文画像，它不是通用自主科研系统。
+这是面向 **CLIP、BLIP、Flamingo 三篇论文的证据约束问答与 Agent 决策原型**。V0.1 已封板；V0.2 增加论文发现、模型控制的查询扩展、离线论文画像和独立研究规划，它不是通用自主科研系统。
 
 | 核心能力 | 如何体现 |
 | --- | --- |
@@ -12,7 +12,7 @@
 | **Understand · 读图** | 将 Figure、caption 与已准备的页面文本一起交给 VLM，分开记录观察与解释 |
 | **Decide · 选动作** | 模型看到每轮 Observation 后，自主选择工具、补充上下文或调用 `finish` |
 
-**当前规模：25 篇论文发现元数据；其中 3 篇具备 25 条 TextEvidence、3 条 FigureEvidence。V0.1 冻结评测集仍为 40 题。** V0.1 基线为 **257 passed**；当前全量 **328 passed**（2026-10-07）。真实 Demo 与模拟验证分别标记；完整三系统正式比较尚未完成。
+**当前规模：25 篇论文发现元数据；其中 3 篇具备 25 条 TextEvidence、3 条 FigureEvidence。V0.1 冻结评测集仍为 40 题。** V0.1 基线为 **257 passed**；当前全量 **372 passed**（2026-10-07）。真实 Demo 与模拟验证分别标记；完整三系统正式比较尚未完成。
 
 快速阅读：[架构](#系统架构) · [三个-demo](#三个-demo) · [失败分析](#失败分析) · [快速开始](#快速开始) · [限制](#当前限制)
 
@@ -51,6 +51,19 @@ python -m eval.paper_discovery --output artifacts/paper-discovery-enriched.json
 ```
 
 首次真实抽取：24/25 篇生成非空画像，1 篇校验失败回退；25 次 LLM 调用、约 43.99 秒。相同八题单查询 Top-10 评测中，Macro Recall@5 保持 87.08%，Recall@10 从 89.58% 到 95.83%；OFA 在 discovery-08 原查询下由第 13 名到第 7 名，InstructBLIP 在 discovery-03 仍为第 15 名。此比较同时改变字段标签和画像内容，未分别测量二者贡献，也不证明普遍性能提升。详见 [画像准备、复用和前后评测](docs/paper-profiles.md)。
+
+## 独立研究规划与证据需求
+
+`ResearchPlanner` 将问题与已验证的候选论文转换为最多 8 个动态研究维度，不预测论文答案。程序确定性展开 `Papers × Dimensions`，生成 pending 的 EvidenceRequirement，再按 paper_id 分成 WorkerTask；本阶段只生成任务，不执行 Worker，也未接入现有 API/Agent Loop。
+
+`supported` 必须有 claim 和 evidence_ids；`insufficient_evidence` 是已解决的合法结果。研究完成由所有需求 resolved 决定，Coverage 单独表示有证据支持的比例。Trace 记录数量、维度 ID、调用和安全失败详情，不保存系统提示或隐藏推理。
+
+```bash
+python -m scripts.smoke_research_planner --env-file .env \
+  --output artifacts/research-planner-smoke.json
+```
+
+最终三个真实 smoke 分别生成 5/5/4 个维度、15/15/8 条需求和 3/3/2 个 WorkerTask，每题一次模型调用。窄成本问题没有独立的下游性能维度；广问题的描述仍含可能引导答案的例子，记录为语义警告。该验证不等于 Worker 执行或中立性的普遍保证。详见 [Planner 契约与真实验收](docs/research-planner.md)。
 
 ## 为什么做这个项目？
 
@@ -293,6 +306,7 @@ Corpus Catalog → Decision Context → LLM 选择 CLIP ID
 ```text
 app/
 ├── papers/      # 论文领域模型、发现目录与独立索引
+├── research/    # 动态研究维度、证据需求、待执行任务及完成统计
 ├── agent/       # 有限步循环、决策上下文、恢复、finish
 ├── tools/       # 工具契约、注册、执行器、Observation
 ├── evidence/    # fixture、来源校验、证据解析与引用校验
