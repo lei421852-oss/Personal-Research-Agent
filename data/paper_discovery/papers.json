@@ -1,0 +1,645 @@
+{
+  "schema_version": 1,
+  "retrieval_text": "title + abstract + keywords",
+  "notes": [
+    "Titles, full author lists and submission years verified against fixed arXiv versions on 2026-10-07.",
+    "Abstract fields are concise source-based summaries, not verbatim original abstracts.",
+    "Venue denotes the verified preprint repository, not an inferred conference.",
+    "Keywords remain empty: no query answers or relevance labels added.",
+    "Metadata discovery does not imply prepared text or figure evidence."
+  ],
+  "papers": [
+    {
+      "name": "CLIP",
+      "source_url": "https://arxiv.org/abs/2103.00020v1",
+      "source_abstract_sha256": "f57ced1b7f2be5f0911d6e6dd5cd70629c794e5bd533811813cdb59fae0e0f92",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "clip-2103.00020v1",
+        "title": "Learning Transferable Visual Models From Natural Language Supervision",
+        "abstract": "CLIP learns transferable image representations from image-caption pairs. Pairing prediction provides natural-language supervision without fixing a predefined set of classes. After training, descriptions of classes support zero-shot transfer across a broad range of visual recognition tasks.",
+        "authors": [
+          "Alec Radford",
+          "Jong Wook Kim",
+          "Chris Hallacy",
+          "Aditya Ramesh",
+          "Gabriel Goh",
+          "Sandhini Agarwal",
+          "Girish Sastry",
+          "Amanda Askell",
+          "Pamela Mishkin",
+          "Jack Clark",
+          "Gretchen Krueger",
+          "Ilya Sutskever"
+        ],
+        "year": 2021,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "BLIP",
+      "source_url": "https://arxiv.org/abs/2201.12086v2",
+      "source_abstract_sha256": "c221ee6deaea9c98230183e42276b442ff0931f09a204082f47a05956ad52ed4",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "blip-2201.12086v2",
+        "title": "BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation",
+        "abstract": "BLIP addresses both discriminative understanding and text generation in vision-language pretraining. Its caption bootstrapping procedure creates synthetic descriptions and filters noisy captions from web image-text data. The framework transfers to retrieval, captioning, question answering, and video-language tasks.",
+        "authors": [
+          "Junnan Li",
+          "Dongxu Li",
+          "Caiming Xiong",
+          "Steven Hoi"
+        ],
+        "year": 2022,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "FLAMINGO",
+      "source_url": "https://arxiv.org/abs/2204.14198v1",
+      "source_abstract_sha256": "a8645fca5eeb94d73ce6bbbe836cebbc9f698a673d6c70138fed294fc1dbce63",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "flamingo-2204.14198v1",
+        "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+        "abstract": "Flamingo connects pretrained visual and language components to process images or videos interleaved with text. Training on multimodal web sequences enables adaptation from a small number of prompted examples. Evaluation covers image and video understanding, including visual questions and captions.",
+        "authors": [
+          "Jean-Baptiste Alayrac",
+          "Jeff Donahue",
+          "Pauline Luc",
+          "Antoine Miech",
+          "Iain Barr",
+          "Yana Hasson",
+          "Karel Lenc",
+          "Arthur Mensch",
+          "Katie Millican",
+          "Malcolm Reynolds",
+          "Roman Ring",
+          "Eliza Rutherford",
+          "Serkan Cabi",
+          "Tengda Han",
+          "Zhitao Gong",
+          "Sina Samangooei",
+          "Marianne Monteiro",
+          "Jacob Menick",
+          "Sebastian Borgeaud",
+          "Andrew Brock",
+          "Aida Nematzadeh",
+          "Sahand Sharifzadeh",
+          "Mikolaj Binkowski",
+          "Ricardo Barreira",
+          "Oriol Vinyals",
+          "Andrew Zisserman",
+          "Karen Simonyan"
+        ],
+        "year": 2022,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "BLIP-2",
+      "source_url": "https://arxiv.org/abs/2301.12597v1",
+      "source_abstract_sha256": "acafb45de060a7f1555d8b397b376a0359a265122a605d78b7390282f9916635",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "blip-2-2301.12597v1",
+        "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+        "abstract": "BLIP-2 reduces vision-language training costs by retaining pretrained image encoders and language models as frozen components. A lightweight querying Transformer bridges them through successive representation-learning and generative-training stages. The resulting model supports visual tasks and instruction-following image-to-text generation.",
+        "authors": [
+          "Junnan Li",
+          "Dongxu Li",
+          "Silvio Savarese",
+          "Steven Hoi"
+        ],
+        "year": 2023,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "FROZEN",
+      "source_url": "https://arxiv.org/abs/2106.13884v1",
+      "source_abstract_sha256": "a6cc568d34856be3d373563b2fbf6a6dcd646001d6452c46be17ec303bf26afd",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "frozen-2106.13884v1",
+        "title": "Multimodal Few-Shot Learning with Frozen Language Models",
+        "abstract": "Frozen transfers a pretrained language model’s few-example prompting ability to visual tasks. A trained image encoder supplies continuous visual prefixes while the language model weights stay unchanged. Interleaved visual and textual examples enable few-shot question answering, new visual concepts, and object-word learning.",
+        "authors": [
+          "Maria Tsimpoukelli",
+          "Jacob Menick",
+          "Serkan Cabi",
+          "S. M. Ali Eslami",
+          "Oriol Vinyals",
+          "Felix Hill"
+        ],
+        "year": 2021,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "LLAVA",
+      "source_url": "https://arxiv.org/abs/2304.08485v1",
+      "source_abstract_sha256": "6e2ab665ad9579be4b857ead1ff3f2dcded14d63b7713f3f04a214bab21da050",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "llava-2304.08485v1",
+        "title": "Visual Instruction Tuning",
+        "abstract": "LLaVA studies instruction tuning for visual-language assistants. Language-only GPT-4 is used to create image-related instruction data, and a visual encoder is connected to a language model and trained with these examples. Experiments examine multimodal dialogue and science question answering.",
+        "authors": [
+          "Haotian Liu",
+          "Chunyuan Li",
+          "Qingyang Wu",
+          "Yong Jae Lee"
+        ],
+        "year": 2023,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "MINIGPT-4",
+      "source_url": "https://arxiv.org/abs/2304.10592v1",
+      "source_abstract_sha256": "4773bcc301dc1b65bc61f22af6586bbf03b29bb73a2db0fc026bc9dd2136a8a8",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "minigpt-4-2304.10592v1",
+        "title": "MiniGPT-4: Enhancing Vision-Language Understanding with Advanced Large Language Models",
+        "abstract": "MiniGPT-4 connects a frozen visual encoder to a frozen Vicuna language model through a trainable projection. Initial image-caption training is followed by tuning on curated detailed descriptions to improve generation quality. Demonstrations include image description, image-based conversations, and interpreting handwritten drafts.",
+        "authors": [
+          "Deyao Zhu",
+          "Jun Chen",
+          "Xiaoqian Shen",
+          "Xiang Li",
+          "Mohamed Elhoseiny"
+        ],
+        "year": 2023,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "INSTRUCTBLIP",
+      "source_url": "https://arxiv.org/abs/2305.06500v1",
+      "source_abstract_sha256": "d7a2a63ca37c7f246bdf74d5559f56b22761496a4e899b9fbbd58689f8573c3d",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "instructblip-2305.06500v1",
+        "title": "InstructBLIP: Towards General-purpose Vision-Language Models with Instruction Tuning",
+        "abstract": "InstructBLIP investigates vision-language instruction tuning starting from BLIP-2. Public datasets are converted to instructions, with separate training and held-out task groups. Instruction-aware feature extraction adapts visual representations to the requested task. Evaluation emphasizes generalization to unseen tasks.",
+        "authors": [
+          "Wenliang Dai",
+          "Junnan Li",
+          "Dongxu Li",
+          "Anthony Meng Huat Tiong",
+          "Junqi Zhao",
+          "Weisheng Wang",
+          "Boyang Li",
+          "Pascale Fung",
+          "Steven Hoi"
+        ],
+        "year": 2023,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "ALBEF",
+      "source_url": "https://arxiv.org/abs/2107.07651v1",
+      "source_abstract_sha256": "efc7e3dc7b37d0fd8df9c1cd10a5b11d6447f977056f47167d6f9004953b9ee1",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "albef-2107.07651v1",
+        "title": "Align before Fuse: Vision and Language Representation Learning with Momentum Distillation",
+        "abstract": "ALBEF aligns image and text representations through contrastive learning before cross-modal fusion. Momentum distillation supplies soft targets to improve learning from noisy image-text pairs. The approach avoids object-region annotations and is evaluated on retrieval and visual-language reasoning tasks.",
+        "authors": [
+          "Junnan Li",
+          "Ramprasaath R. Selvaraju",
+          "Akhilesh Deepak Gotmare",
+          "Shafiq Joty",
+          "Caiming Xiong",
+          "Steven Hoi"
+        ],
+        "year": 2021,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "VILT",
+      "source_url": "https://arxiv.org/abs/2102.03334v1",
+      "source_abstract_sha256": "9799003130334e20027bd5ffc3ce2c0eebabe5e5fda2bb52c40c63316686c307",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "vilt-2102.03334v1",
+        "title": "ViLT: Vision-and-Language Transformer Without Convolution or Region Supervision",
+        "abstract": "ViLT simplifies visual-language pretraining by removing convolutional feature extraction and supervised object regions. Images and text enter a shared Transformer with minimal visual preprocessing. The work investigates how this design affects efficiency and downstream multimodal performance.",
+        "authors": [
+          "Wonjae Kim",
+          "Bokyung Son",
+          "Ildoo Kim"
+        ],
+        "year": 2021,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "ALIGN",
+      "source_url": "https://arxiv.org/abs/2102.05918v1",
+      "source_abstract_sha256": "a8e485a753771c77892bb81d48de8d5032a6278350e8b5cae4c52b513f85d613",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "align-2102.05918v1",
+        "title": "Scaling Up Visual and Vision-Language Representation Learning With Noisy Text Supervision",
+        "abstract": "ALIGN learns visual and textual representations from a large collection of noisy image alt-text pairs. A dual encoder uses contrastive supervision rather than costly curation of every pair. The representations support zero-shot classification and image-text retrieval.",
+        "authors": [
+          "Chao Jia",
+          "Yinfei Yang",
+          "Ye Xia",
+          "Yi-Ting Chen",
+          "Zarana Parekh",
+          "Hieu Pham",
+          "Quoc V. Le",
+          "Yunhsuan Sung",
+          "Zhen Li",
+          "Tom Duerig"
+        ],
+        "year": 2021,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "SIMVLM",
+      "source_url": "https://arxiv.org/abs/2108.10904v1",
+      "source_abstract_sha256": "4a6605d1557869a02d9dac075b57a510926b5267daba6a7623b3e038b68bd3dd",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "simvlm-2108.10904v1",
+        "title": "SimVLM: Simple Visual Language Model Pretraining with Weak Supervision",
+        "abstract": "SimVLM simplifies vision-language pretraining using weakly supervised data and a single prefix language-modeling objective. It avoids region labels and combinations of dataset-specific losses. The resulting pretrained model transfers to both discriminative and generative visual-language tasks.",
+        "authors": [
+          "Zirui Wang",
+          "Jiahui Yu",
+          "Adams Wei Yu",
+          "Zihang Dai",
+          "Yulia Tsvetkov",
+          "Yuan Cao"
+        ],
+        "year": 2021,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "VLMO",
+      "source_url": "https://arxiv.org/abs/2111.02358v1",
+      "source_abstract_sha256": "2d5d36d7d376cff16b6c5fa9cc62d99a1c59fb508a5ddedf70395bca3ae4787c",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "vlmo-2111.02358v1",
+        "title": "VLMo: Unified Vision-Language Pre-Training with Mixture-of-Modality-Experts",
+        "abstract": "VLMo uses modality-specific experts and shared self-attention within a modular Transformer. The same pretrained model can serve as a dual encoder for retrieval or a fusion encoder for classification. Stagewise training combines image-only, text-only, and paired data.",
+        "authors": [
+          "Wenhui Wang",
+          "Hangbo Bao",
+          "Li Dong",
+          "Furu Wei"
+        ],
+        "year": 2021,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "COCA",
+      "source_url": "https://arxiv.org/abs/2205.01917v1",
+      "source_abstract_sha256": "4ba2a3e70b65cd2c9a9604cf10ada13f642c46487f2bd613e8af4b1520e0c533",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "coca-2205.01917v1",
+        "title": "CoCa: Contrastive Captioners are Image-Text Foundation Models",
+        "abstract": "CoCa combines image-text contrastive learning and autoregressive captioning in an encoder-decoder model. Earlier decoder layers encode unimodal text, while later layers attend to images. Sharing computation between objectives supports recognition, retrieval, and generative visual-language tasks.",
+        "authors": [
+          "Jiahui Yu",
+          "Zirui Wang",
+          "Vijay Vasudevan",
+          "Legg Yeung",
+          "Mojtaba Seyedhosseini",
+          "Yonghui Wu"
+        ],
+        "year": 2022,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "PALI",
+      "source_url": "https://arxiv.org/abs/2209.06794v1",
+      "source_abstract_sha256": "a3d2d1f15c3288adec4ec3d97f542fb55feb9c1139721821177ad73973178387",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "pali-2209.06794v1",
+        "title": "PaLI: A Jointly-Scaled Multilingual Language-Image Model",
+        "abstract": "PaLI jointly scales visual and encoder-decoder language models for multilingual multimodal tasks. Text generation provides a common interface for visual and textual inputs. Large multilingual pretraining mixtures and a larger vision backbone are studied for captioning, questions, and related tasks.",
+        "authors": [
+          "Xi Chen",
+          "Xiao Wang",
+          "Soravit Changpinyo",
+          "AJ Piergiovanni",
+          "Piotr Padlewski",
+          "Daniel Salz",
+          "Sebastian Goodman",
+          "Adam Grycner",
+          "Basil Mustafa",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Joan Puigcerver",
+          "Nan Ding",
+          "Keran Rong",
+          "Hassan Akbari",
+          "Gaurav Mishra",
+          "Linting Xue",
+          "Ashish Thapliyal",
+          "James Bradbury",
+          "Weicheng Kuo",
+          "Mojtaba Seyedhosseini",
+          "Chao Jia",
+          "Burcu Karagol Ayan",
+          "Carlos Riquelme",
+          "Andreas Steiner",
+          "Anelia Angelova",
+          "Xiaohua Zhai",
+          "Neil Houlsby",
+          "Radu Soricut"
+        ],
+        "year": 2022,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "PALM-E",
+      "source_url": "https://arxiv.org/abs/2303.03378v1",
+      "source_abstract_sha256": "7ceb70dacb7a1590da9d9480961063d01062a6baff9498fb9071a42597dc6d20",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "palm-e-2303.03378v1",
+        "title": "PaLM-E: An Embodied Multimodal Language Model",
+        "abstract": "PaLM-E incorporates visual observations and continuous sensor states into an embodied language model. Multimodal input sequences support robotic manipulation planning alongside visual questions and captions. Joint training examines transfer between embodied tasks and broader language-vision data.",
+        "authors": [
+          "Danny Driess",
+          "Fei Xia",
+          "Mehdi S. M. Sajjadi",
+          "Corey Lynch",
+          "Aakanksha Chowdhery",
+          "Brian Ichter",
+          "Ayzaan Wahid",
+          "Jonathan Tompson",
+          "Quan Vuong",
+          "Tianhe Yu",
+          "Wenlong Huang",
+          "Yevgen Chebotar",
+          "Pierre Sermanet",
+          "Daniel Duckworth",
+          "Sergey Levine",
+          "Vincent Vanhoucke",
+          "Karol Hausman",
+          "Marc Toussaint",
+          "Klaus Greff",
+          "Andy Zeng",
+          "Igor Mordatch",
+          "Pete Florence"
+        ],
+        "year": 2023,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "BEIT-3",
+      "source_url": "https://arxiv.org/abs/2208.10442v1",
+      "source_abstract_sha256": "36bb087aa862ef5c8711eea73922f7e210fc1c4522ad3573cf9e502ec46ae4e7",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "beit-3-2208.10442v1",
+        "title": "Image as a Foreign Language: BEiT Pretraining for All Vision and Vision-Language Tasks",
+        "abstract": "BEiT-3 treats images and text as inputs to unified masked modeling. A Multiway Transformer provides both modality-specific processing and multimodal fusion. The pretrained representation transfers to visual recognition, detection, segmentation, captioning, retrieval, and visual reasoning.",
+        "authors": [
+          "Wenhui Wang",
+          "Hangbo Bao",
+          "Li Dong",
+          "Johan Bjorck",
+          "Zhiliang Peng",
+          "Qiang Liu",
+          "Kriti Aggarwal",
+          "Owais Khan Mohammed",
+          "Saksham Singhal",
+          "Subhojit Som",
+          "Furu Wei"
+        ],
+        "year": 2022,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "KOSMOS-1",
+      "source_url": "https://arxiv.org/abs/2302.14045v1",
+      "source_abstract_sha256": "525ff63c9d8e61b3cbc4bddfb41692823ad9810a0cbd83102f0949e438383304",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "kosmos-1-2302.14045v1",
+        "title": "Language Is Not All You Need: Aligning Perception with Language Models",
+        "abstract": "Kosmos-1 is trained on text, image-caption pairs, and interleaved multimodal web documents. The language-modeling framework combines perception with in-context learning and instruction following. Evaluations cover language tasks, visual dialogue, captions, questions, and visual recognition.",
+        "authors": [
+          "Shaohan Huang",
+          "Li Dong",
+          "Wenhui Wang",
+          "Yaru Hao",
+          "Saksham Singhal",
+          "Shuming Ma",
+          "Tengchao Lv",
+          "Lei Cui",
+          "Owais Khan Mohammed",
+          "Qiang Liu",
+          "Kriti Aggarwal",
+          "Zewen Chi",
+          "Johan Bjorck",
+          "Vishrav Chaudhary",
+          "Subhojit Som",
+          "Xia Song",
+          "Furu Wei"
+        ],
+        "year": 2023,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "KOSMOS-2",
+      "source_url": "https://arxiv.org/abs/2306.14824v1",
+      "source_abstract_sha256": "fb90d0488d2a06c91e64900fcc6775980814576ec98bc404af842197df705f88",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "kosmos-2-2306.14824v1",
+        "title": "Kosmos-2: Grounding Multimodal Large Language Models to the World",
+        "abstract": "Kosmos-2 extends multimodal language modeling with grounding of textual spans to image locations. Location tokens represent object boxes and grounded image-text pairs support training. Tasks include referring expressions, phrase grounding, and perception-language understanding and generation.",
+        "authors": [
+          "Zhiliang Peng",
+          "Wenhui Wang",
+          "Li Dong",
+          "Yaru Hao",
+          "Shaohan Huang",
+          "Shuming Ma",
+          "Furu Wei"
+        ],
+        "year": 2023,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "IMAGEBIND",
+      "source_url": "https://arxiv.org/abs/2305.05665v1",
+      "source_abstract_sha256": "413b17d38543187a0d578a732809dcc6ca897f5aa862c5bde71bc1602ec6c8c8",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "imagebind-2305.05665v1",
+        "title": "ImageBind: One Embedding Space To Bind Them All",
+        "abstract": "ImageBind learns a shared representation spanning images, text, audio, depth, thermal signals, and inertial measurements. Training uses pairings with images rather than every possible modality pair. The representation enables cross-modal retrieval, composition, and transfer to additional modalities.",
+        "authors": [
+          "Rohit Girdhar",
+          "Alaaeldin El-Nouby",
+          "Zhuang Liu",
+          "Mannat Singh",
+          "Kalyan Vasudev Alwala",
+          "Armand Joulin",
+          "Ishan Misra"
+        ],
+        "year": 2023,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "OTTER",
+      "source_url": "https://arxiv.org/abs/2305.03726v1",
+      "source_abstract_sha256": "c7d1212b01ca24607c3e9e4ee0ad6a3b6dd255f519df17078059590f2261df9b",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "otter-2305.03726v1",
+        "title": "Otter: A Multi-Modal Model with In-Context Instruction Tuning",
+        "abstract": "Otter adapts OpenFlamingo with multimodal in-context instruction data. The MIMIC-IT dataset combines contextual examples and instructions, supporting both instruction following and contextual learning. The work also makes the underlying training implementation more accessible.",
+        "authors": [
+          "Bo Li",
+          "Yuanhan Zhang",
+          "Liangyu Chen",
+          "Jinghao Wang",
+          "Jingkang Yang",
+          "Ziwei Liu"
+        ],
+        "year": 2023,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "LLAVA-1.5",
+      "source_url": "https://arxiv.org/abs/2310.03744v1",
+      "source_abstract_sha256": "70deeba12c361acd5421d53cd85a8ebcc5f65280a8f6a5d1dd7c1511dd761602",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "llava-1.5-2310.03744v1",
+        "title": "Improved Baselines with Visual Instruction Tuning",
+        "abstract": "LLaVA-1.5 strengthens visual instruction tuning with a higher-resolution CLIP encoder, an MLP visual-language connector, and academic question-answering data. Simple formatting prompts and publicly available data provide a stronger baseline across multiple multimodal benchmarks.",
+        "authors": [
+          "Haotian Liu",
+          "Chunyuan Li",
+          "Yuheng Li",
+          "Yong Jae Lee"
+        ],
+        "year": 2023,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "SIGLIP",
+      "source_url": "https://arxiv.org/abs/2303.15343v1",
+      "source_abstract_sha256": "660b31ea588511a1e1525a47b3454d60c59b11aacf18347e3a3030ff687fe6e3",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "siglip-2303.15343v1",
+        "title": "Sigmoid Loss for Language Image Pre-Training",
+        "abstract": "SigLIP replaces globally normalized softmax contrastive training with a pairwise sigmoid objective for image-text learning. This separates loss computation from a full batch similarity normalization. Experiments explore batch size and negative-pair choices for efficient language-image pretraining.",
+        "authors": [
+          "Xiaohua Zhai",
+          "Basil Mustafa",
+          "Alexander Kolesnikov",
+          "Lucas Beyer"
+        ],
+        "year": 2023,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "GIT",
+      "source_url": "https://arxiv.org/abs/2205.14100v1",
+      "source_abstract_sha256": "b26d3b1b0e8949a850b648fcf797e3cd5ae890cf6c8ce45022b550f758b3d725",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "git-2205.14100v1",
+        "title": "GIT: A Generative Image-to-text Transformer for Vision and Language",
+        "abstract": "GIT uses an image encoder and a text decoder trained with a language-modeling objective. The simplified architecture avoids external detectors, taggers, and OCR modules. Scaling experiments cover image and video captioning, visual questions, and generation-based recognition.",
+        "authors": [
+          "Jianfeng Wang",
+          "Zhengyuan Yang",
+          "Xiaowei Hu",
+          "Linjie Li",
+          "Kevin Lin",
+          "Zhe Gan",
+          "Zicheng Liu",
+          "Ce Liu",
+          "Lijuan Wang"
+        ],
+        "year": 2022,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    },
+    {
+      "name": "OFA",
+      "source_url": "https://arxiv.org/abs/2202.03052v1",
+      "source_abstract_sha256": "04f30db576a2ee92f01ff34693b7052461ab953208c6e23392b48cf629c39e28",
+      "abstract_kind": "source_based_summary",
+      "document": {
+        "paper_id": "ofa-2202.03052v1",
+        "title": "Unifying Architectures, Tasks, and Modalities Through a Simple Sequence-to-Sequence Learning Framework",
+        "abstract": "OFA casts visual, textual, and cross-modal tasks into an instruction-conditioned encoder-decoder sequence framework. It shares a common architecture across image generation, visual grounding, captions, classification, and language tasks without additional task-specific layers.",
+        "authors": [
+          "Peng Wang",
+          "An Yang",
+          "Rui Men",
+          "Junyang Lin",
+          "Shuai Bai",
+          "Zhikang Li",
+          "Jianxin Ma",
+          "Chang Zhou",
+          "Jingren Zhou",
+          "Hongxia Yang"
+        ],
+        "year": 2022,
+        "venue": "arXiv preprint",
+        "keywords": []
+      }
+    }
+  ]
+}

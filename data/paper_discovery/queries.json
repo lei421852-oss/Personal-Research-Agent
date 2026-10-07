@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "annotation_status": "development_candidate_labels_not_user_reviewed",
+  "notes": [
+    "Fixed before the first real retrieval run.",
+    "Labels describe relevance within this 25-paper fixture, not an exhaustive literature judgment.",
+    "Do not tune metadata, keywords, embedding or ranking to these cases."
+  ],
+  "cases": [
+    {
+      "case_id": "discovery-01",
+      "query": "Find work on learning image-text embeddings for zero-shot image classification with contrastive or pairwise objectives.",
+      "relevant_paper_ids": [
+        "clip-2103.00020v1",
+        "align-2102.05918v1",
+        "siglip-2303.15343v1"
+      ]
+    },
+    {
+      "case_id": "discovery-02",
+      "query": "Which papers extend a pretrained language model to few-shot visual tasks using interleaved image and text examples?",
+      "relevant_paper_ids": [
+        "frozen-2106.13884v1",
+        "flamingo-2204.14198v1"
+      ]
+    },
+    {
+      "case_id": "discovery-03",
+      "query": "Find approaches that connect frozen vision encoders and large language models using a small trainable bridge.",
+      "relevant_paper_ids": [
+        "blip-2-2301.12597v1",
+        "minigpt-4-2304.10592v1",
+        "instructblip-2305.06500v1"
+      ]
+    },
+    {
+      "case_id": "discovery-04",
+      "query": "Which paper bootstraps noisy web image captions with a caption generator and a filter?",
+      "relevant_paper_ids": [
+        "blip-2201.12086v2"
+      ]
+    },
+    {
+      "case_id": "discovery-05",
+      "query": "Find multimodal assistants trained with visual instruction tuning or in-context instruction examples.",
+      "relevant_paper_ids": [
+        "llava-2304.08485v1",
+        "instructblip-2305.06500v1",
+        "minigpt-4-2304.10592v1",
+        "llava-1.5-2310.03744v1",
+        "otter-2305.03726v1"
+      ]
+    },
+    {
+      "case_id": "discovery-06",
+      "query": "Which model incorporates continuous sensor states and images into a language model for robotic manipulation planning?",
+      "relevant_paper_ids": [
+        "palm-e-2303.03378v1"
+      ]
+    },
+    {
+      "case_id": "discovery-07",
+      "query": "Find a shared embedding approach for images, text, audio, depth, thermal signals and inertial measurements.",
+      "relevant_paper_ids": [
+        "imagebind-2305.05665v1"
+      ]
+    },
+    {
+      "case_id": "discovery-08",
+      "query": "Find multimodal models that ground textual referring expressions in image locations or bounding boxes.",
+      "relevant_paper_ids": [
+        "kosmos-2-2306.14824v1",
+        "ofa-2202.03052v1"
+      ]
+    }
+  ]
+}
