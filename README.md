@@ -4,7 +4,7 @@
 
 > A bounded multimodal research agent that retrieves, analyzes, and reasons over text and figures in scientific papers with traceable evidence.
 
-这是面向 **CLIP、BLIP、Flamingo 三篇论文的证据约束问答与 Agent 决策原型**。V0.1 已封板；当前 V0.2 Phase 1 仅增加论文发现与分层检索基础能力，它不是通用自主科研系统。
+这是面向 **CLIP、BLIP、Flamingo 三篇论文的证据约束问答与 Agent 决策原型**。V0.1 已封板；V0.2 增加论文发现、模型控制的查询扩展及离线论文画像，它不是通用自主科研系统。
 
 | 核心能力 | 如何体现 |
 | --- | --- |
@@ -12,7 +12,7 @@
 | **Understand · 读图** | 将 Figure、caption 与已准备的页面文本一起交给 VLM，分开记录观察与解释 |
 | **Decide · 选动作** | 模型看到每轮 Observation 后，自主选择工具、补充上下文或调用 `finish` |
 
-**当前规模：25 篇论文发现元数据；其中 3 篇具备 25 条 TextEvidence、3 条 FigureEvidence。V0.1 冻结评测集仍为 40 题。** V0.1 基线为 **257 passed**；当前全量 **306 passed**（2026-10-07）。真实 Demo 与模拟验证分别标记；完整三系统正式比较尚未完成。
+**当前规模：25 篇论文发现元数据；其中 3 篇具备 25 条 TextEvidence、3 条 FigureEvidence。V0.1 冻结评测集仍为 40 题。** V0.1 基线为 **257 passed**；当前全量 **328 passed**（2026-10-07）。真实 Demo 与模拟验证分别标记；完整三系统正式比较尚未完成。
 
 快速阅读：[架构](#系统架构) · [三个-demo](#三个-demo) · [失败分析](#失败分析) · [快速开始](#快速开始) · [限制](#当前限制)
 
@@ -21,7 +21,7 @@
 开放问题可先调用 `search_papers` 发现候选论文，再由模型选择 `paper_ids` 调用 `search_text`。
 已知论文问题直接使用 scope；发现元数据不等于可引用正文。未准备正文的候选返回结构化 unavailable/empty，不生成虚假 Evidence。
 
-新增独立 Paper Index，复用既有 Qwen Embedding/Chroma；8 条开发查询的真实宏平均 Recall@5=0.8708、Recall@10=0.8958。fixture 摘要为来源摘要简述，keywords 为空，开发相关性标签尚非正式人工 Ground Truth。详见 [Phase 1 实现与运行说明](docs/paper-discovery.md)。
+新增独立 Paper Index，复用既有 Qwen Embedding/Chroma；原始表示下 8 条开发查询的真实宏平均 Recall@5=0.8708、Recall@10=0.8958。fixture 摘要为来源摘要简述，keywords 为空，开发相关性标签尚非正式人工 Ground Truth。详见 [Phase 1 实现与运行说明](docs/paper-discovery.md)。
 
 ```bash
 python -m scripts.ingest_papers --device cpu
@@ -35,8 +35,22 @@ python -m eval.paper_discovery --output artifacts/paper-discovery-evaluation.jso
 新增 `expand_search_query`：只生成最多两条保持原意的检索查询，不自动检索。每请求最多调用一次，由模型根据原查询的 Observation 判断是否需要；Controller 只验证参数、重复与预算。
 候选按 paper_id 取并集，Trace 的 retrieved_paper_ids 保留 Query → Papers 关系，不混入 Evidence 引用。
 
-完全相同的 Phase 1 八题真实评测中，ExpansionRate=37.5%，额外 26 次 LLM / 4 次 Embedding 调用，Recall@5/10 仍为 0.8708/0.8958；InstructBLIP 和 OFA 未被新增查询召回。固定 shortlist 与各查询并集覆盖分开统计，没有包装为提升。
+增强论文表示之前的首次八题真实评测中，ExpansionRate=37.5%，额外 26 次 LLM / 4 次 Embedding 调用，Recall@5/10 仍为 0.8708/0.8958；InstructBLIP 和 OFA 未被新增查询召回。这是历史运行记录，未在本次表示增强后重跑多查询比较。固定 shortlist 与各查询并集覆盖分开统计，没有包装为提升。
 详见 [多查询发现设计、指标与真实结果](docs/query-expansion.md)。
+
+## 离线结构化论文画像
+
+`PaperProfileExtractor` 只读取当前标题和摘要，生成 `tasks / methods / capabilities`，每字段最多 5 项。输出必须通过结构校验和原文片段存在性校验；失败回退为空画像，查询时不调用抽取模型。
+
+统一索引文本使用 `Title / Abstract / Tasks / Methods / Capabilities / Keywords` 字段标签。缓存按标题、摘要和抽取版本匹配，复用成功的画像；原始 fixture、Gold、Embedding Model 和 PaperRetriever 算法均不变。
+
+```bash
+python -m scripts.ingest_papers --enrich --env-file .env --device cpu \
+  --profile-cache artifacts/paper-profiles.json --report artifacts/paper-enrichment.json
+python -m eval.paper_discovery --output artifacts/paper-discovery-enriched.json
+```
+
+首次真实抽取：24/25 篇生成非空画像，1 篇校验失败回退；25 次 LLM 调用、约 43.99 秒。相同八题单查询 Top-10 评测中，Macro Recall@5 保持 87.08%，Recall@10 从 89.58% 到 95.83%；OFA 在 discovery-08 原查询下由第 13 名到第 7 名，InstructBLIP 在 discovery-03 仍为第 15 名。此比较同时改变字段标签和画像内容，未分别测量二者贡献，也不证明普遍性能提升。详见 [画像准备、复用和前后评测](docs/paper-profiles.md)。
 
 ## 为什么做这个项目？
 

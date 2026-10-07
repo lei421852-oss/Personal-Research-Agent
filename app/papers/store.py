@@ -3,7 +3,7 @@
 import hashlib
 from pathlib import Path
 
-from app.papers.models import PaperDocument, RetrievedPaper
+from app.papers.models import REPRESENTATION_VERSION, PaperDocument, RetrievedPaper
 from app.retrieval.errors import RetrievalDependencyError
 from app.retrieval.vector_store import ChromaTextVectorStore
 
@@ -61,6 +61,7 @@ class ChromaPaperVectorStore:
             | {
                 "embedding_model": embedding_model,
                 "fixture_sha256": hashlib.sha256(fixture.read_bytes()).hexdigest(),
+                "representation_version": REPRESENTATION_VERSION,
             }
         )
 
@@ -103,7 +104,11 @@ class ChromaPaperVectorStore:
             if not metadata or identity != metadata.get("paper_id"):
                 raise ValueError("Corrupt paper index identity")
             paper = PaperDocument.model_validate_json(metadata["paper_json"])
-            if paper.paper_id != identity or text != paper.retrieval_text:
+            # 老索引仍可只读评测；含画像的新记录必须与增强序列化完全一致。
+            valid_texts = {paper.retrieval_text}
+            if not paper.profile.has_terms:
+                valid_texts.add(paper.legacy_retrieval_text)
+            if paper.paper_id != identity or text not in valid_texts:
                 raise ValueError("Corrupt paper index metadata")
             hits.append(
                 RetrievedPaper(
