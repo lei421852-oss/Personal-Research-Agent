@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "status": "prepared_not_executed",
+  "system": "coverage_worker_f3_1",
+  "worker_class_import": "app.research.coverage_worker.CoverageAwarePaperWorker",
+  "case_count": 7,
+  "case_ids": [
+    "rqv1-comparison-blip2-flamingo-vision-encoder",
+    "rqv1-comparison-blip2-flamingo-vision-language-bridge",
+    "rqv1-comparison-blip2-flamingo-frozen-trainable-scope",
+    "rqv1-comparison-blip2-flamingo-training-objective",
+    "rqv1-comparison-blip2-flamingo-language-model",
+    "rqv1-comparison-blip2-llava-frozen-trainable-scope",
+    "rqv1-comparison-blip2-llava-language-model"
+  ],
+  "runtime_input_fields": [
+    "case_id",
+    "question",
+    "paper_ids",
+    "dimension"
+  ],
+  "source_execution_file": "executions.jsonl",
+  "source_execution_file_sha256": "41a107a5e8b727fbbd26648b012cbf46e1c60ff2e255ccfc702a5da4d33108fa",
+  "source_execution_count": 90,
+  "source_diagnostic_file": "findings.json",
+  "source_diagnostic_file_sha256": "f5590827026f11b87fbbc0729f0bbc2e6e26b4c1399af337980cf8c638cc93de",
+  "diagnostic_executions_source": {
+    "file": "failed-executions.jsonl",
+    "sha256": "1a337006d903304f8995a51e6e3ecb5074bfa4c1c02ed2160b1295ea8ad35949",
+    "case_count": 7
+  },
+  "selected_execution_records_sha256": "c1cca4e73456e3df0b08e47217ff45d1b89a95471bb4d51a7b99c438791a2289",
+  "source_cases": [
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-vision-encoder",
+      "source_execution_sha256": "e4177411a9d2dc8139a0e45affdaa9c36fcb8a1593312b20b6f379ba5d5a8e5e",
+      "source_input_projection_sha256": "a32b19bbfdf003e906e0616b44bfd751b9f0ea713ba91cf8227759518ae71a82",
+      "runtime_request_sha256": "a65e7a637ac3ddd34092bae7ba3dc48a09d7a20fa8321ee54fd96851fe26b218",
+      "source_case_sha256": "6d34c1bbf48e7868b9d9c09112bb77ecb98a0fc18bd6bc3e7a7215ddac61db0d"
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-vision-language-bridge",
+      "source_execution_sha256": "f0ff1433cc31cad70d047d41d171f3c024e7cb3cabc0d83f72d658c57c1929a9",
+      "source_input_projection_sha256": "dae78987a0aadb81d158da0fbc31bce53cfd6da3f10169f5eae4644e4fbd73a2",
+      "runtime_request_sha256": "b4915a9b8b5a044d2f95bbff3114f59231f3a0f44c845f924c324d034219b97e",
+      "source_case_sha256": "cddb6f6729d67a77dff199df4885b385bc23c36e57ae930ee9b81c01cfa1f617"
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-frozen-trainable-scope",
+      "source_execution_sha256": "bbc298d002b2cc44fd7b455281da135fff4578dc288182a23107c9dd6f29748d",
+      "source_input_projection_sha256": "8bd773c512a0bed254d524227c3c30020ae20e11ebf787df509375649363c979",
+      "runtime_request_sha256": "6b8b904873ca3f8cca488b9770a3ac246887b98fb15e7c7f5d3175bbfa4cfd7c",
+      "source_case_sha256": "68c030ba5403ed17d877d6b69d2634c41e45cfd7e9981077ddd4ee44278f3037"
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-training-objective",
+      "source_execution_sha256": "cc8ba08ec5dce971ad302a5f67b5b539fa7fe1dda16ce9617e377c4722207433",
+      "source_input_projection_sha256": "5d1b4614d6d6ea5d245d0b0f61c9f0650a52a8a0381303c2fd75325e9d68bd07",
+      "runtime_request_sha256": "00272e4f5252eb20fe3616279ae420794b5b7d7a11a28ca6eb88022c0ff39a70",
+      "source_case_sha256": "f35c362a229f7b63e761d5918111c4a6a8146d5c7196bbd3254fee3e9d4c129f"
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-language-model",
+      "source_execution_sha256": "5b30892a2d386e695e9b3c77507ea8796b8fabecc4892a57afda3fe863c63dbc",
+      "source_input_projection_sha256": "42d1ff93e3e25c94f04c8f9b4acf64c4b3c54564ec98ff091d0c4c2a45c5d9dd",
+      "runtime_request_sha256": "67c6a0690445f7bb43eefdb6d8463db75e676478d640b29fc701491261c1ece1",
+      "source_case_sha256": "f63e376eef4269ffe6deddb9adc81ef0ea5c8a4859955f54e8e23fe0a1956301"
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-llava-frozen-trainable-scope",
+      "source_execution_sha256": "3d3ae47d842d4fc29e517cec0509e5b4dd1b837d77ac0f2f86592a9b540eff7b",
+      "source_input_projection_sha256": "f81e831028ce4b369608e387b9dfc79ff0ab55d6fb456dee20d53ce32259d328",
+      "runtime_request_sha256": "6d92c8b99f7099b80c1e9826047524080d269223068bd887cc5d4805dd8c0124",
+      "source_case_sha256": "3e44a0154800596a5c36714561898fe3d5a1e396200440f330f207bcdf6f6334"
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-llava-language-model",
+      "source_execution_sha256": "907d7668d569081173bd1f0bb707c82d09754fc59a563f86e829c3086e17b7d7",
+      "source_input_projection_sha256": "3f843a518deb0a25a79285d9c7fdb40bab585ad25ae278167a3ca6acf24763a9",
+      "runtime_request_sha256": "8806055556d20e7b550f4de03268da470a2f1e1e6dc1b132295895f0ddcd8cfe",
+      "source_case_sha256": "fc8136a03f7a3227fe0ea1be9c9a132b895f5ad39cf1870b2e6975332609685e"
+    }
+  ],
+  "baseline_configuration": {
+    "schema_version": 1,
+    "dataset": "eval/datasets/stage_e.json",
+    "papers_dir": "data/papers",
+    "additional_papers_dir": "data/research_papers",
+    "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+    "device": "cpu",
+    "index_dir": "data/chroma/stage-e",
+    "collection": "research-stage-e-text",
+    "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+    "distance": "cosine",
+    "top_k": 10,
+    "runtime": {
+      "max_concurrent_workers": 3,
+      "max_concurrent_llm": 2,
+      "max_concurrent_vlm": 1,
+      "max_concurrent_retrieval": 1,
+      "max_tool_calls_per_worker": 8,
+      "max_model_calls_per_worker": 20,
+      "max_protocol_corrections": 2,
+      "operation_timeout_seconds": 60,
+      "max_retries": 2
+    },
+    "review_runtime": {
+      "max_concurrent_reviewers": 2,
+      "max_model_calls_per_review": 3
+    },
+    "recovery": {
+      "max_research_model_calls": 200,
+      "max_research_tool_calls": 64
+    },
+    "planner_mode": "fixed_benchmark_paper_dimension_plan_no_gold",
+    "provider_temperature": "provider_default_not_sent",
+    "source_label_policy": "Source-checked candidate labels; not independently human-approved exhaustive relevance labels."
+  },
+  "baseline_corpus_snapshot": {
+    "snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+    "papers": [
+      {
+        "paper_id": "blip-2201.12086v2",
+        "source_sha256": "63e0335cdd57c3d92b907b89c93d10befdd29b8aeed108091bbde90c121ed97a",
+        "metadata_sha256": "2171421d418f9e8757154030cb8279c33e8f8327325f44a0bed3a9e161a7823f",
+        "prepared_sha256": "0189764865606c14ef96e71c8c51cb03bcd49129a38f7f69985b59c361405628"
+      },
+      {
+        "paper_id": "clip-2103.00020v1",
+        "source_sha256": "6478b6e571a7d6fcd846d8ef77bfd60c285f1986abb8f475eedc43de403074f5",
+        "metadata_sha256": "8a0ca7cf8e96dbfcd740757918283ece5c30bfdab8c0f65cc59b2833a023abee",
+        "prepared_sha256": "7ea14fdd46b1f1aa57227e9227598ed98fd020eab5c5c8c86fd9c14558f6f463"
+      },
+      {
+        "paper_id": "flamingo-2204.14198v1",
+        "source_sha256": "79d131280bc79f659212f35f940dfd3a26013c73355a58eb2263410945780c4c",
+        "metadata_sha256": "e45db1efc4f2abb09026150a657d0749db1bc30e88c652788e36828f219caa7c",
+        "prepared_sha256": "1f74f19edc12fed812a9181b5a3bd6840295d6de992583e148cdcbf35102071a"
+      },
+      {
+        "paper_id": "blip-2-2301.12597v1",
+        "source_sha256": "0a4b93c402a6b8b0d2c5f438bbae31d447b17324b71c3e4fb6dab53e0e389bc5",
+        "metadata_sha256": "230d99c654921ea067df38070c235cdf71a10ac46b4fa5ab20eb5ccc9c4da7aa",
+        "prepared_sha256": "af6939d223423787a46bd72fc3ce68c942ecd7b7d6c3c3b07b87e273378c009c"
+      },
+      {
+        "paper_id": "llava-2304.08485v1",
+        "source_sha256": "0d5be40caf852d51a0e2636619fafc5b910788af9584fdc392abc652787560ed",
+        "metadata_sha256": "267e246529084cc39e4ed23729c5b27d020b7ab3fc9ba89c8fa08979e92f96ea",
+        "prepared_sha256": "201837067a067d3f11520fed8035163712755a8108179e4dc9115f99fa0932bb"
+      }
+    ],
+    "text_count": 46,
+    "figure_count": 5,
+    "corpus_validity_rate": 1.0,
+    "evidence_provenance_validity_rate": 1.0
+  },
+  "requests_file": "requests.jsonl",
+  "requests_sha256": "562abaad25ab0df0b2e05dd70fd516a8c203865bb1afb7f942c280b00453c6b8",
+  "provider_calls": 0,
+  "retrieval_calls": 0,
+  "execution_contract": {
+    "worker_factory": "Explicitly construct CoverageAwarePaperWorker with existing adapters, resolver, runtime configuration and matching task.",
+    "worker_tasks_builder": "eval.research_quality.coverage_comparison.comparison_worker_tasks",
+    "legacy_default_entrypoints_unchanged": true,
+    "full_chain_execution_available": false,
+    "next_integration": "Provide a new explicit runtime factory for Reviewer/Recovery/Synthesis comparison. Do not replace legacy run_case module globals.",
+    "offline_manifest_not_model_input": true
+  },
+  "semantic_scoring": {
+    "required": "Independent human or explicitly identified AI annotations; never infer semantic quality from coverage declarations or fake execution.",
+    "without_annotations": "null metrics with zero assessment denominator"
+  }
+}

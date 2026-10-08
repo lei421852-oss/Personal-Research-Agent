@@ -1,0 +1,105 @@
+{
+  "scope": "Stage F3.1 new files only; no self-referential certificate hash",
+  "files": [
+    {
+      "path": "app/research/coverage_models.py",
+      "sha256": "563dc02ec6a7f7353cf8e28b22a1916ec4a6c7739a52bcfdc8d1f439e4ee4f5f",
+      "bytes": 4436
+    },
+    {
+      "path": "app/research/coverage_worker.py",
+      "sha256": "6ce7ae4c40db4bde057f6d40855c95bdcbf384577eecf5d3f250763b656b8167",
+      "bytes": 16077
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1/acceptance.json",
+      "sha256": "fa5b41ad2233b196104b06c3d468c5f520a911cbb0f884a099733c8f2e244b2d",
+      "bytes": 3394
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1/acceptance_report.md",
+      "sha256": "cd636bbc536348d051eacf6b1def9dfcfcf742980c9ed3d8f9f2dd96aba71844",
+      "bytes": 8121
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1/baseline.json",
+      "sha256": "c389865a1f0f43c7a43bb5fc48d5cdc2f35196a400f6b83f7e57b5f37c976da6",
+      "bytes": 11057
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1/comparison/comparison_manifest.json",
+      "sha256": "cca2ed49a031abddb266961ef57a47b35d69bed9696c81bbe078e51aa2294bfb",
+      "bytes": 9006
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1/comparison/requests.jsonl",
+      "sha256": "562abaad25ab0df0b2e05dd70fd516a8c203865bb1afb7f942c280b00453c6b8",
+      "bytes": 1832
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1/controlled_traces.jsonl",
+      "sha256": "0715aeddb30820299e4d1cb7163a0d30dcd939fccda62f9463850afd12ff56e9",
+      "bytes": 37554
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1/extra_markdown_formatter_results.txt",
+      "sha256": "7813fa0253d54bb4e201eca7ee6e687809b6a2006b61b9ccddc47e4f91b41984",
+      "bytes": 1064
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1/formatter_results.txt",
+      "sha256": "d05c0280a19426e07f212d7f92b01fa368423f6d58445c9cd7c94542fd26843b",
+      "bytes": 28
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1/integrity.json",
+      "sha256": "fb3da9a7a88a582931e57e9238d3005a55514f8ea25c484d31dc6c1f0287a483",
+      "bytes": 221
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1/lint_results.txt",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1/test_results.txt",
+      "sha256": "826eef73c8d94807e22b3705fc011ef2ff943703e714cbb3ee2a7f7f6af6a8c3",
+      "bytes": 1760
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1/whitespace_results.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/worker-coverage.md",
+      "sha256": "0d686d3ce42856531adab18f2b5a1f4a38078c531b27c08f22c170a3b5b1ba87",
+      "bytes": 7298
+    },
+    {
+      "path": "eval/research_quality/coverage_comparison.py",
+      "sha256": "7f0cbe9d9a71c6be2c0362bb1733d3a7a9ce10a8399e97988e95af9acfa8ca63",
+      "bytes": 18015
+    },
+    {
+      "path": "scripts/prepare_worker_coverage_comparison.py",
+      "sha256": "5559c7a618426f670dfede9c10b5f0eae1ccc5cdc852019709d4de5e2b871bd5",
+      "bytes": 1889
+    },
+    {
+      "path": "scripts/verify_worker_coverage_baseline.py",
+      "sha256": "e7b3bab2bd3b431ed4c5f60579f05c4d59605562e90b3545c1007467eb4f1ed9",
+      "bytes": 1750
+    },
+    {
+      "path": "tests/unit/research/test_coverage_models.py",
+      "sha256": "858808b162eb1e7aa25b1f1905e98eb04ba66b9a5b12076dbed414c8c30ceb6a",
+      "bytes": 7994
+    },
+    {
+      "path": "tests/unit/research/test_worker_coverage.py",
+      "sha256": "0a62dc661ef9f0c7f1a1f3d368ef7ff52ccc944a947e467c170b94116a6bd720",
+      "bytes": 33285
+    }
+  ]
+}

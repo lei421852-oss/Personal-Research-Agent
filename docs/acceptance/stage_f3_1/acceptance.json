@@ -1,0 +1,98 @@
+{
+  "stage": "F3.1",
+  "date": "2026-10-09",
+  "verdict": "PASS",
+  "verdict_scope": "Explicit opt-in CoverageAwarePaperWorker engineering acceptance; not a claim that frozen default entrypoints changed or real research quality improved.",
+  "branch": "feature/stage-f3-1-worker-coverage",
+  "code_commits": [
+    "3294cad167d4b03739d02181f37d0b18534851ce",
+    "ed7cc4445cc4e31372d6a9e4e4406a51b2715a5f"
+  ],
+  "delivery_commit": "Final local acceptance commit contains this certificate; resolve HEAD after it is created.",
+  "tests": {
+    "new_models": 36,
+    "new_worker_and_comparison": 45,
+    "new_total": 81,
+    "full_suite_passed": 955,
+    "failures": 0,
+    "existing_diagnostic_tests": 12,
+    "warnings": 1,
+    "warning_kind": "Existing Starlette/httpx deprecation"
+  },
+  "checks": [
+    {
+      "command": ".venv/bin/python -m pytest -q --junitxml=artifacts/stage-f3-1-engineering-tests.xml",
+      "exit_code": 0,
+      "log": "test_results.txt",
+      "tests": 955,
+      "failures": 0,
+      "errors": 0,
+      "duration_seconds": 13.879
+    },
+    {
+      "command": "ruff check app tests scripts eval",
+      "exit_code": 0,
+      "log": "lint_results.txt"
+    },
+    {
+      "command": "ruff format --check app tests scripts eval",
+      "exit_code": 0,
+      "log": "formatter_results.txt"
+    },
+    {
+      "command": ".venv/bin/python -m scripts.verify_worker_coverage_baseline",
+      "exit_code": 0,
+      "log": "integrity.json"
+    },
+    {
+      "command": "ruff format --check .",
+      "exit_code": 1,
+      "log": "extra_markdown_formatter_results.txt",
+      "classification": "non_blocking_existing_protected_annotation_guidelines_markdown_formatting_outside_prior_check_scope"
+    }
+  ],
+  "integrity": {
+    "status": "PASS",
+    "frozen_files_checked": 292,
+    "protected_artifacts_checked": 47,
+    "frozen_mismatches": [],
+    "protected_artifact_mismatches": [],
+    "frozen_manifest_root_changed": false,
+    "provider_calls": 0
+  },
+  "prepared_comparison": {
+    "cases": 7,
+    "worker_tasks": 14,
+    "runtime_fields": [
+      "case_id",
+      "question",
+      "paper_ids",
+      "dimension"
+    ],
+    "status": "prepared_not_executed"
+  },
+  "real_provider_calls": 0,
+  "formal_benchmark_runs": 0,
+  "controlled_trace_count": 4,
+  "compatibility": {
+    "legacy_worker_result_schema_unchanged": true,
+    "legacy_requirement_statuses_unchanged": true,
+    "authority_questions_and_ids_unchanged": true,
+    "legacy_citation_validation_reused": true,
+    "reviewer_recovery_synthesis_files_unchanged": true,
+    "frozen_default_entrypoints_unchanged": true
+  },
+  "freeze_blocked_actions": [
+    "Default frozen entrypoint replacement was not implemented.",
+    "Partial supported facts are diagnostic only; unchanged downstream does not natively review or synthesize them."
+  ],
+  "limitations": [
+    "Coverage and stage inventory are Policy semantic assertions; Controller validates explicit structure and evidence identity, not entailment.",
+    "No real Provider comparison was performed; no seven-case quality gain is claimed.",
+    "Unknown dimension IDs use the generic requested_facts profile.",
+    "Two protected historical annotation Markdown code blocks produce nonblocking broad-format hints; files were preserved."
+  ],
+  "remote_git_operations": false,
+  "next_stage_started": false,
+  "preexisting_changes_preserved": true
+}
