@@ -94,8 +94,8 @@
     },
     {
       "path": "docs/acceptance/stage_f1_sample_review/review_table.csv",
-      "bytes": 51203,
-      "sha256": "366869683883929ce14259232d61e93dfcf2f2c07555e0dc6b56408829b5a73b"
+      "bytes": 51112,
+      "sha256": "343592cb7b90ab8d79ee420f87ea658c5b9b161084a0dbf0baeedf3506f97b02"
     },
     {
       "path": "docs/acceptance/stage_f1_sample_review/reviewed_dataset_cli.json",
