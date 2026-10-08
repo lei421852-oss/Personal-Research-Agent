@@ -1,0 +1,65 @@
+{
+  "status": "PASS",
+  "local_links_checked": 21,
+  "broken_links": [],
+  "commands_checked": 6,
+  "commands": [
+    {
+      "file": "docs/demos/blip2-vs-flamingo/README.md",
+      "module": "scripts.run_research_demo",
+      "flags": [
+        "--config",
+        "--env-file",
+        "--output-dir"
+      ],
+      "unknown": []
+    },
+    {
+      "file": "docs/demos/blip2-vs-flamingo/README.md",
+      "module": "scripts.run_research_demo",
+      "flags": [
+        "--config",
+        "--env-file",
+        "--output-dir",
+        "--timeout",
+        "--execute"
+      ],
+      "unknown": []
+    },
+    {
+      "file": "docs/demos/blip2-vs-flamingo/README.md",
+      "module": "scripts.run_research_demo",
+      "flags": [
+        "--help"
+      ],
+      "unknown": []
+    },
+    {
+      "file": "docs/acceptance/stage_g2/acceptance_report.md",
+      "module": "scripts.run_research_demo",
+      "flags": [
+        "--help"
+      ],
+      "unknown": []
+    },
+    {
+      "file": "docs/acceptance/stage_g2/acceptance_report.md",
+      "module": "scripts.run_research_demo",
+      "flags": [
+        "--output-dir"
+      ],
+      "unknown": []
+    },
+    {
+      "file": "docs/acceptance/stage_g2/acceptance_report.md",
+      "module": "scripts.run_research_demo",
+      "flags": [
+        "--output-dir",
+        "--execute"
+      ],
+      "unknown": []
+    }
+  ],
+  "help_exit_code": 0,
+  "provider_calls": 0
+}

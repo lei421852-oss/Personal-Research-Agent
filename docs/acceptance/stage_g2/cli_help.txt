@@ -1,0 +1,17 @@
+usage: run_research_demo.py [-h] [--question QUESTION]
+                            [--paper-ids PAPER_IDS [PAPER_IDS ...]]
+                            [--config CONFIG] [--env-file ENV_FILE]
+                            --output-dir OUTPUT_DIR [--timeout TIMEOUT]
+                            [--execute]
+
+薄封装真实 Planner 与冻结研究链；默认预检，不补建索引，不选择成功重跑。
+
+options:
+  -h, --help            show this help message and exit
+  --question QUESTION
+  --paper-ids PAPER_IDS [PAPER_IDS ...]
+  --config CONFIG
+  --env-file ENV_FILE
+  --output-dir OUTPUT_DIR
+  --timeout TIMEOUT
+  --execute

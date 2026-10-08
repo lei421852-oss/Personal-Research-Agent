@@ -1,0 +1,43 @@
+{
+  "engineering_status": "PASS",
+  "demo_acceptance": "CONDITIONAL",
+  "reason": "Flamingo Worker failed; no verified cross-paper comparison.",
+  "baseline": {
+    "status": "PASS",
+    "frozen_files_checked": 292,
+    "protected_artifacts_checked": 47,
+    "frozen_mismatches": [],
+    "protected_artifact_mismatches": [],
+    "frozen_manifest_root_changed": false,
+    "provider_calls": 0
+  },
+  "original_files": [
+    {
+      "scope": "tracked_files",
+      "checked": 480,
+      "mismatches": []
+    },
+    {
+      "scope": "untracked_files",
+      "checked": 13,
+      "mismatches": []
+    }
+  ],
+  "f3_protected_checked": 60,
+  "f3_mismatches": [],
+  "full_execution_sha256": "a5e5b2603063a1e5cf7c4a60313c57c3c70c9980ec773c4558271428c84cad5b",
+  "index_unchanged": true,
+  "report_exact_render_match": true,
+  "compact_export_matches_original": true,
+  "source_files_unchanged_since_formal_start": true,
+  "verified_claims": 5,
+  "citation_references": 13,
+  "unique_citations": 5,
+  "cross_paper_comparison_count": 0,
+  "cross_paper_citation_validity_rate": null,
+  "comparison_detection_method": "Structural claim membership, paper scope, dimension and exact evidence-union checks; not semantic entailment.",
+  "independent_human_fact_review": "not_performed",
+  "secrets_found": 0,
+  "hidden_reasoning_fields_found": 0,
+  "new_provider_calls_for_verification": 0
+}

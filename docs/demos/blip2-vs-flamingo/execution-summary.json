@@ -1,0 +1,145 @@
+{
+  "status": "completed",
+  "report_status": "completed",
+  "citation_check": "passed",
+  "cross_paper_comparison_count": 0,
+  "cross_paper_citation_validity_rate": null,
+  "comparison_detection_method": "Structural claim membership, paper scope, dimension and exact evidence-union checks; not semantic entailment.",
+  "planner_model_calls": 1,
+  "llm_provider_attempts_observed": 31,
+  "research_metrics": {
+    "corpus_validity_rate": 1.0,
+    "evidence_provenance_validity_rate": 1.0,
+    "retrieval_recall_at_5": null,
+    "retrieval_recall_at_10": null,
+    "worker_supported_count": 5,
+    "reviewer_passed_count": 5,
+    "reviewer_rejected_count": 0,
+    "recovery_attempted_count": 0,
+    "recovery_converted_count": 0,
+    "verified_coverage": 0.4166666666666667,
+    "stage_d_baseline_coverage": 0.3333333333333333,
+    "coverage_delta_vs_stage_d": null,
+    "cross_paper_comparison_count": 0,
+    "cross_paper_citation_validity_rate": null,
+    "comparison_detection_method": "Structural claim membership, paper scope, dimension and exact evidence-union checks; not semantic entailment.",
+    "unsupported_claim_count": 0,
+    "unsupported_claim_detection_method": "Distinct claims rejected by model Reviewer among initial/final snapshots; structured citation violations fail closed. This is a reviewer diagnostic, NOT a human/independent hallucination rate.",
+    "total_model_calls": 30,
+    "total_tool_calls": 9,
+    "wall_time_ms": 31301.907661007135,
+    "resolution_rate": 0.5,
+    "review_pass_rate": 1.0,
+    "report_generation_success_rate": 1.0,
+    "report_status": "completed"
+  },
+  "retrieval_attempts": 6,
+  "research_latency_ms": 35656.16856199631,
+  "total_latency_ms": 41957.309173987596,
+  "index_unchanged": true,
+  "worker": "PaperResearchWorker",
+  "coverage_worker_enabled": false,
+  "independent_human_review": "not_performed",
+  "configuration": {
+    "status": "ready",
+    "question": "Compare the visual-language connection mechanisms in BLIP-2 and Flamingo. Explain how each paper transfers visual features into its language model, covering BLIP-2's Q-Former and visual-language interface, and Flamingo's Perceiver Resampler and gated cross-attention. Identify the main differences in visual-language interaction, and cite prepared paper evidence for each finding. Mark unsupported details as evidence gaps.",
+    "paper_ids": [
+      "blip-2-2301.12597v1",
+      "flamingo-2204.14198v1"
+    ],
+    "configuration": {
+      "schema_version": 1,
+      "dataset": "eval/datasets/stage_e.json",
+      "papers_dir": "data/papers",
+      "additional_papers_dir": "data/research_papers",
+      "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+      "device": "cpu",
+      "index_dir": "data/chroma/stage-e",
+      "collection": "research-stage-e-text",
+      "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+      "distance": "cosine",
+      "top_k": 10,
+      "runtime": {
+        "max_concurrent_workers": 3,
+        "max_concurrent_llm": 2,
+        "max_concurrent_vlm": 1,
+        "max_concurrent_retrieval": 1,
+        "max_tool_calls_per_worker": 8,
+        "max_model_calls_per_worker": 20,
+        "max_protocol_corrections": 2,
+        "operation_timeout_seconds": 60,
+        "max_retries": 2
+      },
+      "review_runtime": {
+        "max_concurrent_reviewers": 2,
+        "max_model_calls_per_review": 3
+      },
+      "recovery": {
+        "max_research_model_calls": 200,
+        "max_research_tool_calls": 64
+      },
+      "planner_mode": "replay_original_verified_plan",
+      "provider_temperature": "provider_default_not_sent",
+      "source_label_policy": "Source-checked candidate labels; not independently human-approved exhaustive relevance labels."
+    },
+    "corpus_snapshot": {
+      "snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+      "papers": [
+        {
+          "paper_id": "blip-2201.12086v2",
+          "source_sha256": "63e0335cdd57c3d92b907b89c93d10befdd29b8aeed108091bbde90c121ed97a",
+          "metadata_sha256": "2171421d418f9e8757154030cb8279c33e8f8327325f44a0bed3a9e161a7823f",
+          "prepared_sha256": "0189764865606c14ef96e71c8c51cb03bcd49129a38f7f69985b59c361405628"
+        },
+        {
+          "paper_id": "clip-2103.00020v1",
+          "source_sha256": "6478b6e571a7d6fcd846d8ef77bfd60c285f1986abb8f475eedc43de403074f5",
+          "metadata_sha256": "8a0ca7cf8e96dbfcd740757918283ece5c30bfdab8c0f65cc59b2833a023abee",
+          "prepared_sha256": "7ea14fdd46b1f1aa57227e9227598ed98fd020eab5c5c8c86fd9c14558f6f463"
+        },
+        {
+          "paper_id": "flamingo-2204.14198v1",
+          "source_sha256": "79d131280bc79f659212f35f940dfd3a26013c73355a58eb2263410945780c4c",
+          "metadata_sha256": "e45db1efc4f2abb09026150a657d0749db1bc30e88c652788e36828f219caa7c",
+          "prepared_sha256": "1f74f19edc12fed812a9181b5a3bd6840295d6de992583e148cdcbf35102071a"
+        },
+        {
+          "paper_id": "blip-2-2301.12597v1",
+          "source_sha256": "0a4b93c402a6b8b0d2c5f438bbae31d447b17324b71c3e4fb6dab53e0e389bc5",
+          "metadata_sha256": "230d99c654921ea067df38070c235cdf71a10ac46b4fa5ab20eb5ccc9c4da7aa",
+          "prepared_sha256": "af6939d223423787a46bd72fc3ce68c942ecd7b7d6c3c3b07b87e273378c009c"
+        },
+        {
+          "paper_id": "llava-2304.08485v1",
+          "source_sha256": "0d5be40caf852d51a0e2636619fafc5b910788af9584fdc392abc652787560ed",
+          "metadata_sha256": "267e246529084cc39e4ed23729c5b27d020b7ab3fc9ba89c8fa08979e92f96ea",
+          "prepared_sha256": "201837067a067d3f11520fed8035163712755a8108179e4dc9115f99fa0932bb"
+        }
+      ],
+      "text_count": 46,
+      "figure_count": 5,
+      "corpus_validity_rate": 1.0,
+      "evidence_provenance_validity_rate": 1.0
+    },
+    "index_fingerprint": "266d1057540f44d6dc84826053d5a9b62e6b705fdc7dbbaad749fc1f4a43aeab",
+    "index_record_count": 46,
+    "embedding_dimension": 1024,
+    "preflight_embedding_calls": 1,
+    "models": {
+      "llm": {
+        "model": "deepseek-flash",
+        "provider_host": "api.deepseek.com"
+      },
+      "vlm": {
+        "model": "deepseek-flash",
+        "provider_host": "api.deepseek.com"
+      }
+    },
+    "provider_calls": 0,
+    "index_rebuilt": false,
+    "worker": "PaperResearchWorker",
+    "coverage_worker_enabled": false,
+    "case_timeout_seconds": 420
+  },
+  "counting_note": "LLM counts include physical retries; Worker budget model_calls may reserve VLM attempts. Planner and preflight costs are separate."
+}

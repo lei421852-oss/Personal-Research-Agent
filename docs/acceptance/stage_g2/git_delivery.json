@@ -1,0 +1,7 @@
+{
+  "branch": "docs/stage-g2-research-demo",
+  "execution_commit": "fb7a0e485174ecdbb022d6cbeb8608538c453042",
+  "documentation_commit_message": "docs: record real research demo and bounded failure",
+  "self_reference_note": "最终承载提交的SHA由Git和外部交付清单记录，避免自引用。",
+  "remote_operations": 0
+}

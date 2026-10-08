@@ -1,0 +1,43 @@
+{
+  "commands": [
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.run_research_demo",
+        "--help"
+      ],
+      "exit_code": 0,
+      "provider_calls": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.run_research_demo",
+        "--output-dir",
+        "artifacts/stage-g2-blip2-flamingo"
+      ],
+      "exit_code": 0,
+      "provider_calls": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.run_research_demo",
+        "--output-dir",
+        "artifacts/stage-g2-blip2-flamingo",
+        "--execute"
+      ],
+      "exit_code": 0,
+      "stdout_final": {
+        "status": "completed",
+        "report_status": "completed",
+        "llm_provider_attempts_observed": 31,
+        "index_unchanged": true
+      }
+    }
+  ],
+  "exit_code_note": "Process success is valid report delivery, not comparative task success."
+}

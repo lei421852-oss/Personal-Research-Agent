@@ -1,0 +1,37 @@
+[
+  {
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "pytest",
+      "-q"
+    ],
+    "exit_code": 0,
+    "output": "........................................................................ [  6%]\n........................................................................ [ 13%]\n........................................................................ [ 20%]\n........................................................................ [ 27%]\n........................................................................ [ 34%]\n........................................................................ [ 40%]\n........................................................................ [ 47%]\n........................................................................ [ 54%]\n........................................................................ [ 61%]\n........................................................................ [ 68%]\n........................................................................ [ 75%]\n........................................................................ [ 81%]\n........................................................................ [ 88%]\n........................................................................ [ 95%]\n..............................................                           [100%]\n=============================== warnings summary ===============================\n.venv/lib/python3.12/site-packages/fastapi/testclient.py:1\n  /home/lei/project/projects/personal-agent/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1054 passed, 1 warning in 15.16s\n"
+  },
+  {
+    "command": [
+      "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+      "check",
+      "app",
+      "tests",
+      "scripts",
+      "eval"
+    ],
+    "exit_code": 0,
+    "output": "All checks passed!\n"
+  },
+  {
+    "command": [
+      "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+      "format",
+      "--check",
+      "app",
+      "tests",
+      "scripts",
+      "eval"
+    ],
+    "exit_code": 0,
+    "output": "227 files already formatted\n"
+  }
+]
