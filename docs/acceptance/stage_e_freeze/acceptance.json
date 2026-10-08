@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "conclusion": "PASS",
+  "acceptance_time": "2026-10-08T08:52:37.522998+00:00",
+  "baseline": {
+    "recorded_at": "2026-10-08T08:24:06.239659+00:00",
+    "branch": "feat/Structured-tool-calling",
+    "git_commit_sha": "9ad7c5c7c2c8a6ffd57c864271b31046ef582f0e",
+    "initial_working_tree": "clean",
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "python_executable": "/home/lei/project/projects/personal-agent/.venv/bin/python",
+    "dependencies": {
+      "pydantic": "2.13.5",
+      "pytest": "8.4.2",
+      "chromadb": "1.5.9",
+      "PyMuPDF": "1.28.2",
+      "torch": "2.13.0+cu130",
+      "transformers": "4.57.6",
+      "openai": "2.54.0",
+      "fastapi": "0.142.2",
+      "starlette": "1.7.0",
+      "httpx": "0.28.1",
+      "python-dotenv": "1.2.4",
+      "ruff": "ruff 0.16.5"
+    },
+    "remote_operations": false,
+    "new_real_model_execution": false,
+    "historical_acceptance_reports": [
+      "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageAB最终验收报告.md",
+      "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageC最终验收报告.md",
+      "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageD最终验收报告.md",
+      "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageE验收报告.md"
+    ]
+  },
+  "freeze_snapshot_commit_sha": "7c36b7700e7e507d42876098288d16cbb5095cd3",
+  "tested_runtime_commit_sha": "9ad7c5c7c2c8a6ffd57c864271b31046ef582f0e",
+  "runtime_source_changed": false,
+  "tests": {
+    "passed": 756,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "warnings": 1,
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "--junitxml=docs/acceptance/stage_e_freeze/test_results.xml"
+    ],
+    "started_at": "2026-10-08T08:24:12.764652+00:00",
+    "elapsed_seconds": 12.168441192989121,
+    "exit_code": 0,
+    "log": "test_results.txt",
+    "junit": "test_results.xml"
+  },
+  "static_checks": [
+    {
+      "command": [
+        "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+        "check",
+        "app",
+        "tests",
+        "scripts",
+        "eval"
+      ],
+      "exit_code": 0,
+      "executed_at": "2026-10-08T08:24:21.599200+00:00"
+    },
+    {
+      "command": [
+        "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+        "format",
+        "--check",
+        "app",
+        "tests",
+        "scripts",
+        "eval"
+      ],
+      "exit_code": 0,
+      "executed_at": "2026-10-08T08:24:21.609176+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "executed_at": "2026-10-08T08:24:21.611748+00:00"
+    }
+  ],
+  "modules": {
+    "Planner": {
+      "status": "PASS",
+      "test_modules": [
+        "test_planner"
+      ],
+      "real_evidence": "evidence/2026-10-07-多模态论文研究智能体-ResearchPlanner三条真实Smoke.json",
+      "scope": "Valid target IDs, dynamic dimensions and exact requirement expansion; Stage E replays the original real plan, zero new Planner calls.",
+      "passed_test_cases": 44
+    },
+    "Worker": {
+      "status": "PASS",
+      "test_modules": [
+        "test_async_adapters",
+        "test_async_runtime",
+        "test_orchestrator",
+        "test_paper_worker",
+        "test_requirement_state",
+        "test_worker_protocol_recovery"
+      ],
+      "scope": "Resource/worker semaphore caps, cancellation, retry, timeouts, model/tool budgets and single-action recovery.",
+      "passed_test_cases": 135
+    },
+    "Reviewer": {
+      "status": "PASS",
+      "test_modules": [
+        "test_review_validation",
+        "test_reviewer",
+        "test_review_runtime"
+      ],
+      "scope": "Exact claim/citation binding, semantic pass/reject and provider-unavailable separation; review correctness is not independently measured accuracy.",
+      "passed_test_cases": 67
+    },
+    "Recovery": {
+      "status": "PASS",
+      "test_modules": [
+        "test_recovery_eligibility",
+        "test_recovery_worker",
+        "test_recovery_merge",
+        "test_recovery_orchestrator"
+      ],
+      "evidence": {
+        "stage_d_A": {
+          "mode": "controlled_initial_rejection_real_worker_reviewer_synthesis",
+          "real_provider_used": true,
+          "controlled_initial_rejection": true,
+          "recovery_rounds": 1,
+          "attempted": 1,
+          "passed": 1,
+          "history_entries": 20,
+          "recovery_worker_llm_calls": 1,
+          "recovery_reviewer_model_calls": 1,
+          "synthesis_model_calls": 1,
+          "additional_model_calls": 3,
+          "verified_requirements": 5,
+          "missing_requirements": 10
+        },
+        "stage_d_B": {
+          "mode": "controlled_fake_repeat_rejection",
+          "real_provider_used": false,
+          "controlled_initial_rejection": true,
+          "recovery_rounds": 1,
+          "attempted": 1,
+          "passed": 0,
+          "history_entries": 20,
+          "recovery_worker_llm_calls": 1,
+          "recovery_reviewer_model_calls": 1,
+          "synthesis_model_calls": 1,
+          "additional_model_calls": 3,
+          "verified_requirements": 4,
+          "missing_requirements": 11
+        },
+        "stage_d_C": {
+          "mode": "no_prepared_corpus_skip_scripted_synthesis",
+          "real_provider_used": false,
+          "controlled_initial_rejection": false,
+          "recovery_rounds": 0,
+          "attempted": 0,
+          "passed": 0,
+          "history_entries": 18,
+          "recovery_worker_llm_calls": 0,
+          "recovery_reviewer_model_calls": 0,
+          "synthesis_model_calls": 1,
+          "additional_model_calls": 1,
+          "verified_requirements": 5,
+          "missing_requirements": 10
+        }
+      },
+      "budget_exhaustion_evidence": "test_coverage.json: special_regressions; all cases passed in this run.",
+      "passed_test_cases": 57
+    },
+    "Synthesis": {
+      "status": "PASS",
+      "test_modules": [
+        "test_synthesis_input",
+        "test_synthesis_agent",
+        "test_synthesis_validator",
+        "test_synthesis_runtime"
+      ],
+      "scope": "Rebuilt verified inputs, rejected/unavailable isolation, comparison whitelist, original authoritative text and missing states; deterministic degraded report revalidated.",
+      "passed_test_cases": 64
+    },
+    "Evaluation": {
+      "status": "PASS",
+      "test_modules": [
+        "test_cross_paper_evaluation",
+        "test_runners_metrics",
+        "test_dataset",
+        "test_corpus_provenance",
+        "test_corpus_isolation",
+        "test_stage_e_index"
+      ],
+      "scope": "368 read-only artifact checks, independently recalculated coverage, costs, Recall and source/claim identities; real and scripted evidence separated.",
+      "passed_test_cases": 93
+    }
+  },
+  "stage_d_evidence": {
+    "stage_d_A": {
+      "mode": "controlled_initial_rejection_real_worker_reviewer_synthesis",
+      "real_provider_used": true,
+      "controlled_initial_rejection": true,
+      "recovery_rounds": 1,
+      "attempted": 1,
+      "passed": 1,
+      "history_entries": 20,
+      "recovery_worker_llm_calls": 1,
+      "recovery_reviewer_model_calls": 1,
+      "synthesis_model_calls": 1,
+      "additional_model_calls": 3,
+      "verified_requirements": 5,
+      "missing_requirements": 10
+    },
+    "stage_d_B": {
+      "mode": "controlled_fake_repeat_rejection",
+      "real_provider_used": false,
+      "controlled_initial_rejection": true,
+      "recovery_rounds": 1,
+      "attempted": 1,
+      "passed": 0,
+      "history_entries": 20,
+      "recovery_worker_llm_calls": 1,
+      "recovery_reviewer_model_calls": 1,
+      "synthesis_model_calls": 1,
+      "additional_model_calls": 3,
+      "verified_requirements": 4,
+      "missing_requirements": 11
+    },
+    "stage_d_C": {
+      "mode": "no_prepared_corpus_skip_scripted_synthesis",
+      "real_provider_used": false,
+      "controlled_initial_rejection": false,
+      "recovery_rounds": 0,
+      "attempted": 0,
+      "passed": 0,
+      "history_entries": 18,
+      "recovery_worker_llm_calls": 0,
+      "recovery_reviewer_model_calls": 0,
+      "synthesis_model_calls": 1,
+      "additional_model_calls": 1,
+      "verified_requirements": 5,
+      "missing_requirements": 10
+    }
+  },
+  "stage_e_real_evidence": {
+    "two_paper": {
+      "case_id": "two-paper-bridge",
+      "status": "completed",
+      "total_requirements": 2,
+      "verified_requirements": 2,
+      "verified_coverage": 1.0,
+      "cross_paper_comparison_count": 1,
+      "cross_paper_citation_validity_rate": 1.0,
+      "comparison_detection_method": "Structural claim membership, paper scope, dimension and exact evidence-union checks; not semantic entailment.",
+      "citation_validation_failures": 0,
+      "model_calls": 9,
+      "tool_calls": 2,
+      "vlm_tool_attempts": 0,
+      "missing": [],
+      "protocol_corrections": 0,
+      "provider_evidence_level": "Saved local execution traces and aggregate adapter counters; no independent Provider billing receipt.",
+      "semantic_accuracy_measured": false
+    },
+    "three_paper": {
+      "case_id": "three-paper-core",
+      "status": "completed",
+      "total_requirements": 15,
+      "verified_requirements": 14,
+      "verified_coverage": 0.9333333333333333,
+      "cross_paper_comparison_count": 4,
+      "cross_paper_citation_validity_rate": 1.0,
+      "comparison_detection_method": "Structural claim membership, paper scope, dimension and exact evidence-union checks; not semantic entailment.",
+      "citation_validation_failures": 0,
+      "model_calls": 41,
+      "tool_calls": 11,
+      "vlm_tool_attempts": 0,
+      "missing": [
+        {
+          "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "downstream_capabilities",
+          "status": "insufficient_evidence",
+          "issue": null
+        }
+      ],
+      "protocol_corrections": 6,
+      "provider_evidence_level": "Saved local execution traces and aggregate adapter counters; no independent Provider billing receipt.",
+      "semantic_accuracy_measured": false
+    },
+    "retrieval": {
+      "before_stage_d_corpus": {
+        "sample_count": 15,
+        "recall_at_5": 0.24000000000000002,
+        "recall_at_10": 0.3333333333333333
+      },
+      "after_stage_e_corpus": {
+        "sample_count": 15,
+        "recall_at_5": 0.74,
+        "recall_at_10": 0.9666666666666667
+      }
+    }
+  },
+  "artifact_audit": {
+    "conclusion": "PASS",
+    "checks": 368,
+    "exit_code": 0,
+    "report": "evidence_audit.json",
+    "execution": "evidence_audit_execution.json"
+  },
+  "remaining_risks": [
+    {
+      "severity": "P2",
+      "blocking": false,
+      "code": "remaining_evidence_gap",
+      "description": "Flamingo downstream_capabilities remains insufficient_evidence: req_33be67ee76e452d5de235b6a8e528afa. Report preserves the gap; no corpus expansion or model-memory completion."
+    },
+    {
+      "severity": "P2",
+      "blocking": false,
+      "code": "policy_protocol_inefficiency",
+      "description": "Three-paper real trace contains six bounded multiple-action corrections plus invalid argument feedback. Requests recover and finish within existing limits; optimization deferred."
+    },
+    {
+      "severity": "non_blocking",
+      "code": "stale_preflight_reason",
+      "description": "Historical retrieval artifact retains its preflight reason despite retrieval_executed status and complete actual rows. Original artifact is preserved; execution classification follows validated status/counters/results."
+    },
+    {
+      "severity": "INFO",
+      "blocking": false,
+      "code": "semantic_accuracy_not_measured",
+      "description": "Citation structural validity and Reviewer pass-based coverage are not human semantic accuracy or a true hallucination rate; labels remain source_checked_candidates."
+    },
+    {
+      "severity": "INFO",
+      "blocking": false,
+      "code": "existing_real_artifacts_audited",
+      "description": "No new real-model calls in this acceptance. Historical Provider execution is checked against saved Worker/Reviewer/Synthesis traces and aggregate adapter counters; Stage D initial rejection is controlled."
+    }
+  ],
+  "freeze_blockers": [],
+  "artifact_manifest": "artifact_manifest.json",
+  "freeze_manifest": "freeze_manifest.json",
+  "planned_tag": "stage-e-freeze-v1",
+  "git_status_at_snapshot": "clean",
+  "new_real_model_calls": 0,
+  "remote_operations": false,
+  "formal_freeze_recommended": true
+}

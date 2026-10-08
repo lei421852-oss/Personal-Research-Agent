@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "verified_at": "2026-10-08T08:55:38.687865+00:00",
+  "files_checked": 292,
+  "fingerprint_failures": [],
+  "fingerprint_root_sha256": "44c7afd36c793eff86faed077b7c917a5c6a200e3d652bfbf5b19e83cff0362e",
+  "runtime_diff_from_tested_commit": [],
+  "static_checks": [
+    {
+      "command": [
+        "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+        "check",
+        "app",
+        "tests",
+        "scripts",
+        "eval"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+        "format",
+        "--check",
+        "app",
+        "tests",
+        "scripts",
+        "eval"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+        "check",
+        "docs/acceptance/stage_e_freeze/audit_evidence.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+        "format",
+        "--check",
+        "docs/acceptance/stage_e_freeze/audit_evidence.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "acceptance_conclusion": "PASS"
+}

@@ -1,0 +1,20 @@
+$ /home/lei/project/projects/personal-rag/.venv/bin/ruff check app tests scripts eval
+All checks passed!
+exit_code=0
+
+$ /home/lei/project/projects/personal-rag/.venv/bin/ruff format --check app tests scripts eval
+185 files already formatted
+exit_code=0
+
+$ /home/lei/project/projects/personal-rag/.venv/bin/ruff check docs/acceptance/stage_e_freeze/audit_evidence.py
+All checks passed!
+exit_code=0
+
+$ /home/lei/project/projects/personal-rag/.venv/bin/ruff format --check docs/acceptance/stage_e_freeze/audit_evidence.py
+1 file already formatted
+exit_code=0
+
+$ git diff --check
+exit_code=0
+
+Freeze SHA256 validation: PASS; 292 files matched; runtime unchanged.
