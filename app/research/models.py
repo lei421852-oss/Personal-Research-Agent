@@ -205,9 +205,13 @@ class WorkerResult(ResearchModel):
     attempts: int = Field(default=1, ge=0)
     latency_ms: float = Field(default=0, ge=0)
     trace: WorkerTrace | None = None
+    # 来自运行时核验后的观察账本；候选关联和最终引用不能代替此集合。
+    observed_evidence_ids: list[NonEmpty] = Field(default_factory=list)
 
     @model_validator(mode="after")
     def execution_invariants(self):
+        if len(set(self.observed_evidence_ids)) != len(self.observed_evidence_ids):
+            raise ValueError("Duplicate observed evidence ID")
         ids = [item.requirement_id for item in self.requirements]
         if len(ids) != len(set(ids)):
             raise ValueError("Duplicate worker result requirement")

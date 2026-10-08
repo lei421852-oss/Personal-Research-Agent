@@ -66,6 +66,10 @@ insufficient_evidence 是合法 resolved 结果，无 claim/证据。模型/工�
 
 模型只接收未解决问题、已解决摘要、去重证据引用和最近 Observation，不接收无限增长的完整对话。上下文字符串副本有长度限制，原证据和最终 claim 不被截断。相同成功/空 lookup 不再次执行，通过 redundant_action 反馈让模型改动或复用。
 
+Stage A 增加 requirement_states：每项显式提供 status、candidate_evidence_ids、search_attempts、last_new_evidence_count，并保留 resolved/unresolved 分区。候选关联只表达调查来源，不表示证据支持该需求；只有模型显式提交 resolution 才更新 supported/insufficient_evidence。模型在继续检索前先检查是否可以使用已有候选解决一个或多个需求。
+
+research action 的可选 requirement_ids 只属于 Worker 本地封装，Controller 校验后剥离；缺省表示所有 pending 需求的共享调查，不修改全局 Tool Contract。每需求的新增数按候选关联计算，全局新增数按实际观察账本计算；已观察证据首次关联另一需求时允许前者为正、后者为零。search_attempts 只记实际调度的逻辑 search_text，不包括拒绝动作或 Provider 物理重试。WorkerResult.observed_evidence_ids 来自已核验的观察账本，后续 Reviewer 验证引用时不能用候选集合代替它。
+
 tool_calls 统计进入 ToolExecutor 的物理执行尝试，重试也消耗工具预算；Controller 拒绝的参数和需求更新不计工具调用。model_calls 是保守的模型预算计数：LLM 适配调用 + analyze_figure 执行尝试，分别提供 llm_calls、vlm_tool_attempts。VLM 预处理可能在实际 client 调用前失败，因此这些数不是 Provider 计费次数；取消结果也是当时快照。VLM 重试同时受剩余模型/工具预算限制。
 
 ## 策略协议自纠错
@@ -127,3 +131,5 @@ Worker Pool 初始实现新增 101 项 Fake/确定性测试，原有 372 项保�
 协议恢复修复另增 19 项确定性测试，原有 473 项全部保留，当前全量 492 passed。覆盖多动作拒绝到单动作恢复、纠正次数耗尽、模型预算优先、工具预算不扣、多动作 resolution 无副作用、已有结果保留、上下文反馈和公开 Trace 安全性。Ruff、147 个 Python 文件格式检查、97 个冻结文件指纹以及原 Planner 的 11 个模型 AST 比对通过。
 
 Worker Pool 初始验收仅验证真实 Runner 的计划模式；本次协议恢复采用 Fake/确定性验证，没有重跑真实 Worker smoke、正式研究实验或 Benchmark。真实模型收到反馈后是否恢复合规仍需由真实 Smoke 确认。没有 Reviewer、Synthesis、跨论文答案、Checkpoint、消息队列、ProcessPool 或新检索算法。
+
+Stage A（2026-10-08）新增 21 项确定性测试，全量 513 passed。沿用历史 planner-smoke-01 的同一问题、3 篇论文、15 条需求和 Runtime Config，max_protocol_corrections 保持 2。Flamingo 从 failed/protocol_correction_exhausted 变为 completed：5 supported，5 tool calls、9 model calls、2 protocol corrections、0 provider retry，约 26.51 秒。出现两个多动作拒绝、随后合法动作恢复以及检索新增证据为零；模型显式批量解决前 4 项，再解决最后一项。三个 Worker 都 completed，但 BLIP-2/LLaVA 共 10 项为 insufficient，不产生虚假引用。这是一次工程回归，未证明语义 claim 全部正确或行为稳定性，也未记录历史 Provider 配置用于逐值比对。

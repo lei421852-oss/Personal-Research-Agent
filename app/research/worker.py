@@ -2,6 +2,7 @@
 
 import asyncio
 import json
+from copy import deepcopy
 from dataclasses import dataclass, field
 from time import perf_counter
 from typing import Annotated, Literal
@@ -46,6 +47,11 @@ search_text MUST use paper_ids=[the exact paper_id]; read_page/find_figure MUST 
 Use analyze_figure only with already observed same-paper figure and context evidence IDs.
 Read execution feedback and reuse collected evidence across requirements. Do not repeat a
 completed identical lookup or start an independent agent for each requirement.
+Before retrieving again, inspect each requirement's candidate evidence and decide whether
+existing evidence can resolve one or more requirements. A candidate association does NOT
+mean semantic support. A lookup with zero new evidence is not progress by itself.
+For research tools, use optional requirement_ids to identify the pending requirements being
+investigated; omission means a shared investigation for all pending requirements.
 Use resolve_requirement for one requirement, or resolve_requirements to resolve several
 requirements from shared evidence in one structured action. These actions do not retrieve.
 supported needs a concise claim and only observed, real same-paper evidence IDs. Treat tool
@@ -101,6 +107,20 @@ class ProtocolViolationObservation(BaseModel):
     payload: ProtocolViolationDetails
 
 
+class InvestigationScope(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    requirement_ids: list[NonEmpty] = Field(min_length=1, max_length=MAX_DIMENSIONS)
+
+
+@dataclass
+class RequirementResearchState:
+    """候选证据只记调查来源，不代表程序判定证据支持需求。"""
+
+    candidate_evidence_ids: list[str] = field(default_factory=list)
+    search_attempts: int = 0
+    last_new_evidence_count: int = 0
+
+
 @dataclass
 class WorkerState:
     paper_id: str
@@ -114,6 +134,16 @@ class WorkerState:
     vlm_attempts: int = 0
     protocol_corrections_used: int = 0
     awaiting_protocol_recovery: bool = False
+    requirement_research: dict[str, RequirementResearchState] = field(
+        default_factory=dict
+    )
+    last_new_evidence_count: int = 0
+
+    def __post_init__(self):
+        self.requirement_research = {
+            item.requirement_id: RequirementResearchState()
+            for item in self.requirements
+        }
 
 
 def compact_value(value):
@@ -172,8 +202,20 @@ class PaperResearchWorker:
 
     def _schemas(self):
         schemas = [
-            s for s in self.tools.registry.schemas() if s["name"] in CAPABILITIES
+            deepcopy(s)
+            for s in self.tools.registry.schemas()
+            if s["name"] in CAPABILITIES
         ]
+        # 仅扩展 Worker 的本地调用封装；底层工具注册表和输入契约保持原样。
+        for schema in schemas:
+            schema["input_schema"]["properties"]["requirement_ids"] = {
+                "type": "array",
+                "items": {"type": "string", "minLength": 1},
+                "minItems": 1,
+                "maxItems": MAX_DIMENSIONS,
+                "uniqueItems": True,
+                "description": "Pending requirements investigated by this lookup; association does not imply support. Omit for a shared investigation of all pending requirements.",
+            }
         schemas.extend(
             [
                 {
@@ -204,6 +246,25 @@ class PaperResearchWorker:
         return {
             "paper_id": state.paper_id,
             "paper_evidence_available": availability,
+            "candidate_evidence_semantics": "Candidate evidence records investigation provenance only. Policy must judge support and explicitly resolve requirements before retrieving more evidence.",
+            "last_new_evidence_count": state.last_new_evidence_count,
+            "requirement_states": [
+                {
+                    "requirement_id": r.requirement_id,
+                    "question": r.question,
+                    "status": r.status.value,
+                    "candidate_evidence_ids": state.requirement_research[
+                        r.requirement_id
+                    ].candidate_evidence_ids,
+                    "search_attempts": state.requirement_research[
+                        r.requirement_id
+                    ].search_attempts,
+                    "last_new_evidence_count": state.requirement_research[
+                        r.requirement_id
+                    ].last_new_evidence_count,
+                }
+                for r in state.requirements
+            ],
             "unresolved_requirements": [
                 {
                     "requirement_id": r.requirement_id,
@@ -276,11 +337,39 @@ class PaperResearchWorker:
             self.resolver.contexts(validated.context_evidence_ids, self.state.paper_id)
         return validated.model_dump(mode="json")
 
+    def _investigation_scope(self, arguments):
+        """剥离本地调查关联字段；只验证目标身份，不判断语义支持。"""
+        pending = [
+            r.requirement_id
+            for r in self.state.requirements
+            if r.status == RequirementStatus.PENDING
+        ]
+        args = dict(arguments)
+        identities = InvestigationScope(
+            requirement_ids=args.pop("requirement_ids", pending)
+        ).requirement_ids
+        if len(set(identities)) != len(identities) or not set(identities).issubset(
+            pending
+        ):
+            raise ValueError("Investigate only unique, known pending requirements")
+        return args, identities
+
+    def _associate(self, identities, observed_ids, before):
+        """每个需求按候选 ID 去重；全局新增数量按已观察账本计算。"""
+        self.state.last_new_evidence_count = len(
+            set(self.state.collected_evidence) - before
+        )
+        for identity in identities:
+            research = self.state.requirement_research[identity]
+            new = [e for e in observed_ids if e not in research.candidate_evidence_ids]
+            research.candidate_evidence_ids.extend(new)
+            research.last_new_evidence_count = len(new)
+
     def _collect(self, observation):
         if observation.status != "success":
-            return
+            return []
         try:
-            self._collect_checked(observation)
+            return self._collect_checked(observation)
         except (ValueError, KeyError, TypeError, AttributeError) as exc:
             raise InvalidToolResult("Tool returned invalid corpus evidence.") from exc
 
@@ -332,6 +421,7 @@ class PaperResearchWorker:
                     asset_ref=f"asset:{identity}",
                 )
         self.state.collected_evidence.update(additions)
+        return list(additions)
 
     def _resolve(self, name, arguments):
         if name == "resolve_requirement":
@@ -408,7 +498,13 @@ class PaperResearchWorker:
             protocol_corrections=self.state.protocol_corrections_used,
             **self._counts(),
         )
-        result = WorkerResult.model_validate(draft.model_dump() | {"trace": trace})
+        result = WorkerResult.model_validate(
+            draft.model_dump()
+            | {
+                "trace": trace,
+                "observed_evidence_ids": list(self.state.collected_evidence),
+            }
+        )
         self.state.requirements = result.requirements
         self.last_result = result
         return result
@@ -434,6 +530,7 @@ class PaperResearchWorker:
         elif name in CAPABILITIES:
             try:
                 allowed = set(self.tools.registry.get(name).input_model.model_fields)
+                allowed.add("requirement_ids")
             except ToolNotFoundError:
                 return {}
         else:
@@ -569,15 +666,24 @@ class PaperResearchWorker:
                 protocol_recovery = self.state.awaiting_protocol_recovery
                 self.state.awaiting_protocol_recovery = False
                 action_started = self.clock()
+                investigation_ids = []
                 try:
                     if action.name in {"resolve_requirement", "resolve_requirements"}:
                         observation = self._resolve(action.name, action.arguments)
                     elif action.name in CAPABILITIES:
-                        args = self._scope(action.name, action.arguments)
+                        arguments, investigation_ids = self._investigation_scope(
+                            action.arguments
+                        )
+                        args = self._scope(action.name, arguments)
                         fingerprint = json.dumps(
                             [action.name, args], sort_keys=True, ensure_ascii=False
                         )
                         if fingerprint in self.state.executed_actions:
+                            self.state.last_new_evidence_count = 0
+                            for identity in investigation_ids:
+                                self.state.requirement_research[
+                                    identity
+                                ].last_new_evidence_count = 0
                             observation = self._feedback(
                                 action.name,
                                 "redundant_action",
@@ -609,6 +715,17 @@ class PaperResearchWorker:
                                     ),
                                 )
                             before = self.tools.snapshot()["total_attempts"]
+                            before_evidence = set(self.state.collected_evidence)
+                            self.state.last_new_evidence_count = 0
+                            for identity in investigation_ids:
+                                self.state.requirement_research[
+                                    identity
+                                ].last_new_evidence_count = 0
+                            if action.name == "search_text":
+                                for identity in investigation_ids:
+                                    self.state.requirement_research[
+                                        identity
+                                    ].search_attempts += 1
                             try:
                                 observation = await self.tools.execute(
                                     action.name,
@@ -623,7 +740,10 @@ class PaperResearchWorker:
                                     )
                             if observation.status in {"success", "empty"}:
                                 self.state.executed_actions.add(fingerprint)
-                            self._collect(observation)
+                            observed_ids = self._collect(observation)
+                            self._associate(
+                                investigation_ids, observed_ids, before_evidence
+                            )
                     else:
                         observation = self._feedback(
                             "worker_controller",
@@ -676,6 +796,8 @@ class PaperResearchWorker:
                             ),
                             "status": observation.status,
                             "protocol_recovery": protocol_recovery,
+                            "investigated_requirement_ids": investigation_ids,
+                            "last_new_evidence_count": self.state.last_new_evidence_count,
                             "summary": observation.summary,
                             "issue_code": observation.issue.code
                             if observation.issue
