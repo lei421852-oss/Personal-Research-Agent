@@ -130,6 +130,6 @@ Worker Pool 初始实现新增 101 项 Fake/确定性测试，原有 372 项保�
 
 协议恢复修复另增 19 项确定性测试，原有 473 项全部保留，当前全量 492 passed。覆盖多动作拒绝到单动作恢复、纠正次数耗尽、模型预算优先、工具预算不扣、多动作 resolution 无副作用、已有结果保留、上下文反馈和公开 Trace 安全性。Ruff、147 个 Python 文件格式检查、97 个冻结文件指纹以及原 Planner 的 11 个模型 AST 比对通过。
 
-Worker Pool 初始验收仅验证真实 Runner 的计划模式；本次协议恢复采用 Fake/确定性验证，没有重跑真实 Worker smoke、正式研究实验或 Benchmark。真实模型收到反馈后是否恢复合规仍需由真实 Smoke 确认。没有 Reviewer、Synthesis、跨论文答案、Checkpoint、消息队列、ProcessPool 或新检索算法。
+Worker Pool 初始验收仅验证真实 Runner 的计划模式；随后协议恢复修复采用 Fake/确定性验证，当时没有重跑真实 Worker smoke。该阶段尚无 Reviewer；不含 Synthesis、跨论文答案、Checkpoint、消息队列、ProcessPool 或新检索算法。后续独立审核见 [Reviewer 架构](evidence-review.md)。
 
 Stage A（2026-10-08）新增 21 项确定性测试，全量 513 passed。沿用历史 planner-smoke-01 的同一问题、3 篇论文、15 条需求和 Runtime Config，max_protocol_corrections 保持 2。Flamingo 从 failed/protocol_correction_exhausted 变为 completed：5 supported，5 tool calls、9 model calls、2 protocol corrections、0 provider retry，约 26.51 秒。出现两个多动作拒绝、随后合法动作恢复以及检索新增证据为零；模型显式批量解决前 4 项，再解决最后一项。三个 Worker 都 completed，但 BLIP-2/LLaVA 共 10 项为 insufficient，不产生虚假引用。这是一次工程回归，未证明语义 claim 全部正确或行为稳定性，也未记录历史 Provider 配置用于逐值比对。

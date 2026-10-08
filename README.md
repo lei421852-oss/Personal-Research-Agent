@@ -12,7 +12,7 @@
 | **Understand · 读图** | 将 Figure、caption 与已准备的页面文本一起交给 VLM，分开记录观察与解释 |
 | **Decide · 选动作** | 模型看到每轮 Observation 后，自主选择工具、补充上下文或调用 `finish` |
 
-**当前规模：25 篇论文发现元数据；其中 3 篇具备 25 条 TextEvidence、3 条 FigureEvidence。V0.1 冻结评测集仍为 40 题。** V0.1 基线为 **257 passed**；当前全量 **492 passed**（2026-10-08）。真实 Demo 与模拟验证分别标记；完整三系统正式比较尚未完成。
+**当前规模：25 篇论文发现元数据；其中 3 篇具备 25 条 TextEvidence、3 条 FigureEvidence。V0.1 冻结评测集仍为 40 题。** V0.1 基线为 **257 passed**；当前全量 **582 passed**（2026-10-08）。真实 Demo 与模拟验证分别标记；完整三系统正式比较尚未完成。
 
 快速阅读：[架构](#系统架构) · [三个-demo](#三个-demo) · [失败分析](#失败分析) · [快速开始](#快速开始) · [限制](#当前限制)
 
@@ -80,7 +80,15 @@ python -m scripts.smoke_async_research --plan artifacts/research-planner-smoke.j
 # 去掉 --validate-only 后才会调用真实模型并执行 Worker。
 ```
 
-本阶段新增 101 项 Fake/确定性测试，包括 10 Workers / 上限 3 的真实重叠、独立资源峰值、共享证据、故障隔离、取消、重试及物理预算。它们验证工程行为，不是正式研究性能结果。现有 API/UI 未切换到 Worker Pool，未实现 Reviewer 或跨论文 Synthesis。详见 [Worker Pool 接口、指标和真实运行方式](docs/async-research.md)。
+Worker Pool 初始阶段新增 101 项 Fake/确定性测试，包括 10 Workers / 上限 3 的真实重叠、独立资源峰值、共享证据、故障隔离、取消、重试及物理预算。它们验证工程行为，不是正式研究性能结果。现有 API/UI 未切换到 Worker Pool；该初始阶段尚无 Reviewer 或跨论文 Synthesis。详见 [Worker Pool 接口、指标和真实运行方式](docs/async-research.md)。
+
+## 需求中心状态与独立证据审核
+
+Worker 按需求记录候选证据、逻辑搜索次数和最后新增数，显式区分 resolved/unresolved。候选只表示调查来源；语义充分性和 resolution 仍由 Policy 决定。相同原计划和预算的 Flamingo 工程回归从 protocol_correction_exhausted 变为 completed，恢复额度保持 2，5 条需求显式 supported；它们仍需独立审核，不能仅凭身份校验当作正确答案。
+
+`DeterministicReviewValidator → EvidenceReviewer → ReviewResult` 先验证结构、当前 Corpus 身份、同论文来源和 Worker 观察账本，再审核完整 claim 的语义支持。Reviewer 没有研究工具，不改 claim、不搜索、不生成跨论文答案。审核以固定数量消费者与独立 Reviewer/LLM 配额执行；语义 rejected 不重试，Provider 失败保持 typed not_reviewable；不足和执行失败跳过模型。
+
+Stage A 新增 21 项、Stage B 新增 69 项确定性测试。一次真实审核中，Flamingo 5 项 passed、5 次模型调用、0 重试；BLIP-2/LLaVA 10 项 insufficient 全部跳过，0 Reviewer 调用。此结果只验证工程链路，不是模型正确率 Benchmark；现有 API/UI 未接入审核，也没有 Reviewer→Worker 恢复或 Synthesis。详见 [审核架构、契约与运行方式](docs/evidence-review.md)。
 
 ## 为什么做这个项目？
 
