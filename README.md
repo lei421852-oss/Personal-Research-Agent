@@ -12,9 +12,15 @@
 | **Understand · 读图** | 将 Figure、caption 与已准备的页面文本一起交给 VLM，分开记录观察与解释 |
 | **Decide · 选动作** | 模型看到每轮 Observation 后，自主选择工具、补充上下文或调用 `finish` |
 
-**当前规模：25 篇论文发现元数据；其中 3 篇具备 25 条 TextEvidence、3 条 FigureEvidence。V0.1 冻结评测集仍为 40 题。** V0.1 基线为 **257 passed**；当前全量 **703 passed**（2026-10-08）。真实 Demo 与模拟验证分别标记；完整三系统正式比较尚未完成。
+**当前规模：25 篇论文发现元数据；V0.1 默认语料仍是 3 篇、25 条 TextEvidence、3 条 FigureEvidence。Stage E 显式研究语料新增 BLIP-2/LLaVA，合计 5 篇、46 条 TextEvidence、5 条 FigureEvidence。V0.1 冻结评测集仍为 40 题。** V0.1 基线为 **257 passed**；当前全量 **756 passed**（2026-10-08），详见 [Stage E 验收说明](docs/stage-e-evaluation.md)。真实 Demo 与模拟验证分别标记；完整三系统正式比较尚未完成。
 
 快速阅读：[架构](#系统架构) · [三个-demo](#三个-demo) · [失败分析](#失败分析) · [快速开始](#快速开始) · [限制](#当前限制)
+
+## Stage E · 语料来源与跨论文评测入口
+
+新增 BLIP-2 `2301.12597v1` 和 LLaVA `2304.08485v1` 的固定 PDF 段落与 Figure，分别记录来源哈希、页面映射、块坐标、图注和关联证据。来源校验通过后才加载研究语料；原 Flamingo Evidence、V0.1 默认语料与冻结 40 题保持不变。
+
+Stage E 冻结 22 个研究案例，包含原始 15 个 Paper×Dimension 需求。重放此前真实 Planner 计划后，复用既有 Worker → Reviewer → 一轮 Recovery → Synthesis。双/三论文 Scripted Smoke 验证了流程和多来源引用；**真实 Embedding Recall 和真实跨论文研究评测尚未执行，不能据此声称研究质量或 Coverage 提升。** 默认 CLI 只预检，真实运行需显式 `--execute` 并先由用户确认。详见 [语料、指标、运行命令和已知限制](docs/stage-e-evaluation.md)。
 
 ## V0.2 Phase 1 · 论文发现
 
