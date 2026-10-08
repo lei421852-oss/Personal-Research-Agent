@@ -1,0 +1,262 @@
+{
+  "stage": "F3.1",
+  "baseline_head": "263a779f4e2ef3435caea506a3c52ec554702764",
+  "branch": "feature/stage-f3-1-worker-coverage",
+  "stage_e_tag": "2cfb1eda67f7fdf4f587f603556d789de1bc46e5",
+  "frozen_file_count": 292,
+  "frozen_fingerprint_root_sha256": "44c7afd36c793eff86faed077b7c917a5c6a200e3d652bfbf5b19e83cff0362e",
+  "frozen_mismatches": [],
+  "preexisting_untracked_files": [
+    "docs/diagnostics/quality_failures_2026_10_09/artifact_manifest.json",
+    "docs/diagnostics/quality_failures_2026_10_09/findings.json",
+    "docs/diagnostics/quality_failures_2026_10_09/report.md",
+    "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-frozen-trainable-scope.md",
+    "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-language-model.md",
+    "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-training-objective.md",
+    "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-vision-encoder.md",
+    "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-vision-language-bridge.md",
+    "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-llava-frozen-trainable-scope.md",
+    "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-llava-language-model.md",
+    "docs/diagnostics/quality_failures_2026_10_09/verification.json",
+    "scripts/export_quality_failure_traces.py",
+    "tests/research_quality/test_failure_trace_export.py"
+  ],
+  "protected_artifacts": [
+    {
+      "path": "data/benchmark/research_quality_v1/abstention_cases.jsonl",
+      "sha256": "10c588ee7e307cd5429303d180ae3720460941ec86e749f5c021021eba90b113",
+      "bytes": 27947
+    },
+    {
+      "path": "data/benchmark/research_quality_v1/annotation_guidelines.md",
+      "sha256": "d29a6afe14353cbdf9925ca21376025e836d61a0c9b49cec773ed9a649f2fd8b",
+      "bytes": 8119
+    },
+    {
+      "path": "data/benchmark/research_quality_v1/claim_cases.jsonl",
+      "sha256": "2af51e9aafb9b4f091acf2ed583a007ed83b7db58fd8157fe476bce4cf4cadc7",
+      "bytes": 74418
+    },
+    {
+      "path": "data/benchmark/research_quality_v1/comparison_cases.jsonl",
+      "sha256": "041b75a287e4cae074618022dea95b25bc40f49fa53f9c8cf760eb60806dd41e",
+      "bytes": 82587
+    },
+    {
+      "path": "data/benchmark/research_quality_v1/manifest.json",
+      "sha256": "d7fd2e2d7750a7f18a0bf533db6897ffd6a9866c8e78ceaf8bcda587d51bfeb5",
+      "bytes": 1981
+    },
+    {
+      "path": "data/benchmark/research_quality_v1/reviewer_cases.jsonl",
+      "sha256": "00ae5450c3b21ac5c29909d323357149429e78db9ec2dc23722e7b551e1799f1",
+      "bytes": 83880
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reference/README.md",
+      "sha256": "b63f503111bc67cc74c6dea83dee94e2227789f6762e7c08576565cfc47637ad",
+      "bytes": 4456
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reference/abstention_cases.jsonl",
+      "sha256": "be247195c8e39e7379e6b398d8d4d633b5dd4eea5d4a42ff9e25947cc3049c52",
+      "bytes": 39237
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reference/claim_cases.jsonl",
+      "sha256": "14839466c4b53250280f40541c9c6e7178d99b1bb12ca72aa10cf29284349e42",
+      "bytes": 96598
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reference/comparison_cases.jsonl",
+      "sha256": "61e8543928c6551924fb35a1ac3fb8c5113e5c1a5b444c2ddfd0d3f624973f66",
+      "bytes": 96697
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reference/manifest.json",
+      "sha256": "f8a867503fca36f24ea68c553073ea4a41f5b057753d7cc2db48516a81f2667d",
+      "bytes": 2132
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reference/reviewer_cases.jsonl",
+      "sha256": "cfac3d3f03aae8e35cb3a74d8cb5ac2e5270e5258dd9ccaee185d37f78bd96af",
+      "bytes": 108129
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reviewed/AI_REVIEW.md",
+      "sha256": "a158f79a88682b234454d068d482ebfb0e1ed431be93166f81946541894a7ae3",
+      "bytes": 614
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reviewed/abstention_cases.jsonl",
+      "sha256": "10c588ee7e307cd5429303d180ae3720460941ec86e749f5c021021eba90b113",
+      "bytes": 27947
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reviewed/annotation_guidelines.md",
+      "sha256": "d29a6afe14353cbdf9925ca21376025e836d61a0c9b49cec773ed9a649f2fd8b",
+      "bytes": 8119
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reviewed/claim_cases.jsonl",
+      "sha256": "2af51e9aafb9b4f091acf2ed583a007ed83b7db58fd8157fe476bce4cf4cadc7",
+      "bytes": 74418
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reviewed/comparison_cases.jsonl",
+      "sha256": "d6c9fd398d9470c7f77609ef761b7527947df3cd09a75bccf219285947cfd64a",
+      "bytes": 83199
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reviewed/manifest.json",
+      "sha256": "9cc67e7df8622abb575e4bac15c6ea43723cbad37aa776838fe6408f19473c08",
+      "bytes": 2194
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reviewed/reviewer_cases.jsonl",
+      "sha256": "1eb4b65165929e74a4aa21a6531a037a7dd8e093b59edc5c850cec29f3d55cc2",
+      "bytes": 83989
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/artifact_manifest.json",
+      "sha256": "b470c746417d729ed7606809fa5bf8ae96af1aa35bbb3fa0a8764f9acee9cc8b",
+      "bytes": 4802
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/checks.json",
+      "sha256": "36b036b72cf6d765b862fef53b3fd55b0e48cd0bf9cfe25bb3348e59e345c64f",
+      "bytes": 1294
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/evaluation_summary.json",
+      "sha256": "9c2d449d5a0778b0a28e120114bce6613cd06cd8bb717faa5f8de805cf9f2fc2",
+      "bytes": 14035
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/formatter.txt",
+      "sha256": "feca25aea532c5d75686bc968f8f8cc0dac429b2ade14ae92e7fd62276ef2992",
+      "bytes": 28
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/full_tests.txt",
+      "sha256": "8123ef9942c0c47252552b9796bc4d85eb59b0e64b0c75c96bbb0acf86fd9800",
+      "bytes": 1491
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/report.md",
+      "sha256": "f405c811b85141dc0bb20db9f5932912e0b5f0061a7fc931afe6dc59e219ddaf",
+      "bytes": 7216
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/ai-assessments.jsonl",
+      "sha256": "323e4a3c442b8b5b8b147a3244bba41929a42653df9de63d6baa1e37774f3446",
+      "bytes": 22036
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/case_results.csv",
+      "sha256": "27022bd195830ee7e35054123098dfcfe906565fd4258ff3e5205fa65aa83831",
+      "bytes": 143614
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/executions.jsonl",
+      "sha256": "41a107a5e8b727fbbd26648b012cbf46e1c60ff2e255ccfc702a5da4d33108fa",
+      "bytes": 2137383
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/grading_protocol.json",
+      "sha256": "46742e427189d65d6412a0b2dffe00e3c004fad9964bca2d4da0b9fbbe8f669a",
+      "bytes": 1011
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/predictions.jsonl",
+      "sha256": "105fb37741ff5a22d68dcd0063b52d2890bb34c4b1036a45669b62883677fbd1",
+      "bytes": 141799
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/quality-score-all.json",
+      "sha256": "a8617e6b9b4677981b59f9e15ba660f7c0b9e663a2811be6ca0628f5d7210f76",
+      "bytes": 103533
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/quality-score-dev.json",
+      "sha256": "8951015d13d34401699ffd2762326172902840ab8b5bd24e22bfab33fb5f5669",
+      "bytes": 100420
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/quality-score-test.json",
+      "sha256": "0694aad427b438c7e6b3e8f9f700cede2e6d9eac1fd9160188b737c0ac35085e",
+      "bytes": 102786
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/run_manifest.json",
+      "sha256": "192950cc52c6d89465a1db6664747370d039318ffbf2d32a31aea01f79b3fd2e",
+      "bytes": 1773
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/ruff.txt",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/whitespace.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/artifact_manifest.json",
+      "sha256": "ee233e77df173293c437e887f78c141c6d36dcf264d6b004c0223853fd60f223",
+      "bytes": 5209
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/findings.json",
+      "sha256": "f5590827026f11b87fbbc0729f0bbc2e6e26b4c1399af337980cf8c638cc93de",
+      "bytes": 33429
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/report.md",
+      "sha256": "9579aabe3451eae73aa949beee92133103dbc0168ede980a0f0070d4851a099f",
+      "bytes": 7969
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-frozen-trainable-scope.md",
+      "sha256": "abdec5284ce2de37d786cbd2bc66d8c49c23eb045fa1f9f64c8bdedb3b7c3f81",
+      "bytes": 24613
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-language-model.md",
+      "sha256": "51c5dada6a6cdded716bd1a0bf670dee83a33e8f64558b03dfb321b60385508c",
+      "bytes": 24610
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-training-objective.md",
+      "sha256": "b50a0e2ecc96c50e93b83e7d3bd0c2ccedb2aec1b48106539ff4bcee5bccbb29",
+      "bytes": 32426
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-vision-encoder.md",
+      "sha256": "e62e2404f29e15cf4233a319dd69952ab0cbd28b73371ad74182e4e9260f797c",
+      "bytes": 28196
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-vision-language-bridge.md",
+      "sha256": "cb0b57c84f80526ea0d89a90e2213fd261649f5ea3a57414efc732323fa48476",
+      "bytes": 24792
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-llava-frozen-trainable-scope.md",
+      "sha256": "f1422c861901636998acd0eb45a379900e8fbe5f2bc8fb9a2db6e4290eaf5d09",
+      "bytes": 22174
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-llava-language-model.md",
+      "sha256": "1156f7e4efc7ec8731be1e539753717b659aae1b76ebf398d7338fa2a219b936",
+      "bytes": 27369
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/verification.json",
+      "sha256": "f107553f46a803cd866a3d16a9892bdc5682bde958d2b4eecba98759a7f2fca3",
+      "bytes": 460
+    }
+  ],
+  "scope": "Freeze-preserving incremental extension; no production index or benchmark labels changed."
+}
