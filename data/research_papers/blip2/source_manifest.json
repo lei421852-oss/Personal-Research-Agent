@@ -1,0 +1,24 @@
+{
+  "paper_id": "blip-2-2301.12597v1",
+  "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+  "source_url": "https://arxiv.org/pdf/2301.12597v1",
+  "source_version": "2301.12597v1",
+  "source_sha256": "0a4b93c402a6b8b0d2c5f438bbae31d447b17324b71c3e4fb6dab53e0e389bc5",
+  "extraction_method": "manual_pdf_regions_v1",
+  "extraction_timestamp": "2026-10-08T07:22:15.484892Z",
+  "evidence_schema_version": 1,
+  "extraction_config_sha256": "c9e30ce119ebdd073f38ffe2bcb28ee010d8493fbe87cae952e72d3fd8a8ebde",
+  "page_count": 13,
+  "page_mapping": {
+    "1": null,
+    "2": null,
+    "3": null,
+    "4": null
+  },
+  "limitations": [
+    "Only manually selected PDF paragraphs and one figure are prepared; no general PDF parser.",
+    "Equations, tables and unselected page continuations are not reconstructed.",
+    "Caption text is not pixel analysis; reviewers receive captions/context, not pixels.",
+    "BLIP-2 page 2/3 architecture and page 3/4 training-data continuations are deliberately not stitched; exact 188M and full training-data detail may be unavailable."
+  ]
+}

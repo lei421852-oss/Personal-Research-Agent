@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "paper_key": "llava",
+  "paper_id": "llava-2304.08485v1",
+  "title": "Visual Instruction Tuning",
+  "source_url": "https://arxiv.org/abs/2304.08485v1",
+  "pdf_url": "https://arxiv.org/pdf/2304.08485v1",
+  "pdf_sha256": "0d5be40caf852d51a0e2636619fafc5b910788af9584fdc392abc652787560ed",
+  "page_numbering": "one-based PDF page index",
+  "preparation": "Manual page regions and fixed figure crops; not a general PDF parser.",
+  "pages": [
+    {
+      "page": 1,
+      "regions": [
+        [
+          143.61599731445312,
+          247.79428100585938,
+          470.04315185546875,
+          400.15008544921875
+        ]
+      ],
+      "path": "pages/page-001.txt",
+      "sha256": "fedbe41da131b3283bbf18cd39de5bba9cdf57aea5eb500ba26fef3a0d40c953"
+    },
+    {
+      "page": 4,
+      "regions": [
+        [
+          107.44100189208984,
+          74.14993286132812,
+          505.995361328125,
+          128.25607299804688
+        ],
+        [
+          107.28199768066406,
+          285.3892822265625,
+          504.60302734375,
+          328.6540832519531
+        ],
+        [
+          107.44100189208984,
+          397.56976318359375,
+          505.4164733886719,
+          440.82708740234375
+        ],
+        [
+          107.75,
+          566.6062622070312,
+          504.4161071777344,
+          631.6900024414062
+        ],
+        [
+          107.4209976196289,
+          657.7063598632812,
+          505.4985656738281,
+          722.6570434570312
+        ]
+      ],
+      "path": "pages/page-004.txt",
+      "sha256": "dd39fec72090f884dc8962a488a37f3d0d004fff841aefc4b9c64d531f1b8e1a"
+    },
+    {
+      "page": 5,
+      "regions": [
+        [
+          107.44100189208984,
+          321.98828125,
+          504.2534484863281,
+          354.3440856933594
+        ],
+        [
+          107.39099884033203,
+          495.7854919433594,
+          505.990478515625,
+          604.5210571289062
+        ],
+        [
+          107.75,
+          617.3585205078125,
+          504.2523193359375,
+          649.8136596679688
+        ]
+      ],
+      "path": "pages/page-005.txt",
+      "sha256": "1111cac95628df8a5e9b55adb3e7174018eb1b642f5b9de4b74299e0fbc636cb"
+    },
+    {
+      "page": 6,
+      "regions": [
+        [
+          107.28199768066406,
+          181.19239807128906,
+          505.99102783203125,
+          246.12509155273438
+        ]
+      ],
+      "path": "pages/page-006.txt",
+      "sha256": "e851ff89522a3c3115a8c7e71e3e37a52f73c5acfae979e525343392e685745a"
+    }
+  ],
+  "figures": [
+    {
+      "figure_id": "Figure 1",
+      "page": 4,
+      "crop": [
+        164.0,
+        442.0,
+        452.0,
+        543.0
+      ],
+      "caption_region": [
+        225.0,
+        545.0,
+        387.0,
+        560.0
+      ],
+      "related_pages": [
+        4
+      ],
+      "asset_path": "figures/figure-001.png",
+      "asset_sha256": "96f297587f8649961454daa56ee47487ef03dee792fb0411f78021dd96fc578e",
+      "caption": "Figure 1: LLaVA network architecture.",
+      "related_text": "This symbolic representation allows us to encode the image as an LLM-recognizable sequence. We use COCO images [28] and generate three types of instruction-following data. One example per type is shown in the bottom block of Table 1. For each type, we ﬁrst manually design a few examples. They are the only human annotations we have during data collection, and are used as seed examples in in-context-learning to query GPT-4.\n\nWe collect 158K unique language-image instruction-following samples in total, including 58K in conversations, 23K in detailed description, and 77k in complex reasoning, respectively. We ablated the use of ChatGPT and GPT-4 in our early experiments, and found that GPT-4 can consistently provide higher quality instruction-following data, such as spatial reasoning.\n\nThe primary goal is to effectively leverage the capabilities of both the pre-trained LLM and visual model. The network archtecture is illustrated in Figure 1. We choose LLaMA as our LLM fφ(·) parameterized by φ, as its effectiveness has been demonstrated in several open-source language-only instruction-tuning works. [43, 45, 34].\n\nFor an input image Xv, we consider the pre-trained CLIP visual encoder ViT-L/14 [36], which provides the visual feature Zv = g(Xv). The grid features before and after the last Transformer layer are considered in our experiments. We consider a simple linear layer to connect image features into the word embedding space. Speciﬁcally, we apply a trainable projection matrix W to convert Zv into language embedding tokens Hq, which have the same dimensionality of the word embedding space in the language model:\n\nThus we have a sequence of visual tokens Hv. Note that our simple projection scheme is lightweight and cost-effective, which allows us to iterate data centric experiments quickly. More sophisticated (but expensive) schemes to connect the image and language representations can also be considered, such as gated cross-attention in Flamingo [2] and Q-former in BLIP-2 [25], or other vision encoders such as SAM [21] that provide object-level features. We leave exploring possibly more effective and sophisticated architecture designs for LLaVA as future work."
+    }
+  ],
+  "smoke_queries": [
+    {
+      "query": "How does LLaVA connect image features to the language model?",
+      "expected_pages": [
+        4
+      ],
+      "expected_terms": [
+        "linear",
+        "projection"
+      ]
+    },
+    {
+      "query": "Which parameters are frozen during the two training stages?",
+      "expected_pages": [
+        5
+      ],
+      "expected_terms": [
+        "frozen",
+        "projection"
+      ]
+    }
+  ]
+}

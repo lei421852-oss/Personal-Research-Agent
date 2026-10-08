@@ -1,0 +1,25 @@
+{
+  "paper_id": "llava-2304.08485v1",
+  "title": "Visual Instruction Tuning",
+  "source_url": "https://arxiv.org/pdf/2304.08485v1",
+  "source_version": "2304.08485v1",
+  "source_sha256": "0d5be40caf852d51a0e2636619fafc5b910788af9584fdc392abc652787560ed",
+  "extraction_method": "manual_pdf_regions_v1",
+  "extraction_timestamp": "2026-10-08T07:22:32.535204Z",
+  "evidence_schema_version": 1,
+  "extraction_config_sha256": "a814173acc8422ce739cc5119e9596c5438190b02a3e0046bbb2c62543c67f21",
+  "page_count": 19,
+  "page_mapping": {
+    "1": null,
+    "4": "4",
+    "5": "5",
+    "6": "6"
+  },
+  "limitations": [
+    "Only manually selected PDF paragraphs and one figure are prepared; no general PDF parser.",
+    "Equations, tables and unselected page continuations are not reconstructed.",
+    "Caption text is not pixel analysis; reviewers receive captions/context, not pixels.",
+    "LLaVA Figure 1 contains corrupted LaTeX text-layer labels; the original pixel crop is retained but that text layer and standalone equations are not indexed.",
+    "The selected ScienceQA continuation on page 6 is not stitched to the preceding page; only complete selected paragraphs are citable."
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "fixture": {
+    "paper_key": "llava",
+    "paper_id": "llava-2304.08485v1",
+    "title": "Visual Instruction Tuning",
+    "source_url": "https://arxiv.org/abs/2304.08485v1",
+    "pdf_url": "https://arxiv.org/pdf/2304.08485v1",
+    "pdf_sha256": "0d5be40caf852d51a0e2636619fafc5b910788af9584fdc392abc652787560ed",
+    "page_regions": [
+      {
+        "page": 1,
+        "regions": [
+          [
+            143.61599731445312,
+            247.79428100585938,
+            470.04315185546875,
+            400.15008544921875
+          ]
+        ]
+      },
+      {
+        "page": 4,
+        "regions": [
+          [
+            107.44100189208984,
+            74.14993286132812,
+            505.995361328125,
+            128.25607299804688
+          ],
+          [
+            107.28199768066406,
+            285.3892822265625,
+            504.60302734375,
+            328.6540832519531
+          ],
+          [
+            107.44100189208984,
+            397.56976318359375,
+            505.4164733886719,
+            440.82708740234375
+          ],
+          [
+            107.75,
+            566.6062622070312,
+            504.4161071777344,
+            631.6900024414062
+          ],
+          [
+            107.4209976196289,
+            657.7063598632812,
+            505.4985656738281,
+            722.6570434570312
+          ]
+        ]
+      },
+      {
+        "page": 5,
+        "regions": [
+          [
+            107.44100189208984,
+            321.98828125,
+            504.2534484863281,
+            354.3440856933594
+          ],
+          [
+            107.39099884033203,
+            495.7854919433594,
+            505.990478515625,
+            604.5210571289062
+          ],
+          [
+            107.75,
+            617.3585205078125,
+            504.2523193359375,
+            649.8136596679688
+          ]
+        ]
+      },
+      {
+        "page": 6,
+        "regions": [
+          [
+            107.28199768066406,
+            181.19239807128906,
+            505.99102783203125,
+            246.12509155273438
+          ]
+        ]
+      }
+    ],
+    "figures": [
+      {
+        "figure_id": "Figure 1",
+        "page": 4,
+        "crop": [
+          164,
+          442,
+          452,
+          543
+        ],
+        "caption_region": [
+          225,
+          545,
+          387,
+          560
+        ],
+        "related_pages": [
+          4
+        ]
+      }
+    ],
+    "smoke_queries": [
+      {
+        "query": "How does LLaVA connect image features to the language model?",
+        "expected_pages": [
+          4
+        ],
+        "expected_terms": [
+          "linear",
+          "projection"
+        ]
+      },
+      {
+        "query": "Which parameters are frozen during the two training stages?",
+        "expected_pages": [
+          5
+        ],
+        "expected_terms": [
+          "frozen",
+          "projection"
+        ]
+      }
+    ]
+  },
+  "section_titles": {
+    "1": {
+      "0": "Abstract"
+    },
+    "4": {
+      "0": "3. Visual Instruction Data Generation",
+      "1": "3. Visual Instruction Data Generation",
+      "2": "4.1. Architecture",
+      "3": "4.1. Architecture",
+      "4": "4.1. Architecture / future work"
+    },
+    "5": {
+      "0": "4.2. Training",
+      "1": "4.2. Training",
+      "2": "4.2. Training"
+    },
+    "6": {
+      "0": "5.1. Multimodal Chatbot"
+    }
+  }
+}

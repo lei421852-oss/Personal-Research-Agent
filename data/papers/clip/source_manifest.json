@@ -1,0 +1,21 @@
+{
+  "paper_id": "clip-2103.00020v1",
+  "title": "Learning Transferable Visual Models From Natural Language Supervision",
+  "source_url": "https://arxiv.org/pdf/2103.00020v1",
+  "source_version": "2103.00020v1",
+  "source_sha256": "6478b6e571a7d6fcd846d8ef77bfd60c285f1986abb8f475eedc43de403074f5",
+  "extraction_method": "manual_pdf_regions_v1",
+  "extraction_timestamp": "2026-10-08T07:22:15.511518Z",
+  "evidence_schema_version": 1,
+  "extraction_config_sha256": "d90a8d8d1a19620e5aa1d09c0d2ec0e75ff294353de006296a1f2d212a0a70b8",
+  "page_count": 48,
+  "page_mapping": {
+    "2": null,
+    "4": null
+  },
+  "limitations": [
+    "Only manually selected PDF paragraphs and one figure are prepared; no general PDF parser.",
+    "Equations, tables and unselected page continuations are not reconstructed.",
+    "Caption text is not pixel analysis; reviewers receive captions/context, not pixels."
+  ]
+}

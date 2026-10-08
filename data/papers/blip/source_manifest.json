@@ -1,0 +1,22 @@
+{
+  "paper_id": "blip-2201.12086v2",
+  "title": "BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation",
+  "source_url": "https://arxiv.org/pdf/2201.12086v2",
+  "source_version": "2201.12086v2",
+  "source_sha256": "63e0335cdd57c3d92b907b89c93d10befdd29b8aeed108091bbde90c121ed97a",
+  "extraction_method": "manual_pdf_regions_v1",
+  "extraction_timestamp": "2026-10-08T07:22:15.429789Z",
+  "evidence_schema_version": 1,
+  "extraction_config_sha256": "27c37d53ae78b4b8aa3482c4828fef2da2440496721ce2a7aa863e864c9e3db0",
+  "page_count": 12,
+  "page_mapping": {
+    "2": null,
+    "3": null,
+    "4": null
+  },
+  "limitations": [
+    "Only manually selected PDF paragraphs and one figure are prepared; no general PDF parser.",
+    "Equations, tables and unselected page continuations are not reconstructed.",
+    "Caption text is not pixel analysis; reviewers receive captions/context, not pixels."
+  ]
+}

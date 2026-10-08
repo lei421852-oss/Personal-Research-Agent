@@ -1,0 +1,23 @@
+{
+  "paper_id": "flamingo-2204.14198v1",
+  "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+  "source_url": "https://arxiv.org/pdf/2204.14198v1",
+  "source_version": "2204.14198v1",
+  "source_sha256": "79d131280bc79f659212f35f940dfd3a26013c73355a58eb2263410945780c4c",
+  "extraction_method": "manual_pdf_regions_v1",
+  "extraction_timestamp": "2026-10-08T07:22:15.556336Z",
+  "evidence_schema_version": 1,
+  "extraction_config_sha256": "2c713c4790e8101fcc6ac8d85aaddc3d690ea879ed37b77161e47be6aaf2892a",
+  "page_count": 66,
+  "page_mapping": {
+    "4": "4",
+    "9": "9",
+    "10": "10",
+    "11": "11"
+  },
+  "limitations": [
+    "Only manually selected PDF paragraphs and one figure are prepared; no general PDF parser.",
+    "Equations, tables and unselected page continuations are not reconstructed.",
+    "Caption text is not pixel analysis; reviewers receive captions/context, not pixels."
+  ]
+}
