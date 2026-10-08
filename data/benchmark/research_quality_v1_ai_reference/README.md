@@ -18,7 +18,14 @@
 
 ## 使用
 
-仓库根目录、已有Python环境下，将`REFERENCE_OUTPUT_DIR`设置为实际产物目录，然后执行：
+仓库根目录、已有Python环境下，先设置输出目录。本对话WSL环境可使用：
+
+```bash
+export REFERENCE_OUTPUT_DIR="/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体"
+mkdir -p "$REFERENCE_OUTPUT_DIR"
+```
+
+尚未运行真实评测时，执行下面的来源检查和评分入口检查。省略预测/评分文件参数；评分状态为`awaiting_predictions`：
 
 ```bash
 python -m scripts.validate_quality_benchmark \
@@ -28,9 +35,20 @@ python -m scripts.validate_quality_benchmark \
 python -m scripts.score_quality_benchmark \
   --dataset data/benchmark/research_quality_v1_ai_reference \
   --reference-kind ai_reviewed --split test \
+  --output "$REFERENCE_OUTPUT_DIR/2026-10-08-多模态论文研究智能体-评分入口检查.json"
+```
+
+实际作答完成后才使用下面的评分命令。`predictions.jsonl`必须是已存在的实际系统输出，`human-assessments.jsonl`必须是对这些输出的实际语义评分；F1不会自动创建它们。请将示例文件名替换为真实文件位置：
+
+```bash
+python -m scripts.score_quality_benchmark \
+  --dataset data/benchmark/research_quality_v1_ai_reference \
+  --reference-kind ai_reviewed --split test \
   --predictions predictions.jsonl --assessments human-assessments.jsonl \
   --output "$REFERENCE_OUTPUT_DIR/quality-score.json"
 ```
+
+若只有预测而尚无人工语义评分，可先省略`--assessments`：Reviewer/拒答标签可计分，开放答案将保持`pending_human_assessment`。不要用空文件或参考样本的审核记录代替真实预测/语义评分。
 
 加载API：`load_dataset(OUTPUT_DATASET)`；选择API：`approved_references(dataset, split="test")`。评分器默认从该manifest取得AI参考类型，并在结果中记录`provisional_ai_reviewed_reference`。`approved_gold`不会返回这些条目，人工Gold计数不会被AI参考覆盖。
 

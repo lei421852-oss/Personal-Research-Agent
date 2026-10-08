@@ -16,7 +16,45 @@ from eval.research_quality.dataset_validator import (
     validate_dataset,
 )
 from eval.research_quality.schemas import HumanAssessment, QualityPrediction
-from eval.research_quality.scoring import score_benchmark
+from eval.research_quality.scoring import ScoringInputError, score_benchmark
+
+
+class MissingInputFiles(FileNotFoundError):
+    def __init__(self, details):
+        self.details = details
+        self.issues = ["missing_" + item["input_name"] + "_file" for item in details]
+        super().__init__("Required scoring input files do not exist")
+
+
+def check_input_files(predictions, assessments):
+    """先检查用户显式指定的结果文件，避免读完整语料后只报笼统错误。"""
+    details = []
+    for name, path, hint in (
+        (
+            "predictions",
+            predictions,
+            "这是系统实际作答结果。先运行评测生成该文件；仅检查入口时去掉 --predictions。",
+        ),
+        (
+            "assessments",
+            assessments,
+            "这是对实际模型答案的人工语义评分，不是参考样本审核记录。尚未生成时去掉 --assessments。",
+        ),
+    ):
+        if path is not None and not path.is_file():
+            details.append(
+                {
+                    "input_name": name,
+                    "argument": "--" + name,
+                    "file": str(path),
+                    "reason": "file_not_found"
+                    if not path.exists()
+                    else "not_a_regular_file",
+                    "hint": hint,
+                }
+            )
+    if details:
+        raise MissingInputFiles(details)
 
 
 def main():
@@ -28,16 +66,23 @@ def main():
     parser.add_argument("--reference-kind", choices=["human_gold", "ai_reviewed"])
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    stage = "input_files"
     try:
+        check_input_files(args.predictions, args.assessments)
+        stage = "dataset_load"
         dataset = load_dataset(args.dataset)
+        stage = "source_validation"
         records, snapshot = source_index(ROOT)
         validation = validate_dataset(dataset, records, snapshot)
+        stage = "predictions_load"
         predictions = (
             load_jsonl(args.predictions, QualityPrediction) if args.predictions else []
         )
+        stage = "assessments_load"
         assessments = (
             load_jsonl(args.assessments, HumanAssessment) if args.assessments else []
         )
+        stage = "scoring"
         report = score_benchmark(
             dataset,
             predictions,
@@ -50,11 +95,20 @@ def main():
         report = {
             "status": "invalid_input",
             "issue_type": type(exc).__name__,
+            "input_stage": stage,
             "issues": getattr(
                 exc, "issues", ["dataset_prediction_or_annotation_validation_failure"]
             ),
             "real_provider_calls": 0,
         }
+        if isinstance(exc, MissingInputFiles):
+            report["input_errors"] = exc.details
+        elif isinstance(exc, FileNotFoundError):
+            report["issues"] = ["file_not_found"]
+            report["file_name"] = Path(exc.filename).name if exc.filename else None
+        elif isinstance(exc, ScoringInputError):
+            # 评分异常只包含程序定义的错误码，不输出输入内容或异常堆栈。
+            report["issues"] = [str(exc)]
         code = 1
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n")
