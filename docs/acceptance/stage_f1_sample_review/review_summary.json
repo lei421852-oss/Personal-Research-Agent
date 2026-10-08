@@ -1,0 +1,77 @@
+{
+  "status": "ai_source_review_completed",
+  "base_commit_sha": "49a4ee5a3e70d2ef086e9c5d784649faee87558e",
+  "reviewed_at": "2026-10-08T11:03:30.103083+00:00",
+  "original_dataset_path": "data/benchmark/research_quality_v1",
+  "reviewed_dataset_path": "data/benchmark/research_quality_v1_ai_reviewed",
+  "reviewed_manifest_sha256": "9cc67e7df8622abb575e4bac15c6ea43723cbad37aa776838fe6408f19473c08",
+  "cases_reviewed": 90,
+  "unchanged_cases": 87,
+  "revised_cases": 3,
+  "unresolved_cases": 0,
+  "task_counts": {
+    "claim": 30,
+    "reviewer": 30,
+    "comparison": 15,
+    "abstention": 15
+  },
+  "reviewer_labels": {
+    "passed": 15,
+    "rejected": 15
+  },
+  "label_changes": 0,
+  "original_pdf_sources_checked": 32,
+  "original_pdf_pages_checked": 13,
+  "human_reviewed_count": 0,
+  "approved_gold_count": 0,
+  "annotation_status": "pending_review",
+  "split": "unassigned",
+  "provider_api_calls": 0,
+  "method_boundary": "AI review by Codex, not independent human Gold verification; all review notes are stored separately from human_reviews.",
+  "revisions": {
+    "rqv1-reviewer-clip-batch-pairings-rejected": {
+      "issue": "反例的N=1退化边界",
+      "before": "All N squared cross-batch image-text pairings are real positive pairs.",
+      "after": "For a batch with N > 1, all N squared cross-batch image-text pairings are real positive pairs.",
+      "reason": "明确N>1，保证全部N²配对均为正例的反例与原文直接矛盾。"
+    },
+    "rqv1-comparison-blip2-flamingo-frozen-trainable-scope": {
+      "issue": "训练阶段范围表述容易歧义",
+      "before": "Q-Former is pretrained in two stages with a frozen image encoder and a frozen LLM.",
+      "after": "Q-Former is pretrained for vision-language representation learning with a frozen image encoder in stage 1, then for vision-to-language generative learning with a frozen LLM in stage 2.",
+      "reason": "对应原文第2页逐项说明，避免暗示两个阶段都同时使用LLM。"
+    },
+    "rqv1-comparison-blip2-llava-frozen-trainable-scope": {
+      "issue": "训练阶段范围表述容易歧义",
+      "before": "Q-Former is pretrained in two stages with a frozen image encoder and a frozen LLM.",
+      "after": "Q-Former is pretrained for vision-language representation learning with a frozen image encoder in stage 1, then for vision-to-language generative learning with a frozen LLM in stage 2.",
+      "reason": "对应原文第2页逐项说明，避免暗示两个阶段都同时使用LLM。"
+    }
+  },
+  "dataset_validation": {
+    "status": "structurally_valid",
+    "dataset_version": "research_quality_v1",
+    "total_cases": 90,
+    "task_counts": {
+      "abstention": 15,
+      "claim": 30,
+      "comparison": 15,
+      "reviewer": 30
+    },
+    "candidate_count": 90,
+    "human_reviewed_count": 0,
+    "approved_gold_count": 0,
+    "rejected_count": 0,
+    "target_shortfall": {
+      "claim": 0,
+      "reviewer": 0,
+      "comparison": 0,
+      "abstention": 0
+    },
+    "fact_group_count": 34,
+    "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+    "semantic_reference_validation": "requires_human_original_pdf_review",
+    "split_policy": "Explicit groups and normalized identical references checked; not a semantic paraphrase detector.",
+    "real_provider_calls": 0
+  }
+}

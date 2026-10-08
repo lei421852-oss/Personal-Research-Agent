@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "baseline_commit_sha": "49a4ee5a3e70d2ef086e9c5d784649faee87558e",
+  "baseline_tracked_files_unchanged": 337,
+  "stage_e_frozen_files_verified": 292,
+  "revision_count": 3,
+  "revised_case_ids": [
+    "rqv1-reviewer-clip-batch-pairings-rejected",
+    "rqv1-comparison-blip2-flamingo-frozen-trainable-scope",
+    "rqv1-comparison-blip2-llava-frozen-trainable-scope"
+  ],
+  "review_ledger_count": 90,
+  "case_hash_bindings_valid": true,
+  "gold_and_label_changes": 0,
+  "human_approval_fabricated": false,
+  "production_code_changes": 0
+}

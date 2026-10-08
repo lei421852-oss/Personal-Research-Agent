@@ -1,0 +1,116 @@
+{
+  "scope": "AI original PDF source review and revised candidate copy; excludes this self-referencing manifest.",
+  "base_commit_sha": "49a4ee5a3e70d2ef086e9c5d784649faee87558e",
+  "files": [
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reviewed/AI_REVIEW.md",
+      "bytes": 614,
+      "sha256": "a158f79a88682b234454d068d482ebfb0e1ed431be93166f81946541894a7ae3"
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reviewed/abstention_cases.jsonl",
+      "bytes": 27947,
+      "sha256": "10c588ee7e307cd5429303d180ae3720460941ec86e749f5c021021eba90b113"
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reviewed/annotation_guidelines.md",
+      "bytes": 8119,
+      "sha256": "d29a6afe14353cbdf9925ca21376025e836d61a0c9b49cec773ed9a649f2fd8b"
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reviewed/claim_cases.jsonl",
+      "bytes": 74418,
+      "sha256": "2af51e9aafb9b4f091acf2ed583a007ed83b7db58fd8157fe476bce4cf4cadc7"
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reviewed/comparison_cases.jsonl",
+      "bytes": 83199,
+      "sha256": "d6c9fd398d9470c7f77609ef761b7527947df3cd09a75bccf219285947cfd64a"
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reviewed/manifest.json",
+      "bytes": 2194,
+      "sha256": "9cc67e7df8622abb575e4bac15c6ea43723cbad37aa776838fe6408f19473c08"
+    },
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reviewed/reviewer_cases.jsonl",
+      "bytes": 83989,
+      "sha256": "1eb4b65165929e74a4aa21a6531a037a7dd8e093b59edc5c850cec29f3d55cc2"
+    },
+    {
+      "path": "docs/acceptance/stage_f1_sample_review/case_reviews.jsonl",
+      "bytes": 94245,
+      "sha256": "6868415f0e3373aa82511d23297c90dc08b1e8390d4419cdd34a9216af734c29"
+    },
+    {
+      "path": "docs/acceptance/stage_f1_sample_review/check_results.json",
+      "bytes": 2050,
+      "sha256": "bfafa0f7577e09cc45a4da4b725d0dbf495fff7d2b955f54e41686da51275a01"
+    },
+    {
+      "path": "docs/acceptance/stage_f1_sample_review/dataset_validation.json",
+      "bytes": 753,
+      "sha256": "ab63b57d3594f801b6ec317fe8376c5a863e77bd7c5ef56a7fbca7eec84024cb"
+    },
+    {
+      "path": "docs/acceptance/stage_f1_sample_review/formatter.txt",
+      "bytes": 28,
+      "sha256": "f36b4fb3218f12e3995320c733435e653e7140d30f5d071fbadca31291aa1fdc"
+    },
+    {
+      "path": "docs/acceptance/stage_f1_sample_review/full_tests.txt",
+      "bytes": 1491,
+      "sha256": "78a75a96c9bdcae6237bb1b27d5d086ad0d6ebe406be882ee6cfca0facf3305e"
+    },
+    {
+      "path": "docs/acceptance/stage_f1_sample_review/no_false_gold_cli.txt",
+      "bytes": 1646,
+      "sha256": "29db7bade3038ccf95d9dfc9e1972596de8c2955158c511371c5dbcd8d6ae80e"
+    },
+    {
+      "path": "docs/acceptance/stage_f1_sample_review/no_false_gold_scoring.json",
+      "bytes": 98490,
+      "sha256": "7d0b78bfc697b6a1415797f097da69155de50e8fc62e6c413c16c64aac2482ec"
+    },
+    {
+      "path": "docs/acceptance/stage_f1_sample_review/original_pdf_source_checks.json",
+      "bytes": 60566,
+      "sha256": "5d1e387b7bd00a282e8b9a0b3e47be97d394f01feef3a64ab71acbf5d47d2484"
+    },
+    {
+      "path": "docs/acceptance/stage_f1_sample_review/preservation_check.json",
+      "bytes": 561,
+      "sha256": "f32f8dadfa14438877019e71cca9062cad95d64a4cb3b2388435b946df1ea703"
+    },
+    {
+      "path": "docs/acceptance/stage_f1_sample_review/review_report.md",
+      "bytes": 5287,
+      "sha256": "e6c6b7980b8fc4d78ce83883f63ec07cd133e1c2baf2d9233cd2b032bf97a33d"
+    },
+    {
+      "path": "docs/acceptance/stage_f1_sample_review/review_summary.json",
+      "bytes": 3362,
+      "sha256": "d3b363d340fbdfcd780da9fe6aed9441825c54748a285f888c08561e80d1bb19"
+    },
+    {
+      "path": "docs/acceptance/stage_f1_sample_review/review_table.csv",
+      "bytes": 51203,
+      "sha256": "366869683883929ce14259232d61e93dfcf2f2c07555e0dc6b56408829b5a73b"
+    },
+    {
+      "path": "docs/acceptance/stage_f1_sample_review/reviewed_dataset_cli.json",
+      "bytes": 753,
+      "sha256": "ab63b57d3594f801b6ec317fe8376c5a863e77bd7c5ef56a7fbca7eec84024cb"
+    },
+    {
+      "path": "docs/acceptance/stage_f1_sample_review/reviewed_dataset_cli.txt",
+      "bytes": 683,
+      "sha256": "b7a7b577bc62335e5599aae93805d6d8f2edcca8016065f01cb4aef14ada0a90"
+    },
+    {
+      "path": "docs/acceptance/stage_f1_sample_review/ruff.txt",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    }
+  ]
+}

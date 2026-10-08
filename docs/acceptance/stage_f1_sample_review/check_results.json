@@ -1,0 +1,78 @@
+[
+  {
+    "name": "reviewed_dataset_cli",
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "scripts.validate_quality_benchmark",
+      "--dataset",
+      "data/benchmark/research_quality_v1_ai_reviewed",
+      "--output",
+      "docs/acceptance/stage_f1_sample_review/reviewed_dataset_cli.json"
+    ],
+    "started_at": "2026-10-08T11:04:29.477906+00:00",
+    "elapsed_seconds": 0.427,
+    "exit_code": 0,
+    "log_path": "docs/acceptance/stage_f1_sample_review/reviewed_dataset_cli.txt"
+  },
+  {
+    "name": "no_false_gold_cli",
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "scripts.score_quality_benchmark",
+      "--dataset",
+      "data/benchmark/research_quality_v1_ai_reviewed",
+      "--output",
+      "docs/acceptance/stage_f1_sample_review/no_false_gold_scoring.json"
+    ],
+    "started_at": "2026-10-08T11:04:29.904792+00:00",
+    "elapsed_seconds": 0.419,
+    "exit_code": 0,
+    "log_path": "docs/acceptance/stage_f1_sample_review/no_false_gold_cli.txt"
+  },
+  {
+    "name": "full_tests",
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "pytest",
+      "-q"
+    ],
+    "started_at": "2026-10-08T11:04:30.324031+00:00",
+    "elapsed_seconds": 12.088,
+    "exit_code": 0,
+    "log_path": "docs/acceptance/stage_f1_sample_review/full_tests.txt"
+  },
+  {
+    "name": "ruff",
+    "command": [
+      "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+      "check",
+      "app",
+      "tests",
+      "scripts",
+      "eval"
+    ],
+    "started_at": "2026-10-08T11:04:42.412492+00:00",
+    "elapsed_seconds": 0.016,
+    "exit_code": 0,
+    "log_path": "docs/acceptance/stage_f1_sample_review/ruff.txt"
+  },
+  {
+    "name": "formatter",
+    "command": [
+      "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+      "format",
+      "--check",
+      "app",
+      "tests",
+      "scripts",
+      "eval"
+    ],
+    "started_at": "2026-10-08T11:04:42.428784+00:00",
+    "elapsed_seconds": 0.009,
+    "exit_code": 0,
+    "log_path": "docs/acceptance/stage_f1_sample_review/formatter.txt"
+  }
+]

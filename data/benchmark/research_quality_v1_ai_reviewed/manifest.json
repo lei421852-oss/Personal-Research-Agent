@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "dataset_version": "research_quality_v1",
+  "prepared_at": "2026-10-08T10:03:52.680773Z",
+  "stage_e_tag": "stage-e-freeze-v1",
+  "stage_e_commit_sha": "5700c6e31d0a46fefa44f890fb7fbb1b60634124",
+  "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+  "registered_paper_ids": [
+    "blip-2-2301.12597v1",
+    "blip-2201.12086v2",
+    "clip-2103.00020v1",
+    "flamingo-2204.14198v1",
+    "llava-2304.08485v1"
+  ],
+  "purpose": "research_quality_evaluation_only",
+  "forbidden_uses": [
+    "training",
+    "prompt_optimization",
+    "threshold_tuning"
+  ],
+  "target_counts": {
+    "claim": 30,
+    "reviewer": 30,
+    "comparison": 15,
+    "abstention": 15
+  },
+  "case_files": {
+    "claim": {
+      "filename": "claim_cases.jsonl",
+      "sha256": "2af51e9aafb9b4f091acf2ed583a007ed83b7db58fd8157fe476bce4cf4cadc7",
+      "count": 30
+    },
+    "reviewer": {
+      "filename": "reviewer_cases.jsonl",
+      "sha256": "1eb4b65165929e74a4aa21a6531a037a7dd8e093b59edc5c850cec29f3d55cc2",
+      "count": 30
+    },
+    "comparison": {
+      "filename": "comparison_cases.jsonl",
+      "sha256": "d6c9fd398d9470c7f77609ef761b7527947df3cd09a75bccf219285947cfd64a",
+      "count": 15
+    },
+    "abstention": {
+      "filename": "abstention_cases.jsonl",
+      "sha256": "10c588ee7e307cd5429303d180ae3720460941ec86e749f5c021021eba90b113",
+      "count": 15
+    }
+  },
+  "notes": [
+    "All references are source-curated candidates, pending human original-PDF review; no approved Gold is created.",
+    "Reviewer negatives are controlled contradictions with explicit source-based correction, not alleged paper facts.",
+    "Related cases share fact_group_ids across tasks; all candidate splits are unassigned.",
+    "Prepared-corpus absence is not a claim about absence from the entire PDF or external world.",
+    "No Stage E model-generated Claim or abstract-only unsupported detail is used as a reference answer.",
+    "AI source review revision dated 2026-10-08T11:03:30.103083+00:00; based on original candidate commit 49a4ee5a3e70d2ef086e9c5d784649faee87558e; three wording corrections, no human approval or label changes."
+  ]
+}
