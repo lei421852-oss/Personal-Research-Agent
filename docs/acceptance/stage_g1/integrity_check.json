@@ -1,0 +1,26 @@
+{
+  "tracked_before": {
+    "checked": 462,
+    "mismatches": []
+  },
+  "untracked_before": {
+    "checked": 13,
+    "mismatches": []
+  },
+  "stage_e_frozen_files": {
+    "checked": 292,
+    "mismatches": []
+  },
+  "f2_protected_artifacts": {
+    "checked": 47,
+    "mismatches": []
+  },
+  "f3_protected_artifacts": {
+    "checked": 60,
+    "mismatches": []
+  },
+  "status": "PASS",
+  "provider_calls": 0,
+  "indexes_rebuilt": 0,
+  "stage_e_root_sha256": "44c7afd36c793eff86faed077b7c917a5c6a200e3d652bfbf5b19e83cff0362e"
+}

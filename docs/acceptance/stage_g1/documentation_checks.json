@@ -1,0 +1,990 @@
+{
+  "status": "PASS",
+  "new_documents": [
+    "docs/README.md",
+    "docs/architecture/documentation-audit.md",
+    "docs/architecture/engineering-inventory.md",
+    "docs/architecture/system-overview.md",
+    "docs/guides/development.md",
+    "docs/acceptance/stage_g1/acceptance_report.md"
+  ],
+  "new_document_links": {
+    "checked_count": 127,
+    "broken_count": 0,
+    "broken": [],
+    "checked": [
+      {
+        "document": "docs/README.md",
+        "target": "architecture/system-overview.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "architecture/engineering-inventory.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "guides/development.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "architecture/documentation-audit.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "acceptance/stage_g1/acceptance_report.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "../README.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "acceptance/stage_e_freeze/freeze_manifest.json",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "research-planner.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "async-research.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "evidence-review.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "research-recovery.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "research-synthesis.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "paper-discovery.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "query-expansion.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "paper-profiles.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "stage-e-evaluation.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "research-quality-benchmark.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "research-quality-execution.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "acceptance/quality_end_to_end/results/run_manifest.json",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "worker-coverage.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "acceptance/stage_f3_1_e/acceptance_report.md",
+        "exists": true
+      },
+      {
+        "document": "docs/README.md",
+        "target": "demos/README.md",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/documentation-audit.md",
+        "target": "../acceptance/stage_g1/baseline.json",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/documentation-audit.md",
+        "target": "system-overview.md",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/documentation-audit.md",
+        "target": "../README.md",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/documentation-audit.md",
+        "target": "../acceptance/stage_g1/documentation_checks.json",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/main.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/api/runtime.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/api/routes/agent.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/papers/retriever.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/tools/discovery.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/papers/expansion.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/agent/query_guard.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/papers/profiles.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../scripts/ingest_papers.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/planner.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/requirements.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/worker.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/orchestrator.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../scripts/evaluate_cross_paper.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../scripts/run_quality_benchmark.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../scripts/score_quality_benchmark.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../eval/research_quality/coverage_execution.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../scripts/run_worker_coverage_comparison.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/agent/loop.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/agent/context.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/agent/finish.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/tools/registry.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/tools/executor.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/tools/observations.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/evidence/models.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/evidence/corpus.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/evidence/resolver.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/retrieval/retriever.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/retrieval/vector_store.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/retrieval/ingestion.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/papers/models.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/papers/store.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/papers/catalog.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/vision/analysis.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/vision/provider.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/tools/figure.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/evidence/citations.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/models.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/runtime.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/async_tools.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/retry.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/review_validation.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/reviewer.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/review_runtime.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/recovery_eligibility.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/recovery_orchestrator.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/recovery_merge.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/synthesis_input.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/synthesis_agent.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/synthesis_validator.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/synthesis_runtime.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/coverage_models.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../app/research/coverage_worker.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../data/papers",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../data/research_papers",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../data/paper_discovery/papers.json",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../data/fixture_configs",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../configs/cross_paper_eval.json",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../eval/research_quality",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../data/benchmark",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../../pyproject.toml",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../acceptance/stage_g1/baseline.json",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../acceptance/stage_e_freeze",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../acceptance/quality_end_to_end/results",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../acceptance/stage_f3_1_e",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "../acceptance/stage_g1/acceptance_report.md",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/engineering-inventory.md",
+        "target": "system-overview.md",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/system-overview.md",
+        "target": "engineering-inventory.md",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/system-overview.md",
+        "target": "../guides/development.md",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/system-overview.md",
+        "target": "../acceptance/stage_g1/acceptance_report.md",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/system-overview.md",
+        "target": "../demos/README.md",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/system-overview.md",
+        "target": "../../app/research/runtime.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/system-overview.md",
+        "target": "../../configs/cross_paper_eval.json",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/system-overview.md",
+        "target": "../../app/research/coverage_worker.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/system-overview.md",
+        "target": "../../eval/research_quality/coverage_execution.py",
+        "exists": true
+      },
+      {
+        "document": "docs/architecture/system-overview.md",
+        "target": "../acceptance/stage_f3_1_e/acceptance_report.md",
+        "exists": true
+      },
+      {
+        "document": "docs/guides/development.md",
+        "target": "../architecture/system-overview.md",
+        "exists": true
+      },
+      {
+        "document": "docs/guides/development.md",
+        "target": "../architecture/engineering-inventory.md",
+        "exists": true
+      },
+      {
+        "document": "docs/guides/development.md",
+        "target": "../../pyproject.toml",
+        "exists": true
+      },
+      {
+        "document": "docs/guides/development.md",
+        "target": "../../.env.example",
+        "exists": true
+      },
+      {
+        "document": "docs/guides/development.md",
+        "target": "../../configs/cross_paper_eval.json",
+        "exists": true
+      },
+      {
+        "document": "docs/guides/development.md",
+        "target": "../../.gitignore",
+        "exists": true
+      },
+      {
+        "document": "docs/guides/development.md",
+        "target": "../acceptance/stage_g1/baseline.json",
+        "exists": true
+      },
+      {
+        "document": "docs/guides/development.md",
+        "target": "../../scripts/evaluate_cross_paper.py",
+        "exists": true
+      },
+      {
+        "document": "docs/acceptance/stage_g1/acceptance_report.md",
+        "target": "../../architecture/system-overview.md",
+        "exists": true
+      },
+      {
+        "document": "docs/acceptance/stage_g1/acceptance_report.md",
+        "target": "../../architecture/engineering-inventory.md",
+        "exists": true
+      },
+      {
+        "document": "docs/acceptance/stage_g1/acceptance_report.md",
+        "target": "../../guides/development.md",
+        "exists": true
+      },
+      {
+        "document": "docs/acceptance/stage_g1/acceptance_report.md",
+        "target": "../../README.md",
+        "exists": true
+      },
+      {
+        "document": "docs/acceptance/stage_g1/acceptance_report.md",
+        "target": "../../architecture/documentation-audit.md",
+        "exists": true
+      },
+      {
+        "document": "docs/acceptance/stage_g1/acceptance_report.md",
+        "target": "test_results.txt",
+        "exists": true
+      },
+      {
+        "document": "docs/acceptance/stage_g1/acceptance_report.md",
+        "target": "lint_results.txt",
+        "exists": true
+      },
+      {
+        "document": "docs/acceptance/stage_g1/acceptance_report.md",
+        "target": "lint_results.txt",
+        "exists": true
+      },
+      {
+        "document": "docs/acceptance/stage_g1/acceptance_report.md",
+        "target": "cli_help.json",
+        "exists": true
+      },
+      {
+        "document": "docs/acceptance/stage_g1/acceptance_report.md",
+        "target": "corpus_validation.json",
+        "exists": true
+      },
+      {
+        "document": "docs/acceptance/stage_g1/acceptance_report.md",
+        "target": "research_preflight.json",
+        "exists": true
+      },
+      {
+        "document": "docs/acceptance/stage_g1/acceptance_report.md",
+        "target": "documentation_checks.json",
+        "exists": true
+      },
+      {
+        "document": "docs/acceptance/stage_g1/acceptance_report.md",
+        "target": "integrity_check.json",
+        "exists": true
+      },
+      {
+        "document": "docs/acceptance/stage_g1/acceptance_report.md",
+        "target": "check_commands.json",
+        "exists": true
+      },
+      {
+        "document": "docs/acceptance/stage_g1/acceptance_report.md",
+        "target": "baseline.json",
+        "exists": true
+      },
+      {
+        "document": "docs/acceptance/stage_g1/acceptance_report.md",
+        "target": "integrity_check.json",
+        "exists": true
+      },
+      {
+        "document": "docs/acceptance/stage_g1/acceptance_report.md",
+        "target": "git_delivery.json",
+        "exists": true
+      }
+    ]
+  },
+  "legacy_document_links": {
+    "checked_count": 28,
+    "broken_count": 0,
+    "broken": [],
+    "checked": [
+      {
+        "document": "README.md",
+        "target": "docs/stage-e-evaluation.md",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "docs/acceptance/stage_e_freeze/acceptance_report.md",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "docs/stage-e-evaluation.md",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "docs/paper-discovery.md",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "docs/query-expansion.md",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "docs/paper-profiles.md",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "docs/research-planner.md",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "docs/async-research.md",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "docs/evidence-review.md",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "docs/research-synthesis.md",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "docs/research-recovery.md",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "docs/demos/README.md",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "docs/demos/clip-text-real.json",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "docs/demos/blip-fixed-vlm-real.json",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "docs/demos/blip-false-premise-real.json",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "docs/demos/clip-wrong-scope-real.json",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "docs/demos/clip-text-real.json",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "eval/datasets",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "eval/README.md",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "pyproject.toml",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "eval/README.md",
+        "exists": true
+      },
+      {
+        "document": "README.md",
+        "target": "data/papers",
+        "exists": true
+      },
+      {
+        "document": "docs/async-research.md",
+        "target": "evidence-review.md",
+        "exists": true
+      },
+      {
+        "document": "docs/paper-discovery.md",
+        "target": "../data/paper_discovery/papers.json",
+        "exists": true
+      },
+      {
+        "document": "docs/paper-discovery.md",
+        "target": "../data/paper_discovery/queries.json",
+        "exists": true
+      },
+      {
+        "document": "docs/research-quality-benchmark.md",
+        "target": "../data/benchmark/research_quality_v1_ai_reference/README.md",
+        "exists": true
+      },
+      {
+        "document": "docs/research-quality-benchmark.md",
+        "target": "../data/benchmark/research_quality_v1/annotation_guidelines.md",
+        "exists": true
+      },
+      {
+        "document": "docs/stage-e-evaluation.md",
+        "target": "acceptance/stage_e_freeze/acceptance_report.md",
+        "exists": true
+      }
+    ]
+  },
+  "legacy_note": "Historical or frozen files are not rewritten; findings, if any, remain documented.",
+  "cli_help_modules": 18,
+  "cli_help_failures": [],
+  "documented_commands": [
+    {
+      "document": "docs/guides/development.md",
+      "module": "venv",
+      "flags": [],
+      "verification": "existing_project_dependency_and_entrypoint"
+    },
+    {
+      "document": "docs/guides/development.md",
+      "module": "pip",
+      "flags": [],
+      "verification": "existing_project_dependency_and_entrypoint"
+    },
+    {
+      "document": "docs/guides/development.md",
+      "module": "scripts.ingest_corpus",
+      "flags": [],
+      "unknown_flags": [],
+      "verification": "source_ast_and_cli_help_only"
+    },
+    {
+      "document": "docs/guides/development.md",
+      "module": "scripts.validate_research_corpus",
+      "flags": [
+        "--papers-dir",
+        "--additional-papers-dir",
+        "--output"
+      ],
+      "unknown_flags": [],
+      "verification": "source_ast_and_cli_help_only"
+    },
+    {
+      "document": "docs/guides/development.md",
+      "module": "scripts.verify_worker_coverage_baseline",
+      "flags": [],
+      "unknown_flags": [],
+      "verification": "source_ast_and_cli_help_only"
+    },
+    {
+      "document": "docs/guides/development.md",
+      "module": "scripts.prepare_paper_fixture",
+      "flags": [
+        "--config",
+        "--pdf",
+        "--output"
+      ],
+      "unknown_flags": [],
+      "verification": "source_ast_and_cli_help_only"
+    },
+    {
+      "document": "docs/guides/development.md",
+      "module": "scripts.prepare_research_corpus",
+      "flags": [
+        "--config",
+        "--pdf",
+        "--papers-dir"
+      ],
+      "unknown_flags": [],
+      "verification": "source_ast_and_cli_help_only"
+    },
+    {
+      "document": "docs/guides/development.md",
+      "module": "scripts.ingest_corpus",
+      "flags": [
+        "--execute",
+        "--papers-dir",
+        "--index-dir",
+        "--embedding-model",
+        "--device"
+      ],
+      "unknown_flags": [],
+      "verification": "source_ast_and_cli_help_only"
+    },
+    {
+      "document": "docs/guides/development.md",
+      "module": "scripts.ingest_papers",
+      "flags": [
+        "--fixture",
+        "--index-dir",
+        "--embedding-model",
+        "--device"
+      ],
+      "unknown_flags": [],
+      "verification": "source_ast_and_cli_help_only"
+    },
+    {
+      "document": "docs/guides/development.md",
+      "module": "scripts.evaluate_cross_paper",
+      "flags": [
+        "--config",
+        "--case-id",
+        "--output"
+      ],
+      "unknown_flags": [],
+      "verification": "source_ast_and_cli_help_only"
+    },
+    {
+      "document": "docs/guides/development.md",
+      "module": "uvicorn",
+      "flags": [
+        "--host",
+        "--port"
+      ],
+      "verification": "existing_project_dependency_and_entrypoint"
+    },
+    {
+      "document": "docs/guides/development.md",
+      "module": "pytest",
+      "flags": [],
+      "verification": "existing_project_dependency_and_entrypoint"
+    },
+    {
+      "document": "docs/guides/development.md",
+      "module": "scripts.validate_quality_benchmark",
+      "flags": [
+        "--dataset",
+        "--output"
+      ],
+      "unknown_flags": [],
+      "verification": "source_ast_and_cli_help_only"
+    },
+    {
+      "document": "docs/guides/development.md",
+      "module": "scripts.score_quality_benchmark",
+      "flags": [
+        "--dataset",
+        "--reference-kind",
+        "--split",
+        "--predictions",
+        "--ai-assessments",
+        "--output"
+      ],
+      "unknown_flags": [],
+      "verification": "source_ast_and_cli_help_only"
+    }
+  ],
+  "command_issues": [],
+  "source_symbols": [
+    {
+      "path": "app/research/planner.py",
+      "symbol": "ResearchPlanner",
+      "exists": true
+    },
+    {
+      "path": "app/research/worker.py",
+      "symbol": "PaperResearchWorker",
+      "exists": true
+    },
+    {
+      "path": "app/research/coverage_worker.py",
+      "symbol": "CoverageAwarePaperWorker",
+      "exists": true
+    },
+    {
+      "path": "app/research/orchestrator.py",
+      "symbol": "AsyncResearchOrchestrator",
+      "exists": true
+    },
+    {
+      "path": "app/research/reviewer.py",
+      "symbol": "EvidenceReviewer",
+      "exists": true
+    },
+    {
+      "path": "app/research/recovery_orchestrator.py",
+      "symbol": "RecoveryOrchestrator",
+      "exists": true
+    },
+    {
+      "path": "app/research/synthesis_runtime.py",
+      "symbol": "SynthesisRuntime",
+      "exists": true
+    },
+    {
+      "path": "app/papers/retriever.py",
+      "symbol": "PaperRetriever",
+      "exists": true
+    },
+    {
+      "path": "app/agent/loop.py",
+      "symbol": "BoundedToolAgent",
+      "exists": true
+    }
+  ],
+  "mermaid_diagrams": 2,
+  "mermaid_check": "Manual syntax and source-flow review; no renderer introduced.",
+  "unsafe_commands_executed": false
+}

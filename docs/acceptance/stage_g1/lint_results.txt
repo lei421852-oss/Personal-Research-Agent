@@ -1,0 +1,7 @@
+COMMAND: /home/lei/project/projects/personal-rag/.venv/bin/ruff check app tests scripts eval
+All checks passed!
+EXIT_CODE: 0
+
+COMMAND: /home/lei/project/projects/personal-rag/.venv/bin/ruff format --check app tests scripts eval
+225 files already formatted
+EXIT_CODE: 0

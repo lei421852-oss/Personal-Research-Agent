@@ -1,0 +1,35 @@
+{
+  "branch": "docs/stage-g1-architecture",
+  "original_head": "3be3a68a87c72a22456908c9b655afcfc8c422e5",
+  "documentation_commits": [
+    {
+      "sha": "338d154952903ffa4266ed617b1498238be4a552",
+      "message": "docs: record Stage G1 engineering audit"
+    },
+    {
+      "sha": "a11ea3785d59b4b2988ee07cdab1f67e4eca00e4",
+      "message": "docs: explain research architecture and development workflow"
+    }
+  ],
+  "head_before_acceptance_commit": "a11ea3785d59b4b2988ee07cdab1f67e4eca00e4",
+  "acceptance_commit_message": "docs: verify Stage G1 documentation and protected baselines",
+  "acceptance_commit_resolution": "git log -1 --format=%H --grep=\"^docs: verify Stage G1 documentation and protected baselines$\"",
+  "self_reference_note": "验收记录在最终提交前生成；承载自身的提交 SHA 由 Git 查询及外部交付清单记录。",
+  "preexisting_untracked_preserved": [
+    "docs/diagnostics/quality_failures_2026_10_09/artifact_manifest.json",
+    "docs/diagnostics/quality_failures_2026_10_09/findings.json",
+    "docs/diagnostics/quality_failures_2026_10_09/report.md",
+    "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-frozen-trainable-scope.md",
+    "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-language-model.md",
+    "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-training-objective.md",
+    "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-vision-encoder.md",
+    "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-vision-language-bridge.md",
+    "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-llava-frozen-trainable-scope.md",
+    "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-llava-language-model.md",
+    "docs/diagnostics/quality_failures_2026_10_09/verification.json",
+    "scripts/export_quality_failure_traces.py",
+    "tests/research_quality/test_failure_trace_export.py"
+  ],
+  "remote_operations": 0,
+  "tag_created": false
+}

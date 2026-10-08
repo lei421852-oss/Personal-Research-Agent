@@ -1,0 +1,120 @@
+{
+  "stage": "G1",
+  "status": "PASS",
+  "accepted_at": "2026-10-08T18:20:17.874811+00:00",
+  "scope": "documentation_and_engineering_audit_only",
+  "modules": {
+    "planner": {
+      "status": "PASS",
+      "basis": "source_audit_and_existing_full_regression",
+      "new_real_experiments": false
+    },
+    "worker": {
+      "status": "PASS",
+      "basis": "source_audit_and_existing_full_regression",
+      "new_real_experiments": false
+    },
+    "retrieval": {
+      "status": "PASS",
+      "basis": "source_audit_and_existing_full_regression",
+      "new_real_experiments": false
+    },
+    "reviewer": {
+      "status": "PASS",
+      "basis": "source_audit_and_existing_full_regression",
+      "new_real_experiments": false
+    },
+    "recovery": {
+      "status": "PASS",
+      "basis": "source_audit_and_existing_full_regression",
+      "new_real_experiments": false
+    },
+    "synthesis": {
+      "status": "PASS",
+      "basis": "source_audit_and_existing_full_regression",
+      "new_real_experiments": false
+    },
+    "evaluation": {
+      "status": "PASS",
+      "basis": "source_audit_and_existing_full_regression",
+      "new_real_experiments": false
+    },
+    "optional_coverage_worker": {
+      "status": "PASS",
+      "basis": "source_audit_and_existing_full_regression",
+      "new_real_experiments": false
+    }
+  },
+  "tests": {
+    "passed": 1043,
+    "failed": 0,
+    "warnings": 1,
+    "seconds": 14.43,
+    "exit_code": 0,
+    "log": "test_results.txt"
+  },
+  "static_checks": {
+    "ruff_exit_code": 0,
+    "formatter_exit_code": 0,
+    "formatted_files": 225,
+    "type_checker": "not_configured",
+    "log": "lint_results.txt"
+  },
+  "documentation_checks": {
+    "new_local_links": 127,
+    "new_broken_links": 0,
+    "legacy_local_links": 28,
+    "legacy_broken_links": 0,
+    "verified_cli_help_modules": 18,
+    "documented_module_commands": 14,
+    "mermaid_diagrams": 2,
+    "command_execution_limits": "Installation, preparation, indexing, service start and real runs checked by source/help only."
+  },
+  "integrity": {
+    "tracked_before": {
+      "checked": 462,
+      "mismatches": []
+    },
+    "untracked_before": {
+      "checked": 13,
+      "mismatches": []
+    },
+    "stage_e_frozen_files": {
+      "checked": 292,
+      "mismatches": []
+    },
+    "f2_protected_artifacts": {
+      "checked": 47,
+      "mismatches": []
+    },
+    "f3_protected_artifacts": {
+      "checked": 60,
+      "mismatches": []
+    }
+  },
+  "original_branch": "feature/stage-f3-1-worker-coverage",
+  "original_head": "3be3a68a87c72a22456908c9b655afcfc8c422e5",
+  "branch": "docs/stage-g1-architecture",
+  "protected_artifacts_changed": false,
+  "existing_untracked_preserved": 13,
+  "provider_calls": 0,
+  "production_indexes_rebuilt": 0,
+  "production_changes": false,
+  "coverage_worker_default_enabled": false,
+  "blocking_issues": [],
+  "known_nonblocking_issues": [
+    "Frozen root README contains historical current counts; new navigation explains them.",
+    "Dependency lock and wheel packaging of source scripts are absent.",
+    "Existing Starlette/httpx deprecation warning.",
+    "Optional VLM transport is not current research pixel-quality validation."
+  ],
+  "reports": {
+    "architecture": "../../architecture/system-overview.md",
+    "development": "../../guides/development.md",
+    "inventory": "../../architecture/engineering-inventory.md",
+    "audit": "../../architecture/documentation-audit.md",
+    "acceptance": "acceptance_report.md"
+  },
+  "remote_operations": 0,
+  "next_stage_started": false
+}

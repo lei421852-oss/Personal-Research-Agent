@@ -47,7 +47,7 @@
 | Stage E 研究配置 | [cross_paper_eval.json](../../configs/cross_paper_eval.json) | Qwen/Qwen3-Embedding-0.6B、CPU、cosine、Top-K=10、research-stage-e-text collection。 |
 | 质量评测 | [eval/research_quality](../../eval/research_quality)、[data/benchmark](../../data/benchmark) | Schema、校验、执行、评分、AI 辅助评分、分组隔离和来源验证。 |
 
-研究语料 snapshot 为 `18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390`。正文索引与论文元数据索引独立；本轮未打开 Chroma 写接口，未验证新的检索排名。
+研究语料 snapshot 为 `18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390`。正文索引与论文元数据索引独立；本轮未打开生产索引的 Chroma 写接口，未验证新的检索排名。单元测试可使用临时目录内的测试索引。
 
 依赖以 [pyproject.toml](../../pyproject.toml) 为准：Python ≥3.11，基础 Pydantic；`test`、`retrieval`、`llm`、`vision`、`data`、`api`、`ui-test` 为可选组。当前包版本元数据仍为 `0.1.0`，不能据研究阶段名称声称已发布 V0.2 包。Setuptools 只打包 `app*`，`scripts` / `eval` 的运行须基于源码仓库。
 

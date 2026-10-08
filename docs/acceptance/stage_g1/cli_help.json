@@ -1,0 +1,218 @@
+[
+  {
+    "module": "scripts.ingest_corpus",
+    "command": [
+      "python",
+      "-m",
+      "scripts.ingest_corpus",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: ingest_corpus.py [-h] [--papers-dir PAPERS_DIR] [--index-dir INDEX_DIR]\n                        [--embedding-model EMBEDDING_MODEL] [--device DEVICE]\n                        [--execute]\n\n默认检查已准备论文；只有 --execute 才运行真实嵌入。\n\noptions:\n  -h, --help            show this help message and exit\n  --papers-dir PAPERS_DIR\n  --index-dir INDEX_DIR\n  --embedding-model EMBEDDING_MODEL\n  --device DEVICE\n  --execute\n",
+    "stderr": ""
+  },
+  {
+    "module": "scripts.ingest_papers",
+    "command": [
+      "python",
+      "-m",
+      "scripts.ingest_papers",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: ingest_papers.py [-h] [--fixture FIXTURE] [--index-dir INDEX_DIR]\n                        [--embedding-model EMBEDDING_MODEL] [--device DEVICE]\n                        [--enrich] [--env-file ENV_FILE]\n                        [--profile-cache PROFILE_CACHE] [--report REPORT]\n\n显式建立独立论文元数据索引，不写入 V0.1 Evidence Index。\n\noptions:\n  -h, --help            show this help message and exit\n  --fixture FIXTURE\n  --index-dir INDEX_DIR\n  --embedding-model EMBEDDING_MODEL\n  --device DEVICE\n  --enrich              离线抽取论文画像；不改变原始 fixture\n  --env-file ENV_FILE\n  --profile-cache PROFILE_CACHE\n  --report REPORT       保存画像、抽取成本和实际索引文本\n",
+    "stderr": ""
+  },
+  {
+    "module": "scripts.prepare_paper_fixture",
+    "command": [
+      "python",
+      "-m",
+      "scripts.prepare_paper_fixture",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: prepare_paper_fixture.py [-h] --config CONFIG --pdf PDF --output OUTPUT\n\n用人工 JSON 配置准备固定版本 PDF，不下载文件或加载模型。\n\noptions:\n  -h, --help       show this help message and exit\n  --config CONFIG\n  --pdf PDF\n  --output OUTPUT\n",
+    "stderr": ""
+  },
+  {
+    "module": "scripts.prepare_research_corpus",
+    "command": [
+      "python",
+      "-m",
+      "scripts.prepare_research_corpus",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: prepare_research_corpus.py [-h] [--papers-dir PAPERS_DIR]\n                                  [--config CONFIG] [--pdf PDF]\n\n复用固定 PDF 人工区域准备器；导出可验证的来源清单和段落位置。\n\noptions:\n  -h, --help            show this help message and exit\n  --papers-dir PAPERS_DIR\n  --config CONFIG\n  --pdf PDF\n",
+    "stderr": ""
+  },
+  {
+    "module": "scripts.validate_research_corpus",
+    "command": [
+      "python",
+      "-m",
+      "scripts.validate_research_corpus",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: validate_research_corpus.py [-h] [--papers-dir PAPERS_DIR]\n                                   [--additional-papers-dir ADDITIONAL_PAPERS_DIR]\n                                   --output OUTPUT\n\n只做 PDF 来源与语料投影校验，不初始化模型或调用 Provider。\n\noptions:\n  -h, --help            show this help message and exit\n  --papers-dir PAPERS_DIR\n  --additional-papers-dir ADDITIONAL_PAPERS_DIR\n  --output OUTPUT\n",
+    "stderr": ""
+  },
+  {
+    "module": "scripts.evaluate_cross_paper",
+    "command": [
+      "python",
+      "-m",
+      "scripts.evaluate_cross_paper",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: evaluate_cross_paper.py [-h] [--config CONFIG] [--case-id CASE_ID]\n                               --output OUTPUT [--env-file ENV_FILE]\n                               [--scripted-smoke | --execute | --execute-retrieval]\n\n默认只校验；真实检索/研究必须显式执行，脚本化结果只证明工程连线。\n\noptions:\n  -h, --help           show this help message and exit\n  --config CONFIG\n  --case-id CASE_ID\n  --output OUTPUT\n  --env-file ENV_FILE\n  --scripted-smoke\n  --execute\n  --execute-retrieval\n",
+    "stderr": ""
+  },
+  {
+    "module": "scripts.verify_worker_coverage_baseline",
+    "command": [
+      "python",
+      "-m",
+      "scripts.verify_worker_coverage_baseline",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: verify_worker_coverage_baseline.py [-h] [--baseline BASELINE]\n\n核验 Stage E 与 F2 原始文件；不重写冻结清单或评测结果。\n\noptions:\n  -h, --help           show this help message and exit\n  --baseline BASELINE\n",
+    "stderr": ""
+  },
+  {
+    "module": "scripts.validate_quality_benchmark",
+    "command": [
+      "python",
+      "-m",
+      "scripts.validate_quality_benchmark",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: validate_quality_benchmark.py [-h] [--dataset DATASET] --output OUTPUT\n                                     [--annotation-template ANNOTATION_TEMPLATE]\n\n校验候选/Gold 来源与隔离，输出人工表单；不运行任何模型。\n\noptions:\n  -h, --help            show this help message and exit\n  --dataset DATASET\n  --output OUTPUT\n  --annotation-template ANNOTATION_TEMPLATE\n",
+    "stderr": ""
+  },
+  {
+    "module": "scripts.score_quality_benchmark",
+    "command": [
+      "python",
+      "-m",
+      "scripts.score_quality_benchmark",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: score_quality_benchmark.py [-h] [--dataset DATASET]\n                                  [--predictions PREDICTIONS]\n                                  [--assessments ASSESSMENTS]\n                                  [--ai-assessments AI_ASSESSMENTS]\n                                  [--split {dev,test,all}]\n                                  [--reference-kind {human_gold,ai_reviewed}]\n                                  --output OUTPUT\n\n只读取预测与人工评分记录；无 Gold 时输出空分母，不启动 Provider。\n\noptions:\n  -h, --help            show this help message and exit\n  --dataset DATASET\n  --predictions PREDICTIONS\n  --assessments ASSESSMENTS\n  --ai-assessments AI_ASSESSMENTS\n  --split {dev,test,all}\n  --reference-kind {human_gold,ai_reviewed}\n  --output OUTPUT\n",
+    "stderr": ""
+  },
+  {
+    "module": "scripts.run_quality_benchmark",
+    "command": [
+      "python",
+      "-m",
+      "scripts.run_quality_benchmark",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: run_quality_benchmark.py [-h] [--dataset DATASET] [--env-file ENV_FILE]\n                                [--split {dev,test,all}] [--pilot] [--execute]\n                                --output-dir OUTPUT_DIR\n\n生成真实质量预测；逐题保存，已执行题不重复调用，缺失结果不编造。\n\noptions:\n  -h, --help            show this help message and exit\n  --dataset DATASET\n  --env-file ENV_FILE\n  --split {dev,test,all}\n  --pilot\n  --execute\n  --output-dir OUTPUT_DIR\n",
+    "stderr": ""
+  },
+  {
+    "module": "scripts.run_worker_coverage_comparison",
+    "command": [
+      "python",
+      "-m",
+      "scripts.run_worker_coverage_comparison",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: run_worker_coverage_comparison.py [-h] [--requests REQUESTS]\n                                         [--env-file ENV_FILE]\n                                         [--output OUTPUT]\n                                         [--case-timeout CASE_TIMEOUT]\n                                         [--remaining]\n\n显式执行 F3.1-E 七题实验；先冒烟，再固定配置执行剩余题。\n\noptions:\n  -h, --help            show this help message and exit\n  --requests REQUESTS\n  --env-file ENV_FILE\n  --output OUTPUT\n  --case-timeout CASE_TIMEOUT\n  --remaining\n",
+    "stderr": ""
+  },
+  {
+    "module": "scripts.prepare_worker_coverage_comparison",
+    "command": [
+      "python",
+      "-m",
+      "scripts.prepare_worker_coverage_comparison",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: prepare_worker_coverage_comparison.py [-h] [--executions EXECUTIONS]\n                                             [--findings FINDINGS]\n                                             [--output OUTPUT]\n                                             [--diagnostic-executions DIAGNOSTIC_EXECUTIONS]\n\n从已有失败诊断准备 F3.1 同题对照输入，不调用 Provider 或检索器。\n\noptions:\n  -h, --help            show this help message and exit\n  --executions EXECUTIONS\n  --findings FINDINGS\n  --output OUTPUT\n  --diagnostic-executions DIAGNOSTIC_EXECUTIONS\n                        可选：核对原七条逐字导出轨迹，并额外记录其文件指纹。\n",
+    "stderr": ""
+  },
+  {
+    "module": "scripts.summarize_worker_coverage_comparison",
+    "command": [
+      "python",
+      "-m",
+      "scripts.summarize_worker_coverage_comparison",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: summarize_worker_coverage_comparison.py [-h] [--output OUTPUT]\n                                               [--review REVIEW]\n\n消费已保存的独立 AI 复核，生成逐题对照；不调用 Provider 或重跑研究。\n\noptions:\n  -h, --help       show this help message and exit\n  --output OUTPUT\n  --review REVIEW\n",
+    "stderr": ""
+  },
+  {
+    "module": "scripts.smoke_research_planner",
+    "command": [
+      "python",
+      "-m",
+      "scripts.smoke_research_planner",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: smoke_research_planner.py [-h] [--env-file ENV_FILE] [--output OUTPUT]\n\n显式运行三条真实 Planner smoke；不执行 Worker 或任何检索。\n\noptions:\n  -h, --help           show this help message and exit\n  --env-file ENV_FILE\n  --output OUTPUT\n",
+    "stderr": ""
+  },
+  {
+    "module": "scripts.smoke_async_research",
+    "command": [
+      "python",
+      "-m",
+      "scripts.smoke_async_research",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: smoke_async_research.py [-h] --plan PLAN [--case-id CASE_ID]\n                               [--env-file ENV_FILE] [--output OUTPUT]\n                               [--validate-only] [--max-workers MAX_WORKERS]\n                               [--max-llm MAX_LLM] [--max-vlm MAX_VLM]\n                               [--max-retrieval MAX_RETRIEVAL]\n                               [--max-tool-calls MAX_TOOL_CALLS]\n                               [--max-model-calls MAX_MODEL_CALLS]\n                               [--max-protocol-corrections MAX_PROTOCOL_CORRECTIONS]\n                               [--max-retries MAX_RETRIES]\n                               [--operation-timeout OPERATION_TIMEOUT]\n\n由用户显式运行的真实 Worker Pool smoke；复用已生成计划，不调用 Planner。\n\noptions:\n  -h, --help            show this help message and exit\n  --plan PLAN\n  --case-id CASE_ID\n  --env-file ENV_FILE\n  --output OUTPUT\n  --validate-only       只校验已有计划和配置，不初始化 Provider、模型或执行 Worker\n  --max-workers MAX_WORKERS\n  --max-llm MAX_LLM\n  --max-vlm MAX_VLM\n  --max-retrieval MAX_RETRIEVAL\n  --max-tool-calls MAX_TOOL_CALLS\n  --max-model-calls MAX_MODEL_CALLS\n  --max-protocol-corrections MAX_PROTOCOL_CORRECTIONS\n  --max-retries MAX_RETRIES\n  --operation-timeout OPERATION_TIMEOUT\n",
+    "stderr": ""
+  },
+  {
+    "module": "scripts.smoke_evidence_review",
+    "command": [
+      "python",
+      "-m",
+      "scripts.smoke_evidence_review",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: smoke_evidence_review.py [-h] --worker-results WORKER_RESULTS\n                                [--env-file ENV_FILE] [--output OUTPUT]\n                                [--max-reviewers MAX_REVIEWERS]\n                                [--max-llm MAX_LLM]\n                                [--max-model-calls MAX_MODEL_CALLS]\n                                [--validate-only]\n\n审核既有真实 Worker 结果；不重跑 Planner/Worker，不生成跨论文答案。\n\noptions:\n  -h, --help            show this help message and exit\n  --worker-results WORKER_RESULTS\n  --env-file ENV_FILE\n  --output OUTPUT\n  --max-reviewers MAX_REVIEWERS\n  --max-llm MAX_LLM\n  --max-model-calls MAX_MODEL_CALLS\n  --validate-only\n",
+    "stderr": ""
+  },
+  {
+    "module": "scripts.smoke_research_recovery",
+    "command": [
+      "python",
+      "-m",
+      "scripts.smoke_research_recovery",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: smoke_research_recovery.py [-h] --mode {a,b,c} --plan PLAN\n                                  [--case-id CASE_ID] --worker-results\n                                  WORKER_RESULTS --review-results\n                                  REVIEW_RESULTS [--env-file ENV_FILE]\n                                  --prior-model-calls PRIOR_MODEL_CALLS\n                                  --prior-tool-calls PRIOR_TOOL_CALLS --output\n                                  OUTPUT [--validate-only]\n\nStage D 三个明确分开的场景：受控初始拒绝+真实恢复，Fake再次拒绝，无语料跳过。\n\noptions:\n  -h, --help            show this help message and exit\n  --mode {a,b,c}\n  --plan PLAN\n  --case-id CASE_ID\n  --worker-results WORKER_RESULTS\n  --review-results REVIEW_RESULTS\n  --env-file ENV_FILE\n  --prior-model-calls PRIOR_MODEL_CALLS\n  --prior-tool-calls PRIOR_TOOL_CALLS\n  --output OUTPUT\n  --validate-only\n",
+    "stderr": ""
+  },
+  {
+    "module": "scripts.smoke_research_synthesis",
+    "command": [
+      "python",
+      "-m",
+      "scripts.smoke_research_synthesis",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: smoke_research_synthesis.py [-h] --plan PLAN [--case-id CASE_ID]\n                                   --worker-results WORKER_RESULTS\n                                   --review-results REVIEW_RESULTS\n                                   [--env-file ENV_FILE] [--output OUTPUT]\n                                   [--markdown MARKDOWN]\n                                   [--max-model-calls MAX_MODEL_CALLS]\n                                   [--max-protocol-corrections MAX_PROTOCOL_CORRECTIONS]\n                                   [--validate-only]\n\n消费已保存的 Stage A/B 结果，生成综合报告；不启动新的研究或审核。\n\noptions:\n  -h, --help            show this help message and exit\n  --plan PLAN\n  --case-id CASE_ID\n  --worker-results WORKER_RESULTS\n  --review-results REVIEW_RESULTS\n  --env-file ENV_FILE\n  --output OUTPUT\n  --markdown MARKDOWN\n  --max-model-calls MAX_MODEL_CALLS\n  --max-protocol-corrections MAX_PROTOCOL_CORRECTIONS\n  --validate-only\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,91 @@
+{
+  "stage": "G1",
+  "sha256_scope": "New documentation and acceptance records; excludes self to avoid recursive hashing.",
+  "files": [
+    {
+      "path": "docs/README.md",
+      "sha256": "c424428120c003ba23c75977eb38cb4c3b31821626b462de15a8a0f4138e67ba",
+      "bytes": 2834
+    },
+    {
+      "path": "docs/architecture/documentation-audit.md",
+      "sha256": "8d8b6e5d615dc74b303dbe910aaf63a27b9bacc566c482b9ab8626bba406ac6e",
+      "bytes": 5272
+    },
+    {
+      "path": "docs/architecture/engineering-inventory.md",
+      "sha256": "13d50f3e77cc2c946c06fcfa8c630eb0fe4fbe244911b6d69a46c2e698f7197f",
+      "bytes": 9332
+    },
+    {
+      "path": "docs/architecture/system-overview.md",
+      "sha256": "15524e0abbefdab173c9e4df11336e53d56f153efd2e07cc515a52facee41d7d",
+      "bytes": 13639
+    },
+    {
+      "path": "docs/guides/development.md",
+      "sha256": "a94bacfc76eb67e84341666127fe13ea8d44a4def78fae0d7301c3b06dabf36c",
+      "bytes": 13149
+    },
+    {
+      "path": "docs/acceptance/stage_g1/acceptance.json",
+      "sha256": "4fd4851ac317313fbec5a060db820bc7110fafb8fff50305c412f7c8e427b1f5",
+      "bytes": 3552
+    },
+    {
+      "path": "docs/acceptance/stage_g1/acceptance_report.md",
+      "sha256": "ed7a1c54bbad3a99cf02b23efd837de2df3206e6d4502f7c89bedee86486d446",
+      "bytes": 5921
+    },
+    {
+      "path": "docs/acceptance/stage_g1/baseline.json",
+      "sha256": "af362fe5f502b3878bdcbedca0c78b93f322072b6b2183f907021e4823c057e7",
+      "bytes": 145822
+    },
+    {
+      "path": "docs/acceptance/stage_g1/check_commands.json",
+      "sha256": "dfce81a3fdfd672bab0e14ce0b00901298781f08cadabb1e5346d376eee24f99",
+      "bytes": 4064
+    },
+    {
+      "path": "docs/acceptance/stage_g1/cli_help.json",
+      "sha256": "388b0ea22e28812ebfb9f32e349888dccb99a5b3f7f948dcc4a7571e230061d2",
+      "bytes": 14694
+    },
+    {
+      "path": "docs/acceptance/stage_g1/corpus_validation.json",
+      "sha256": "1be6bcce9bb4cd655157cfa5d4cdc4619e887fa0c22751a898cabf8b5ebbd92f",
+      "bytes": 1917
+    },
+    {
+      "path": "docs/acceptance/stage_g1/documentation_checks.json",
+      "sha256": "d20ca5a03bfa4963fa2dfcdd4a9e39adeebe6c6348ccefc8c7576e7f3a3dce61",
+      "bytes": 28269
+    },
+    {
+      "path": "docs/acceptance/stage_g1/git_delivery.json",
+      "sha256": "23cfaf0621cabf45796f73a3bb1e00e48341daba59e106cffdc6884abc70d50d",
+      "bytes": 2066
+    },
+    {
+      "path": "docs/acceptance/stage_g1/integrity_check.json",
+      "sha256": "f8199771501bbdfb1ca41eabe990451982c063ed35105d57e96456b55e297352",
+      "bytes": 524
+    },
+    {
+      "path": "docs/acceptance/stage_g1/lint_results.txt",
+      "sha256": "e40ef1a1944033d558e97d47c3d9e9e96861aadee52cbc29c4145437a2200412",
+      "bytes": 269
+    },
+    {
+      "path": "docs/acceptance/stage_g1/research_preflight.json",
+      "sha256": "1181d484bd42e370354132a8f9e15f7530f3f3700dea782b8949acebd4fff0de",
+      "bytes": 4984
+    },
+    {
+      "path": "docs/acceptance/stage_g1/test_results.txt",
+      "sha256": "19c4aff8f1c5bff93c7efd2a49a58a9d9aea799326e612be8ba283dbea2883df",
+      "bytes": 1785
+    }
+  ]
+}

@@ -168,7 +168,7 @@ python -m scripts.score_quality_benchmark \
 
 | 症状 | 排查顺序 |
 | --- | --- |
-| module not found / 相对路径不存在 | 确認位于源码仓库根目录，激活正确 `.venv`，使用 `python -m scripts...`；不要把 Windows UNC 路径直接交给 Linux CLI。 |
+| module not found / 相对路径不存在 | 确认位于源码仓库根目录，激活正确 `.venv`，使用 `python -m scripts...`；不要把 Windows UNC 路径直接交给 Linux CLI。 |
 | FileNotFoundError / invalid_input | 检查真实 dataset、predictions、assessments 路径和参数类别；评分结果中的 input_stage / input_errors 可定位，不代表模型已调用。 |
 | API 503 / runtime unavailable | 检查六项环境变量是否非空、AGENT_ENV_FILE 是否存在、检索模式及索引是否匹配。不要打印 API Key。 |
 | multiple_actions / protocol_failure | 查看 Worker rejection 与下轮 feedback、max_protocol_corrections、模型预算；一次违规不执行任何被拒工具。重复耗尽是执行失败。 |
