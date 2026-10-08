@@ -1,0 +1,213 @@
+{
+  "conclusion": "PASS",
+  "acceptance_scope": "Stage F1 engineering only; not human Gold acceptance or model-quality benchmark",
+  "accepted_at": "2026-10-08T10:32:01.584168+00:00",
+  "branch": "feat/stage-f1-research-quality-benchmark",
+  "stage_e_tag": "stage-e-freeze-v1",
+  "stage_e_commit_sha": "5700c6e31d0a46fefa44f890fb7fbb1b60634124",
+  "tested_f1_commit_sha": "c5f300c76a6f296fca5280f4a65d7e15f17c0f76",
+  "initial_worktree_clean": true,
+  "production_logic_modified": false,
+  "remote_git_operations": 0,
+  "real_provider_calls": 0,
+  "automatic_F2_started": false,
+  "dataset": {
+    "status": "structurally_valid",
+    "dataset_version": "research_quality_v1",
+    "total_cases": 90,
+    "task_counts": {
+      "abstention": 15,
+      "claim": 30,
+      "comparison": 15,
+      "reviewer": 30
+    },
+    "candidate_count": 90,
+    "human_reviewed_count": 0,
+    "approved_gold_count": 0,
+    "rejected_count": 0,
+    "target_shortfall": {
+      "claim": 0,
+      "reviewer": 0,
+      "comparison": 0,
+      "abstention": 0
+    },
+    "fact_group_count": 34,
+    "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+    "semantic_reference_validation": "requires_human_original_pdf_review",
+    "split_policy": "Explicit groups and normalized identical references checked; not a semantic paraphrase detector.",
+    "real_provider_calls": 0
+  },
+  "dataset_manifest_sha256": "d7fd2e2d7750a7f18a0bf533db6897ffd6a9866c8e78ceaf8bcda587d51bfeb5",
+  "formal_gold_ready": false,
+  "real_model_quality_metrics_available": false,
+  "tests": {
+    "previous_stage_e_passed": 756,
+    "new_f1_passed": 73,
+    "full_passed": 829,
+    "failed": 0,
+    "warning_count": 1,
+    "checks": [
+      {
+        "name": "related_tests",
+        "command": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/unit/research_quality"
+        ],
+        "exit_code": 0,
+        "started_at": "2026-10-08T10:27:45.454782+00:00",
+        "elapsed_seconds": 0.729,
+        "log_path": "docs/acceptance/stage_f1/related_tests.txt"
+      },
+      {
+        "name": "full_tests",
+        "command": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q"
+        ],
+        "exit_code": 0,
+        "started_at": "2026-10-08T10:27:46.183635+00:00",
+        "elapsed_seconds": 12.013,
+        "log_path": "docs/acceptance/stage_f1/full_tests.txt"
+      }
+    ]
+  },
+  "static_checks": [
+    {
+      "name": "ruff",
+      "command": [
+        "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+        "check",
+        "app",
+        "tests",
+        "scripts",
+        "eval"
+      ],
+      "exit_code": 0,
+      "started_at": "2026-10-08T10:27:42.995283+00:00",
+      "elapsed_seconds": 0.009,
+      "log_path": "docs/acceptance/stage_f1/ruff_results.txt"
+    },
+    {
+      "name": "formatter",
+      "command": [
+        "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+        "format",
+        "--check",
+        "app",
+        "tests",
+        "scripts",
+        "eval"
+      ],
+      "exit_code": 0,
+      "started_at": "2026-10-08T10:27:43.004826+00:00",
+      "elapsed_seconds": 0.01,
+      "log_path": "docs/acceptance/stage_f1/formatter_results.txt"
+    },
+    {
+      "name": "whitespace",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "started_at": "2026-10-08T10:27:43.014851+00:00",
+      "elapsed_seconds": 0.002,
+      "log_path": "docs/acceptance/stage_f1/whitespace_results.txt"
+    }
+  ],
+  "cli_checks": {
+    "checks": [
+      {
+        "name": "preparation_repeat",
+        "command": [
+          ".venv/bin/python",
+          "-m",
+          "scripts.prepare_quality_benchmark"
+        ],
+        "started_at": "2026-10-08T10:28:59.064068+00:00",
+        "elapsed_seconds": 0.556,
+        "exit_code": 0,
+        "log_path": "docs/acceptance/stage_f1/preparation_repeat.txt"
+      },
+      {
+        "name": "dataset_validation",
+        "command": [
+          ".venv/bin/python",
+          "-m",
+          "scripts.validate_quality_benchmark",
+          "--output",
+          "docs/acceptance/stage_f1/dataset_validation.json",
+          "--annotation-template",
+          "/tmp/f1-annotation-template.json"
+        ],
+        "started_at": "2026-10-08T10:28:59.619892+00:00",
+        "elapsed_seconds": 0.418,
+        "exit_code": 0,
+        "log_path": "docs/acceptance/stage_f1/dataset_validation.txt"
+      },
+      {
+        "name": "no_gold_scoring",
+        "command": [
+          ".venv/bin/python",
+          "-m",
+          "scripts.score_quality_benchmark",
+          "--output",
+          "docs/acceptance/stage_f1/no_gold_scoring.json"
+        ],
+        "started_at": "2026-10-08T10:29:00.037647+00:00",
+        "elapsed_seconds": 0.419,
+        "exit_code": 0,
+        "log_path": "docs/acceptance/stage_f1/no_gold_scoring.txt"
+      }
+    ],
+    "dataset_byte_identical_after_repreparation": true,
+    "real_provider_calls": 0
+  },
+  "frozen_evidence": {
+    "frozen_file_count": 292,
+    "all_frozen_hashes_match": true,
+    "stage_e_tracked_file_count": 297,
+    "modified_stage_e_tracked_files": [],
+    "fingerprint_root_sha256": "44c7afd36c793eff86faed077b7c917a5c6a200e3d652bfbf5b19e83cff0362e"
+  },
+  "source_policy": "References curated from 32 original prepared text/caption evidence IDs in five versioned PDFs; never copied from Stage E generated Claims.",
+  "scoring_policy": {
+    "open_answer": "Human semantic review tied to case/prediction SHA256; no string equality or production Reviewer judgment.",
+    "reviewer": "passed positive label; explicit valid-label confusion denominators.",
+    "abstention": "Structured decision accuracy; not prose semantics.",
+    "comparison": "Four human 0..2 axes; no inferred correctness threshold.",
+    "zero_denominator": "null",
+    "missing_prediction": "Explicit operational failure",
+    "ungraded_open_answer": "Pending and excluded from known-correctness denominator; coverage reported."
+  },
+  "known_limits": [
+    {
+      "severity": "required_before_formal_quality_evaluation",
+      "detail": "Human reviewed=0 and approved_gold=0; all 90 candidates remain pending_review/unassigned."
+    },
+    {
+      "severity": "dataset_design",
+      "detail": "90 related cases share 34 fact/boundary groups; they are not 90 independent facts. Group-connected dev/test assignment remains human work."
+    },
+    {
+      "severity": "dataset_design",
+      "detail": "Abstention labels have 13 refusal cases and 2 answerable controls; report class counts alongside accuracy."
+    },
+    {
+      "severity": "validation_boundary",
+      "detail": "Source hashes/positions/quotes and explicit groups are checked; semantic entailment, undeclared external optimization use and human identity cannot be authenticated automatically."
+    },
+    {
+      "severity": "existing_nonblocking_warning",
+      "detail": "Existing Starlette TestClient/httpx deprecation warning; no dependency or production change in F1."
+    }
+  ],
+  "report_path": "docs/acceptance/stage_f1/acceptance_report.md",
+  "artifact_manifest_path": "docs/acceptance/stage_f1/artifact_manifest.json"
+}

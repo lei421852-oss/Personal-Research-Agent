@@ -1,0 +1,29 @@
+[
+  {
+    "name": "related_tests",
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/research_quality"
+    ],
+    "exit_code": 0,
+    "started_at": "2026-10-08T10:27:45.454782+00:00",
+    "elapsed_seconds": 0.729,
+    "log_path": "docs/acceptance/stage_f1/related_tests.txt"
+  },
+  {
+    "name": "full_tests",
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "pytest",
+      "-q"
+    ],
+    "exit_code": 0,
+    "started_at": "2026-10-08T10:27:46.183635+00:00",
+    "elapsed_seconds": 12.013,
+    "log_path": "docs/acceptance/stage_f1/full_tests.txt"
+  }
+]

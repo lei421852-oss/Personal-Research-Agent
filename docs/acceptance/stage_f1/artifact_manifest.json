@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "base_tag": "stage-e-freeze-v1",
+  "tested_f1_commit_sha": "c5f300c76a6f296fca5280f4a65d7e15f17c0f76",
+  "scope": "New F1 implementation, candidates and acceptance evidence; excludes this self-referencing manifest.",
+  "files": [
+    {
+      "path": "data/benchmark/research_quality_v1/abstention_cases.jsonl",
+      "bytes": 27947,
+      "sha256": "10c588ee7e307cd5429303d180ae3720460941ec86e749f5c021021eba90b113"
+    },
+    {
+      "path": "data/benchmark/research_quality_v1/annotation_guidelines.md",
+      "bytes": 8119,
+      "sha256": "d29a6afe14353cbdf9925ca21376025e836d61a0c9b49cec773ed9a649f2fd8b"
+    },
+    {
+      "path": "data/benchmark/research_quality_v1/claim_cases.jsonl",
+      "bytes": 74418,
+      "sha256": "2af51e9aafb9b4f091acf2ed583a007ed83b7db58fd8157fe476bce4cf4cadc7"
+    },
+    {
+      "path": "data/benchmark/research_quality_v1/comparison_cases.jsonl",
+      "bytes": 82587,
+      "sha256": "041b75a287e4cae074618022dea95b25bc40f49fa53f9c8cf760eb60806dd41e"
+    },
+    {
+      "path": "data/benchmark/research_quality_v1/manifest.json",
+      "bytes": 1981,
+      "sha256": "d7fd2e2d7750a7f18a0bf533db6897ffd6a9866c8e78ceaf8bcda587d51bfeb5"
+    },
+    {
+      "path": "data/benchmark/research_quality_v1/reviewer_cases.jsonl",
+      "bytes": 83880,
+      "sha256": "00ae5450c3b21ac5c29909d323357149429e78db9ec2dc23722e7b551e1799f1"
+    },
+    {
+      "path": "docs/acceptance/stage_f1/acceptance.json",
+      "bytes": 7232,
+      "sha256": "7aef369b42e4cbe5d536207382ae9162315b83107f12184d0e0c5813fb1122dc"
+    },
+    {
+      "path": "docs/acceptance/stage_f1/acceptance_report.md",
+      "bytes": 8806,
+      "sha256": "cfa38a0ae5effcaab7048747d50683f21d71c96fd3634ce3b904f041b5678d67"
+    },
+    {
+      "path": "docs/acceptance/stage_f1/cli_checks.json",
+      "bytes": 1353,
+      "sha256": "83fa35ca1fcf8925914c5edd5d3ed9f00a72ed8de538039dda5592142a405f18"
+    },
+    {
+      "path": "docs/acceptance/stage_f1/dataset_validation.json",
+      "bytes": 753,
+      "sha256": "ab63b57d3594f801b6ec317fe8376c5a863e77bd7c5ef56a7fbca7eec84024cb"
+    },
+    {
+      "path": "docs/acceptance/stage_f1/dataset_validation.txt",
+      "bytes": 683,
+      "sha256": "b7a7b577bc62335e5599aae93805d6d8f2edcca8016065f01cb4aef14ada0a90"
+    },
+    {
+      "path": "docs/acceptance/stage_f1/formatter_results.txt",
+      "bytes": 28,
+      "sha256": "f36b4fb3218f12e3995320c733435e653e7140d30f5d071fbadca31291aa1fdc"
+    },
+    {
+      "path": "docs/acceptance/stage_f1/freeze_verification.json",
+      "bytes": 51289,
+      "sha256": "5c3771cc2ab55792de2668da00a54d3f1b75a62e8913f3bfaf05b84be71b7785"
+    },
+    {
+      "path": "docs/acceptance/stage_f1/full_tests.txt",
+      "bytes": 1491,
+      "sha256": "84d165f03646f2d98ce9701f260717987d9da61e2485c60a86a50f695020e86c"
+    },
+    {
+      "path": "docs/acceptance/stage_f1/no_gold_scoring.json",
+      "bytes": 98490,
+      "sha256": "7d0b78bfc697b6a1415797f097da69155de50e8fc62e6c413c16c64aac2482ec"
+    },
+    {
+      "path": "docs/acceptance/stage_f1/no_gold_scoring.txt",
+      "bytes": 1646,
+      "sha256": "29db7bade3038ccf95d9dfc9e1972596de8c2955158c511371c5dbcd8d6ae80e"
+    },
+    {
+      "path": "docs/acceptance/stage_f1/preparation_repeat.txt",
+      "bytes": 683,
+      "sha256": "b7a7b577bc62335e5599aae93805d6d8f2edcca8016065f01cb4aef14ada0a90"
+    },
+    {
+      "path": "docs/acceptance/stage_f1/related_tests.txt",
+      "bytes": 179,
+      "sha256": "cf8f9046b7188eb15fb2e512673666dad32c7a1bb49f281a15e31ed9be64e3be"
+    },
+    {
+      "path": "docs/acceptance/stage_f1/ruff_results.txt",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "docs/acceptance/stage_f1/static_checks.json",
+      "bytes": 1010,
+      "sha256": "bde1602794ada82fa1ac80f7f6af9615da85673a0fd679b12f9fd92c037784c5"
+    },
+    {
+      "path": "docs/acceptance/stage_f1/test_checks.json",
+      "bytes": 619,
+      "sha256": "d3ba214e358238100a844db1bf45045f3659ae9d34d4638d42c0705709b6bf47"
+    },
+    {
+      "path": "docs/acceptance/stage_f1/whitespace_results.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research-quality-benchmark.md",
+      "bytes": 4872,
+      "sha256": "6984449db6c3ffb0c1890e6e5aff412dc0cd3ba48bc155d32bca37f955f3a4ea"
+    },
+    {
+      "path": "eval/research_quality/__init__.py",
+      "bytes": 80,
+      "sha256": "90fab17671b692fa51778ec904f101822dce960f5fbd739d3d4b6d12b3273b3e"
+    },
+    {
+      "path": "eval/research_quality/annotation_template.py",
+      "bytes": 2133,
+      "sha256": "e79d872a3f009d65f7914040a9fe8af6193109b70bd6db6c20548e87a606b59b"
+    },
+    {
+      "path": "eval/research_quality/dataset_loader.py",
+      "bytes": 2864,
+      "sha256": "3993bbeb4ff1ed09a75e4aeabca3e7cba95d3a7334889b31682f1670c011c3c4"
+    },
+    {
+      "path": "eval/research_quality/dataset_validator.py",
+      "bytes": 7992,
+      "sha256": "db2036a4b5d2ff3a4be7ee5265cbe53db7c1c432a03bbaa712e99a63bb06a85a"
+    },
+    {
+      "path": "eval/research_quality/metrics.py",
+      "bytes": 4205,
+      "sha256": "db8f0bc4ba528ffe3f14c94e6e0daeae83a799dfa3963b528accb4e445e14a2b"
+    },
+    {
+      "path": "eval/research_quality/schemas.py",
+      "bytes": 11218,
+      "sha256": "0b8b2802601ebd827e37088a04671f71eb47977a5e7594484c150b2f66e0ec83"
+    },
+    {
+      "path": "eval/research_quality/scoring.py",
+      "bytes": 7269,
+      "sha256": "999543f78e9dea4d2912551dd87b0705b932fe32db49d44552ffaaafbb75c6e4"
+    },
+    {
+      "path": "scripts/prepare_quality_benchmark.py",
+      "bytes": 30653,
+      "sha256": "8718949726587a2c31ac31d07f6f7e97019a791a136f2e928ce7088cf7e6261a"
+    },
+    {
+      "path": "scripts/score_quality_benchmark.py",
+      "bytes": 2271,
+      "sha256": "f9d6d80813c38ca9917168dc6238bdb46927637fa7b33bcfe5b855749d73c3b4"
+    },
+    {
+      "path": "scripts/validate_quality_benchmark.py",
+      "bytes": 1769,
+      "sha256": "b467dde7e932286040a4be07b65a15e47fc88a50792694fc00770af243fae619"
+    },
+    {
+      "path": "tests/unit/research_quality/conftest.py",
+      "bytes": 399,
+      "sha256": "a8a75c3283c6cbdb0004a782053fb3987afbef5adaccb06550ff24b7a0df156e"
+    },
+    {
+      "path": "tests/unit/research_quality/rq_helpers.py",
+      "bytes": 1385,
+      "sha256": "1fe9b20ed68228f4373faa00958b7ece72bc67ba10ec828f068af75c36496221"
+    },
+    {
+      "path": "tests/unit/research_quality/test_dataset_validator.py",
+      "bytes": 7202,
+      "sha256": "2b7bd982215de2348a889f6dc9af64825b7076027501aa26486518418a8ebc08"
+    },
+    {
+      "path": "tests/unit/research_quality/test_metrics.py",
+      "bytes": 3132,
+      "sha256": "dc444ba7509796b341b81553cb5213cbad49c09003308f7ef33d9a9cab850a6d"
+    },
+    {
+      "path": "tests/unit/research_quality/test_schemas.py",
+      "bytes": 6075,
+      "sha256": "83d3968394c725c59137f9d7d30193bfdd177fe24cd2380a641419d7fbaa7e66"
+    },
+    {
+      "path": "tests/unit/research_quality/test_scoring.py",
+      "bytes": 9265,
+      "sha256": "9420ef22910697dfbd819b9c1902843ba09363de2d61d937c9a71419cb5a47b6"
+    }
+  ]
+}

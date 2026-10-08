@@ -1,0 +1,48 @@
+{
+  "checks": [
+    {
+      "name": "preparation_repeat",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.prepare_quality_benchmark"
+      ],
+      "started_at": "2026-10-08T10:28:59.064068+00:00",
+      "elapsed_seconds": 0.556,
+      "exit_code": 0,
+      "log_path": "docs/acceptance/stage_f1/preparation_repeat.txt"
+    },
+    {
+      "name": "dataset_validation",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.validate_quality_benchmark",
+        "--output",
+        "docs/acceptance/stage_f1/dataset_validation.json",
+        "--annotation-template",
+        "/tmp/f1-annotation-template.json"
+      ],
+      "started_at": "2026-10-08T10:28:59.619892+00:00",
+      "elapsed_seconds": 0.418,
+      "exit_code": 0,
+      "log_path": "docs/acceptance/stage_f1/dataset_validation.txt"
+    },
+    {
+      "name": "no_gold_scoring",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.score_quality_benchmark",
+        "--output",
+        "docs/acceptance/stage_f1/no_gold_scoring.json"
+      ],
+      "started_at": "2026-10-08T10:29:00.037647+00:00",
+      "elapsed_seconds": 0.419,
+      "exit_code": 0,
+      "log_path": "docs/acceptance/stage_f1/no_gold_scoring.txt"
+    }
+  ],
+  "dataset_byte_identical_after_repreparation": true,
+  "real_provider_calls": 0
+}

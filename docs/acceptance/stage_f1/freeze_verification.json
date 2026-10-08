@@ -1,0 +1,1486 @@
+{
+  "verified_at": "2026-10-08T10:29:49.457448+00:00",
+  "stage_e_tag": "stage-e-freeze-v1",
+  "stage_e_commit_sha": "5700c6e31d0a46fefa44f890fb7fbb1b60634124",
+  "tag_unchanged": true,
+  "frozen_file_count": 292,
+  "all_frozen_hashes_match": true,
+  "fingerprint_root_sha256": "44c7afd36c793eff86faed077b7c917a5c6a200e3d652bfbf5b19e83cff0362e",
+  "manifest_root_matches": true,
+  "stage_e_tracked_file_count": 297,
+  "modified_stage_e_tracked_files": [],
+  "frozen_files": [
+    {
+      "path": ".env.example",
+      "sha256": "1387ff168273408be84d4ad13a7988e30f2042356b7b616e365a8bb3ebcc3206",
+      "matches": true
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "676caed23e182ecfd4112e91b88d5a832daca13fdcd5a821cd5d42e674b6352a",
+      "matches": true
+    },
+    {
+      "path": "README.md",
+      "sha256": "ec3682b4e15768a8ce6e87f14268470fec822e506d07fd5306ac42f2bf861d43",
+      "matches": true
+    },
+    {
+      "path": "app/__init__.py",
+      "sha256": "f9286f6e78331b00d057c250ca6ae67e940244d45b9077cdeb2555c42718ff85",
+      "matches": true
+    },
+    {
+      "path": "app/agent/__init__.py",
+      "sha256": "082e6c841ddc1c3121404a6a64db69eeee9d1c2ff8dd01e5792fc84e5261326d",
+      "matches": true
+    },
+    {
+      "path": "app/agent/context.py",
+      "sha256": "44840c4e9c9bcca53a75895f560aafb5d1a54c378ac16fe8ffeb8df947b96ea6",
+      "matches": true
+    },
+    {
+      "path": "app/agent/errors.py",
+      "sha256": "ac083275477fc96fec9dda511f479172f5f7b43cfc4609f3192824a654283450",
+      "matches": true
+    },
+    {
+      "path": "app/agent/finish.py",
+      "sha256": "6b76c796512b0ff09497a4dc8a01dda053b399f15107f3cac3b36518b85a27db",
+      "matches": true
+    },
+    {
+      "path": "app/agent/loop.py",
+      "sha256": "665b5910e6636f9c4ecff0252deeed6115a4751483dc1949b7d1f2963f5a0f10",
+      "matches": true
+    },
+    {
+      "path": "app/agent/query_guard.py",
+      "sha256": "1340eab96a6a5029fd9d63423bc0461a9d92aa2438a52e3be8bdc33ca1974608",
+      "matches": true
+    },
+    {
+      "path": "app/agent/recovery.py",
+      "sha256": "f850ce89d3875753d9a1ec2532fb9e6e0f099dd9583fa52b77529bdc5a96315c",
+      "matches": true
+    },
+    {
+      "path": "app/agent/tool_calling.py",
+      "sha256": "35adaf9bb7f2f84ab988366929ba8f2e8446c164e617bed6bc5cd942ebec4218",
+      "matches": true
+    },
+    {
+      "path": "app/api/__init__.py",
+      "sha256": "c2aedef563f1173f952dee81b467ba9542041b7601a37d51294f1dcdd03b2fda",
+      "matches": true
+    },
+    {
+      "path": "app/api/mapping.py",
+      "sha256": "5c114dde5d509d11a727eab62fc3d9f24f380601560936751a128ec45410c3d4",
+      "matches": true
+    },
+    {
+      "path": "app/api/routes/__init__.py",
+      "sha256": "a6bbc8dc92e08bdaa1403efa132a8bd66414b3cf76a56389f733c296b14247e3",
+      "matches": true
+    },
+    {
+      "path": "app/api/routes/agent.py",
+      "sha256": "7a4033dc243324cb7c06f08cdad98e0b7bd9f2ee2a811d2da6edc57cc2935da4",
+      "matches": true
+    },
+    {
+      "path": "app/api/runtime.py",
+      "sha256": "8ec0fd73fca7fbcbd3f2776327faf80ef50a8e4b3b7163e7f9c753eae6a2a287",
+      "matches": true
+    },
+    {
+      "path": "app/api/schemas/__init__.py",
+      "sha256": "70c5307e6be4189e0e2307ec67b830cffa320d875cea562d0b4401d9030a1f84",
+      "matches": true
+    },
+    {
+      "path": "app/api/schemas/agent.py",
+      "sha256": "7d66fa76693172f7e0f8ad5011d25cdffa09ca01e415bd9b53606c1e7ff1e6fd",
+      "matches": true
+    },
+    {
+      "path": "app/diagnostics.py",
+      "sha256": "39095cf236fccb8fab0773e8cd9e9deeacb5e141617a55a90656d76ad63fd26c",
+      "matches": true
+    },
+    {
+      "path": "app/evidence/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "app/evidence/citations.py",
+      "sha256": "8f32695b8d543a77c597087e600181e8bfd769734780ff6889603080989c3057",
+      "matches": true
+    },
+    {
+      "path": "app/evidence/corpus.py",
+      "sha256": "f2d6aee1673006ec10458843b6aad45c028ec045ec72f0e59ae2a170b07450d4",
+      "matches": true
+    },
+    {
+      "path": "app/evidence/errors.py",
+      "sha256": "770edf116b243be5e24280f11ba3500debed10c539d9e5243fec4a97e3ea8458",
+      "matches": true
+    },
+    {
+      "path": "app/evidence/fixtures.py",
+      "sha256": "c25138782a0fec328a326eb5add3f34e4200d8fbebacbefa8e7902dacba94aa1",
+      "matches": true
+    },
+    {
+      "path": "app/evidence/models.py",
+      "sha256": "9f0e39239c8597d95749412fba39062d10ab776d6da3e6bac6e89d5c0fc5a4c2",
+      "matches": true
+    },
+    {
+      "path": "app/evidence/preparation.py",
+      "sha256": "7da86cccd9d66ebb1a708761e17d5984f2e98ed278da04652d97b7acb5c7001b",
+      "matches": true
+    },
+    {
+      "path": "app/evidence/repository.py",
+      "sha256": "a9990e48ccf6131746aec55dd9fb4d9dd869d5220ff06232deadbae8c03d4428",
+      "matches": true
+    },
+    {
+      "path": "app/evidence/resolver.py",
+      "sha256": "3bbf92db4fdc4a83cb2407ad211aea1cf1972b0051073eb3bc6e1e8626b83e8c",
+      "matches": true
+    },
+    {
+      "path": "app/evidence/smoke.py",
+      "sha256": "1e479a318ae1eecd47d1456010ac5de712738f6beefec49867a6c4a67e2c8782",
+      "matches": true
+    },
+    {
+      "path": "app/llm/__init__.py",
+      "sha256": "fbf8541789f8ad04279bf021b8e6d3629eb39d04703cfc02f77a570c96b5af08",
+      "matches": true
+    },
+    {
+      "path": "app/llm/client.py",
+      "sha256": "021e43accd91cfecdf61c071bbf18c39a1b845afe38514f45347a67ae8877e5c",
+      "matches": true
+    },
+    {
+      "path": "app/llm/fake.py",
+      "sha256": "ebf0c52efa93f4fa4b12740ac04aa840e5e4e49e11c43e4371c7fc7ec8b62946",
+      "matches": true
+    },
+    {
+      "path": "app/llm/models.py",
+      "sha256": "8348cc850b3dba44d45190362c79d7c03d280cdc642fef1dd351fb4cd4d11dcb",
+      "matches": true
+    },
+    {
+      "path": "app/llm/provider.py",
+      "sha256": "2bd7fe648b59ee2537d3b42e4cb0186445c9abba240ea6fc55f258749fea2f28",
+      "matches": true
+    },
+    {
+      "path": "app/main.py",
+      "sha256": "30cd8c6f6d391e30be1547e95d9cb77513199381e979247432f8900daae1a645",
+      "matches": true
+    },
+    {
+      "path": "app/papers/__init__.py",
+      "sha256": "b5609b15e806177c58dba357b091e837f96940f9519c4d91803e8ebe51e12bb2",
+      "matches": true
+    },
+    {
+      "path": "app/papers/candidates.py",
+      "sha256": "1c4704038ef74f906771b5849da040b3d0195c2fb67f11cb5e316aecb955cd51",
+      "matches": true
+    },
+    {
+      "path": "app/papers/catalog.py",
+      "sha256": "f7f28beef185fe9c00cff3d691dea168f7a036eadcf54e3d90aac164bae17597",
+      "matches": true
+    },
+    {
+      "path": "app/papers/evidence_access.py",
+      "sha256": "526d8a1d089a0750740cdf729e08fc6e678dbb7fc0758a87fe565a6a6f18bb22",
+      "matches": true
+    },
+    {
+      "path": "app/papers/expansion.py",
+      "sha256": "05bfefc8b4ce24b4a265e77c7ee6f12fb5d84adb2cead67c97f5d42281ec2ed6",
+      "matches": true
+    },
+    {
+      "path": "app/papers/models.py",
+      "sha256": "422232db5aaa1969b44774d0aae59610d9b610237f4224496d37d0ddaf05c1dd",
+      "matches": true
+    },
+    {
+      "path": "app/papers/profiles.py",
+      "sha256": "182f71fed092754a5c72840c94c23a983bd1df4115e69f32bba0fcf0f11df7e5",
+      "matches": true
+    },
+    {
+      "path": "app/papers/retriever.py",
+      "sha256": "c4e108eddab2133fe05ae08986c2b6306de7f87f16c733dac65cbd0107c9c868",
+      "matches": true
+    },
+    {
+      "path": "app/papers/store.py",
+      "sha256": "64fedbce36a3ce195c77c945ed04250810db3df7d16b00170d0d256020b0336b",
+      "matches": true
+    },
+    {
+      "path": "app/qa/__init__.py",
+      "sha256": "efefaf9744be2e24a31a03ee606997a4cabf88a18c81a34d18df40ecd34c1fd6",
+      "matches": true
+    },
+    {
+      "path": "app/qa/service.py",
+      "sha256": "838283203c0984dffb739652eab9cf432096ab27e66df354fa2857af2e859a4c",
+      "matches": true
+    },
+    {
+      "path": "app/research/__init__.py",
+      "sha256": "5da9426d933684cc9904b6e6319e72bb3bd2fa028c6769efc3eb06f041584970",
+      "matches": true
+    },
+    {
+      "path": "app/research/async_tools.py",
+      "sha256": "94b3dd1478154d90bab4671d5a92f73203443e0f6413bd5e189bc77fc7846c26",
+      "matches": true
+    },
+    {
+      "path": "app/research/corpus_validation.py",
+      "sha256": "d9c5afb9c9fa734c8b04b45143908e2f03f17e11b146061b38497686470fd5d7",
+      "matches": true
+    },
+    {
+      "path": "app/research/models.py",
+      "sha256": "d14f428625c8102e7d84084520524b53dcb5b93bf591a27603a6a91dcccb5793",
+      "matches": true
+    },
+    {
+      "path": "app/research/orchestrator.py",
+      "sha256": "c496e5ed5c4d2786ee1317e27d40bd0e645cffbc983519370e988a3e80a0a3a0",
+      "matches": true
+    },
+    {
+      "path": "app/research/planner.py",
+      "sha256": "fe51559b7df93a2941bedb8356de5893878937605fef6bcac81171164d4b53d5",
+      "matches": true
+    },
+    {
+      "path": "app/research/recovery_eligibility.py",
+      "sha256": "7892d8e361ba49fd0ea81937880f685b39bf7376a69d56bc4ecb8919b3b20fca",
+      "matches": true
+    },
+    {
+      "path": "app/research/recovery_merge.py",
+      "sha256": "8d4b9455086aaee812a4669ec1de314915926617d244278bdbac95d460a6b36b",
+      "matches": true
+    },
+    {
+      "path": "app/research/recovery_models.py",
+      "sha256": "c07f521728dc06905ce2afa359525c3963785f931aa049cf0a8118d0b537bb0e",
+      "matches": true
+    },
+    {
+      "path": "app/research/recovery_orchestrator.py",
+      "sha256": "39b3929fc0f508b55369c4c676e990eda5c02ed316de9ec728a1c285361df236",
+      "matches": true
+    },
+    {
+      "path": "app/research/requirements.py",
+      "sha256": "2b21efbcb23a5001c3f75d815956313a249c95857ca63b78ad993829af2ea62a",
+      "matches": true
+    },
+    {
+      "path": "app/research/retry.py",
+      "sha256": "08aac430c1329d68c6168110268923e7bab754e040fbc3d2e01e6abde105cc42",
+      "matches": true
+    },
+    {
+      "path": "app/research/review_models.py",
+      "sha256": "0a94a910d4a7b0e32a18ad53022d1f187e842f8a39b285c8ea218f4839459c2d",
+      "matches": true
+    },
+    {
+      "path": "app/research/review_runtime.py",
+      "sha256": "aee842745d8e79a2d6b5da868af47736d035a5e64803e4a6de1d8e64466cce24",
+      "matches": true
+    },
+    {
+      "path": "app/research/review_validation.py",
+      "sha256": "5ac89445e3d21d81f33140a8c51bda0fdda137a6a9853d9317ee0d69ece9f417",
+      "matches": true
+    },
+    {
+      "path": "app/research/reviewer.py",
+      "sha256": "79a7879941bfc8bdac3b04db73e70a10918f5f32d41fbdfcad2ee231f05c80bb",
+      "matches": true
+    },
+    {
+      "path": "app/research/runtime.py",
+      "sha256": "8e54f04e4e5bdb114415347c0f79454c72a247e795fb893f11310225b5d564f1",
+      "matches": true
+    },
+    {
+      "path": "app/research/synthesis_agent.py",
+      "sha256": "d95b9fa3d36916c0b3de10c461f69282318baaecd91c4b5d2e6d3b406ec90c92",
+      "matches": true
+    },
+    {
+      "path": "app/research/synthesis_input.py",
+      "sha256": "f91377ba5205991543570cb44b70c46948fa984f8f32e5417ee01949b07af4f1",
+      "matches": true
+    },
+    {
+      "path": "app/research/synthesis_models.py",
+      "sha256": "b04fbba3465476e91d0084d83a98c9ae4805295ed679333214f59c09b6e54d87",
+      "matches": true
+    },
+    {
+      "path": "app/research/synthesis_runtime.py",
+      "sha256": "235c334419c7363ba9d157a0a3f63af56a36957b5a57271e7f02e6b69fdb65f2",
+      "matches": true
+    },
+    {
+      "path": "app/research/synthesis_validator.py",
+      "sha256": "0c035a9a4b2cb53ef25b22a4f11044da2e28a4ddd9b859bfbbbbaf5e5feb1d98",
+      "matches": true
+    },
+    {
+      "path": "app/research/worker.py",
+      "sha256": "9f7962a56fd7d8ec4b9576fdf4380d75d599ff8573a83c266aeb2cfc577c7349",
+      "matches": true
+    },
+    {
+      "path": "app/retrieval/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "app/retrieval/contracts.py",
+      "sha256": "70d05ae07883143bfb3adcb23f686277b1d14e35ef5c01f42c007f1d818b3eac",
+      "matches": true
+    },
+    {
+      "path": "app/retrieval/embedding.py",
+      "sha256": "7f90770f27965ab10d539712617a4bb165fd059df97f62d7f57bec7c0c69d84f",
+      "matches": true
+    },
+    {
+      "path": "app/retrieval/errors.py",
+      "sha256": "2afcbc0296b6ab9824af084667f171fc1362c49a66a8c17a9952e21718959e1c",
+      "matches": true
+    },
+    {
+      "path": "app/retrieval/ingestion.py",
+      "sha256": "3649ed806124ac9480254124e59d3c075a4215b6ca6e91a646cb23ff4edc69f0",
+      "matches": true
+    },
+    {
+      "path": "app/retrieval/retriever.py",
+      "sha256": "2596f110c23f7ef1205aa6b6b104733d6774e0e9dc57cab49d1ea5a8cae691f4",
+      "matches": true
+    },
+    {
+      "path": "app/retrieval/vector_store.py",
+      "sha256": "353a921e3579935567cf3944f8535d914d2ece278768dbfad87aae38d7369c0b",
+      "matches": true
+    },
+    {
+      "path": "app/tools/__init__.py",
+      "sha256": "70918c27c55c7913d7c6a275518e18b7ddb3dbb48139adfdfdac5a468ea28f89",
+      "matches": true
+    },
+    {
+      "path": "app/tools/base.py",
+      "sha256": "f8ca197b654029fa33d906377ec994e47e5c0fd8b00b3562831f75a4d6ff5172",
+      "matches": true
+    },
+    {
+      "path": "app/tools/calculator.py",
+      "sha256": "9130628516d776162bee06b49b9ada53945c4a5dbde1b667242d23d7d8894afd",
+      "matches": true
+    },
+    {
+      "path": "app/tools/discovery.py",
+      "sha256": "740d2cbf5134291d56531d0adae39a1f0e402c4040470a70dd9e5851d7bb2733",
+      "matches": true
+    },
+    {
+      "path": "app/tools/errors.py",
+      "sha256": "97d197c3eac94f4d228556ab8ab89c2b1394df4d201fda4a664f1174db3febe0",
+      "matches": true
+    },
+    {
+      "path": "app/tools/executor.py",
+      "sha256": "4f457afcc9fce3c72f607c1b9babf5469dc24f04ee0facf2de03909ec6233242",
+      "matches": true
+    },
+    {
+      "path": "app/tools/expansion.py",
+      "sha256": "671f8e0d8653bc4cea037b61e27d92407279055a8cb7e4207501a2e448c053dd",
+      "matches": true
+    },
+    {
+      "path": "app/tools/figure.py",
+      "sha256": "adba3c0c6eae77ec69f57452c8c7532b70e734f4083cd426ef54495796a8d189",
+      "matches": true
+    },
+    {
+      "path": "app/tools/observations.py",
+      "sha256": "e59c4fefcf1b90c4f93363e6aff7253516aa37d50e95bea082900afc20cde063",
+      "matches": true
+    },
+    {
+      "path": "app/tools/paper.py",
+      "sha256": "bf475eff12c390b9e2da534414944b2e489b5cc71d2bfcc086a9fa89dca088ca",
+      "matches": true
+    },
+    {
+      "path": "app/tools/paper_registry.py",
+      "sha256": "0c0134eaf83c1beb74282258d43ba3c1fd2a0cd7cda6a07aa4720e689db801f3",
+      "matches": true
+    },
+    {
+      "path": "app/tools/redaction.py",
+      "sha256": "c3a9657f10749cb86021a073c2c2cd554754d37958141a67c96d2c7e134ec844",
+      "matches": true
+    },
+    {
+      "path": "app/tools/registry.py",
+      "sha256": "212e855574cb1a48bf2a2e5701bc8ad3a9b78a6d81bc6ed38ed987ff007272de",
+      "matches": true
+    },
+    {
+      "path": "app/vision/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "app/vision/analysis.py",
+      "sha256": "72dc7a19aca0fd744a3d12903f0a336c6d855e8aec74b549c46bd14a537860ff",
+      "matches": true
+    },
+    {
+      "path": "app/vision/client.py",
+      "sha256": "97c81820c7760cb53d5637ca100c5902e3166582e827eaa6f45759b3517287d8",
+      "matches": true
+    },
+    {
+      "path": "app/vision/provider.py",
+      "sha256": "673e53dc341645b2c4b3db2962d0d1795c0b3ee9da69fc87535ce91e2300ea36",
+      "matches": true
+    },
+    {
+      "path": "app/web/app.js",
+      "sha256": "6081e2157576aee76dcf7b932879382e9cd6a93c6b5ee20866b461a8943c9bcd",
+      "matches": true
+    },
+    {
+      "path": "app/web/index.html",
+      "sha256": "73a5608adc4ae0ada1b7c820410b42513e4d272b2b032cebc3a7ca60fc7d5931",
+      "matches": true
+    },
+    {
+      "path": "app/web/style.css",
+      "sha256": "d02f96aced92a191a2ff19b04e27d0a3bef2280fc62a998a0e0f96ad3e547d57",
+      "matches": true
+    },
+    {
+      "path": "configs/cross_paper_eval.json",
+      "sha256": "1f221cacc2b66794dc01aa8388cafd743741d13737093aae30cda9ebee0a2078",
+      "matches": true
+    },
+    {
+      "path": "data/fixture_configs/blip.json",
+      "sha256": "98476e97a096168f436131757481bef7a1674108a23eab62b8335f0cd59c8501",
+      "matches": true
+    },
+    {
+      "path": "data/fixture_configs/blip2.json",
+      "sha256": "54058bdf47c82d7c4a9c13eb65eea6f67072eb947fbd2aa7e3f484fd644d84f4",
+      "matches": true
+    },
+    {
+      "path": "data/fixture_configs/clip.json",
+      "sha256": "de25bcfd6eb6d6b5ea127748bc183a638a1392a96f91bda2a76a2ac51cf47df7",
+      "matches": true
+    },
+    {
+      "path": "data/fixture_configs/flamingo.json",
+      "sha256": "1f963377bfcc33030eee6444f696b38af5230352199cd895ce7fa9c6098431fb",
+      "matches": true
+    },
+    {
+      "path": "data/fixture_configs/llava.json",
+      "sha256": "205ce1abc13befe02595366df03c1e57c0d6168e4ce3ae255d9f585b2fb102a1",
+      "matches": true
+    },
+    {
+      "path": "data/paper_discovery/papers.json",
+      "sha256": "d0f8e8cc5417f99af4a53d23acd15d8c2a2ca26fb74994836ad9f31673d2587f",
+      "matches": true
+    },
+    {
+      "path": "data/paper_discovery/queries.json",
+      "sha256": "ca1e895c51a62d82c83c1db2e29fb72b0e67495b8ad7cecce6a2ab452a654b4d",
+      "matches": true
+    },
+    {
+      "path": "data/papers/blip/figures/figure-001.png",
+      "sha256": "978501a788f697392d2ed194e60bad791c3535ed637ca1dd633e74e0644aef7a",
+      "matches": true
+    },
+    {
+      "path": "data/papers/blip/metadata.json",
+      "sha256": "2171421d418f9e8757154030cb8279c33e8f8327325f44a0bed3a9e161a7823f",
+      "matches": true
+    },
+    {
+      "path": "data/papers/blip/pages/page-002.txt",
+      "sha256": "dd36be67a7cc6fb792711f96fecd446c53afa65419b8a851e0c9aa9498d5e0db",
+      "matches": true
+    },
+    {
+      "path": "data/papers/blip/pages/page-003.txt",
+      "sha256": "597700652f0a03a76930bc95bf252ff6f5d1e602a0c8971732233da4ac0ae8de",
+      "matches": true
+    },
+    {
+      "path": "data/papers/blip/pages/page-004.txt",
+      "sha256": "6d3bdea5e796f91f5d9e4298e0535eb51d4afbb9e620551bd8cfda3a0cce1e63",
+      "matches": true
+    },
+    {
+      "path": "data/papers/blip/paper.pdf",
+      "sha256": "63e0335cdd57c3d92b907b89c93d10befdd29b8aeed108091bbde90c121ed97a",
+      "matches": true
+    },
+    {
+      "path": "data/papers/blip/prepared_evidence.jsonl",
+      "sha256": "0189764865606c14ef96e71c8c51cb03bcd49129a38f7f69985b59c361405628",
+      "matches": true
+    },
+    {
+      "path": "data/papers/blip/source_manifest.json",
+      "sha256": "eaba0d40628958c68acce855b0884ed8c57c8a2fce717b70067e7c5049146e39",
+      "matches": true
+    },
+    {
+      "path": "data/papers/clip/figures/figure-001.png",
+      "sha256": "a93ff4d58122fb908393ee98f91c4d686fcce1f18e1aa45a81eb7fde848b5399",
+      "matches": true
+    },
+    {
+      "path": "data/papers/clip/metadata.json",
+      "sha256": "8a0ca7cf8e96dbfcd740757918283ece5c30bfdab8c0f65cc59b2833a023abee",
+      "matches": true
+    },
+    {
+      "path": "data/papers/clip/pages/page-002.txt",
+      "sha256": "dcd605d1c10c44201ad7d62e1c2fb3944f971c9e9d744ae647584c93a3d51d71",
+      "matches": true
+    },
+    {
+      "path": "data/papers/clip/pages/page-004.txt",
+      "sha256": "96c6ff1f46cd9f5463852a74c95b5bc562b5356bf262d2660260605dc847a801",
+      "matches": true
+    },
+    {
+      "path": "data/papers/clip/paper.pdf",
+      "sha256": "6478b6e571a7d6fcd846d8ef77bfd60c285f1986abb8f475eedc43de403074f5",
+      "matches": true
+    },
+    {
+      "path": "data/papers/clip/prepared_evidence.jsonl",
+      "sha256": "7ea14fdd46b1f1aa57227e9227598ed98fd020eab5c5c8c86fd9c14558f6f463",
+      "matches": true
+    },
+    {
+      "path": "data/papers/clip/source_manifest.json",
+      "sha256": "b20a2502e1000a46b53554292dc84fd1b268b0318ff47d870f423be8912a49c7",
+      "matches": true
+    },
+    {
+      "path": "data/papers/flamingo/figures/figure-001.png",
+      "sha256": "cea551519eafce3ecc5c650568a9237d751ce6cdcfc4d0b54a8b0e899076ec7c",
+      "matches": true
+    },
+    {
+      "path": "data/papers/flamingo/metadata.json",
+      "sha256": "e45db1efc4f2abb09026150a657d0749db1bc30e88c652788e36828f219caa7c",
+      "matches": true
+    },
+    {
+      "path": "data/papers/flamingo/pages/page-004.txt",
+      "sha256": "11458251e03766aa6eff3984101030453f2b6912e469949ac8ad7a92bac852a5",
+      "matches": true
+    },
+    {
+      "path": "data/papers/flamingo/pages/page-009.txt",
+      "sha256": "f6947bc832f99d9f931e1a9d57330c5f6b846af66cdd2bd6f244a309e3112d4e",
+      "matches": true
+    },
+    {
+      "path": "data/papers/flamingo/pages/page-010.txt",
+      "sha256": "4a08e5cda5927674e81503bd1386c7f1b05c86b5a5c0fc56c9dc9198010c742b",
+      "matches": true
+    },
+    {
+      "path": "data/papers/flamingo/pages/page-011.txt",
+      "sha256": "1d4be6a63ba946d5e219f398ef0e8c0b7f5459f3213344a3701962e68ac8cccf",
+      "matches": true
+    },
+    {
+      "path": "data/papers/flamingo/paper.pdf",
+      "sha256": "79d131280bc79f659212f35f940dfd3a26013c73355a58eb2263410945780c4c",
+      "matches": true
+    },
+    {
+      "path": "data/papers/flamingo/prepared_evidence.jsonl",
+      "sha256": "1f74f19edc12fed812a9181b5a3bd6840295d6de992583e148cdcbf35102071a",
+      "matches": true
+    },
+    {
+      "path": "data/papers/flamingo/source_manifest.json",
+      "sha256": "b82f321c4114ef04f4ea1054bffc2a6bc2b757e9a4b86695d3387f9f9ec34991",
+      "matches": true
+    },
+    {
+      "path": "data/research_papers/blip2/figures/figure-001.png",
+      "sha256": "f6691aa798a33db8c7a4f520ab4ecee1ce3ade297441397a10bb500040534c81",
+      "matches": true
+    },
+    {
+      "path": "data/research_papers/blip2/metadata.json",
+      "sha256": "230d99c654921ea067df38070c235cdf71a10ac46b4fa5ab20eb5ccc9c4da7aa",
+      "matches": true
+    },
+    {
+      "path": "data/research_papers/blip2/pages/page-001.txt",
+      "sha256": "1bd715aa338f6ba375d4cb311d0f01b35eb4f9839ca5920ea2fa4fa56bfbc54e",
+      "matches": true
+    },
+    {
+      "path": "data/research_papers/blip2/pages/page-002.txt",
+      "sha256": "9f5af3d11cd7e9e1c7cd161578ade0fb49033b9b43fab992ed5980b083eff725",
+      "matches": true
+    },
+    {
+      "path": "data/research_papers/blip2/pages/page-003.txt",
+      "sha256": "219167c0831decb01e3c5ac862274b586a7b03bd02e02ba96701b02a208c2a09",
+      "matches": true
+    },
+    {
+      "path": "data/research_papers/blip2/pages/page-004.txt",
+      "sha256": "522283e1ce25e8f70d0795b093f62b391932dfc6ae7f162cdc82006f236e3651",
+      "matches": true
+    },
+    {
+      "path": "data/research_papers/blip2/paper.pdf",
+      "sha256": "0a4b93c402a6b8b0d2c5f438bbae31d447b17324b71c3e4fb6dab53e0e389bc5",
+      "matches": true
+    },
+    {
+      "path": "data/research_papers/blip2/prepared_evidence.jsonl",
+      "sha256": "af6939d223423787a46bd72fc3ce68c942ecd7b7d6c3c3b07b87e273378c009c",
+      "matches": true
+    },
+    {
+      "path": "data/research_papers/blip2/source_manifest.json",
+      "sha256": "2d1cda2ed8e2d0c520144b676a19ffff2da4accf06fc8c2b60a3c772f7052871",
+      "matches": true
+    },
+    {
+      "path": "data/research_papers/llava/figures/figure-001.png",
+      "sha256": "96f297587f8649961454daa56ee47487ef03dee792fb0411f78021dd96fc578e",
+      "matches": true
+    },
+    {
+      "path": "data/research_papers/llava/metadata.json",
+      "sha256": "267e246529084cc39e4ed23729c5b27d020b7ab3fc9ba89c8fa08979e92f96ea",
+      "matches": true
+    },
+    {
+      "path": "data/research_papers/llava/pages/page-001.txt",
+      "sha256": "fedbe41da131b3283bbf18cd39de5bba9cdf57aea5eb500ba26fef3a0d40c953",
+      "matches": true
+    },
+    {
+      "path": "data/research_papers/llava/pages/page-004.txt",
+      "sha256": "dd39fec72090f884dc8962a488a37f3d0d004fff841aefc4b9c64d531f1b8e1a",
+      "matches": true
+    },
+    {
+      "path": "data/research_papers/llava/pages/page-005.txt",
+      "sha256": "1111cac95628df8a5e9b55adb3e7174018eb1b642f5b9de4b74299e0fbc636cb",
+      "matches": true
+    },
+    {
+      "path": "data/research_papers/llava/pages/page-006.txt",
+      "sha256": "e851ff89522a3c3115a8c7e71e3e37a52f73c5acfae979e525343392e685745a",
+      "matches": true
+    },
+    {
+      "path": "data/research_papers/llava/paper.pdf",
+      "sha256": "0d5be40caf852d51a0e2636619fafc5b910788af9584fdc392abc652787560ed",
+      "matches": true
+    },
+    {
+      "path": "data/research_papers/llava/prepared_evidence.jsonl",
+      "sha256": "201837067a067d3f11520fed8035163712755a8108179e4dc9115f99fa0932bb",
+      "matches": true
+    },
+    {
+      "path": "data/research_papers/llava/source_manifest.json",
+      "sha256": "1691b554d32f53b687bc64aff3d78ba5a61e3e23f03b54537fc4620ad9e75818",
+      "matches": true
+    },
+    {
+      "path": "data/smoke/day2_queries.json",
+      "sha256": "340b71d326e7865eb0f7dc50ec7c0018ddcb764ba8bfe10b38a20caa0cdf24ec",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/artifact_manifest.json",
+      "sha256": "259625a639757e788e635781c13938e2b926ad9dfc4ca4e1a15345b7fdf27533",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/audit_evidence.py",
+      "sha256": "1e5577c057c2a207b10b7208f912ec3f6cbb3d5ed3e429a735a31d73a432b882",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/baseline.json",
+      "sha256": "3baaa6d1a94232528e6c131eed93d65b6b3976ff503858763b83f52dbcf47f22",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/evidence/2026-10-07-多模态论文研究智能体-ResearchPlanner三条真实Smoke.json",
+      "sha256": "52745c579662232ded801772a26826c1dbb1e25d3bdc17426891b0276b597e31",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageA相同FlamingoSmoke.json",
+      "sha256": "3f935223360c189994a14731d47c9de7af50ba5c72b35cfa586b28862e5189bc",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageB真实EvidenceReviewSmoke.json",
+      "sha256": "4d7d394fc02e9194c2e5ae39daf34da8912bb2b26d7ab558dd572c4f89c4a1dd",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageC受控失败降级报告.json",
+      "sha256": "33b0931351d512437e19b54ed7decc65117b486db90f8522a437d8de72d47840",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageC真实研究报告.json",
+      "sha256": "0e60339f7437c7512c9452b004e1a6b9b59e35c90d0b426a98b7133017539fc5",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageD受控再次拒绝SmokeB.json",
+      "sha256": "c8f100f69dfdfd4ffa06b5fa77c160a9888560ade3404f19a7a37764636d28d9",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageD无语料跳过SmokeC.json",
+      "sha256": "597dd716ab02ce804bfcbed48b482dfcf7fab1fb8ec0c1cdd661274aefb0964b",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageD真实RecoverySmokeA.json",
+      "sha256": "20718c2ce79142d07ab2dba69e35be4d01ad893f8306c2fa7982b10a3bff8bf6",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE三论文受控Smoke.json",
+      "sha256": "49136b9d740cca7d7756928d4d6b9ff4dd13250664a196773cb0be411970e996",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json",
+      "sha256": "f916b32e799f47e8ab6733d0f9ed15c5237221ff30da5f1e76dd81cc86104d40",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE双论文受控Smoke.json",
+      "sha256": "cb78d8b9123816cfdf7a38ae2e3ff420a115625b469911e5d70f16dfa538ac0e",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE双论文真实评测.json",
+      "sha256": "43dfed7282321def50c29368281a28d153f070298cef1c7b28c526a2522e7384",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE真实检索回归.json",
+      "sha256": "9d7a1f15978d924be48aa99d06f2bde00628f31e6505ef4562a674e5d2adce25",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/evidence_audit.json",
+      "sha256": "46308de8368484c75554308de66ba82063c0aed63b5aeb60316dd220a5682837",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/evidence_audit_execution.json",
+      "sha256": "cdf89eb618c2f408cb095cdeb2190c3b9fd3bbccc296b17da5cd8570f981170a",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/evidence_audit_results.txt",
+      "sha256": "fe6e6d1b86234616c1212c8f5629b337733ea757dc8458068fe634802d43d522",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/historical_fingerprint_audit.json",
+      "sha256": "73025d58b67be17f524fcb98edd3e66f4a9e44c0e3bd569b0c436193ef014671",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/historical_fingerprints/personal-agent-stage-ab-frozen.json",
+      "sha256": "5d297e0a5b1b57a02ec7987bc810defa3fc35a40871fbaf7e67f720c9da74ae9",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/historical_fingerprints/personal-agent-stage-c-frozen.json",
+      "sha256": "d24595971ca97e6f7e033a4acb7ec3cd175f45fb805e2bf1152cf3ef7df6379c",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/historical_fingerprints/personal-agent-stage-d-frozen.json",
+      "sha256": "87b46fa2a78ed2b379e4e0634ea69ef3732632534245ffcb8405cf497a545d1d",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/historical_fingerprints/personal-agent-stage-e-frozen.json",
+      "sha256": "0233cf853a79627c1523803e9084f34a78a1d286b3ac1c3f06d5addbc08d316e",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/historical_fingerprints/personal-agent-worker-frozen-fingerprints.json",
+      "sha256": "557c1fed92e98fda5ac7a63d3d890ffe1007c1bd2a6dd24cf392924700900e15",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/lint_execution.json",
+      "sha256": "3fe646cab5a89835efdbe4cd48d02925181e8ad5e581d98915996d342d1e7fff",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/lint_results.txt",
+      "sha256": "73e7fc8a2603f834afb90b7ac217dc4009cabfbb7af2525a44d70c8f2d833b11",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/test_coverage.json",
+      "sha256": "7362e22b9f8dc8922d0c2ef3b089923d322ac6f13706f22adf46ea1c84543c88",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/test_execution.json",
+      "sha256": "79bee439824baf1150387168e6506524fa1b02842ebdc18d6f45321eb09ffd55",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/test_results.txt",
+      "sha256": "b0f3d55eac99e59b99f72c815a62cdb4df0d4b889058f4abae08e95b12c685ed",
+      "matches": true
+    },
+    {
+      "path": "docs/acceptance/stage_e_freeze/test_results.xml",
+      "sha256": "22024acb7621ee54269a8f69d35822110c4d4cc36bf54e6a6a2ab541efd7fdfc",
+      "matches": true
+    },
+    {
+      "path": "docs/async-research.md",
+      "sha256": "a89107420635d924a3f0b9c976b6a9dd103afa1d08a6d05d2a572b5b04cdad55",
+      "matches": true
+    },
+    {
+      "path": "docs/demos/README.md",
+      "sha256": "d239c63c02fe779e329dcdb3d6c504648bc58546d532f1a6d6860888971498fb",
+      "matches": true
+    },
+    {
+      "path": "docs/demos/blip-false-premise-real.json",
+      "sha256": "c1ea6a07f97b6c2c7d050fd9b425626f43501c675e8e1f7d708a3467d6ec76ff",
+      "matches": true
+    },
+    {
+      "path": "docs/demos/blip-fixed-vlm-real.json",
+      "sha256": "12775fb9fec18b073cd7cd1e10d7c4b45a09b5e8266575260d4772e1a6b0dd8e",
+      "matches": true
+    },
+    {
+      "path": "docs/demos/clip-text-real.json",
+      "sha256": "b4e5398ea147420a9aede89c5a623e045203ba271b9cb1a5ba8fcc7ab8e14015",
+      "matches": true
+    },
+    {
+      "path": "docs/demos/clip-wrong-scope-real.json",
+      "sha256": "eafa81e302aeadd50e5d097dc80969e9dbd9191b0a61b9dcf0ab7e12c3352669",
+      "matches": true
+    },
+    {
+      "path": "docs/demos/ui-figure-fake.png",
+      "sha256": "c7ad2e160ec11042e1e40ab2e973935d33788ebcf44a64f8ecfc6616764d03c2",
+      "matches": true
+    },
+    {
+      "path": "docs/evidence-review.md",
+      "sha256": "5278bbfe4235b422095bed2d1f9dc4a06d8505ddf5e6ee4a8904d98b8e93294c",
+      "matches": true
+    },
+    {
+      "path": "docs/paper-discovery.md",
+      "sha256": "27a046830d062d26a7b68e9de4e2b02204bf5aa2f40cc7102a36f0977fb5d4d2",
+      "matches": true
+    },
+    {
+      "path": "docs/paper-profiles.md",
+      "sha256": "d7469066b326155b00cedfcfba62016ec32f38a21b3544e946c268bb6097c962",
+      "matches": true
+    },
+    {
+      "path": "docs/query-expansion.md",
+      "sha256": "8b23e63de1332139f8ad33f266861a24fb9f3e6b672eda99c71325822acbf071",
+      "matches": true
+    },
+    {
+      "path": "docs/research-planner.md",
+      "sha256": "bbc03aa5e3155f3d9178e9cc8c76efd21c5fdf5292cfabf4cd65455cd14084b0",
+      "matches": true
+    },
+    {
+      "path": "docs/research-recovery.md",
+      "sha256": "b0fa5ca23270927f4696f2662c48bb0d290d0e3a19054694f6c1e145fff4cba0",
+      "matches": true
+    },
+    {
+      "path": "docs/research-synthesis.md",
+      "sha256": "125459990e1326bed858b25121a5b7e5c3b6d389918a340a70df952e70fcb3d4",
+      "matches": true
+    },
+    {
+      "path": "docs/stage-e-evaluation.md",
+      "sha256": "907764507054ad6d8e398657b7751d11f0dc9f575ff03f0967092b33b5e80cea",
+      "matches": true
+    },
+    {
+      "path": "eval/README.md",
+      "sha256": "c2aa94ca0a6f28c26e4d30a92b81652409b3c240e06bfd278d4cf4ee6fe34063",
+      "matches": true
+    },
+    {
+      "path": "eval/adaptive_paper_discovery.py",
+      "sha256": "c7371287feafd6904542451d0006d91cbf157100d4152313f9105c0900b11430",
+      "matches": true
+    },
+    {
+      "path": "eval/cross_paper.py",
+      "sha256": "5830a13dfafc4ce49c56b3a17ca39c1167b55c7449b939184fcbf773d32b43c6",
+      "matches": true
+    },
+    {
+      "path": "eval/datasets/dev.json",
+      "sha256": "aab4b35b05974eee9a6d3a6b69d567bbae3ff596c2dd1863a8ff3b124bed329a",
+      "matches": true
+    },
+    {
+      "path": "eval/datasets/stage_e.json",
+      "sha256": "3a6d8100bd991ba514e061d78bb3f834e571fb9fbf348b48cf415d0e61743557",
+      "matches": true
+    },
+    {
+      "path": "eval/datasets/test.json",
+      "sha256": "58305970e6f8cc513a3931c359416fff1f7dcf07400dd8452a9f9907570e3632",
+      "matches": true
+    },
+    {
+      "path": "eval/loader.py",
+      "sha256": "ffe931705fa7625e66ee3bc8c28bd1ca80bcbac943607012c3c306c9bb965ff7",
+      "matches": true
+    },
+    {
+      "path": "eval/metrics/citation.py",
+      "sha256": "2953e7b2d027b1192ffdec2c252acf4bbd6a5431b2905ab299680c93d5175475",
+      "matches": true
+    },
+    {
+      "path": "eval/metrics/cost.py",
+      "sha256": "74982f348722f203a7762c3b03848363f685ac87c9c79125205ff09a856950b6",
+      "matches": true
+    },
+    {
+      "path": "eval/metrics/retrieval.py",
+      "sha256": "215c9214ed505386497971b0178594a01ceaf62348cd80515fa5d522afa842ee",
+      "matches": true
+    },
+    {
+      "path": "eval/metrics/task_success.py",
+      "sha256": "70df3fa70db932e2c7ad33d0565be23d6fc21136498d31d075c1803630d38701",
+      "matches": true
+    },
+    {
+      "path": "eval/paper_discovery.py",
+      "sha256": "c2655e1257ccf42c3fb0567df43d962ea5c3e39e63e8adee5fcb7d918fbb0be1",
+      "matches": true
+    },
+    {
+      "path": "eval/run_evaluation.py",
+      "sha256": "a499cc41cf92d54ec47b8a52caac6c4c66698317cf9a2e8925f1ede1f8e58e10",
+      "matches": true
+    },
+    {
+      "path": "eval/runners/base.py",
+      "sha256": "a41df700e337cc62cba6aa3de68b9857c91db4c3ed079e79000ae1907c96941e",
+      "matches": true
+    },
+    {
+      "path": "eval/runners/fixed_multimodal_rag.py",
+      "sha256": "c0121d1f5316ef806c6bc13693dee5aec86091b290c6acef3e97810f09eeeda5",
+      "matches": true
+    },
+    {
+      "path": "eval/runners/multimodal_agent.py",
+      "sha256": "fca69b9b569c614dbad006a324764fe97a83cbc56a121592000737cdcd2d81f1",
+      "matches": true
+    },
+    {
+      "path": "eval/runners/resources.py",
+      "sha256": "cebc0f6d29f62abb45b74eec9c071a9e0969ac2f911422020012309c7c80f74f",
+      "matches": true
+    },
+    {
+      "path": "eval/runners/text_rag.py",
+      "sha256": "b2e0db1aa6f7f2b69c5013888ca68c345a4aa1947ad0b8c733528506241624ef",
+      "matches": true
+    },
+    {
+      "path": "eval/schemas.py",
+      "sha256": "a83b39cb1ea2439326122f37c6a88ed79d9975391d98e374ede5753d5917d22d",
+      "matches": true
+    },
+    {
+      "path": "eval/smoke.py",
+      "sha256": "9b86929e3d9fff6f988f17b26f46475c68bcff7ee4dc192b02778ec4f12ad7a3",
+      "matches": true
+    },
+    {
+      "path": "eval/summarize_results.py",
+      "sha256": "2e8ec1c5d1a43edd5a127c59410581d46deaebeb99b30121492336819386cef5",
+      "matches": true
+    },
+    {
+      "path": "eval/validate_dataset.py",
+      "sha256": "cbf18982e03608f315bf356cf784db683770bed375117620157c99479a5633fb",
+      "matches": true
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "d1ab98e8a4405e0d01ed919a7d36e8414a90c01b0208ec6b8688899bbbe4df1f",
+      "matches": true
+    },
+    {
+      "path": "scripts/check_day6_ui.py",
+      "sha256": "aaf4575ba964ccf6946d53b9ee80c19d289c309f1c1e32b0c45dc5070dfa295f",
+      "matches": true
+    },
+    {
+      "path": "scripts/demo_day3.py",
+      "sha256": "8200cf205df7374122e8b9f9b45e83a12d6c35a9439671bbcf20317aeff00ff0",
+      "matches": true
+    },
+    {
+      "path": "scripts/demo_day5.py",
+      "sha256": "1697dee5b8e4b85289b6c2a32426125edd13e97f93dfc8cec27c9469b567ac72",
+      "matches": true
+    },
+    {
+      "path": "scripts/evaluate_cross_paper.py",
+      "sha256": "e6af8ce8b8ed369bc54fc59e0c1e60c9fdb41579de26c4bbf6acebd770268f28",
+      "matches": true
+    },
+    {
+      "path": "scripts/ingest_corpus.py",
+      "sha256": "133a3408671d4a6bc748000e3afe9dd898379a18e3ab80df4df9319327c01ee7",
+      "matches": true
+    },
+    {
+      "path": "scripts/ingest_papers.py",
+      "sha256": "14c8ed0642befa45161d32987f7ed47d270a98c26ed6777dc3ff28c3bc4a7e10",
+      "matches": true
+    },
+    {
+      "path": "scripts/prepare_blip_fixture.py",
+      "sha256": "173b37180621b506eeaae2c9a4baeff20d8570d3292570558d013561e784158f",
+      "matches": true
+    },
+    {
+      "path": "scripts/prepare_paper_fixture.py",
+      "sha256": "cb16a2d3d581dd90cb0a662965d0ec568b0104570626720261500715ce50b9a3",
+      "matches": true
+    },
+    {
+      "path": "scripts/prepare_research_corpus.py",
+      "sha256": "6368ef01cfba5eeb631aaad94362e6407db817c5f30cf283e80be474c6af45c1",
+      "matches": true
+    },
+    {
+      "path": "scripts/smoke_async_research.py",
+      "sha256": "a5bd4380187386d85b27cae015f27b9b82cdff5a89638455b289f71ce0e8ecc6",
+      "matches": true
+    },
+    {
+      "path": "scripts/smoke_evidence_review.py",
+      "sha256": "362fe728f1b0e9e5800514eebdd6e60a65a7b5d845e90131a14b47f6ea0e6c01",
+      "matches": true
+    },
+    {
+      "path": "scripts/smoke_paper_discovery.py",
+      "sha256": "8ea3bf2df86d92b888545b699524b7664a3f095fdf2a489ab7f66a0773076650",
+      "matches": true
+    },
+    {
+      "path": "scripts/smoke_research_planner.py",
+      "sha256": "e765920e6b79a57f7ba34cf9a5982a96db14239536ce0ae70514bd3bdf614810",
+      "matches": true
+    },
+    {
+      "path": "scripts/smoke_research_recovery.py",
+      "sha256": "86accdd820707fcef7d35ab78d8ced5f0327a259fb377c0e87613b36b361b405",
+      "matches": true
+    },
+    {
+      "path": "scripts/smoke_research_synthesis.py",
+      "sha256": "afa81c6a872f8e8dae8630f1edf16718b1b8ac09c071b25acf865b7471fea4f0",
+      "matches": true
+    },
+    {
+      "path": "scripts/smoke_test_day1.py",
+      "sha256": "aa366ccd698f021a8cffc6f048c7d36c07ae533d6041033ce5151b9470d1a080",
+      "matches": true
+    },
+    {
+      "path": "scripts/smoke_test_day2.py",
+      "sha256": "9db2e96b03eeffa812a973163bcc0c07ebcb61082d64819aa2a1af68b9d0bc72",
+      "matches": true
+    },
+    {
+      "path": "scripts/smoke_test_day4.py",
+      "sha256": "73996ba612783609bc1b42f5dda9c282133a07678f19b8395b82cccff32c3d85",
+      "matches": true
+    },
+    {
+      "path": "scripts/smoke_test_day55.py",
+      "sha256": "6a08c4151761b38f48c6a81bdfc38433d9690a921d1f57f2e26e4549c1373635",
+      "matches": true
+    },
+    {
+      "path": "scripts/validate_research_corpus.py",
+      "sha256": "55aac3f0175d039c3a8eec397600b6674b02edfc08e1e3c2c7df391789db1401",
+      "matches": true
+    },
+    {
+      "path": "tests/integration/api/test_api.py",
+      "sha256": "4d6ae1132138eec711a981d3a128d231ef1a6185a124ee245a332d0a5df763d1",
+      "matches": true
+    },
+    {
+      "path": "tests/integration/test_chroma.py",
+      "sha256": "b041d6b92331a2697ac8493dde7c1bfd02e6ad8fabbbc0510ee9f4dfdf9621b5",
+      "matches": true
+    },
+    {
+      "path": "tests/integration/test_day3_tools.py",
+      "sha256": "9ee053d37bc9c128474782b52520b1069310b4a7cf1b50a3e50faa31ff5ef961",
+      "matches": true
+    },
+    {
+      "path": "tests/integration/test_multi_paper_chroma.py",
+      "sha256": "e7a5c1c8b4b15dd8e5b19cafa88d73a2618e071a13fa64551c64447b473c2229",
+      "matches": true
+    },
+    {
+      "path": "tests/integration/test_stage_e_index.py",
+      "sha256": "387194173e9f8052eee81252c2d257dafffa7cc353b70ea8eb8c95ea702bfaf1",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/agent/test_diagnostics.py",
+      "sha256": "623f62d0c426ee53db190e429b86960ea495f4cb0f5922770abf3e530d4b3d67",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/agent/test_loop.py",
+      "sha256": "375d3c306a20df8e4347205af05bfa7769cec94916dff1c024873ea0cfda3caf",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/agent/test_recovery.py",
+      "sha256": "d3658a3200a77ec2546153f11df12d49c8d37268c8fe889231d3812d9edac7a3",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/agent/test_tool_calling.py",
+      "sha256": "8ff8522230d7cd129cf817f69e99326d422f06ba7729e73ce9be12e6e3b4259a",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/eval/test_dataset.py",
+      "sha256": "e62a0d07f1617f6de794ebbd92595276a2af0300bc0e9a35f5e896f977b59645",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/eval/test_runners_metrics.py",
+      "sha256": "867ca19c6bf67c2686c51fb4e5712960d211debb40c9588eab21059ad7c40bd2",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/evidence/test_corpus.py",
+      "sha256": "f10273c65ae89d664d83c295e89563f6971bdfbf60c5a236400e7e031538439c",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/evidence/test_evidence_models.py",
+      "sha256": "0955ad3e166f2fb59e2751bdd35f5216643ea2af76ae31f16ea6f88a86981f00",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/evidence/test_fixture_config.py",
+      "sha256": "cc7cdfb763a049a2efc9c2387a04c201eb7d1d8a52f1cbdab0b7355e3d720f0b",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/evidence/test_multi_paper_corpus.py",
+      "sha256": "fc22fb9a093c9b05d011517ee7ab7c776c60c601ee908c3e29a34015a1a5c3ec",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/expansion/test_expansion.py",
+      "sha256": "dd10f4c71bf4cf6e30743ca6836f7985f49ba0c119a89acee524a97e672ea9a4",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/llm/test_models.py",
+      "sha256": "e0794c04e4f88980fa9da91cf0bc26d8368d15d99871cee81082674f90f30417",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/llm/test_provider.py",
+      "sha256": "170afb60b8c100dc0ee6d30cdba3fb6add8c250c6c7a92a1c1b8df262cea1e43",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/papers/test_discovery.py",
+      "sha256": "5de66c5b715de1857303362842627d787ecef0860777987f3e48be2c91d94be9",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/papers/test_models_retrieval.py",
+      "sha256": "920f2e2c29b3c9242f02fb7d6675bee3e7100d59dee842093a735bbd56667e0d",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/papers/test_profiles.py",
+      "sha256": "2834fab49ec5b024ba108fb2fbbe5fe9ce8f2db64d64242d11d9fa7953b304ec",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_async_adapters.py",
+      "sha256": "5c44b35a25ca5e8dba7ce894e91c023d82cbfda1d55f3e5e1e6de6828fba5b46",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_async_runtime.py",
+      "sha256": "9aa2e17f6be9d4f663f1b6478bc06fccb3b682ae4c1f1c16379b15dea7b8f56d",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_corpus_isolation.py",
+      "sha256": "89b4c83cd897eab276d553237d36066887c869ca74652f6652c626453c1aa87c",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_corpus_provenance.py",
+      "sha256": "d3ea56b480b70feae9daabebd5f48c883bed716021238dcdf8b16beef18de972",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_cross_paper_evaluation.py",
+      "sha256": "6ec44056b533de6a1d7591b239a0d49159d7d9562afe90e9a8b93fcfba39f2e4",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_orchestrator.py",
+      "sha256": "93dbd433192fdea799ce63cca544df18ce609232b858e8cea884fe07e411a34e",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_paper_worker.py",
+      "sha256": "bb9512d9617df75fb25b2eb21d9d8cbde512a7c88a8b998b8ea6e76c68a8af69",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_planner.py",
+      "sha256": "575578d223c2040e3d89d911f987ee15b4c7634bd4284a75786e40c7dfe4add5",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_recovery_eligibility.py",
+      "sha256": "a143bb3288ecf9bc92b1a4a7c91065d5fb1177e7a0a29f357287fa1d475aefb2",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_recovery_merge.py",
+      "sha256": "8b8c054141fa01f8ee14db7cb238ca22f412adf066867cb0712a47090d8178d1",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_recovery_orchestrator.py",
+      "sha256": "32066f3f68797b4364474c34ef6488f961b70132eec732bf79d39799f96cb472",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_recovery_worker.py",
+      "sha256": "b1dae9b9fe4a0af5aeacf40751b4f8ff6525266800cc1dbbb5e5e31463621ff2",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_requirement_state.py",
+      "sha256": "ddfd443ce00444c3dc39d591f7e92c5163d38497ba63368f6cccbc6137fbc7c0",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_review_runtime.py",
+      "sha256": "c87a5da8a517379fe98d9ebdd78c33a58ec943e265f75cab3ada094093b8d6ac",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_review_validation.py",
+      "sha256": "9b7b287fa4a976812a004c85105b3d2b59887e35cbb989655d95969fdb4e1126",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_reviewer.py",
+      "sha256": "bed09bbef43e5fdccedc37a5127ebaf98825be9c86d82a81deafc0aa83955076",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_smoke_async.py",
+      "sha256": "551ca0c017b6f484d11f86d0704da6631d977e5a827fb8d7a9d78be5b05df0d8",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_smoke_review.py",
+      "sha256": "c8895be82af718c893224e489c2bc0dca723139898d0c14586f96b7b24b7c3ff",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_synthesis_agent.py",
+      "sha256": "702b6903cee23ba29c1f2ee37fec461fda01ed26c3dedb2b0eaac67842dd4608",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_synthesis_input.py",
+      "sha256": "04eb85cef4e36739b8911d828ca833aecb90f23306c297bc2f2cedfbc10967a2",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_synthesis_runtime.py",
+      "sha256": "b39f6464c22c035d53b8d360566583fefde5bc146ebe72af9b474b501c8b0fc3",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_synthesis_validator.py",
+      "sha256": "4e17271c8f2e135d6ea4666ef2a4f0e778a03d15309f135483fcaded65fd00c3",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/research/test_worker_protocol_recovery.py",
+      "sha256": "c08c688600b3e8862d8e0e47e83a31450b78ecb815f5ca89a36991f06ecf3369",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/retrieval/test_dependency_errors.py",
+      "sha256": "b1c5f6b4ced4ca8d34c9f0d15fd54814376aec3761250ac20ed362b5fe5d9103",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/retrieval/test_multi_paper_retrieval.py",
+      "sha256": "43850c38e317a82cf18259f46af518e0fd81b4c1220eebd36ec01826abf828b9",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/retrieval/test_retrieval.py",
+      "sha256": "168ae514003b97d4ed25c8b8c5f23ac1c198ca982edb54ee3d1eddd244adfa5d",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/tools/test_calculator.py",
+      "sha256": "901020127f5326698c0bccd5ec30421ac423f679c4a22884642a225fdb42c5b8",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/tools/test_execution_boundary.py",
+      "sha256": "445fc81a0676858de4b3576fc27534e283b4e52e1d6e60de92356bf18167a2cf",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/tools/test_figure_tool.py",
+      "sha256": "b7d47af2f634da22addd089e292ad4a84abb481a74ce7528e85a1b3444ff939e",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/tools/test_observations.py",
+      "sha256": "8ca642acf016d8e561c15eddf28e0db5fc555291127b7dea0ba0fed0faf7c944",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/tools/test_paper_tools.py",
+      "sha256": "9372d1daa4c73b571dbcd02c9038cb8d715072b7f132a8f0747c43c2bdc440e8",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/tools/test_redaction.py",
+      "sha256": "ca92b97e64425578451ea735322114341c486b0f8711d6a3170754536992c21c",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/tools/test_registry.py",
+      "sha256": "36df86cc0c0c07b4f5a621ad8b4fd110ae7857221d0629db6328b6c9049a6f23",
+      "matches": true
+    },
+    {
+      "path": "tests/unit/vision/test_figure_analysis.py",
+      "sha256": "7313a73eb8dbdff73da0f2ac4bcbafe7ac10d23ffcd7d90d0e8f003c063680ea",
+      "matches": true
+    }
+  ],
+  "environment": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "packages": {
+      "pydantic": "2.13.5",
+      "pytest": null,
+      "PyMuPDF": "1.28.2",
+      "fastapi": "0.142.2",
+      "openai": "2.54.0"
+    },
+    "ruff": "ruff 0.16.5"
+  },
+  "tested_f1_commit_sha": "c5f300c76a6f296fca5280f4a65d7e15f17c0f76"
+}
