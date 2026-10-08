@@ -1,0 +1,1589 @@
+{
+  "conclusion": "PASS",
+  "checks": [
+    {
+      "check": "artifact_sha256:evidence/2026-10-07-多模态论文研究智能体-ResearchPlanner三条真实Smoke.json",
+      "status": "PASS"
+    },
+    {
+      "check": "artifact_sha256:evidence/2026-10-08-多模态论文研究智能体-StageA相同FlamingoSmoke.json",
+      "status": "PASS"
+    },
+    {
+      "check": "artifact_sha256:evidence/2026-10-08-多模态论文研究智能体-StageB真实EvidenceReviewSmoke.json",
+      "status": "PASS"
+    },
+    {
+      "check": "artifact_sha256:evidence/2026-10-08-多模态论文研究智能体-StageC真实研究报告.json",
+      "status": "PASS"
+    },
+    {
+      "check": "artifact_sha256:evidence/2026-10-08-多模态论文研究智能体-StageC受控失败降级报告.json",
+      "status": "PASS"
+    },
+    {
+      "check": "artifact_sha256:evidence/2026-10-08-多模态论文研究智能体-StageD真实RecoverySmokeA.json",
+      "status": "PASS"
+    },
+    {
+      "check": "artifact_sha256:evidence/2026-10-08-多模态论文研究智能体-StageD受控再次拒绝SmokeB.json",
+      "status": "PASS"
+    },
+    {
+      "check": "artifact_sha256:evidence/2026-10-08-多模态论文研究智能体-StageD无语料跳过SmokeC.json",
+      "status": "PASS"
+    },
+    {
+      "check": "artifact_sha256:evidence/2026-10-08-多模态论文研究智能体-StageE双论文真实评测.json",
+      "status": "PASS"
+    },
+    {
+      "check": "artifact_sha256:evidence/2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json",
+      "status": "PASS"
+    },
+    {
+      "check": "artifact_sha256:evidence/2026-10-08-多模态论文研究智能体-StageE真实检索回归.json",
+      "status": "PASS"
+    },
+    {
+      "check": "artifact_sha256:evidence/2026-10-08-多模态论文研究智能体-StageE双论文受控Smoke.json",
+      "status": "PASS"
+    },
+    {
+      "check": "artifact_sha256:evidence/2026-10-08-多模态论文研究智能体-StageE三论文受控Smoke.json",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_ab:worker_review_source_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_c:source_hashes",
+      "status": "PASS"
+    },
+    {
+      "check": "planner:original_real_plan_retained",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_c:original_report_revalidated",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_c:deterministic_fallback_keeps_reviewed_facts",
+      "status": "PASS"
+    },
+    {
+      "check": "StageE双论文受控Smoke:clearly_scripted",
+      "status": "PASS"
+    },
+    {
+      "check": "StageE三论文受控Smoke:clearly_scripted",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:synthesis_input_rebuilt_from_reviews",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:report_provenance_and_comparisons",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:verified_req_795f851833824b49b269f864cf511807",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:verified_req_360e41c76c26117ed16af9d15221522b",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:verified_req_dc439a155d75957a0d50bc39339deabc",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:verified_req_ba2200026a21f5c79b16ba9e52d23717",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:verified_req_33be67ee76e452d5de235b6a8e528afa",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:rejected_claim_bodies_excluded",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:unique_history_ids",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:at_most_one_recovery_round",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_0_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_0_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_1_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_1_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_2_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_2_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_3_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_3_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_4_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_4_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_5_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_5_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_6_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_6_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_7_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_7_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_8_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_8_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_9_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_9_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_10_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_10_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_11_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_11_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_12_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_12_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_13_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_13_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_14_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_14_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_15_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_15_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_16_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_16_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_17_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_17_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_18_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_18_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_19_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:history_19_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:additional_costs",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:controlled_initial_rejection_real_recovery",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:new_claim_re_reviewed",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_A:initial_approved_immutable",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:synthesis_input_rebuilt_from_reviews",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:report_provenance_and_comparisons",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:verified_req_360e41c76c26117ed16af9d15221522b",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:verified_req_dc439a155d75957a0d50bc39339deabc",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:verified_req_ba2200026a21f5c79b16ba9e52d23717",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:verified_req_33be67ee76e452d5de235b6a8e528afa",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:rejected_claim_bodies_excluded",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:unique_history_ids",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:at_most_one_recovery_round",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_0_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_0_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_1_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_1_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_2_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_2_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_3_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_3_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_4_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_4_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_5_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_5_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_6_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_6_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_7_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_7_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_8_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_8_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_9_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_9_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_10_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_10_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_11_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_11_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_12_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_12_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_13_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_13_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_14_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_14_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_15_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_15_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_16_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_16_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_17_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_17_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_18_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_18_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_19_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:history_19_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:additional_costs",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:repeat_rejection_terminal",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_B:initial_approved_immutable",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:synthesis_input_rebuilt_from_reviews",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:report_provenance_and_comparisons",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:verified_req_795f851833824b49b269f864cf511807",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:verified_req_360e41c76c26117ed16af9d15221522b",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:verified_req_dc439a155d75957a0d50bc39339deabc",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:verified_req_ba2200026a21f5c79b16ba9e52d23717",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:verified_req_33be67ee76e452d5de235b6a8e528afa",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:rejected_claim_bodies_excluded",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:unique_history_ids",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:at_most_one_recovery_round",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_0_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_0_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_1_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_1_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_2_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_2_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_3_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_3_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_4_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_4_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_5_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_5_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_6_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_6_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_7_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_7_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_8_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_8_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_9_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_9_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_10_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_10_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_11_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_11_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_12_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_12_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_13_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_13_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_14_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_14_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_15_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_15_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_16_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_16_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_17_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:history_17_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:additional_costs",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:no_recovery_workers_or_reviews",
+      "status": "PASS"
+    },
+    {
+      "check": "stage_d_C:initial_approved_immutable",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:synthesis_input_rebuilt_from_reviews",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:report_provenance_and_comparisons",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:verified_req_9b812a56c386edc56b01ad7612222137",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:verified_req_638cc283fb01bf590f5233c40f49087a",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:rejected_claim_bodies_excluded",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:unique_history_ids",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:at_most_one_recovery_round",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:history_0_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:history_0_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:history_1_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:history_1_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:history_2_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:history_2_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:history_3_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:history_3_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:current_corpus_snapshot",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:frozen_plan",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:real_provider_flag_and_recorded_calls",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:no_vlm_counter_ambiguity_in_this_case",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:all_metrics_recomputed",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:coverage_from_reviewer_passes",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:all_unresolved_cells_preserved",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:worker_budget_blip-2-2301.12597v1",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:decision_trace_blip-2-2301.12597v1",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:worker_budget_llava-2304.08485v1",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:decision_trace_llava-2304.08485v1",
+      "status": "PASS"
+    },
+    {
+      "check": "two_paper:model_tool_totals",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:synthesis_input_rebuilt_from_reviews",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:report_provenance_and_comparisons",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:verified_req_9daac7cc6c7a911400ad045f31b569a3",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:verified_req_9b812a56c386edc56b01ad7612222137",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:verified_req_c4a9956a9c46ca858320c1f09d211b31",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:verified_req_06c21be590e96ece1d9e0bc9d49757f1",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:verified_req_dce891f967956694a5ccce5c5a10832a",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:verified_req_795f851833824b49b269f864cf511807",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:verified_req_360e41c76c26117ed16af9d15221522b",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:verified_req_dc439a155d75957a0d50bc39339deabc",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:verified_req_ba2200026a21f5c79b16ba9e52d23717",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:verified_req_f3819b194d1948b00cae50ea1c3aa018",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:verified_req_638cc283fb01bf590f5233c40f49087a",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:verified_req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:verified_req_dc68fde14ded13acea0eb1c952be17b8",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:verified_req_f175c0c799f61411fd36b9fb88fa6b85",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:rejected_claim_bodies_excluded",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:unique_history_ids",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:at_most_one_recovery_round",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_0_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_0_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_1_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_1_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_2_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_2_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_3_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_3_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_4_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_4_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_5_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_5_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_6_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_6_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_7_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_7_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_8_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_8_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_9_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_9_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_10_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_10_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_11_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_11_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_12_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_12_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_13_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_13_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_14_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_14_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_15_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_15_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_16_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_16_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_17_content_hash",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:history_17_identity",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:current_corpus_snapshot",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:frozen_plan",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:real_provider_flag_and_recorded_calls",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:no_vlm_counter_ambiguity_in_this_case",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:all_metrics_recomputed",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:coverage_from_reviewer_passes",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:all_unresolved_cells_preserved",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:worker_budget_blip-2-2301.12597v1",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:decision_trace_blip-2-2301.12597v1",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:worker_budget_flamingo-2204.14198v1",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:decision_trace_flamingo-2204.14198v1",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:worker_budget_llava-2304.08485v1",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:decision_trace_llava-2304.08485v1",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:model_tool_totals",
+      "status": "PASS"
+    },
+    {
+      "check": "three_paper:historical_reference_values",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:real_embedding_only",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:dataset_snapshot_and_config",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:sample_count",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:labels_core-01",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:scope_core-01",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:recall_core-01",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:labels_core-02",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:scope_core-02",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:recall_core-02",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:labels_core-03",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:scope_core-03",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:recall_core-03",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:labels_core-04",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:scope_core-04",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:recall_core-04",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:labels_core-05",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:scope_core-05",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:recall_core-05",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:labels_core-06",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:scope_core-06",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:recall_core-06",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:labels_core-07",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:scope_core-07",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:recall_core-07",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:labels_core-08",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:scope_core-08",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:recall_core-08",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:labels_core-09",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:scope_core-09",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:recall_core-09",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:labels_core-10",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:scope_core-10",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:recall_core-10",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:labels_core-11",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:scope_core-11",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:recall_core-11",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:labels_core-12",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:scope_core-12",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:recall_core-12",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:labels_core-13",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:scope_core-13",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:recall_core-13",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:labels_core-14",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:scope_core-14",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:recall_core-14",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:labels_core-15",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:scope_core-15",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:recall_core-15",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:macro_recalculated",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:sample_count",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:labels_core-01",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:scope_core-01",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:recall_core-01",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:labels_core-02",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:scope_core-02",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:recall_core-02",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:labels_core-03",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:scope_core-03",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:recall_core-03",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:labels_core-04",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:scope_core-04",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:recall_core-04",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:labels_core-05",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:scope_core-05",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:recall_core-05",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:labels_core-06",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:scope_core-06",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:recall_core-06",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:labels_core-07",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:scope_core-07",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:recall_core-07",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:labels_core-08",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:scope_core-08",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:recall_core-08",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:labels_core-09",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:scope_core-09",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:recall_core-09",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:labels_core-10",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:scope_core-10",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:recall_core-10",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:labels_core-11",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:scope_core-11",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:recall_core-11",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:labels_core-12",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:scope_core-12",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:recall_core-12",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:labels_core-13",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:scope_core-13",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:recall_core-13",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:labels_core-14",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:scope_core-14",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:recall_core-14",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:labels_core-15",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:scope_core-15",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:recall_core-15",
+      "status": "PASS"
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:macro_recalculated",
+      "status": "PASS"
+    }
+  ],
+  "summaries": {
+    "stage_d_A": {
+      "mode": "controlled_initial_rejection_real_worker_reviewer_synthesis",
+      "real_provider_used": true,
+      "controlled_initial_rejection": true,
+      "recovery_rounds": 1,
+      "attempted": 1,
+      "passed": 1,
+      "history_entries": 20,
+      "recovery_worker_llm_calls": 1,
+      "recovery_reviewer_model_calls": 1,
+      "synthesis_model_calls": 1,
+      "additional_model_calls": 3,
+      "verified_requirements": 5,
+      "missing_requirements": 10
+    },
+    "stage_d_B": {
+      "mode": "controlled_fake_repeat_rejection",
+      "real_provider_used": false,
+      "controlled_initial_rejection": true,
+      "recovery_rounds": 1,
+      "attempted": 1,
+      "passed": 0,
+      "history_entries": 20,
+      "recovery_worker_llm_calls": 1,
+      "recovery_reviewer_model_calls": 1,
+      "synthesis_model_calls": 1,
+      "additional_model_calls": 3,
+      "verified_requirements": 4,
+      "missing_requirements": 11
+    },
+    "stage_d_C": {
+      "mode": "no_prepared_corpus_skip_scripted_synthesis",
+      "real_provider_used": false,
+      "controlled_initial_rejection": false,
+      "recovery_rounds": 0,
+      "attempted": 0,
+      "passed": 0,
+      "history_entries": 18,
+      "recovery_worker_llm_calls": 0,
+      "recovery_reviewer_model_calls": 0,
+      "synthesis_model_calls": 1,
+      "additional_model_calls": 1,
+      "verified_requirements": 5,
+      "missing_requirements": 10
+    },
+    "two_paper": {
+      "case_id": "two-paper-bridge",
+      "status": "completed",
+      "total_requirements": 2,
+      "verified_requirements": 2,
+      "verified_coverage": 1.0,
+      "cross_paper_comparison_count": 1,
+      "cross_paper_citation_validity_rate": 1.0,
+      "comparison_detection_method": "Structural claim membership, paper scope, dimension and exact evidence-union checks; not semantic entailment.",
+      "citation_validation_failures": 0,
+      "model_calls": 9,
+      "tool_calls": 2,
+      "vlm_tool_attempts": 0,
+      "missing": [],
+      "protocol_corrections": 0,
+      "provider_evidence_level": "Saved local execution traces and aggregate adapter counters; no independent Provider billing receipt.",
+      "semantic_accuracy_measured": false
+    },
+    "three_paper": {
+      "case_id": "three-paper-core",
+      "status": "completed",
+      "total_requirements": 15,
+      "verified_requirements": 14,
+      "verified_coverage": 0.9333333333333333,
+      "cross_paper_comparison_count": 4,
+      "cross_paper_citation_validity_rate": 1.0,
+      "comparison_detection_method": "Structural claim membership, paper scope, dimension and exact evidence-union checks; not semantic entailment.",
+      "citation_validation_failures": 0,
+      "model_calls": 41,
+      "tool_calls": 11,
+      "vlm_tool_attempts": 0,
+      "missing": [
+        {
+          "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "downstream_capabilities",
+          "status": "insufficient_evidence",
+          "issue": null
+        }
+      ],
+      "protocol_corrections": 6,
+      "provider_evidence_level": "Saved local execution traces and aggregate adapter counters; no independent Provider billing receipt.",
+      "semantic_accuracy_measured": false
+    },
+    "retrieval": {
+      "before_stage_d_corpus": {
+        "sample_count": 15,
+        "recall_at_5": 0.24000000000000002,
+        "recall_at_10": 0.3333333333333333
+      },
+      "after_stage_e_corpus": {
+        "sample_count": 15,
+        "recall_at_5": 0.74,
+        "recall_at_10": 0.9666666666666667
+      }
+    }
+  },
+  "warnings": [
+    {
+      "severity": "non_blocking",
+      "code": "stale_preflight_reason",
+      "description": "Historical retrieval artifact retains its preflight reason despite retrieval_executed status and complete actual rows. Original artifact is preserved; execution classification follows validated status/counters/results."
+    }
+  ],
+  "new_model_calls": 0,
+  "existing_results_modified": false
+}

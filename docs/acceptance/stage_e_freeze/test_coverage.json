@@ -1,0 +1,132 @@
+{
+  "test_cases": 756,
+  "modules": {
+    "tests.integration.api.test_api": 18,
+    "tests.integration.test_chroma": 1,
+    "tests.integration.test_day3_tools": 2,
+    "tests.integration.test_multi_paper_chroma": 5,
+    "tests.integration.test_stage_e_index": 2,
+    "tests.unit.agent.test_diagnostics": 3,
+    "tests.unit.agent.test_loop": 25,
+    "tests.unit.agent.test_recovery": 13,
+    "tests.unit.agent.test_tool_calling": 7,
+    "tests.unit.eval.test_dataset": 25,
+    "tests.unit.eval.test_runners_metrics": 15,
+    "tests.unit.evidence.test_corpus": 1,
+    "tests.unit.evidence.test_evidence_models": 10,
+    "tests.unit.evidence.test_fixture_config": 9,
+    "tests.unit.evidence.test_multi_paper_corpus": 6,
+    "tests.unit.expansion.test_expansion": 22,
+    "tests.unit.llm.test_models": 2,
+    "tests.unit.llm.test_provider": 3,
+    "tests.unit.papers.test_discovery": 7,
+    "tests.unit.papers.test_models_retrieval": 20,
+    "tests.unit.papers.test_profiles": 22,
+    "tests.unit.research.test_async_adapters": 18,
+    "tests.unit.research.test_async_runtime": 42,
+    "tests.unit.research.test_corpus_isolation": 9,
+    "tests.unit.research.test_corpus_provenance": 21,
+    "tests.unit.research.test_cross_paper_evaluation": 21,
+    "tests.unit.research.test_orchestrator": 13,
+    "tests.unit.research.test_paper_worker": 22,
+    "tests.unit.research.test_planner": 44,
+    "tests.unit.research.test_recovery_eligibility": 22,
+    "tests.unit.research.test_recovery_merge": 12,
+    "tests.unit.research.test_recovery_orchestrator": 15,
+    "tests.unit.research.test_recovery_worker": 8,
+    "tests.unit.research.test_requirement_state": 21,
+    "tests.unit.research.test_review_runtime": 24,
+    "tests.unit.research.test_review_validation": 17,
+    "tests.unit.research.test_reviewer": 26,
+    "tests.unit.research.test_smoke_async": 6,
+    "tests.unit.research.test_smoke_review": 2,
+    "tests.unit.research.test_synthesis_agent": 17,
+    "tests.unit.research.test_synthesis_input": 18,
+    "tests.unit.research.test_synthesis_runtime": 10,
+    "tests.unit.research.test_synthesis_validator": 19,
+    "tests.unit.research.test_worker_protocol_recovery": 19,
+    "tests.unit.retrieval.test_dependency_errors": 3,
+    "tests.unit.retrieval.test_multi_paper_retrieval": 6,
+    "tests.unit.retrieval.test_retrieval": 9,
+    "tests.unit.tools.test_calculator": 11,
+    "tests.unit.tools.test_execution_boundary": 2,
+    "tests.unit.tools.test_figure_tool": 22,
+    "tests.unit.tools.test_observations": 6,
+    "tests.unit.tools.test_paper_tools": 38,
+    "tests.unit.tools.test_redaction": 3,
+    "tests.unit.tools.test_registry": 6,
+    "tests.unit.vision.test_figure_analysis": 6
+  },
+  "special_regressions": [
+    {
+      "module": "tests.unit.research.test_recovery_merge",
+      "name": "test_new_passed_claim_is_verified_and_initial_approved_is_exactly_preserved",
+      "status": "PASS"
+    },
+    {
+      "module": "tests.unit.research.test_recovery_merge",
+      "name": "test_new_claim_needs_re_review_and_terminal_rejection_is_not_insufficient[rejected-review_rejected]",
+      "status": "PASS"
+    },
+    {
+      "module": "tests.unit.research.test_recovery_merge",
+      "name": "test_new_claim_needs_re_review_and_terminal_rejection_is_not_insufficient[not_reviewable-review_unavailable]",
+      "status": "PASS"
+    },
+    {
+      "module": "tests.unit.research.test_recovery_merge",
+      "name": "test_missing_re_review_never_promotes_supported",
+      "status": "PASS"
+    },
+    {
+      "module": "tests.unit.research.test_recovery_merge",
+      "name": "test_unknown_or_wrong_paper_evidence_cannot_become_verified[ev-fake]",
+      "status": "PASS"
+    },
+    {
+      "module": "tests.unit.research.test_recovery_merge",
+      "name": "test_unknown_or_wrong_paper_evidence_cannot_become_verified[ev-paper-b-architecture]",
+      "status": "PASS"
+    },
+    {
+      "module": "tests.unit.research.test_recovery_merge",
+      "name": "test_duplicate_re_review_fail_closed_and_history_retains_both_records",
+      "status": "PASS"
+    },
+    {
+      "module": "tests.unit.research.test_recovery_orchestrator",
+      "name": "test_rejected_again_is_terminal_and_instance_cannot_run_second_round",
+      "status": "PASS"
+    },
+    {
+      "module": "tests.unit.research.test_recovery_orchestrator",
+      "name": "test_low_global_budget_does_not_start_worker_or_review",
+      "status": "PASS"
+    },
+    {
+      "module": "tests.unit.research.test_recovery_orchestrator",
+      "name": "test_existing_worker_and_llm_semaphores_remain_bounded",
+      "status": "PASS"
+    },
+    {
+      "module": "tests.unit.research.test_recovery_orchestrator",
+      "name": "test_all_insufficient_with_exhausted_prior_budget_needs_no_provider",
+      "status": "PASS"
+    },
+    {
+      "module": "tests.unit.research.test_recovery_worker",
+      "name": "test_unknown_or_wrong_paper_prior_evidence_fails_before_llm[ev-nonexistent]",
+      "status": "PASS"
+    },
+    {
+      "module": "tests.unit.research.test_recovery_worker",
+      "name": "test_unknown_or_wrong_paper_prior_evidence_fails_before_llm[ev-paper-b-architecture]",
+      "status": "PASS"
+    },
+    {
+      "module": "tests.unit.research.test_review_validation",
+      "name": "test_figure_review_task_uses_caption_and_provenance_without_filesystem_path",
+      "status": "PASS"
+    }
+  ]
+}

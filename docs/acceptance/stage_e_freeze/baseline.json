@@ -1,0 +1,30 @@
+{
+  "recorded_at": "2026-10-08T08:24:06.239659+00:00",
+  "branch": "feat/Structured-tool-calling",
+  "git_commit_sha": "9ad7c5c7c2c8a6ffd57c864271b31046ef582f0e",
+  "initial_working_tree": "clean",
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "python_executable": "/home/lei/project/projects/personal-agent/.venv/bin/python",
+  "dependencies": {
+    "pydantic": "2.13.5",
+    "pytest": "8.4.2",
+    "chromadb": "1.5.9",
+    "PyMuPDF": "1.28.2",
+    "torch": "2.13.0+cu130",
+    "transformers": "4.57.6",
+    "openai": "2.54.0",
+    "fastapi": "0.142.2",
+    "starlette": "1.7.0",
+    "httpx": "0.28.1",
+    "python-dotenv": "1.2.4",
+    "ruff": "ruff 0.16.5"
+  },
+  "remote_operations": false,
+  "new_real_model_execution": false,
+  "historical_acceptance_reports": [
+    "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageAB最终验收报告.md",
+    "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageC最终验收报告.md",
+    "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageD最终验收报告.md",
+    "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageE验收报告.md"
+  ]
+}

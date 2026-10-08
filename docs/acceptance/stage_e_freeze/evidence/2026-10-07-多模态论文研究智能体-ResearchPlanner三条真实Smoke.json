@@ -1,0 +1,737 @@
+{
+  "scope": "Three planner-only smoke tests; no Worker, retrieval or QA evaluation.",
+  "cases": [
+    {
+      "case_id": "planner-smoke-01",
+      "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "flamingo-2204.14198v1",
+        "llava-2304.08485v1"
+      ],
+      "status": "success",
+      "dimensions": [
+        {
+          "dimension_id": "architecture_components",
+          "name": "Overall Architectural Components",
+          "description": "Identify the principal building blocks described for this paper's model and how they are arranged into an end-to-end visual-language pipeline. Focus on the model's own described structure rather than comparisons.",
+          "research_question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?"
+        },
+        {
+          "dimension_id": "vision_language_bridge",
+          "name": "Vision-Language Connection Mechanism",
+          "description": "Investigate the specific mechanism the model uses to bridge visual representations and the language model, including any connector, adapter, resampler, cross-attention interface, or projection described in the paper, and whether the language model is frozen or tunable.",
+          "research_question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?"
+        },
+        {
+          "dimension_id": "training_strategy",
+          "name": "Training Strategy and Objectives",
+          "description": "Examine the training procedure described in the paper: stages, objectives, data used, and the order in which components are trained or whether they are jointly trained.",
+          "research_question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?"
+        },
+        {
+          "dimension_id": "trainable_parameter_scope",
+          "name": "Trainable Parameter Scope",
+          "description": "Investigate which components of the model the paper reports as trainable versus frozen, and any parameter counts or parameter-efficient settings discussed.",
+          "research_question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?"
+        },
+        {
+          "dimension_id": "downstream_capabilities",
+          "name": "Downstream Capabilities and Evaluation Tasks",
+          "description": "Identify the downstream tasks and capabilities the paper evaluates or claims for the model, and the nature of the evidence provided for those capabilities.",
+          "research_question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?"
+        }
+      ],
+      "requirement_count": 15,
+      "worker_task_count": 3,
+      "worker_tasks": [
+        {
+          "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+          "paper_id": "blip-2-2301.12597v1",
+          "requirement_ids": [
+            "req_9daac7cc6c7a911400ad045f31b569a3",
+            "req_9b812a56c386edc56b01ad7612222137",
+            "req_c4a9956a9c46ca858320c1f09d211b31",
+            "req_06c21be590e96ece1d9e0bc9d49757f1",
+            "req_dce891f967956694a5ccce5c5a10832a"
+          ]
+        },
+        {
+          "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+          "paper_id": "flamingo-2204.14198v1",
+          "requirement_ids": [
+            "req_795f851833824b49b269f864cf511807",
+            "req_360e41c76c26117ed16af9d15221522b",
+            "req_dc439a155d75957a0d50bc39339deabc",
+            "req_ba2200026a21f5c79b16ba9e52d23717",
+            "req_33be67ee76e452d5de235b6a8e528afa"
+          ]
+        },
+        {
+          "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+          "paper_id": "llava-2304.08485v1",
+          "requirement_ids": [
+            "req_f3819b194d1948b00cae50ea1c3aa018",
+            "req_638cc283fb01bf590f5233c40f49087a",
+            "req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+            "req_dc68fde14ded13acea0eb1c952be17b8",
+            "req_f175c0c799f61411fd36b9fb88fa6b85"
+          ]
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "req_9daac7cc6c7a911400ad045f31b569a3",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "architecture_components",
+          "question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "vision_language_bridge",
+          "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_c4a9956a9c46ca858320c1f09d211b31",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "training_strategy",
+          "question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_06c21be590e96ece1d9e0bc9d49757f1",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "trainable_parameter_scope",
+          "question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_dce891f967956694a5ccce5c5a10832a",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "downstream_capabilities",
+          "question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_795f851833824b49b269f864cf511807",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "architecture_components",
+          "question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_360e41c76c26117ed16af9d15221522b",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "vision_language_bridge",
+          "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_dc439a155d75957a0d50bc39339deabc",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "training_strategy",
+          "question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "trainable_parameter_scope",
+          "question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "downstream_capabilities",
+          "question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_f3819b194d1948b00cae50ea1c3aa018",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "architecture_components",
+          "question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "vision_language_bridge",
+          "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "training_strategy",
+          "question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_dc68fde14ded13acea0eb1c952be17b8",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "trainable_parameter_scope",
+          "question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_f175c0c799f61411fd36b9fb88fa6b85",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "downstream_capabilities",
+          "question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        }
+      ],
+      "trace": {
+        "events": [
+          "planner_started",
+          "planner_completed"
+        ],
+        "status": "success",
+        "candidate_paper_count": 3,
+        "dimension_count": 5,
+        "dimension_ids": [
+          "architecture_components",
+          "vision_language_bridge",
+          "training_strategy",
+          "trainable_parameter_scope",
+          "downstream_capabilities"
+        ],
+        "requirement_count": 15,
+        "worker_task_count": 3,
+        "model_calls": 1,
+        "latency_ms": 5273.176546001196,
+        "error_code": null,
+        "error_message": null,
+        "failure": null
+      },
+      "semantic_review": {
+        "status": "reviewed_with_warnings",
+        "review_method": "manual_inspection_of_public_dimensions",
+        "answer_assumption": false,
+        "answer_hint_warning": true,
+        "scope_drift": false,
+        "paper_local_questions": true,
+        "notes": [
+          "五个维度对应用户明确要求的五个比较轴；研究问题可逐论文调查，未指定具体组件答案。",
+          "vision_language_bridge.description 仍列举 adapter/resampler/cross-attention/projection，记录为潜在答案引导警告。"
+        ]
+      }
+    },
+    {
+      "case_id": "planner-smoke-02",
+      "question": "What are the major differences between BLIP-2, Flamingo, and LLaVA, and why do they adopt different designs?",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "flamingo-2204.14198v1",
+        "llava-2304.08485v1"
+      ],
+      "status": "success",
+      "dimensions": [
+        {
+          "dimension_id": "architecture_connectivity",
+          "name": "Vision-language architecture and connectivity",
+          "description": "Investigate the high-level architectural arrangement by which each model connects visual and language components: what modules exist, how visual information flows into the language model, and what interface or bridging mechanism (if any) is used. Focus on structural design rather than training specifics.",
+          "research_question": "What is the overall vision-language architecture of this paper's model, and how is visual information connected to or injected into the language model?"
+        },
+        {
+          "dimension_id": "visual_encoding_and_representation",
+          "name": "Visual encoding and representation",
+          "description": "Investigate how each paper represents images: the visual encoder or feature extractor used, whether visual features are frozen or trainable, and how visual tokens/features are formed and consumed. This is a distinct information need from the connectivity interface.",
+          "research_question": "How does this model encode images and obtain visual representations, including any visual encoder choice and whether visual features are fixed or learnable?"
+        },
+        {
+          "dimension_id": "training_objectives_and_procedure",
+          "name": "Training objectives and procedure",
+          "description": "Investigate the training strategy each paper adopts: the loss objectives, data sources and scale, whether training occurs in one or multiple stages, and which components are updated. Ask about the design as stated rather than assuming any particular staging or objective.",
+          "research_question": "What training objectives and procedures does this paper use, including the data, number of stages if any, and which components are trained?"
+        },
+        {
+          "dimension_id": "task_scope_and_capabilities",
+          "name": "Task scope and capabilities",
+          "description": "Investigate the tasks and capability categories each paper targets (e.g., zero-shot or few-shot classification, captioning, visual question answering, instruction-following dialogue, or other settings) and what interaction patterns the model is designed to support.",
+          "research_question": "What task settings and capability categories does this paper target, and what kinds of vision-language behaviors is the model designed to produce?"
+        },
+        {
+          "dimension_id": "design_motivations_and_tradeoffs",
+          "name": "Design motivations and tradeoffs",
+          "description": "Investigate the reasons each paper gives for its design choices: the stated problems or limitations being addressed, the constraints considered, and any explicit comparisons to alternative strategies. Ask what rationales are articulated rather than presuming them.",
+          "research_question": "What motivations, constraints, and tradeoffs does this paper state for its design decisions, and how does it justify chosen strategies over alternatives?"
+        }
+      ],
+      "requirement_count": 15,
+      "worker_task_count": 3,
+      "worker_tasks": [
+        {
+          "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+          "paper_id": "blip-2-2301.12597v1",
+          "requirement_ids": [
+            "req_205e294bc056eef6c4756932a99ccd13",
+            "req_aedccf7da0607de09371302b4c4e91ea",
+            "req_80bd29fd200a9c6622eb92bc8d7b2111",
+            "req_ff19dc0c830638d4ffec7f96c396345b",
+            "req_b4185abef2b4aa218dc3a03ede3d3b74"
+          ]
+        },
+        {
+          "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+          "paper_id": "flamingo-2204.14198v1",
+          "requirement_ids": [
+            "req_ca89c72c7b07a1b45f6a3c7b1d72bbf5",
+            "req_fe3df1f628ae69dec4b0437d63f8b64b",
+            "req_b7662558b4990bab18bed5c1767bc73d",
+            "req_ca96c645814c76d198f9bb8a74b19bd8",
+            "req_863a1556f7388dcd2bce46e9cc3f5247"
+          ]
+        },
+        {
+          "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+          "paper_id": "llava-2304.08485v1",
+          "requirement_ids": [
+            "req_f2a52592073489c64c097f641c5d0735",
+            "req_cc07bb4f12814ae5518375cd62217cde",
+            "req_4a95eecb289e53784432ed7a03283288",
+            "req_6fc6befc5de5306a453b0e7ffe67f599",
+            "req_5920bbb29be601cdd75df3ebf231d952"
+          ]
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "req_205e294bc056eef6c4756932a99ccd13",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "architecture_connectivity",
+          "question": "What is the overall vision-language architecture of this paper's model, and how is visual information connected to or injected into the language model?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_aedccf7da0607de09371302b4c4e91ea",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "visual_encoding_and_representation",
+          "question": "How does this model encode images and obtain visual representations, including any visual encoder choice and whether visual features are fixed or learnable?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_80bd29fd200a9c6622eb92bc8d7b2111",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "training_objectives_and_procedure",
+          "question": "What training objectives and procedures does this paper use, including the data, number of stages if any, and which components are trained?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_ff19dc0c830638d4ffec7f96c396345b",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "task_scope_and_capabilities",
+          "question": "What task settings and capability categories does this paper target, and what kinds of vision-language behaviors is the model designed to produce?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_b4185abef2b4aa218dc3a03ede3d3b74",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "design_motivations_and_tradeoffs",
+          "question": "What motivations, constraints, and tradeoffs does this paper state for its design decisions, and how does it justify chosen strategies over alternatives?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_ca89c72c7b07a1b45f6a3c7b1d72bbf5",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "architecture_connectivity",
+          "question": "What is the overall vision-language architecture of this paper's model, and how is visual information connected to or injected into the language model?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_fe3df1f628ae69dec4b0437d63f8b64b",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "visual_encoding_and_representation",
+          "question": "How does this model encode images and obtain visual representations, including any visual encoder choice and whether visual features are fixed or learnable?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_b7662558b4990bab18bed5c1767bc73d",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "training_objectives_and_procedure",
+          "question": "What training objectives and procedures does this paper use, including the data, number of stages if any, and which components are trained?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_ca96c645814c76d198f9bb8a74b19bd8",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "task_scope_and_capabilities",
+          "question": "What task settings and capability categories does this paper target, and what kinds of vision-language behaviors is the model designed to produce?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_863a1556f7388dcd2bce46e9cc3f5247",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "design_motivations_and_tradeoffs",
+          "question": "What motivations, constraints, and tradeoffs does this paper state for its design decisions, and how does it justify chosen strategies over alternatives?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_f2a52592073489c64c097f641c5d0735",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "architecture_connectivity",
+          "question": "What is the overall vision-language architecture of this paper's model, and how is visual information connected to or injected into the language model?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_cc07bb4f12814ae5518375cd62217cde",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "visual_encoding_and_representation",
+          "question": "How does this model encode images and obtain visual representations, including any visual encoder choice and whether visual features are fixed or learnable?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_4a95eecb289e53784432ed7a03283288",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "training_objectives_and_procedure",
+          "question": "What training objectives and procedures does this paper use, including the data, number of stages if any, and which components are trained?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_6fc6befc5de5306a453b0e7ffe67f599",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "task_scope_and_capabilities",
+          "question": "What task settings and capability categories does this paper target, and what kinds of vision-language behaviors is the model designed to produce?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_5920bbb29be601cdd75df3ebf231d952",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "design_motivations_and_tradeoffs",
+          "question": "What motivations, constraints, and tradeoffs does this paper state for its design decisions, and how does it justify chosen strategies over alternatives?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        }
+      ],
+      "trace": {
+        "events": [
+          "planner_started",
+          "planner_completed"
+        ],
+        "status": "success",
+        "candidate_paper_count": 3,
+        "dimension_count": 5,
+        "dimension_ids": [
+          "architecture_connectivity",
+          "visual_encoding_and_representation",
+          "training_objectives_and_procedure",
+          "task_scope_and_capabilities",
+          "design_motivations_and_tradeoffs"
+        ],
+        "requirement_count": 15,
+        "worker_task_count": 3,
+        "model_calls": 1,
+        "latency_ms": 4088.310121001996,
+        "error_code": null,
+        "error_message": null,
+        "failure": null
+      },
+      "semantic_review": {
+        "status": "reviewed_with_warnings",
+        "review_method": "manual_inspection_of_public_dimensions",
+        "answer_assumption": false,
+        "answer_hint_warning": true,
+        "scope_drift": false,
+        "paper_local_questions": true,
+        "notes": [
+          "动态生成架构接口、视觉表示、训练、任务范围、设计动机五个信息需求；问题可逐论文调查。",
+          "task_scope_and_capabilities.description 仍列举未由用户提供的任务例子；未指认某论文具备这些能力，仍记录语义警告。"
+        ]
+      }
+    },
+    {
+      "case_id": "planner-smoke-03",
+      "question": "Compare the training cost and parameter efficiency of BLIP-2 and Flamingo.",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "flamingo-2204.14198v1"
+      ],
+      "status": "success",
+      "dimensions": [
+        {
+          "dimension_id": "trainable_parameter_scope",
+          "name": "Trainable vs frozen parameter accounting",
+          "description": "Investigate how the paper reports which parts of the model are trained versus held fixed, and the resulting parameter counts relevant to efficiency claims.",
+          "research_question": "For this paper's model, which parameters are described as being trained versus kept fixed, and what parameter counts or proportions are reported in connection with that training setup?"
+        },
+        {
+          "dimension_id": "training_compute_budget",
+          "name": "Reported training cost and compute",
+          "description": "Investigate the concrete training-cost figures the paper reports (hardware, training steps, number of examples/tokens processed, wall-clock or GPU/TPU hours, FLOPs).",
+          "research_question": "What training cost does this paper report for its method, in terms of hardware used, amount of data or training steps, and time or compute consumed?"
+        },
+        {
+          "dimension_id": "design_choices_affecting_cost",
+          "name": "Architectural and procedural design choices bearing on training cost",
+          "description": "Investigate what design decisions the paper states are responsible for reduced training cost or parameter usage, without assuming any particular mechanism is present.",
+          "research_question": "What architectural or training-procedure design choices does this paper describe as influencing training cost or the number of parameters requiring training?"
+        },
+        {
+          "dimension_id": "efficiency_vs_alternative_training",
+          "name": "Comparison against alternative training approaches",
+          "description": "Investigate whether and how the paper frames its training cost and parameter efficiency relative to other training approaches by the same authors or baselines.",
+          "research_question": "Does this paper compare its training cost or parameter efficiency to alternative training approaches, and if so, which comparisons and quantities does it report?"
+        }
+      ],
+      "requirement_count": 8,
+      "worker_task_count": 2,
+      "worker_tasks": [
+        {
+          "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+          "paper_id": "blip-2-2301.12597v1",
+          "requirement_ids": [
+            "req_06c21be590e96ece1d9e0bc9d49757f1",
+            "req_dd2d978f563db06537538f24252ea7fd",
+            "req_27ea4406353a683b4b0cea12e5bdc13d",
+            "req_46034064dce31f550abd8b3550c21bd4"
+          ]
+        },
+        {
+          "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+          "paper_id": "flamingo-2204.14198v1",
+          "requirement_ids": [
+            "req_ba2200026a21f5c79b16ba9e52d23717",
+            "req_4b892d729e7c689a0bfed47335fc7a5a",
+            "req_827d6394b0800bc123228de506289ca6",
+            "req_41299d948d0a79bbdfa87eb6b4263970"
+          ]
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "req_06c21be590e96ece1d9e0bc9d49757f1",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "trainable_parameter_scope",
+          "question": "For this paper's model, which parameters are described as being trained versus kept fixed, and what parameter counts or proportions are reported in connection with that training setup?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_dd2d978f563db06537538f24252ea7fd",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "training_compute_budget",
+          "question": "What training cost does this paper report for its method, in terms of hardware used, amount of data or training steps, and time or compute consumed?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_27ea4406353a683b4b0cea12e5bdc13d",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "design_choices_affecting_cost",
+          "question": "What architectural or training-procedure design choices does this paper describe as influencing training cost or the number of parameters requiring training?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_46034064dce31f550abd8b3550c21bd4",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "efficiency_vs_alternative_training",
+          "question": "Does this paper compare its training cost or parameter efficiency to alternative training approaches, and if so, which comparisons and quantities does it report?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "trainable_parameter_scope",
+          "question": "For this paper's model, which parameters are described as being trained versus kept fixed, and what parameter counts or proportions are reported in connection with that training setup?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_4b892d729e7c689a0bfed47335fc7a5a",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "training_compute_budget",
+          "question": "What training cost does this paper report for its method, in terms of hardware used, amount of data or training steps, and time or compute consumed?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_827d6394b0800bc123228de506289ca6",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "design_choices_affecting_cost",
+          "question": "What architectural or training-procedure design choices does this paper describe as influencing training cost or the number of parameters requiring training?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_41299d948d0a79bbdfa87eb6b4263970",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "efficiency_vs_alternative_training",
+          "question": "Does this paper compare its training cost or parameter efficiency to alternative training approaches, and if so, which comparisons and quantities does it report?",
+          "required": true,
+          "status": "pending",
+          "claim": null,
+          "evidence_ids": []
+        }
+      ],
+      "trace": {
+        "events": [
+          "planner_started",
+          "planner_completed"
+        ],
+        "status": "success",
+        "candidate_paper_count": 2,
+        "dimension_count": 4,
+        "dimension_ids": [
+          "trainable_parameter_scope",
+          "training_compute_budget",
+          "design_choices_affecting_cost",
+          "efficiency_vs_alternative_training"
+        ],
+        "requirement_count": 8,
+        "worker_task_count": 2,
+        "model_calls": 1,
+        "latency_ms": 3668.9182900008745,
+        "error_code": null,
+        "error_message": null,
+        "failure": null
+      },
+      "semantic_review": {
+        "status": "reviewed",
+        "review_method": "manual_inspection_of_public_dimensions",
+        "answer_assumption": false,
+        "answer_hint_warning": false,
+        "scope_drift": false,
+        "paper_local_questions": true,
+        "notes": [
+          "四个维度都服务训练成本和参数效率，没有独立下游性能、安全或幻觉维度。",
+          "研究问题没有为论文指定具体组件或预设答案。"
+        ]
+      }
+    }
+  ],
+  "status": "completed",
+  "development_runs": {
+    "rounds": 3,
+    "total_model_calls": 9,
+    "total_planner_latency_ms": 41095.78531500483,
+    "dependency_failures": 1,
+    "previous_results": [
+      "2026-10-07-多模态论文研究智能体-ResearchPlanner首次真实Smoke.json",
+      "2026-10-07-多模态论文研究智能体-ResearchPlanner第二轮真实Smoke.json"
+    ],
+    "automatic_retries": 0
+  },
+  "final_model_calls": 3,
+  "verification": {
+    "tests_passed": 372,
+    "existing_tests_retained": 328,
+    "new_tests": 44,
+    "ruff": "passed",
+    "formatter_python_files": 135,
+    "frozen_retrieval_fingerprints_verified": 9,
+    "worker_execution": false,
+    "retrieval_calls": 0,
+    "working_tree": "clean"
+  },
+  "local_commit": "f782062"
+}

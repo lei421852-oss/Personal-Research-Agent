@@ -1,0 +1,3345 @@
+{
+  "mode": "controlled_fake_repeat_rejection",
+  "initial_rejection_is_controlled": true,
+  "real_provider_used": false,
+  "outcome": {
+    "eligibility": [
+      {
+        "requirement_id": "req_9daac7cc6c7a911400ad045f31b569a3",
+        "paper_id": "blip-2-2301.12597v1",
+        "eligible": false,
+        "reason_code": "insufficient_evidence"
+      },
+      {
+        "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+        "paper_id": "blip-2-2301.12597v1",
+        "eligible": false,
+        "reason_code": "insufficient_evidence"
+      },
+      {
+        "requirement_id": "req_c4a9956a9c46ca858320c1f09d211b31",
+        "paper_id": "blip-2-2301.12597v1",
+        "eligible": false,
+        "reason_code": "insufficient_evidence"
+      },
+      {
+        "requirement_id": "req_06c21be590e96ece1d9e0bc9d49757f1",
+        "paper_id": "blip-2-2301.12597v1",
+        "eligible": false,
+        "reason_code": "insufficient_evidence"
+      },
+      {
+        "requirement_id": "req_dce891f967956694a5ccce5c5a10832a",
+        "paper_id": "blip-2-2301.12597v1",
+        "eligible": false,
+        "reason_code": "insufficient_evidence"
+      },
+      {
+        "requirement_id": "req_795f851833824b49b269f864cf511807",
+        "paper_id": "flamingo-2204.14198v1",
+        "eligible": true,
+        "reason_code": "actionable_rejection"
+      },
+      {
+        "requirement_id": "req_360e41c76c26117ed16af9d15221522b",
+        "paper_id": "flamingo-2204.14198v1",
+        "eligible": false,
+        "reason_code": "review_passed"
+      },
+      {
+        "requirement_id": "req_dc439a155d75957a0d50bc39339deabc",
+        "paper_id": "flamingo-2204.14198v1",
+        "eligible": false,
+        "reason_code": "review_passed"
+      },
+      {
+        "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+        "paper_id": "flamingo-2204.14198v1",
+        "eligible": false,
+        "reason_code": "review_passed"
+      },
+      {
+        "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+        "paper_id": "flamingo-2204.14198v1",
+        "eligible": false,
+        "reason_code": "review_passed"
+      },
+      {
+        "requirement_id": "req_f3819b194d1948b00cae50ea1c3aa018",
+        "paper_id": "llava-2304.08485v1",
+        "eligible": false,
+        "reason_code": "insufficient_evidence"
+      },
+      {
+        "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+        "paper_id": "llava-2304.08485v1",
+        "eligible": false,
+        "reason_code": "insufficient_evidence"
+      },
+      {
+        "requirement_id": "req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+        "paper_id": "llava-2304.08485v1",
+        "eligible": false,
+        "reason_code": "insufficient_evidence"
+      },
+      {
+        "requirement_id": "req_dc68fde14ded13acea0eb1c952be17b8",
+        "paper_id": "llava-2304.08485v1",
+        "eligible": false,
+        "reason_code": "insufficient_evidence"
+      },
+      {
+        "requirement_id": "req_f175c0c799f61411fd36b9fb88fa6b85",
+        "paper_id": "llava-2304.08485v1",
+        "eligible": false,
+        "reason_code": "insufficient_evidence"
+      }
+    ],
+    "tasks": [
+      {
+        "recovery_task_id": "recovery_908da8b8c0fcdc751d157db2ec03b05c",
+        "paper_id": "flamingo-2204.14198v1",
+        "target_requirement_ids": [
+          "req_795f851833824b49b269f864cf511807"
+        ],
+        "reviewer_feedback": [
+          {
+            "requirement_id": "req_795f851833824b49b269f864cf511807",
+            "rejected_claim_id": "claim_c8e30e33939e9e95ce0bf204052f5389",
+            "reason_code": "evidence_partially_supports_claim",
+            "explanation": "The prepared pages support architecture components but do not establish zero errors or superiority to every model. Remove those unsupported guarantees, or find direct prepared evidence for them. Keep the original architecture question in scope.",
+            "prior_evidence_ids": [
+              "ev_1f60e62600f7a79eae799d5ed285f571",
+              "ev_03da035280d198641cd7bcb081b6f845",
+              "ev_9262472c69770e9a098422d6b46534f9",
+              "ev_a802881b56aa396b45e4431996b61ae5",
+              "ev_218bd889fec22dc20b36a380b0e0fb62"
+            ]
+          }
+        ],
+        "attempt_index": 1,
+        "max_attempts": 1,
+        "prior_result_refs": [
+          "worker_0fcf558289c8ddf46543a2f98b13d77f",
+          "review_8925354574344f71b519062b711f9c0c"
+        ],
+        "prior_worker_result": {
+          "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+          "paper_id": "flamingo-2204.14198v1",
+          "status": "completed",
+          "requirements": [
+            {
+              "requirement_id": "req_795f851833824b49b269f864cf511807",
+              "paper_id": "flamingo-2204.14198v1",
+              "dimension_id": "architecture_components",
+              "question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?",
+              "required": true,
+              "status": "supported",
+              "claim": "The Flamingo pipeline consists of: a pretrained vision encoder (NFNet F6 pretrained contrastively, CLIP-style) that extracts spatial features; a Perceiver Resampler that takes image/video features and outputs a fixed-size set (64) of visual tokens; and a pretrained frozen autoregressive language model conditioned via freshly-initialized cross-attention layers (interleaved with the frozen LM layers) with gating mechanisms. These components are organized so the vision encoder feeds the Resampler, whose visual tokens condition the LM through cross-attention for next-token prediction. This architecture guarantees zero prediction errors on every downstream task and proves superior performance to all models.",
+              "evidence_ids": [
+                "ev_1f60e62600f7a79eae799d5ed285f571",
+                "ev_03da035280d198641cd7bcb081b6f845",
+                "ev_9262472c69770e9a098422d6b46534f9",
+                "ev_a802881b56aa396b45e4431996b61ae5",
+                "ev_218bd889fec22dc20b36a380b0e0fb62"
+              ]
+            },
+            {
+              "requirement_id": "req_360e41c76c26117ed16af9d15221522b",
+              "paper_id": "flamingo-2204.14198v1",
+              "dimension_id": "vision_language_bridge",
+              "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+              "required": true,
+              "status": "supported",
+              "claim": "Visual representations are bridged to the LM via two learnable components: the Perceiver Resampler, which receives spatio-temporal features from the vision encoder and outputs a fixed-size set of visual tokens, and freshly-initialized cross-attention layers (GATED XATTN-DENSE) interleaved between the frozen pretrained LM layers that let the LM condition on visual information for next-token prediction. Gating mechanisms minimize the effect of the newly added layers at initialization.",
+              "evidence_ids": [
+                "ev_1f60e62600f7a79eae799d5ed285f571",
+                "ev_a802881b56aa396b45e4431996b61ae5",
+                "ev_218bd889fec22dc20b36a380b0e0fb62",
+                "ev_9262472c69770e9a098422d6b46534f9"
+              ]
+            },
+            {
+              "requirement_id": "req_dc439a155d75957a0d50bc39339deabc",
+              "paper_id": "flamingo-2204.14198v1",
+              "dimension_id": "training_strategy",
+              "question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?",
+              "required": true,
+              "status": "supported",
+              "claim": "The vision encoder is pretrained with a two-term contrastive text-image objective on image-text pair datasets (CLIP-style, using BERT text encoder). The main Flamingo training phase keeps the vision encoder and LM frozen and trains the newly added cross-attention layers (and Perceiver Resampler) using the next-token prediction / text-generation objective; ablation studies and appendix sections provide further details.",
+              "evidence_ids": [
+                "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                "ev_03da035280d198641cd7bcb081b6f845",
+                "ev_a802881b56aa396b45e4431996b61ae5",
+                "ev_1f60e62600f7a79eae799d5ed285f571"
+              ]
+            },
+            {
+              "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+              "paper_id": "flamingo-2204.14198v1",
+              "dimension_id": "trainable_parameter_scope",
+              "question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?",
+              "required": true,
+              "status": "supported",
+              "claim": "The pretrained vision encoder (NFNet F6) and the pretrained autoregressive LM are frozen during main Flamingo training; the newly added, freshly-initialized cross-attention layers (interleaved with the frozen LM self-attention layers) and the Perceiver Resampler are trainable. The paper frames this as a parameter-efficient approach that leverages pretrained components without retraining them from scratch.",
+              "evidence_ids": [
+                "ev_1f60e62600f7a79eae799d5ed285f571",
+                "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                "ev_a802881b56aa396b45e4431996b61ae5",
+                "ev_218bd889fec22dc20b36a380b0e0fb62"
+              ]
+            },
+            {
+              "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+              "paper_id": "flamingo-2204.14198v1",
+              "dimension_id": "downstream_capabilities",
+              "question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?",
+              "required": true,
+              "status": "supported",
+              "claim": "The paper claims Flamingo is a visual language model that accepts text interleaved with images/videos and outputs free-form text, handling both open-ended tasks (e.g., visual question-answering, captioning) requiring text generation and close-ended tasks (e.g., classification) requiring choosing among a set of categories, and is amenable to few-shot in-context learning where annotated visual-text examples in an interleaved prompt steer task behavior without weight changes. These capabilities are evidenced by the described API and its expressiveness in tackling diverse tasks, with detailed evaluation in Section 3.3.",
+              "evidence_ids": [
+                "ev_c0b1e5bbd1cb0899c45305d4a282b86e"
+              ]
+            }
+          ],
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 26513.00555800117,
+          "trace": {
+            "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+            "paper_id": "flamingo-2204.14198v1",
+            "requirement_count": 5,
+            "resolved_count": 5,
+            "status": "completed",
+            "tool_calls": 5,
+            "model_calls": 9,
+            "llm_calls": 9,
+            "vlm_tool_attempts": 0,
+            "protocol_corrections": 2,
+            "retry_count": 0,
+            "dependency_calls": 14,
+            "retried_dependency_calls": 0,
+            "latency_ms": 26513.00555800117,
+            "actions": [
+              {
+                "step": 1,
+                "tool_name": "worker_policy",
+                "status": "rejected",
+                "execution_status": "not_executed",
+                "summary": "Policy response rejected: multiple actions were requested; no actions were executed.",
+                "issue_code": "multiple_actions",
+                "expected": "exactly_one_action",
+                "actual_action_count": 3,
+                "recovery_instruction": "Choose exactly one action using the existing evidence and requirements. No rejected actions were executed. Wait for its observation before choosing another.",
+                "correction_allowed": true,
+                "protocol_corrections": 1,
+                "model_calls": 1,
+                "tool_calls": 0,
+                "latency_ms": 2835.006932997203
+              },
+              {
+                "step": 2,
+                "tool_name": "search_text",
+                "arguments": {
+                  "query": "architecture vision encoder language model cross-attention gated perceiver resampler",
+                  "paper_ids": [
+                    "flamingo-2204.14198v1"
+                  ],
+                  "top_k": 5,
+                  "requirement_ids": [
+                    "req_795f851833824b49b269f864cf511807",
+                    "req_360e41c76c26117ed16af9d15221522b"
+                  ]
+                },
+                "status": "success",
+                "protocol_recovery": true,
+                "investigated_requirement_ids": [
+                  "req_795f851833824b49b269f864cf511807",
+                  "req_360e41c76c26117ed16af9d15221522b"
+                ],
+                "last_new_evidence_count": 5,
+                "summary": "Retrieved 5 text evidence items.",
+                "issue_code": null,
+                "failure": null,
+                "evidence_ids": [
+                  "ev_9262472c69770e9a098422d6b46534f9",
+                  "ev_1f60e62600f7a79eae799d5ed285f571",
+                  "ev_1863b35f4e6e9086964ec47670f5ea7b",
+                  "ev_218bd889fec22dc20b36a380b0e0fb62",
+                  "ev_03da035280d198641cd7bcb081b6f845"
+                ],
+                "latency_ms": 157.28362199297408
+              },
+              {
+                "step": 3,
+                "tool_name": "worker_policy",
+                "status": "rejected",
+                "execution_status": "not_executed",
+                "summary": "Policy response rejected: multiple actions were requested; no actions were executed.",
+                "issue_code": "multiple_actions",
+                "expected": "exactly_one_action",
+                "actual_action_count": 2,
+                "recovery_instruction": "Choose exactly one action using the existing evidence and requirements. No rejected actions were executed. Wait for its observation before choosing another.",
+                "correction_allowed": true,
+                "protocol_corrections": 2,
+                "model_calls": 3,
+                "tool_calls": 1,
+                "latency_ms": 2493.370985997899
+              },
+              {
+                "step": 4,
+                "tool_name": "search_text",
+                "arguments": {
+                  "query": "training strategy joint interleaved datasets objectives frozen trainable parameters",
+                  "paper_ids": [
+                    "flamingo-2204.14198v1"
+                  ],
+                  "top_k": 8,
+                  "requirement_ids": [
+                    "req_dc439a155d75957a0d50bc39339deabc",
+                    "req_ba2200026a21f5c79b16ba9e52d23717"
+                  ]
+                },
+                "status": "success",
+                "protocol_recovery": true,
+                "investigated_requirement_ids": [
+                  "req_dc439a155d75957a0d50bc39339deabc",
+                  "req_ba2200026a21f5c79b16ba9e52d23717"
+                ],
+                "last_new_evidence_count": 4,
+                "summary": "Retrieved 8 text evidence items.",
+                "issue_code": null,
+                "failure": null,
+                "evidence_ids": [
+                  "ev_9262472c69770e9a098422d6b46534f9",
+                  "ev_1f60e62600f7a79eae799d5ed285f571",
+                  "ev_1863b35f4e6e9086964ec47670f5ea7b",
+                  "ev_218bd889fec22dc20b36a380b0e0fb62",
+                  "ev_03da035280d198641cd7bcb081b6f845",
+                  "ev_a802881b56aa396b45e4431996b61ae5",
+                  "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+                  "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                  "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+                ],
+                "latency_ms": 191.8228949944023
+              },
+              {
+                "step": 5,
+                "tool_name": "resolve_requirements",
+                "arguments": {
+                  "resolutions": [
+                    {
+                      "requirement_id": "req_795f851833824b49b269f864cf511807",
+                      "status": "supported",
+                      "evidence_ids": [
+                        "ev_1f60e62600f7a79eae799d5ed285f571",
+                        "ev_03da035280d198641cd7bcb081b6f845",
+                        "ev_9262472c69770e9a098422d6b46534f9",
+                        "ev_a802881b56aa396b45e4431996b61ae5",
+                        "ev_218bd889fec22dc20b36a380b0e0fb62"
+                      ]
+                    },
+                    {
+                      "requirement_id": "req_360e41c76c26117ed16af9d15221522b",
+                      "status": "supported",
+                      "evidence_ids": [
+                        "ev_1f60e62600f7a79eae799d5ed285f571",
+                        "ev_a802881b56aa396b45e4431996b61ae5",
+                        "ev_218bd889fec22dc20b36a380b0e0fb62",
+                        "ev_9262472c69770e9a098422d6b46534f9"
+                      ]
+                    },
+                    {
+                      "requirement_id": "req_dc439a155d75957a0d50bc39339deabc",
+                      "status": "supported",
+                      "evidence_ids": [
+                        "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                        "ev_03da035280d198641cd7bcb081b6f845",
+                        "ev_a802881b56aa396b45e4431996b61ae5",
+                        "ev_1f60e62600f7a79eae799d5ed285f571"
+                      ]
+                    },
+                    {
+                      "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+                      "status": "supported",
+                      "evidence_ids": [
+                        "ev_1f60e62600f7a79eae799d5ed285f571",
+                        "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                        "ev_a802881b56aa396b45e4431996b61ae5",
+                        "ev_218bd889fec22dc20b36a380b0e0fb62"
+                      ]
+                    }
+                  ]
+                },
+                "status": "success",
+                "protocol_recovery": false,
+                "investigated_requirement_ids": [],
+                "last_new_evidence_count": 4,
+                "summary": "Resolved 4 paper-local requirements.",
+                "issue_code": null,
+                "failure": null,
+                "evidence_ids": [
+                  "ev_9262472c69770e9a098422d6b46534f9",
+                  "ev_1f60e62600f7a79eae799d5ed285f571",
+                  "ev_1863b35f4e6e9086964ec47670f5ea7b",
+                  "ev_218bd889fec22dc20b36a380b0e0fb62",
+                  "ev_03da035280d198641cd7bcb081b6f845",
+                  "ev_a802881b56aa396b45e4431996b61ae5",
+                  "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+                  "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                  "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+                ],
+                "latency_ms": 1.7302810010733083
+              },
+              {
+                "step": 6,
+                "tool_name": "search_text",
+                "arguments": {
+                  "query": "downstream tasks evaluation few-shot in-context learning visual question answering captioning classification",
+                  "paper_ids": [
+                    "flamingo-2204.14198v1"
+                  ],
+                  "requirement_ids": [
+                    "req_33be67ee76e452d5de235b6a8e528afa"
+                  ],
+                  "top_k": 5
+                },
+                "status": "success",
+                "protocol_recovery": false,
+                "investigated_requirement_ids": [
+                  "req_33be67ee76e452d5de235b6a8e528afa"
+                ],
+                "last_new_evidence_count": 0,
+                "summary": "Retrieved 5 text evidence items.",
+                "issue_code": null,
+                "failure": null,
+                "evidence_ids": [
+                  "ev_9262472c69770e9a098422d6b46534f9",
+                  "ev_1f60e62600f7a79eae799d5ed285f571",
+                  "ev_1863b35f4e6e9086964ec47670f5ea7b",
+                  "ev_218bd889fec22dc20b36a380b0e0fb62",
+                  "ev_03da035280d198641cd7bcb081b6f845",
+                  "ev_a802881b56aa396b45e4431996b61ae5",
+                  "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+                  "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                  "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+                ],
+                "latency_ms": 285.7373109945911
+              },
+              {
+                "step": 7,
+                "tool_name": "read_page",
+                "arguments": {
+                  "paper_id": "flamingo-2204.14198v1",
+                  "page": 3,
+                  "requirement_ids": [
+                    "req_33be67ee76e452d5de235b6a8e528afa"
+                  ]
+                },
+                "status": "empty",
+                "protocol_recovery": false,
+                "investigated_requirement_ids": [
+                  "req_33be67ee76e452d5de235b6a8e528afa"
+                ],
+                "last_new_evidence_count": 0,
+                "summary": "Requested page has not been prepared; no PDF parsing was attempted.",
+                "issue_code": "empty_result",
+                "failure": {
+                  "phase": "execution",
+                  "message": "Requested page has not been prepared; no PDF parsing was attempted.",
+                  "issue_code": "empty_result",
+                  "retryable": false
+                },
+                "evidence_ids": [
+                  "ev_9262472c69770e9a098422d6b46534f9",
+                  "ev_1f60e62600f7a79eae799d5ed285f571",
+                  "ev_1863b35f4e6e9086964ec47670f5ea7b",
+                  "ev_218bd889fec22dc20b36a380b0e0fb62",
+                  "ev_03da035280d198641cd7bcb081b6f845",
+                  "ev_a802881b56aa396b45e4431996b61ae5",
+                  "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+                  "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                  "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+                ],
+                "latency_ms": 3.238746998249553
+              },
+              {
+                "step": 8,
+                "tool_name": "search_text",
+                "arguments": {
+                  "paper_ids": [
+                    "flamingo-2204.14198v1"
+                  ],
+                  "query": "downstream tasks few-shot evaluation: classification, VQA, captioning, in-context learning, image/video benchmarks",
+                  "requirement_ids": [
+                    "req_33be67ee76e452d5de235b6a8e528afa"
+                  ],
+                  "top_k": 4
+                },
+                "status": "success",
+                "protocol_recovery": false,
+                "investigated_requirement_ids": [
+                  "req_33be67ee76e452d5de235b6a8e528afa"
+                ],
+                "last_new_evidence_count": 0,
+                "summary": "Retrieved 4 text evidence items.",
+                "issue_code": null,
+                "failure": null,
+                "evidence_ids": [
+                  "ev_9262472c69770e9a098422d6b46534f9",
+                  "ev_1f60e62600f7a79eae799d5ed285f571",
+                  "ev_1863b35f4e6e9086964ec47670f5ea7b",
+                  "ev_218bd889fec22dc20b36a380b0e0fb62",
+                  "ev_03da035280d198641cd7bcb081b6f845",
+                  "ev_a802881b56aa396b45e4431996b61ae5",
+                  "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+                  "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                  "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+                ],
+                "latency_ms": 290.96071199455764
+              },
+              {
+                "step": 9,
+                "tool_name": "resolve_requirement",
+                "arguments": {
+                  "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+                  "status": "supported",
+                  "evidence_ids": [
+                    "ev_c0b1e5bbd1cb0899c45305d4a282b86e"
+                  ]
+                },
+                "status": "success",
+                "protocol_recovery": false,
+                "investigated_requirement_ids": [],
+                "last_new_evidence_count": 0,
+                "summary": "Resolved 1 paper-local requirements.",
+                "issue_code": null,
+                "failure": null,
+                "evidence_ids": [
+                  "ev_9262472c69770e9a098422d6b46534f9",
+                  "ev_1f60e62600f7a79eae799d5ed285f571",
+                  "ev_1863b35f4e6e9086964ec47670f5ea7b",
+                  "ev_218bd889fec22dc20b36a380b0e0fb62",
+                  "ev_03da035280d198641cd7bcb081b6f845",
+                  "ev_a802881b56aa396b45e4431996b61ae5",
+                  "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+                  "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                  "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+                ],
+                "latency_ms": 0.3298419978818856
+              }
+            ]
+          },
+          "observed_evidence_ids": [
+            "ev_9262472c69770e9a098422d6b46534f9",
+            "ev_1f60e62600f7a79eae799d5ed285f571",
+            "ev_1863b35f4e6e9086964ec47670f5ea7b",
+            "ev_218bd889fec22dc20b36a380b0e0fb62",
+            "ev_03da035280d198641cd7bcb081b6f845",
+            "ev_a802881b56aa396b45e4431996b61ae5",
+            "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+            "ev_e86416c4f3b10aeabf3180b5f807d7be",
+            "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+          ]
+        },
+        "prior_reviews": [
+          {
+            "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+            "requirement_id": "req_795f851833824b49b269f864cf511807",
+            "paper_id": "flamingo-2204.14198v1",
+            "status": "rejected",
+            "reason_code": "evidence_partially_supports_claim",
+            "claim": "The Flamingo pipeline consists of: a pretrained vision encoder (NFNet F6 pretrained contrastively, CLIP-style) that extracts spatial features; a Perceiver Resampler that takes image/video features and outputs a fixed-size set (64) of visual tokens; and a pretrained frozen autoregressive language model conditioned via freshly-initialized cross-attention layers (interleaved with the frozen LM layers) with gating mechanisms. These components are organized so the vision encoder feeds the Resampler, whose visual tokens condition the LM through cross-attention for next-token prediction. This architecture guarantees zero prediction errors on every downstream task and proves superior performance to all models.",
+            "evidence_ids": [
+              "ev_1f60e62600f7a79eae799d5ed285f571",
+              "ev_03da035280d198641cd7bcb081b6f845",
+              "ev_9262472c69770e9a098422d6b46534f9",
+              "ev_a802881b56aa396b45e4431996b61ae5",
+              "ev_218bd889fec22dc20b36a380b0e0fb62"
+            ],
+            "validation_status": "passed",
+            "skip_reason": null,
+            "issue": null,
+            "trace": {
+              "model_calls": 0,
+              "retry_count": 0,
+              "latency_ms": 0.0
+            }
+          }
+        ],
+        "remaining_budget": {
+          "model_calls": 12,
+          "tool_calls": 4
+        },
+        "review_model_calls_per_requirement": 3
+      }
+    ],
+    "merged": {
+      "worker_results": [
+        {
+          "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+          "paper_id": "blip-2-2301.12597v1",
+          "status": "completed",
+          "requirements": [
+            {
+              "requirement_id": "req_9daac7cc6c7a911400ad045f31b569a3",
+              "paper_id": "blip-2-2301.12597v1",
+              "dimension_id": "architecture_components",
+              "question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?",
+              "required": true,
+              "status": "insufficient_evidence",
+              "claim": null,
+              "evidence_ids": []
+            },
+            {
+              "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+              "paper_id": "blip-2-2301.12597v1",
+              "dimension_id": "vision_language_bridge",
+              "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+              "required": true,
+              "status": "insufficient_evidence",
+              "claim": null,
+              "evidence_ids": []
+            },
+            {
+              "requirement_id": "req_c4a9956a9c46ca858320c1f09d211b31",
+              "paper_id": "blip-2-2301.12597v1",
+              "dimension_id": "training_strategy",
+              "question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?",
+              "required": true,
+              "status": "insufficient_evidence",
+              "claim": null,
+              "evidence_ids": []
+            },
+            {
+              "requirement_id": "req_06c21be590e96ece1d9e0bc9d49757f1",
+              "paper_id": "blip-2-2301.12597v1",
+              "dimension_id": "trainable_parameter_scope",
+              "question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?",
+              "required": true,
+              "status": "insufficient_evidence",
+              "claim": null,
+              "evidence_ids": []
+            },
+            {
+              "requirement_id": "req_dce891f967956694a5ccce5c5a10832a",
+              "paper_id": "blip-2-2301.12597v1",
+              "dimension_id": "downstream_capabilities",
+              "question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?",
+              "required": true,
+              "status": "insufficient_evidence",
+              "claim": null,
+              "evidence_ids": []
+            }
+          ],
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "trace": null,
+          "observed_evidence_ids": []
+        },
+        {
+          "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+          "paper_id": "flamingo-2204.14198v1",
+          "status": "completed",
+          "requirements": [
+            {
+              "requirement_id": "req_795f851833824b49b269f864cf511807",
+              "paper_id": "flamingo-2204.14198v1",
+              "dimension_id": "architecture_components",
+              "question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?",
+              "required": true,
+              "status": "supported",
+              "claim": "Controlled new claim rejected again by scripted Reviewer.",
+              "evidence_ids": [
+                "ev_1f60e62600f7a79eae799d5ed285f571",
+                "ev_03da035280d198641cd7bcb081b6f845",
+                "ev_9262472c69770e9a098422d6b46534f9",
+                "ev_a802881b56aa396b45e4431996b61ae5",
+                "ev_218bd889fec22dc20b36a380b0e0fb62"
+              ]
+            },
+            {
+              "requirement_id": "req_360e41c76c26117ed16af9d15221522b",
+              "paper_id": "flamingo-2204.14198v1",
+              "dimension_id": "vision_language_bridge",
+              "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+              "required": true,
+              "status": "supported",
+              "claim": "Visual representations are bridged to the LM via two learnable components: the Perceiver Resampler, which receives spatio-temporal features from the vision encoder and outputs a fixed-size set of visual tokens, and freshly-initialized cross-attention layers (GATED XATTN-DENSE) interleaved between the frozen pretrained LM layers that let the LM condition on visual information for next-token prediction. Gating mechanisms minimize the effect of the newly added layers at initialization.",
+              "evidence_ids": [
+                "ev_1f60e62600f7a79eae799d5ed285f571",
+                "ev_a802881b56aa396b45e4431996b61ae5",
+                "ev_218bd889fec22dc20b36a380b0e0fb62",
+                "ev_9262472c69770e9a098422d6b46534f9"
+              ]
+            },
+            {
+              "requirement_id": "req_dc439a155d75957a0d50bc39339deabc",
+              "paper_id": "flamingo-2204.14198v1",
+              "dimension_id": "training_strategy",
+              "question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?",
+              "required": true,
+              "status": "supported",
+              "claim": "The vision encoder is pretrained with a two-term contrastive text-image objective on image-text pair datasets (CLIP-style, using BERT text encoder). The main Flamingo training phase keeps the vision encoder and LM frozen and trains the newly added cross-attention layers (and Perceiver Resampler) using the next-token prediction / text-generation objective; ablation studies and appendix sections provide further details.",
+              "evidence_ids": [
+                "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                "ev_03da035280d198641cd7bcb081b6f845",
+                "ev_a802881b56aa396b45e4431996b61ae5",
+                "ev_1f60e62600f7a79eae799d5ed285f571"
+              ]
+            },
+            {
+              "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+              "paper_id": "flamingo-2204.14198v1",
+              "dimension_id": "trainable_parameter_scope",
+              "question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?",
+              "required": true,
+              "status": "supported",
+              "claim": "The pretrained vision encoder (NFNet F6) and the pretrained autoregressive LM are frozen during main Flamingo training; the newly added, freshly-initialized cross-attention layers (interleaved with the frozen LM self-attention layers) and the Perceiver Resampler are trainable. The paper frames this as a parameter-efficient approach that leverages pretrained components without retraining them from scratch.",
+              "evidence_ids": [
+                "ev_1f60e62600f7a79eae799d5ed285f571",
+                "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                "ev_a802881b56aa396b45e4431996b61ae5",
+                "ev_218bd889fec22dc20b36a380b0e0fb62"
+              ]
+            },
+            {
+              "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+              "paper_id": "flamingo-2204.14198v1",
+              "dimension_id": "downstream_capabilities",
+              "question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?",
+              "required": true,
+              "status": "supported",
+              "claim": "The paper claims Flamingo is a visual language model that accepts text interleaved with images/videos and outputs free-form text, handling both open-ended tasks (e.g., visual question-answering, captioning) requiring text generation and close-ended tasks (e.g., classification) requiring choosing among a set of categories, and is amenable to few-shot in-context learning where annotated visual-text examples in an interleaved prompt steer task behavior without weight changes. These capabilities are evidenced by the described API and its expressiveness in tackling diverse tasks, with detailed evaluation in Section 3.3.",
+              "evidence_ids": [
+                "ev_c0b1e5bbd1cb0899c45305d4a282b86e"
+              ]
+            }
+          ],
+          "error": null,
+          "attempts": 2,
+          "latency_ms": 0.0,
+          "trace": null,
+          "observed_evidence_ids": [
+            "ev_9262472c69770e9a098422d6b46534f9",
+            "ev_1f60e62600f7a79eae799d5ed285f571",
+            "ev_1863b35f4e6e9086964ec47670f5ea7b",
+            "ev_218bd889fec22dc20b36a380b0e0fb62",
+            "ev_03da035280d198641cd7bcb081b6f845",
+            "ev_a802881b56aa396b45e4431996b61ae5",
+            "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+            "ev_e86416c4f3b10aeabf3180b5f807d7be",
+            "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+          ]
+        },
+        {
+          "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+          "paper_id": "llava-2304.08485v1",
+          "status": "completed",
+          "requirements": [
+            {
+              "requirement_id": "req_f3819b194d1948b00cae50ea1c3aa018",
+              "paper_id": "llava-2304.08485v1",
+              "dimension_id": "architecture_components",
+              "question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?",
+              "required": true,
+              "status": "insufficient_evidence",
+              "claim": null,
+              "evidence_ids": []
+            },
+            {
+              "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+              "paper_id": "llava-2304.08485v1",
+              "dimension_id": "vision_language_bridge",
+              "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+              "required": true,
+              "status": "insufficient_evidence",
+              "claim": null,
+              "evidence_ids": []
+            },
+            {
+              "requirement_id": "req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+              "paper_id": "llava-2304.08485v1",
+              "dimension_id": "training_strategy",
+              "question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?",
+              "required": true,
+              "status": "insufficient_evidence",
+              "claim": null,
+              "evidence_ids": []
+            },
+            {
+              "requirement_id": "req_dc68fde14ded13acea0eb1c952be17b8",
+              "paper_id": "llava-2304.08485v1",
+              "dimension_id": "trainable_parameter_scope",
+              "question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?",
+              "required": true,
+              "status": "insufficient_evidence",
+              "claim": null,
+              "evidence_ids": []
+            },
+            {
+              "requirement_id": "req_f175c0c799f61411fd36b9fb88fa6b85",
+              "paper_id": "llava-2304.08485v1",
+              "dimension_id": "downstream_capabilities",
+              "question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?",
+              "required": true,
+              "status": "insufficient_evidence",
+              "claim": null,
+              "evidence_ids": []
+            }
+          ],
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "trace": null,
+          "observed_evidence_ids": []
+        }
+      ],
+      "review_results": [
+        {
+          "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+          "requirement_id": "req_9daac7cc6c7a911400ad045f31b569a3",
+          "paper_id": "blip-2-2301.12597v1",
+          "status": "not_reviewable",
+          "reason_code": null,
+          "claim": null,
+          "evidence_ids": [],
+          "validation_status": "passed",
+          "skip_reason": "insufficient_evidence",
+          "issue": null,
+          "trace": {
+            "model_calls": 0,
+            "retry_count": 0,
+            "latency_ms": 0.0
+          }
+        },
+        {
+          "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+          "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+          "paper_id": "blip-2-2301.12597v1",
+          "status": "not_reviewable",
+          "reason_code": null,
+          "claim": null,
+          "evidence_ids": [],
+          "validation_status": "passed",
+          "skip_reason": "insufficient_evidence",
+          "issue": null,
+          "trace": {
+            "model_calls": 0,
+            "retry_count": 0,
+            "latency_ms": 0.0
+          }
+        },
+        {
+          "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+          "requirement_id": "req_c4a9956a9c46ca858320c1f09d211b31",
+          "paper_id": "blip-2-2301.12597v1",
+          "status": "not_reviewable",
+          "reason_code": null,
+          "claim": null,
+          "evidence_ids": [],
+          "validation_status": "passed",
+          "skip_reason": "insufficient_evidence",
+          "issue": null,
+          "trace": {
+            "model_calls": 0,
+            "retry_count": 0,
+            "latency_ms": 0.0
+          }
+        },
+        {
+          "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+          "requirement_id": "req_06c21be590e96ece1d9e0bc9d49757f1",
+          "paper_id": "blip-2-2301.12597v1",
+          "status": "not_reviewable",
+          "reason_code": null,
+          "claim": null,
+          "evidence_ids": [],
+          "validation_status": "passed",
+          "skip_reason": "insufficient_evidence",
+          "issue": null,
+          "trace": {
+            "model_calls": 0,
+            "retry_count": 0,
+            "latency_ms": 0.0
+          }
+        },
+        {
+          "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+          "requirement_id": "req_dce891f967956694a5ccce5c5a10832a",
+          "paper_id": "blip-2-2301.12597v1",
+          "status": "not_reviewable",
+          "reason_code": null,
+          "claim": null,
+          "evidence_ids": [],
+          "validation_status": "passed",
+          "skip_reason": "insufficient_evidence",
+          "issue": null,
+          "trace": {
+            "model_calls": 0,
+            "retry_count": 0,
+            "latency_ms": 0.0
+          }
+        },
+        {
+          "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+          "requirement_id": "req_795f851833824b49b269f864cf511807",
+          "paper_id": "flamingo-2204.14198v1",
+          "status": "rejected",
+          "reason_code": "evidence_does_not_support_claim",
+          "claim": "Controlled new claim rejected again by scripted Reviewer.",
+          "evidence_ids": [
+            "ev_1f60e62600f7a79eae799d5ed285f571",
+            "ev_03da035280d198641cd7bcb081b6f845",
+            "ev_9262472c69770e9a098422d6b46534f9",
+            "ev_a802881b56aa396b45e4431996b61ae5",
+            "ev_218bd889fec22dc20b36a380b0e0fb62"
+          ],
+          "validation_status": "passed",
+          "skip_reason": null,
+          "issue": null,
+          "trace": {
+            "model_calls": 1,
+            "retry_count": 0,
+            "latency_ms": 3.412717007449828
+          }
+        },
+        {
+          "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+          "requirement_id": "req_360e41c76c26117ed16af9d15221522b",
+          "paper_id": "flamingo-2204.14198v1",
+          "status": "passed",
+          "reason_code": "evidence_supports_claim",
+          "claim": "Visual representations are bridged to the LM via two learnable components: the Perceiver Resampler, which receives spatio-temporal features from the vision encoder and outputs a fixed-size set of visual tokens, and freshly-initialized cross-attention layers (GATED XATTN-DENSE) interleaved between the frozen pretrained LM layers that let the LM condition on visual information for next-token prediction. Gating mechanisms minimize the effect of the newly added layers at initialization.",
+          "evidence_ids": [
+            "ev_1f60e62600f7a79eae799d5ed285f571",
+            "ev_a802881b56aa396b45e4431996b61ae5",
+            "ev_218bd889fec22dc20b36a380b0e0fb62",
+            "ev_9262472c69770e9a098422d6b46534f9"
+          ],
+          "validation_status": "passed",
+          "skip_reason": null,
+          "issue": null,
+          "trace": {
+            "model_calls": 1,
+            "retry_count": 0,
+            "latency_ms": 1731.2761530047283
+          }
+        },
+        {
+          "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+          "requirement_id": "req_dc439a155d75957a0d50bc39339deabc",
+          "paper_id": "flamingo-2204.14198v1",
+          "status": "passed",
+          "reason_code": "evidence_supports_claim",
+          "claim": "The vision encoder is pretrained with a two-term contrastive text-image objective on image-text pair datasets (CLIP-style, using BERT text encoder). The main Flamingo training phase keeps the vision encoder and LM frozen and trains the newly added cross-attention layers (and Perceiver Resampler) using the next-token prediction / text-generation objective; ablation studies and appendix sections provide further details.",
+          "evidence_ids": [
+            "ev_e86416c4f3b10aeabf3180b5f807d7be",
+            "ev_03da035280d198641cd7bcb081b6f845",
+            "ev_a802881b56aa396b45e4431996b61ae5",
+            "ev_1f60e62600f7a79eae799d5ed285f571"
+          ],
+          "validation_status": "passed",
+          "skip_reason": null,
+          "issue": null,
+          "trace": {
+            "model_calls": 1,
+            "retry_count": 0,
+            "latency_ms": 2698.1968809996033
+          }
+        },
+        {
+          "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+          "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+          "paper_id": "flamingo-2204.14198v1",
+          "status": "passed",
+          "reason_code": "evidence_supports_claim",
+          "claim": "The pretrained vision encoder (NFNet F6) and the pretrained autoregressive LM are frozen during main Flamingo training; the newly added, freshly-initialized cross-attention layers (interleaved with the frozen LM self-attention layers) and the Perceiver Resampler are trainable. The paper frames this as a parameter-efficient approach that leverages pretrained components without retraining them from scratch.",
+          "evidence_ids": [
+            "ev_1f60e62600f7a79eae799d5ed285f571",
+            "ev_e86416c4f3b10aeabf3180b5f807d7be",
+            "ev_a802881b56aa396b45e4431996b61ae5",
+            "ev_218bd889fec22dc20b36a380b0e0fb62"
+          ],
+          "validation_status": "passed",
+          "skip_reason": null,
+          "issue": null,
+          "trace": {
+            "model_calls": 1,
+            "retry_count": 0,
+            "latency_ms": 2276.4652019977802
+          }
+        },
+        {
+          "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+          "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+          "paper_id": "flamingo-2204.14198v1",
+          "status": "passed",
+          "reason_code": "evidence_supports_claim",
+          "claim": "The paper claims Flamingo is a visual language model that accepts text interleaved with images/videos and outputs free-form text, handling both open-ended tasks (e.g., visual question-answering, captioning) requiring text generation and close-ended tasks (e.g., classification) requiring choosing among a set of categories, and is amenable to few-shot in-context learning where annotated visual-text examples in an interleaved prompt steer task behavior without weight changes. These capabilities are evidenced by the described API and its expressiveness in tackling diverse tasks, with detailed evaluation in Section 3.3.",
+          "evidence_ids": [
+            "ev_c0b1e5bbd1cb0899c45305d4a282b86e"
+          ],
+          "validation_status": "passed",
+          "skip_reason": null,
+          "issue": null,
+          "trace": {
+            "model_calls": 1,
+            "retry_count": 0,
+            "latency_ms": 4075.3340010051033
+          }
+        },
+        {
+          "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+          "requirement_id": "req_f3819b194d1948b00cae50ea1c3aa018",
+          "paper_id": "llava-2304.08485v1",
+          "status": "not_reviewable",
+          "reason_code": null,
+          "claim": null,
+          "evidence_ids": [],
+          "validation_status": "passed",
+          "skip_reason": "insufficient_evidence",
+          "issue": null,
+          "trace": {
+            "model_calls": 0,
+            "retry_count": 0,
+            "latency_ms": 0.0
+          }
+        },
+        {
+          "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+          "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+          "paper_id": "llava-2304.08485v1",
+          "status": "not_reviewable",
+          "reason_code": null,
+          "claim": null,
+          "evidence_ids": [],
+          "validation_status": "passed",
+          "skip_reason": "insufficient_evidence",
+          "issue": null,
+          "trace": {
+            "model_calls": 0,
+            "retry_count": 0,
+            "latency_ms": 0.0
+          }
+        },
+        {
+          "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+          "requirement_id": "req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+          "paper_id": "llava-2304.08485v1",
+          "status": "not_reviewable",
+          "reason_code": null,
+          "claim": null,
+          "evidence_ids": [],
+          "validation_status": "passed",
+          "skip_reason": "insufficient_evidence",
+          "issue": null,
+          "trace": {
+            "model_calls": 0,
+            "retry_count": 0,
+            "latency_ms": 0.0
+          }
+        },
+        {
+          "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+          "requirement_id": "req_dc68fde14ded13acea0eb1c952be17b8",
+          "paper_id": "llava-2304.08485v1",
+          "status": "not_reviewable",
+          "reason_code": null,
+          "claim": null,
+          "evidence_ids": [],
+          "validation_status": "passed",
+          "skip_reason": "insufficient_evidence",
+          "issue": null,
+          "trace": {
+            "model_calls": 0,
+            "retry_count": 0,
+            "latency_ms": 0.0
+          }
+        },
+        {
+          "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+          "requirement_id": "req_f175c0c799f61411fd36b9fb88fa6b85",
+          "paper_id": "llava-2304.08485v1",
+          "status": "not_reviewable",
+          "reason_code": null,
+          "claim": null,
+          "evidence_ids": [],
+          "validation_status": "passed",
+          "skip_reason": "insufficient_evidence",
+          "issue": null,
+          "trace": {
+            "model_calls": 0,
+            "retry_count": 0,
+            "latency_ms": 0.0
+          }
+        }
+      ],
+      "history": [
+        {
+          "record_id": "history_fa7c02e0cd83441e00cf4d8445336c54",
+          "result_ref": "worker_f4c57b4f014e9a14b6dce0d578cacafa",
+          "kind": "worker",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T06:22:55.434386+00:00",
+          "status": "completed",
+          "worker_result": {
+            "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+            "paper_id": "blip-2-2301.12597v1",
+            "status": "completed",
+            "requirements": [
+              {
+                "requirement_id": "req_9daac7cc6c7a911400ad045f31b569a3",
+                "paper_id": "blip-2-2301.12597v1",
+                "dimension_id": "architecture_components",
+                "question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?",
+                "required": true,
+                "status": "insufficient_evidence",
+                "claim": null,
+                "evidence_ids": []
+              },
+              {
+                "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+                "paper_id": "blip-2-2301.12597v1",
+                "dimension_id": "vision_language_bridge",
+                "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+                "required": true,
+                "status": "insufficient_evidence",
+                "claim": null,
+                "evidence_ids": []
+              },
+              {
+                "requirement_id": "req_c4a9956a9c46ca858320c1f09d211b31",
+                "paper_id": "blip-2-2301.12597v1",
+                "dimension_id": "training_strategy",
+                "question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?",
+                "required": true,
+                "status": "insufficient_evidence",
+                "claim": null,
+                "evidence_ids": []
+              },
+              {
+                "requirement_id": "req_06c21be590e96ece1d9e0bc9d49757f1",
+                "paper_id": "blip-2-2301.12597v1",
+                "dimension_id": "trainable_parameter_scope",
+                "question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?",
+                "required": true,
+                "status": "insufficient_evidence",
+                "claim": null,
+                "evidence_ids": []
+              },
+              {
+                "requirement_id": "req_dce891f967956694a5ccce5c5a10832a",
+                "paper_id": "blip-2-2301.12597v1",
+                "dimension_id": "downstream_capabilities",
+                "question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?",
+                "required": true,
+                "status": "insufficient_evidence",
+                "claim": null,
+                "evidence_ids": []
+              }
+            ],
+            "error": null,
+            "attempts": 1,
+            "latency_ms": 14359.613633001572,
+            "trace": {
+              "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+              "paper_id": "blip-2-2301.12597v1",
+              "requirement_count": 5,
+              "resolved_count": 5,
+              "status": "completed",
+              "tool_calls": 4,
+              "model_calls": 6,
+              "llm_calls": 6,
+              "vlm_tool_attempts": 0,
+              "protocol_corrections": 1,
+              "retry_count": 0,
+              "dependency_calls": 10,
+              "retried_dependency_calls": 0,
+              "latency_ms": 14359.613633001572,
+              "actions": [
+                {
+                  "step": 1,
+                  "tool_name": "worker_policy",
+                  "status": "rejected",
+                  "execution_status": "not_executed",
+                  "summary": "Policy response rejected: multiple actions were requested; no actions were executed.",
+                  "issue_code": "multiple_actions",
+                  "expected": "exactly_one_action",
+                  "actual_action_count": 3,
+                  "recovery_instruction": "Choose exactly one action using the existing evidence and requirements. No rejected actions were executed. Wait for its observation before choosing another.",
+                  "correction_allowed": true,
+                  "protocol_corrections": 1,
+                  "model_calls": 1,
+                  "tool_calls": 0,
+                  "latency_ms": 2682.458362003672
+                },
+                {
+                  "step": 2,
+                  "tool_name": "search_text",
+                  "arguments": {
+                    "query": "BLIP-2 architecture components Q-Former vision encoder frozen LLM pipeline",
+                    "paper_ids": [
+                      "blip-2-2301.12597v1"
+                    ],
+                    "requirement_ids": [
+                      "req_9daac7cc6c7a911400ad045f31b569a3",
+                      "req_9b812a56c386edc56b01ad7612222137"
+                    ],
+                    "top_k": 5
+                  },
+                  "status": "empty",
+                  "protocol_recovery": true,
+                  "investigated_requirement_ids": [
+                    "req_9daac7cc6c7a911400ad045f31b569a3",
+                    "req_9b812a56c386edc56b01ad7612222137"
+                  ],
+                  "last_new_evidence_count": 0,
+                  "summary": "Requested papers are known to discovery, but no prepared text evidence is available.",
+                  "issue_code": "empty_result",
+                  "failure": {
+                    "phase": "execution",
+                    "message": "Requested papers are known to discovery, but no prepared text evidence is available.",
+                    "issue_code": "empty_result",
+                    "retryable": false
+                  },
+                  "evidence_ids": [],
+                  "latency_ms": 5.188675000681542
+                },
+                {
+                  "step": 3,
+                  "tool_name": "search_text",
+                  "arguments": {
+                    "query": "architecture components visual encoder Q-Former language model pipeline",
+                    "paper_ids": [
+                      "blip-2-2301.12597v1"
+                    ],
+                    "requirement_ids": [
+                      "req_9daac7cc6c7a911400ad045f31b569a3",
+                      "req_9b812a56c386edc56b01ad7612222137"
+                    ]
+                  },
+                  "status": "empty",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [
+                    "req_9daac7cc6c7a911400ad045f31b569a3",
+                    "req_9b812a56c386edc56b01ad7612222137"
+                  ],
+                  "last_new_evidence_count": 0,
+                  "summary": "Requested papers are known to discovery, but no prepared text evidence is available.",
+                  "issue_code": "empty_result",
+                  "failure": {
+                    "phase": "execution",
+                    "message": "Requested papers are known to discovery, but no prepared text evidence is available.",
+                    "issue_code": "empty_result",
+                    "retryable": false
+                  },
+                  "evidence_ids": [],
+                  "latency_ms": 4.379066995170433
+                },
+                {
+                  "step": 4,
+                  "tool_name": "read_page",
+                  "arguments": {
+                    "paper_id": "blip-2-2301.12597v1",
+                    "page": 1,
+                    "requirement_ids": [
+                      "req_9daac7cc6c7a911400ad045f31b569a3",
+                      "req_9b812a56c386edc56b01ad7612222137",
+                      "req_c4a9956a9c46ca858320c1f09d211b31",
+                      "req_06c21be590e96ece1d9e0bc9d49757f1",
+                      "req_dce891f967956694a5ccce5c5a10832a"
+                    ]
+                  },
+                  "status": "empty",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [
+                    "req_9daac7cc6c7a911400ad045f31b569a3",
+                    "req_9b812a56c386edc56b01ad7612222137",
+                    "req_c4a9956a9c46ca858320c1f09d211b31",
+                    "req_06c21be590e96ece1d9e0bc9d49757f1",
+                    "req_dce891f967956694a5ccce5c5a10832a"
+                  ],
+                  "last_new_evidence_count": 0,
+                  "summary": "Discovered paper has no prepared evidence; no PDF was parsed.",
+                  "issue_code": "empty_result",
+                  "failure": {
+                    "phase": "execution",
+                    "error_type": "PaperEvidenceUnavailable",
+                    "message": "Discovered paper has no prepared evidence; no PDF was parsed.",
+                    "issue_code": "empty_result",
+                    "retryable": false
+                  },
+                  "evidence_ids": [],
+                  "latency_ms": 3.839222998067271
+                },
+                {
+                  "step": 5,
+                  "tool_name": "search_text",
+                  "arguments": {
+                    "query": "architecture components visual encoder language model Q-Former",
+                    "paper_ids": [
+                      "blip-2-2301.12597v1"
+                    ]
+                  },
+                  "status": "empty",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [
+                    "req_9daac7cc6c7a911400ad045f31b569a3",
+                    "req_9b812a56c386edc56b01ad7612222137",
+                    "req_c4a9956a9c46ca858320c1f09d211b31",
+                    "req_06c21be590e96ece1d9e0bc9d49757f1",
+                    "req_dce891f967956694a5ccce5c5a10832a"
+                  ],
+                  "last_new_evidence_count": 0,
+                  "summary": "Requested papers are known to discovery, but no prepared text evidence is available.",
+                  "issue_code": "empty_result",
+                  "failure": {
+                    "phase": "execution",
+                    "message": "Requested papers are known to discovery, but no prepared text evidence is available.",
+                    "issue_code": "empty_result",
+                    "retryable": false
+                  },
+                  "evidence_ids": [],
+                  "latency_ms": 3.5658810011227615
+                },
+                {
+                  "step": 6,
+                  "tool_name": "resolve_requirements",
+                  "arguments": {
+                    "resolutions": [
+                      {
+                        "requirement_id": "req_9daac7cc6c7a911400ad045f31b569a3",
+                        "status": "insufficient_evidence",
+                        "evidence_ids": []
+                      },
+                      {
+                        "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+                        "status": "insufficient_evidence",
+                        "evidence_ids": []
+                      },
+                      {
+                        "requirement_id": "req_c4a9956a9c46ca858320c1f09d211b31",
+                        "status": "insufficient_evidence",
+                        "evidence_ids": []
+                      },
+                      {
+                        "requirement_id": "req_06c21be590e96ece1d9e0bc9d49757f1",
+                        "status": "insufficient_evidence",
+                        "evidence_ids": []
+                      },
+                      {
+                        "requirement_id": "req_dce891f967956694a5ccce5c5a10832a",
+                        "status": "insufficient_evidence",
+                        "evidence_ids": []
+                      }
+                    ]
+                  },
+                  "status": "success",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [],
+                  "last_new_evidence_count": 0,
+                  "summary": "Resolved 5 paper-local requirements.",
+                  "issue_code": null,
+                  "failure": null,
+                  "evidence_ids": [],
+                  "latency_ms": 1.1485590002848767
+                }
+              ]
+            },
+            "observed_evidence_ids": []
+          },
+          "review_result": null
+        },
+        {
+          "record_id": "history_b32e0111887550e68a3ecb28563cd274",
+          "result_ref": "worker_0fcf558289c8ddf46543a2f98b13d77f",
+          "kind": "worker",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T06:22:55.434709+00:00",
+          "status": "completed",
+          "worker_result": {
+            "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+            "paper_id": "flamingo-2204.14198v1",
+            "status": "completed",
+            "requirements": [
+              {
+                "requirement_id": "req_795f851833824b49b269f864cf511807",
+                "paper_id": "flamingo-2204.14198v1",
+                "dimension_id": "architecture_components",
+                "question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?",
+                "required": true,
+                "status": "supported",
+                "claim": "The Flamingo pipeline consists of: a pretrained vision encoder (NFNet F6 pretrained contrastively, CLIP-style) that extracts spatial features; a Perceiver Resampler that takes image/video features and outputs a fixed-size set (64) of visual tokens; and a pretrained frozen autoregressive language model conditioned via freshly-initialized cross-attention layers (interleaved with the frozen LM layers) with gating mechanisms. These components are organized so the vision encoder feeds the Resampler, whose visual tokens condition the LM through cross-attention for next-token prediction. This architecture guarantees zero prediction errors on every downstream task and proves superior performance to all models.",
+                "evidence_ids": [
+                  "ev_1f60e62600f7a79eae799d5ed285f571",
+                  "ev_03da035280d198641cd7bcb081b6f845",
+                  "ev_9262472c69770e9a098422d6b46534f9",
+                  "ev_a802881b56aa396b45e4431996b61ae5",
+                  "ev_218bd889fec22dc20b36a380b0e0fb62"
+                ]
+              },
+              {
+                "requirement_id": "req_360e41c76c26117ed16af9d15221522b",
+                "paper_id": "flamingo-2204.14198v1",
+                "dimension_id": "vision_language_bridge",
+                "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+                "required": true,
+                "status": "supported",
+                "claim": "Visual representations are bridged to the LM via two learnable components: the Perceiver Resampler, which receives spatio-temporal features from the vision encoder and outputs a fixed-size set of visual tokens, and freshly-initialized cross-attention layers (GATED XATTN-DENSE) interleaved between the frozen pretrained LM layers that let the LM condition on visual information for next-token prediction. Gating mechanisms minimize the effect of the newly added layers at initialization.",
+                "evidence_ids": [
+                  "ev_1f60e62600f7a79eae799d5ed285f571",
+                  "ev_a802881b56aa396b45e4431996b61ae5",
+                  "ev_218bd889fec22dc20b36a380b0e0fb62",
+                  "ev_9262472c69770e9a098422d6b46534f9"
+                ]
+              },
+              {
+                "requirement_id": "req_dc439a155d75957a0d50bc39339deabc",
+                "paper_id": "flamingo-2204.14198v1",
+                "dimension_id": "training_strategy",
+                "question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?",
+                "required": true,
+                "status": "supported",
+                "claim": "The vision encoder is pretrained with a two-term contrastive text-image objective on image-text pair datasets (CLIP-style, using BERT text encoder). The main Flamingo training phase keeps the vision encoder and LM frozen and trains the newly added cross-attention layers (and Perceiver Resampler) using the next-token prediction / text-generation objective; ablation studies and appendix sections provide further details.",
+                "evidence_ids": [
+                  "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                  "ev_03da035280d198641cd7bcb081b6f845",
+                  "ev_a802881b56aa396b45e4431996b61ae5",
+                  "ev_1f60e62600f7a79eae799d5ed285f571"
+                ]
+              },
+              {
+                "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+                "paper_id": "flamingo-2204.14198v1",
+                "dimension_id": "trainable_parameter_scope",
+                "question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?",
+                "required": true,
+                "status": "supported",
+                "claim": "The pretrained vision encoder (NFNet F6) and the pretrained autoregressive LM are frozen during main Flamingo training; the newly added, freshly-initialized cross-attention layers (interleaved with the frozen LM self-attention layers) and the Perceiver Resampler are trainable. The paper frames this as a parameter-efficient approach that leverages pretrained components without retraining them from scratch.",
+                "evidence_ids": [
+                  "ev_1f60e62600f7a79eae799d5ed285f571",
+                  "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                  "ev_a802881b56aa396b45e4431996b61ae5",
+                  "ev_218bd889fec22dc20b36a380b0e0fb62"
+                ]
+              },
+              {
+                "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+                "paper_id": "flamingo-2204.14198v1",
+                "dimension_id": "downstream_capabilities",
+                "question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?",
+                "required": true,
+                "status": "supported",
+                "claim": "The paper claims Flamingo is a visual language model that accepts text interleaved with images/videos and outputs free-form text, handling both open-ended tasks (e.g., visual question-answering, captioning) requiring text generation and close-ended tasks (e.g., classification) requiring choosing among a set of categories, and is amenable to few-shot in-context learning where annotated visual-text examples in an interleaved prompt steer task behavior without weight changes. These capabilities are evidenced by the described API and its expressiveness in tackling diverse tasks, with detailed evaluation in Section 3.3.",
+                "evidence_ids": [
+                  "ev_c0b1e5bbd1cb0899c45305d4a282b86e"
+                ]
+              }
+            ],
+            "error": null,
+            "attempts": 1,
+            "latency_ms": 26513.00555800117,
+            "trace": {
+              "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+              "paper_id": "flamingo-2204.14198v1",
+              "requirement_count": 5,
+              "resolved_count": 5,
+              "status": "completed",
+              "tool_calls": 5,
+              "model_calls": 9,
+              "llm_calls": 9,
+              "vlm_tool_attempts": 0,
+              "protocol_corrections": 2,
+              "retry_count": 0,
+              "dependency_calls": 14,
+              "retried_dependency_calls": 0,
+              "latency_ms": 26513.00555800117,
+              "actions": [
+                {
+                  "step": 1,
+                  "tool_name": "worker_policy",
+                  "status": "rejected",
+                  "execution_status": "not_executed",
+                  "summary": "Policy response rejected: multiple actions were requested; no actions were executed.",
+                  "issue_code": "multiple_actions",
+                  "expected": "exactly_one_action",
+                  "actual_action_count": 3,
+                  "recovery_instruction": "Choose exactly one action using the existing evidence and requirements. No rejected actions were executed. Wait for its observation before choosing another.",
+                  "correction_allowed": true,
+                  "protocol_corrections": 1,
+                  "model_calls": 1,
+                  "tool_calls": 0,
+                  "latency_ms": 2835.006932997203
+                },
+                {
+                  "step": 2,
+                  "tool_name": "search_text",
+                  "arguments": {
+                    "query": "architecture vision encoder language model cross-attention gated perceiver resampler",
+                    "paper_ids": [
+                      "flamingo-2204.14198v1"
+                    ],
+                    "top_k": 5,
+                    "requirement_ids": [
+                      "req_795f851833824b49b269f864cf511807",
+                      "req_360e41c76c26117ed16af9d15221522b"
+                    ]
+                  },
+                  "status": "success",
+                  "protocol_recovery": true,
+                  "investigated_requirement_ids": [
+                    "req_795f851833824b49b269f864cf511807",
+                    "req_360e41c76c26117ed16af9d15221522b"
+                  ],
+                  "last_new_evidence_count": 5,
+                  "summary": "Retrieved 5 text evidence items.",
+                  "issue_code": null,
+                  "failure": null,
+                  "evidence_ids": [
+                    "ev_9262472c69770e9a098422d6b46534f9",
+                    "ev_1f60e62600f7a79eae799d5ed285f571",
+                    "ev_1863b35f4e6e9086964ec47670f5ea7b",
+                    "ev_218bd889fec22dc20b36a380b0e0fb62",
+                    "ev_03da035280d198641cd7bcb081b6f845"
+                  ],
+                  "latency_ms": 157.28362199297408
+                },
+                {
+                  "step": 3,
+                  "tool_name": "worker_policy",
+                  "status": "rejected",
+                  "execution_status": "not_executed",
+                  "summary": "Policy response rejected: multiple actions were requested; no actions were executed.",
+                  "issue_code": "multiple_actions",
+                  "expected": "exactly_one_action",
+                  "actual_action_count": 2,
+                  "recovery_instruction": "Choose exactly one action using the existing evidence and requirements. No rejected actions were executed. Wait for its observation before choosing another.",
+                  "correction_allowed": true,
+                  "protocol_corrections": 2,
+                  "model_calls": 3,
+                  "tool_calls": 1,
+                  "latency_ms": 2493.370985997899
+                },
+                {
+                  "step": 4,
+                  "tool_name": "search_text",
+                  "arguments": {
+                    "query": "training strategy joint interleaved datasets objectives frozen trainable parameters",
+                    "paper_ids": [
+                      "flamingo-2204.14198v1"
+                    ],
+                    "top_k": 8,
+                    "requirement_ids": [
+                      "req_dc439a155d75957a0d50bc39339deabc",
+                      "req_ba2200026a21f5c79b16ba9e52d23717"
+                    ]
+                  },
+                  "status": "success",
+                  "protocol_recovery": true,
+                  "investigated_requirement_ids": [
+                    "req_dc439a155d75957a0d50bc39339deabc",
+                    "req_ba2200026a21f5c79b16ba9e52d23717"
+                  ],
+                  "last_new_evidence_count": 4,
+                  "summary": "Retrieved 8 text evidence items.",
+                  "issue_code": null,
+                  "failure": null,
+                  "evidence_ids": [
+                    "ev_9262472c69770e9a098422d6b46534f9",
+                    "ev_1f60e62600f7a79eae799d5ed285f571",
+                    "ev_1863b35f4e6e9086964ec47670f5ea7b",
+                    "ev_218bd889fec22dc20b36a380b0e0fb62",
+                    "ev_03da035280d198641cd7bcb081b6f845",
+                    "ev_a802881b56aa396b45e4431996b61ae5",
+                    "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+                    "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                    "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+                  ],
+                  "latency_ms": 191.8228949944023
+                },
+                {
+                  "step": 5,
+                  "tool_name": "resolve_requirements",
+                  "arguments": {
+                    "resolutions": [
+                      {
+                        "requirement_id": "req_795f851833824b49b269f864cf511807",
+                        "status": "supported",
+                        "evidence_ids": [
+                          "ev_1f60e62600f7a79eae799d5ed285f571",
+                          "ev_03da035280d198641cd7bcb081b6f845",
+                          "ev_9262472c69770e9a098422d6b46534f9",
+                          "ev_a802881b56aa396b45e4431996b61ae5",
+                          "ev_218bd889fec22dc20b36a380b0e0fb62"
+                        ]
+                      },
+                      {
+                        "requirement_id": "req_360e41c76c26117ed16af9d15221522b",
+                        "status": "supported",
+                        "evidence_ids": [
+                          "ev_1f60e62600f7a79eae799d5ed285f571",
+                          "ev_a802881b56aa396b45e4431996b61ae5",
+                          "ev_218bd889fec22dc20b36a380b0e0fb62",
+                          "ev_9262472c69770e9a098422d6b46534f9"
+                        ]
+                      },
+                      {
+                        "requirement_id": "req_dc439a155d75957a0d50bc39339deabc",
+                        "status": "supported",
+                        "evidence_ids": [
+                          "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                          "ev_03da035280d198641cd7bcb081b6f845",
+                          "ev_a802881b56aa396b45e4431996b61ae5",
+                          "ev_1f60e62600f7a79eae799d5ed285f571"
+                        ]
+                      },
+                      {
+                        "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+                        "status": "supported",
+                        "evidence_ids": [
+                          "ev_1f60e62600f7a79eae799d5ed285f571",
+                          "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                          "ev_a802881b56aa396b45e4431996b61ae5",
+                          "ev_218bd889fec22dc20b36a380b0e0fb62"
+                        ]
+                      }
+                    ]
+                  },
+                  "status": "success",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [],
+                  "last_new_evidence_count": 4,
+                  "summary": "Resolved 4 paper-local requirements.",
+                  "issue_code": null,
+                  "failure": null,
+                  "evidence_ids": [
+                    "ev_9262472c69770e9a098422d6b46534f9",
+                    "ev_1f60e62600f7a79eae799d5ed285f571",
+                    "ev_1863b35f4e6e9086964ec47670f5ea7b",
+                    "ev_218bd889fec22dc20b36a380b0e0fb62",
+                    "ev_03da035280d198641cd7bcb081b6f845",
+                    "ev_a802881b56aa396b45e4431996b61ae5",
+                    "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+                    "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                    "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+                  ],
+                  "latency_ms": 1.7302810010733083
+                },
+                {
+                  "step": 6,
+                  "tool_name": "search_text",
+                  "arguments": {
+                    "query": "downstream tasks evaluation few-shot in-context learning visual question answering captioning classification",
+                    "paper_ids": [
+                      "flamingo-2204.14198v1"
+                    ],
+                    "requirement_ids": [
+                      "req_33be67ee76e452d5de235b6a8e528afa"
+                    ],
+                    "top_k": 5
+                  },
+                  "status": "success",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [
+                    "req_33be67ee76e452d5de235b6a8e528afa"
+                  ],
+                  "last_new_evidence_count": 0,
+                  "summary": "Retrieved 5 text evidence items.",
+                  "issue_code": null,
+                  "failure": null,
+                  "evidence_ids": [
+                    "ev_9262472c69770e9a098422d6b46534f9",
+                    "ev_1f60e62600f7a79eae799d5ed285f571",
+                    "ev_1863b35f4e6e9086964ec47670f5ea7b",
+                    "ev_218bd889fec22dc20b36a380b0e0fb62",
+                    "ev_03da035280d198641cd7bcb081b6f845",
+                    "ev_a802881b56aa396b45e4431996b61ae5",
+                    "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+                    "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                    "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+                  ],
+                  "latency_ms": 285.7373109945911
+                },
+                {
+                  "step": 7,
+                  "tool_name": "read_page",
+                  "arguments": {
+                    "paper_id": "flamingo-2204.14198v1",
+                    "page": 3,
+                    "requirement_ids": [
+                      "req_33be67ee76e452d5de235b6a8e528afa"
+                    ]
+                  },
+                  "status": "empty",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [
+                    "req_33be67ee76e452d5de235b6a8e528afa"
+                  ],
+                  "last_new_evidence_count": 0,
+                  "summary": "Requested page has not been prepared; no PDF parsing was attempted.",
+                  "issue_code": "empty_result",
+                  "failure": {
+                    "phase": "execution",
+                    "message": "Requested page has not been prepared; no PDF parsing was attempted.",
+                    "issue_code": "empty_result",
+                    "retryable": false
+                  },
+                  "evidence_ids": [
+                    "ev_9262472c69770e9a098422d6b46534f9",
+                    "ev_1f60e62600f7a79eae799d5ed285f571",
+                    "ev_1863b35f4e6e9086964ec47670f5ea7b",
+                    "ev_218bd889fec22dc20b36a380b0e0fb62",
+                    "ev_03da035280d198641cd7bcb081b6f845",
+                    "ev_a802881b56aa396b45e4431996b61ae5",
+                    "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+                    "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                    "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+                  ],
+                  "latency_ms": 3.238746998249553
+                },
+                {
+                  "step": 8,
+                  "tool_name": "search_text",
+                  "arguments": {
+                    "paper_ids": [
+                      "flamingo-2204.14198v1"
+                    ],
+                    "query": "downstream tasks few-shot evaluation: classification, VQA, captioning, in-context learning, image/video benchmarks",
+                    "requirement_ids": [
+                      "req_33be67ee76e452d5de235b6a8e528afa"
+                    ],
+                    "top_k": 4
+                  },
+                  "status": "success",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [
+                    "req_33be67ee76e452d5de235b6a8e528afa"
+                  ],
+                  "last_new_evidence_count": 0,
+                  "summary": "Retrieved 4 text evidence items.",
+                  "issue_code": null,
+                  "failure": null,
+                  "evidence_ids": [
+                    "ev_9262472c69770e9a098422d6b46534f9",
+                    "ev_1f60e62600f7a79eae799d5ed285f571",
+                    "ev_1863b35f4e6e9086964ec47670f5ea7b",
+                    "ev_218bd889fec22dc20b36a380b0e0fb62",
+                    "ev_03da035280d198641cd7bcb081b6f845",
+                    "ev_a802881b56aa396b45e4431996b61ae5",
+                    "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+                    "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                    "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+                  ],
+                  "latency_ms": 290.96071199455764
+                },
+                {
+                  "step": 9,
+                  "tool_name": "resolve_requirement",
+                  "arguments": {
+                    "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+                    "status": "supported",
+                    "evidence_ids": [
+                      "ev_c0b1e5bbd1cb0899c45305d4a282b86e"
+                    ]
+                  },
+                  "status": "success",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [],
+                  "last_new_evidence_count": 0,
+                  "summary": "Resolved 1 paper-local requirements.",
+                  "issue_code": null,
+                  "failure": null,
+                  "evidence_ids": [
+                    "ev_9262472c69770e9a098422d6b46534f9",
+                    "ev_1f60e62600f7a79eae799d5ed285f571",
+                    "ev_1863b35f4e6e9086964ec47670f5ea7b",
+                    "ev_218bd889fec22dc20b36a380b0e0fb62",
+                    "ev_03da035280d198641cd7bcb081b6f845",
+                    "ev_a802881b56aa396b45e4431996b61ae5",
+                    "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+                    "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                    "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+                  ],
+                  "latency_ms": 0.3298419978818856
+                }
+              ]
+            },
+            "observed_evidence_ids": [
+              "ev_9262472c69770e9a098422d6b46534f9",
+              "ev_1f60e62600f7a79eae799d5ed285f571",
+              "ev_1863b35f4e6e9086964ec47670f5ea7b",
+              "ev_218bd889fec22dc20b36a380b0e0fb62",
+              "ev_03da035280d198641cd7bcb081b6f845",
+              "ev_a802881b56aa396b45e4431996b61ae5",
+              "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+              "ev_e86416c4f3b10aeabf3180b5f807d7be",
+              "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+            ]
+          },
+          "review_result": null
+        },
+        {
+          "record_id": "history_bcd73bf53dc1988802b7bc12fd3badff",
+          "result_ref": "worker_4e24a7db42bc4f1445e72612be40d47e",
+          "kind": "worker",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T06:22:55.434850+00:00",
+          "status": "completed",
+          "worker_result": {
+            "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+            "paper_id": "llava-2304.08485v1",
+            "status": "completed",
+            "requirements": [
+              {
+                "requirement_id": "req_f3819b194d1948b00cae50ea1c3aa018",
+                "paper_id": "llava-2304.08485v1",
+                "dimension_id": "architecture_components",
+                "question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?",
+                "required": true,
+                "status": "insufficient_evidence",
+                "claim": null,
+                "evidence_ids": []
+              },
+              {
+                "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+                "paper_id": "llava-2304.08485v1",
+                "dimension_id": "vision_language_bridge",
+                "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+                "required": true,
+                "status": "insufficient_evidence",
+                "claim": null,
+                "evidence_ids": []
+              },
+              {
+                "requirement_id": "req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+                "paper_id": "llava-2304.08485v1",
+                "dimension_id": "training_strategy",
+                "question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?",
+                "required": true,
+                "status": "insufficient_evidence",
+                "claim": null,
+                "evidence_ids": []
+              },
+              {
+                "requirement_id": "req_dc68fde14ded13acea0eb1c952be17b8",
+                "paper_id": "llava-2304.08485v1",
+                "dimension_id": "trainable_parameter_scope",
+                "question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?",
+                "required": true,
+                "status": "insufficient_evidence",
+                "claim": null,
+                "evidence_ids": []
+              },
+              {
+                "requirement_id": "req_f175c0c799f61411fd36b9fb88fa6b85",
+                "paper_id": "llava-2304.08485v1",
+                "dimension_id": "downstream_capabilities",
+                "question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?",
+                "required": true,
+                "status": "insufficient_evidence",
+                "claim": null,
+                "evidence_ids": []
+              }
+            ],
+            "error": null,
+            "attempts": 1,
+            "latency_ms": 10440.026456999476,
+            "trace": {
+              "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+              "paper_id": "llava-2304.08485v1",
+              "requirement_count": 5,
+              "resolved_count": 5,
+              "status": "completed",
+              "tool_calls": 1,
+              "model_calls": 3,
+              "llm_calls": 3,
+              "vlm_tool_attempts": 0,
+              "protocol_corrections": 1,
+              "retry_count": 0,
+              "dependency_calls": 4,
+              "retried_dependency_calls": 0,
+              "latency_ms": 10440.026456999476,
+              "actions": [
+                {
+                  "step": 1,
+                  "tool_name": "worker_policy",
+                  "status": "rejected",
+                  "execution_status": "not_executed",
+                  "summary": "Policy response rejected: multiple actions were requested; no actions were executed.",
+                  "issue_code": "multiple_actions",
+                  "expected": "exactly_one_action",
+                  "actual_action_count": 3,
+                  "recovery_instruction": "Choose exactly one action using the existing evidence and requirements. No rejected actions were executed. Wait for its observation before choosing another.",
+                  "correction_allowed": true,
+                  "protocol_corrections": 1,
+                  "model_calls": 1,
+                  "tool_calls": 0,
+                  "latency_ms": 4823.0453160067555
+                },
+                {
+                  "step": 2,
+                  "tool_name": "search_text",
+                  "arguments": {
+                    "paper_ids": [
+                      "llava-2304.08485v1"
+                    ],
+                    "query": "architecture components vision encoder language model linear projection pipeline",
+                    "requirement_ids": [
+                      "req_f3819b194d1948b00cae50ea1c3aa018",
+                      "req_638cc283fb01bf590f5233c40f49087a"
+                    ]
+                  },
+                  "status": "empty",
+                  "protocol_recovery": true,
+                  "investigated_requirement_ids": [
+                    "req_f3819b194d1948b00cae50ea1c3aa018",
+                    "req_638cc283fb01bf590f5233c40f49087a"
+                  ],
+                  "last_new_evidence_count": 0,
+                  "summary": "Requested papers are known to discovery, but no prepared text evidence is available.",
+                  "issue_code": "empty_result",
+                  "failure": {
+                    "phase": "execution",
+                    "message": "Requested papers are known to discovery, but no prepared text evidence is available.",
+                    "issue_code": "empty_result",
+                    "retryable": false
+                  },
+                  "evidence_ids": [],
+                  "latency_ms": 4.386305998195894
+                },
+                {
+                  "step": 3,
+                  "tool_name": "resolve_requirements",
+                  "arguments": {
+                    "resolutions": [
+                      {
+                        "requirement_id": "req_f3819b194d1948b00cae50ea1c3aa018",
+                        "status": "insufficient_evidence",
+                        "evidence_ids": []
+                      },
+                      {
+                        "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+                        "status": "insufficient_evidence",
+                        "evidence_ids": []
+                      },
+                      {
+                        "requirement_id": "req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+                        "status": "insufficient_evidence",
+                        "evidence_ids": []
+                      },
+                      {
+                        "requirement_id": "req_dc68fde14ded13acea0eb1c952be17b8",
+                        "status": "insufficient_evidence",
+                        "evidence_ids": []
+                      },
+                      {
+                        "requirement_id": "req_f175c0c799f61411fd36b9fb88fa6b85",
+                        "status": "insufficient_evidence",
+                        "evidence_ids": []
+                      }
+                    ]
+                  },
+                  "status": "success",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [],
+                  "last_new_evidence_count": 0,
+                  "summary": "Resolved 5 paper-local requirements.",
+                  "issue_code": null,
+                  "failure": null,
+                  "evidence_ids": [],
+                  "latency_ms": 1.3571750023402274
+                }
+              ]
+            },
+            "observed_evidence_ids": []
+          },
+          "review_result": null
+        },
+        {
+          "record_id": "history_6ce6f762081ba9c71725da8a8ffe960f",
+          "result_ref": "review_51cee40659bf3bca930ddf372d45014b",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T06:22:55.434882+00:00",
+          "status": "not_reviewable",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+            "requirement_id": "req_9daac7cc6c7a911400ad045f31b569a3",
+            "paper_id": "blip-2-2301.12597v1",
+            "status": "not_reviewable",
+            "reason_code": null,
+            "claim": null,
+            "evidence_ids": [],
+            "validation_status": "passed",
+            "skip_reason": "insufficient_evidence",
+            "issue": null,
+            "trace": {
+              "model_calls": 0,
+              "retry_count": 0,
+              "latency_ms": 0.0
+            }
+          }
+        },
+        {
+          "record_id": "history_22e48a777373be04791f9da6922f3094",
+          "result_ref": "review_ad848e2c52a7f2ae4a7fb67564ac65be",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T06:22:55.434904+00:00",
+          "status": "not_reviewable",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+            "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+            "paper_id": "blip-2-2301.12597v1",
+            "status": "not_reviewable",
+            "reason_code": null,
+            "claim": null,
+            "evidence_ids": [],
+            "validation_status": "passed",
+            "skip_reason": "insufficient_evidence",
+            "issue": null,
+            "trace": {
+              "model_calls": 0,
+              "retry_count": 0,
+              "latency_ms": 0.0
+            }
+          }
+        },
+        {
+          "record_id": "history_9e41b6257bd0188ef65c358059209a82",
+          "result_ref": "review_37cbc2571004fb70dc7175fbc84da5f5",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T06:22:55.434920+00:00",
+          "status": "not_reviewable",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+            "requirement_id": "req_c4a9956a9c46ca858320c1f09d211b31",
+            "paper_id": "blip-2-2301.12597v1",
+            "status": "not_reviewable",
+            "reason_code": null,
+            "claim": null,
+            "evidence_ids": [],
+            "validation_status": "passed",
+            "skip_reason": "insufficient_evidence",
+            "issue": null,
+            "trace": {
+              "model_calls": 0,
+              "retry_count": 0,
+              "latency_ms": 0.0
+            }
+          }
+        },
+        {
+          "record_id": "history_cbae323790b5f5f164e27e83472a1ea8",
+          "result_ref": "review_80ad9c2ca664b3b7ad88f86a23238dd0",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T06:22:55.434937+00:00",
+          "status": "not_reviewable",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+            "requirement_id": "req_06c21be590e96ece1d9e0bc9d49757f1",
+            "paper_id": "blip-2-2301.12597v1",
+            "status": "not_reviewable",
+            "reason_code": null,
+            "claim": null,
+            "evidence_ids": [],
+            "validation_status": "passed",
+            "skip_reason": "insufficient_evidence",
+            "issue": null,
+            "trace": {
+              "model_calls": 0,
+              "retry_count": 0,
+              "latency_ms": 0.0
+            }
+          }
+        },
+        {
+          "record_id": "history_f4476449ea7145a493a20536dd783e94",
+          "result_ref": "review_0789299eeed12df055ce53da0f6d8cfa",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T06:22:55.434953+00:00",
+          "status": "not_reviewable",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+            "requirement_id": "req_dce891f967956694a5ccce5c5a10832a",
+            "paper_id": "blip-2-2301.12597v1",
+            "status": "not_reviewable",
+            "reason_code": null,
+            "claim": null,
+            "evidence_ids": [],
+            "validation_status": "passed",
+            "skip_reason": "insufficient_evidence",
+            "issue": null,
+            "trace": {
+              "model_calls": 0,
+              "retry_count": 0,
+              "latency_ms": 0.0
+            }
+          }
+        },
+        {
+          "record_id": "history_2657010f22e82d50217ede9093dec294",
+          "result_ref": "review_8925354574344f71b519062b711f9c0c",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T06:22:55.434980+00:00",
+          "status": "rejected",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+            "requirement_id": "req_795f851833824b49b269f864cf511807",
+            "paper_id": "flamingo-2204.14198v1",
+            "status": "rejected",
+            "reason_code": "evidence_partially_supports_claim",
+            "claim": "The Flamingo pipeline consists of: a pretrained vision encoder (NFNet F6 pretrained contrastively, CLIP-style) that extracts spatial features; a Perceiver Resampler that takes image/video features and outputs a fixed-size set (64) of visual tokens; and a pretrained frozen autoregressive language model conditioned via freshly-initialized cross-attention layers (interleaved with the frozen LM layers) with gating mechanisms. These components are organized so the vision encoder feeds the Resampler, whose visual tokens condition the LM through cross-attention for next-token prediction. This architecture guarantees zero prediction errors on every downstream task and proves superior performance to all models.",
+            "evidence_ids": [
+              "ev_1f60e62600f7a79eae799d5ed285f571",
+              "ev_03da035280d198641cd7bcb081b6f845",
+              "ev_9262472c69770e9a098422d6b46534f9",
+              "ev_a802881b56aa396b45e4431996b61ae5",
+              "ev_218bd889fec22dc20b36a380b0e0fb62"
+            ],
+            "validation_status": "passed",
+            "skip_reason": null,
+            "issue": null,
+            "trace": {
+              "model_calls": 0,
+              "retry_count": 0,
+              "latency_ms": 0.0
+            }
+          }
+        },
+        {
+          "record_id": "history_31ce5882bcca1124878cdbc33a7c1548",
+          "result_ref": "review_b24d53f94d8fdad202f66a2a257ae0f0",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T06:22:55.435002+00:00",
+          "status": "passed",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+            "requirement_id": "req_360e41c76c26117ed16af9d15221522b",
+            "paper_id": "flamingo-2204.14198v1",
+            "status": "passed",
+            "reason_code": "evidence_supports_claim",
+            "claim": "Visual representations are bridged to the LM via two learnable components: the Perceiver Resampler, which receives spatio-temporal features from the vision encoder and outputs a fixed-size set of visual tokens, and freshly-initialized cross-attention layers (GATED XATTN-DENSE) interleaved between the frozen pretrained LM layers that let the LM condition on visual information for next-token prediction. Gating mechanisms minimize the effect of the newly added layers at initialization.",
+            "evidence_ids": [
+              "ev_1f60e62600f7a79eae799d5ed285f571",
+              "ev_a802881b56aa396b45e4431996b61ae5",
+              "ev_218bd889fec22dc20b36a380b0e0fb62",
+              "ev_9262472c69770e9a098422d6b46534f9"
+            ],
+            "validation_status": "passed",
+            "skip_reason": null,
+            "issue": null,
+            "trace": {
+              "model_calls": 1,
+              "retry_count": 0,
+              "latency_ms": 1731.2761530047283
+            }
+          }
+        },
+        {
+          "record_id": "history_1e1d140bd4dcebad4480d36c006596cb",
+          "result_ref": "review_84e89556bcc20c3f0cbaf8565a2eac4b",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T06:22:55.435023+00:00",
+          "status": "passed",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+            "requirement_id": "req_dc439a155d75957a0d50bc39339deabc",
+            "paper_id": "flamingo-2204.14198v1",
+            "status": "passed",
+            "reason_code": "evidence_supports_claim",
+            "claim": "The vision encoder is pretrained with a two-term contrastive text-image objective on image-text pair datasets (CLIP-style, using BERT text encoder). The main Flamingo training phase keeps the vision encoder and LM frozen and trains the newly added cross-attention layers (and Perceiver Resampler) using the next-token prediction / text-generation objective; ablation studies and appendix sections provide further details.",
+            "evidence_ids": [
+              "ev_e86416c4f3b10aeabf3180b5f807d7be",
+              "ev_03da035280d198641cd7bcb081b6f845",
+              "ev_a802881b56aa396b45e4431996b61ae5",
+              "ev_1f60e62600f7a79eae799d5ed285f571"
+            ],
+            "validation_status": "passed",
+            "skip_reason": null,
+            "issue": null,
+            "trace": {
+              "model_calls": 1,
+              "retry_count": 0,
+              "latency_ms": 2698.1968809996033
+            }
+          }
+        },
+        {
+          "record_id": "history_07f551750d1070a400dbd66c6d3d5e0a",
+          "result_ref": "review_8c4505ecdad26aab0543a23fa85a21f6",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T06:22:55.435053+00:00",
+          "status": "passed",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+            "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+            "paper_id": "flamingo-2204.14198v1",
+            "status": "passed",
+            "reason_code": "evidence_supports_claim",
+            "claim": "The pretrained vision encoder (NFNet F6) and the pretrained autoregressive LM are frozen during main Flamingo training; the newly added, freshly-initialized cross-attention layers (interleaved with the frozen LM self-attention layers) and the Perceiver Resampler are trainable. The paper frames this as a parameter-efficient approach that leverages pretrained components without retraining them from scratch.",
+            "evidence_ids": [
+              "ev_1f60e62600f7a79eae799d5ed285f571",
+              "ev_e86416c4f3b10aeabf3180b5f807d7be",
+              "ev_a802881b56aa396b45e4431996b61ae5",
+              "ev_218bd889fec22dc20b36a380b0e0fb62"
+            ],
+            "validation_status": "passed",
+            "skip_reason": null,
+            "issue": null,
+            "trace": {
+              "model_calls": 1,
+              "retry_count": 0,
+              "latency_ms": 2276.4652019977802
+            }
+          }
+        },
+        {
+          "record_id": "history_1aac6d2f7092844aca2a29bf7fbfa787",
+          "result_ref": "review_f2bedd52d0b72ec7a234c6b655507ade",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T06:22:55.435082+00:00",
+          "status": "passed",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+            "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+            "paper_id": "flamingo-2204.14198v1",
+            "status": "passed",
+            "reason_code": "evidence_supports_claim",
+            "claim": "The paper claims Flamingo is a visual language model that accepts text interleaved with images/videos and outputs free-form text, handling both open-ended tasks (e.g., visual question-answering, captioning) requiring text generation and close-ended tasks (e.g., classification) requiring choosing among a set of categories, and is amenable to few-shot in-context learning where annotated visual-text examples in an interleaved prompt steer task behavior without weight changes. These capabilities are evidenced by the described API and its expressiveness in tackling diverse tasks, with detailed evaluation in Section 3.3.",
+            "evidence_ids": [
+              "ev_c0b1e5bbd1cb0899c45305d4a282b86e"
+            ],
+            "validation_status": "passed",
+            "skip_reason": null,
+            "issue": null,
+            "trace": {
+              "model_calls": 1,
+              "retry_count": 0,
+              "latency_ms": 4075.3340010051033
+            }
+          }
+        },
+        {
+          "record_id": "history_2dab2dedbe4c2072db12214e1693dc9b",
+          "result_ref": "review_d16c12277e2df6f1fe042ed15a7dcdf4",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T06:22:55.435103+00:00",
+          "status": "not_reviewable",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+            "requirement_id": "req_f3819b194d1948b00cae50ea1c3aa018",
+            "paper_id": "llava-2304.08485v1",
+            "status": "not_reviewable",
+            "reason_code": null,
+            "claim": null,
+            "evidence_ids": [],
+            "validation_status": "passed",
+            "skip_reason": "insufficient_evidence",
+            "issue": null,
+            "trace": {
+              "model_calls": 0,
+              "retry_count": 0,
+              "latency_ms": 0.0
+            }
+          }
+        },
+        {
+          "record_id": "history_27f7efe5edfad93c9e5130d28a0537b6",
+          "result_ref": "review_32500386fb129eedb2a693e0f3fff461",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T06:22:55.435122+00:00",
+          "status": "not_reviewable",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+            "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+            "paper_id": "llava-2304.08485v1",
+            "status": "not_reviewable",
+            "reason_code": null,
+            "claim": null,
+            "evidence_ids": [],
+            "validation_status": "passed",
+            "skip_reason": "insufficient_evidence",
+            "issue": null,
+            "trace": {
+              "model_calls": 0,
+              "retry_count": 0,
+              "latency_ms": 0.0
+            }
+          }
+        },
+        {
+          "record_id": "history_4e34fe10978f21397670451ffec19720",
+          "result_ref": "review_6aa16258ddb08961aab598afc18e7b9e",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T06:22:55.435140+00:00",
+          "status": "not_reviewable",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+            "requirement_id": "req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+            "paper_id": "llava-2304.08485v1",
+            "status": "not_reviewable",
+            "reason_code": null,
+            "claim": null,
+            "evidence_ids": [],
+            "validation_status": "passed",
+            "skip_reason": "insufficient_evidence",
+            "issue": null,
+            "trace": {
+              "model_calls": 0,
+              "retry_count": 0,
+              "latency_ms": 0.0
+            }
+          }
+        },
+        {
+          "record_id": "history_f9ec811711162a97fba077df18b2a172",
+          "result_ref": "review_75b8e8eb38e09a9e43b817bacb35800b",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T06:22:55.435158+00:00",
+          "status": "not_reviewable",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+            "requirement_id": "req_dc68fde14ded13acea0eb1c952be17b8",
+            "paper_id": "llava-2304.08485v1",
+            "status": "not_reviewable",
+            "reason_code": null,
+            "claim": null,
+            "evidence_ids": [],
+            "validation_status": "passed",
+            "skip_reason": "insufficient_evidence",
+            "issue": null,
+            "trace": {
+              "model_calls": 0,
+              "retry_count": 0,
+              "latency_ms": 0.0
+            }
+          }
+        },
+        {
+          "record_id": "history_a524aee33815ce15ff6d4ae1ef87c4ee",
+          "result_ref": "review_eb0e22ef6be042d2d39173528bc8bdf2",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T06:22:55.435174+00:00",
+          "status": "not_reviewable",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+            "requirement_id": "req_f175c0c799f61411fd36b9fb88fa6b85",
+            "paper_id": "llava-2304.08485v1",
+            "status": "not_reviewable",
+            "reason_code": null,
+            "claim": null,
+            "evidence_ids": [],
+            "validation_status": "passed",
+            "skip_reason": "insufficient_evidence",
+            "issue": null,
+            "trace": {
+              "model_calls": 0,
+              "retry_count": 0,
+              "latency_ms": 0.0
+            }
+          }
+        },
+        {
+          "record_id": "history_dc9ce26c801bd2c4cb41c7cb651af329",
+          "result_ref": "worker_9a46a0e4a32eaed0c052ea6a66818832",
+          "kind": "worker",
+          "attempt_index": 1,
+          "recorded_at": "2026-10-08T06:22:55.435238+00:00",
+          "status": "completed",
+          "worker_result": {
+            "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+            "paper_id": "flamingo-2204.14198v1",
+            "status": "completed",
+            "requirements": [
+              {
+                "requirement_id": "req_795f851833824b49b269f864cf511807",
+                "paper_id": "flamingo-2204.14198v1",
+                "dimension_id": "architecture_components",
+                "question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?",
+                "required": true,
+                "status": "supported",
+                "claim": "Controlled new claim rejected again by scripted Reviewer.",
+                "evidence_ids": [
+                  "ev_1f60e62600f7a79eae799d5ed285f571",
+                  "ev_03da035280d198641cd7bcb081b6f845",
+                  "ev_9262472c69770e9a098422d6b46534f9",
+                  "ev_a802881b56aa396b45e4431996b61ae5",
+                  "ev_218bd889fec22dc20b36a380b0e0fb62"
+                ]
+              }
+            ],
+            "error": null,
+            "attempts": 1,
+            "latency_ms": 8.625472997664474,
+            "trace": {
+              "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+              "paper_id": "flamingo-2204.14198v1",
+              "requirement_count": 1,
+              "resolved_count": 1,
+              "status": "completed",
+              "tool_calls": 0,
+              "model_calls": 1,
+              "llm_calls": 1,
+              "vlm_tool_attempts": 0,
+              "protocol_corrections": 0,
+              "retry_count": 0,
+              "dependency_calls": 1,
+              "retried_dependency_calls": 0,
+              "latency_ms": 8.625472997664474,
+              "actions": [
+                {
+                  "step": 1,
+                  "tool_name": "resolve_requirement",
+                  "arguments": {
+                    "requirement_id": "req_795f851833824b49b269f864cf511807",
+                    "status": "supported",
+                    "evidence_ids": [
+                      "ev_1f60e62600f7a79eae799d5ed285f571",
+                      "ev_03da035280d198641cd7bcb081b6f845",
+                      "ev_9262472c69770e9a098422d6b46534f9",
+                      "ev_a802881b56aa396b45e4431996b61ae5",
+                      "ev_218bd889fec22dc20b36a380b0e0fb62"
+                    ]
+                  },
+                  "status": "success",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [],
+                  "last_new_evidence_count": 0,
+                  "summary": "Resolved 1 paper-local requirements.",
+                  "issue_code": null,
+                  "failure": null,
+                  "evidence_ids": [
+                    "ev_1f60e62600f7a79eae799d5ed285f571",
+                    "ev_03da035280d198641cd7bcb081b6f845",
+                    "ev_9262472c69770e9a098422d6b46534f9",
+                    "ev_a802881b56aa396b45e4431996b61ae5",
+                    "ev_218bd889fec22dc20b36a380b0e0fb62"
+                  ],
+                  "latency_ms": 0.4647009918699041
+                }
+              ]
+            },
+            "observed_evidence_ids": [
+              "ev_1f60e62600f7a79eae799d5ed285f571",
+              "ev_03da035280d198641cd7bcb081b6f845",
+              "ev_9262472c69770e9a098422d6b46534f9",
+              "ev_a802881b56aa396b45e4431996b61ae5",
+              "ev_218bd889fec22dc20b36a380b0e0fb62"
+            ]
+          },
+          "review_result": null
+        },
+        {
+          "record_id": "history_aed479579b426730d01fa20f21bd024e",
+          "result_ref": "review_3eb5b70ec1e7a30aed7b815d1bcd9239",
+          "kind": "review",
+          "attempt_index": 1,
+          "recorded_at": "2026-10-08T06:22:55.435266+00:00",
+          "status": "rejected",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+            "requirement_id": "req_795f851833824b49b269f864cf511807",
+            "paper_id": "flamingo-2204.14198v1",
+            "status": "rejected",
+            "reason_code": "evidence_does_not_support_claim",
+            "claim": "Controlled new claim rejected again by scripted Reviewer.",
+            "evidence_ids": [
+              "ev_1f60e62600f7a79eae799d5ed285f571",
+              "ev_03da035280d198641cd7bcb081b6f845",
+              "ev_9262472c69770e9a098422d6b46534f9",
+              "ev_a802881b56aa396b45e4431996b61ae5",
+              "ev_218bd889fec22dc20b36a380b0e0fb62"
+            ],
+            "validation_status": "passed",
+            "skip_reason": null,
+            "issue": null,
+            "trace": {
+              "model_calls": 1,
+              "retry_count": 0,
+              "latency_ms": 3.412717007449828
+            }
+          }
+        }
+      ]
+    },
+    "metrics": {
+      "recovery_eligible_count": 1,
+      "recovery_attempted_count": 1,
+      "recovery_passed_count": 0,
+      "recovery_failed_count": 1,
+      "recovery_skipped_count": 14,
+      "recovery_conversion_rate": 0.0,
+      "additional_model_calls": 3,
+      "additional_tool_calls": 0,
+      "recovery_latency_ms": 25.265156000386924,
+      "recovery_rounds_used": 1,
+      "prior_usage": {
+        "model_calls": 25,
+        "tool_calls": 10
+      },
+      "reserved_budget": {
+        "model_calls": 20,
+        "tool_calls": 4
+      },
+      "research_usage": {
+        "model_calls": 28,
+        "tool_calls": 10
+      }
+    },
+    "status": "completed",
+    "synthesis_input": {
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "architecture_components",
+            "name": "Overall Architectural Components",
+            "description": "Identify the principal building blocks described for this paper's model and how they are arranged into an end-to-end visual-language pipeline. Focus on the model's own described structure rather than comparisons.",
+            "research_question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?"
+          },
+          {
+            "dimension_id": "vision_language_bridge",
+            "name": "Vision-Language Connection Mechanism",
+            "description": "Investigate the specific mechanism the model uses to bridge visual representations and the language model, including any connector, adapter, resampler, cross-attention interface, or projection described in the paper, and whether the language model is frozen or tunable.",
+            "research_question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?"
+          },
+          {
+            "dimension_id": "training_strategy",
+            "name": "Training Strategy and Objectives",
+            "description": "Examine the training procedure described in the paper: stages, objectives, data used, and the order in which components are trained or whether they are jointly trained.",
+            "research_question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?"
+          },
+          {
+            "dimension_id": "trainable_parameter_scope",
+            "name": "Trainable Parameter Scope",
+            "description": "Investigate which components of the model the paper reports as trainable versus frozen, and any parameter counts or parameter-efficient settings discussed.",
+            "research_question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?"
+          },
+          {
+            "dimension_id": "downstream_capabilities",
+            "name": "Downstream Capabilities and Evaluation Tasks",
+            "description": "Identify the downstream tasks and capabilities the paper evaluates or claims for the model, and the nature of the evidence provided for those capabilities.",
+            "research_question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?"
+          }
+        ],
+        "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+        "paper_ids": [
+          "blip-2-2301.12597v1",
+          "flamingo-2204.14198v1",
+          "llava-2304.08485v1"
+        ]
+      },
+      "cells": [
+        {
+          "requirement_id": "req_9daac7cc6c7a911400ad045f31b569a3",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "architecture_components",
+          "status": "insufficient_evidence",
+          "claim_id": null
+        },
+        {
+          "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "vision_language_bridge",
+          "status": "insufficient_evidence",
+          "claim_id": null
+        },
+        {
+          "requirement_id": "req_c4a9956a9c46ca858320c1f09d211b31",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "training_strategy",
+          "status": "insufficient_evidence",
+          "claim_id": null
+        },
+        {
+          "requirement_id": "req_06c21be590e96ece1d9e0bc9d49757f1",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "trainable_parameter_scope",
+          "status": "insufficient_evidence",
+          "claim_id": null
+        },
+        {
+          "requirement_id": "req_dce891f967956694a5ccce5c5a10832a",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "downstream_capabilities",
+          "status": "insufficient_evidence",
+          "claim_id": null
+        },
+        {
+          "requirement_id": "req_795f851833824b49b269f864cf511807",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "architecture_components",
+          "status": "review_rejected",
+          "claim_id": null
+        },
+        {
+          "requirement_id": "req_360e41c76c26117ed16af9d15221522b",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "vision_language_bridge",
+          "status": "verified",
+          "claim_id": "claim_0de12b2252ea4cd25a45e196edc86483"
+        },
+        {
+          "requirement_id": "req_dc439a155d75957a0d50bc39339deabc",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "training_strategy",
+          "status": "verified",
+          "claim_id": "claim_d551758c884e14ddde0e05f4cfa65f84"
+        },
+        {
+          "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "trainable_parameter_scope",
+          "status": "verified",
+          "claim_id": "claim_01fc15ab12d773d2dbead129cc2ee43b"
+        },
+        {
+          "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "downstream_capabilities",
+          "status": "verified",
+          "claim_id": "claim_6717cd6dd1ba31f879f50b12963793e1"
+        },
+        {
+          "requirement_id": "req_f3819b194d1948b00cae50ea1c3aa018",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "architecture_components",
+          "status": "insufficient_evidence",
+          "claim_id": null
+        },
+        {
+          "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "vision_language_bridge",
+          "status": "insufficient_evidence",
+          "claim_id": null
+        },
+        {
+          "requirement_id": "req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "training_strategy",
+          "status": "insufficient_evidence",
+          "claim_id": null
+        },
+        {
+          "requirement_id": "req_dc68fde14ded13acea0eb1c952be17b8",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "trainable_parameter_scope",
+          "status": "insufficient_evidence",
+          "claim_id": null
+        },
+        {
+          "requirement_id": "req_f175c0c799f61411fd36b9fb88fa6b85",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "downstream_capabilities",
+          "status": "insufficient_evidence",
+          "claim_id": null
+        }
+      ],
+      "verified_claims": [
+        {
+          "claim_id": "claim_0de12b2252ea4cd25a45e196edc86483",
+          "requirement_id": "req_360e41c76c26117ed16af9d15221522b",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "vision_language_bridge",
+          "text": "Visual representations are bridged to the LM via two learnable components: the Perceiver Resampler, which receives spatio-temporal features from the vision encoder and outputs a fixed-size set of visual tokens, and freshly-initialized cross-attention layers (GATED XATTN-DENSE) interleaved between the frozen pretrained LM layers that let the LM condition on visual information for next-token prediction. Gating mechanisms minimize the effect of the newly added layers at initialization.",
+          "evidence": [
+            {
+              "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 9,
+              "modality": "text",
+              "text": "The architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 10,
+              "modality": "text",
+              "text": "Second, those visual tokens are used to condition the frozen LM using freshly initialised cross attention layers (Section 3.1.2) that are interleaved between the pretrained LM layers. These new layers oﬀer an expressive way for the LM to incorporate visual information for the next-token prediction task.",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 4,
+              "modality": "text",
+              "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_9262472c69770e9a098422d6b46534f9",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 11,
+              "modality": "text",
+              "text": "architecture in Figure 3. It takes as input a variable number of image or video features from the vision encoder and produces a ﬁxed number of visual outputs as illustrated in Figure 4 (hence the name Resampler). The motivation for re-sampling the visual input to a ﬁxed and small number (in practice 64) of outputs is to signiﬁcantly reduce the computational complexity of vision-text cross attention, particularly important when dealing with multiple long videos. In similar spirit to Perceiver (Jaegle et al., 2021) and DETR (Carion et al., 2020), we learn a predeﬁned number of latent input queries. These latent queries are fed to a transformer stack and cross attend to the ﬂattened visual features",
+              "caption": null,
+              "figure_id": null
+            }
+          ]
+        },
+        {
+          "claim_id": "claim_d551758c884e14ddde0e05f4cfa65f84",
+          "requirement_id": "req_dc439a155d75957a0d50bc39339deabc",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "training_strategy",
+          "text": "The vision encoder is pretrained with a two-term contrastive text-image objective on image-text pair datasets (CLIP-style, using BERT text encoder). The main Flamingo training phase keeps the vision encoder and LM frozen and trains the newly added cross-attention layers (and Perceiver Resampler) using the next-token prediction / text-generation objective; ablation studies and appendix sections provide further details.",
+          "evidence": [
+            {
+              "evidence_id": "ev_e86416c4f3b10aeabf3180b5f807d7be",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 10,
+              "modality": "text",
+              "text": "using the two-term contrastive loss from Radford et al. (2021). Contrastive similarities are computed as the dot product of the mean pooling of the image encoder output, and the mean pooled output of a BERT model (Devlin et al., 2018). The performance of our contrastive pretrained model is given in Section 4.2.3 and more details about the contrastive training are given in Appendix C.2.2. During the main training phase of the Flamingo models, we leave the vision encoder frozen as it performs favorably when compared to training the vision model directly from our text generation objective (see ablations in Section 4.4). The output of the ﬁnal stage is a 2D spatial grid of features 𝑋𝑓, which",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_03da035280d198641cd7bcb081b6f845",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 10,
+              "modality": "text",
+              "text": "Vision encoder: from pixels to features. Our model’s vision encoder is a pretrained Normalizer- Free ResNet (NFNet) (Brock et al., 2021) – we use the F6 model. We chose this family of visual backbones thanks to their excellent trade-oﬀbetween performance and eﬃciency given our hardware. We pretrain the vision encoder using a contrastive objective on our datasets of image and text pairs,",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 10,
+              "modality": "text",
+              "text": "Second, those visual tokens are used to condition the frozen LM using freshly initialised cross attention layers (Section 3.1.2) that are interleaved between the pretrained LM layers. These new layers oﬀer an expressive way for the LM to incorporate visual information for the next-token prediction task.",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 9,
+              "modality": "text",
+              "text": "The architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.",
+              "caption": null,
+              "figure_id": null
+            }
+          ]
+        },
+        {
+          "claim_id": "claim_01fc15ab12d773d2dbead129cc2ee43b",
+          "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "trainable_parameter_scope",
+          "text": "The pretrained vision encoder (NFNet F6) and the pretrained autoregressive LM are frozen during main Flamingo training; the newly added, freshly-initialized cross-attention layers (interleaved with the frozen LM self-attention layers) and the Perceiver Resampler are trainable. The paper frames this as a parameter-efficient approach that leverages pretrained components without retraining them from scratch.",
+          "evidence": [
+            {
+              "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 9,
+              "modality": "text",
+              "text": "The architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_e86416c4f3b10aeabf3180b5f807d7be",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 10,
+              "modality": "text",
+              "text": "using the two-term contrastive loss from Radford et al. (2021). Contrastive similarities are computed as the dot product of the mean pooling of the image encoder output, and the mean pooled output of a BERT model (Devlin et al., 2018). The performance of our contrastive pretrained model is given in Section 4.2.3 and more details about the contrastive training are given in Appendix C.2.2. During the main training phase of the Flamingo models, we leave the vision encoder frozen as it performs favorably when compared to training the vision model directly from our text generation objective (see ablations in Section 4.4). The output of the ﬁnal stage is a 2D spatial grid of features 𝑋𝑓, which",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 10,
+              "modality": "text",
+              "text": "Second, those visual tokens are used to condition the frozen LM using freshly initialised cross attention layers (Section 3.1.2) that are interleaved between the pretrained LM layers. These new layers oﬀer an expressive way for the LM to incorporate visual information for the next-token prediction task.",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 4,
+              "modality": "text",
+              "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+              "caption": null,
+              "figure_id": null
+            }
+          ]
+        },
+        {
+          "claim_id": "claim_6717cd6dd1ba31f879f50b12963793e1",
+          "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "downstream_capabilities",
+          "text": "The paper claims Flamingo is a visual language model that accepts text interleaved with images/videos and outputs free-form text, handling both open-ended tasks (e.g., visual question-answering, captioning) requiring text generation and close-ended tasks (e.g., classification) requiring choosing among a set of categories, and is amenable to few-shot in-context learning where annotated visual-text examples in an interleaved prompt steer task behavior without weight changes. These capabilities are evidenced by the described API and its expressiveness in tackling diverse tasks, with detailed evaluation in Section 3.3.",
+          "evidence": [
+            {
+              "evidence_id": "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 9,
+              "modality": "text",
+              "text": "This section describes our approach to building the Flamingo model: a visual language model that accepts text interleaved with images/videos as input and outputs free-form text. Despite its apparent simplicity, this API is suﬃciently expressive to tackle a diverse range of tasks. In particular, it handles both open-ended tasks such as visual question-answering or captioning, which require generating text, and close-ended tasks such as classiﬁcation, which require choosing the best category or answer amongst a set. Most importantly, it is amenable to few-shot in-context learning where examples of annotated visual and text pairs are provided in an interleaved prompt to steer the model to a desired task behavior, without having to change or adapt the model weights (see Section 3.3).",
+              "caption": null,
+              "figure_id": null
+            }
+          ]
+        }
+      ],
+      "missing_evidence": [
+        {
+          "requirement_id": "req_9daac7cc6c7a911400ad045f31b569a3",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "architecture_components",
+          "status": "insufficient_evidence",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "vision_language_bridge",
+          "status": "insufficient_evidence",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_c4a9956a9c46ca858320c1f09d211b31",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "training_strategy",
+          "status": "insufficient_evidence",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_06c21be590e96ece1d9e0bc9d49757f1",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "trainable_parameter_scope",
+          "status": "insufficient_evidence",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_dce891f967956694a5ccce5c5a10832a",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "downstream_capabilities",
+          "status": "insufficient_evidence",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_795f851833824b49b269f864cf511807",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "architecture_components",
+          "status": "review_rejected",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_f3819b194d1948b00cae50ea1c3aa018",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "architecture_components",
+          "status": "insufficient_evidence",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "vision_language_bridge",
+          "status": "insufficient_evidence",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "training_strategy",
+          "status": "insufficient_evidence",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_dc68fde14ded13acea0eb1c952be17b8",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "trainable_parameter_scope",
+          "status": "insufficient_evidence",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_f175c0c799f61411fd36b9fb88fa6b85",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "downstream_capabilities",
+          "status": "insufficient_evidence",
+          "issue": null
+        }
+      ],
+      "allowed_claim_ids": [
+        "claim_0de12b2252ea4cd25a45e196edc86483",
+        "claim_d551758c884e14ddde0e05f4cfa65f84",
+        "claim_01fc15ab12d773d2dbead129cc2ee43b",
+        "claim_6717cd6dd1ba31f879f50b12963793e1"
+      ],
+      "allowed_evidence_ids": [
+        "ev_1f60e62600f7a79eae799d5ed285f571",
+        "ev_a802881b56aa396b45e4431996b61ae5",
+        "ev_218bd889fec22dc20b36a380b0e0fb62",
+        "ev_9262472c69770e9a098422d6b46534f9",
+        "ev_e86416c4f3b10aeabf3180b5f807d7be",
+        "ev_03da035280d198641cd7bcb081b6f845",
+        "ev_c0b1e5bbd1cb0899c45305d4a282b86e"
+      ],
+      "resolved_requirements": 15,
+      "reviewed_requirements": 5
+    },
+    "report": {
+      "title": "Evidence-grounded research report",
+      "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "flamingo-2204.14198v1",
+        "llava-2304.08485v1"
+      ],
+      "sections": [
+        {
+          "dimension_id": "architecture_components",
+          "title": "Overall Architectural Components · Verified findings",
+          "cells": [
+            {
+              "requirement_id": "req_9daac7cc6c7a911400ad045f31b569a3",
+              "paper_id": "blip-2-2301.12597v1",
+              "dimension_id": "architecture_components",
+              "status": "insufficient_evidence",
+              "claim_id": null
+            },
+            {
+              "requirement_id": "req_795f851833824b49b269f864cf511807",
+              "paper_id": "flamingo-2204.14198v1",
+              "dimension_id": "architecture_components",
+              "status": "review_rejected",
+              "claim_id": null
+            },
+            {
+              "requirement_id": "req_f3819b194d1948b00cae50ea1c3aa018",
+              "paper_id": "llava-2304.08485v1",
+              "dimension_id": "architecture_components",
+              "status": "insufficient_evidence",
+              "claim_id": null
+            }
+          ],
+          "comparisons": []
+        },
+        {
+          "dimension_id": "vision_language_bridge",
+          "title": "Vision-Language Connection Mechanism · Verified findings",
+          "cells": [
+            {
+              "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+              "paper_id": "blip-2-2301.12597v1",
+              "dimension_id": "vision_language_bridge",
+              "status": "insufficient_evidence",
+              "claim_id": null
+            },
+            {
+              "requirement_id": "req_360e41c76c26117ed16af9d15221522b",
+              "paper_id": "flamingo-2204.14198v1",
+              "dimension_id": "vision_language_bridge",
+              "status": "verified",
+              "claim_id": "claim_0de12b2252ea4cd25a45e196edc86483"
+            },
+            {
+              "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+              "paper_id": "llava-2304.08485v1",
+              "dimension_id": "vision_language_bridge",
+              "status": "insufficient_evidence",
+              "claim_id": null
+            }
+          ],
+          "comparisons": []
+        },
+        {
+          "dimension_id": "training_strategy",
+          "title": "Training Strategy and Objectives · Verified findings",
+          "cells": [
+            {
+              "requirement_id": "req_c4a9956a9c46ca858320c1f09d211b31",
+              "paper_id": "blip-2-2301.12597v1",
+              "dimension_id": "training_strategy",
+              "status": "insufficient_evidence",
+              "claim_id": null
+            },
+            {
+              "requirement_id": "req_dc439a155d75957a0d50bc39339deabc",
+              "paper_id": "flamingo-2204.14198v1",
+              "dimension_id": "training_strategy",
+              "status": "verified",
+              "claim_id": "claim_d551758c884e14ddde0e05f4cfa65f84"
+            },
+            {
+              "requirement_id": "req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+              "paper_id": "llava-2304.08485v1",
+              "dimension_id": "training_strategy",
+              "status": "insufficient_evidence",
+              "claim_id": null
+            }
+          ],
+          "comparisons": []
+        },
+        {
+          "dimension_id": "trainable_parameter_scope",
+          "title": "Trainable Parameter Scope · Verified findings",
+          "cells": [
+            {
+              "requirement_id": "req_06c21be590e96ece1d9e0bc9d49757f1",
+              "paper_id": "blip-2-2301.12597v1",
+              "dimension_id": "trainable_parameter_scope",
+              "status": "insufficient_evidence",
+              "claim_id": null
+            },
+            {
+              "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+              "paper_id": "flamingo-2204.14198v1",
+              "dimension_id": "trainable_parameter_scope",
+              "status": "verified",
+              "claim_id": "claim_01fc15ab12d773d2dbead129cc2ee43b"
+            },
+            {
+              "requirement_id": "req_dc68fde14ded13acea0eb1c952be17b8",
+              "paper_id": "llava-2304.08485v1",
+              "dimension_id": "trainable_parameter_scope",
+              "status": "insufficient_evidence",
+              "claim_id": null
+            }
+          ],
+          "comparisons": []
+        },
+        {
+          "dimension_id": "downstream_capabilities",
+          "title": "Downstream Capabilities and Evaluation Tasks · Verified findings",
+          "cells": [
+            {
+              "requirement_id": "req_dce891f967956694a5ccce5c5a10832a",
+              "paper_id": "blip-2-2301.12597v1",
+              "dimension_id": "downstream_capabilities",
+              "status": "insufficient_evidence",
+              "claim_id": null
+            },
+            {
+              "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+              "paper_id": "flamingo-2204.14198v1",
+              "dimension_id": "downstream_capabilities",
+              "status": "verified",
+              "claim_id": "claim_6717cd6dd1ba31f879f50b12963793e1"
+            },
+            {
+              "requirement_id": "req_f175c0c799f61411fd36b9fb88fa6b85",
+              "paper_id": "llava-2304.08485v1",
+              "dimension_id": "downstream_capabilities",
+              "status": "insufficient_evidence",
+              "claim_id": null
+            }
+          ],
+          "comparisons": []
+        }
+      ],
+      "verified_claims": [
+        {
+          "claim_id": "claim_0de12b2252ea4cd25a45e196edc86483",
+          "requirement_id": "req_360e41c76c26117ed16af9d15221522b",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "vision_language_bridge",
+          "text": "Visual representations are bridged to the LM via two learnable components: the Perceiver Resampler, which receives spatio-temporal features from the vision encoder and outputs a fixed-size set of visual tokens, and freshly-initialized cross-attention layers (GATED XATTN-DENSE) interleaved between the frozen pretrained LM layers that let the LM condition on visual information for next-token prediction. Gating mechanisms minimize the effect of the newly added layers at initialization.",
+          "evidence": [
+            {
+              "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 9,
+              "modality": "text",
+              "text": "The architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 10,
+              "modality": "text",
+              "text": "Second, those visual tokens are used to condition the frozen LM using freshly initialised cross attention layers (Section 3.1.2) that are interleaved between the pretrained LM layers. These new layers oﬀer an expressive way for the LM to incorporate visual information for the next-token prediction task.",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 4,
+              "modality": "text",
+              "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_9262472c69770e9a098422d6b46534f9",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 11,
+              "modality": "text",
+              "text": "architecture in Figure 3. It takes as input a variable number of image or video features from the vision encoder and produces a ﬁxed number of visual outputs as illustrated in Figure 4 (hence the name Resampler). The motivation for re-sampling the visual input to a ﬁxed and small number (in practice 64) of outputs is to signiﬁcantly reduce the computational complexity of vision-text cross attention, particularly important when dealing with multiple long videos. In similar spirit to Perceiver (Jaegle et al., 2021) and DETR (Carion et al., 2020), we learn a predeﬁned number of latent input queries. These latent queries are fed to a transformer stack and cross attend to the ﬂattened visual features",
+              "caption": null,
+              "figure_id": null
+            }
+          ]
+        },
+        {
+          "claim_id": "claim_d551758c884e14ddde0e05f4cfa65f84",
+          "requirement_id": "req_dc439a155d75957a0d50bc39339deabc",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "training_strategy",
+          "text": "The vision encoder is pretrained with a two-term contrastive text-image objective on image-text pair datasets (CLIP-style, using BERT text encoder). The main Flamingo training phase keeps the vision encoder and LM frozen and trains the newly added cross-attention layers (and Perceiver Resampler) using the next-token prediction / text-generation objective; ablation studies and appendix sections provide further details.",
+          "evidence": [
+            {
+              "evidence_id": "ev_e86416c4f3b10aeabf3180b5f807d7be",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 10,
+              "modality": "text",
+              "text": "using the two-term contrastive loss from Radford et al. (2021). Contrastive similarities are computed as the dot product of the mean pooling of the image encoder output, and the mean pooled output of a BERT model (Devlin et al., 2018). The performance of our contrastive pretrained model is given in Section 4.2.3 and more details about the contrastive training are given in Appendix C.2.2. During the main training phase of the Flamingo models, we leave the vision encoder frozen as it performs favorably when compared to training the vision model directly from our text generation objective (see ablations in Section 4.4). The output of the ﬁnal stage is a 2D spatial grid of features 𝑋𝑓, which",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_03da035280d198641cd7bcb081b6f845",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 10,
+              "modality": "text",
+              "text": "Vision encoder: from pixels to features. Our model’s vision encoder is a pretrained Normalizer- Free ResNet (NFNet) (Brock et al., 2021) – we use the F6 model. We chose this family of visual backbones thanks to their excellent trade-oﬀbetween performance and eﬃciency given our hardware. We pretrain the vision encoder using a contrastive objective on our datasets of image and text pairs,",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 10,
+              "modality": "text",
+              "text": "Second, those visual tokens are used to condition the frozen LM using freshly initialised cross attention layers (Section 3.1.2) that are interleaved between the pretrained LM layers. These new layers oﬀer an expressive way for the LM to incorporate visual information for the next-token prediction task.",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 9,
+              "modality": "text",
+              "text": "The architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.",
+              "caption": null,
+              "figure_id": null
+            }
+          ]
+        },
+        {
+          "claim_id": "claim_01fc15ab12d773d2dbead129cc2ee43b",
+          "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "trainable_parameter_scope",
+          "text": "The pretrained vision encoder (NFNet F6) and the pretrained autoregressive LM are frozen during main Flamingo training; the newly added, freshly-initialized cross-attention layers (interleaved with the frozen LM self-attention layers) and the Perceiver Resampler are trainable. The paper frames this as a parameter-efficient approach that leverages pretrained components without retraining them from scratch.",
+          "evidence": [
+            {
+              "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 9,
+              "modality": "text",
+              "text": "The architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_e86416c4f3b10aeabf3180b5f807d7be",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 10,
+              "modality": "text",
+              "text": "using the two-term contrastive loss from Radford et al. (2021). Contrastive similarities are computed as the dot product of the mean pooling of the image encoder output, and the mean pooled output of a BERT model (Devlin et al., 2018). The performance of our contrastive pretrained model is given in Section 4.2.3 and more details about the contrastive training are given in Appendix C.2.2. During the main training phase of the Flamingo models, we leave the vision encoder frozen as it performs favorably when compared to training the vision model directly from our text generation objective (see ablations in Section 4.4). The output of the ﬁnal stage is a 2D spatial grid of features 𝑋𝑓, which",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 10,
+              "modality": "text",
+              "text": "Second, those visual tokens are used to condition the frozen LM using freshly initialised cross attention layers (Section 3.1.2) that are interleaved between the pretrained LM layers. These new layers oﬀer an expressive way for the LM to incorporate visual information for the next-token prediction task.",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 4,
+              "modality": "text",
+              "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+              "caption": null,
+              "figure_id": null
+            }
+          ]
+        },
+        {
+          "claim_id": "claim_6717cd6dd1ba31f879f50b12963793e1",
+          "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "downstream_capabilities",
+          "text": "The paper claims Flamingo is a visual language model that accepts text interleaved with images/videos and outputs free-form text, handling both open-ended tasks (e.g., visual question-answering, captioning) requiring text generation and close-ended tasks (e.g., classification) requiring choosing among a set of categories, and is amenable to few-shot in-context learning where annotated visual-text examples in an interleaved prompt steer task behavior without weight changes. These capabilities are evidenced by the described API and its expressiveness in tackling diverse tasks, with detailed evaluation in Section 3.3.",
+          "evidence": [
+            {
+              "evidence_id": "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 9,
+              "modality": "text",
+              "text": "This section describes our approach to building the Flamingo model: a visual language model that accepts text interleaved with images/videos as input and outputs free-form text. Despite its apparent simplicity, this API is suﬃciently expressive to tackle a diverse range of tasks. In particular, it handles both open-ended tasks such as visual question-answering or captioning, which require generating text, and close-ended tasks such as classiﬁcation, which require choosing the best category or answer amongst a set. Most importantly, it is amenable to few-shot in-context learning where examples of annotated visual and text pairs are provided in an interleaved prompt to steer the model to a desired task behavior, without having to change or adapt the model weights (see Section 3.3).",
+              "caption": null,
+              "figure_id": null
+            }
+          ]
+        }
+      ],
+      "missing_evidence": [
+        {
+          "requirement_id": "req_9daac7cc6c7a911400ad045f31b569a3",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "architecture_components",
+          "status": "insufficient_evidence",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "vision_language_bridge",
+          "status": "insufficient_evidence",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_c4a9956a9c46ca858320c1f09d211b31",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "training_strategy",
+          "status": "insufficient_evidence",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_06c21be590e96ece1d9e0bc9d49757f1",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "trainable_parameter_scope",
+          "status": "insufficient_evidence",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_dce891f967956694a5ccce5c5a10832a",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "downstream_capabilities",
+          "status": "insufficient_evidence",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_795f851833824b49b269f864cf511807",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "architecture_components",
+          "status": "review_rejected",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_f3819b194d1948b00cae50ea1c3aa018",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "architecture_components",
+          "status": "insufficient_evidence",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "vision_language_bridge",
+          "status": "insufficient_evidence",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "training_strategy",
+          "status": "insufficient_evidence",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_dc68fde14ded13acea0eb1c952be17b8",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "trainable_parameter_scope",
+          "status": "insufficient_evidence",
+          "issue": null
+        },
+        {
+          "requirement_id": "req_f175c0c799f61411fd36b9fb88fa6b85",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "downstream_capabilities",
+          "status": "insufficient_evidence",
+          "issue": null
+        }
+      ],
+      "summary": "4 of 15 planned requirements have reviewed evidence; 11 remain missing.",
+      "limitations": [
+        "Only reviewed claims and prepared evidence are factual report content.",
+        "Structural citation validation does not prove semantic entailment or model-review correctness.",
+        "Missing cells are not completed from paper profiles or model knowledge."
+      ],
+      "status": "completed",
+      "generation_degraded": false,
+      "issue": null,
+      "metrics": {
+        "total_requirements": 15,
+        "verified_requirements": 4,
+        "missing_requirements": 11,
+        "rejected_requirements": 1,
+        "resolved_requirements": 15,
+        "reviewed_requirements": 5,
+        "citation_validation_failures": 0,
+        "synthesis_model_calls": 1,
+        "protocol_corrections": 0,
+        "provider_retries": 0,
+        "synthesis_latency_ms": 2.208014004281722,
+        "resolution_rate": 1.0,
+        "evidence_coverage": 0.26666666666666666,
+        "review_pass_rate": 0.8,
+        "report_generation_attempts": 1,
+        "report_generation_successes": 1,
+        "report_generation_success_rate": 1.0,
+        "report_status": "completed",
+        "degraded_generation": false
+      },
+      "trace": [
+        {
+          "event": "validated_report",
+          "model_calls": 1,
+          "protocol_corrections": 0
+        }
+      ]
+    }
+  }
+}

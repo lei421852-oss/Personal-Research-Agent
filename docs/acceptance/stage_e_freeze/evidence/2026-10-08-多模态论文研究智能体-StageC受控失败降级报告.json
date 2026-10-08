@@ -1,0 +1,494 @@
+{
+  "mode": "controlled_fake_failure_on_real_stage_ab_inputs",
+  "real_provider_calls": 0,
+  "research_report": {
+    "title": "Verified findings and evidence gaps",
+    "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+    "paper_ids": [
+      "blip-2-2301.12597v1",
+      "flamingo-2204.14198v1",
+      "llava-2304.08485v1"
+    ],
+    "sections": [
+      {
+        "dimension_id": "architecture_components",
+        "title": "Overall Architectural Components",
+        "cells": [
+          {
+            "requirement_id": "req_9daac7cc6c7a911400ad045f31b569a3",
+            "paper_id": "blip-2-2301.12597v1",
+            "dimension_id": "architecture_components",
+            "status": "insufficient_evidence",
+            "claim_id": null
+          },
+          {
+            "requirement_id": "req_795f851833824b49b269f864cf511807",
+            "paper_id": "flamingo-2204.14198v1",
+            "dimension_id": "architecture_components",
+            "status": "verified",
+            "claim_id": "claim_e5db34c63c711779d425ad87e7711229"
+          },
+          {
+            "requirement_id": "req_f3819b194d1948b00cae50ea1c3aa018",
+            "paper_id": "llava-2304.08485v1",
+            "dimension_id": "architecture_components",
+            "status": "insufficient_evidence",
+            "claim_id": null
+          }
+        ],
+        "comparisons": []
+      },
+      {
+        "dimension_id": "vision_language_bridge",
+        "title": "Vision-Language Connection Mechanism",
+        "cells": [
+          {
+            "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+            "paper_id": "blip-2-2301.12597v1",
+            "dimension_id": "vision_language_bridge",
+            "status": "insufficient_evidence",
+            "claim_id": null
+          },
+          {
+            "requirement_id": "req_360e41c76c26117ed16af9d15221522b",
+            "paper_id": "flamingo-2204.14198v1",
+            "dimension_id": "vision_language_bridge",
+            "status": "verified",
+            "claim_id": "claim_0de12b2252ea4cd25a45e196edc86483"
+          },
+          {
+            "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+            "paper_id": "llava-2304.08485v1",
+            "dimension_id": "vision_language_bridge",
+            "status": "insufficient_evidence",
+            "claim_id": null
+          }
+        ],
+        "comparisons": []
+      },
+      {
+        "dimension_id": "training_strategy",
+        "title": "Training Strategy and Objectives",
+        "cells": [
+          {
+            "requirement_id": "req_c4a9956a9c46ca858320c1f09d211b31",
+            "paper_id": "blip-2-2301.12597v1",
+            "dimension_id": "training_strategy",
+            "status": "insufficient_evidence",
+            "claim_id": null
+          },
+          {
+            "requirement_id": "req_dc439a155d75957a0d50bc39339deabc",
+            "paper_id": "flamingo-2204.14198v1",
+            "dimension_id": "training_strategy",
+            "status": "verified",
+            "claim_id": "claim_d551758c884e14ddde0e05f4cfa65f84"
+          },
+          {
+            "requirement_id": "req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+            "paper_id": "llava-2304.08485v1",
+            "dimension_id": "training_strategy",
+            "status": "insufficient_evidence",
+            "claim_id": null
+          }
+        ],
+        "comparisons": []
+      },
+      {
+        "dimension_id": "trainable_parameter_scope",
+        "title": "Trainable Parameter Scope",
+        "cells": [
+          {
+            "requirement_id": "req_06c21be590e96ece1d9e0bc9d49757f1",
+            "paper_id": "blip-2-2301.12597v1",
+            "dimension_id": "trainable_parameter_scope",
+            "status": "insufficient_evidence",
+            "claim_id": null
+          },
+          {
+            "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+            "paper_id": "flamingo-2204.14198v1",
+            "dimension_id": "trainable_parameter_scope",
+            "status": "verified",
+            "claim_id": "claim_01fc15ab12d773d2dbead129cc2ee43b"
+          },
+          {
+            "requirement_id": "req_dc68fde14ded13acea0eb1c952be17b8",
+            "paper_id": "llava-2304.08485v1",
+            "dimension_id": "trainable_parameter_scope",
+            "status": "insufficient_evidence",
+            "claim_id": null
+          }
+        ],
+        "comparisons": []
+      },
+      {
+        "dimension_id": "downstream_capabilities",
+        "title": "Downstream Capabilities and Evaluation Tasks",
+        "cells": [
+          {
+            "requirement_id": "req_dce891f967956694a5ccce5c5a10832a",
+            "paper_id": "blip-2-2301.12597v1",
+            "dimension_id": "downstream_capabilities",
+            "status": "insufficient_evidence",
+            "claim_id": null
+          },
+          {
+            "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+            "paper_id": "flamingo-2204.14198v1",
+            "dimension_id": "downstream_capabilities",
+            "status": "verified",
+            "claim_id": "claim_6717cd6dd1ba31f879f50b12963793e1"
+          },
+          {
+            "requirement_id": "req_f175c0c799f61411fd36b9fb88fa6b85",
+            "paper_id": "llava-2304.08485v1",
+            "dimension_id": "downstream_capabilities",
+            "status": "insufficient_evidence",
+            "claim_id": null
+          }
+        ],
+        "comparisons": []
+      }
+    ],
+    "verified_claims": [
+      {
+        "claim_id": "claim_e5db34c63c711779d425ad87e7711229",
+        "requirement_id": "req_795f851833824b49b269f864cf511807",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "architecture_components",
+        "text": "The Flamingo pipeline consists of: a pretrained vision encoder (NFNet F6 pretrained contrastively, CLIP-style) that extracts spatial features; a Perceiver Resampler that takes image/video features and outputs a fixed-size set (64) of visual tokens; and a pretrained frozen autoregressive language model conditioned via freshly-initialized cross-attention layers (interleaved with the frozen LM layers) with gating mechanisms. These components are organized so the vision encoder feeds the Resampler, whose visual tokens condition the LM through cross-attention for next-token prediction.",
+        "evidence": [
+          {
+            "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 9,
+            "modality": "text",
+            "text": "The architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_03da035280d198641cd7bcb081b6f845",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 10,
+            "modality": "text",
+            "text": "Vision encoder: from pixels to features. Our model’s vision encoder is a pretrained Normalizer- Free ResNet (NFNet) (Brock et al., 2021) – we use the F6 model. We chose this family of visual backbones thanks to their excellent trade-oﬀbetween performance and eﬃciency given our hardware. We pretrain the vision encoder using a contrastive objective on our datasets of image and text pairs,",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_9262472c69770e9a098422d6b46534f9",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 11,
+            "modality": "text",
+            "text": "architecture in Figure 3. It takes as input a variable number of image or video features from the vision encoder and produces a ﬁxed number of visual outputs as illustrated in Figure 4 (hence the name Resampler). The motivation for re-sampling the visual input to a ﬁxed and small number (in practice 64) of outputs is to signiﬁcantly reduce the computational complexity of vision-text cross attention, particularly important when dealing with multiple long videos. In similar spirit to Perceiver (Jaegle et al., 2021) and DETR (Carion et al., 2020), we learn a predeﬁned number of latent input queries. These latent queries are fed to a transformer stack and cross attend to the ﬂattened visual features",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 10,
+            "modality": "text",
+            "text": "Second, those visual tokens are used to condition the frozen LM using freshly initialised cross attention layers (Section 3.1.2) that are interleaved between the pretrained LM layers. These new layers oﬀer an expressive way for the LM to incorporate visual information for the next-token prediction task.",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 4,
+            "modality": "text",
+            "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+            "caption": null,
+            "figure_id": null
+          }
+        ]
+      },
+      {
+        "claim_id": "claim_0de12b2252ea4cd25a45e196edc86483",
+        "requirement_id": "req_360e41c76c26117ed16af9d15221522b",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "vision_language_bridge",
+        "text": "Visual representations are bridged to the LM via two learnable components: the Perceiver Resampler, which receives spatio-temporal features from the vision encoder and outputs a fixed-size set of visual tokens, and freshly-initialized cross-attention layers (GATED XATTN-DENSE) interleaved between the frozen pretrained LM layers that let the LM condition on visual information for next-token prediction. Gating mechanisms minimize the effect of the newly added layers at initialization.",
+        "evidence": [
+          {
+            "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 9,
+            "modality": "text",
+            "text": "The architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 10,
+            "modality": "text",
+            "text": "Second, those visual tokens are used to condition the frozen LM using freshly initialised cross attention layers (Section 3.1.2) that are interleaved between the pretrained LM layers. These new layers oﬀer an expressive way for the LM to incorporate visual information for the next-token prediction task.",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 4,
+            "modality": "text",
+            "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_9262472c69770e9a098422d6b46534f9",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 11,
+            "modality": "text",
+            "text": "architecture in Figure 3. It takes as input a variable number of image or video features from the vision encoder and produces a ﬁxed number of visual outputs as illustrated in Figure 4 (hence the name Resampler). The motivation for re-sampling the visual input to a ﬁxed and small number (in practice 64) of outputs is to signiﬁcantly reduce the computational complexity of vision-text cross attention, particularly important when dealing with multiple long videos. In similar spirit to Perceiver (Jaegle et al., 2021) and DETR (Carion et al., 2020), we learn a predeﬁned number of latent input queries. These latent queries are fed to a transformer stack and cross attend to the ﬂattened visual features",
+            "caption": null,
+            "figure_id": null
+          }
+        ]
+      },
+      {
+        "claim_id": "claim_d551758c884e14ddde0e05f4cfa65f84",
+        "requirement_id": "req_dc439a155d75957a0d50bc39339deabc",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "training_strategy",
+        "text": "The vision encoder is pretrained with a two-term contrastive text-image objective on image-text pair datasets (CLIP-style, using BERT text encoder). The main Flamingo training phase keeps the vision encoder and LM frozen and trains the newly added cross-attention layers (and Perceiver Resampler) using the next-token prediction / text-generation objective; ablation studies and appendix sections provide further details.",
+        "evidence": [
+          {
+            "evidence_id": "ev_e86416c4f3b10aeabf3180b5f807d7be",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 10,
+            "modality": "text",
+            "text": "using the two-term contrastive loss from Radford et al. (2021). Contrastive similarities are computed as the dot product of the mean pooling of the image encoder output, and the mean pooled output of a BERT model (Devlin et al., 2018). The performance of our contrastive pretrained model is given in Section 4.2.3 and more details about the contrastive training are given in Appendix C.2.2. During the main training phase of the Flamingo models, we leave the vision encoder frozen as it performs favorably when compared to training the vision model directly from our text generation objective (see ablations in Section 4.4). The output of the ﬁnal stage is a 2D spatial grid of features 𝑋𝑓, which",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_03da035280d198641cd7bcb081b6f845",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 10,
+            "modality": "text",
+            "text": "Vision encoder: from pixels to features. Our model’s vision encoder is a pretrained Normalizer- Free ResNet (NFNet) (Brock et al., 2021) – we use the F6 model. We chose this family of visual backbones thanks to their excellent trade-oﬀbetween performance and eﬃciency given our hardware. We pretrain the vision encoder using a contrastive objective on our datasets of image and text pairs,",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 10,
+            "modality": "text",
+            "text": "Second, those visual tokens are used to condition the frozen LM using freshly initialised cross attention layers (Section 3.1.2) that are interleaved between the pretrained LM layers. These new layers oﬀer an expressive way for the LM to incorporate visual information for the next-token prediction task.",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 9,
+            "modality": "text",
+            "text": "The architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.",
+            "caption": null,
+            "figure_id": null
+          }
+        ]
+      },
+      {
+        "claim_id": "claim_01fc15ab12d773d2dbead129cc2ee43b",
+        "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "trainable_parameter_scope",
+        "text": "The pretrained vision encoder (NFNet F6) and the pretrained autoregressive LM are frozen during main Flamingo training; the newly added, freshly-initialized cross-attention layers (interleaved with the frozen LM self-attention layers) and the Perceiver Resampler are trainable. The paper frames this as a parameter-efficient approach that leverages pretrained components without retraining them from scratch.",
+        "evidence": [
+          {
+            "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 9,
+            "modality": "text",
+            "text": "The architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_e86416c4f3b10aeabf3180b5f807d7be",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 10,
+            "modality": "text",
+            "text": "using the two-term contrastive loss from Radford et al. (2021). Contrastive similarities are computed as the dot product of the mean pooling of the image encoder output, and the mean pooled output of a BERT model (Devlin et al., 2018). The performance of our contrastive pretrained model is given in Section 4.2.3 and more details about the contrastive training are given in Appendix C.2.2. During the main training phase of the Flamingo models, we leave the vision encoder frozen as it performs favorably when compared to training the vision model directly from our text generation objective (see ablations in Section 4.4). The output of the ﬁnal stage is a 2D spatial grid of features 𝑋𝑓, which",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 10,
+            "modality": "text",
+            "text": "Second, those visual tokens are used to condition the frozen LM using freshly initialised cross attention layers (Section 3.1.2) that are interleaved between the pretrained LM layers. These new layers oﬀer an expressive way for the LM to incorporate visual information for the next-token prediction task.",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 4,
+            "modality": "text",
+            "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+            "caption": null,
+            "figure_id": null
+          }
+        ]
+      },
+      {
+        "claim_id": "claim_6717cd6dd1ba31f879f50b12963793e1",
+        "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "downstream_capabilities",
+        "text": "The paper claims Flamingo is a visual language model that accepts text interleaved with images/videos and outputs free-form text, handling both open-ended tasks (e.g., visual question-answering, captioning) requiring text generation and close-ended tasks (e.g., classification) requiring choosing among a set of categories, and is amenable to few-shot in-context learning where annotated visual-text examples in an interleaved prompt steer task behavior without weight changes. These capabilities are evidenced by the described API and its expressiveness in tackling diverse tasks, with detailed evaluation in Section 3.3.",
+        "evidence": [
+          {
+            "evidence_id": "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 9,
+            "modality": "text",
+            "text": "This section describes our approach to building the Flamingo model: a visual language model that accepts text interleaved with images/videos as input and outputs free-form text. Despite its apparent simplicity, this API is suﬃciently expressive to tackle a diverse range of tasks. In particular, it handles both open-ended tasks such as visual question-answering or captioning, which require generating text, and close-ended tasks such as classiﬁcation, which require choosing the best category or answer amongst a set. Most importantly, it is amenable to few-shot in-context learning where examples of annotated visual and text pairs are provided in an interleaved prompt to steer the model to a desired task behavior, without having to change or adapt the model weights (see Section 3.3).",
+            "caption": null,
+            "figure_id": null
+          }
+        ]
+      }
+    ],
+    "missing_evidence": [
+      {
+        "requirement_id": "req_9daac7cc6c7a911400ad045f31b569a3",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "architecture_components",
+        "status": "insufficient_evidence",
+        "issue": null
+      },
+      {
+        "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "vision_language_bridge",
+        "status": "insufficient_evidence",
+        "issue": null
+      },
+      {
+        "requirement_id": "req_c4a9956a9c46ca858320c1f09d211b31",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "training_strategy",
+        "status": "insufficient_evidence",
+        "issue": null
+      },
+      {
+        "requirement_id": "req_06c21be590e96ece1d9e0bc9d49757f1",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "trainable_parameter_scope",
+        "status": "insufficient_evidence",
+        "issue": null
+      },
+      {
+        "requirement_id": "req_dce891f967956694a5ccce5c5a10832a",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "downstream_capabilities",
+        "status": "insufficient_evidence",
+        "issue": null
+      },
+      {
+        "requirement_id": "req_f3819b194d1948b00cae50ea1c3aa018",
+        "paper_id": "llava-2304.08485v1",
+        "dimension_id": "architecture_components",
+        "status": "insufficient_evidence",
+        "issue": null
+      },
+      {
+        "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+        "paper_id": "llava-2304.08485v1",
+        "dimension_id": "vision_language_bridge",
+        "status": "insufficient_evidence",
+        "issue": null
+      },
+      {
+        "requirement_id": "req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+        "paper_id": "llava-2304.08485v1",
+        "dimension_id": "training_strategy",
+        "status": "insufficient_evidence",
+        "issue": null
+      },
+      {
+        "requirement_id": "req_dc68fde14ded13acea0eb1c952be17b8",
+        "paper_id": "llava-2304.08485v1",
+        "dimension_id": "trainable_parameter_scope",
+        "status": "insufficient_evidence",
+        "issue": null
+      },
+      {
+        "requirement_id": "req_f175c0c799f61411fd36b9fb88fa6b85",
+        "paper_id": "llava-2304.08485v1",
+        "dimension_id": "downstream_capabilities",
+        "status": "insufficient_evidence",
+        "issue": null
+      }
+    ],
+    "summary": "5 of 15 planned requirements have reviewed evidence; 10 remain missing.",
+    "limitations": [
+      "Only reviewed claims and prepared evidence are factual report content.",
+      "Structural citation validation does not prove semantic entailment or model-review correctness.",
+      "Missing cells are not completed from paper profiles or model knowledge.",
+      "Model generation failed; this deterministic report adds no technical conclusions."
+    ],
+    "status": "generation_degraded",
+    "generation_degraded": true,
+    "issue": {
+      "code": "protocol_correction_exhausted",
+      "message": "Synthesis did not produce a validated model report; verified facts remain available.",
+      "requirement_id": null
+    },
+    "metrics": {
+      "total_requirements": 15,
+      "verified_requirements": 5,
+      "missing_requirements": 10,
+      "rejected_requirements": 0,
+      "resolved_requirements": 15,
+      "reviewed_requirements": 5,
+      "citation_validation_failures": 3,
+      "synthesis_model_calls": 3,
+      "protocol_corrections": 2,
+      "provider_retries": 0,
+      "synthesis_latency_ms": 5.571529996814206,
+      "resolution_rate": 1.0,
+      "evidence_coverage": 0.3333333333333333,
+      "review_pass_rate": 1.0,
+      "report_generation_attempts": 1,
+      "report_generation_successes": 0,
+      "report_generation_success_rate": 0.0,
+      "report_status": "generation_degraded",
+      "degraded_generation": true
+    },
+    "trace": [
+      {
+        "event": "protocol_rejection",
+        "issue_code": "invalid_evidence_reference",
+        "correction_allowed": true,
+        "model_calls": 1,
+        "provider_retries": 0
+      },
+      {
+        "event": "protocol_rejection",
+        "issue_code": "invalid_evidence_reference",
+        "correction_allowed": true,
+        "model_calls": 2,
+        "provider_retries": 0
+      },
+      {
+        "event": "protocol_rejection",
+        "issue_code": "invalid_evidence_reference",
+        "correction_allowed": false,
+        "model_calls": 3,
+        "provider_retries": 0
+      }
+    ]
+  }
+}

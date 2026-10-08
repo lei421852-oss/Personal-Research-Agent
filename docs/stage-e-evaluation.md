@@ -1,5 +1,7 @@
 # Stage E：来源可核验的研究语料与跨论文评测
 
+> 状态更新：下面保留语料工程实现阶段、真实评测执行前的历史记录。双论文、三论文和检索回归产物现已完成，并在本轮最终验收中独立复核；当前结论、日志、来源指纹与限制以 [最终冻结验收报告](acceptance/stage_e_freeze/acceptance_report.md) 为准。没有改写历史评测产物。
+
 本轮完成 E1 语料处理、来源校验和 E2 评测入口。**真实 Embedding 检索评测与真实 Worker/Reviewer/Synthesis 评测尚未执行**；状态为 `not_executed`，原因是本轮执行计划要求先交付命令，用户确认后运行。Scripted/Fake 结果只验证工程连线，不作为研究质量、覆盖率提升或 Benchmark 证据。
 
 ## Stage D 冻结基线

@@ -1,0 +1,44 @@
+[
+  {
+    "snapshot": "historical_fingerprints/personal-agent-stage-ab-frozen.json",
+    "sha256": "5d297e0a5b1b57a02ec7987bc810defa3fc35a40871fbaf7e67f720c9da74ae9",
+    "files_checked": 101,
+    "authorized_historical_changes": [],
+    "status": "PASS"
+  },
+  {
+    "snapshot": "historical_fingerprints/personal-agent-stage-c-frozen.json",
+    "sha256": "d24595971ca97e6f7e033a4acb7ec3cd175f45fb805e2bf1152cf3ef7df6379c",
+    "files_checked": 171,
+    "authorized_historical_changes": [
+      "app/evidence/corpus.py",
+      "app/research/worker.py"
+    ],
+    "status": "PASS"
+  },
+  {
+    "snapshot": "historical_fingerprints/personal-agent-stage-d-frozen.json",
+    "sha256": "87b46fa2a78ed2b379e4e0634ea69ef3732632534245ffcb8405cf497a545d1d",
+    "files_checked": 195,
+    "authorized_historical_changes": [
+      "app/evidence/corpus.py"
+    ],
+    "status": "PASS"
+  },
+  {
+    "snapshot": "historical_fingerprints/personal-agent-stage-e-frozen.json",
+    "sha256": "0233cf853a79627c1523803e9084f34a78a1d286b3ac1c3f06d5addbc08d316e",
+    "files_checked": 205,
+    "authorized_historical_changes": [
+      "app/evidence/corpus.py"
+    ],
+    "status": "PASS"
+  },
+  {
+    "snapshot": "historical_fingerprints/personal-agent-worker-frozen-fingerprints.json",
+    "sha256": "557c1fed92e98fda5ac7a63d3d890ffe1007c1bd2a6dd24cf392924700900e15",
+    "files_checked": 97,
+    "authorized_historical_changes": [],
+    "status": "PASS"
+  }
+]

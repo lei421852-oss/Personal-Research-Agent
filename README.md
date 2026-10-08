@@ -20,7 +20,7 @@
 
 新增 BLIP-2 `2301.12597v1` 和 LLaVA `2304.08485v1` 的固定 PDF 段落与 Figure，分别记录来源哈希、页面映射、块坐标、图注和关联证据。来源校验通过后才加载研究语料；原 Flamingo Evidence、V0.1 默认语料与冻结 40 题保持不变。
 
-Stage E 冻结 22 个研究案例，包含原始 15 个 Paper×Dimension 需求。重放此前真实 Planner 计划后，复用既有 Worker → Reviewer → 一轮 Recovery → Synthesis。双/三论文 Scripted Smoke 验证了流程和多来源引用；**真实 Embedding Recall 和真实跨论文研究评测尚未执行，不能据此声称研究质量或 Coverage 提升。** 默认 CLI 只预检，真实运行需显式 `--execute` 并先由用户确认。详见 [语料、指标、运行命令和已知限制](docs/stage-e-evaluation.md)。
+Stage E 冻结 22 个研究案例，包含原始 15 个 Paper×Dimension 需求。重放此前真实 Planner 计划后，复用既有 Worker → Reviewer → 一轮 Recovery → Synthesis。已有真实双论文结果为 2/2 个需求通过审核、1 组比较；真实三论文结果为 14/15 个需求通过审核（93.33%）、4 组比较、1 项证据缺口，最终报告 completed。本轮最终工程回归 **756 passed**，并独立核验已保存的真实/受控报告、来源和指标。详见 [最终冻结验收与原始证据](docs/acceptance/stage_e_freeze/acceptance_report.md)。这些是小规模工程验证，结构引用有效不等于语义正确率，不是完整 Benchmark。默认 CLI 仍只预检，真实运行需显式 `--execute`。语料和原执行协议见 [Stage E 说明](docs/stage-e-evaluation.md)。
 
 ## V0.2 Phase 1 · 论文发现
 

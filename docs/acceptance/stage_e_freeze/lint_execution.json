@@ -1,0 +1,36 @@
+[
+  {
+    "command": [
+      "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+      "check",
+      "app",
+      "tests",
+      "scripts",
+      "eval"
+    ],
+    "exit_code": 0,
+    "executed_at": "2026-10-08T08:24:21.599200+00:00"
+  },
+  {
+    "command": [
+      "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+      "format",
+      "--check",
+      "app",
+      "tests",
+      "scripts",
+      "eval"
+    ],
+    "exit_code": 0,
+    "executed_at": "2026-10-08T08:24:21.609176+00:00"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "executed_at": "2026-10-08T08:24:21.611748+00:00"
+  }
+]

@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "copied_byte_identically": true,
+  "artifacts": [
+    {
+      "path": "evidence/2026-10-07-多模态论文研究智能体-ResearchPlanner三条真实Smoke.json",
+      "original_path": "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-07-多模态论文研究智能体-ResearchPlanner三条真实Smoke.json",
+      "sha256": "52745c579662232ded801772a26826c1dbb1e25d3bdc17426891b0276b597e31",
+      "bytes": 35461
+    },
+    {
+      "path": "evidence/2026-10-08-多模态论文研究智能体-StageA相同FlamingoSmoke.json",
+      "original_path": "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageA相同FlamingoSmoke.json",
+      "sha256": "3f935223360c189994a14731d47c9de7af50ba5c72b35cfa586b28862e5189bc",
+      "bytes": 43456
+    },
+    {
+      "path": "evidence/2026-10-08-多模态论文研究智能体-StageB真实EvidenceReviewSmoke.json",
+      "original_path": "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageB真实EvidenceReviewSmoke.json",
+      "sha256": "4d7d394fc02e9194c2e5ae39daf34da8912bb2b26d7ab558dd572c4f89c4a1dd",
+      "bytes": 12473
+    },
+    {
+      "path": "evidence/2026-10-08-多模态论文研究智能体-StageC真实研究报告.json",
+      "original_path": "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageC真实研究报告.json",
+      "sha256": "0e60339f7437c7512c9452b004e1a6b9b59e35c90d0b426a98b7133017539fc5",
+      "bytes": 32522
+    },
+    {
+      "path": "evidence/2026-10-08-多模态论文研究智能体-StageC受控失败降级报告.json",
+      "original_path": "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageC受控失败降级报告.json",
+      "sha256": "33b0931351d512437e19b54ed7decc65117b486db90f8522a437d8de72d47840",
+      "bytes": 32857
+    },
+    {
+      "path": "evidence/2026-10-08-多模态论文研究智能体-StageD真实RecoverySmokeA.json",
+      "original_path": "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageD真实RecoverySmokeA.json",
+      "sha256": "20718c2ce79142d07ab2dba69e35be4d01ad893f8306c2fa7982b10a3bff8bf6",
+      "bytes": 190170
+    },
+    {
+      "path": "evidence/2026-10-08-多模态论文研究智能体-StageD受控再次拒绝SmokeB.json",
+      "original_path": "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageD受控再次拒绝SmokeB.json",
+      "sha256": "c8f100f69dfdfd4ffa06b5fa77c160a9888560ade3404f19a7a37764636d28d9",
+      "bytes": 174482
+    },
+    {
+      "path": "evidence/2026-10-08-多模态论文研究智能体-StageD无语料跳过SmokeC.json",
+      "original_path": "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageD无语料跳过SmokeC.json",
+      "sha256": "597dd716ab02ce804bfcbed48b482dfcf7fab1fb8ec0c1cdd661274aefb0964b",
+      "bytes": 157098
+    },
+    {
+      "path": "evidence/2026-10-08-多模态论文研究智能体-StageE双论文真实评测.json",
+      "original_path": "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageE双论文真实评测.json",
+      "sha256": "43dfed7282321def50c29368281a28d153f070298cef1c7b28c526a2522e7384",
+      "bytes": 66991
+    },
+    {
+      "path": "evidence/2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json",
+      "original_path": "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json",
+      "sha256": "f916b32e799f47e8ab6733d0f9ed15c5237221ff30da5f1e76dd81cc86104d40",
+      "bytes": 373266
+    },
+    {
+      "path": "evidence/2026-10-08-多模态论文研究智能体-StageE真实检索回归.json",
+      "original_path": "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageE真实检索回归.json",
+      "sha256": "9d7a1f15978d924be48aa99d06f2bde00628f31e6505ef4562a674e5d2adce25",
+      "bytes": 28349
+    },
+    {
+      "path": "evidence/2026-10-08-多模态论文研究智能体-StageE双论文受控Smoke.json",
+      "original_path": "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageE双论文受控Smoke.json",
+      "sha256": "cb78d8b9123816cfdf7a38ae2e3ff420a115625b469911e5d70f16dfa538ac0e",
+      "bytes": 56898
+    },
+    {
+      "path": "evidence/2026-10-08-多模态论文研究智能体-StageE三论文受控Smoke.json",
+      "original_path": "/mnt/d/Codex-Generated-Artifacts/2026-10-05-多模态论文研究智能体/2026-10-08-多模态论文研究智能体-StageE三论文受控Smoke.json",
+      "sha256": "49136b9d740cca7d7756928d4d6b9ff4dd13250664a196773cb0be411970e996",
+      "bytes": 292377
+    }
+  ]
+}

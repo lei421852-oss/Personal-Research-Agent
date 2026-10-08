@@ -1,0 +1,325 @@
+{
+  "mode": "real_evidence_review_smoke",
+  "real_smoke_executed": true,
+  "cancelled": false,
+  "source_worker_report_sha256": "3f935223360c189994a14731d47c9de7af50ba5c72b35cfa586b28862e5189bc",
+  "configuration": {
+    "max_concurrent_reviewers": 2,
+    "max_model_calls_per_review": 3
+  },
+  "resource_configuration": {
+    "max_concurrent_workers": 3,
+    "max_concurrent_llm": 2,
+    "max_concurrent_vlm": 1,
+    "max_concurrent_retrieval": 1,
+    "max_tool_calls_per_worker": 8,
+    "max_model_calls_per_worker": 20,
+    "max_protocol_corrections": 2,
+    "recent_observations": 4,
+    "max_context_evidence": 20,
+    "operation_timeout_seconds": 60.0,
+    "max_retries": 2,
+    "retry_initial_delay_seconds": 0.1,
+    "retry_jitter_seconds": 0.05
+  },
+  "llm_model": "deepseek-flash",
+  "results": [
+    {
+      "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+      "requirement_id": "req_9daac7cc6c7a911400ad045f31b569a3",
+      "paper_id": "blip-2-2301.12597v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    },
+    {
+      "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+      "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+      "paper_id": "blip-2-2301.12597v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    },
+    {
+      "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+      "requirement_id": "req_c4a9956a9c46ca858320c1f09d211b31",
+      "paper_id": "blip-2-2301.12597v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    },
+    {
+      "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+      "requirement_id": "req_06c21be590e96ece1d9e0bc9d49757f1",
+      "paper_id": "blip-2-2301.12597v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    },
+    {
+      "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+      "requirement_id": "req_dce891f967956694a5ccce5c5a10832a",
+      "paper_id": "blip-2-2301.12597v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    },
+    {
+      "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+      "requirement_id": "req_795f851833824b49b269f864cf511807",
+      "paper_id": "flamingo-2204.14198v1",
+      "status": "passed",
+      "reason_code": "evidence_supports_claim",
+      "claim": "The Flamingo pipeline consists of: a pretrained vision encoder (NFNet F6 pretrained contrastively, CLIP-style) that extracts spatial features; a Perceiver Resampler that takes image/video features and outputs a fixed-size set (64) of visual tokens; and a pretrained frozen autoregressive language model conditioned via freshly-initialized cross-attention layers (interleaved with the frozen LM layers) with gating mechanisms. These components are organized so the vision encoder feeds the Resampler, whose visual tokens condition the LM through cross-attention for next-token prediction.",
+      "evidence_ids": [
+        "ev_1f60e62600f7a79eae799d5ed285f571",
+        "ev_03da035280d198641cd7bcb081b6f845",
+        "ev_9262472c69770e9a098422d6b46534f9",
+        "ev_a802881b56aa396b45e4431996b61ae5",
+        "ev_218bd889fec22dc20b36a380b0e0fb62"
+      ],
+      "validation_status": "passed",
+      "skip_reason": null,
+      "issue": null,
+      "trace": {
+        "model_calls": 1,
+        "retry_count": 0,
+        "latency_ms": 3880.321560995071
+      }
+    },
+    {
+      "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+      "requirement_id": "req_360e41c76c26117ed16af9d15221522b",
+      "paper_id": "flamingo-2204.14198v1",
+      "status": "passed",
+      "reason_code": "evidence_supports_claim",
+      "claim": "Visual representations are bridged to the LM via two learnable components: the Perceiver Resampler, which receives spatio-temporal features from the vision encoder and outputs a fixed-size set of visual tokens, and freshly-initialized cross-attention layers (GATED XATTN-DENSE) interleaved between the frozen pretrained LM layers that let the LM condition on visual information for next-token prediction. Gating mechanisms minimize the effect of the newly added layers at initialization.",
+      "evidence_ids": [
+        "ev_1f60e62600f7a79eae799d5ed285f571",
+        "ev_a802881b56aa396b45e4431996b61ae5",
+        "ev_218bd889fec22dc20b36a380b0e0fb62",
+        "ev_9262472c69770e9a098422d6b46534f9"
+      ],
+      "validation_status": "passed",
+      "skip_reason": null,
+      "issue": null,
+      "trace": {
+        "model_calls": 1,
+        "retry_count": 0,
+        "latency_ms": 1731.2761530047283
+      }
+    },
+    {
+      "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+      "requirement_id": "req_dc439a155d75957a0d50bc39339deabc",
+      "paper_id": "flamingo-2204.14198v1",
+      "status": "passed",
+      "reason_code": "evidence_supports_claim",
+      "claim": "The vision encoder is pretrained with a two-term contrastive text-image objective on image-text pair datasets (CLIP-style, using BERT text encoder). The main Flamingo training phase keeps the vision encoder and LM frozen and trains the newly added cross-attention layers (and Perceiver Resampler) using the next-token prediction / text-generation objective; ablation studies and appendix sections provide further details.",
+      "evidence_ids": [
+        "ev_e86416c4f3b10aeabf3180b5f807d7be",
+        "ev_03da035280d198641cd7bcb081b6f845",
+        "ev_a802881b56aa396b45e4431996b61ae5",
+        "ev_1f60e62600f7a79eae799d5ed285f571"
+      ],
+      "validation_status": "passed",
+      "skip_reason": null,
+      "issue": null,
+      "trace": {
+        "model_calls": 1,
+        "retry_count": 0,
+        "latency_ms": 2698.1968809996033
+      }
+    },
+    {
+      "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+      "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+      "paper_id": "flamingo-2204.14198v1",
+      "status": "passed",
+      "reason_code": "evidence_supports_claim",
+      "claim": "The pretrained vision encoder (NFNet F6) and the pretrained autoregressive LM are frozen during main Flamingo training; the newly added, freshly-initialized cross-attention layers (interleaved with the frozen LM self-attention layers) and the Perceiver Resampler are trainable. The paper frames this as a parameter-efficient approach that leverages pretrained components without retraining them from scratch.",
+      "evidence_ids": [
+        "ev_1f60e62600f7a79eae799d5ed285f571",
+        "ev_e86416c4f3b10aeabf3180b5f807d7be",
+        "ev_a802881b56aa396b45e4431996b61ae5",
+        "ev_218bd889fec22dc20b36a380b0e0fb62"
+      ],
+      "validation_status": "passed",
+      "skip_reason": null,
+      "issue": null,
+      "trace": {
+        "model_calls": 1,
+        "retry_count": 0,
+        "latency_ms": 2276.4652019977802
+      }
+    },
+    {
+      "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+      "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+      "paper_id": "flamingo-2204.14198v1",
+      "status": "passed",
+      "reason_code": "evidence_supports_claim",
+      "claim": "The paper claims Flamingo is a visual language model that accepts text interleaved with images/videos and outputs free-form text, handling both open-ended tasks (e.g., visual question-answering, captioning) requiring text generation and close-ended tasks (e.g., classification) requiring choosing among a set of categories, and is amenable to few-shot in-context learning where annotated visual-text examples in an interleaved prompt steer task behavior without weight changes. These capabilities are evidenced by the described API and its expressiveness in tackling diverse tasks, with detailed evaluation in Section 3.3.",
+      "evidence_ids": [
+        "ev_c0b1e5bbd1cb0899c45305d4a282b86e"
+      ],
+      "validation_status": "passed",
+      "skip_reason": null,
+      "issue": null,
+      "trace": {
+        "model_calls": 1,
+        "retry_count": 0,
+        "latency_ms": 4075.3340010051033
+      }
+    },
+    {
+      "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+      "requirement_id": "req_f3819b194d1948b00cae50ea1c3aa018",
+      "paper_id": "llava-2304.08485v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    },
+    {
+      "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+      "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+      "paper_id": "llava-2304.08485v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    },
+    {
+      "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+      "requirement_id": "req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+      "paper_id": "llava-2304.08485v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    },
+    {
+      "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+      "requirement_id": "req_dc68fde14ded13acea0eb1c952be17b8",
+      "paper_id": "llava-2304.08485v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    },
+    {
+      "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+      "requirement_id": "req_f175c0c799f61411fd36b9fb88fa6b85",
+      "paper_id": "llava-2304.08485v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    }
+  ],
+  "trace": {
+    "total_requirement_count": 15,
+    "reviewable_requirement_count": 5,
+    "reviewed_count": 5,
+    "passed_count": 5,
+    "rejected_count": 0,
+    "not_reviewable_count": 10,
+    "bypassed_count": 10,
+    "reviewer_model_calls": 5,
+    "retry_count": 0,
+    "peak_reviewer_concurrency": 2,
+    "peak_llm_concurrency": 2,
+    "total_latency_ms": 9017.281975000515
+  },
+  "limitations": [
+    "Engineering smoke only; no benchmark or Worker recovery loop.",
+    "Observed IDs must originate from trusted runtime records; external JSON is not an authenticated observation ledger.",
+    "Review is based on prepared text/captions/metadata; no additional image interpretation or new evidence retrieval."
+  ]
+}

@@ -1,0 +1,976 @@
+{
+  "case_id": "two-paper-bridge",
+  "status": "scripted_wiring_only",
+  "real_provider_used": false,
+  "real_provider_calls": 0,
+  "llm_provider_attempts_observed": 0,
+  "models_initialized": 0,
+  "planner_mode": "replay_original_verified_plan",
+  "planner_model_calls": 0,
+  "plan": {
+    "dimensions": [
+      {
+        "dimension_id": "vision_language_bridge",
+        "name": "Vision-Language Connection Mechanism",
+        "description": "Investigate the specific mechanism the model uses to bridge visual representations and the language model, including any connector, adapter, resampler, cross-attention interface, or projection described in the paper, and whether the language model is frozen or tunable.",
+        "research_question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?"
+      }
+    ],
+    "question": "Compare BLIP-2 and LLaVA in how they connect visual representations to the language model.",
+    "paper_ids": [
+      "blip-2-2301.12597v1",
+      "llava-2304.08485v1"
+    ]
+  },
+  "corpus_snapshot": {
+    "snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+    "papers": [
+      {
+        "paper_id": "blip-2201.12086v2",
+        "source_sha256": "63e0335cdd57c3d92b907b89c93d10befdd29b8aeed108091bbde90c121ed97a",
+        "metadata_sha256": "2171421d418f9e8757154030cb8279c33e8f8327325f44a0bed3a9e161a7823f",
+        "prepared_sha256": "0189764865606c14ef96e71c8c51cb03bcd49129a38f7f69985b59c361405628"
+      },
+      {
+        "paper_id": "clip-2103.00020v1",
+        "source_sha256": "6478b6e571a7d6fcd846d8ef77bfd60c285f1986abb8f475eedc43de403074f5",
+        "metadata_sha256": "8a0ca7cf8e96dbfcd740757918283ece5c30bfdab8c0f65cc59b2833a023abee",
+        "prepared_sha256": "7ea14fdd46b1f1aa57227e9227598ed98fd020eab5c5c8c86fd9c14558f6f463"
+      },
+      {
+        "paper_id": "flamingo-2204.14198v1",
+        "source_sha256": "79d131280bc79f659212f35f940dfd3a26013c73355a58eb2263410945780c4c",
+        "metadata_sha256": "e45db1efc4f2abb09026150a657d0749db1bc30e88c652788e36828f219caa7c",
+        "prepared_sha256": "1f74f19edc12fed812a9181b5a3bd6840295d6de992583e148cdcbf35102071a"
+      },
+      {
+        "paper_id": "blip-2-2301.12597v1",
+        "source_sha256": "0a4b93c402a6b8b0d2c5f438bbae31d447b17324b71c3e4fb6dab53e0e389bc5",
+        "metadata_sha256": "230d99c654921ea067df38070c235cdf71a10ac46b4fa5ab20eb5ccc9c4da7aa",
+        "prepared_sha256": "af6939d223423787a46bd72fc3ce68c942ecd7b7d6c3c3b07b87e273378c009c"
+      },
+      {
+        "paper_id": "llava-2304.08485v1",
+        "source_sha256": "0d5be40caf852d51a0e2636619fafc5b910788af9584fdc392abc652787560ed",
+        "metadata_sha256": "267e246529084cc39e4ed23729c5b27d020b7ab3fc9ba89c8fa08979e92f96ea",
+        "prepared_sha256": "201837067a067d3f11520fed8035163712755a8108179e4dc9115f99fa0932bb"
+      }
+    ],
+    "text_count": 46,
+    "figure_count": 5,
+    "corpus_validity_rate": 1.0,
+    "evidence_provenance_validity_rate": 1.0
+  },
+  "configuration": {
+    "schema_version": 1,
+    "dataset": "eval/datasets/stage_e.json",
+    "papers_dir": "data/papers",
+    "additional_papers_dir": "data/research_papers",
+    "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+    "device": "cpu",
+    "index_dir": "data/chroma/stage-e",
+    "collection": "research-stage-e-text",
+    "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+    "distance": "cosine",
+    "top_k": 10,
+    "runtime": {
+      "max_concurrent_workers": 3,
+      "max_concurrent_llm": 2,
+      "max_concurrent_vlm": 1,
+      "max_concurrent_retrieval": 1,
+      "max_tool_calls_per_worker": 8,
+      "max_model_calls_per_worker": 20,
+      "max_protocol_corrections": 2,
+      "operation_timeout_seconds": 60,
+      "max_retries": 2
+    },
+    "review_runtime": {
+      "max_concurrent_reviewers": 2,
+      "max_model_calls_per_review": 3
+    },
+    "recovery": {
+      "max_research_model_calls": 200,
+      "max_research_tool_calls": 64
+    },
+    "planner_mode": "replay_original_verified_plan",
+    "provider_temperature": "provider_default_not_sent",
+    "source_label_policy": "Source-checked candidate labels; not independently human-approved exhaustive relevance labels."
+  },
+  "models": {
+    "llm": "scripted",
+    "vlm": "scripted",
+    "embedding": null,
+    "temperature": "provider_default_not_sent"
+  },
+  "initial_worker_results": [
+    {
+      "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+      "paper_id": "blip-2-2301.12597v1",
+      "status": "completed",
+      "requirements": [
+        {
+          "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "vision_language_bridge",
+          "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+          "required": true,
+          "status": "supported",
+          "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+          "evidence_ids": [
+            "ev_9eac712dd806552d2b4d4d2e01e0f117"
+          ]
+        }
+      ],
+      "error": null,
+      "attempts": 1,
+      "latency_ms": 21.807911994983442,
+      "trace": {
+        "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+        "paper_id": "blip-2-2301.12597v1",
+        "requirement_count": 1,
+        "resolved_count": 1,
+        "status": "completed",
+        "tool_calls": 1,
+        "model_calls": 2,
+        "llm_calls": 2,
+        "vlm_tool_attempts": 0,
+        "protocol_corrections": 0,
+        "retry_count": 0,
+        "dependency_calls": 3,
+        "retried_dependency_calls": 0,
+        "latency_ms": 21.807911994983442,
+        "actions": [
+          {
+            "step": 1,
+            "tool_name": "read_page",
+            "arguments": {
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 1
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_9b812a56c386edc56b01ad7612222137"
+            ],
+            "last_new_evidence_count": 1,
+            "summary": "Read 1 text items and 0 figures from prepared regions; this is not a full-page PDF read.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_9eac712dd806552d2b4d4d2e01e0f117"
+            ],
+            "latency_ms": 2.816774998791516
+          },
+          {
+            "step": 2,
+            "tool_name": "resolve_requirements",
+            "arguments": {
+              "resolutions": [
+                {
+                  "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+                  "status": "supported",
+                  "evidence_ids": [
+                    "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                  ]
+                }
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [],
+            "last_new_evidence_count": 1,
+            "summary": "Resolved 1 paper-local requirements.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_9eac712dd806552d2b4d4d2e01e0f117"
+            ],
+            "latency_ms": 0.49598100304137915
+          }
+        ]
+      },
+      "observed_evidence_ids": [
+        "ev_9eac712dd806552d2b4d4d2e01e0f117"
+      ]
+    },
+    {
+      "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+      "paper_id": "llava-2304.08485v1",
+      "status": "completed",
+      "requirements": [
+        {
+          "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "vision_language_bridge",
+          "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+          "required": true,
+          "status": "supported",
+          "claim": "Instruction tuning large language models (LLMs) using machine-generated instruction-following data has improved zero-shot capabilities on new tasks, but the idea is less explored in the multimodal ﬁeld. In this paper, we present the ﬁrst attempt to use language-only GPT-4 to generate multimodal language-image instruction-following data. By instruction tuning on such generated data, we in- troduce LLaVA: Large Language and Vision Assistant, an end-to-end trained large multimodal model that connects a vision encoder and LLM for general- purpose visual and language understanding. Our early experiments show that LLaVA demonstrates impressive multimodel chat abilities, sometimes exhibiting the behaviors of multimodal GPT-4 on unseen images/instructions, and yields a 85.1% relative score compared with GPT-4 on a synthetic multimodal instruction- following dataset. When ﬁne-tuned on Science QA, the synergy of LLaVA and GPT-4 achieves a new state-of-the-art accuracy of 92.53%. We make GPT-4 gener- ated visual instruction tuning data, our model and code base publicly available.",
+          "evidence_ids": [
+            "ev_5418ad7d89b668e2ce1dba87be8f7efd"
+          ]
+        }
+      ],
+      "error": null,
+      "attempts": 1,
+      "latency_ms": 21.46422398800496,
+      "trace": {
+        "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+        "paper_id": "llava-2304.08485v1",
+        "requirement_count": 1,
+        "resolved_count": 1,
+        "status": "completed",
+        "tool_calls": 1,
+        "model_calls": 2,
+        "llm_calls": 2,
+        "vlm_tool_attempts": 0,
+        "protocol_corrections": 0,
+        "retry_count": 0,
+        "dependency_calls": 3,
+        "retried_dependency_calls": 0,
+        "latency_ms": 21.46422398800496,
+        "actions": [
+          {
+            "step": 1,
+            "tool_name": "read_page",
+            "arguments": {
+              "paper_id": "llava-2304.08485v1",
+              "page": 1
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_638cc283fb01bf590f5233c40f49087a"
+            ],
+            "last_new_evidence_count": 1,
+            "summary": "Read 1 text items and 0 figures from prepared regions; this is not a full-page PDF read.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_5418ad7d89b668e2ce1dba87be8f7efd"
+            ],
+            "latency_ms": 7.812642012140714
+          },
+          {
+            "step": 2,
+            "tool_name": "resolve_requirements",
+            "arguments": {
+              "resolutions": [
+                {
+                  "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+                  "status": "supported",
+                  "evidence_ids": [
+                    "ev_5418ad7d89b668e2ce1dba87be8f7efd"
+                  ]
+                }
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [],
+            "last_new_evidence_count": 1,
+            "summary": "Resolved 1 paper-local requirements.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_5418ad7d89b668e2ce1dba87be8f7efd"
+            ],
+            "latency_ms": 0.2909820032073185
+          }
+        ]
+      },
+      "observed_evidence_ids": [
+        "ev_5418ad7d89b668e2ce1dba87be8f7efd"
+      ]
+    }
+  ],
+  "initial_review_results": [
+    {
+      "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+      "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+      "paper_id": "blip-2-2301.12597v1",
+      "status": "passed",
+      "reason_code": "evidence_supports_claim",
+      "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+      "evidence_ids": [
+        "ev_9eac712dd806552d2b4d4d2e01e0f117"
+      ],
+      "validation_status": "passed",
+      "skip_reason": null,
+      "issue": null,
+      "trace": {
+        "model_calls": 1,
+        "retry_count": 0,
+        "latency_ms": 3.2898020144784823
+      }
+    },
+    {
+      "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+      "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+      "paper_id": "llava-2304.08485v1",
+      "status": "passed",
+      "reason_code": "evidence_supports_claim",
+      "claim": "Instruction tuning large language models (LLMs) using machine-generated instruction-following data has improved zero-shot capabilities on new tasks, but the idea is less explored in the multimodal ﬁeld. In this paper, we present the ﬁrst attempt to use language-only GPT-4 to generate multimodal language-image instruction-following data. By instruction tuning on such generated data, we in- troduce LLaVA: Large Language and Vision Assistant, an end-to-end trained large multimodal model that connects a vision encoder and LLM for general- purpose visual and language understanding. Our early experiments show that LLaVA demonstrates impressive multimodel chat abilities, sometimes exhibiting the behaviors of multimodal GPT-4 on unseen images/instructions, and yields a 85.1% relative score compared with GPT-4 on a synthetic multimodal instruction- following dataset. When ﬁne-tuned on Science QA, the synergy of LLaVA and GPT-4 achieves a new state-of-the-art accuracy of 92.53%. We make GPT-4 gener- ated visual instruction tuning data, our model and code base publicly available.",
+      "evidence_ids": [
+        "ev_5418ad7d89b668e2ce1dba87be8f7efd"
+      ],
+      "validation_status": "passed",
+      "skip_reason": null,
+      "issue": null,
+      "trace": {
+        "model_calls": 1,
+        "retry_count": 0,
+        "latency_ms": 1.8417949904687703
+      }
+    }
+  ],
+  "orchestrator_trace": {
+    "worker_task_count": 2,
+    "completed_count": 2,
+    "partial_success_count": 0,
+    "failed_count": 0,
+    "cancelled_count": 0,
+    "peak_worker_concurrency": 2,
+    "peak_llm_concurrency": 2,
+    "peak_vlm_concurrency": 0,
+    "peak_retrieval_concurrency": 1,
+    "total_latency_ms": 26.898165000602603,
+    "resolution_rate": 1.0,
+    "coverage": 1.0,
+    "worker_success_rate": 1.0,
+    "partial_failure_rate": 0.0,
+    "retry_rate": 0.0,
+    "dependency_calls": 6,
+    "retried_dependency_calls": 0,
+    "retry_count": 0
+  },
+  "outcome": {
+    "eligibility": [
+      {
+        "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+        "paper_id": "blip-2-2301.12597v1",
+        "eligible": false,
+        "reason_code": "review_passed"
+      },
+      {
+        "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+        "paper_id": "llava-2304.08485v1",
+        "eligible": false,
+        "reason_code": "review_passed"
+      }
+    ],
+    "tasks": [],
+    "merged": {
+      "worker_results": [
+        {
+          "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+          "paper_id": "blip-2-2301.12597v1",
+          "status": "completed",
+          "requirements": [
+            {
+              "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+              "paper_id": "blip-2-2301.12597v1",
+              "dimension_id": "vision_language_bridge",
+              "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+              "required": true,
+              "status": "supported",
+              "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+              "evidence_ids": [
+                "ev_9eac712dd806552d2b4d4d2e01e0f117"
+              ]
+            }
+          ],
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "trace": null,
+          "observed_evidence_ids": [
+            "ev_9eac712dd806552d2b4d4d2e01e0f117"
+          ]
+        },
+        {
+          "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+          "paper_id": "llava-2304.08485v1",
+          "status": "completed",
+          "requirements": [
+            {
+              "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+              "paper_id": "llava-2304.08485v1",
+              "dimension_id": "vision_language_bridge",
+              "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+              "required": true,
+              "status": "supported",
+              "claim": "Instruction tuning large language models (LLMs) using machine-generated instruction-following data has improved zero-shot capabilities on new tasks, but the idea is less explored in the multimodal ﬁeld. In this paper, we present the ﬁrst attempt to use language-only GPT-4 to generate multimodal language-image instruction-following data. By instruction tuning on such generated data, we in- troduce LLaVA: Large Language and Vision Assistant, an end-to-end trained large multimodal model that connects a vision encoder and LLM for general- purpose visual and language understanding. Our early experiments show that LLaVA demonstrates impressive multimodel chat abilities, sometimes exhibiting the behaviors of multimodal GPT-4 on unseen images/instructions, and yields a 85.1% relative score compared with GPT-4 on a synthetic multimodal instruction- following dataset. When ﬁne-tuned on Science QA, the synergy of LLaVA and GPT-4 achieves a new state-of-the-art accuracy of 92.53%. We make GPT-4 gener- ated visual instruction tuning data, our model and code base publicly available.",
+              "evidence_ids": [
+                "ev_5418ad7d89b668e2ce1dba87be8f7efd"
+              ]
+            }
+          ],
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "trace": null,
+          "observed_evidence_ids": [
+            "ev_5418ad7d89b668e2ce1dba87be8f7efd"
+          ]
+        }
+      ],
+      "review_results": [
+        {
+          "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+          "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+          "paper_id": "blip-2-2301.12597v1",
+          "status": "passed",
+          "reason_code": "evidence_supports_claim",
+          "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+          "evidence_ids": [
+            "ev_9eac712dd806552d2b4d4d2e01e0f117"
+          ],
+          "validation_status": "passed",
+          "skip_reason": null,
+          "issue": null,
+          "trace": {
+            "model_calls": 1,
+            "retry_count": 0,
+            "latency_ms": 3.2898020144784823
+          }
+        },
+        {
+          "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+          "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+          "paper_id": "llava-2304.08485v1",
+          "status": "passed",
+          "reason_code": "evidence_supports_claim",
+          "claim": "Instruction tuning large language models (LLMs) using machine-generated instruction-following data has improved zero-shot capabilities on new tasks, but the idea is less explored in the multimodal ﬁeld. In this paper, we present the ﬁrst attempt to use language-only GPT-4 to generate multimodal language-image instruction-following data. By instruction tuning on such generated data, we in- troduce LLaVA: Large Language and Vision Assistant, an end-to-end trained large multimodal model that connects a vision encoder and LLM for general- purpose visual and language understanding. Our early experiments show that LLaVA demonstrates impressive multimodel chat abilities, sometimes exhibiting the behaviors of multimodal GPT-4 on unseen images/instructions, and yields a 85.1% relative score compared with GPT-4 on a synthetic multimodal instruction- following dataset. When ﬁne-tuned on Science QA, the synergy of LLaVA and GPT-4 achieves a new state-of-the-art accuracy of 92.53%. We make GPT-4 gener- ated visual instruction tuning data, our model and code base publicly available.",
+          "evidence_ids": [
+            "ev_5418ad7d89b668e2ce1dba87be8f7efd"
+          ],
+          "validation_status": "passed",
+          "skip_reason": null,
+          "issue": null,
+          "trace": {
+            "model_calls": 1,
+            "retry_count": 0,
+            "latency_ms": 1.8417949904687703
+          }
+        }
+      ],
+      "history": [
+        {
+          "record_id": "history_fce63cc506b617e12c7e65cbee30c2bb",
+          "result_ref": "worker_5ff948d7929c12c239ca2a92c90a7622",
+          "kind": "worker",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T07:54:37.406886+00:00",
+          "status": "completed",
+          "worker_result": {
+            "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+            "paper_id": "blip-2-2301.12597v1",
+            "status": "completed",
+            "requirements": [
+              {
+                "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+                "paper_id": "blip-2-2301.12597v1",
+                "dimension_id": "vision_language_bridge",
+                "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+                "required": true,
+                "status": "supported",
+                "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+                "evidence_ids": [
+                  "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                ]
+              }
+            ],
+            "error": null,
+            "attempts": 1,
+            "latency_ms": 21.807911994983442,
+            "trace": {
+              "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+              "paper_id": "blip-2-2301.12597v1",
+              "requirement_count": 1,
+              "resolved_count": 1,
+              "status": "completed",
+              "tool_calls": 1,
+              "model_calls": 2,
+              "llm_calls": 2,
+              "vlm_tool_attempts": 0,
+              "protocol_corrections": 0,
+              "retry_count": 0,
+              "dependency_calls": 3,
+              "retried_dependency_calls": 0,
+              "latency_ms": 21.807911994983442,
+              "actions": [
+                {
+                  "step": 1,
+                  "tool_name": "read_page",
+                  "arguments": {
+                    "paper_id": "blip-2-2301.12597v1",
+                    "page": 1
+                  },
+                  "status": "success",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [
+                    "req_9b812a56c386edc56b01ad7612222137"
+                  ],
+                  "last_new_evidence_count": 1,
+                  "summary": "Read 1 text items and 0 figures from prepared regions; this is not a full-page PDF read.",
+                  "issue_code": null,
+                  "failure": null,
+                  "evidence_ids": [
+                    "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                  ],
+                  "latency_ms": 2.816774998791516
+                },
+                {
+                  "step": 2,
+                  "tool_name": "resolve_requirements",
+                  "arguments": {
+                    "resolutions": [
+                      {
+                        "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+                        "status": "supported",
+                        "evidence_ids": [
+                          "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                        ]
+                      }
+                    ]
+                  },
+                  "status": "success",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [],
+                  "last_new_evidence_count": 1,
+                  "summary": "Resolved 1 paper-local requirements.",
+                  "issue_code": null,
+                  "failure": null,
+                  "evidence_ids": [
+                    "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                  ],
+                  "latency_ms": 0.49598100304137915
+                }
+              ]
+            },
+            "observed_evidence_ids": [
+              "ev_9eac712dd806552d2b4d4d2e01e0f117"
+            ]
+          },
+          "review_result": null
+        },
+        {
+          "record_id": "history_ed6cd2738796d39ec866ee6f0fccb91a",
+          "result_ref": "worker_ddab5ce04721fa8e8130d2635541373e",
+          "kind": "worker",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T07:54:37.406967+00:00",
+          "status": "completed",
+          "worker_result": {
+            "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+            "paper_id": "llava-2304.08485v1",
+            "status": "completed",
+            "requirements": [
+              {
+                "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+                "paper_id": "llava-2304.08485v1",
+                "dimension_id": "vision_language_bridge",
+                "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+                "required": true,
+                "status": "supported",
+                "claim": "Instruction tuning large language models (LLMs) using machine-generated instruction-following data has improved zero-shot capabilities on new tasks, but the idea is less explored in the multimodal ﬁeld. In this paper, we present the ﬁrst attempt to use language-only GPT-4 to generate multimodal language-image instruction-following data. By instruction tuning on such generated data, we in- troduce LLaVA: Large Language and Vision Assistant, an end-to-end trained large multimodal model that connects a vision encoder and LLM for general- purpose visual and language understanding. Our early experiments show that LLaVA demonstrates impressive multimodel chat abilities, sometimes exhibiting the behaviors of multimodal GPT-4 on unseen images/instructions, and yields a 85.1% relative score compared with GPT-4 on a synthetic multimodal instruction- following dataset. When ﬁne-tuned on Science QA, the synergy of LLaVA and GPT-4 achieves a new state-of-the-art accuracy of 92.53%. We make GPT-4 gener- ated visual instruction tuning data, our model and code base publicly available.",
+                "evidence_ids": [
+                  "ev_5418ad7d89b668e2ce1dba87be8f7efd"
+                ]
+              }
+            ],
+            "error": null,
+            "attempts": 1,
+            "latency_ms": 21.46422398800496,
+            "trace": {
+              "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+              "paper_id": "llava-2304.08485v1",
+              "requirement_count": 1,
+              "resolved_count": 1,
+              "status": "completed",
+              "tool_calls": 1,
+              "model_calls": 2,
+              "llm_calls": 2,
+              "vlm_tool_attempts": 0,
+              "protocol_corrections": 0,
+              "retry_count": 0,
+              "dependency_calls": 3,
+              "retried_dependency_calls": 0,
+              "latency_ms": 21.46422398800496,
+              "actions": [
+                {
+                  "step": 1,
+                  "tool_name": "read_page",
+                  "arguments": {
+                    "paper_id": "llava-2304.08485v1",
+                    "page": 1
+                  },
+                  "status": "success",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [
+                    "req_638cc283fb01bf590f5233c40f49087a"
+                  ],
+                  "last_new_evidence_count": 1,
+                  "summary": "Read 1 text items and 0 figures from prepared regions; this is not a full-page PDF read.",
+                  "issue_code": null,
+                  "failure": null,
+                  "evidence_ids": [
+                    "ev_5418ad7d89b668e2ce1dba87be8f7efd"
+                  ],
+                  "latency_ms": 7.812642012140714
+                },
+                {
+                  "step": 2,
+                  "tool_name": "resolve_requirements",
+                  "arguments": {
+                    "resolutions": [
+                      {
+                        "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+                        "status": "supported",
+                        "evidence_ids": [
+                          "ev_5418ad7d89b668e2ce1dba87be8f7efd"
+                        ]
+                      }
+                    ]
+                  },
+                  "status": "success",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [],
+                  "last_new_evidence_count": 1,
+                  "summary": "Resolved 1 paper-local requirements.",
+                  "issue_code": null,
+                  "failure": null,
+                  "evidence_ids": [
+                    "ev_5418ad7d89b668e2ce1dba87be8f7efd"
+                  ],
+                  "latency_ms": 0.2909820032073185
+                }
+              ]
+            },
+            "observed_evidence_ids": [
+              "ev_5418ad7d89b668e2ce1dba87be8f7efd"
+            ]
+          },
+          "review_result": null
+        },
+        {
+          "record_id": "history_571cbc1766ede31d0b8ac8f60679d5c3",
+          "result_ref": "review_cf756e23558c0a429327621931c6bc39",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T07:54:37.406999+00:00",
+          "status": "passed",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+            "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+            "paper_id": "blip-2-2301.12597v1",
+            "status": "passed",
+            "reason_code": "evidence_supports_claim",
+            "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+            "evidence_ids": [
+              "ev_9eac712dd806552d2b4d4d2e01e0f117"
+            ],
+            "validation_status": "passed",
+            "skip_reason": null,
+            "issue": null,
+            "trace": {
+              "model_calls": 1,
+              "retry_count": 0,
+              "latency_ms": 3.2898020144784823
+            }
+          }
+        },
+        {
+          "record_id": "history_b72008844d2b96b3afd068e3e59dab97",
+          "result_ref": "review_835f499675da01678b7c82eac8f6217d",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T07:54:37.407025+00:00",
+          "status": "passed",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+            "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+            "paper_id": "llava-2304.08485v1",
+            "status": "passed",
+            "reason_code": "evidence_supports_claim",
+            "claim": "Instruction tuning large language models (LLMs) using machine-generated instruction-following data has improved zero-shot capabilities on new tasks, but the idea is less explored in the multimodal ﬁeld. In this paper, we present the ﬁrst attempt to use language-only GPT-4 to generate multimodal language-image instruction-following data. By instruction tuning on such generated data, we in- troduce LLaVA: Large Language and Vision Assistant, an end-to-end trained large multimodal model that connects a vision encoder and LLM for general- purpose visual and language understanding. Our early experiments show that LLaVA demonstrates impressive multimodel chat abilities, sometimes exhibiting the behaviors of multimodal GPT-4 on unseen images/instructions, and yields a 85.1% relative score compared with GPT-4 on a synthetic multimodal instruction- following dataset. When ﬁne-tuned on Science QA, the synergy of LLaVA and GPT-4 achieves a new state-of-the-art accuracy of 92.53%. We make GPT-4 gener- ated visual instruction tuning data, our model and code base publicly available.",
+            "evidence_ids": [
+              "ev_5418ad7d89b668e2ce1dba87be8f7efd"
+            ],
+            "validation_status": "passed",
+            "skip_reason": null,
+            "issue": null,
+            "trace": {
+              "model_calls": 1,
+              "retry_count": 0,
+              "latency_ms": 1.8417949904687703
+            }
+          }
+        }
+      ]
+    },
+    "metrics": {
+      "recovery_eligible_count": 0,
+      "recovery_attempted_count": 0,
+      "recovery_passed_count": 0,
+      "recovery_failed_count": 0,
+      "recovery_skipped_count": 2,
+      "recovery_conversion_rate": null,
+      "additional_model_calls": 1,
+      "additional_tool_calls": 0,
+      "recovery_latency_ms": 3.2994960056385025,
+      "recovery_rounds_used": 0,
+      "prior_usage": {
+        "model_calls": 6,
+        "tool_calls": 2
+      },
+      "reserved_budget": {
+        "model_calls": 5,
+        "tool_calls": 0
+      },
+      "research_usage": {
+        "model_calls": 7,
+        "tool_calls": 2
+      }
+    },
+    "status": "completed",
+    "synthesis_input": {
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "vision_language_bridge",
+            "name": "Vision-Language Connection Mechanism",
+            "description": "Investigate the specific mechanism the model uses to bridge visual representations and the language model, including any connector, adapter, resampler, cross-attention interface, or projection described in the paper, and whether the language model is frozen or tunable.",
+            "research_question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?"
+          }
+        ],
+        "question": "Compare BLIP-2 and LLaVA in how they connect visual representations to the language model.",
+        "paper_ids": [
+          "blip-2-2301.12597v1",
+          "llava-2304.08485v1"
+        ]
+      },
+      "cells": [
+        {
+          "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "vision_language_bridge",
+          "status": "verified",
+          "claim_id": "claim_afe29211eed51222333230f2912f4f77"
+        },
+        {
+          "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "vision_language_bridge",
+          "status": "verified",
+          "claim_id": "claim_8cddadbfc541d537dfe7c7be6915f3e6"
+        }
+      ],
+      "verified_claims": [
+        {
+          "claim_id": "claim_afe29211eed51222333230f2912f4f77",
+          "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "vision_language_bridge",
+          "text": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+          "evidence": [
+            {
+              "evidence_id": "ev_9eac712dd806552d2b4d4d2e01e0f117",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 1,
+              "modality": "text",
+              "text": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+              "caption": null,
+              "figure_id": null
+            }
+          ]
+        },
+        {
+          "claim_id": "claim_8cddadbfc541d537dfe7c7be6915f3e6",
+          "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "vision_language_bridge",
+          "text": "Instruction tuning large language models (LLMs) using machine-generated instruction-following data has improved zero-shot capabilities on new tasks, but the idea is less explored in the multimodal ﬁeld. In this paper, we present the ﬁrst attempt to use language-only GPT-4 to generate multimodal language-image instruction-following data. By instruction tuning on such generated data, we in- troduce LLaVA: Large Language and Vision Assistant, an end-to-end trained large multimodal model that connects a vision encoder and LLM for general- purpose visual and language understanding. Our early experiments show that LLaVA demonstrates impressive multimodel chat abilities, sometimes exhibiting the behaviors of multimodal GPT-4 on unseen images/instructions, and yields a 85.1% relative score compared with GPT-4 on a synthetic multimodal instruction- following dataset. When ﬁne-tuned on Science QA, the synergy of LLaVA and GPT-4 achieves a new state-of-the-art accuracy of 92.53%. We make GPT-4 gener- ated visual instruction tuning data, our model and code base publicly available.",
+          "evidence": [
+            {
+              "evidence_id": "ev_5418ad7d89b668e2ce1dba87be8f7efd",
+              "paper_id": "llava-2304.08485v1",
+              "page": 1,
+              "modality": "text",
+              "text": "Instruction tuning large language models (LLMs) using machine-generated instruction-following data has improved zero-shot capabilities on new tasks, but the idea is less explored in the multimodal ﬁeld. In this paper, we present the ﬁrst attempt to use language-only GPT-4 to generate multimodal language-image instruction-following data. By instruction tuning on such generated data, we in- troduce LLaVA: Large Language and Vision Assistant, an end-to-end trained large multimodal model that connects a vision encoder and LLM for general- purpose visual and language understanding. Our early experiments show that LLaVA demonstrates impressive multimodel chat abilities, sometimes exhibiting the behaviors of multimodal GPT-4 on unseen images/instructions, and yields a 85.1% relative score compared with GPT-4 on a synthetic multimodal instruction- following dataset. When ﬁne-tuned on Science QA, the synergy of LLaVA and GPT-4 achieves a new state-of-the-art accuracy of 92.53%. We make GPT-4 gener- ated visual instruction tuning data, our model and code base publicly available.",
+              "caption": null,
+              "figure_id": null
+            }
+          ]
+        }
+      ],
+      "missing_evidence": [],
+      "allowed_claim_ids": [
+        "claim_afe29211eed51222333230f2912f4f77",
+        "claim_8cddadbfc541d537dfe7c7be6915f3e6"
+      ],
+      "allowed_evidence_ids": [
+        "ev_9eac712dd806552d2b4d4d2e01e0f117",
+        "ev_5418ad7d89b668e2ce1dba87be8f7efd"
+      ],
+      "resolved_requirements": 2,
+      "reviewed_requirements": 2
+    },
+    "report": {
+      "title": "Evidence-grounded research report",
+      "question": "Compare BLIP-2 and LLaVA in how they connect visual representations to the language model.",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "llava-2304.08485v1"
+      ],
+      "sections": [
+        {
+          "dimension_id": "vision_language_bridge",
+          "title": "Vision-Language Connection Mechanism · Verified findings",
+          "cells": [
+            {
+              "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+              "paper_id": "blip-2-2301.12597v1",
+              "dimension_id": "vision_language_bridge",
+              "status": "verified",
+              "claim_id": "claim_afe29211eed51222333230f2912f4f77"
+            },
+            {
+              "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+              "paper_id": "llava-2304.08485v1",
+              "dimension_id": "vision_language_bridge",
+              "status": "verified",
+              "claim_id": "claim_8cddadbfc541d537dfe7c7be6915f3e6"
+            }
+          ],
+          "comparisons": [
+            {
+              "relation": "side_by_side",
+              "paper_ids": [
+                "blip-2-2301.12597v1",
+                "llava-2304.08485v1"
+              ],
+              "claim_ids": [
+                "claim_afe29211eed51222333230f2912f4f77",
+                "claim_8cddadbfc541d537dfe7c7be6915f3e6"
+              ],
+              "evidence_ids": [
+                "ev_5418ad7d89b668e2ce1dba87be8f7efd",
+                "ev_9eac712dd806552d2b4d4d2e01e0f117"
+              ]
+            }
+          ]
+        }
+      ],
+      "verified_claims": [
+        {
+          "claim_id": "claim_afe29211eed51222333230f2912f4f77",
+          "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "vision_language_bridge",
+          "text": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+          "evidence": [
+            {
+              "evidence_id": "ev_9eac712dd806552d2b4d4d2e01e0f117",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 1,
+              "modality": "text",
+              "text": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+              "caption": null,
+              "figure_id": null
+            }
+          ]
+        },
+        {
+          "claim_id": "claim_8cddadbfc541d537dfe7c7be6915f3e6",
+          "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "vision_language_bridge",
+          "text": "Instruction tuning large language models (LLMs) using machine-generated instruction-following data has improved zero-shot capabilities on new tasks, but the idea is less explored in the multimodal ﬁeld. In this paper, we present the ﬁrst attempt to use language-only GPT-4 to generate multimodal language-image instruction-following data. By instruction tuning on such generated data, we in- troduce LLaVA: Large Language and Vision Assistant, an end-to-end trained large multimodal model that connects a vision encoder and LLM for general- purpose visual and language understanding. Our early experiments show that LLaVA demonstrates impressive multimodel chat abilities, sometimes exhibiting the behaviors of multimodal GPT-4 on unseen images/instructions, and yields a 85.1% relative score compared with GPT-4 on a synthetic multimodal instruction- following dataset. When ﬁne-tuned on Science QA, the synergy of LLaVA and GPT-4 achieves a new state-of-the-art accuracy of 92.53%. We make GPT-4 gener- ated visual instruction tuning data, our model and code base publicly available.",
+          "evidence": [
+            {
+              "evidence_id": "ev_5418ad7d89b668e2ce1dba87be8f7efd",
+              "paper_id": "llava-2304.08485v1",
+              "page": 1,
+              "modality": "text",
+              "text": "Instruction tuning large language models (LLMs) using machine-generated instruction-following data has improved zero-shot capabilities on new tasks, but the idea is less explored in the multimodal ﬁeld. In this paper, we present the ﬁrst attempt to use language-only GPT-4 to generate multimodal language-image instruction-following data. By instruction tuning on such generated data, we in- troduce LLaVA: Large Language and Vision Assistant, an end-to-end trained large multimodal model that connects a vision encoder and LLM for general- purpose visual and language understanding. Our early experiments show that LLaVA demonstrates impressive multimodel chat abilities, sometimes exhibiting the behaviors of multimodal GPT-4 on unseen images/instructions, and yields a 85.1% relative score compared with GPT-4 on a synthetic multimodal instruction- following dataset. When ﬁne-tuned on Science QA, the synergy of LLaVA and GPT-4 achieves a new state-of-the-art accuracy of 92.53%. We make GPT-4 gener- ated visual instruction tuning data, our model and code base publicly available.",
+              "caption": null,
+              "figure_id": null
+            }
+          ]
+        }
+      ],
+      "missing_evidence": [],
+      "summary": "2 of 2 planned requirements have reviewed evidence; 0 remain missing.",
+      "limitations": [
+        "Only reviewed claims and prepared evidence are factual report content.",
+        "Structural citation validation does not prove semantic entailment or model-review correctness.",
+        "Missing cells are not completed from paper profiles or model knowledge."
+      ],
+      "status": "completed",
+      "generation_degraded": false,
+      "issue": null,
+      "metrics": {
+        "total_requirements": 2,
+        "verified_requirements": 2,
+        "missing_requirements": 0,
+        "rejected_requirements": 0,
+        "resolved_requirements": 2,
+        "reviewed_requirements": 2,
+        "citation_validation_failures": 0,
+        "synthesis_model_calls": 1,
+        "protocol_corrections": 0,
+        "provider_retries": 0,
+        "synthesis_latency_ms": 1.4954009966459125,
+        "resolution_rate": 1.0,
+        "evidence_coverage": 1.0,
+        "review_pass_rate": 1.0,
+        "report_generation_attempts": 1,
+        "report_generation_successes": 1,
+        "report_generation_success_rate": 1.0,
+        "report_status": "completed",
+        "degraded_generation": false
+      },
+      "trace": [
+        {
+          "event": "validated_report",
+          "model_calls": 1,
+          "protocol_corrections": 0
+        }
+      ]
+    }
+  },
+  "metrics": {
+    "corpus_validity_rate": 1.0,
+    "evidence_provenance_validity_rate": 1.0,
+    "retrieval_recall_at_5": null,
+    "retrieval_recall_at_10": null,
+    "worker_supported_count": 2,
+    "reviewer_passed_count": 2,
+    "reviewer_rejected_count": 0,
+    "recovery_attempted_count": 0,
+    "recovery_converted_count": 0,
+    "verified_coverage": 1.0,
+    "stage_d_baseline_coverage": 0.3333333333333333,
+    "coverage_delta_vs_stage_d": null,
+    "cross_paper_comparison_count": 1,
+    "cross_paper_citation_validity_rate": 1.0,
+    "comparison_detection_method": "Structural claim membership, paper scope, dimension and exact evidence-union checks; not semantic entailment.",
+    "unsupported_claim_count": 0,
+    "unsupported_claim_detection_method": "Scripted Reviewer verdicts test wiring only; no semantic unsupported-claim measurement.",
+    "total_model_calls": 7,
+    "total_tool_calls": 2,
+    "wall_time_ms": 35.54886199708562,
+    "resolution_rate": 1.0,
+    "review_pass_rate": 1.0,
+    "report_generation_success_rate": 1.0,
+    "report_status": "completed"
+  },
+  "quality_result_usable": false,
+  "limitations": [
+    "Scripted Reviewer passes test transport/identity only, never semantics."
+  ]
+}

@@ -1,0 +1,1304 @@
+{
+  "case_id": "two-paper-bridge",
+  "status": "completed",
+  "real_provider_used": true,
+  "real_provider_calls": null,
+  "llm_provider_attempts_observed": 9,
+  "models_initialized": 1,
+  "planner_mode": "replay_original_verified_plan",
+  "planner_model_calls": 0,
+  "plan": {
+    "dimensions": [
+      {
+        "dimension_id": "vision_language_bridge",
+        "name": "Vision-Language Connection Mechanism",
+        "description": "Investigate the specific mechanism the model uses to bridge visual representations and the language model, including any connector, adapter, resampler, cross-attention interface, or projection described in the paper, and whether the language model is frozen or tunable.",
+        "research_question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?"
+      }
+    ],
+    "question": "Compare BLIP-2 and LLaVA in how they connect visual representations to the language model.",
+    "paper_ids": [
+      "blip-2-2301.12597v1",
+      "llava-2304.08485v1"
+    ]
+  },
+  "corpus_snapshot": {
+    "snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+    "papers": [
+      {
+        "paper_id": "blip-2201.12086v2",
+        "source_sha256": "63e0335cdd57c3d92b907b89c93d10befdd29b8aeed108091bbde90c121ed97a",
+        "metadata_sha256": "2171421d418f9e8757154030cb8279c33e8f8327325f44a0bed3a9e161a7823f",
+        "prepared_sha256": "0189764865606c14ef96e71c8c51cb03bcd49129a38f7f69985b59c361405628"
+      },
+      {
+        "paper_id": "clip-2103.00020v1",
+        "source_sha256": "6478b6e571a7d6fcd846d8ef77bfd60c285f1986abb8f475eedc43de403074f5",
+        "metadata_sha256": "8a0ca7cf8e96dbfcd740757918283ece5c30bfdab8c0f65cc59b2833a023abee",
+        "prepared_sha256": "7ea14fdd46b1f1aa57227e9227598ed98fd020eab5c5c8c86fd9c14558f6f463"
+      },
+      {
+        "paper_id": "flamingo-2204.14198v1",
+        "source_sha256": "79d131280bc79f659212f35f940dfd3a26013c73355a58eb2263410945780c4c",
+        "metadata_sha256": "e45db1efc4f2abb09026150a657d0749db1bc30e88c652788e36828f219caa7c",
+        "prepared_sha256": "1f74f19edc12fed812a9181b5a3bd6840295d6de992583e148cdcbf35102071a"
+      },
+      {
+        "paper_id": "blip-2-2301.12597v1",
+        "source_sha256": "0a4b93c402a6b8b0d2c5f438bbae31d447b17324b71c3e4fb6dab53e0e389bc5",
+        "metadata_sha256": "230d99c654921ea067df38070c235cdf71a10ac46b4fa5ab20eb5ccc9c4da7aa",
+        "prepared_sha256": "af6939d223423787a46bd72fc3ce68c942ecd7b7d6c3c3b07b87e273378c009c"
+      },
+      {
+        "paper_id": "llava-2304.08485v1",
+        "source_sha256": "0d5be40caf852d51a0e2636619fafc5b910788af9584fdc392abc652787560ed",
+        "metadata_sha256": "267e246529084cc39e4ed23729c5b27d020b7ab3fc9ba89c8fa08979e92f96ea",
+        "prepared_sha256": "201837067a067d3f11520fed8035163712755a8108179e4dc9115f99fa0932bb"
+      }
+    ],
+    "text_count": 46,
+    "figure_count": 5,
+    "corpus_validity_rate": 1.0,
+    "evidence_provenance_validity_rate": 1.0
+  },
+  "configuration": {
+    "schema_version": 1,
+    "dataset": "eval/datasets/stage_e.json",
+    "papers_dir": "data/papers",
+    "additional_papers_dir": "data/research_papers",
+    "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+    "device": "cpu",
+    "index_dir": "data/chroma/stage-e",
+    "collection": "research-stage-e-text",
+    "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+    "distance": "cosine",
+    "top_k": 10,
+    "runtime": {
+      "max_concurrent_workers": 3,
+      "max_concurrent_llm": 2,
+      "max_concurrent_vlm": 1,
+      "max_concurrent_retrieval": 1,
+      "max_tool_calls_per_worker": 8,
+      "max_model_calls_per_worker": 20,
+      "max_protocol_corrections": 2,
+      "operation_timeout_seconds": 60,
+      "max_retries": 2
+    },
+    "review_runtime": {
+      "max_concurrent_reviewers": 2,
+      "max_model_calls_per_review": 3
+    },
+    "recovery": {
+      "max_research_model_calls": 200,
+      "max_research_tool_calls": 64
+    },
+    "planner_mode": "replay_original_verified_plan",
+    "provider_temperature": "provider_default_not_sent",
+    "source_label_policy": "Source-checked candidate labels; not independently human-approved exhaustive relevance labels."
+  },
+  "models": {
+    "llm": "deepseek-flash",
+    "vlm": "deepseek-flash",
+    "embedding": "Qwen/Qwen3-Embedding-0.6B",
+    "temperature": "provider_default_not_sent"
+  },
+  "initial_worker_results": [
+    {
+      "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+      "paper_id": "blip-2-2301.12597v1",
+      "status": "completed",
+      "requirements": [
+        {
+          "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "vision_language_bridge",
+          "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+          "required": true,
+          "status": "supported",
+          "claim": "BLIP-2 bridges visual representations to the language model via a Querying Transformer (Q-Former) pre-trained in two stages. The Q-Former is connected to a frozen image encoder in the representation learning stage to extract language-informative visual features, and to a frozen LLM in the generative learning stage. The interface is a fully-connected (FC) layer that linearly projects the Q-Former's output query embeddings (Z) into the LLM's text-embedding dimension; these projected query embeddings are prepended to the input text embeddings and serve as soft visual prompts conditioning the LLM on the visual representation. The Q-Former thus acts as an information bottleneck between the frozen image encoder and the frozen LLM.",
+          "evidence_ids": [
+            "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+            "ev_e4829335e46c87be4cada6e262bdd856",
+            "ev_242192f04216b43089535562ea0dcec9",
+            "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+          ]
+        }
+      ],
+      "error": null,
+      "attempts": 1,
+      "latency_ms": 8512.65671699366,
+      "trace": {
+        "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+        "paper_id": "blip-2-2301.12597v1",
+        "requirement_count": 1,
+        "resolved_count": 1,
+        "status": "completed",
+        "tool_calls": 1,
+        "model_calls": 3,
+        "llm_calls": 3,
+        "vlm_tool_attempts": 0,
+        "protocol_corrections": 0,
+        "retry_count": 0,
+        "dependency_calls": 4,
+        "retried_dependency_calls": 0,
+        "latency_ms": 8512.65671699366,
+        "actions": [
+          {
+            "step": 1,
+            "tool_name": "search_text",
+            "arguments": {
+              "query": "Q-Former querying transformer connect visual representations to language model",
+              "requirement_ids": [
+                "req_9b812a56c386edc56b01ad7612222137"
+              ],
+              "top_k": 5
+            },
+            "status": "error",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_9b812a56c386edc56b01ad7612222137"
+            ],
+            "last_new_evidence_count": 0,
+            "summary": "Resolution, citation or paper scope is invalid; correct the action arguments.",
+            "issue_code": "invalid_arguments",
+            "failure": {
+              "phase": "worker_action",
+              "error_type": "ValidationError",
+              "message": "Invalid worker action.",
+              "validation_errors": [
+                {
+                  "field": [
+                    "paper_id"
+                  ],
+                  "type": "extra_forbidden"
+                }
+              ],
+              "hint": "Check the listed fields against the tool schema; input values are omitted."
+            },
+            "evidence_ids": [],
+            "latency_ms": 0.6256299966480583
+          },
+          {
+            "step": 2,
+            "tool_name": "search_text",
+            "arguments": {
+              "query": "Q-Former visual representations language model connection",
+              "paper_ids": [
+                "blip-2-2301.12597v1"
+              ],
+              "requirement_ids": [
+                "req_9b812a56c386edc56b01ad7612222137"
+              ],
+              "top_k": 5
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_9b812a56c386edc56b01ad7612222137"
+            ],
+            "last_new_evidence_count": 5,
+            "summary": "Retrieved 5 text evidence items.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_e4829335e46c87be4cada6e262bdd856",
+              "ev_242192f04216b43089535562ea0dcec9",
+              "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "ev_234984c983953494ce28027dc2716acc",
+              "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+            ],
+            "latency_ms": 187.12871900061145
+          },
+          {
+            "step": 3,
+            "tool_name": "resolve_requirement",
+            "arguments": {
+              "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+              "status": "supported",
+              "evidence_ids": [
+                "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+                "ev_e4829335e46c87be4cada6e262bdd856",
+                "ev_242192f04216b43089535562ea0dcec9",
+                "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [],
+            "last_new_evidence_count": 5,
+            "summary": "Resolved 1 paper-local requirements.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_e4829335e46c87be4cada6e262bdd856",
+              "ev_242192f04216b43089535562ea0dcec9",
+              "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "ev_234984c983953494ce28027dc2716acc",
+              "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+            ],
+            "latency_ms": 0.3623240045271814
+          }
+        ]
+      },
+      "observed_evidence_ids": [
+        "ev_e4829335e46c87be4cada6e262bdd856",
+        "ev_242192f04216b43089535562ea0dcec9",
+        "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+        "ev_234984c983953494ce28027dc2716acc",
+        "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+      ]
+    },
+    {
+      "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+      "paper_id": "llava-2304.08485v1",
+      "status": "completed",
+      "requirements": [
+        {
+          "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "vision_language_bridge",
+          "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+          "required": true,
+          "status": "supported",
+          "claim": "LLaVA connects visual representations to the language model via a CLIP ViT-L/14 visual encoder that produces visual features Zv = g(Xv), and a trainable linear projection matrix W (a simple linear layer) that maps those image features into the language model's word embedding space, yielding visual tokens Hv/Hq of the same dimensionality as the word embedding space. The projection layer is the trainable interface mediating the connection: in Stage 2 the visual encoder weights stay frozen while the projection layer W and the LLM (φ) are updated.",
+          "evidence_ids": [
+            "ev_5af59f6012398940516f736562f5800e",
+            "ev_d39623f7635492ff9c1a349e90426601",
+            "ev_84b236a4049e358dd2a7dda5bddb4464"
+          ]
+        }
+      ],
+      "error": null,
+      "attempts": 1,
+      "latency_ms": 6519.009146999451,
+      "trace": {
+        "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+        "paper_id": "llava-2304.08485v1",
+        "requirement_count": 1,
+        "resolved_count": 1,
+        "status": "completed",
+        "tool_calls": 1,
+        "model_calls": 3,
+        "llm_calls": 3,
+        "vlm_tool_attempts": 0,
+        "protocol_corrections": 0,
+        "retry_count": 0,
+        "dependency_calls": 4,
+        "retried_dependency_calls": 0,
+        "latency_ms": 6519.009146999451,
+        "actions": [
+          {
+            "step": 1,
+            "tool_name": "search_text",
+            "arguments": {
+              "query": "visual representation to language model connection projection",
+              "requirement_ids": [
+                "req_638cc283fb01bf590f5233c40f49087a"
+              ]
+            },
+            "status": "error",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_638cc283fb01bf590f5233c40f49087a"
+            ],
+            "last_new_evidence_count": 0,
+            "summary": "Resolution, citation or paper scope is invalid; correct the action arguments.",
+            "issue_code": "invalid_arguments",
+            "failure": {
+              "phase": "worker_action",
+              "error_type": "ValidationError",
+              "message": "Invalid worker action.",
+              "validation_errors": [
+                {
+                  "field": [
+                    "paper_id"
+                  ],
+                  "type": "extra_forbidden"
+                }
+              ],
+              "hint": "Check the listed fields against the tool schema; input values are omitted."
+            },
+            "evidence_ids": [],
+            "latency_ms": 0.7362030009971932
+          },
+          {
+            "step": 2,
+            "tool_name": "search_text",
+            "arguments": {
+              "paper_ids": [
+                "llava-2304.08485v1"
+              ],
+              "query": "visual representations to language model connection projection linear layer",
+              "requirement_ids": [
+                "req_638cc283fb01bf590f5233c40f49087a"
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_638cc283fb01bf590f5233c40f49087a"
+            ],
+            "last_new_evidence_count": 3,
+            "summary": "Retrieved 3 text evidence items.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_5af59f6012398940516f736562f5800e",
+              "ev_d39623f7635492ff9c1a349e90426601",
+              "ev_84b236a4049e358dd2a7dda5bddb4464"
+            ],
+            "latency_ms": 111.10828400705941
+          },
+          {
+            "step": 3,
+            "tool_name": "resolve_requirement",
+            "arguments": {
+              "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+              "status": "supported",
+              "evidence_ids": [
+                "ev_5af59f6012398940516f736562f5800e",
+                "ev_d39623f7635492ff9c1a349e90426601",
+                "ev_84b236a4049e358dd2a7dda5bddb4464"
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [],
+            "last_new_evidence_count": 3,
+            "summary": "Resolved 1 paper-local requirements.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_5af59f6012398940516f736562f5800e",
+              "ev_d39623f7635492ff9c1a349e90426601",
+              "ev_84b236a4049e358dd2a7dda5bddb4464"
+            ],
+            "latency_ms": 0.36997999995946884
+          }
+        ]
+      },
+      "observed_evidence_ids": [
+        "ev_5af59f6012398940516f736562f5800e",
+        "ev_d39623f7635492ff9c1a349e90426601",
+        "ev_84b236a4049e358dd2a7dda5bddb4464"
+      ]
+    }
+  ],
+  "initial_review_results": [
+    {
+      "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+      "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+      "paper_id": "blip-2-2301.12597v1",
+      "status": "passed",
+      "reason_code": "evidence_supports_claim",
+      "claim": "BLIP-2 bridges visual representations to the language model via a Querying Transformer (Q-Former) pre-trained in two stages. The Q-Former is connected to a frozen image encoder in the representation learning stage to extract language-informative visual features, and to a frozen LLM in the generative learning stage. The interface is a fully-connected (FC) layer that linearly projects the Q-Former's output query embeddings (Z) into the LLM's text-embedding dimension; these projected query embeddings are prepended to the input text embeddings and serve as soft visual prompts conditioning the LLM on the visual representation. The Q-Former thus acts as an information bottleneck between the frozen image encoder and the frozen LLM.",
+      "evidence_ids": [
+        "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+        "ev_e4829335e46c87be4cada6e262bdd856",
+        "ev_242192f04216b43089535562ea0dcec9",
+        "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+      ],
+      "validation_status": "passed",
+      "skip_reason": null,
+      "issue": null,
+      "trace": {
+        "model_calls": 1,
+        "retry_count": 0,
+        "latency_ms": 2164.976960993954
+      }
+    },
+    {
+      "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+      "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+      "paper_id": "llava-2304.08485v1",
+      "status": "passed",
+      "reason_code": "evidence_supports_claim",
+      "claim": "LLaVA connects visual representations to the language model via a CLIP ViT-L/14 visual encoder that produces visual features Zv = g(Xv), and a trainable linear projection matrix W (a simple linear layer) that maps those image features into the language model's word embedding space, yielding visual tokens Hv/Hq of the same dimensionality as the word embedding space. The projection layer is the trainable interface mediating the connection: in Stage 2 the visual encoder weights stay frozen while the projection layer W and the LLM (φ) are updated.",
+      "evidence_ids": [
+        "ev_5af59f6012398940516f736562f5800e",
+        "ev_d39623f7635492ff9c1a349e90426601",
+        "ev_84b236a4049e358dd2a7dda5bddb4464"
+      ],
+      "validation_status": "passed",
+      "skip_reason": null,
+      "issue": null,
+      "trace": {
+        "model_calls": 1,
+        "retry_count": 0,
+        "latency_ms": 1152.63369299646
+      }
+    }
+  ],
+  "orchestrator_trace": {
+    "worker_task_count": 2,
+    "completed_count": 2,
+    "partial_success_count": 0,
+    "failed_count": 0,
+    "cancelled_count": 0,
+    "peak_worker_concurrency": 2,
+    "peak_llm_concurrency": 2,
+    "peak_vlm_concurrency": 0,
+    "peak_retrieval_concurrency": 1,
+    "total_latency_ms": 8541.142123009195,
+    "resolution_rate": 1.0,
+    "coverage": 1.0,
+    "worker_success_rate": 1.0,
+    "partial_failure_rate": 0.0,
+    "retry_rate": 0.0,
+    "dependency_calls": 8,
+    "retried_dependency_calls": 0,
+    "retry_count": 0
+  },
+  "outcome": {
+    "eligibility": [
+      {
+        "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+        "paper_id": "blip-2-2301.12597v1",
+        "eligible": false,
+        "reason_code": "review_passed"
+      },
+      {
+        "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+        "paper_id": "llava-2304.08485v1",
+        "eligible": false,
+        "reason_code": "review_passed"
+      }
+    ],
+    "tasks": [],
+    "merged": {
+      "worker_results": [
+        {
+          "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+          "paper_id": "blip-2-2301.12597v1",
+          "status": "completed",
+          "requirements": [
+            {
+              "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+              "paper_id": "blip-2-2301.12597v1",
+              "dimension_id": "vision_language_bridge",
+              "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+              "required": true,
+              "status": "supported",
+              "claim": "BLIP-2 bridges visual representations to the language model via a Querying Transformer (Q-Former) pre-trained in two stages. The Q-Former is connected to a frozen image encoder in the representation learning stage to extract language-informative visual features, and to a frozen LLM in the generative learning stage. The interface is a fully-connected (FC) layer that linearly projects the Q-Former's output query embeddings (Z) into the LLM's text-embedding dimension; these projected query embeddings are prepended to the input text embeddings and serve as soft visual prompts conditioning the LLM on the visual representation. The Q-Former thus acts as an information bottleneck between the frozen image encoder and the frozen LLM.",
+              "evidence_ids": [
+                "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+                "ev_e4829335e46c87be4cada6e262bdd856",
+                "ev_242192f04216b43089535562ea0dcec9",
+                "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+              ]
+            }
+          ],
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "trace": null,
+          "observed_evidence_ids": [
+            "ev_e4829335e46c87be4cada6e262bdd856",
+            "ev_242192f04216b43089535562ea0dcec9",
+            "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+            "ev_234984c983953494ce28027dc2716acc",
+            "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+          ]
+        },
+        {
+          "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+          "paper_id": "llava-2304.08485v1",
+          "status": "completed",
+          "requirements": [
+            {
+              "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+              "paper_id": "llava-2304.08485v1",
+              "dimension_id": "vision_language_bridge",
+              "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+              "required": true,
+              "status": "supported",
+              "claim": "LLaVA connects visual representations to the language model via a CLIP ViT-L/14 visual encoder that produces visual features Zv = g(Xv), and a trainable linear projection matrix W (a simple linear layer) that maps those image features into the language model's word embedding space, yielding visual tokens Hv/Hq of the same dimensionality as the word embedding space. The projection layer is the trainable interface mediating the connection: in Stage 2 the visual encoder weights stay frozen while the projection layer W and the LLM (φ) are updated.",
+              "evidence_ids": [
+                "ev_5af59f6012398940516f736562f5800e",
+                "ev_d39623f7635492ff9c1a349e90426601",
+                "ev_84b236a4049e358dd2a7dda5bddb4464"
+              ]
+            }
+          ],
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "trace": null,
+          "observed_evidence_ids": [
+            "ev_5af59f6012398940516f736562f5800e",
+            "ev_d39623f7635492ff9c1a349e90426601",
+            "ev_84b236a4049e358dd2a7dda5bddb4464"
+          ]
+        }
+      ],
+      "review_results": [
+        {
+          "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+          "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+          "paper_id": "blip-2-2301.12597v1",
+          "status": "passed",
+          "reason_code": "evidence_supports_claim",
+          "claim": "BLIP-2 bridges visual representations to the language model via a Querying Transformer (Q-Former) pre-trained in two stages. The Q-Former is connected to a frozen image encoder in the representation learning stage to extract language-informative visual features, and to a frozen LLM in the generative learning stage. The interface is a fully-connected (FC) layer that linearly projects the Q-Former's output query embeddings (Z) into the LLM's text-embedding dimension; these projected query embeddings are prepended to the input text embeddings and serve as soft visual prompts conditioning the LLM on the visual representation. The Q-Former thus acts as an information bottleneck between the frozen image encoder and the frozen LLM.",
+          "evidence_ids": [
+            "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+            "ev_e4829335e46c87be4cada6e262bdd856",
+            "ev_242192f04216b43089535562ea0dcec9",
+            "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+          ],
+          "validation_status": "passed",
+          "skip_reason": null,
+          "issue": null,
+          "trace": {
+            "model_calls": 1,
+            "retry_count": 0,
+            "latency_ms": 2164.976960993954
+          }
+        },
+        {
+          "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+          "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+          "paper_id": "llava-2304.08485v1",
+          "status": "passed",
+          "reason_code": "evidence_supports_claim",
+          "claim": "LLaVA connects visual representations to the language model via a CLIP ViT-L/14 visual encoder that produces visual features Zv = g(Xv), and a trainable linear projection matrix W (a simple linear layer) that maps those image features into the language model's word embedding space, yielding visual tokens Hv/Hq of the same dimensionality as the word embedding space. The projection layer is the trainable interface mediating the connection: in Stage 2 the visual encoder weights stay frozen while the projection layer W and the LLM (φ) are updated.",
+          "evidence_ids": [
+            "ev_5af59f6012398940516f736562f5800e",
+            "ev_d39623f7635492ff9c1a349e90426601",
+            "ev_84b236a4049e358dd2a7dda5bddb4464"
+          ],
+          "validation_status": "passed",
+          "skip_reason": null,
+          "issue": null,
+          "trace": {
+            "model_calls": 1,
+            "retry_count": 0,
+            "latency_ms": 1152.63369299646
+          }
+        }
+      ],
+      "history": [
+        {
+          "record_id": "history_d649791e29228db5073dd01e02599ac1",
+          "result_ref": "worker_82f5c2040d63ab1717360ca7176fd775",
+          "kind": "worker",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T08:14:38.294288+00:00",
+          "status": "completed",
+          "worker_result": {
+            "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+            "paper_id": "blip-2-2301.12597v1",
+            "status": "completed",
+            "requirements": [
+              {
+                "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+                "paper_id": "blip-2-2301.12597v1",
+                "dimension_id": "vision_language_bridge",
+                "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+                "required": true,
+                "status": "supported",
+                "claim": "BLIP-2 bridges visual representations to the language model via a Querying Transformer (Q-Former) pre-trained in two stages. The Q-Former is connected to a frozen image encoder in the representation learning stage to extract language-informative visual features, and to a frozen LLM in the generative learning stage. The interface is a fully-connected (FC) layer that linearly projects the Q-Former's output query embeddings (Z) into the LLM's text-embedding dimension; these projected query embeddings are prepended to the input text embeddings and serve as soft visual prompts conditioning the LLM on the visual representation. The Q-Former thus acts as an information bottleneck between the frozen image encoder and the frozen LLM.",
+                "evidence_ids": [
+                  "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+                  "ev_e4829335e46c87be4cada6e262bdd856",
+                  "ev_242192f04216b43089535562ea0dcec9",
+                  "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+                ]
+              }
+            ],
+            "error": null,
+            "attempts": 1,
+            "latency_ms": 8512.65671699366,
+            "trace": {
+              "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+              "paper_id": "blip-2-2301.12597v1",
+              "requirement_count": 1,
+              "resolved_count": 1,
+              "status": "completed",
+              "tool_calls": 1,
+              "model_calls": 3,
+              "llm_calls": 3,
+              "vlm_tool_attempts": 0,
+              "protocol_corrections": 0,
+              "retry_count": 0,
+              "dependency_calls": 4,
+              "retried_dependency_calls": 0,
+              "latency_ms": 8512.65671699366,
+              "actions": [
+                {
+                  "step": 1,
+                  "tool_name": "search_text",
+                  "arguments": {
+                    "query": "Q-Former querying transformer connect visual representations to language model",
+                    "requirement_ids": [
+                      "req_9b812a56c386edc56b01ad7612222137"
+                    ],
+                    "top_k": 5
+                  },
+                  "status": "error",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [
+                    "req_9b812a56c386edc56b01ad7612222137"
+                  ],
+                  "last_new_evidence_count": 0,
+                  "summary": "Resolution, citation or paper scope is invalid; correct the action arguments.",
+                  "issue_code": "invalid_arguments",
+                  "failure": {
+                    "phase": "worker_action",
+                    "error_type": "ValidationError",
+                    "message": "Invalid worker action.",
+                    "validation_errors": [
+                      {
+                        "field": [
+                          "paper_id"
+                        ],
+                        "type": "extra_forbidden"
+                      }
+                    ],
+                    "hint": "Check the listed fields against the tool schema; input values are omitted."
+                  },
+                  "evidence_ids": [],
+                  "latency_ms": 0.6256299966480583
+                },
+                {
+                  "step": 2,
+                  "tool_name": "search_text",
+                  "arguments": {
+                    "query": "Q-Former visual representations language model connection",
+                    "paper_ids": [
+                      "blip-2-2301.12597v1"
+                    ],
+                    "requirement_ids": [
+                      "req_9b812a56c386edc56b01ad7612222137"
+                    ],
+                    "top_k": 5
+                  },
+                  "status": "success",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [
+                    "req_9b812a56c386edc56b01ad7612222137"
+                  ],
+                  "last_new_evidence_count": 5,
+                  "summary": "Retrieved 5 text evidence items.",
+                  "issue_code": null,
+                  "failure": null,
+                  "evidence_ids": [
+                    "ev_e4829335e46c87be4cada6e262bdd856",
+                    "ev_242192f04216b43089535562ea0dcec9",
+                    "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+                    "ev_234984c983953494ce28027dc2716acc",
+                    "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+                  ],
+                  "latency_ms": 187.12871900061145
+                },
+                {
+                  "step": 3,
+                  "tool_name": "resolve_requirement",
+                  "arguments": {
+                    "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+                    "status": "supported",
+                    "evidence_ids": [
+                      "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+                      "ev_e4829335e46c87be4cada6e262bdd856",
+                      "ev_242192f04216b43089535562ea0dcec9",
+                      "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+                    ]
+                  },
+                  "status": "success",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [],
+                  "last_new_evidence_count": 5,
+                  "summary": "Resolved 1 paper-local requirements.",
+                  "issue_code": null,
+                  "failure": null,
+                  "evidence_ids": [
+                    "ev_e4829335e46c87be4cada6e262bdd856",
+                    "ev_242192f04216b43089535562ea0dcec9",
+                    "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+                    "ev_234984c983953494ce28027dc2716acc",
+                    "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+                  ],
+                  "latency_ms": 0.3623240045271814
+                }
+              ]
+            },
+            "observed_evidence_ids": [
+              "ev_e4829335e46c87be4cada6e262bdd856",
+              "ev_242192f04216b43089535562ea0dcec9",
+              "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "ev_234984c983953494ce28027dc2716acc",
+              "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+            ]
+          },
+          "review_result": null
+        },
+        {
+          "record_id": "history_4bfc7f83e8214546b7b5a544881c2580",
+          "result_ref": "worker_552b2905e3700a5ad90f5b018617decc",
+          "kind": "worker",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T08:14:38.294418+00:00",
+          "status": "completed",
+          "worker_result": {
+            "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+            "paper_id": "llava-2304.08485v1",
+            "status": "completed",
+            "requirements": [
+              {
+                "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+                "paper_id": "llava-2304.08485v1",
+                "dimension_id": "vision_language_bridge",
+                "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+                "required": true,
+                "status": "supported",
+                "claim": "LLaVA connects visual representations to the language model via a CLIP ViT-L/14 visual encoder that produces visual features Zv = g(Xv), and a trainable linear projection matrix W (a simple linear layer) that maps those image features into the language model's word embedding space, yielding visual tokens Hv/Hq of the same dimensionality as the word embedding space. The projection layer is the trainable interface mediating the connection: in Stage 2 the visual encoder weights stay frozen while the projection layer W and the LLM (φ) are updated.",
+                "evidence_ids": [
+                  "ev_5af59f6012398940516f736562f5800e",
+                  "ev_d39623f7635492ff9c1a349e90426601",
+                  "ev_84b236a4049e358dd2a7dda5bddb4464"
+                ]
+              }
+            ],
+            "error": null,
+            "attempts": 1,
+            "latency_ms": 6519.009146999451,
+            "trace": {
+              "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+              "paper_id": "llava-2304.08485v1",
+              "requirement_count": 1,
+              "resolved_count": 1,
+              "status": "completed",
+              "tool_calls": 1,
+              "model_calls": 3,
+              "llm_calls": 3,
+              "vlm_tool_attempts": 0,
+              "protocol_corrections": 0,
+              "retry_count": 0,
+              "dependency_calls": 4,
+              "retried_dependency_calls": 0,
+              "latency_ms": 6519.009146999451,
+              "actions": [
+                {
+                  "step": 1,
+                  "tool_name": "search_text",
+                  "arguments": {
+                    "query": "visual representation to language model connection projection",
+                    "requirement_ids": [
+                      "req_638cc283fb01bf590f5233c40f49087a"
+                    ]
+                  },
+                  "status": "error",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [
+                    "req_638cc283fb01bf590f5233c40f49087a"
+                  ],
+                  "last_new_evidence_count": 0,
+                  "summary": "Resolution, citation or paper scope is invalid; correct the action arguments.",
+                  "issue_code": "invalid_arguments",
+                  "failure": {
+                    "phase": "worker_action",
+                    "error_type": "ValidationError",
+                    "message": "Invalid worker action.",
+                    "validation_errors": [
+                      {
+                        "field": [
+                          "paper_id"
+                        ],
+                        "type": "extra_forbidden"
+                      }
+                    ],
+                    "hint": "Check the listed fields against the tool schema; input values are omitted."
+                  },
+                  "evidence_ids": [],
+                  "latency_ms": 0.7362030009971932
+                },
+                {
+                  "step": 2,
+                  "tool_name": "search_text",
+                  "arguments": {
+                    "paper_ids": [
+                      "llava-2304.08485v1"
+                    ],
+                    "query": "visual representations to language model connection projection linear layer",
+                    "requirement_ids": [
+                      "req_638cc283fb01bf590f5233c40f49087a"
+                    ]
+                  },
+                  "status": "success",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [
+                    "req_638cc283fb01bf590f5233c40f49087a"
+                  ],
+                  "last_new_evidence_count": 3,
+                  "summary": "Retrieved 3 text evidence items.",
+                  "issue_code": null,
+                  "failure": null,
+                  "evidence_ids": [
+                    "ev_5af59f6012398940516f736562f5800e",
+                    "ev_d39623f7635492ff9c1a349e90426601",
+                    "ev_84b236a4049e358dd2a7dda5bddb4464"
+                  ],
+                  "latency_ms": 111.10828400705941
+                },
+                {
+                  "step": 3,
+                  "tool_name": "resolve_requirement",
+                  "arguments": {
+                    "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+                    "status": "supported",
+                    "evidence_ids": [
+                      "ev_5af59f6012398940516f736562f5800e",
+                      "ev_d39623f7635492ff9c1a349e90426601",
+                      "ev_84b236a4049e358dd2a7dda5bddb4464"
+                    ]
+                  },
+                  "status": "success",
+                  "protocol_recovery": false,
+                  "investigated_requirement_ids": [],
+                  "last_new_evidence_count": 3,
+                  "summary": "Resolved 1 paper-local requirements.",
+                  "issue_code": null,
+                  "failure": null,
+                  "evidence_ids": [
+                    "ev_5af59f6012398940516f736562f5800e",
+                    "ev_d39623f7635492ff9c1a349e90426601",
+                    "ev_84b236a4049e358dd2a7dda5bddb4464"
+                  ],
+                  "latency_ms": 0.36997999995946884
+                }
+              ]
+            },
+            "observed_evidence_ids": [
+              "ev_5af59f6012398940516f736562f5800e",
+              "ev_d39623f7635492ff9c1a349e90426601",
+              "ev_84b236a4049e358dd2a7dda5bddb4464"
+            ]
+          },
+          "review_result": null
+        },
+        {
+          "record_id": "history_80f5f975ee287982ff18774a8f64c664",
+          "result_ref": "review_e501ed6d3ca3321fb987ff48bb923377",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T08:14:38.294457+00:00",
+          "status": "passed",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+            "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+            "paper_id": "blip-2-2301.12597v1",
+            "status": "passed",
+            "reason_code": "evidence_supports_claim",
+            "claim": "BLIP-2 bridges visual representations to the language model via a Querying Transformer (Q-Former) pre-trained in two stages. The Q-Former is connected to a frozen image encoder in the representation learning stage to extract language-informative visual features, and to a frozen LLM in the generative learning stage. The interface is a fully-connected (FC) layer that linearly projects the Q-Former's output query embeddings (Z) into the LLM's text-embedding dimension; these projected query embeddings are prepended to the input text embeddings and serve as soft visual prompts conditioning the LLM on the visual representation. The Q-Former thus acts as an information bottleneck between the frozen image encoder and the frozen LLM.",
+            "evidence_ids": [
+              "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "ev_e4829335e46c87be4cada6e262bdd856",
+              "ev_242192f04216b43089535562ea0dcec9",
+              "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+            ],
+            "validation_status": "passed",
+            "skip_reason": null,
+            "issue": null,
+            "trace": {
+              "model_calls": 1,
+              "retry_count": 0,
+              "latency_ms": 2164.976960993954
+            }
+          }
+        },
+        {
+          "record_id": "history_76ec424fb5fae347055a59129ae1f594",
+          "result_ref": "review_5b4a7fc7cfaa0e9cf359f6f453630a4a",
+          "kind": "review",
+          "attempt_index": 0,
+          "recorded_at": "2026-10-08T08:14:38.294491+00:00",
+          "status": "passed",
+          "worker_result": null,
+          "review_result": {
+            "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+            "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+            "paper_id": "llava-2304.08485v1",
+            "status": "passed",
+            "reason_code": "evidence_supports_claim",
+            "claim": "LLaVA connects visual representations to the language model via a CLIP ViT-L/14 visual encoder that produces visual features Zv = g(Xv), and a trainable linear projection matrix W (a simple linear layer) that maps those image features into the language model's word embedding space, yielding visual tokens Hv/Hq of the same dimensionality as the word embedding space. The projection layer is the trainable interface mediating the connection: in Stage 2 the visual encoder weights stay frozen while the projection layer W and the LLM (φ) are updated.",
+            "evidence_ids": [
+              "ev_5af59f6012398940516f736562f5800e",
+              "ev_d39623f7635492ff9c1a349e90426601",
+              "ev_84b236a4049e358dd2a7dda5bddb4464"
+            ],
+            "validation_status": "passed",
+            "skip_reason": null,
+            "issue": null,
+            "trace": {
+              "model_calls": 1,
+              "retry_count": 0,
+              "latency_ms": 1152.63369299646
+            }
+          }
+        }
+      ]
+    },
+    "metrics": {
+      "recovery_eligible_count": 0,
+      "recovery_attempted_count": 0,
+      "recovery_passed_count": 0,
+      "recovery_failed_count": 0,
+      "recovery_skipped_count": 2,
+      "recovery_conversion_rate": null,
+      "additional_model_calls": 1,
+      "additional_tool_calls": 0,
+      "recovery_latency_ms": 4147.955419000937,
+      "recovery_rounds_used": 0,
+      "prior_usage": {
+        "model_calls": 8,
+        "tool_calls": 2
+      },
+      "reserved_budget": {
+        "model_calls": 5,
+        "tool_calls": 0
+      },
+      "research_usage": {
+        "model_calls": 9,
+        "tool_calls": 2
+      }
+    },
+    "status": "completed",
+    "synthesis_input": {
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "vision_language_bridge",
+            "name": "Vision-Language Connection Mechanism",
+            "description": "Investigate the specific mechanism the model uses to bridge visual representations and the language model, including any connector, adapter, resampler, cross-attention interface, or projection described in the paper, and whether the language model is frozen or tunable.",
+            "research_question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?"
+          }
+        ],
+        "question": "Compare BLIP-2 and LLaVA in how they connect visual representations to the language model.",
+        "paper_ids": [
+          "blip-2-2301.12597v1",
+          "llava-2304.08485v1"
+        ]
+      },
+      "cells": [
+        {
+          "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "vision_language_bridge",
+          "status": "verified",
+          "claim_id": "claim_d0d8319d60dbbe6670df22ad36e51865"
+        },
+        {
+          "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "vision_language_bridge",
+          "status": "verified",
+          "claim_id": "claim_62875649e7c28d28a6927947a343c981"
+        }
+      ],
+      "verified_claims": [
+        {
+          "claim_id": "claim_d0d8319d60dbbe6670df22ad36e51865",
+          "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "vision_language_bridge",
+          "text": "BLIP-2 bridges visual representations to the language model via a Querying Transformer (Q-Former) pre-trained in two stages. The Q-Former is connected to a frozen image encoder in the representation learning stage to extract language-informative visual features, and to a frozen LLM in the generative learning stage. The interface is a fully-connected (FC) layer that linearly projects the Q-Former's output query embeddings (Z) into the LLM's text-embedding dimension; these projected query embeddings are prepended to the input text embeddings and serve as soft visual prompts conditioning the LLM on the visual representation. The Q-Former thus acts as an information bottleneck between the frozen image encoder and the frozen LLM.",
+          "evidence": [
+            {
+              "evidence_id": "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 2,
+              "modality": "text",
+              "text": "We propose BLIP-2, a new vision-language pre-training method that bootstraps from frozen pre-trained unimodal models. In order to bridge the modality gap, we propose a Querying Transformer (Q-Former) pre-trained in two stages: (1) vision-language representation learning stage with a frozen image encoder and (2) vision-to-language genera- tive learning stage with a frozen LLM. This section ﬁrst introduces the model architecture of Q-Former, and then delineates the two-stage pre-training procedures.",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_e4829335e46c87be4cada6e262bdd856",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 4,
+              "modality": "text",
+              "text": "In the generative pre-training stage, we connect Q- Former (with the frozen image encoder attached) to a frozen LLM to harvest the LLM’s generative language capability. As shown in Figure 3, we use a fully-connected (FC) layer to linearly project the output query embeddings Z into the same dimension as the text embedding of the LLM. The projected query embeddings are then prepended to the input text embeddings. They function as soft visual prompts that condition the LLM on visual representation extracted by the Q-Former. Since the Q-Former has been pre-trained to extract language-informative visual representation, it ef- fectively functions as an information bottleneck that feeds the most useful information to the LLM while removing irrelevant visual information. This reduces the burden of the LLM to learn vision-language alignment, thus mitigating the catastrophic forgetting problem.",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_242192f04216b43089535562ea0dcec9",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 3,
+              "modality": "text",
+              "text": "In the representation learning stage, we connect Q-Former to a frozen image encoder and perform pre-training using image-text pairs. We aim to train the Q-Former such that the queries can learn to extract visual representation that is most informative of the text. Inspired by BLIP (Li et al., 2022), we jointly optimize three pre-training objectives that share the same input format and model parameters. Each objec- tive employs a different attention masking strategy between queries and text to control their interaction (see Figure 2).",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 2,
+              "modality": "text",
+              "text": "• BLIP-2 effectively leverages both frozen pre-trained im- age models and language models. We bridge the modality gap using a Q-Former pre-trained in two-stages: repre- sentation learning stage and generative learning stage. BLIP-2 achieves state-of-the-art performance on various vision-language tasks including visual question answer- ing, image captioning, and image-text retrieval.",
+              "caption": null,
+              "figure_id": null
+            }
+          ]
+        },
+        {
+          "claim_id": "claim_62875649e7c28d28a6927947a343c981",
+          "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "vision_language_bridge",
+          "text": "LLaVA connects visual representations to the language model via a CLIP ViT-L/14 visual encoder that produces visual features Zv = g(Xv), and a trainable linear projection matrix W (a simple linear layer) that maps those image features into the language model's word embedding space, yielding visual tokens Hv/Hq of the same dimensionality as the word embedding space. The projection layer is the trainable interface mediating the connection: in Stage 2 the visual encoder weights stay frozen while the projection layer W and the LLM (φ) are updated.",
+          "evidence": [
+            {
+              "evidence_id": "ev_5af59f6012398940516f736562f5800e",
+              "paper_id": "llava-2304.08485v1",
+              "page": 4,
+              "modality": "text",
+              "text": "For an input image Xv, we consider the pre-trained CLIP visual encoder ViT-L/14 [36], which provides the visual feature Zv = g(Xv). The grid features before and after the last Transformer layer are considered in our experiments. We consider a simple linear layer to connect image features into the word embedding space. Speciﬁcally, we apply a trainable projection matrix W to convert Zv into language embedding tokens Hq, which have the same dimensionality of the word embedding space in the language model:",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_d39623f7635492ff9c1a349e90426601",
+              "paper_id": "llava-2304.08485v1",
+              "page": 4,
+              "modality": "text",
+              "text": "Thus we have a sequence of visual tokens Hv. Note that our simple projection scheme is lightweight and cost-effective, which allows us to iterate data centric experiments quickly. More sophisticated (but expensive) schemes to connect the image and language representations can also be considered, such as gated cross-attention in Flamingo [2] and Q-former in BLIP-2 [25], or other vision encoders such as SAM [21] that provide object-level features. We leave exploring possibly more effective and sophisticated architecture designs for LLaVA as future work.",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_84b236a4049e358dd2a7dda5bddb4464",
+              "paper_id": "llava-2304.08485v1",
+              "page": 5,
+              "modality": "text",
+              "text": "Stage 2: Fine-tuning End-to-End. We only keep the visual encoder weights frozen, and continue to update both the pre-trained weights of the projection layer and LLM in LLaVA; i.e., the trainable parameters are θ = {W, φ} in (3). We consider two speciﬁc use case scenarios:",
+              "caption": null,
+              "figure_id": null
+            }
+          ]
+        }
+      ],
+      "missing_evidence": [],
+      "allowed_claim_ids": [
+        "claim_d0d8319d60dbbe6670df22ad36e51865",
+        "claim_62875649e7c28d28a6927947a343c981"
+      ],
+      "allowed_evidence_ids": [
+        "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+        "ev_e4829335e46c87be4cada6e262bdd856",
+        "ev_242192f04216b43089535562ea0dcec9",
+        "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+        "ev_5af59f6012398940516f736562f5800e",
+        "ev_d39623f7635492ff9c1a349e90426601",
+        "ev_84b236a4049e358dd2a7dda5bddb4464"
+      ],
+      "resolved_requirements": 2,
+      "reviewed_requirements": 2
+    },
+    "report": {
+      "title": "Verified findings and evidence gaps",
+      "question": "Compare BLIP-2 and LLaVA in how they connect visual representations to the language model.",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "llava-2304.08485v1"
+      ],
+      "sections": [
+        {
+          "dimension_id": "vision_language_bridge",
+          "title": "Vision-Language Connection Mechanism · Verified findings",
+          "cells": [
+            {
+              "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+              "paper_id": "blip-2-2301.12597v1",
+              "dimension_id": "vision_language_bridge",
+              "status": "verified",
+              "claim_id": "claim_d0d8319d60dbbe6670df22ad36e51865"
+            },
+            {
+              "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+              "paper_id": "llava-2304.08485v1",
+              "dimension_id": "vision_language_bridge",
+              "status": "verified",
+              "claim_id": "claim_62875649e7c28d28a6927947a343c981"
+            }
+          ],
+          "comparisons": [
+            {
+              "relation": "side_by_side",
+              "paper_ids": [
+                "blip-2-2301.12597v1",
+                "llava-2304.08485v1"
+              ],
+              "claim_ids": [
+                "claim_d0d8319d60dbbe6670df22ad36e51865",
+                "claim_62875649e7c28d28a6927947a343c981"
+              ],
+              "evidence_ids": [
+                "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+                "ev_e4829335e46c87be4cada6e262bdd856",
+                "ev_242192f04216b43089535562ea0dcec9",
+                "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+                "ev_5af59f6012398940516f736562f5800e",
+                "ev_d39623f7635492ff9c1a349e90426601",
+                "ev_84b236a4049e358dd2a7dda5bddb4464"
+              ]
+            }
+          ]
+        }
+      ],
+      "verified_claims": [
+        {
+          "claim_id": "claim_d0d8319d60dbbe6670df22ad36e51865",
+          "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "vision_language_bridge",
+          "text": "BLIP-2 bridges visual representations to the language model via a Querying Transformer (Q-Former) pre-trained in two stages. The Q-Former is connected to a frozen image encoder in the representation learning stage to extract language-informative visual features, and to a frozen LLM in the generative learning stage. The interface is a fully-connected (FC) layer that linearly projects the Q-Former's output query embeddings (Z) into the LLM's text-embedding dimension; these projected query embeddings are prepended to the input text embeddings and serve as soft visual prompts conditioning the LLM on the visual representation. The Q-Former thus acts as an information bottleneck between the frozen image encoder and the frozen LLM.",
+          "evidence": [
+            {
+              "evidence_id": "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 2,
+              "modality": "text",
+              "text": "We propose BLIP-2, a new vision-language pre-training method that bootstraps from frozen pre-trained unimodal models. In order to bridge the modality gap, we propose a Querying Transformer (Q-Former) pre-trained in two stages: (1) vision-language representation learning stage with a frozen image encoder and (2) vision-to-language genera- tive learning stage with a frozen LLM. This section ﬁrst introduces the model architecture of Q-Former, and then delineates the two-stage pre-training procedures.",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_e4829335e46c87be4cada6e262bdd856",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 4,
+              "modality": "text",
+              "text": "In the generative pre-training stage, we connect Q- Former (with the frozen image encoder attached) to a frozen LLM to harvest the LLM’s generative language capability. As shown in Figure 3, we use a fully-connected (FC) layer to linearly project the output query embeddings Z into the same dimension as the text embedding of the LLM. The projected query embeddings are then prepended to the input text embeddings. They function as soft visual prompts that condition the LLM on visual representation extracted by the Q-Former. Since the Q-Former has been pre-trained to extract language-informative visual representation, it ef- fectively functions as an information bottleneck that feeds the most useful information to the LLM while removing irrelevant visual information. This reduces the burden of the LLM to learn vision-language alignment, thus mitigating the catastrophic forgetting problem.",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_242192f04216b43089535562ea0dcec9",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 3,
+              "modality": "text",
+              "text": "In the representation learning stage, we connect Q-Former to a frozen image encoder and perform pre-training using image-text pairs. We aim to train the Q-Former such that the queries can learn to extract visual representation that is most informative of the text. Inspired by BLIP (Li et al., 2022), we jointly optimize three pre-training objectives that share the same input format and model parameters. Each objec- tive employs a different attention masking strategy between queries and text to control their interaction (see Figure 2).",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 2,
+              "modality": "text",
+              "text": "• BLIP-2 effectively leverages both frozen pre-trained im- age models and language models. We bridge the modality gap using a Q-Former pre-trained in two-stages: repre- sentation learning stage and generative learning stage. BLIP-2 achieves state-of-the-art performance on various vision-language tasks including visual question answer- ing, image captioning, and image-text retrieval.",
+              "caption": null,
+              "figure_id": null
+            }
+          ]
+        },
+        {
+          "claim_id": "claim_62875649e7c28d28a6927947a343c981",
+          "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "vision_language_bridge",
+          "text": "LLaVA connects visual representations to the language model via a CLIP ViT-L/14 visual encoder that produces visual features Zv = g(Xv), and a trainable linear projection matrix W (a simple linear layer) that maps those image features into the language model's word embedding space, yielding visual tokens Hv/Hq of the same dimensionality as the word embedding space. The projection layer is the trainable interface mediating the connection: in Stage 2 the visual encoder weights stay frozen while the projection layer W and the LLM (φ) are updated.",
+          "evidence": [
+            {
+              "evidence_id": "ev_5af59f6012398940516f736562f5800e",
+              "paper_id": "llava-2304.08485v1",
+              "page": 4,
+              "modality": "text",
+              "text": "For an input image Xv, we consider the pre-trained CLIP visual encoder ViT-L/14 [36], which provides the visual feature Zv = g(Xv). The grid features before and after the last Transformer layer are considered in our experiments. We consider a simple linear layer to connect image features into the word embedding space. Speciﬁcally, we apply a trainable projection matrix W to convert Zv into language embedding tokens Hq, which have the same dimensionality of the word embedding space in the language model:",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_d39623f7635492ff9c1a349e90426601",
+              "paper_id": "llava-2304.08485v1",
+              "page": 4,
+              "modality": "text",
+              "text": "Thus we have a sequence of visual tokens Hv. Note that our simple projection scheme is lightweight and cost-effective, which allows us to iterate data centric experiments quickly. More sophisticated (but expensive) schemes to connect the image and language representations can also be considered, such as gated cross-attention in Flamingo [2] and Q-former in BLIP-2 [25], or other vision encoders such as SAM [21] that provide object-level features. We leave exploring possibly more effective and sophisticated architecture designs for LLaVA as future work.",
+              "caption": null,
+              "figure_id": null
+            },
+            {
+              "evidence_id": "ev_84b236a4049e358dd2a7dda5bddb4464",
+              "paper_id": "llava-2304.08485v1",
+              "page": 5,
+              "modality": "text",
+              "text": "Stage 2: Fine-tuning End-to-End. We only keep the visual encoder weights frozen, and continue to update both the pre-trained weights of the projection layer and LLM in LLaVA; i.e., the trainable parameters are θ = {W, φ} in (3). We consider two speciﬁc use case scenarios:",
+              "caption": null,
+              "figure_id": null
+            }
+          ]
+        }
+      ],
+      "missing_evidence": [],
+      "summary": "2 of 2 planned requirements have reviewed evidence; 0 remain missing.",
+      "limitations": [
+        "Only reviewed claims and prepared evidence are factual report content.",
+        "Structural citation validation does not prove semantic entailment or model-review correctness.",
+        "Missing cells are not completed from paper profiles or model knowledge."
+      ],
+      "status": "completed",
+      "generation_degraded": false,
+      "issue": null,
+      "metrics": {
+        "total_requirements": 2,
+        "verified_requirements": 2,
+        "missing_requirements": 0,
+        "rejected_requirements": 0,
+        "resolved_requirements": 2,
+        "reviewed_requirements": 2,
+        "citation_validation_failures": 0,
+        "synthesis_model_calls": 1,
+        "protocol_corrections": 0,
+        "provider_retries": 0,
+        "synthesis_latency_ms": 4145.55835101055,
+        "resolution_rate": 1.0,
+        "evidence_coverage": 1.0,
+        "review_pass_rate": 1.0,
+        "report_generation_attempts": 1,
+        "report_generation_successes": 1,
+        "report_generation_success_rate": 1.0,
+        "report_status": "completed",
+        "degraded_generation": false
+      },
+      "trace": [
+        {
+          "event": "validated_report",
+          "model_calls": 1,
+          "protocol_corrections": 0
+        }
+      ]
+    }
+  },
+  "metrics": {
+    "corpus_validity_rate": 1.0,
+    "evidence_provenance_validity_rate": 1.0,
+    "retrieval_recall_at_5": null,
+    "retrieval_recall_at_10": null,
+    "worker_supported_count": 2,
+    "reviewer_passed_count": 2,
+    "reviewer_rejected_count": 0,
+    "recovery_attempted_count": 0,
+    "recovery_converted_count": 0,
+    "verified_coverage": 1.0,
+    "stage_d_baseline_coverage": 0.3333333333333333,
+    "coverage_delta_vs_stage_d": null,
+    "cross_paper_comparison_count": 1,
+    "cross_paper_citation_validity_rate": 1.0,
+    "comparison_detection_method": "Structural claim membership, paper scope, dimension and exact evidence-union checks; not semantic entailment.",
+    "unsupported_claim_count": 0,
+    "unsupported_claim_detection_method": "Distinct claims rejected by model Reviewer among initial/final snapshots; structured citation violations fail closed. This is a reviewer diagnostic, NOT a human/independent hallucination rate.",
+    "total_model_calls": 9,
+    "total_tool_calls": 2,
+    "wall_time_ms": 15183.85814598878,
+    "resolution_rate": 1.0,
+    "review_pass_rate": 1.0,
+    "report_generation_success_rate": 1.0,
+    "report_status": "completed"
+  },
+  "quality_result_usable": true,
+  "limitations": [
+    "Frozen real Planner output is replayed, not regenerated; zero new Planner calls.",
+    "Model-based review is not independently measured semantic correctness.",
+    "Worker model_calls includes conservative VLM tool-attempt reservations, not exact provider billing."
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "--junitxml=docs/acceptance/stage_e_freeze/test_results.xml"
+  ],
+  "started_at": "2026-10-08T08:24:12.764652+00:00",
+  "elapsed_seconds": 12.168441192989121,
+  "exit_code": 0
+}

@@ -1,0 +1,1062 @@
+{
+  "mode": "real_prepared_corpus_worker_smoke",
+  "status": "completed",
+  "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+  "paper_ids": [
+    "blip-2-2301.12597v1",
+    "flamingo-2204.14198v1",
+    "llava-2304.08485v1"
+  ],
+  "configuration": {
+    "max_concurrent_workers": 3,
+    "max_concurrent_llm": 2,
+    "max_concurrent_vlm": 1,
+    "max_concurrent_retrieval": 1,
+    "max_tool_calls_per_worker": 8,
+    "max_model_calls_per_worker": 20,
+    "max_protocol_corrections": 2,
+    "recent_observations": 4,
+    "max_context_evidence": 20,
+    "operation_timeout_seconds": 60.0,
+    "max_retries": 2,
+    "retry_initial_delay_seconds": 0.1,
+    "retry_jitter_seconds": 0.05
+  },
+  "paper_evidence_availability": [
+    {
+      "name": "CLIP",
+      "paper_id": "clip-2103.00020v1",
+      "paper_discovered": true,
+      "paper_evidence_available": true
+    },
+    {
+      "name": "BLIP",
+      "paper_id": "blip-2201.12086v2",
+      "paper_discovered": true,
+      "paper_evidence_available": true
+    },
+    {
+      "name": "FLAMINGO",
+      "paper_id": "flamingo-2204.14198v1",
+      "paper_discovered": true,
+      "paper_evidence_available": true
+    },
+    {
+      "name": "BLIP-2",
+      "paper_id": "blip-2-2301.12597v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "FROZEN",
+      "paper_id": "frozen-2106.13884v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "LLAVA",
+      "paper_id": "llava-2304.08485v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "MINIGPT-4",
+      "paper_id": "minigpt-4-2304.10592v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "INSTRUCTBLIP",
+      "paper_id": "instructblip-2305.06500v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "ALBEF",
+      "paper_id": "albef-2107.07651v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "VILT",
+      "paper_id": "vilt-2102.03334v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "ALIGN",
+      "paper_id": "align-2102.05918v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "SIMVLM",
+      "paper_id": "simvlm-2108.10904v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "VLMO",
+      "paper_id": "vlmo-2111.02358v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "COCA",
+      "paper_id": "coca-2205.01917v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "PALI",
+      "paper_id": "pali-2209.06794v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "PALM-E",
+      "paper_id": "palm-e-2303.03378v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "BEIT-3",
+      "paper_id": "beit-3-2208.10442v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "KOSMOS-1",
+      "paper_id": "kosmos-1-2302.14045v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "KOSMOS-2",
+      "paper_id": "kosmos-2-2306.14824v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "IMAGEBIND",
+      "paper_id": "imagebind-2305.05665v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "OTTER",
+      "paper_id": "otter-2305.03726v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "LLAVA-1.5",
+      "paper_id": "llava-1.5-2310.03744v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "SIGLIP",
+      "paper_id": "siglip-2303.15343v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "GIT",
+      "paper_id": "git-2205.14100v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    },
+    {
+      "name": "OFA",
+      "paper_id": "ofa-2202.03052v1",
+      "paper_discovered": true,
+      "paper_evidence_available": false
+    }
+  ],
+  "worker_results": [
+    {
+      "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+      "paper_id": "blip-2-2301.12597v1",
+      "status": "completed",
+      "requirements": [
+        {
+          "requirement_id": "req_9daac7cc6c7a911400ad045f31b569a3",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "architecture_components",
+          "question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "vision_language_bridge",
+          "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_c4a9956a9c46ca858320c1f09d211b31",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "training_strategy",
+          "question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_06c21be590e96ece1d9e0bc9d49757f1",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "trainable_parameter_scope",
+          "question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_dce891f967956694a5ccce5c5a10832a",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "downstream_capabilities",
+          "question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        }
+      ],
+      "error": null,
+      "attempts": 1,
+      "latency_ms": 14359.613633001572,
+      "trace": {
+        "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+        "paper_id": "blip-2-2301.12597v1",
+        "requirement_count": 5,
+        "resolved_count": 5,
+        "status": "completed",
+        "tool_calls": 4,
+        "model_calls": 6,
+        "llm_calls": 6,
+        "vlm_tool_attempts": 0,
+        "protocol_corrections": 1,
+        "retry_count": 0,
+        "dependency_calls": 10,
+        "retried_dependency_calls": 0,
+        "latency_ms": 14359.613633001572,
+        "actions": [
+          {
+            "step": 1,
+            "tool_name": "worker_policy",
+            "status": "rejected",
+            "execution_status": "not_executed",
+            "summary": "Policy response rejected: multiple actions were requested; no actions were executed.",
+            "issue_code": "multiple_actions",
+            "expected": "exactly_one_action",
+            "actual_action_count": 3,
+            "recovery_instruction": "Choose exactly one action using the existing evidence and requirements. No rejected actions were executed. Wait for its observation before choosing another.",
+            "correction_allowed": true,
+            "protocol_corrections": 1,
+            "model_calls": 1,
+            "tool_calls": 0,
+            "latency_ms": 2682.458362003672
+          },
+          {
+            "step": 2,
+            "tool_name": "search_text",
+            "arguments": {
+              "query": "BLIP-2 architecture components Q-Former vision encoder frozen LLM pipeline",
+              "paper_ids": [
+                "blip-2-2301.12597v1"
+              ],
+              "requirement_ids": [
+                "req_9daac7cc6c7a911400ad045f31b569a3",
+                "req_9b812a56c386edc56b01ad7612222137"
+              ],
+              "top_k": 5
+            },
+            "status": "empty",
+            "protocol_recovery": true,
+            "investigated_requirement_ids": [
+              "req_9daac7cc6c7a911400ad045f31b569a3",
+              "req_9b812a56c386edc56b01ad7612222137"
+            ],
+            "last_new_evidence_count": 0,
+            "summary": "Requested papers are known to discovery, but no prepared text evidence is available.",
+            "issue_code": "empty_result",
+            "failure": {
+              "phase": "execution",
+              "message": "Requested papers are known to discovery, but no prepared text evidence is available.",
+              "issue_code": "empty_result",
+              "retryable": false
+            },
+            "evidence_ids": [],
+            "latency_ms": 5.188675000681542
+          },
+          {
+            "step": 3,
+            "tool_name": "search_text",
+            "arguments": {
+              "query": "architecture components visual encoder Q-Former language model pipeline",
+              "paper_ids": [
+                "blip-2-2301.12597v1"
+              ],
+              "requirement_ids": [
+                "req_9daac7cc6c7a911400ad045f31b569a3",
+                "req_9b812a56c386edc56b01ad7612222137"
+              ]
+            },
+            "status": "empty",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_9daac7cc6c7a911400ad045f31b569a3",
+              "req_9b812a56c386edc56b01ad7612222137"
+            ],
+            "last_new_evidence_count": 0,
+            "summary": "Requested papers are known to discovery, but no prepared text evidence is available.",
+            "issue_code": "empty_result",
+            "failure": {
+              "phase": "execution",
+              "message": "Requested papers are known to discovery, but no prepared text evidence is available.",
+              "issue_code": "empty_result",
+              "retryable": false
+            },
+            "evidence_ids": [],
+            "latency_ms": 4.379066995170433
+          },
+          {
+            "step": 4,
+            "tool_name": "read_page",
+            "arguments": {
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 1,
+              "requirement_ids": [
+                "req_9daac7cc6c7a911400ad045f31b569a3",
+                "req_9b812a56c386edc56b01ad7612222137",
+                "req_c4a9956a9c46ca858320c1f09d211b31",
+                "req_06c21be590e96ece1d9e0bc9d49757f1",
+                "req_dce891f967956694a5ccce5c5a10832a"
+              ]
+            },
+            "status": "empty",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_9daac7cc6c7a911400ad045f31b569a3",
+              "req_9b812a56c386edc56b01ad7612222137",
+              "req_c4a9956a9c46ca858320c1f09d211b31",
+              "req_06c21be590e96ece1d9e0bc9d49757f1",
+              "req_dce891f967956694a5ccce5c5a10832a"
+            ],
+            "last_new_evidence_count": 0,
+            "summary": "Discovered paper has no prepared evidence; no PDF was parsed.",
+            "issue_code": "empty_result",
+            "failure": {
+              "phase": "execution",
+              "error_type": "PaperEvidenceUnavailable",
+              "message": "Discovered paper has no prepared evidence; no PDF was parsed.",
+              "issue_code": "empty_result",
+              "retryable": false
+            },
+            "evidence_ids": [],
+            "latency_ms": 3.839222998067271
+          },
+          {
+            "step": 5,
+            "tool_name": "search_text",
+            "arguments": {
+              "query": "architecture components visual encoder language model Q-Former",
+              "paper_ids": [
+                "blip-2-2301.12597v1"
+              ]
+            },
+            "status": "empty",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_9daac7cc6c7a911400ad045f31b569a3",
+              "req_9b812a56c386edc56b01ad7612222137",
+              "req_c4a9956a9c46ca858320c1f09d211b31",
+              "req_06c21be590e96ece1d9e0bc9d49757f1",
+              "req_dce891f967956694a5ccce5c5a10832a"
+            ],
+            "last_new_evidence_count": 0,
+            "summary": "Requested papers are known to discovery, but no prepared text evidence is available.",
+            "issue_code": "empty_result",
+            "failure": {
+              "phase": "execution",
+              "message": "Requested papers are known to discovery, but no prepared text evidence is available.",
+              "issue_code": "empty_result",
+              "retryable": false
+            },
+            "evidence_ids": [],
+            "latency_ms": 3.5658810011227615
+          },
+          {
+            "step": 6,
+            "tool_name": "resolve_requirements",
+            "arguments": {
+              "resolutions": [
+                {
+                  "requirement_id": "req_9daac7cc6c7a911400ad045f31b569a3",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                },
+                {
+                  "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                },
+                {
+                  "requirement_id": "req_c4a9956a9c46ca858320c1f09d211b31",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                },
+                {
+                  "requirement_id": "req_06c21be590e96ece1d9e0bc9d49757f1",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                },
+                {
+                  "requirement_id": "req_dce891f967956694a5ccce5c5a10832a",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                }
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [],
+            "last_new_evidence_count": 0,
+            "summary": "Resolved 5 paper-local requirements.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [],
+            "latency_ms": 1.1485590002848767
+          }
+        ]
+      },
+      "observed_evidence_ids": []
+    },
+    {
+      "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+      "paper_id": "flamingo-2204.14198v1",
+      "status": "completed",
+      "requirements": [
+        {
+          "requirement_id": "req_795f851833824b49b269f864cf511807",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "architecture_components",
+          "question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?",
+          "required": true,
+          "status": "supported",
+          "claim": "The Flamingo pipeline consists of: a pretrained vision encoder (NFNet F6 pretrained contrastively, CLIP-style) that extracts spatial features; a Perceiver Resampler that takes image/video features and outputs a fixed-size set (64) of visual tokens; and a pretrained frozen autoregressive language model conditioned via freshly-initialized cross-attention layers (interleaved with the frozen LM layers) with gating mechanisms. These components are organized so the vision encoder feeds the Resampler, whose visual tokens condition the LM through cross-attention for next-token prediction.",
+          "evidence_ids": [
+            "ev_1f60e62600f7a79eae799d5ed285f571",
+            "ev_03da035280d198641cd7bcb081b6f845",
+            "ev_9262472c69770e9a098422d6b46534f9",
+            "ev_a802881b56aa396b45e4431996b61ae5",
+            "ev_218bd889fec22dc20b36a380b0e0fb62"
+          ]
+        },
+        {
+          "requirement_id": "req_360e41c76c26117ed16af9d15221522b",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "vision_language_bridge",
+          "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+          "required": true,
+          "status": "supported",
+          "claim": "Visual representations are bridged to the LM via two learnable components: the Perceiver Resampler, which receives spatio-temporal features from the vision encoder and outputs a fixed-size set of visual tokens, and freshly-initialized cross-attention layers (GATED XATTN-DENSE) interleaved between the frozen pretrained LM layers that let the LM condition on visual information for next-token prediction. Gating mechanisms minimize the effect of the newly added layers at initialization.",
+          "evidence_ids": [
+            "ev_1f60e62600f7a79eae799d5ed285f571",
+            "ev_a802881b56aa396b45e4431996b61ae5",
+            "ev_218bd889fec22dc20b36a380b0e0fb62",
+            "ev_9262472c69770e9a098422d6b46534f9"
+          ]
+        },
+        {
+          "requirement_id": "req_dc439a155d75957a0d50bc39339deabc",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "training_strategy",
+          "question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?",
+          "required": true,
+          "status": "supported",
+          "claim": "The vision encoder is pretrained with a two-term contrastive text-image objective on image-text pair datasets (CLIP-style, using BERT text encoder). The main Flamingo training phase keeps the vision encoder and LM frozen and trains the newly added cross-attention layers (and Perceiver Resampler) using the next-token prediction / text-generation objective; ablation studies and appendix sections provide further details.",
+          "evidence_ids": [
+            "ev_e86416c4f3b10aeabf3180b5f807d7be",
+            "ev_03da035280d198641cd7bcb081b6f845",
+            "ev_a802881b56aa396b45e4431996b61ae5",
+            "ev_1f60e62600f7a79eae799d5ed285f571"
+          ]
+        },
+        {
+          "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "trainable_parameter_scope",
+          "question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?",
+          "required": true,
+          "status": "supported",
+          "claim": "The pretrained vision encoder (NFNet F6) and the pretrained autoregressive LM are frozen during main Flamingo training; the newly added, freshly-initialized cross-attention layers (interleaved with the frozen LM self-attention layers) and the Perceiver Resampler are trainable. The paper frames this as a parameter-efficient approach that leverages pretrained components without retraining them from scratch.",
+          "evidence_ids": [
+            "ev_1f60e62600f7a79eae799d5ed285f571",
+            "ev_e86416c4f3b10aeabf3180b5f807d7be",
+            "ev_a802881b56aa396b45e4431996b61ae5",
+            "ev_218bd889fec22dc20b36a380b0e0fb62"
+          ]
+        },
+        {
+          "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "downstream_capabilities",
+          "question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?",
+          "required": true,
+          "status": "supported",
+          "claim": "The paper claims Flamingo is a visual language model that accepts text interleaved with images/videos and outputs free-form text, handling both open-ended tasks (e.g., visual question-answering, captioning) requiring text generation and close-ended tasks (e.g., classification) requiring choosing among a set of categories, and is amenable to few-shot in-context learning where annotated visual-text examples in an interleaved prompt steer task behavior without weight changes. These capabilities are evidenced by the described API and its expressiveness in tackling diverse tasks, with detailed evaluation in Section 3.3.",
+          "evidence_ids": [
+            "ev_c0b1e5bbd1cb0899c45305d4a282b86e"
+          ]
+        }
+      ],
+      "error": null,
+      "attempts": 1,
+      "latency_ms": 26513.00555800117,
+      "trace": {
+        "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+        "paper_id": "flamingo-2204.14198v1",
+        "requirement_count": 5,
+        "resolved_count": 5,
+        "status": "completed",
+        "tool_calls": 5,
+        "model_calls": 9,
+        "llm_calls": 9,
+        "vlm_tool_attempts": 0,
+        "protocol_corrections": 2,
+        "retry_count": 0,
+        "dependency_calls": 14,
+        "retried_dependency_calls": 0,
+        "latency_ms": 26513.00555800117,
+        "actions": [
+          {
+            "step": 1,
+            "tool_name": "worker_policy",
+            "status": "rejected",
+            "execution_status": "not_executed",
+            "summary": "Policy response rejected: multiple actions were requested; no actions were executed.",
+            "issue_code": "multiple_actions",
+            "expected": "exactly_one_action",
+            "actual_action_count": 3,
+            "recovery_instruction": "Choose exactly one action using the existing evidence and requirements. No rejected actions were executed. Wait for its observation before choosing another.",
+            "correction_allowed": true,
+            "protocol_corrections": 1,
+            "model_calls": 1,
+            "tool_calls": 0,
+            "latency_ms": 2835.006932997203
+          },
+          {
+            "step": 2,
+            "tool_name": "search_text",
+            "arguments": {
+              "query": "architecture vision encoder language model cross-attention gated perceiver resampler",
+              "paper_ids": [
+                "flamingo-2204.14198v1"
+              ],
+              "top_k": 5,
+              "requirement_ids": [
+                "req_795f851833824b49b269f864cf511807",
+                "req_360e41c76c26117ed16af9d15221522b"
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": true,
+            "investigated_requirement_ids": [
+              "req_795f851833824b49b269f864cf511807",
+              "req_360e41c76c26117ed16af9d15221522b"
+            ],
+            "last_new_evidence_count": 5,
+            "summary": "Retrieved 5 text evidence items.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_9262472c69770e9a098422d6b46534f9",
+              "ev_1f60e62600f7a79eae799d5ed285f571",
+              "ev_1863b35f4e6e9086964ec47670f5ea7b",
+              "ev_218bd889fec22dc20b36a380b0e0fb62",
+              "ev_03da035280d198641cd7bcb081b6f845"
+            ],
+            "latency_ms": 157.28362199297408
+          },
+          {
+            "step": 3,
+            "tool_name": "worker_policy",
+            "status": "rejected",
+            "execution_status": "not_executed",
+            "summary": "Policy response rejected: multiple actions were requested; no actions were executed.",
+            "issue_code": "multiple_actions",
+            "expected": "exactly_one_action",
+            "actual_action_count": 2,
+            "recovery_instruction": "Choose exactly one action using the existing evidence and requirements. No rejected actions were executed. Wait for its observation before choosing another.",
+            "correction_allowed": true,
+            "protocol_corrections": 2,
+            "model_calls": 3,
+            "tool_calls": 1,
+            "latency_ms": 2493.370985997899
+          },
+          {
+            "step": 4,
+            "tool_name": "search_text",
+            "arguments": {
+              "query": "training strategy joint interleaved datasets objectives frozen trainable parameters",
+              "paper_ids": [
+                "flamingo-2204.14198v1"
+              ],
+              "top_k": 8,
+              "requirement_ids": [
+                "req_dc439a155d75957a0d50bc39339deabc",
+                "req_ba2200026a21f5c79b16ba9e52d23717"
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": true,
+            "investigated_requirement_ids": [
+              "req_dc439a155d75957a0d50bc39339deabc",
+              "req_ba2200026a21f5c79b16ba9e52d23717"
+            ],
+            "last_new_evidence_count": 4,
+            "summary": "Retrieved 8 text evidence items.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_9262472c69770e9a098422d6b46534f9",
+              "ev_1f60e62600f7a79eae799d5ed285f571",
+              "ev_1863b35f4e6e9086964ec47670f5ea7b",
+              "ev_218bd889fec22dc20b36a380b0e0fb62",
+              "ev_03da035280d198641cd7bcb081b6f845",
+              "ev_a802881b56aa396b45e4431996b61ae5",
+              "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+              "ev_e86416c4f3b10aeabf3180b5f807d7be",
+              "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+            ],
+            "latency_ms": 191.8228949944023
+          },
+          {
+            "step": 5,
+            "tool_name": "resolve_requirements",
+            "arguments": {
+              "resolutions": [
+                {
+                  "requirement_id": "req_795f851833824b49b269f864cf511807",
+                  "status": "supported",
+                  "evidence_ids": [
+                    "ev_1f60e62600f7a79eae799d5ed285f571",
+                    "ev_03da035280d198641cd7bcb081b6f845",
+                    "ev_9262472c69770e9a098422d6b46534f9",
+                    "ev_a802881b56aa396b45e4431996b61ae5",
+                    "ev_218bd889fec22dc20b36a380b0e0fb62"
+                  ]
+                },
+                {
+                  "requirement_id": "req_360e41c76c26117ed16af9d15221522b",
+                  "status": "supported",
+                  "evidence_ids": [
+                    "ev_1f60e62600f7a79eae799d5ed285f571",
+                    "ev_a802881b56aa396b45e4431996b61ae5",
+                    "ev_218bd889fec22dc20b36a380b0e0fb62",
+                    "ev_9262472c69770e9a098422d6b46534f9"
+                  ]
+                },
+                {
+                  "requirement_id": "req_dc439a155d75957a0d50bc39339deabc",
+                  "status": "supported",
+                  "evidence_ids": [
+                    "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                    "ev_03da035280d198641cd7bcb081b6f845",
+                    "ev_a802881b56aa396b45e4431996b61ae5",
+                    "ev_1f60e62600f7a79eae799d5ed285f571"
+                  ]
+                },
+                {
+                  "requirement_id": "req_ba2200026a21f5c79b16ba9e52d23717",
+                  "status": "supported",
+                  "evidence_ids": [
+                    "ev_1f60e62600f7a79eae799d5ed285f571",
+                    "ev_e86416c4f3b10aeabf3180b5f807d7be",
+                    "ev_a802881b56aa396b45e4431996b61ae5",
+                    "ev_218bd889fec22dc20b36a380b0e0fb62"
+                  ]
+                }
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [],
+            "last_new_evidence_count": 4,
+            "summary": "Resolved 4 paper-local requirements.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_9262472c69770e9a098422d6b46534f9",
+              "ev_1f60e62600f7a79eae799d5ed285f571",
+              "ev_1863b35f4e6e9086964ec47670f5ea7b",
+              "ev_218bd889fec22dc20b36a380b0e0fb62",
+              "ev_03da035280d198641cd7bcb081b6f845",
+              "ev_a802881b56aa396b45e4431996b61ae5",
+              "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+              "ev_e86416c4f3b10aeabf3180b5f807d7be",
+              "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+            ],
+            "latency_ms": 1.7302810010733083
+          },
+          {
+            "step": 6,
+            "tool_name": "search_text",
+            "arguments": {
+              "query": "downstream tasks evaluation few-shot in-context learning visual question answering captioning classification",
+              "paper_ids": [
+                "flamingo-2204.14198v1"
+              ],
+              "requirement_ids": [
+                "req_33be67ee76e452d5de235b6a8e528afa"
+              ],
+              "top_k": 5
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_33be67ee76e452d5de235b6a8e528afa"
+            ],
+            "last_new_evidence_count": 0,
+            "summary": "Retrieved 5 text evidence items.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_9262472c69770e9a098422d6b46534f9",
+              "ev_1f60e62600f7a79eae799d5ed285f571",
+              "ev_1863b35f4e6e9086964ec47670f5ea7b",
+              "ev_218bd889fec22dc20b36a380b0e0fb62",
+              "ev_03da035280d198641cd7bcb081b6f845",
+              "ev_a802881b56aa396b45e4431996b61ae5",
+              "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+              "ev_e86416c4f3b10aeabf3180b5f807d7be",
+              "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+            ],
+            "latency_ms": 285.7373109945911
+          },
+          {
+            "step": 7,
+            "tool_name": "read_page",
+            "arguments": {
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 3,
+              "requirement_ids": [
+                "req_33be67ee76e452d5de235b6a8e528afa"
+              ]
+            },
+            "status": "empty",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_33be67ee76e452d5de235b6a8e528afa"
+            ],
+            "last_new_evidence_count": 0,
+            "summary": "Requested page has not been prepared; no PDF parsing was attempted.",
+            "issue_code": "empty_result",
+            "failure": {
+              "phase": "execution",
+              "message": "Requested page has not been prepared; no PDF parsing was attempted.",
+              "issue_code": "empty_result",
+              "retryable": false
+            },
+            "evidence_ids": [
+              "ev_9262472c69770e9a098422d6b46534f9",
+              "ev_1f60e62600f7a79eae799d5ed285f571",
+              "ev_1863b35f4e6e9086964ec47670f5ea7b",
+              "ev_218bd889fec22dc20b36a380b0e0fb62",
+              "ev_03da035280d198641cd7bcb081b6f845",
+              "ev_a802881b56aa396b45e4431996b61ae5",
+              "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+              "ev_e86416c4f3b10aeabf3180b5f807d7be",
+              "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+            ],
+            "latency_ms": 3.238746998249553
+          },
+          {
+            "step": 8,
+            "tool_name": "search_text",
+            "arguments": {
+              "paper_ids": [
+                "flamingo-2204.14198v1"
+              ],
+              "query": "downstream tasks few-shot evaluation: classification, VQA, captioning, in-context learning, image/video benchmarks",
+              "requirement_ids": [
+                "req_33be67ee76e452d5de235b6a8e528afa"
+              ],
+              "top_k": 4
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_33be67ee76e452d5de235b6a8e528afa"
+            ],
+            "last_new_evidence_count": 0,
+            "summary": "Retrieved 4 text evidence items.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_9262472c69770e9a098422d6b46534f9",
+              "ev_1f60e62600f7a79eae799d5ed285f571",
+              "ev_1863b35f4e6e9086964ec47670f5ea7b",
+              "ev_218bd889fec22dc20b36a380b0e0fb62",
+              "ev_03da035280d198641cd7bcb081b6f845",
+              "ev_a802881b56aa396b45e4431996b61ae5",
+              "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+              "ev_e86416c4f3b10aeabf3180b5f807d7be",
+              "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+            ],
+            "latency_ms": 290.96071199455764
+          },
+          {
+            "step": 9,
+            "tool_name": "resolve_requirement",
+            "arguments": {
+              "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+              "status": "supported",
+              "evidence_ids": [
+                "ev_c0b1e5bbd1cb0899c45305d4a282b86e"
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [],
+            "last_new_evidence_count": 0,
+            "summary": "Resolved 1 paper-local requirements.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_9262472c69770e9a098422d6b46534f9",
+              "ev_1f60e62600f7a79eae799d5ed285f571",
+              "ev_1863b35f4e6e9086964ec47670f5ea7b",
+              "ev_218bd889fec22dc20b36a380b0e0fb62",
+              "ev_03da035280d198641cd7bcb081b6f845",
+              "ev_a802881b56aa396b45e4431996b61ae5",
+              "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+              "ev_e86416c4f3b10aeabf3180b5f807d7be",
+              "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+            ],
+            "latency_ms": 0.3298419978818856
+          }
+        ]
+      },
+      "observed_evidence_ids": [
+        "ev_9262472c69770e9a098422d6b46534f9",
+        "ev_1f60e62600f7a79eae799d5ed285f571",
+        "ev_1863b35f4e6e9086964ec47670f5ea7b",
+        "ev_218bd889fec22dc20b36a380b0e0fb62",
+        "ev_03da035280d198641cd7bcb081b6f845",
+        "ev_a802881b56aa396b45e4431996b61ae5",
+        "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+        "ev_e86416c4f3b10aeabf3180b5f807d7be",
+        "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+      ]
+    },
+    {
+      "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+      "paper_id": "llava-2304.08485v1",
+      "status": "completed",
+      "requirements": [
+        {
+          "requirement_id": "req_f3819b194d1948b00cae50ea1c3aa018",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "architecture_components",
+          "question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "vision_language_bridge",
+          "question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "training_strategy",
+          "question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_dc68fde14ded13acea0eb1c952be17b8",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "trainable_parameter_scope",
+          "question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_f175c0c799f61411fd36b9fb88fa6b85",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "downstream_capabilities",
+          "question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        }
+      ],
+      "error": null,
+      "attempts": 1,
+      "latency_ms": 10440.026456999476,
+      "trace": {
+        "worker_task_id": "worker_a62465b2e63d8d7a6a1b3013db3cb46c",
+        "paper_id": "llava-2304.08485v1",
+        "requirement_count": 5,
+        "resolved_count": 5,
+        "status": "completed",
+        "tool_calls": 1,
+        "model_calls": 3,
+        "llm_calls": 3,
+        "vlm_tool_attempts": 0,
+        "protocol_corrections": 1,
+        "retry_count": 0,
+        "dependency_calls": 4,
+        "retried_dependency_calls": 0,
+        "latency_ms": 10440.026456999476,
+        "actions": [
+          {
+            "step": 1,
+            "tool_name": "worker_policy",
+            "status": "rejected",
+            "execution_status": "not_executed",
+            "summary": "Policy response rejected: multiple actions were requested; no actions were executed.",
+            "issue_code": "multiple_actions",
+            "expected": "exactly_one_action",
+            "actual_action_count": 3,
+            "recovery_instruction": "Choose exactly one action using the existing evidence and requirements. No rejected actions were executed. Wait for its observation before choosing another.",
+            "correction_allowed": true,
+            "protocol_corrections": 1,
+            "model_calls": 1,
+            "tool_calls": 0,
+            "latency_ms": 4823.0453160067555
+          },
+          {
+            "step": 2,
+            "tool_name": "search_text",
+            "arguments": {
+              "paper_ids": [
+                "llava-2304.08485v1"
+              ],
+              "query": "architecture components vision encoder language model linear projection pipeline",
+              "requirement_ids": [
+                "req_f3819b194d1948b00cae50ea1c3aa018",
+                "req_638cc283fb01bf590f5233c40f49087a"
+              ]
+            },
+            "status": "empty",
+            "protocol_recovery": true,
+            "investigated_requirement_ids": [
+              "req_f3819b194d1948b00cae50ea1c3aa018",
+              "req_638cc283fb01bf590f5233c40f49087a"
+            ],
+            "last_new_evidence_count": 0,
+            "summary": "Requested papers are known to discovery, but no prepared text evidence is available.",
+            "issue_code": "empty_result",
+            "failure": {
+              "phase": "execution",
+              "message": "Requested papers are known to discovery, but no prepared text evidence is available.",
+              "issue_code": "empty_result",
+              "retryable": false
+            },
+            "evidence_ids": [],
+            "latency_ms": 4.386305998195894
+          },
+          {
+            "step": 3,
+            "tool_name": "resolve_requirements",
+            "arguments": {
+              "resolutions": [
+                {
+                  "requirement_id": "req_f3819b194d1948b00cae50ea1c3aa018",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                },
+                {
+                  "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                },
+                {
+                  "requirement_id": "req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                },
+                {
+                  "requirement_id": "req_dc68fde14ded13acea0eb1c952be17b8",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                },
+                {
+                  "requirement_id": "req_f175c0c799f61411fd36b9fb88fa6b85",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                }
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [],
+            "last_new_evidence_count": 0,
+            "summary": "Resolved 5 paper-local requirements.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [],
+            "latency_ms": 1.3571750023402274
+          }
+        ]
+      },
+      "observed_evidence_ids": []
+    }
+  ],
+  "orchestrator_trace": {
+    "worker_task_count": 3,
+    "completed_count": 3,
+    "partial_success_count": 0,
+    "failed_count": 0,
+    "cancelled_count": 0,
+    "peak_worker_concurrency": 3,
+    "peak_llm_concurrency": 2,
+    "peak_vlm_concurrency": 0,
+    "peak_retrieval_concurrency": 1,
+    "total_latency_ms": 27180.914399003086,
+    "resolution_rate": 1.0,
+    "coverage": 0.3333333333333333,
+    "worker_success_rate": 1.0,
+    "partial_failure_rate": 0.0,
+    "retry_rate": 0.0,
+    "dependency_calls": 28,
+    "retried_dependency_calls": 0,
+    "retry_count": 0
+  },
+  "serial_estimated_latency_ms": 51312.64564800222,
+  "actual_parallel_latency_ms": 27180.914399003086,
+  "latency_protocol": "Sum of observed worker latencies is a serial proxy, includes concurrent resource waiting; not a measured serial run or benchmark.",
+  "real_smoke_executed": true,
+  "limitations": [
+    "Only prepared text/figure evidence is citable; discovery-only papers may complete with insufficient evidence.",
+    "model_calls conservatively counts LLM calls plus VLM tool attempts; preprocessing failures can reserve model budget without invoking the VLM.",
+    "Cancelled blocking threads may continue until their own operation timeout; result metrics are snapshots, not final provider billing."
+  ],
+  "cleanup_latency_ms": 0.29429000278469175
+}
