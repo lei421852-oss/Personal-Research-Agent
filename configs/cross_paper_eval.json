@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "dataset": "eval/datasets/stage_e.json",
+  "papers_dir": "data/papers",
+  "additional_papers_dir": "data/research_papers",
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "device": "cpu",
+  "index_dir": "data/chroma/stage-e",
+  "collection": "research-stage-e-text",
+  "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+  "distance": "cosine",
+  "top_k": 10,
+  "runtime": {
+    "max_concurrent_workers": 3,
+    "max_concurrent_llm": 2,
+    "max_concurrent_vlm": 1,
+    "max_concurrent_retrieval": 1,
+    "max_tool_calls_per_worker": 8,
+    "max_model_calls_per_worker": 20,
+    "max_protocol_corrections": 2,
+    "operation_timeout_seconds": 60,
+    "max_retries": 2
+  },
+  "review_runtime": {
+    "max_concurrent_reviewers": 2,
+    "max_model_calls_per_review": 3
+  },
+  "recovery": {
+    "max_research_model_calls": 200,
+    "max_research_tool_calls": 64
+  },
+  "planner_mode": "replay_original_verified_plan",
+  "provider_temperature": "provider_default_not_sent",
+  "source_label_policy": "Source-checked candidate labels; not independently human-approved exhaustive relevance labels."
+}

@@ -1,0 +1,730 @@
+{
+  "schema_version": 1,
+  "version": "stage-e-v1",
+  "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+  "original_plan": {
+    "dimensions": [
+      {
+        "dimension_id": "architecture_components",
+        "name": "Overall Architectural Components",
+        "description": "Identify the principal building blocks described for this paper's model and how they are arranged into an end-to-end visual-language pipeline. Focus on the model's own described structure rather than comparisons.",
+        "research_question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?"
+      },
+      {
+        "dimension_id": "vision_language_bridge",
+        "name": "Vision-Language Connection Mechanism",
+        "description": "Investigate the specific mechanism the model uses to bridge visual representations and the language model, including any connector, adapter, resampler, cross-attention interface, or projection described in the paper, and whether the language model is frozen or tunable.",
+        "research_question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?"
+      },
+      {
+        "dimension_id": "training_strategy",
+        "name": "Training Strategy and Objectives",
+        "description": "Examine the training procedure described in the paper: stages, objectives, data used, and the order in which components are trained or whether they are jointly trained.",
+        "research_question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?"
+      },
+      {
+        "dimension_id": "trainable_parameter_scope",
+        "name": "Trainable Parameter Scope",
+        "description": "Investigate which components of the model the paper reports as trainable versus frozen, and any parameter counts or parameter-efficient settings discussed.",
+        "research_question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?"
+      },
+      {
+        "dimension_id": "downstream_capabilities",
+        "name": "Downstream Capabilities and Evaluation Tasks",
+        "description": "Identify the downstream tasks and capabilities the paper evaluates or claims for the model, and the nature of the evidence provided for those capabilities.",
+        "research_question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?"
+      }
+    ],
+    "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+    "paper_ids": [
+      "blip-2-2301.12597v1",
+      "flamingo-2204.14198v1",
+      "llava-2304.08485v1"
+    ]
+  },
+  "original_plan_sha256": "1ef82d781c00d24752e77d188ae6b4f90c1f18fbb1ecd2b5eecee799f6d7de7e",
+  "core_requirement_ids": [
+    "req_9daac7cc6c7a911400ad045f31b569a3",
+    "req_9b812a56c386edc56b01ad7612222137",
+    "req_c4a9956a9c46ca858320c1f09d211b31",
+    "req_06c21be590e96ece1d9e0bc9d49757f1",
+    "req_dce891f967956694a5ccce5c5a10832a",
+    "req_795f851833824b49b269f864cf511807",
+    "req_360e41c76c26117ed16af9d15221522b",
+    "req_dc439a155d75957a0d50bc39339deabc",
+    "req_ba2200026a21f5c79b16ba9e52d23717",
+    "req_33be67ee76e452d5de235b6a8e528afa",
+    "req_f3819b194d1948b00cae50ea1c3aa018",
+    "req_638cc283fb01bf590f5233c40f49087a",
+    "req_c3f8f38f6bf9ec5b7822caee32ffa0aa",
+    "req_dc68fde14ded13acea0eb1c952be17b8",
+    "req_f175c0c799f61411fd36b9fb88fa6b85"
+  ],
+  "annotation_status": "source_checked_candidates",
+  "cases": [
+    {
+      "case_id": "core-01",
+      "category": "single_fact",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "architecture_components",
+            "name": "Overall Architectural Components",
+            "description": "Identify the principal building blocks described for this paper's model and how they are arranged into an end-to-end visual-language pipeline. Focus on the model's own described structure rather than comparisons.",
+            "research_question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?"
+          }
+        ],
+        "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+        "paper_ids": [
+          "blip-2-2301.12597v1"
+        ]
+      },
+      "expected_behavior": "Locate paper-local prepared evidence; answer only supported scope and retain unprepared details as limitations.",
+      "source_labels": {
+        "req_9daac7cc6c7a911400ad045f31b569a3": [
+          "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+          "ev_e4829335e46c87be4cada6e262bdd856"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "core-02",
+      "category": "single_fact",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "vision_language_bridge",
+            "name": "Vision-Language Connection Mechanism",
+            "description": "Investigate the specific mechanism the model uses to bridge visual representations and the language model, including any connector, adapter, resampler, cross-attention interface, or projection described in the paper, and whether the language model is frozen or tunable.",
+            "research_question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?"
+          }
+        ],
+        "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+        "paper_ids": [
+          "blip-2-2301.12597v1"
+        ]
+      },
+      "expected_behavior": "Locate paper-local prepared evidence; answer only supported scope and retain unprepared details as limitations.",
+      "source_labels": {
+        "req_9b812a56c386edc56b01ad7612222137": [
+          "ev_e4829335e46c87be4cada6e262bdd856"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "core-03",
+      "category": "single_fact",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "training_strategy",
+            "name": "Training Strategy and Objectives",
+            "description": "Examine the training procedure described in the paper: stages, objectives, data used, and the order in which components are trained or whether they are jointly trained.",
+            "research_question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?"
+          }
+        ],
+        "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+        "paper_ids": [
+          "blip-2-2301.12597v1"
+        ]
+      },
+      "expected_behavior": "Locate paper-local prepared evidence; answer only supported scope and retain unprepared details as limitations.",
+      "source_labels": {
+        "req_c4a9956a9c46ca858320c1f09d211b31": [
+          "ev_242192f04216b43089535562ea0dcec9",
+          "ev_234984c983953494ce28027dc2716acc"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "core-04",
+      "category": "single_fact",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "trainable_parameter_scope",
+            "name": "Trainable Parameter Scope",
+            "description": "Investigate which components of the model the paper reports as trainable versus frozen, and any parameter counts or parameter-efficient settings discussed.",
+            "research_question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?"
+          }
+        ],
+        "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+        "paper_ids": [
+          "blip-2-2301.12597v1"
+        ]
+      },
+      "expected_behavior": "Locate paper-local prepared evidence; answer only supported scope and retain unprepared details as limitations.",
+      "source_labels": {
+        "req_06c21be590e96ece1d9e0bc9d49757f1": [
+          "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+          "ev_b800026beae4f1a22793a9f31e9dfd11"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "core-05",
+      "category": "single_fact",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "downstream_capabilities",
+            "name": "Downstream Capabilities and Evaluation Tasks",
+            "description": "Identify the downstream tasks and capabilities the paper evaluates or claims for the model, and the nature of the evidence provided for those capabilities.",
+            "research_question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?"
+          }
+        ],
+        "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+        "paper_ids": [
+          "blip-2-2301.12597v1"
+        ]
+      },
+      "expected_behavior": "Locate paper-local prepared evidence; answer only supported scope and retain unprepared details as limitations.",
+      "source_labels": {
+        "req_dce891f967956694a5ccce5c5a10832a": [
+          "ev_09615ea9669f8dd3e5b0bd7a980253fe",
+          "ev_9eac712dd806552d2b4d4d2e01e0f117"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "core-06",
+      "category": "single_fact",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "architecture_components",
+            "name": "Overall Architectural Components",
+            "description": "Identify the principal building blocks described for this paper's model and how they are arranged into an end-to-end visual-language pipeline. Focus on the model's own described structure rather than comparisons.",
+            "research_question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?"
+          }
+        ],
+        "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+        "paper_ids": [
+          "flamingo-2204.14198v1"
+        ]
+      },
+      "expected_behavior": "Locate paper-local prepared evidence; answer only supported scope and retain unprepared details as limitations.",
+      "source_labels": {
+        "req_795f851833824b49b269f864cf511807": [
+          "ev_1f60e62600f7a79eae799d5ed285f571",
+          "ev_03da035280d198641cd7bcb081b6f845",
+          "ev_9262472c69770e9a098422d6b46534f9",
+          "ev_a802881b56aa396b45e4431996b61ae5",
+          "ev_218bd889fec22dc20b36a380b0e0fb62"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "core-07",
+      "category": "single_fact",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "vision_language_bridge",
+            "name": "Vision-Language Connection Mechanism",
+            "description": "Investigate the specific mechanism the model uses to bridge visual representations and the language model, including any connector, adapter, resampler, cross-attention interface, or projection described in the paper, and whether the language model is frozen or tunable.",
+            "research_question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?"
+          }
+        ],
+        "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+        "paper_ids": [
+          "flamingo-2204.14198v1"
+        ]
+      },
+      "expected_behavior": "Locate paper-local prepared evidence; answer only supported scope and retain unprepared details as limitations.",
+      "source_labels": {
+        "req_360e41c76c26117ed16af9d15221522b": [
+          "ev_1f60e62600f7a79eae799d5ed285f571",
+          "ev_a802881b56aa396b45e4431996b61ae5",
+          "ev_218bd889fec22dc20b36a380b0e0fb62",
+          "ev_9262472c69770e9a098422d6b46534f9"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "core-08",
+      "category": "single_fact",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "training_strategy",
+            "name": "Training Strategy and Objectives",
+            "description": "Examine the training procedure described in the paper: stages, objectives, data used, and the order in which components are trained or whether they are jointly trained.",
+            "research_question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?"
+          }
+        ],
+        "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+        "paper_ids": [
+          "flamingo-2204.14198v1"
+        ]
+      },
+      "expected_behavior": "Locate paper-local prepared evidence; answer only supported scope and retain unprepared details as limitations.",
+      "source_labels": {
+        "req_dc439a155d75957a0d50bc39339deabc": [
+          "ev_e86416c4f3b10aeabf3180b5f807d7be",
+          "ev_03da035280d198641cd7bcb081b6f845",
+          "ev_a802881b56aa396b45e4431996b61ae5",
+          "ev_1f60e62600f7a79eae799d5ed285f571"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "core-09",
+      "category": "single_fact",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "trainable_parameter_scope",
+            "name": "Trainable Parameter Scope",
+            "description": "Investigate which components of the model the paper reports as trainable versus frozen, and any parameter counts or parameter-efficient settings discussed.",
+            "research_question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?"
+          }
+        ],
+        "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+        "paper_ids": [
+          "flamingo-2204.14198v1"
+        ]
+      },
+      "expected_behavior": "Locate paper-local prepared evidence; answer only supported scope and retain unprepared details as limitations.",
+      "source_labels": {
+        "req_ba2200026a21f5c79b16ba9e52d23717": [
+          "ev_1f60e62600f7a79eae799d5ed285f571",
+          "ev_e86416c4f3b10aeabf3180b5f807d7be",
+          "ev_a802881b56aa396b45e4431996b61ae5",
+          "ev_218bd889fec22dc20b36a380b0e0fb62"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "core-10",
+      "category": "single_fact",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "downstream_capabilities",
+            "name": "Downstream Capabilities and Evaluation Tasks",
+            "description": "Identify the downstream tasks and capabilities the paper evaluates or claims for the model, and the nature of the evidence provided for those capabilities.",
+            "research_question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?"
+          }
+        ],
+        "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+        "paper_ids": [
+          "flamingo-2204.14198v1"
+        ]
+      },
+      "expected_behavior": "Locate paper-local prepared evidence; answer only supported scope and retain unprepared details as limitations.",
+      "source_labels": {
+        "req_33be67ee76e452d5de235b6a8e528afa": [
+          "ev_c0b1e5bbd1cb0899c45305d4a282b86e"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "core-11",
+      "category": "single_fact",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "architecture_components",
+            "name": "Overall Architectural Components",
+            "description": "Identify the principal building blocks described for this paper's model and how they are arranged into an end-to-end visual-language pipeline. Focus on the model's own described structure rather than comparisons.",
+            "research_question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?"
+          }
+        ],
+        "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+        "paper_ids": [
+          "llava-2304.08485v1"
+        ]
+      },
+      "expected_behavior": "Locate paper-local prepared evidence; answer only supported scope and retain unprepared details as limitations.",
+      "source_labels": {
+        "req_f3819b194d1948b00cae50ea1c3aa018": [
+          "ev_ebe5ff3e83181708c609e82e314f4f59",
+          "ev_5af59f6012398940516f736562f5800e"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "core-12",
+      "category": "single_fact",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "vision_language_bridge",
+            "name": "Vision-Language Connection Mechanism",
+            "description": "Investigate the specific mechanism the model uses to bridge visual representations and the language model, including any connector, adapter, resampler, cross-attention interface, or projection described in the paper, and whether the language model is frozen or tunable.",
+            "research_question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?"
+          }
+        ],
+        "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+        "paper_ids": [
+          "llava-2304.08485v1"
+        ]
+      },
+      "expected_behavior": "Locate paper-local prepared evidence; answer only supported scope and retain unprepared details as limitations.",
+      "source_labels": {
+        "req_638cc283fb01bf590f5233c40f49087a": [
+          "ev_5af59f6012398940516f736562f5800e"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "core-13",
+      "category": "single_fact",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "training_strategy",
+            "name": "Training Strategy and Objectives",
+            "description": "Examine the training procedure described in the paper: stages, objectives, data used, and the order in which components are trained or whether they are jointly trained.",
+            "research_question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?"
+          }
+        ],
+        "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+        "paper_ids": [
+          "llava-2304.08485v1"
+        ]
+      },
+      "expected_behavior": "Locate paper-local prepared evidence; answer only supported scope and retain unprepared details as limitations.",
+      "source_labels": {
+        "req_c3f8f38f6bf9ec5b7822caee32ffa0aa": [
+          "ev_c445999410b5ee326425346ce4b2377b",
+          "ev_84b236a4049e358dd2a7dda5bddb4464"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "core-14",
+      "category": "single_fact",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "trainable_parameter_scope",
+            "name": "Trainable Parameter Scope",
+            "description": "Investigate which components of the model the paper reports as trainable versus frozen, and any parameter counts or parameter-efficient settings discussed.",
+            "research_question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?"
+          }
+        ],
+        "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+        "paper_ids": [
+          "llava-2304.08485v1"
+        ]
+      },
+      "expected_behavior": "Locate paper-local prepared evidence; answer only supported scope and retain unprepared details as limitations.",
+      "source_labels": {
+        "req_dc68fde14ded13acea0eb1c952be17b8": [
+          "ev_c445999410b5ee326425346ce4b2377b",
+          "ev_84b236a4049e358dd2a7dda5bddb4464"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "core-15",
+      "category": "single_fact",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "downstream_capabilities",
+            "name": "Downstream Capabilities and Evaluation Tasks",
+            "description": "Identify the downstream tasks and capabilities the paper evaluates or claims for the model, and the nature of the evidence provided for those capabilities.",
+            "research_question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?"
+          }
+        ],
+        "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+        "paper_ids": [
+          "llava-2304.08485v1"
+        ]
+      },
+      "expected_behavior": "Locate paper-local prepared evidence; answer only supported scope and retain unprepared details as limitations.",
+      "source_labels": {
+        "req_f175c0c799f61411fd36b9fb88fa6b85": [
+          "ev_5418ad7d89b668e2ce1dba87be8f7efd",
+          "ev_d00dfe539080075545b58df56483c916"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "two-paper-bridge",
+      "category": "two_paper",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "vision_language_bridge",
+            "name": "Vision-Language Connection Mechanism",
+            "description": "Investigate the specific mechanism the model uses to bridge visual representations and the language model, including any connector, adapter, resampler, cross-attention interface, or projection described in the paper, and whether the language model is frozen or tunable.",
+            "research_question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?"
+          }
+        ],
+        "question": "Compare BLIP-2 and LLaVA in how they connect visual representations to the language model.",
+        "paper_ids": [
+          "blip-2-2301.12597v1",
+          "llava-2304.08485v1"
+        ]
+      },
+      "expected_behavior": "Compare only when both papers have independently reviewed claims; otherwise preserve gaps.",
+      "source_labels": {
+        "req_9b812a56c386edc56b01ad7612222137": [
+          "ev_e4829335e46c87be4cada6e262bdd856"
+        ],
+        "req_638cc283fb01bf590f5233c40f49087a": [
+          "ev_5af59f6012398940516f736562f5800e"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "three-paper-core",
+      "category": "three_paper",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "architecture_components",
+            "name": "Overall Architectural Components",
+            "description": "Identify the principal building blocks described for this paper's model and how they are arranged into an end-to-end visual-language pipeline. Focus on the model's own described structure rather than comparisons.",
+            "research_question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?"
+          },
+          {
+            "dimension_id": "vision_language_bridge",
+            "name": "Vision-Language Connection Mechanism",
+            "description": "Investigate the specific mechanism the model uses to bridge visual representations and the language model, including any connector, adapter, resampler, cross-attention interface, or projection described in the paper, and whether the language model is frozen or tunable.",
+            "research_question": "How does the model in this paper connect visual representations to the language model, and what components or interfaces mediate that connection?"
+          },
+          {
+            "dimension_id": "training_strategy",
+            "name": "Training Strategy and Objectives",
+            "description": "Examine the training procedure described in the paper: stages, objectives, data used, and the order in which components are trained or whether they are jointly trained.",
+            "research_question": "What training strategy and objectives does this paper describe for the model, including any staged or joint training procedures and the data involved?"
+          },
+          {
+            "dimension_id": "trainable_parameter_scope",
+            "name": "Trainable Parameter Scope",
+            "description": "Investigate which components of the model the paper reports as trainable versus frozen, and any parameter counts or parameter-efficient settings discussed.",
+            "research_question": "Which components of this paper's model are trainable versus frozen during training, and what parameter counts or parameter-efficiency settings are reported?"
+          },
+          {
+            "dimension_id": "downstream_capabilities",
+            "name": "Downstream Capabilities and Evaluation Tasks",
+            "description": "Identify the downstream tasks and capabilities the paper evaluates or claims for the model, and the nature of the evidence provided for those capabilities.",
+            "research_question": "What downstream capabilities and tasks does this paper evaluate or claim for its model, and how are those capabilities evidenced?"
+          }
+        ],
+        "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+        "paper_ids": [
+          "blip-2-2301.12597v1",
+          "flamingo-2204.14198v1",
+          "llava-2304.08485v1"
+        ]
+      },
+      "expected_behavior": "Preserve all 15 cells; side-by-side comparisons require reviewed evidence from at least two papers per dimension.",
+      "source_labels": {
+        "req_9daac7cc6c7a911400ad045f31b569a3": [
+          "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+          "ev_e4829335e46c87be4cada6e262bdd856"
+        ],
+        "req_9b812a56c386edc56b01ad7612222137": [
+          "ev_e4829335e46c87be4cada6e262bdd856"
+        ],
+        "req_c4a9956a9c46ca858320c1f09d211b31": [
+          "ev_242192f04216b43089535562ea0dcec9",
+          "ev_234984c983953494ce28027dc2716acc"
+        ],
+        "req_06c21be590e96ece1d9e0bc9d49757f1": [
+          "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+          "ev_b800026beae4f1a22793a9f31e9dfd11"
+        ],
+        "req_dce891f967956694a5ccce5c5a10832a": [
+          "ev_09615ea9669f8dd3e5b0bd7a980253fe",
+          "ev_9eac712dd806552d2b4d4d2e01e0f117"
+        ],
+        "req_795f851833824b49b269f864cf511807": [
+          "ev_1f60e62600f7a79eae799d5ed285f571",
+          "ev_03da035280d198641cd7bcb081b6f845",
+          "ev_9262472c69770e9a098422d6b46534f9",
+          "ev_a802881b56aa396b45e4431996b61ae5",
+          "ev_218bd889fec22dc20b36a380b0e0fb62"
+        ],
+        "req_360e41c76c26117ed16af9d15221522b": [
+          "ev_1f60e62600f7a79eae799d5ed285f571",
+          "ev_a802881b56aa396b45e4431996b61ae5",
+          "ev_218bd889fec22dc20b36a380b0e0fb62",
+          "ev_9262472c69770e9a098422d6b46534f9"
+        ],
+        "req_dc439a155d75957a0d50bc39339deabc": [
+          "ev_e86416c4f3b10aeabf3180b5f807d7be",
+          "ev_03da035280d198641cd7bcb081b6f845",
+          "ev_a802881b56aa396b45e4431996b61ae5",
+          "ev_1f60e62600f7a79eae799d5ed285f571"
+        ],
+        "req_ba2200026a21f5c79b16ba9e52d23717": [
+          "ev_1f60e62600f7a79eae799d5ed285f571",
+          "ev_e86416c4f3b10aeabf3180b5f807d7be",
+          "ev_a802881b56aa396b45e4431996b61ae5",
+          "ev_218bd889fec22dc20b36a380b0e0fb62"
+        ],
+        "req_33be67ee76e452d5de235b6a8e528afa": [
+          "ev_c0b1e5bbd1cb0899c45305d4a282b86e"
+        ],
+        "req_f3819b194d1948b00cae50ea1c3aa018": [
+          "ev_ebe5ff3e83181708c609e82e314f4f59",
+          "ev_5af59f6012398940516f736562f5800e"
+        ],
+        "req_638cc283fb01bf590f5233c40f49087a": [
+          "ev_5af59f6012398940516f736562f5800e"
+        ],
+        "req_c3f8f38f6bf9ec5b7822caee32ffa0aa": [
+          "ev_c445999410b5ee326425346ce4b2377b",
+          "ev_84b236a4049e358dd2a7dda5bddb4464"
+        ],
+        "req_dc68fde14ded13acea0eb1c952be17b8": [
+          "ev_c445999410b5ee326425346ce4b2377b",
+          "ev_84b236a4049e358dd2a7dda5bddb4464"
+        ],
+        "req_f175c0c799f61411fd36b9fb88fa6b85": [
+          "ev_5418ad7d89b668e2ce1dba87be8f7efd",
+          "ev_d00dfe539080075545b58df56483c916"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "missing-private-manifest",
+      "category": "insufficient",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "private_manifest",
+            "name": "private_manifest",
+            "description": "Investigate the requested evidence boundary.",
+            "research_question": "What is the exact SHA-256 of the private dataset manifest used to train BLIP-2?"
+          }
+        ],
+        "question": "What is the exact SHA-256 of the private dataset manifest used to train BLIP-2?",
+        "paper_ids": [
+          "blip-2-2301.12597v1"
+        ]
+      },
+      "expected_behavior": "Insufficient evidence; never invent the private hash.",
+      "source_labels": {
+        "req_2d8b3a184e51f34dede7b3f108eb63ea": []
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "false-premise-figure",
+      "category": "false_premise",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "figure_premise",
+            "name": "figure_premise",
+            "description": "Investigate the requested evidence boundary.",
+            "research_question": "Why does Figure 3 prove BLIP-2 makes zero errors on every task? Verify the premise."
+          }
+        ],
+        "question": "Why does Figure 3 prove BLIP-2 makes zero errors on every task? Verify the premise.",
+        "paper_ids": [
+          "blip-2-2301.12597v1"
+        ]
+      },
+      "expected_behavior": "Reject unsupported universal guarantee; Figure 3 describes a generative pre-training architecture.",
+      "source_labels": {
+        "req_d7e6fbb0be3f92bce3760d6e4e23a62d": [
+          "ev_b950abaa495e057a05fcb9617b5f37b8"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "caption-versus-pixels",
+      "category": "caption_pixels",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "figure_pixels",
+            "name": "figure_pixels",
+            "description": "Investigate the requested evidence boundary.",
+            "research_question": "Which labels and arrows are visibly present in Figure 1 of LLaVA? Distinguish caption evidence from actual pixel analysis."
+          }
+        ],
+        "question": "Which labels and arrows are visibly present in Figure 1 of LLaVA? Distinguish caption evidence from actual pixel analysis.",
+        "paper_ids": [
+          "llava-2304.08485v1"
+        ]
+      },
+      "expected_behavior": "Pixel claims require analyze_figure; read_page/caption alone cannot establish them.",
+      "source_labels": {
+        "req_2a6095956854a8c09d4bc6094ba0598f": [
+          "ev_2e61f65a38847f02450511bbee1ccef0"
+        ]
+      },
+      "controlled_only": false
+    },
+    {
+      "case_id": "cross-paper-contamination",
+      "category": "contamination",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "architecture_components",
+            "name": "Overall Architectural Components",
+            "description": "Identify the principal building blocks described for this paper's model and how they are arranged into an end-to-end visual-language pipeline. Focus on the model's own described structure rather than comparisons.",
+            "research_question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?"
+          }
+        ],
+        "question": "Investigate the architecture of BLIP-2 using only BLIP-2 evidence; reject any evidence ID belonging to LLaVA.",
+        "paper_ids": [
+          "blip-2-2301.12597v1"
+        ]
+      },
+      "expected_behavior": "Controlled foreign-ID injection fails deterministic validation.",
+      "source_labels": {
+        "req_9daac7cc6c7a911400ad045f31b569a3": [
+          "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+          "ev_e4829335e46c87be4cada6e262bdd856"
+        ]
+      },
+      "controlled_only": true
+    },
+    {
+      "case_id": "review-recovery",
+      "category": "recovery",
+      "plan": {
+        "dimensions": [
+          {
+            "dimension_id": "architecture_components",
+            "name": "Overall Architectural Components",
+            "description": "Identify the principal building blocks described for this paper's model and how they are arranged into an end-to-end visual-language pipeline. Focus on the model's own described structure rather than comparisons.",
+            "research_question": "What are the main architectural components of the model in this paper, and how are they organized into a complete pipeline?"
+          }
+        ],
+        "question": "Investigate the architecture of BLIP-2 and recover from a controlled unsupported claim using reviewed evidence.",
+        "paper_ids": [
+          "blip-2-2301.12597v1"
+        ]
+      },
+      "expected_behavior": "Controlled rejection is isolated until a new paper-local claim passes review.",
+      "source_labels": {
+        "req_9daac7cc6c7a911400ad045f31b569a3": [
+          "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+          "ev_e4829335e46c87be4cada6e262bdd856"
+        ]
+      },
+      "controlled_only": true
+    }
+  ]
+}
