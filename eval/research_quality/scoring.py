@@ -3,6 +3,7 @@
 from eval.research_quality.dataset_loader import approved_references
 from eval.research_quality.metrics import metrics_report
 from eval.research_quality.schemas import (
+    AIAssessment,
     HumanAssessment,
     QualityDataset,
     QualityPrediction,
@@ -27,7 +28,13 @@ def keyed(records, model):
 
 
 def score_benchmark(
-    dataset, predictions=(), assessments=(), *, split="test", reference_kind=None
+    dataset,
+    predictions=(),
+    assessments=(),
+    *,
+    split="test",
+    reference_kind=None,
+    ai_assessments=(),
 ):
     dataset = QualityDataset.model_validate(dataset.model_dump(mode="python"))
     kind = reference_kind or dataset.manifest.reference_kind
@@ -51,9 +58,15 @@ def score_benchmark(
                 group_splits[group] = case.split
     predicted = keyed(predictions, QualityPrediction)
     human = keyed(assessments, HumanAssessment)
-    if not set(predicted) <= set(cases) or not set(human) <= set(cases):
+    ai = keyed(ai_assessments, AIAssessment)
+    if ai and kind != "ai_reviewed":
+        raise ScoringInputError("ai_assessment_requires_ai_reference_scope")
+    if set(human) & set(ai):
+        raise ScoringInputError("conflicting_human_and_ai_assessments")
+    semantic = human | ai
+    if not set(predicted) <= set(cases) or not set(semantic) <= set(cases):
         raise ScoringInputError("unknown_case_id")
-    for identity, assessment in human.items():
+    for identity, assessment in semantic.items():
         case, prediction = cases[identity], predicted.get(identity)
         if (
             prediction is None
@@ -129,14 +142,16 @@ def score_benchmark(
                 correct=False,
                 score_source="operational_failure",
             )
-        elif case.case_id not in human:
+        elif case.case_id not in semantic:
             row.update(status="pending_human_assessment")
         else:
-            assessment = human[case.case_id]
+            assessment = semantic[case.case_id]
             row.update(
                 status="scored",
                 correct=assessment.semantic_correct,
-                score_source="human_semantic_review",
+                score_source="ai_semantic_review"
+                if case.case_id in ai
+                else "human_semantic_review",
                 comparison_rubric=assessment.comparison_rubric.model_dump()
                 if assessment.comparison_rubric
                 else None,
@@ -168,6 +183,15 @@ def score_benchmark(
         "result_scope": "provisional_ai_reviewed_reference"
         if kind == "ai_reviewed"
         else "human_gold",
+        "semantic_assessment_source": "ai_assisted"
+        if ai
+        else "human"
+        if human
+        else "none",
+        "human_semantic_assessment_count": sum(i in selected for i in human),
+        "ai_semantic_assessment_count": sum(i in selected for i in ai),
+        "loaded_human_semantic_assessment_count": len(human),
+        "loaded_ai_semantic_assessment_count": len(ai),
         "dataset_version": dataset.manifest.dataset_version,
         "split": split,
         "candidate_cases": sum(
@@ -185,11 +209,11 @@ def score_benchmark(
         "metrics": metrics,
         "case_results": rows,
         "protocol": {
-            "open_answer_semantics": "Human assessment bound to case and prediction hashes; no string-match correctness.",
+            "open_answer_semantics": "Semantic review bound to case and prediction hashes; no string-match correctness. AI reviews require explicit ai_reviewed reference scope and remain separate from human review.",
             "accuracy_denominator": "Cases with a known correctness value. Missing/invalid predictions are failures; ungraded open answers are reported separately, not silently treated as correct or incorrect.",
             "reviewer_rates": "Confusion matrix and false-accept/reject denominators use valid label predictions only; missing/invalid predictions remain explicit operational failures in overall/task accuracy.",
             "abstention": "Structured decision accuracy, not automatic semantic judgment of refusal prose.",
-            "comparison_rubric": "Four human axes, each 0..2; aggregate fractions do not infer correctness from a threshold.",
+            "comparison_rubric": "Four semantic-review axes, each 0..2, with explicit assessment provenance; aggregate fractions do not infer correctness from a threshold.",
         },
         "real_provider_calls": 0,
     }
@@ -203,6 +227,7 @@ def reference_metric_names(value):
             "unscored_gold_cases": "unscored_reference_cases",
             "positive_gold_cases": "positive_reference_cases",
             "negative_gold_cases": "negative_reference_cases",
+            "human_rubric_cases": "semantic_rubric_cases",
         }
         return {names.get(k, k): reference_metric_names(v) for k, v in value.items()}
     return value

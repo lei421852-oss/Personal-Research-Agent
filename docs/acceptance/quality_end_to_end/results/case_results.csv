@@ -1,0 +1,3203 @@
+﻿case_id,split,task_type,quality_correct,score_source,execution_status,provider_attempts,latency_ms,question,actual_answer,reviewer_label,abstained,grading_note,failure
+rqv1-claim-clip-symmetric-loss,dev,claim,True,ai_semantic_review,completed,6,9249.5,CLIP: What loss does CLIP optimize over image-text similarity scores?,"# Verified findings and evidence gaps
+
+CLIP: What loss does CLIP optimize over image-text similarity scores?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## training objective · Verified findings
+
+### clip-2103.00020v1
+
+Requirement: `req_9ecf7007567aeecd03af6aaced630f00` · Status: `verified`
+
+CLIP optimizes a symmetric cross entropy loss over the image-text cosine similarity scores, maximizing the cosine similarity of the N real (image, text) pairs in the batch while minimizing the cosine similarity of the N²−N incorrect pairings.
+
+Claim: `claim_df04aa80242fcb6b18693ba2584f540b`
+
+Sources:
+
+- `ev_13217652070eda7adeb0e42abcf728eb` · clip-2103.00020v1 · Page 4
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 2421.5347949939314,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,明确给出相似度上的对称交叉熵，N真实配对/N²−N错误配对均被所引第4页支持。,[]
+rqv1-reviewer-clip-symmetric-loss-passed,dev,reviewer,True,structured_label_comparison,passed,1,1120.2,Assess whether the stated claim is fully supported by the supplied original evidence for CLIP.,,passed,,按结构化标签核对,[]
+rqv1-comparison-blip2-flamingo-vision-encoder,dev,comparison,False,ai_semantic_review,completed,15,15798.1,Compare BLIP-2 and Flamingo on vision encoder using only the prepared corpus.,"# Verified findings and evidence gaps
+
+Compare BLIP-2 and Flamingo on vision encoder using only the prepared corpus.
+
+Status: `completed`
+
+2 of 2 planned requirements have reviewed evidence; 0 remain missing.
+
+## vision encoder · Verified findings
+
+### blip-2-2301.12597v1
+
+Requirement: `req_9a9be430e5ba45bff83d6a3ce1a4d2ed` · Status: `verified`
+
+BLIP-2's documented vision-encoder facts: it uses two frozen pre-trained vision transformer image encoders — ViT-L/14 from CLIP and ViT-G/14 from EVA-CLIP; the last ViT layer is removed and the second-to-last layer's output features are used, which slightly improves performance (e.g., frozen image features of size 257x1024 for ViT-L/14). BLIP-2 contrasts with Flamingo by using frozen image encoders plus a lightweight Q-Former, outperforming Flamingo by 8.7% on zero-shot VQAv2 with 54x fewer trainable parameters; the paper does not document Flamingo's own vision encoder in this paper.
+
+Claim: `claim_50b536e3f2d96002d517ce9a07d67b53`
+
+Sources:
+
+- `ev_9331722f1a47399ab173e624d02c6985` · blip-2-2301.12597v1 · Page 4
+- `ev_65bb1fa95a078ec3cacc188e7d033199` · blip-2-2301.12597v1 · Page 3
+- `ev_b800026beae4f1a22793a9f31e9dfd11` · blip-2-2301.12597v1 · Page 2
+- `ev_9eac712dd806552d2b4d4d2e01e0f117` · blip-2-2301.12597v1 · Page 1
+
+### flamingo-2204.14198v1
+
+Requirement: `req_fc4e37577cfdbaec487b0362bdba1d67` · Status: `verified`
+
+Per Flamingo's documented facts: its vision encoder is a pretrained Normalizer-Free ResNet (NFNet), specifically the F6 model, chosen for its performance/efficiency trade-off, and pretrained with a contrastive objective on image-text pairs. Visual features from the encoder (with learnt temporal position encodings, no spatial grid position encodings; images treated as single-frame video) are flattened and fed to a Resampler that produces a fixed small number (64) of visual outputs to reduce vision-text cross-attention computation. (These are the facts this paper documents about its vision encoder, for use in comparing with BLIP-2.)
+
+Claim: `claim_0f049c80648b8a1f8b98f9d06b9a62f9`
+
+Sources:
+
+- `ev_03da035280d198641cd7bcb081b6f845` · flamingo-2204.14198v1 · Page 10
+- `ev_9262472c69770e9a098422d6b46534f9` · flamingo-2204.14198v1 · Page 11
+- `ev_1863b35f4e6e9086964ec47670f5ea7b` · flamingo-2204.14198v1 · Page 11
+
+Side-by-side verified claims: `claim_50b536e3f2d96002d517ce9a07d67b53`, `claim_0f049c80648b8a1f8b98f9d06b9a62f9`
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 2,
+  ""verified_requirements"": 2,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 2,
+  ""reviewed_requirements"": 2,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 3236.9569540023804,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,主要骨干/层选择正确，但加入与视觉编码器比较无关的8.7%/54×性能结论，并声称整篇BLIP-2不记载Flamingo编码器；有限引用不能证明整篇缺失。,[]
+rqv1-abstention-blip-caption-rgb,dev,abstention,True,structured_abstention_decision,completed,1,1586.4,"Using only the supplied figure caption of BLIP, give the exact RGB hexadecimal color of the main module boxes. Do not inspect image pixels or call a vision tool.",The supplied caption does not state any RGB hexadecimal color for the main module boxes.,,True,按结构化标签核对,[]
+rqv1-claim-clip-batch-pairings,test,claim,True,ai_semantic_review,completed,10,14421.8,CLIP: Which pairings are treated as real in a batch of N image-text pairs?,"# Verified findings and evidence gaps
+
+CLIP: Which pairings are treated as real in a batch of N image-text pairs?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## training pairings · Verified findings
+
+### clip-2103.00020v1
+
+Requirement: `req_4e16b087fb92d46467c0cbfccdd50b9e` · Status: `verified`
+
+In a batch of N image-text pairs, CLIP treats the N diagonal (matched) image-text pairs as the real pairs; the other N²−N off-diagonal pairings are treated as incorrect.
+
+Claim: `claim_d55d06b377e568f8ed994417075a0ecb`
+
+Sources:
+
+- `ev_b1dfdf019f902850d235d5e5f8f3ffeb` · clip-2103.00020v1 · Page 4
+- `ev_13217652070eda7adeb0e42abcf728eb` · clip-2103.00020v1 · Page 4
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 1685.0056320108706,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,N个匹配对与N²−N错误对计数正确，联合引用两个原段落；未混淆所有跨batch配对。,[]
+rqv1-claim-clip-two-encoders,test,claim,True,ai_semantic_review,completed,5,7191.6,CLIP: What two encoders are jointly trained in the prepared description?,"# Evidence-grounded research report
+
+CLIP: What two encoders are jointly trained in the prepared description?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## architecture · Verified findings
+
+### clip-2103.00020v1
+
+Requirement: `req_f737524cbb8b98e5bc10596f63344d2d` · Status: `verified`
+
+CLIP jointly trains an image encoder and a text encoder (to predict correct image-text pairings / maximize cosine similarity of matched embeddings).
+
+Claim: `claim_55281621144ba1d457231956858cffe7`
+
+Sources:
+
+- `ev_7e22d464b738e57a92e8a2d4cf3b38a4` · clip-2103.00020v1 · Page 2
+- `ev_13217652070eda7adeb0e42abcf728eb` · clip-2103.00020v1 · Page 4
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 1904.9168540077517,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,回答图像编码器和文本编码器，配对学习说明与两条引用一致。,[]
+rqv1-claim-clip-zero-shot-classifier,test,claim,True,ai_semantic_review,completed,4,5712.0,CLIP: How is a zero-shot classifier synthesized at test time?,"# Evidence-grounded research report
+
+CLIP: How is a zero-shot classifier synthesized at test time?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## inference · Verified findings
+
+### clip-2103.00020v1
+
+Requirement: `req_128facd590a414930d4694594ac5db7b` · Status: `verified`
+
+At test time, CLIP's learned text encoder synthesizes a zero-shot linear classifier by embedding the names or descriptions of the target dataset's classes.
+
+Claim: `claim_15dfbc6d936580e7e3ac50e25cb4fec6`
+
+Sources:
+
+- `ev_7e22d464b738e57a92e8a2d4cf3b38a4` · clip-2103.00020v1 · Page 2
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 1528.6039800121216,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,文本编码器嵌入目标类名/描述形成零样本线性分类器，来源完整支持。,[]
+rqv1-claim-clip-whole-text-proxy,test,claim,True,ai_semantic_review,completed,6,8504.3,CLIP: Does the explored proxy task predict the exact words or the paired text as a whole?,"# Evidence-grounded research report
+
+CLIP: Does the explored proxy task predict the exact words or the paired text as a whole?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## objective scope · Verified findings
+
+### clip-2103.00020v1
+
+Requirement: `req_525cd528849043ab864fba3e585d538e` · Status: `verified`
+
+CLIP explores a contrastive proxy task that predicts only which text as a whole is paired with which image, not the exact words of that text (in contrast to prior predictive approaches that try to predict the exact words accompanying each image).
+
+Claim: `claim_c233134e7efac7515b818373d0ac8111`
+
+Sources:
+
+- `ev_075e49db551983dab13b66fb666c8fc9` · clip-2103.00020v1 · Page 4
+- `ev_b1dfdf019f902850d235d5e5f8f3ffeb` · clip-2103.00020v1 · Page 4
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 1696.0413060005521,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,区分whole-text配对代理任务与exact-word预测，保持原文限定。,[]
+rqv1-claim-clip-reported-efficiency,test,claim,False,operational_failure,completed,5,63893.4,CLIP: What efficiency change is reported when swapping the bag-of-words predictive objective for a contrastive objective?,,,,无有效答案：执行失败,"[{""code"": ""dependency_failure"", ""message"": ""Reviewer dependency could not complete within its permitted attempts."", ""details"": {""phase"": ""async_dependency"", ""error_type"": ""APIConnectionError"", ""message"": ""Dependency operation failed."", ""cause_type"": ""RemoteProtocolError"", ""classification"": ""transient"", ""retry_exhausted"": true, ""attempts"": 3, ""retry_count"": 2}}]"
+rqv1-claim-blip-vision-encoder,test,claim,False,operational_failure,not_executed,3,31529.2,BLIP: How does BLIP's image encoder represent the input image?,,,,无有效答案：执行失败,"[{""code"": ""dependency_failure"", ""message"": ""Worker dependency call failed after its permitted attempts."", ""requirement_ids"": [""req_7007c410dd85c4a3794b0df2a1cf63f7""], ""details"": {""phase"": ""async_dependency"", ""error_type"": ""APIConnectionError"", ""message"": ""Dependency operation failed."", ""cause_type"": ""RemoteProtocolError"", ""classification"": ""transient"", ""retry_exhausted"": true, ""attempts"": 3, ""retry_count"": 2}}]"
+rqv1-claim-blip-med-functionalities,test,claim,False,operational_failure,not_executed,3,60707.0,BLIP: What three functionalities does MED support?,,,,无有效答案：执行失败,"[{""code"": ""dependency_failure"", ""message"": ""Worker dependency call failed after its permitted attempts."", ""requirement_ids"": [""req_5f87ff14123e32c6619806e91ec54e96""], ""details"": {""phase"": ""async_dependency"", ""error_type"": ""APIConnectionError"", ""message"": ""Dependency operation failed."", ""cause_type"": ""RemoteProtocolError"", ""classification"": ""transient"", ""retry_exhausted"": true, ""attempts"": 3, ""retry_count"": 2}}]"
+rqv1-claim-blip-cross-attention-placement,test,claim,True,ai_semantic_review,completed,7,41941.6,BLIP: Where is cross-attention inserted in the image-grounded text encoder?,"# Evidence-grounded research report
+
+BLIP: Where is cross-attention inserted in the image-grounded text encoder?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## vision language bridge · Verified findings
+
+### blip-2201.12086v2
+
+Requirement: `req_1d3517d67619bcbde01cdacd6a6dfe74` · Status: `verified`
+
+In the image-grounded text encoder, cross-attention is inserted as one additional cross-attention (CA) layer between the self-attention (SA) layer and the feed forward network (FFN) in each transformer block of the text encoder.
+
+Claim: `claim_21debf93cb8e7cde5ee5e92d8045a63f`
+
+Sources:
+
+- `ev_197064d097092640e20dc38ce8045682` · blip-2201.12086v2 · Page 3
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 1662.6161629974376,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,CA在每个文本transformer block的SA与FFN之间，实际引用与答案一致。,[]
+rqv1-claim-blip-itm-negatives,test,claim,True,ai_semantic_review,completed,5,7592.4,BLIP: What does ITM classify and how are harder negative pairs selected?,"# Evidence-grounded research report
+
+BLIP: What does ITM classify and how are harder negative pairs selected?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## training objective · Verified findings
+
+### blip-2201.12086v2
+
+Requirement: `req_512505889a95e5a6cebd8c3f4bc02e91` · Status: `verified`
+
+BLIP's Image-Text Matching Loss (ITM) is a binary classification task where an ITM head (a linear layer) predicts whether an image-text pair is positive (matched) or negative (unmatched) from their multimodal feature. Harder negative pairs are selected via the hard negative mining strategy of Li et al. (2021a), in which negative pairs with higher contrastive similarity within a batch are more likely to be chosen to compute the loss.
+
+Claim: `claim_bd75e51bfc3a00e371ef087a1a2ce603`
+
+Sources:
+
+- `ev_8168c4959ec3caf6a1554f9e787a9434` · blip-2201.12086v2 · Page 3
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 1806.2025029939832,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,ITM二分类及更高batch内对比相似度负例更可能被选中，两个要点均完整回答。,[]
+rqv1-claim-blip-label-smoothing,test,claim,True,ai_semantic_review,completed,6,12341.0,BLIP: What label-smoothing value is used for the language-modeling loss?,"# Verified findings and evidence gaps
+
+BLIP: What label-smoothing value is used for the language-modeling loss?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## training settings · Verified findings
+
+### blip-2201.12086v2
+
+Requirement: `req_9295fd5921f152bed2291ae67c3a57c7` · Status: `verified`
+
+For the language-modeling (LM) loss, BLIP applies a label smoothing of 0.1 when computing the loss.
+
+Claim: `claim_66722ec0b17a285b8b7919462baa38f6`
+
+Sources:
+
+- `ev_6228bca0d420f2db5c71a0397f93e262` · blip-2201.12086v2 · Page 3
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 1791.0210639965953,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,正确限定LM loss的label smoothing=0.1，没有泛化到全部损失。,[]
+rqv1-claim-blip-capfilt-initialization,dev,claim,True,ai_semantic_review,completed,7,10117.8,BLIP: How are the CapFilt captioner and filter initialized and fine-tuned?,"# Verified findings and evidence gaps
+
+BLIP: How are the CapFilt captioner and filter initialized and fine-tuned?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## data preparation · Verified findings
+
+### blip-2201.12086v2
+
+Requirement: `req_928b3f394198e8c27a6de6ea3d15c4e4` · Status: `verified`
+
+Both the CapFilt captioner and filter are initialized from the same pre-trained MED model and then fine-tuned individually on the COCO dataset in a lightweight procedure. Specifically, the captioner is an image-grounded text decoder fine-tuned with the LM objective to decode texts given images, and the filter is an image-grounded text encoder fine-tuned with the ITC and ITM objectives to learn whether a text matches an image.
+
+Claim: `claim_3ac5896cc80c92e080a85934c25514db`
+
+Sources:
+
+- `ev_03f0209e1af23ec5c3e017db94ac940e` · blip-2201.12086v2 · Page 4
+- `ev_0ef849392533fb9fe735d1fe7cd8ebf9` · blip-2201.12086v2 · Page 4
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 1774.330189000466,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,同一MED初始化、COCO分别微调及LM/ITC/ITM职责均由实际引用支持。,[]
+rqv1-claim-blip2-two-stages,test,claim,True,ai_semantic_review,completed,5,8274.5,BLIP-2: What two pretraining stages connect Q-Former to frozen unimodal models?,"# Evidence-grounded research report
+
+BLIP-2: What two pretraining stages connect Q-Former to frozen unimodal models?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## frozen trainable scope · Verified findings
+
+### blip-2-2301.12597v1
+
+Requirement: `req_cbbd4eeb305e2c8c829b7e2bd2729cb9` · Status: `verified`
+
+BLIP-2 connects Q-Former to frozen unimodal models through two pretraining stages: (1) a vision-language representation learning stage with a frozen image encoder, and (2) a vision-to-language generative learning stage with a frozen LLM.
+
+Claim: `claim_5624818c7af8f0744eb4d47b2372a199`
+
+Sources:
+
+- `ev_525a1f73be26c523e5fb57a5a02a3ecc` · blip-2-2301.12597v1 · Page 2
+- `ev_242192f04216b43089535562ea0dcec9` · blip-2-2301.12597v1 · Page 3
+- `ev_e4829335e46c87be4cada6e262bdd856` · blip-2-2301.12597v1 · Page 4
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 2055.4436489910586,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,两阶段名称、顺序及冻结图像编码器/LLM关系正确。,[]
+rqv1-claim-blip2-query-shape,test,claim,True,ai_semantic_review,completed,6,10658.5,BLIP-2: How many queries and what query dimension are used in the described experiments?,"# Evidence-grounded research report
+
+BLIP-2: How many queries and what query dimension are used in the described experiments?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## bottleneck · Verified findings
+
+### blip-2-2301.12597v1
+
+Requirement: `req_b204b90ce79c0a529c6b23f8f86b498d` · Status: `verified`
+
+BLIP-2 uses 32 queries, each with a dimension of 768 (matching the hidden dimension of the Q-Former), so the output query representation Z is 32 × 768.
+
+Claim: `claim_499408993dc1bbc75a007caf28b04b8d`
+
+Sources:
+
+- `ev_65bb1fa95a078ec3cacc188e7d033199` · blip-2-2301.12597v1 · Page 3
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 3763.0199730047025,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,实验32 queries、每个768维、Z=32×768，与原文一致。,[]
+rqv1-claim-blip2-soft-prompts,test,claim,True,ai_semantic_review,completed,7,11846.0,BLIP-2: How are query outputs supplied to the frozen LLM in generative pretraining?,"# Evidence-grounded research report
+
+BLIP-2: How are query outputs supplied to the frozen LLM in generative pretraining?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## vision language bridge · Verified findings
+
+### blip-2-2301.12597v1
+
+Requirement: `req_9b812a56c386edc56b01ad7612222137` · Status: `verified`
+
+In generative pretraining, a fully-connected (FC) layer linearly projects the Q-Former output query embeddings Z into the same dimension as the LLM's text embedding, and the projected query embeddings are then prepended to the input text embeddings, functioning as soft visual prompts that condition the frozen LLM on the visual representation.
+
+Claim: `claim_755f98e5498e3ed3f2ea708955d3e08b`
+
+Sources:
+
+- `ev_e4829335e46c87be4cada6e262bdd856` · blip-2-2301.12597v1 · Page 4
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 2081.3366700022016,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,FC投影到LLM嵌入维度、prepended soft visual prompts，插入位置正确。,[]
+rqv1-claim-blip2-image-backbones,dev,claim,True,ai_semantic_review,completed,6,15784.8,BLIP-2: Which frozen image encoders and output layer are explored?,"# Evidence-grounded research report
+
+BLIP-2: Which frozen image encoders and output layer are explored?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## vision encoder · Verified findings
+
+### blip-2-2301.12597v1
+
+Requirement: `req_9a9be430e5ba45bff83d6a3ce1a4d2ed` · Status: `verified`
+
+BLIP-2 explores two frozen pre-trained vision transformer image encoders: ViT-L/14 from CLIP and ViT-G/14 from EVA-CLIP. For the output layer, they remove the last layer of the ViT and use the second-to-last layer's output features, which gives slightly better performance.
+
+Claim: `claim_d35a6a0263100cb7fb0bd85b1715615d`
+
+Sources:
+
+- `ev_9331722f1a47399ab173e624d02c6985` · blip-2-2301.12597v1 · Page 4
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 5383.058991006692,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,CLIP ViT-L/14与EVA-CLIP ViT-G/14、去末层并取倒数第二层，全部被引用支持。,[]
+rqv1-claim-blip2-llm-types,test,claim,True,ai_semantic_review,completed,6,14802.3,BLIP-2: Which language-model families and corresponding generative objectives are explored?,"# Verified findings and evidence gaps
+
+BLIP-2: Which language-model families and corresponding generative objectives are explored?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## language model · Verified findings
+
+### blip-2-2301.12597v1
+
+Requirement: `req_d4050717868c613833a69bdc8980cbb0` · Status: `verified`
+
+BLIP-2 explores two LLM families: the unsupervised-trained OPT model family for decoder-based LLMs, pre-trained with the language modeling loss (frozen LLM generates text conditioned on Q-Former's visual representation); and the instruction-trained FlanT5 model family for encoder-decoder-based LLMs, pre-trained with the prefix language modeling loss (prefix text + visual representation input to the encoder, suffix text as decoder generation target).
+
+Claim: `claim_885b349b16c03e4d66b7dd544c43895f`
+
+Sources:
+
+- `ev_9331722f1a47399ab173e624d02c6985` · blip-2-2301.12597v1 · Page 4
+- `ev_234984c983953494ce28027dc2716acc` · blip-2-2301.12597v1 · Page 4
+- `ev_09615ea9669f8dd3e5b0bd7a980253fe` · blip-2-2301.12597v1 · Page 2
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 2048.6499139951775,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,OPT decoder/LM loss与FlanT5 encoder-decoder/prefix LM loss对应正确。,[]
+rqv1-claim-blip2-training-steps,test,claim,True,ai_semantic_review,completed,9,17956.6,BLIP-2: How many pretraining steps are used in each of the two stages?,"# Verified findings and evidence gaps
+
+BLIP-2: How many pretraining steps are used in each of the two stages?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## training settings · Verified findings
+
+### blip-2-2301.12597v1
+
+Requirement: `req_27d0866157f0bfa6f054374d3f4c5f41` · Status: `verified`
+
+BLIP-2 pre-trains for 250k steps in the first stage and 80k steps in the second stage.
+
+Claim: `claim_006d9535a114fc5b487924f86b644608`
+
+Sources:
+
+- `ev_4825dfc97130014274b3be0682b0bffe` · blip-2-2301.12597v1 · Page 4
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 2404.979006998474,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,250k与80k按阶段正确回答，未误当样本数或epoch。,[]
+rqv1-claim-flamingo-vision-backbone,dev,claim,True,ai_semantic_review,completed,4,6888.0,Flamingo: What vision backbone is named in the prepared source?,"# Evidence-grounded research report
+
+Flamingo: What vision backbone is named in the prepared source?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## vision encoder · Verified findings
+
+### flamingo-2204.14198v1
+
+Requirement: `req_fc4e37577cfdbaec487b0362bdba1d67` · Status: `verified`
+
+The vision backbone named in the prepared source is a pretrained Normalizer-Free ResNet (NFNet), specifically the F6 model.
+
+Claim: `claim_8fc382fd4704b6217a857573c2626460`
+
+Sources:
+
+- `ev_03da035280d198641cd7bcb081b6f845` · flamingo-2204.14198v1 · Page 10
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 1871.4457650057739,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,明确NFNet F6，没有把CLIP式训练目标混同为ViT骨干。,[]
+rqv1-claim-flamingo-resampler-outputs,test,claim,True,ai_semantic_review,completed,6,9494.4,Flamingo: Why are visual features resampled and how many outputs are used in practice?,"# Evidence-grounded research report
+
+Flamingo: Why are visual features resampled and how many outputs are used in practice?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## bottleneck · Verified findings
+
+### flamingo-2204.14198v1
+
+Requirement: `req_036c17a3459a8312147f89543082e8c2` · Status: `verified`
+
+The Perceiver Resampler takes a variable number of image/video features and produces a fixed, small number of visual outputs — in practice 64 — to significantly reduce the computational complexity of vision-text cross attention, particularly important when dealing with multiple long videos. The number of output tokens equals the number of learnt latent queries.
+
+Claim: `claim_1721d0651ede9f09183dde3053146ba9`
+
+Sources:
+
+- `ev_9262472c69770e9a098422d6b46534f9` · flamingo-2204.14198v1 · Page 11
+- `ev_1863b35f4e6e9086964ec47670f5ea7b` · flamingo-2204.14198v1 · Page 11
+- `ev_1f60e62600f7a79eae799d5ed285f571` · flamingo-2204.14198v1 · Page 9
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 1631.8805480113951,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,variable features→fixed64及降低cross-attention复杂度，实际引用支持动机和数量。,[]
+rqv1-claim-flamingo-frozen-backbones,test,claim,False,ai_semantic_review,completed,5,9548.0,Flamingo: Which pretrained components are frozen and what learnable components connect them?,"# Verified findings and evidence gaps
+
+Flamingo: Which pretrained components are frozen and what learnable components connect them?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## frozen trainable scope · Verified findings
+
+### flamingo-2204.14198v1
+
+Requirement: `req_d32044dbb8eac1c40906bd9749a65701` · Status: `verified`
+
+Flamingo freezes the pretrained vision encoder (CLIP-style) and the pretrained autoregressive language model, keeping their initial capacity unchanged, and links them with two learnable architecture components: the Perceiver Resampler (which takes spatio-temporal visual features and outputs a fixed-size set of visual tokens, using learned latent queries) and a second learnable component (the gated cross-attention dense layers).
+
+Claim: `claim_574361370a1f919336f65bca6516dfd5`
+
+Sources:
+
+- `ev_1f60e62600f7a79eae799d5ed285f571` · flamingo-2204.14198v1 · Page 9
+- `ev_9262472c69770e9a098422d6b46534f9` · flamingo-2204.14198v1 · Page 11
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 2250.213084000279,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,冻结视觉/语言骨干与Resampler部分正确，但最终声称gated cross-attention dense layers。实际只引用ev_1f60...和ev_9262...，前者止于First/Resampler，后者只解释Resampler；缺少覆盖第二连接组件和gated/dense细节的引用。生产Reviewer通过不能替代完整来源支持。,[]
+rqv1-claim-flamingo-interleaved-attention,test,claim,True,ai_semantic_review,completed,7,22711.3,Flamingo: How are cross-attention and gating used with the pretrained language model?,"# Verified findings and evidence gaps
+
+Flamingo: How are cross-attention and gating used with the pretrained language model?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## vision language bridge · Verified findings
+
+### flamingo-2204.14198v1
+
+Requirement: `req_360e41c76c26117ed16af9d15221522b` · Status: `verified`
+
+Flamingo bridges a frozen pretrained LM by interleaving freshly initialized cross-attention layers between the frozen language-only self-attention layers; visual tokens (produced by the Perceiver Resampler) condition the frozen LM through these added cross-attention layers for next-token prediction. To minimize the effect of the newly added layers at initialization and improve stability and final performance, specific gating mechanisms are introduced.
+
+Claim: `claim_01bf9fd48b3b6ee9745f7cd494c12801`
+
+Sources:
+
+- `ev_218bd889fec22dc20b36a380b0e0fb62` · flamingo-2204.14198v1 · Page 4
+- `ev_a802881b56aa396b45e4431996b61ae5` · flamingo-2204.14198v1 · Page 10
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 4607.942697010003,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,冻结语言层间插入CA与初始化gating动机完整且被实际第4/10页引用支持。,[]
+rqv1-claim-flamingo-video-sampling,test,claim,True,ai_semantic_review,completed,6,29667.1,Flamingo: What frame sampling rate is described for video inputs?,"# Evidence-grounded research report
+
+Flamingo: What frame sampling rate is described for video inputs?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## video processing · Verified findings
+
+### flamingo-2204.14198v1
+
+Requirement: `req_568b35d2c96432c0f31f0c850669e467` · Status: `verified`
+
+For video inputs, frames are sampled at 1 FPS; each frame is encoded independently to obtain a sequence of T feature maps X_f, which are then concatenated before being fed to downstream components.
+
+Claim: `claim_7864a7f7d56fe0b143267dc35a34fd36`
+
+Sources:
+
+- `ev_feb34e007ade9b3e9d28cbb6e7deb391` · flamingo-2204.14198v1 · Page 10
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 10517.478357010987,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,1FPS、独立编码并拼接特征图三个要点准确。,[]
+rqv1-claim-flamingo-pretrained-lm,test,claim,True,ai_semantic_review,completed,6,12250.9,Flamingo: What language-model starting point and prediction task are described?,"# Evidence-grounded research report
+
+Flamingo: What language-model starting point and prediction task are described?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## language model · Verified findings
+
+### flamingo-2204.14198v1
+
+Requirement: `req_9d332cdc6be2aec1e6dde3e6bc818226` · Status: `verified`
+
+Flamingo starts from an existing autoregressive language model pretrained on a large and diverse text corpus (Hoffmann et al., 2022), keeps its weights frozen, and conditions it with freshly initialized cross-attention layers so the LM incorporates visual information for the next-token prediction task.
+
+Claim: `claim_de8cceacb48da0ffdf017d9b4b011ad8`
+
+Sources:
+
+- `ev_1f60e62600f7a79eae799d5ed285f571` · flamingo-2204.14198v1 · Page 9
+- `ev_a802881b56aa396b45e4431996b61ae5` · flamingo-2204.14198v1 · Page 10
+- `ev_218bd889fec22dc20b36a380b0e0fb62` · flamingo-2204.14198v1 · Page 4
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 1747.4387130059768,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,已有大语料自回归LM、冻结及视觉条件next-token任务被引用支持，未补出具体家族名。,[]
+rqv1-claim-llava-language-model,test,claim,True,ai_semantic_review,completed,5,17678.6,LLaVA (2304.08485v1): Which language model is explicitly chosen in this fixed v1 paper?,"# Evidence-grounded research report
+
+LLaVA (2304.08485v1): Which language model is explicitly chosen in this fixed v1 paper?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## language model · Verified findings
+
+### llava-2304.08485v1
+
+Requirement: `req_0656c8d3a0ae017452a5b3bdc80d7dee` · Status: `verified`
+
+LLaVA (v1) explicitly chooses LLaMA as its language model (LLM fφ(·)), citing its demonstrated effectiveness in open-source language-only instruction-tuning works.
+
+Claim: `claim_e37749e22b5103db8ad13a9d00d5959c`
+
+Sources:
+
+- `ev_ebe5ff3e83181708c609e82e314f4f59` · llava-2304.08485v1 · Page 4
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 10573.953334998805,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,固定v1选择LLaMA，版本与引用正确。,[]
+rqv1-claim-llava-vision-backbone,dev,claim,True,ai_semantic_review,completed,6,11534.6,LLaVA (2304.08485v1): Which visual encoder and features are considered?,"# Evidence-grounded research report
+
+LLaVA (2304.08485v1): Which visual encoder and features are considered?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## vision encoder · Verified findings
+
+### llava-2304.08485v1
+
+Requirement: `req_3d9c3755623c6be2479b12b7db1d443e` · Status: `verified`
+
+LLaVA uses the pre-trained CLIP visual encoder ViT-L/14 to produce visual features Zv = g(Xv); grid features both before and after the last Transformer layer are considered in experiments. A trainable linear projection matrix W converts Zv into language embedding tokens Hv. The paper also notes that more sophisticated connection schemes (e.g., gated cross-attention in Flamingo, Q-former in BLIP-2) and other vision encoders such as SAM providing object-level features could be considered but are left as future work.
+
+Claim: `claim_eee9f4e60c42e8f0d7a70d55918461ed`
+
+Sources:
+
+- `ev_5af59f6012398940516f736562f5800e` · llava-2304.08485v1 · Page 4
+- `ev_d39623f7635492ff9c1a349e90426601` · llava-2304.08485v1 · Page 4
+- `ev_c445999410b5ee326425346ce4b2377b` · llava-2304.08485v1 · Page 5
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 1648.2406760042068,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,CLIP ViT-L/14及末层前后grid features正确；额外提及SAM/Q-Former设计明确标为future work，并有相应引用。,[]
+rqv1-claim-llava-linear-projection,test,claim,True,ai_semantic_review,completed,6,8630.7,LLaVA (2304.08485v1): How are image features mapped into the language embedding space?,"# Verified findings and evidence gaps
+
+LLaVA (2304.08485v1): How are image features mapped into the language embedding space?
+
+Status: `generation_degraded`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## vision language bridge
+
+### llava-2304.08485v1
+
+Requirement: `req_638cc283fb01bf590f5233c40f49087a` · Status: `verified`
+
+LLaVA uses a simple linear layer to bridge vision and language: a pre-trained CLIP visual encoder ViT-L/14 produces visual features Zv = g(Xv), and a trainable projection matrix W converts Zv into language embedding tokens Hq (visual tokens Hv) having the same dimensionality as the word embedding space of the language model. During Stage 1 pre-training for feature alignment, only this projection matrix W is trained (visual encoder and LLM kept frozen), aligning image features Hv with the pre-trained LLM word embedding.
+
+Claim: `claim_a9fe5a7711cc9c4b05111f39b2c9ad22`
+
+Sources:
+
+- `ev_5af59f6012398940516f736562f5800e` · llava-2304.08485v1 · Page 4
+- `ev_d39623f7635492ff9c1a349e90426601` · llava-2304.08485v1 · Page 4
+- `ev_c445999410b5ee326425346ce4b2377b` · llava-2304.08485v1 · Page 5
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 1778.597301003174,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 0,
+  ""report_generation_success_rate"": 0.0,
+  ""report_status"": ""generation_degraded"",
+  ""degraded_generation"": true
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+- Model generation failed; this deterministic report adds no technical conclusions.
+
+Execution issue: `dependency_failure` — Synthesis did not produce a validated model report; verified facts remain available.
+",,,W线性映射到LM词嵌入维度，追加Stage1只训练W的说明也有引用。,[]
+rqv1-claim-llava-stage-one,test,claim,True,ai_semantic_review,completed,8,10662.5,LLaVA (2304.08485v1): Which parameters are updated in feature-alignment pretraining?,"# Evidence-grounded research report
+
+LLaVA (2304.08485v1): Which parameters are updated in feature-alignment pretraining?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## frozen trainable scope · Verified findings
+
+### llava-2304.08485v1
+
+Requirement: `req_877afd8fa29bd31deb8e731b2976f53e` · Status: `verified`
+
+In stage 1 feature-alignment pretraining, both the visual encoder and LLM weights are kept frozen, and only the projection matrix W (θ = W) is trained; stage 2 fine-tuning then additionally updates the LLM while keeping the visual encoder frozen.
+
+Claim: `claim_53418d57c025498882fc55d175457c39`
+
+Sources:
+
+- `ev_c445999410b5ee326425346ce4b2377b` · llava-2304.08485v1 · Page 5
+- `ev_84b236a4049e358dd2a7dda5bddb4464` · llava-2304.08485v1 · Page 5
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 2092.6990890002344,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,Stage1只更新W、视觉与LLM冻结；附带Stage2区别被单独引用支持。,[]
+rqv1-claim-llava-stage-two,test,claim,True,ai_semantic_review,completed,11,12766.1,LLaVA (2304.08485v1): Which parameters are updated in end-to-end fine-tuning?,"# Evidence-grounded research report
+
+LLaVA (2304.08485v1): Which parameters are updated in end-to-end fine-tuning?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## frozen trainable scope · Verified findings
+
+### llava-2304.08485v1
+
+Requirement: `req_877afd8fa29bd31deb8e731b2976f53e` · Status: `verified`
+
+In Stage 2 end-to-end fine-tuning, the visual encoder weights are frozen; only the pre-trained projection layer weights (W) and the LLM weights (φ) are updated, i.e., the trainable parameters are θ = {W, φ}.
+
+Claim: `claim_d4c7330035fde4e60e0441ab14858f71`
+
+Sources:
+
+- `ev_84b236a4049e358dd2a7dda5bddb4464` · llava-2304.08485v1 · Page 5
+- `ev_ebe5ff3e83181708c609e82e314f4f59` · llava-2304.08485v1 · Page 4
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 1345.406667998759,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,Stage2视觉冻结、W和LLM更新，参数范围正确。,[]
+rqv1-claim-llava-instruction-counts,test,claim,True,ai_semantic_review,completed,7,10116.0,LLaVA (2304.08485v1): How are the 158K generated instruction-following samples divided?,"# Verified findings and evidence gaps
+
+LLaVA (2304.08485v1): How are the 158K generated instruction-following samples divided?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## training data · Verified findings
+
+### llava-2304.08485v1
+
+Requirement: `req_e31c7db13ced7e0e38f6d571c34a6d51` · Status: `verified`
+
+The 158K unique language-image instruction-following samples are divided into 58K conversation samples, 23K detailed description samples, and 77K complex reasoning samples.
+
+Claim: `claim_3e9b287d82d9e819231f21e62ac1f8ca`
+
+Sources:
+
+- `ev_bb12c44657449eb3224236e0a430a850` · llava-2304.08485v1 · Page 4
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 1772.7792149962625,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,58K/23K/77K及总158K正确且有直接原文来源。,[]
+rqv1-reviewer-clip-symmetric-loss-rejected,dev,reviewer,True,structured_label_comparison,rejected,1,1225.0,Assess whether the stated claim is fully supported by the supplied original evidence for CLIP.,,rejected,,按结构化标签核对,[]
+rqv1-reviewer-clip-batch-pairings-passed,test,reviewer,True,structured_label_comparison,passed,1,1362.7,Assess whether the stated claim is fully supported by the supplied original evidence for CLIP.,,passed,,按结构化标签核对,[]
+rqv1-reviewer-clip-batch-pairings-rejected,test,reviewer,True,structured_label_comparison,rejected,1,1691.6,Assess whether the stated claim is fully supported by the supplied original evidence for CLIP.,,rejected,,按结构化标签核对,[]
+rqv1-reviewer-clip-whole-text-proxy-passed,test,reviewer,True,structured_label_comparison,passed,1,1766.8,Assess whether the stated claim is fully supported by the supplied original evidence for CLIP.,,passed,,按结构化标签核对,[]
+rqv1-reviewer-clip-whole-text-proxy-rejected,test,reviewer,True,structured_label_comparison,rejected,1,1107.6,Assess whether the stated claim is fully supported by the supplied original evidence for CLIP.,,rejected,,按结构化标签核对,[]
+rqv1-reviewer-blip-vision-encoder-passed,test,reviewer,True,structured_label_comparison,passed,1,1093.7,Assess whether the stated claim is fully supported by the supplied original evidence for BLIP.,,passed,,按结构化标签核对,[]
+rqv1-reviewer-blip-vision-encoder-rejected,test,reviewer,True,structured_label_comparison,rejected,1,1552.9,Assess whether the stated claim is fully supported by the supplied original evidence for BLIP.,,rejected,,按结构化标签核对,[]
+rqv1-reviewer-blip-med-functionalities-passed,test,reviewer,True,structured_label_comparison,passed,1,1318.6,Assess whether the stated claim is fully supported by the supplied original evidence for BLIP.,,passed,,按结构化标签核对,[]
+rqv1-reviewer-blip-med-functionalities-rejected,test,reviewer,True,structured_label_comparison,rejected,1,1099.7,Assess whether the stated claim is fully supported by the supplied original evidence for BLIP.,,rejected,,按结构化标签核对,[]
+rqv1-reviewer-blip-label-smoothing-passed,test,reviewer,True,structured_label_comparison,passed,1,1061.0,Assess whether the stated claim is fully supported by the supplied original evidence for BLIP.,,passed,,按结构化标签核对,[]
+rqv1-reviewer-blip-label-smoothing-rejected,test,reviewer,True,structured_label_comparison,rejected,1,1457.1,Assess whether the stated claim is fully supported by the supplied original evidence for BLIP.,,rejected,,按结构化标签核对,[]
+rqv1-reviewer-blip2-query-shape-passed,test,reviewer,True,structured_label_comparison,passed,1,1190.4,Assess whether the stated claim is fully supported by the supplied original evidence for BLIP-2.,,passed,,按结构化标签核对,[]
+rqv1-reviewer-blip2-query-shape-rejected,test,reviewer,True,structured_label_comparison,rejected,1,1455.0,Assess whether the stated claim is fully supported by the supplied original evidence for BLIP-2.,,rejected,,按结构化标签核对,[]
+rqv1-reviewer-blip2-soft-prompts-passed,test,reviewer,True,structured_label_comparison,passed,1,1027.1,Assess whether the stated claim is fully supported by the supplied original evidence for BLIP-2.,,passed,,按结构化标签核对,[]
+rqv1-reviewer-blip2-soft-prompts-rejected,test,reviewer,True,structured_label_comparison,rejected,1,1352.8,Assess whether the stated claim is fully supported by the supplied original evidence for BLIP-2.,,rejected,,按结构化标签核对,[]
+rqv1-reviewer-blip2-image-backbones-passed,dev,reviewer,True,structured_label_comparison,passed,1,1009.4,Assess whether the stated claim is fully supported by the supplied original evidence for BLIP-2.,,passed,,按结构化标签核对,[]
+rqv1-reviewer-blip2-image-backbones-rejected,dev,reviewer,True,structured_label_comparison,rejected,1,1032.4,Assess whether the stated claim is fully supported by the supplied original evidence for BLIP-2.,,rejected,,按结构化标签核对,[]
+rqv1-reviewer-flamingo-vision-backbone-passed,dev,reviewer,True,structured_label_comparison,passed,1,963.6,Assess whether the stated claim is fully supported by the supplied original evidence for Flamingo.,,passed,,按结构化标签核对,[]
+rqv1-reviewer-flamingo-vision-backbone-rejected,dev,reviewer,True,structured_label_comparison,rejected,1,1149.1,Assess whether the stated claim is fully supported by the supplied original evidence for Flamingo.,,rejected,,按结构化标签核对,[]
+rqv1-reviewer-flamingo-resampler-outputs-passed,test,reviewer,True,structured_label_comparison,passed,1,1584.8,Assess whether the stated claim is fully supported by the supplied original evidence for Flamingo.,,passed,,按结构化标签核对,[]
+rqv1-reviewer-flamingo-resampler-outputs-rejected,test,reviewer,True,structured_label_comparison,rejected,1,1992.2,Assess whether the stated claim is fully supported by the supplied original evidence for Flamingo.,,rejected,,按结构化标签核对,[]
+rqv1-reviewer-flamingo-video-sampling-passed,test,reviewer,True,structured_label_comparison,passed,1,1282.3,Assess whether the stated claim is fully supported by the supplied original evidence for Flamingo.,,passed,,按结构化标签核对,[]
+rqv1-reviewer-flamingo-video-sampling-rejected,test,reviewer,True,structured_label_comparison,rejected,1,1555.5,Assess whether the stated claim is fully supported by the supplied original evidence for Flamingo.,,rejected,,按结构化标签核对,[]
+rqv1-reviewer-llava-language-model-passed,test,reviewer,True,structured_label_comparison,passed,1,1210.8,Assess whether the stated claim is fully supported by the supplied original evidence for LLaVA (2304.08485v1).,,passed,,按结构化标签核对,[]
+rqv1-reviewer-llava-language-model-rejected,test,reviewer,True,structured_label_comparison,rejected,1,1125.8,Assess whether the stated claim is fully supported by the supplied original evidence for LLaVA (2304.08485v1).,,rejected,,按结构化标签核对,[]
+rqv1-reviewer-llava-stage-one-passed,test,reviewer,True,structured_label_comparison,passed,1,1318.0,Assess whether the stated claim is fully supported by the supplied original evidence for LLaVA (2304.08485v1).,,passed,,按结构化标签核对,[]
+rqv1-reviewer-llava-stage-one-rejected,test,reviewer,True,structured_label_comparison,rejected,1,938.8,Assess whether the stated claim is fully supported by the supplied original evidence for LLaVA (2304.08485v1).,,rejected,,按结构化标签核对,[]
+rqv1-reviewer-llava-stage-two-passed,test,reviewer,True,structured_label_comparison,passed,1,1005.3,Assess whether the stated claim is fully supported by the supplied original evidence for LLaVA (2304.08485v1).,,passed,,按结构化标签核对,[]
+rqv1-reviewer-llava-stage-two-rejected,test,reviewer,True,structured_label_comparison,rejected,1,1341.9,Assess whether the stated claim is fully supported by the supplied original evidence for LLaVA (2304.08485v1).,,rejected,,按结构化标签核对,[]
+rqv1-comparison-blip2-flamingo-vision-language-bridge,test,comparison,False,ai_semantic_review,completed,11,11442.6,Compare BLIP-2 and Flamingo on vision language bridge using only the prepared corpus.,"# Verified findings and evidence gaps
+
+Compare BLIP-2 and Flamingo on vision language bridge using only the prepared corpus.
+
+Status: `completed`
+
+2 of 2 planned requirements have reviewed evidence; 0 remain missing.
+
+## vision language bridge · Verified findings
+
+### blip-2-2301.12597v1
+
+Requirement: `req_9b812a56c386edc56b01ad7612222137` · Status: `verified`
+
+BLIP-2's documented approach to the vision-language bridge: it bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders (CLIP ViT-L/14 or EVA-CLIP ViT-G/14) and frozen large language models (OPT decoder family or FlanT5 encoder-decoder family), bridging the modality gap with a lightweight Querying Transformer (Q-Former) pre-trained in two stages: (1) vision-language representation learning with a frozen image encoder and (2) vision-to-language generative learning with a frozen LLM. This lightweight bridge yields strong results with few trainable parameters — e.g., it outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer trainable parameters.
+
+Claim: `claim_600c0f6f5e8bed128d42700d0dee2826`
+
+Sources:
+
+- `ev_9eac712dd806552d2b4d4d2e01e0f117` · blip-2-2301.12597v1 · Page 1
+- `ev_525a1f73be26c523e5fb57a5a02a3ecc` · blip-2-2301.12597v1 · Page 2
+- `ev_9331722f1a47399ab173e624d02c6985` · blip-2-2301.12597v1 · Page 4
+
+### flamingo-2204.14198v1
+
+Requirement: `req_360e41c76c26117ed16af9d15221522b` · Status: `verified`
+
+Flamingo bridges vision and language by freezing a pretrained CLIP-style vision encoder and a pretrained autoregressive LM and linking them with two learnable components: a Perceiver Resampler that converts variable image/video features into a fixed small set (64) of visual tokens, and cross-attention layers interleaved with frozen language-only self-attention layers, with gating at initialization for stability. This contrasts with BLIP-2, which (per its paper) uses a lightweight Querying Transformer (Q-Former) in two stages; but for this paper only Flamingo's documented bridge is reported.
+
+Claim: `claim_2e21e1d3b65e6695c9d0cff7141874c1`
+
+Sources:
+
+- `ev_1f60e62600f7a79eae799d5ed285f571` · flamingo-2204.14198v1 · Page 9
+- `ev_9262472c69770e9a098422d6b46534f9` · flamingo-2204.14198v1 · Page 11
+- `ev_218bd889fec22dc20b36a380b0e0fb62` · flamingo-2204.14198v1 · Page 4
+
+Side-by-side verified claims: `claim_600c0f6f5e8bed128d42700d0dee2826`, `claim_2e21e1d3b65e6695c9d0cff7141874c1`
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 2,
+  ""verified_requirements"": 2,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 2,
+  ""reviewed_requirements"": 2,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 3658.0013380007586,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,BLIP-2侧未回答FC投影后prepended soft prompts这一关键接口，转向性能数字；Flamingo侧还谈BLIP-2 Q-Former两阶段，但其实际Flamingo引用不含该跨论文事实。,[]
+rqv1-comparison-blip2-flamingo-frozen-trainable-scope,test,comparison,False,ai_semantic_review,completed,9,10129.0,Compare BLIP-2 and Flamingo on frozen trainable scope using only the prepared corpus.,"# Verified findings and evidence gaps
+
+Compare BLIP-2 and Flamingo on frozen trainable scope using only the prepared corpus.
+
+Status: `completed`
+
+2 of 2 planned requirements have reviewed evidence; 0 remain missing.
+
+## frozen trainable scope · Verified findings
+
+### blip-2-2301.12597v1
+
+Requirement: `req_cbbd4eeb305e2c8c829b7e2bd2729cb9` · Status: `verified`
+
+BLIP-2's documented trainable scope: it uses a frozen pre-trained image encoder (ViT-L/14 from CLIP or ViT-G/14 from EVA-CLIP, using the second-last layer output) and a frozen LLM (OPT decoder family or FlanT5 encoder-decoder family), with only a lightweight Querying Transformer (Q-Former) trained in two stages (representation learning with frozen image encoder, then generative learning with frozen LLM). BLIP-2 is thus compute-efficient: it outperforms Flamingo80B by 8.7% on zero-shot VQAv2 while using 54x fewer trainable parameters.
+
+Claim: `claim_0e4555e5c4283b597fffe1143b6b66f4`
+
+Sources:
+
+- `ev_9331722f1a47399ab173e624d02c6985` · blip-2-2301.12597v1 · Page 4
+- `ev_b800026beae4f1a22793a9f31e9dfd11` · blip-2-2301.12597v1 · Page 2
+- `ev_9eac712dd806552d2b4d4d2e01e0f117` · blip-2-2301.12597v1 · Page 1
+- `ev_525a1f73be26c523e5fb57a5a02a3ecc` · blip-2-2301.12597v1 · Page 2
+
+### flamingo-2204.14198v1
+
+Requirement: `req_d32044dbb8eac1c40906bd9749a65701` · Status: `verified`
+
+Flamingo's frozen/trainable scope: the pretrained vision encoder and pretrained autoregressive LM weights are kept frozen (""we freeze the weights of these models so that their initial capacity remains unchanged""), and only newly added components (the Perceiver Resampler and, per the paper's description, other learnable architecture components) are trained. Specifically, the vision encoder (a pretrained NFNet-F6) is left frozen during main training because it performed favorably vs training from the text-generation objective, and the frozen models are linked via learnable architecture components. The frozen pretrained LMs provide generative language ability and stored knowledge, while learnable components bridge vision and language.
+
+Claim: `claim_5401d0fab8998427bf1b571e1d5ef866`
+
+Sources:
+
+- `ev_1f60e62600f7a79eae799d5ed285f571` · flamingo-2204.14198v1 · Page 9
+- `ev_e86416c4f3b10aeabf3180b5f807d7be` · flamingo-2204.14198v1 · Page 10
+
+Side-by-side verified claims: `claim_0e4555e5c4283b597fffe1143b6b66f4`, `claim_5401d0fab8998427bf1b571e1d5ef866`
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 2,
+  ""verified_requirements"": 2,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 2,
+  ""reviewed_requirements"": 2,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 2592.2876529948553,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,BLIP-2侧only Q-Former的排他范围缺少对FC接口的完整依据，并扩展性能；Flamingo侧只笼统描述other learnable components，未完整区分跨注意力连接组件。,[]
+rqv1-comparison-blip2-flamingo-training-objective,test,comparison,False,ai_semantic_review,completed,16,18722.1,Compare BLIP-2 and Flamingo on training objective using only the prepared corpus.,"# Verified findings and evidence gaps
+
+Compare BLIP-2 and Flamingo on training objective using only the prepared corpus.
+
+Status: `completed`
+
+2 of 2 planned requirements have reviewed evidence; 0 remain missing.
+
+## training objective · Verified findings
+
+### blip-2-2301.12597v1
+
+Requirement: `req_c2f9e90a793c063a0bd252bd1e597cb0` · Status: `verified`
+
+This paper documents BLIP-2's training objective as a two-stage pre-training of the lightweight Querying Transformer (Q-Former): (1) a vision-language representation learning stage, which bootstraps representation learning from a frozen image encoder and jointly optimizes three pre-training objectives (inspired by BLIP) that share input format and model parameters, each using a different attention masking strategy between queries and text; and (2) a vision-to-language generative learning stage, which bootstraps generative learning from a frozen LLM, concatenating/projecting the Q-Former query embeddings as soft visual prompts and pre-training with the language modeling loss for decoder-based LLMs or the prefix language modeling loss for encoder-decoder-based LLMs. Regarding the comparison with Flamingo, the paper only reports performance/efficiency contrasts (BLIP-2 outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer trainable parameters); it does not state Flamingo's training objective, so a training-objective comparison cannot be made from this paper alone.
+
+Claim: `claim_7a4b18b47277daf2fbea0cd5b74f3b7d`
+
+Sources:
+
+- `ev_525a1f73be26c523e5fb57a5a02a3ecc` · blip-2-2301.12597v1 · Page 2
+- `ev_9eac712dd806552d2b4d4d2e01e0f117` · blip-2-2301.12597v1 · Page 1
+- `ev_242192f04216b43089535562ea0dcec9` · blip-2-2301.12597v1 · Page 3
+- `ev_e4829335e46c87be4cada6e262bdd856` · blip-2-2301.12597v1 · Page 4
+- `ev_234984c983953494ce28027dc2716acc` · blip-2-2301.12597v1 · Page 4
+- `ev_b800026beae4f1a22793a9f31e9dfd11` · blip-2-2301.12597v1 · Page 2
+
+### flamingo-2204.14198v1
+
+Requirement: `req_783b62b150a0c51463d8cea199f6050c` · Status: `verified`
+
+Flamingo's training objective, per this paper: it uses a two-stage approach. First, the vision encoder is pretrained with a contrastive text-image objective (à la CLIP), using the two-term contrastive loss from Radford et al. (2021) where contrastive similarities are computed as the dot product of mean-pooled image encoder outputs and mean-pooled BERT outputs. Then, during the main Flamingo training phase, the vision encoder and the pretrained LM are frozen, and the model is trained with a text generation objective (next-token prediction) that conditions the frozen LM on visual tokens via freshly initialized, interleaved cross-attention layers.
+
+Claim: `claim_863a562f095ec337c885e9049d594359`
+
+Sources:
+
+- `ev_1f60e62600f7a79eae799d5ed285f571` · flamingo-2204.14198v1 · Page 9
+- `ev_03da035280d198641cd7bcb081b6f845` · flamingo-2204.14198v1 · Page 10
+- `ev_e86416c4f3b10aeabf3180b5f807d7be` · flamingo-2204.14198v1 · Page 10
+- `ev_a802881b56aa396b45e4431996b61ae5` · flamingo-2204.14198v1 · Page 10
+- `ev_218bd889fec22dc20b36a380b0e0fb62` · flamingo-2204.14198v1 · Page 4
+
+Side-by-side verified claims: `claim_7a4b18b47277daf2fbea0cd5b74f3b7d`, `claim_863a562f095ec337c885e9049d594359`
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 2,
+  ""verified_requirements"": 2,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 2,
+  ""reviewed_requirements"": 2,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 4011.261700987234,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,两侧主要目标都描述正确，但添加性能比较及整篇未记载他方目标的断言，超出问题且无完整来源支持。,[]
+rqv1-comparison-blip2-flamingo-language-model,test,comparison,False,ai_semantic_review,completed,11,12826.8,Compare BLIP-2 and Flamingo on language model using only the prepared corpus.,"# Verified findings and evidence gaps
+
+Compare BLIP-2 and Flamingo on language model using only the prepared corpus.
+
+Status: `completed`
+
+2 of 2 planned requirements have reviewed evidence; 0 remain missing.
+
+## language model · Verified findings
+
+### blip-2-2301.12597v1
+
+Requirement: `req_d4050717868c613833a69bdc8980cbb0` · Status: `verified`
+
+BLIP-2 uses frozen large language models (frozen unimodal models) as part of its generic and efficient pre-training strategy, bridging the modality gap to the frozen language model with a lightweight Querying Transformer (Q-Former) via a two-stage pre-training (representation learning then generative learning from the frozen language model). Leveraging this, BLIP-2 outperforms Flamingo (Flamingo80B) by 8.7% on zero-shot VQAv2 while using 54× fewer trainable parameters, demonstrating better compute efficiency.
+
+Claim: `claim_8202b2baf0cda5d3437c5b3056243d7a`
+
+Sources:
+
+- `ev_9eac712dd806552d2b4d4d2e01e0f117` · blip-2-2301.12597v1 · Page 1
+- `ev_53277b945c2ff7e5d33bf907ba8d96b5` · blip-2-2301.12597v1 · Page 2
+- `ev_b800026beae4f1a22793a9f31e9dfd11` · blip-2-2301.12597v1 · Page 2
+
+### flamingo-2204.14198v1
+
+Requirement: `req_9d332cdc6be2aec1e6dde3e6bc818226` · Status: `verified`
+
+Flamingo's documented language-model facts: the LM is a frozen existing autoregressive language model pretrained on a large, diverse text corpus (Hoffmann et al., 2022), so Flamingo gains strong generative language abilities and access to knowledge stored in the LM weights (p. 9). To integrate vision without destabilizing the pretrained LM, the language-only self-attention layers are kept frozen and interleaved with freshly initialized cross-attention layers that condition the frozen LM on visual tokens for next-token prediction (pp. 4, 10); gating mechanisms minimize the effect of the new layers at initialization (p. 4).
+
+Claim: `claim_309d9bba631e20aa38c83779a9a4b7a8`
+
+Sources:
+
+- `ev_1f60e62600f7a79eae799d5ed285f571` · flamingo-2204.14198v1 · Page 9
+- `ev_218bd889fec22dc20b36a380b0e0fb62` · flamingo-2204.14198v1 · Page 4
+- `ev_a802881b56aa396b45e4431996b61ae5` · flamingo-2204.14198v1 · Page 10
+
+Side-by-side verified claims: `claim_8202b2baf0cda5d3437c5b3056243d7a`, `claim_309d9bba631e20aa38c83779a9a4b7a8`
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 2,
+  ""verified_requirements"": 2,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 2,
+  ""reviewed_requirements"": 2,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 2994.099648989504,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,BLIP-2侧未给出有准备证据的OPT/FlanT5两家族，主要输出冻结/Q-Former与性能优势；语言模型维度的关键比较不完整。,[]
+rqv1-comparison-blip2-llava-vision-encoder,dev,comparison,True,ai_semantic_review,completed,10,9954.9,Compare BLIP-2 and LLaVA (2304.08485v1) on vision encoder using only the prepared corpus.,"# Verified findings and evidence gaps
+
+Compare BLIP-2 and LLaVA (2304.08485v1) on vision encoder using only the prepared corpus.
+
+Status: `completed`
+
+2 of 2 planned requirements have reviewed evidence; 0 remain missing.
+
+## vision encoder · Verified findings
+
+### blip-2-2301.12597v1
+
+Requirement: `req_9a9be430e5ba45bff83d6a3ce1a4d2ed` · Status: `verified`
+
+BLIP-2 uses frozen pre-trained vision transformer image encoders: ViT-L/14 from CLIP and ViT-G/14 from EVA-CLIP, keeping the encoder frozen. Specifically, it removes the last layer of the ViT and uses the second-to-last layer's output features (slightly better performance). The frozen image encoder's features (e.g., 257×1024 for ViT-L/14) are compressed by a lightweight Querying Transformer into 32 query representations of dimension 768.
+
+Claim: `claim_ce72341e1cb4d19deb87a8766944707f`
+
+Sources:
+
+- `ev_9331722f1a47399ab173e624d02c6985` · blip-2-2301.12597v1 · Page 4
+- `ev_65bb1fa95a078ec3cacc188e7d033199` · blip-2-2301.12597v1 · Page 3
+
+### llava-2304.08485v1
+
+Requirement: `req_3d9c3755623c6be2479b12b7db1d443e` · Status: `verified`
+
+LLaVA's vision encoder: it uses the pre-trained CLIP visual encoder ViT-L/14, which produces visual feature Zv = g(Xv); grid features before and after the last Transformer layer are considered. A simple trainable linear projection layer (matrix W) connects image features into the language embedding space. The paper notes more sophisticated/expensive connection schemes (e.g., Q-former used in BLIP-2, gated cross-attention in Flamingo) and other vision encoders (e.g., SAM) but leaves these as future work. In Stage 2 fine-tuning, the visual encoder weights are kept frozen (trainable parameters are the projection layer W and LLM φ).
+
+Claim: `claim_0386b321945285e065ab3adad476d9bf`
+
+Sources:
+
+- `ev_5af59f6012398940516f736562f5800e` · llava-2304.08485v1 · Page 4
+- `ev_84b236a4049e358dd2a7dda5bddb4464` · llava-2304.08485v1 · Page 5
+- `ev_d39623f7635492ff9c1a349e90426601` · llava-2304.08485v1 · Page 4
+
+Side-by-side verified claims: `claim_ce72341e1cb4d19deb87a8766944707f`, `claim_0386b321945285e065ab3adad476d9bf`
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 2,
+  ""verified_requirements"": 2,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 2,
+  ""reviewed_requirements"": 2,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 2375.7021960045677,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,两侧ViT配置、输出层选择清楚；LLaVA的其他方案明确标为future work并有来源，没有误报为当前机制。,[]
+rqv1-comparison-blip2-llava-vision-language-bridge,test,comparison,True,ai_semantic_review,completed,10,11907.4,Compare BLIP-2 and LLaVA (2304.08485v1) on vision language bridge using only the prepared corpus.,"# Verified findings and evidence gaps
+
+Compare BLIP-2 and LLaVA (2304.08485v1) on vision language bridge using only the prepared corpus.
+
+Status: `completed`
+
+2 of 2 planned requirements have reviewed evidence; 0 remain missing.
+
+## vision language bridge · Side-by-side claims
+
+### blip-2-2301.12597v1
+
+Requirement: `req_9b812a56c386edc56b01ad7612222137` · Status: `verified`
+
+BLIP-2 bridges the vision-language modality gap with a Querying Transformer (Q-Former) bootstrapped from frozen pre-trained unimodal models. The Q-Former is pre-trained in two stages: (1) a vision-language representation learning stage with a frozen image encoder, and (2) a vision-to-language generative learning stage with a frozen LLM. In the generative stage, an FC layer projects the Q-Former's output query embeddings into the LLM's text-embedding dimension, and these projected embeddings are prepended to the input text as soft visual prompts, with the Q-Former acting as an information bottleneck. The frozen image encoder options are ViT-L/14 from CLIP and ViT-G/14 from EVA-CLIP; the frozen LLM options are OPT (decoder) and FlanT5 (encoder-decoder) families.
+
+Claim: `claim_ac4a55f6b043dc8b3583a82845f2e9cb`
+
+Sources:
+
+- `ev_525a1f73be26c523e5fb57a5a02a3ecc` · blip-2-2301.12597v1 · Page 2
+- `ev_e4829335e46c87be4cada6e262bdd856` · blip-2-2301.12597v1 · Page 4
+- `ev_9331722f1a47399ab173e624d02c6985` · blip-2-2301.12597v1 · Page 4
+
+### llava-2304.08485v1
+
+Requirement: `req_638cc283fb01bf590f5233c40f49087a` · Status: `verified`
+
+For LLaVA's vision-language bridge, the paper uses a simple, lightweight, cost-effective trainable linear projection matrix W that converts pre-trained CLIP ViT-L/14 visual features Zv into language embedding tokens Hq with the same dimensionality as the LLM word embedding space; it contrasts this with more sophisticated but expensive schemes such as gated cross-attention in Flamingo and the Q-former in BLIP-2, leaving such designs as future work. During Stage 2 end-to-end fine-tuning, the visual encoder weights stay frozen while the projection layer (W) and LLM (φ) are updated.
+
+Claim: `claim_1fee9b735a92e23964c230193bbd48e5`
+
+Sources:
+
+- `ev_d39623f7635492ff9c1a349e90426601` · llava-2304.08485v1 · Page 4
+- `ev_5af59f6012398940516f736562f5800e` · llava-2304.08485v1 · Page 4
+- `ev_84b236a4049e358dd2a7dda5bddb4464` · llava-2304.08485v1 · Page 5
+
+Side-by-side verified claims: `claim_ac4a55f6b043dc8b3583a82845f2e9cb`, `claim_1fee9b735a92e23964c230193bbd48e5`
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 2,
+  ""verified_requirements"": 2,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 2,
+  ""reviewed_requirements"": 2,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 3129.5894130016677,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,Q-Former→FC→soft prompts与直接W投影的接口差异完整，各侧引用支持；future work定位正确。,[]
+rqv1-comparison-blip2-llava-frozen-trainable-scope,test,comparison,False,ai_semantic_review,completed,11,10132.0,Compare BLIP-2 and LLaVA (2304.08485v1) on frozen trainable scope using only the prepared corpus.,"# Verified findings and evidence gaps
+
+Compare BLIP-2 and LLaVA (2304.08485v1) on frozen trainable scope using only the prepared corpus.
+
+Status: `completed`
+
+2 of 2 planned requirements have reviewed evidence; 0 remain missing.
+
+## frozen trainable scope · Side-by-side claims
+
+### blip-2-2301.12597v1
+
+Requirement: `req_cbbd4eeb305e2c8c829b7e2bd2729cb9` · Status: `verified`
+
+BLIP-2's frozen/trainable scope: during generative pre-training it freezes both the pre-trained image encoder (ViT-L/14 from CLIP or ViT-G/14 from EVA-CLIP, using second-to-last layer output) and the LLM (OPT decoder-based family or FlanT5 encoder-decoder family), while training the Q-Former (with a fully-connected layer projecting query embeddings into the LLM's text-embedding dimension); the projected query embeddings act as soft visual prompts, and the Q-Former serves as an information bottleneck that mitigates catastrophic forgetting.
+
+Claim: `claim_d7ffa33880e2591a6a4b8020872b83f5`
+
+Sources:
+
+- `ev_9331722f1a47399ab173e624d02c6985` · blip-2-2301.12597v1 · Page 4
+- `ev_e4829335e46c87be4cada6e262bdd856` · blip-2-2301.12597v1 · Page 4
+- `ev_234984c983953494ce28027dc2716acc` · blip-2-2301.12597v1 · Page 4
+
+### llava-2304.08485v1
+
+Requirement: `req_877afd8fa29bd31deb8e731b2976f53e` · Status: `verified`
+
+LLaVA's trainable/frozen scope: in Stage 2 (fine-tuning end-to-end), only the visual encoder weights are kept frozen, while the pre-trained projection layer (trainable projection matrix W) and the LLM (φ) are updated, i.e., trainable parameters θ = {W, φ}; the CLIP ViT-L/14 visual encoder g is pre-trained and frozen. The paper contrasts this simple linear projection with BLIP-2's Q-former (a more sophisticated/expensive scheme).
+
+Claim: `claim_da5e40fc8234c6f97db6be1011a8361c`
+
+Sources:
+
+- `ev_84b236a4049e358dd2a7dda5bddb4464` · llava-2304.08485v1 · Page 5
+- `ev_d39623f7635492ff9c1a349e90426601` · llava-2304.08485v1 · Page 4
+- `ev_5af59f6012398940516f736562f5800e` · llava-2304.08485v1 · Page 4
+
+Side-by-side verified claims: `claim_d7ffa33880e2591a6a4b8020872b83f5`, `claim_da5e40fc8234c6f97db6be1011a8361c`
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 2,
+  ""verified_requirements"": 2,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 2,
+  ""reviewed_requirements"": 2,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 2464.535179999075,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,两侧实际只聚焦生成/Stage2；遗漏LLaVA Stage1只训练W及BLIP-2第一阶段，使原参考要求的阶段范围比较不完整。,[]
+rqv1-comparison-blip2-llava-training-objective,test,comparison,True,ai_semantic_review,completed,13,11718.3,Compare BLIP-2 and LLaVA (2304.08485v1) on training objective using only the prepared corpus.,"# Verified findings and evidence gaps
+
+Compare BLIP-2 and LLaVA (2304.08485v1) on training objective using only the prepared corpus.
+
+Status: `completed`
+
+2 of 2 planned requirements have reviewed evidence; 0 remain missing.
+
+## training objective · Side-by-side claims
+
+### blip-2-2301.12597v1
+
+Requirement: `req_c2f9e90a793c063a0bd252bd1e597cb0` · Status: `verified`
+
+BLIP-2's training objective is a two-stage pre-training of a lightweight Querying Transformer (Q-Former) bridging frozen image encoders and frozen LLMs: stage 1 is vision-language representation learning with a frozen image encoder, jointly optimizing three pre-training objectives (inspired by BLIP) that share input format and parameters but use different attention masking between queries and text; stage 2 is vision-to-language generative learning with a frozen LLM, where the Q-Former output query embeddings are linearly projected and prepended as soft visual prompts, trained with language modeling loss for decoder-based LLMs and prefix language modeling loss for encoder-decoder-based LLMs.
+
+Claim: `claim_2d6c224d0717771beec66682d59e2a4e`
+
+Sources:
+
+- `ev_525a1f73be26c523e5fb57a5a02a3ecc` · blip-2-2301.12597v1 · Page 2
+- `ev_242192f04216b43089535562ea0dcec9` · blip-2-2301.12597v1 · Page 3
+- `ev_e4829335e46c87be4cada6e262bdd856` · blip-2-2301.12597v1 · Page 4
+- `ev_234984c983953494ce28027dc2716acc` · blip-2-2301.12597v1 · Page 4
+
+### llava-2304.08485v1
+
+Requirement: `req_cded9ba383f9d0485b87b00e2ba123ea` · Status: `verified`
+
+LLaVA's documented training objective: instruction-tuning the LLM on the prediction tokens using its original auto-regressive training objective (ev_3c29482998c95fdc372eebddf41d6060). Training proceeds in two stages: Stage 1 pre-training for feature alignment keeps both visual encoder and LLM weights frozen and maximizes the likelihood with only the projection matrix W trainable (ev_c445999410b5ee326425346ce4b2377b); Stage 2 fine-tuning end-to-end keeps the visual encoder frozen and updates both the projection layer and LLM weights θ={W, φ} (ev_84b236a4049e358dd2a7dda5bddb4464).
+
+Claim: `claim_d99f4dda548d40462fbf88d92f9b6ecf`
+
+Sources:
+
+- `ev_3c29482998c95fdc372eebddf41d6060` · llava-2304.08485v1 · Page 5
+- `ev_c445999410b5ee326425346ce4b2377b` · llava-2304.08485v1 · Page 5
+- `ev_84b236a4049e358dd2a7dda5bddb4464` · llava-2304.08485v1 · Page 5
+
+Side-by-side verified claims: `claim_2d6c224d0717771beec66682d59e2a4e`, `claim_d99f4dda548d40462fbf88d92f9b6ecf`
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 2,
+  ""verified_requirements"": 2,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 2,
+  ""reviewed_requirements"": 2,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 2890.585299988743,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,BLIP-2生成LM/prefix LM与LLaVA自回归instruction目标均准确，训练阶段扩展有实际来源。,[]
+rqv1-comparison-blip2-llava-language-model,test,comparison,False,ai_semantic_review,completed,12,14493.7,Compare BLIP-2 and LLaVA (2304.08485v1) on language model using only the prepared corpus.,"# Verified findings and evidence gaps
+
+Compare BLIP-2 and LLaVA (2304.08485v1) on language model using only the prepared corpus.
+
+Status: `completed`
+
+2 of 2 planned requirements have reviewed evidence; 0 remain missing.
+
+## language model · Verified findings
+
+### blip-2-2301.12597v1
+
+Requirement: `req_d4050717868c613833a69bdc8980cbb0` · Status: `verified`
+
+BLIP-2's language model is a frozen (pre-trained) LLM combined with a Q-Former via a fully-connected projection layer as a visual prefix. BLIP-2 explores two frozen LLM families: the unsupervised-trained OPT family for decoder-based LLMs and the instruction-trained FlanT5 family for encoder-decoder-based LLMs. For decoder-based LLMs it pre-trains with a language modeling loss (frozen LLM generates text conditioned on the Q-Former visual representation); for encoder-decoder LLMs it uses a prefix language modeling loss (prefix text concatenated with visual representation as encoder input, suffix text as decoder generation target). Because the LLM is frozen, BLIP-2 mitigates catastrophic forgetting and is computationally friendlier.
+
+Claim: `claim_cf45d2d476a8c5fd14c29647cdaceb75`
+
+Sources:
+
+- `ev_9331722f1a47399ab173e624d02c6985` · blip-2-2301.12597v1 · Page 4
+- `ev_234984c983953494ce28027dc2716acc` · blip-2-2301.12597v1 · Page 4
+- `ev_e4829335e46c87be4cada6e262bdd856` · blip-2-2301.12597v1 · Page 4
+- `ev_4825dfc97130014274b3be0682b0bffe` · blip-2-2301.12597v1 · Page 4
+
+### llava-2304.08485v1
+
+Requirement: `req_0656c8d3a0ae017452a5b3bdc80d7dee` · Status: `verified`
+
+For the language-model dimension, LLaVA (2304.08485v1) documents: it connects a vision encoder and an LLM for general-purpose visual and language understanding (end-to-end trained large multimodal model); it chooses LLaMA as its LLM f_φ(·) parameterized by φ, motivated by LLaMA's demonstrated effectiveness in open-source language-only instruction-tuning; in Stage 2 end-to-end fine-tuning, the visual encoder weights stay frozen while both the projection layer weights and the LLM (trainable parameters θ = {W, φ}) are updated. Regarding BLIP-2, the paper only mentions it as using a Q-former to connect image and language representations (a more sophisticated/expensive scheme LLaVA leaves as future work) and reports querying BLIP-2 model checkpoints for qualitative comparisons; it does not document BLIP-2's underlying LLM (e.g., OPT/Flan-T5) in this paper.
+
+Claim: `claim_eccd98426f0a6398f841389a5e05a8bc`
+
+Sources:
+
+- `ev_5418ad7d89b668e2ce1dba87be8f7efd` · llava-2304.08485v1 · Page 1
+- `ev_ebe5ff3e83181708c609e82e314f4f59` · llava-2304.08485v1 · Page 4
+- `ev_84b236a4049e358dd2a7dda5bddb4464` · llava-2304.08485v1 · Page 5
+- `ev_d39623f7635492ff9c1a349e90426601` · llava-2304.08485v1 · Page 4
+- `ev_d00dfe539080075545b58df56483c916` · llava-2304.08485v1 · Page 6
+
+Side-by-side verified claims: `claim_cf45d2d476a8c5fd14c29647cdaceb75`, `claim_eccd98426f0a6398f841389a5e05a8bc`
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 2,
+  ""verified_requirements"": 2,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 2,
+  ""reviewed_requirements"": 2,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 3005.1239610038465,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,OPT/FlanT5与LLaMA核心比较正确；额外声称整篇LLaVA没有BLIP-2底层LM信息，prepared片段不能证明整篇不存在，完整引用支持要求未满足。,[]
+rqv1-comparison-flamingo-llava-vision-encoder,dev,comparison,True,ai_semantic_review,completed,8,8539.0,Compare Flamingo and LLaVA (2304.08485v1) on vision encoder using only the prepared corpus.,"# Verified findings and evidence gaps
+
+Compare Flamingo and LLaVA (2304.08485v1) on vision encoder using only the prepared corpus.
+
+Status: `completed`
+
+2 of 2 planned requirements have reviewed evidence; 0 remain missing.
+
+## vision encoder · Side-by-side claims
+
+### flamingo-2204.14198v1
+
+Requirement: `req_fc4e37577cfdbaec487b0362bdba1d67` · Status: `verified`
+
+Flamingo's vision encoder is a pretrained Normalizer-Free ResNet (NFNet), specifically the F6 model, chosen for its performance/efficiency trade-off. The vision encoder is pretrained with a contrastive text-image objective (à la CLIP), using a two-term contrastive loss with similarities computed as the dot product of mean-pooled image encoder output and mean-pooled BERT text output. Its role is to extract semantic spatial features (color, shape, nature, object positions); it outputs a 2D spatial grid of features, and is kept frozen during main Flamingo training.
+
+Claim: `claim_08f2d16e68323dfe01cb79165b8d56d5`
+
+Sources:
+
+- `ev_03da035280d198641cd7bcb081b6f845` · flamingo-2204.14198v1 · Page 10
+- `ev_1f60e62600f7a79eae799d5ed285f571` · flamingo-2204.14198v1 · Page 9
+- `ev_e86416c4f3b10aeabf3180b5f807d7be` · flamingo-2204.14198v1 · Page 10
+
+### llava-2304.08485v1
+
+Requirement: `req_3d9c3755623c6be2479b12b7db1d443e` · Status: `verified`
+
+LLaVA (2304.08485v1) documents its vision encoder as the pre-trained CLIP visual encoder ViT-L/14, which produces visual feature Zv = g(Xv); the grid features before and after the last Transformer layer are considered, and a simple trainable linear projection matrix W maps Zv into language embedding tokens (visual tokens Hv) in the LLM word-embedding space. The paper notes this projection scheme is lightweight and cost-effective, contrasting it with more sophisticated (but expensive) connection schemes such as gated cross-attention in Flamingo [2] and Q-former in BLIP-2. During Stage 1 pre-training the visual encoder weights are kept frozen (only W trained), and in Stage 2 fine-tuning the visual encoder weights are also kept frozen while the projection layer and LLM are updated.
+
+Claim: `claim_8743558db7288b1a9bc686fb3f1ce916`
+
+Sources:
+
+- `ev_5af59f6012398940516f736562f5800e` · llava-2304.08485v1 · Page 4
+- `ev_d39623f7635492ff9c1a349e90426601` · llava-2304.08485v1 · Page 4
+- `ev_c445999410b5ee326425346ce4b2377b` · llava-2304.08485v1 · Page 5
+- `ev_84b236a4049e358dd2a7dda5bddb4464` · llava-2304.08485v1 · Page 5
+
+Side-by-side verified claims: `claim_08f2d16e68323dfe01cb79165b8d56d5`, `claim_8743558db7288b1a9bc686fb3f1ce916`
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 2,
+  ""verified_requirements"": 2,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 2,
+  ""reviewed_requirements"": 2,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 3081.364844998461,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,NFNet F6与CLIP ViT-L/14差异准确，特征、冻结和投影补充均有对应来源。,[]
+rqv1-comparison-flamingo-llava-vision-language-bridge,test,comparison,True,ai_semantic_review,completed,11,9706.6,Compare Flamingo and LLaVA (2304.08485v1) on vision language bridge using only the prepared corpus.,"# Verified findings and evidence gaps
+
+Compare Flamingo and LLaVA (2304.08485v1) on vision language bridge using only the prepared corpus.
+
+Status: `completed`
+
+2 of 2 planned requirements have reviewed evidence; 0 remain missing.
+
+## vision language bridge · Verified findings
+
+### flamingo-2204.14198v1
+
+Requirement: `req_360e41c76c26117ed16af9d15221522b` · Status: `verified`
+
+Flamingo's vision-language bridge: it freezes a pretrained vision encoder (contrastive text-image, CLIP-style; NFNet-F6 pretrained with a contrastive objective) and a pretrained frozen autoregressive LM, then links them via two learnable components — a Perceiver Resampler that converts spatio-temporal visual features into a fixed-size set of visual tokens, and interleaved cross-attention layers inserted among the frozen language-only self-attention layers (with gating at initialization) to feed the visual tokens into the LM without destabilizing its language abilities.
+
+Claim: `claim_74aa1567b7cf5a16f7f101b789877977`
+
+Sources:
+
+- `ev_1f60e62600f7a79eae799d5ed285f571` · flamingo-2204.14198v1 · Page 9
+- `ev_03da035280d198641cd7bcb081b6f845` · flamingo-2204.14198v1 · Page 10
+- `ev_218bd889fec22dc20b36a380b0e0fb62` · flamingo-2204.14198v1 · Page 4
+
+### llava-2304.08485v1
+
+Requirement: `req_638cc283fb01bf590f5233c40f49087a` · Status: `verified`
+
+LLaVA's vision-language bridge is a lightweight, cost-effective simple linear projection: it uses a pre-trained CLIP visual encoder ViT-L/14 to produce visual features Zv, then applies a trainable projection matrix W to convert them into language embedding tokens with the same dimensionality as the LLM's word embedding space. In Stage 2 fine-tuning, the visual encoder weights are frozen while the projection layer and LLM are updated (trainable parameters θ = {W, φ}). The paper contrasts this with more sophisticated/expensive bridge schemes used by other models, explicitly citing gated cross-attention in Flamingo, and leaves such designs to future work.
+
+Claim: `claim_9b612c0e3a93187d14f3ad7f646c3691`
+
+Sources:
+
+- `ev_5af59f6012398940516f736562f5800e` · llava-2304.08485v1 · Page 4
+- `ev_d39623f7635492ff9c1a349e90426601` · llava-2304.08485v1 · Page 4
+- `ev_84b236a4049e358dd2a7dda5bddb4464` · llava-2304.08485v1 · Page 5
+- `ev_ebe5ff3e83181708c609e82e314f4f59` · llava-2304.08485v1 · Page 4
+
+Side-by-side verified claims: `claim_74aa1567b7cf5a16f7f101b789877977`, `claim_9b612c0e3a93187d14f3ad7f646c3691`
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 2,
+  ""verified_requirements"": 2,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 2,
+  ""reviewed_requirements"": 2,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 2751.254022005014,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,Resampler/交错CA对比直接线性W投影，主体、引用与阶段范围完整。,[]
+rqv1-comparison-flamingo-llava-frozen-trainable-scope,test,comparison,True,ai_semantic_review,completed,14,20728.2,Compare Flamingo and LLaVA (2304.08485v1) on frozen trainable scope using only the prepared corpus.,"# Verified findings and evidence gaps
+
+Compare Flamingo and LLaVA (2304.08485v1) on frozen trainable scope using only the prepared corpus.
+
+Status: `completed`
+
+2 of 2 planned requirements have reviewed evidence; 0 remain missing.
+
+## frozen trainable scope · Verified findings
+
+### flamingo-2204.14198v1
+
+Requirement: `req_d32044dbb8eac1c40906bd9749a65701` · Status: `verified`
+
+Flamingo's frozen trainable scope: the pretrained vision encoder (NFNet F6, pretrained contrastively on image-text pairs) and the pretrained autoregressive language model are both frozen during the main training phase; only the added architecture components are trainable — the Perceiver Resampler (which turns spatio-temporal vision features into a fixed-size set of visual tokens) and freshly initialized cross-attention layers interleaved between the frozen LM layers. The paper states it leaves the vision encoder frozen as it ""performs favorably when compared to training the vision model directly"" and freezes the pretrained models ""so that their initial capacity remains unchanged,"" linking them via the two learnable components.
+
+Claim: `claim_eebec1a89e4896a9a05a7a7533d6696f`
+
+Sources:
+
+- `ev_1f60e62600f7a79eae799d5ed285f571` · flamingo-2204.14198v1 · Page 9
+- `ev_a802881b56aa396b45e4431996b61ae5` · flamingo-2204.14198v1 · Page 10
+- `ev_e86416c4f3b10aeabf3180b5f807d7be` · flamingo-2204.14198v1 · Page 10
+- `ev_03da035280d198641cd7bcb081b6f845` · flamingo-2204.14198v1 · Page 10
+
+### llava-2304.08485v1
+
+Requirement: `req_877afd8fa29bd31deb8e731b2976f53e` · Status: `verified`
+
+LLaVA's documented frozen/trainable scope in its two stages: Stage 1 (pre-training for feature alignment) keeps both the visual encoder and LLM weights frozen, with only the projection matrix W trainable (θ = W). Stage 2 (fine-tuning end-to-end) keeps only the visual encoder weights frozen, updating both the pre-trained projection layer and the LLM (θ = {W, φ}). LLaVA uses a pre-trained CLIP ViT-L/14 visual encoder and a trainable projection matrix W to map visual features into language embedding tokens. The paper mentions Flamingo only as an alternative connection scheme (gated cross-attention) that it does not adopt and leaves to future work.
+
+Claim: `claim_9d456cf604f3795fe6fdc73418e9d31f`
+
+Sources:
+
+- `ev_c445999410b5ee326425346ce4b2377b` · llava-2304.08485v1 · Page 5
+- `ev_84b236a4049e358dd2a7dda5bddb4464` · llava-2304.08485v1 · Page 5
+- `ev_5af59f6012398940516f736562f5800e` · llava-2304.08485v1 · Page 4
+- `ev_d39623f7635492ff9c1a349e90426601` · llava-2304.08485v1 · Page 4
+
+Side-by-side verified claims: `claim_eebec1a89e4896a9a05a7a7533d6696f`, `claim_9d456cf604f3795fe6fdc73418e9d31f`
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 2,
+  ""verified_requirements"": 2,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 2,
+  ""reviewed_requirements"": 2,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 3527.2108759963885,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,Flamingo冻结骨干并训练新增链接、LLaVA两个阶段参数范围均完整且有来源。,[]
+rqv1-comparison-flamingo-llava-training-objective,test,comparison,True,ai_semantic_review,completed,13,17096.6,Compare Flamingo and LLaVA (2304.08485v1) on training objective using only the prepared corpus.,"# Verified findings and evidence gaps
+
+Compare Flamingo and LLaVA (2304.08485v1) on training objective using only the prepared corpus.
+
+Status: `completed`
+
+2 of 2 planned requirements have reviewed evidence; 0 remain missing.
+
+## training objective · Verified findings
+
+### flamingo-2204.14198v1
+
+Requirement: `req_783b62b150a0c51463d8cea199f6050c` · Status: `verified`
+
+For Flamingo's training objective: the vision encoder is pretrained with a two-term contrastive loss (à la CLIP/Radford et al. 2021) on image-text pairs, computing contrastive similarities as the dot product between mean-pooled image encoder output and mean-pooled BERT text output (ev_03da035280d198641cd7bcb081b6f845, ev_e86416c4f3b10aeabf3180b5f807d7be, ev_1f60e62600f7a79eae799d5ed285f571); the main Flamingo model is trained on a text-generation (next-token prediction) objective, with a frozen vision encoder and frozen pretrained LM, conditioning the LM on visual tokens via freshly initialized gated cross-attention layers (ev_a802881b56aa396b45e4431996b61ae5, ev_218bd889fec22dc20b36a380b0e0fb62, ev_c0b1e5bbd1cb0899c45305d4a282b86e).
+
+Claim: `claim_bc3744563b6181b5d5819627d50327d2`
+
+Sources:
+
+- `ev_03da035280d198641cd7bcb081b6f845` · flamingo-2204.14198v1 · Page 10
+- `ev_e86416c4f3b10aeabf3180b5f807d7be` · flamingo-2204.14198v1 · Page 10
+- `ev_1f60e62600f7a79eae799d5ed285f571` · flamingo-2204.14198v1 · Page 9
+- `ev_a802881b56aa396b45e4431996b61ae5` · flamingo-2204.14198v1 · Page 10
+- `ev_218bd889fec22dc20b36a380b0e0fb62` · flamingo-2204.14198v1 · Page 4
+- `ev_c0b1e5bbd1cb0899c45305d4a282b86e` · flamingo-2204.14198v1 · Page 9
+
+### llava-2304.08485v1
+
+Requirement: `req_cded9ba383f9d0485b87b00e2ba123ea` · Status: `verified`
+
+LLaVA uses instruction-tuning of the LLM on prediction tokens with its original auto-regressive training objective: the model is trained end-to-end (Stage 2) with the visual encoder frozen while the projection layer and LLM weights (θ = {W, φ}) are updated, over a unified multimodal instruction-following sequence format (Table 2).
+
+Claim: `claim_a978dc278cb83f7d37aeec0ec0d5079c`
+
+Sources:
+
+- `ev_3c29482998c95fdc372eebddf41d6060` · llava-2304.08485v1 · Page 5
+- `ev_84b236a4049e358dd2a7dda5bddb4464` · llava-2304.08485v1 · Page 5
+
+Side-by-side verified claims: `claim_bc3744563b6181b5d5819627d50327d2`, `claim_a978dc278cb83f7d37aeec0ec0d5079c`
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 2,
+  ""verified_requirements"": 2,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 2,
+  ""reviewed_requirements"": 2,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 2891.5775150089758,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,Flamingo视觉预训练/主next-token阶段与LLaVA指令自回归目标表达清楚，没有误推性能优越。,[]
+rqv1-comparison-flamingo-llava-language-model,test,comparison,True,ai_semantic_review,completed,11,10665.2,Compare Flamingo and LLaVA (2304.08485v1) on language model using only the prepared corpus.,"# Verified findings and evidence gaps
+
+Compare Flamingo and LLaVA (2304.08485v1) on language model using only the prepared corpus.
+
+Status: `completed`
+
+2 of 2 planned requirements have reviewed evidence; 0 remain missing.
+
+## language model · Side-by-side claims
+
+### flamingo-2204.14198v1
+
+Requirement: `req_9d332cdc6be2aec1e6dde3e6bc818226` · Status: `verified`
+
+Flamingo's language model: it starts from an existing pretrained autoregressive LM trained on a large diverse text corpus (Hoffmann et al., 2022), freezing its weights so its initial capacity/language understanding and generation capabilities remain intact; it gains strong generative language abilities and access to knowledge stored in the LM weights. Visual inputs are incorporated by interleaving fresh cross-attention layers (with gating mechanisms for stability) with the frozen language-only self-attention layers, so the visual tokens condition the frozen LM for next-token prediction. This provides the documented facts for the language-model comparison with LLaVA.
+
+Claim: `claim_168e6cc17f9942866bb11ec363d97059`
+
+Sources:
+
+- `ev_1f60e62600f7a79eae799d5ed285f571` · flamingo-2204.14198v1 · Page 9
+- `ev_218bd889fec22dc20b36a380b0e0fb62` · flamingo-2204.14198v1 · Page 4
+- `ev_a802881b56aa396b45e4431996b61ae5` · flamingo-2204.14198v1 · Page 10
+
+### llava-2304.08485v1
+
+Requirement: `req_0656c8d3a0ae017452a5b3bdc80d7dee` · Status: `verified`
+
+LLaVA uses LLaMA as its language model (LLM fφ(·) parameterized by φ), chosen for its demonstrated effectiveness in open-source language-only instruction-tuning works; during Stage 1 pre-training both the visual encoder and LLM weights are kept frozen while only the projection matrix W is trained, and in Stage 2 fine-tuning the LLM weights (θ = {W, φ}) are updated end-to-end with only the visual encoder frozen.
+
+Claim: `claim_207288f577e8900b8868abf8a38d6254`
+
+Sources:
+
+- `ev_ebe5ff3e83181708c609e82e314f4f59` · llava-2304.08485v1 · Page 4
+- `ev_c445999410b5ee326425346ce4b2377b` · llava-2304.08485v1 · Page 5
+- `ev_84b236a4049e358dd2a7dda5bddb4464` · llava-2304.08485v1 · Page 5
+
+Side-by-side verified claims: `claim_168e6cc17f9942866bb11ec363d97059`, `claim_207288f577e8900b8868abf8a38d6254`
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 2,
+  ""verified_requirements"": 2,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 2,
+  ""reviewed_requirements"": 2,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 2661.935379001079,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,,Flamingo保留已有自回归LM的可知范围，没有记忆补家族；LLaVA LLaMA与阶段更新状态有来源。,[]
+rqv1-abstention-clip-private-manifest,test,abstention,True,structured_abstention_decision,completed,2,2755.3,"Using only the prepared corpus, give the exact SHA-256 of the private training-dataset manifest for CLIP. Do not substitute the public paper PDF hash.","# Verified findings and evidence gaps
+
+Using only the prepared corpus, give the exact SHA-256 of the private training-dataset manifest for CLIP. Do not substitute the public paper PDF hash.
+
+Status: `insufficient_evidence`
+
+当前没有足够已审核证据；所有计划单元均保留真实缺失状态。
+
+## evidence boundary
+
+### clip-2103.00020v1
+
+Requirement: `req_d8ac1848f2dccd6c50227b5ca9f26ff1` · Status: `insufficient_evidence`
+
+没有该单元的已审核主张；不补充论文技术事实。
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 0,
+  ""missing_requirements"": 1,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 0,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 0,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 0.009490002412348986,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 0.0,
+  ""review_pass_rate"": null,
+  ""report_generation_attempts"": 0,
+  ""report_generation_successes"": 0,
+  ""report_generation_success_rate"": null,
+  ""report_status"": ""insufficient_evidence"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,True,按结构化标签核对,[]
+rqv1-abstention-blip-private-manifest,test,abstention,True,structured_abstention_decision,completed,12,15695.1,"Using only the prepared corpus, give the exact SHA-256 of the private training-dataset manifest for BLIP. Do not substitute the public paper PDF hash.","# Verified findings and evidence gaps
+
+Using only the prepared corpus, give the exact SHA-256 of the private training-dataset manifest for BLIP. Do not substitute the public paper PDF hash.
+
+Status: `insufficient_evidence`
+
+当前没有足够已审核证据；所有计划单元均保留真实缺失状态。
+
+## evidence boundary
+
+### blip-2201.12086v2
+
+Requirement: `req_06bb477dc04df0ec6210a0d5f2c307be` · Status: `insufficient_evidence`
+
+没有该单元的已审核主张；不补充论文技术事实。
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 0,
+  ""missing_requirements"": 1,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 0,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 0,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 0.009010997018776834,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 0.0,
+  ""review_pass_rate"": null,
+  ""report_generation_attempts"": 0,
+  ""report_generation_successes"": 0,
+  ""report_generation_success_rate"": null,
+  ""report_status"": ""insufficient_evidence"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,True,按结构化标签核对,[]
+rqv1-abstention-blip2-private-manifest,test,abstention,True,structured_abstention_decision,completed,6,8709.5,"Using only the prepared corpus, give the exact SHA-256 of the private training-dataset manifest for BLIP-2. Do not substitute the public paper PDF hash.","# Verified findings and evidence gaps
+
+Using only the prepared corpus, give the exact SHA-256 of the private training-dataset manifest for BLIP-2. Do not substitute the public paper PDF hash.
+
+Status: `insufficient_evidence`
+
+当前没有足够已审核证据；所有计划单元均保留真实缺失状态。
+
+## evidence boundary
+
+### blip-2-2301.12597v1
+
+Requirement: `req_85c5fc8bcda154376134b32bc725a61e` · Status: `insufficient_evidence`
+
+没有该单元的已审核主张；不补充论文技术事实。
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 0,
+  ""missing_requirements"": 1,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 0,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 0,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 0.008096001693047583,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 0.0,
+  ""review_pass_rate"": null,
+  ""report_generation_attempts"": 0,
+  ""report_generation_successes"": 0,
+  ""report_generation_success_rate"": null,
+  ""report_status"": ""insufficient_evidence"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,True,按结构化标签核对,[]
+rqv1-abstention-flamingo-private-manifest,test,abstention,True,structured_abstention_decision,completed,9,13836.1,"Using only the prepared corpus, give the exact SHA-256 of the private training-dataset manifest for Flamingo. Do not substitute the public paper PDF hash.","# Verified findings and evidence gaps
+
+Using only the prepared corpus, give the exact SHA-256 of the private training-dataset manifest for Flamingo. Do not substitute the public paper PDF hash.
+
+Status: `insufficient_evidence`
+
+当前没有足够已审核证据；所有计划单元均保留真实缺失状态。
+
+## evidence boundary
+
+### flamingo-2204.14198v1
+
+Requirement: `req_9a9bdb4ed755fb629f745144b06ab60b` · Status: `insufficient_evidence`
+
+没有该单元的已审核主张；不补充论文技术事实。
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 0,
+  ""missing_requirements"": 1,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 0,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 0,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 0.010590010788291693,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 0.0,
+  ""review_pass_rate"": null,
+  ""report_generation_attempts"": 0,
+  ""report_generation_successes"": 0,
+  ""report_generation_success_rate"": null,
+  ""report_status"": ""insufficient_evidence"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,True,按结构化标签核对,[]
+rqv1-abstention-llava-private-manifest,test,abstention,True,structured_abstention_decision,completed,8,13686.0,"Using only the prepared corpus, give the exact SHA-256 of the private training-dataset manifest for LLaVA (2304.08485v1). Do not substitute the public paper PDF hash.","# Verified findings and evidence gaps
+
+Using only the prepared corpus, give the exact SHA-256 of the private training-dataset manifest for LLaVA (2304.08485v1). Do not substitute the public paper PDF hash.
+
+Status: `insufficient_evidence`
+
+当前没有足够已审核证据；所有计划单元均保留真实缺失状态。
+
+## evidence boundary
+
+### llava-2304.08485v1
+
+Requirement: `req_2ac12da4131bc50499bb1d783547e219` · Status: `insufficient_evidence`
+
+没有该单元的已审核主张；不补充论文技术事实。
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 0,
+  ""missing_requirements"": 1,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 0,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 0,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 0.010275005479343235,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 0.0,
+  ""review_pass_rate"": null,
+  ""report_generation_attempts"": 0,
+  ""report_generation_successes"": 0,
+  ""report_generation_success_rate"": null,
+  ""report_status"": ""insufficient_evidence"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,True,按结构化标签核对,[]
+rqv1-abstention-clip-unprepared-page,test,abstention,True,structured_abstention_decision,completed,4,4902.3,"Transcribe the exact first full paragraph on PDF page 1 of CLIP, using only already prepared page evidence; do not parse the PDF on demand.","# Verified findings and evidence gaps
+
+Transcribe the exact first full paragraph on PDF page 1 of CLIP, using only already prepared page evidence; do not parse the PDF on demand.
+
+Status: `insufficient_evidence`
+
+当前没有足够已审核证据；所有计划单元均保留真实缺失状态。
+
+## evidence boundary
+
+### clip-2103.00020v1
+
+Requirement: `req_d8ac1848f2dccd6c50227b5ca9f26ff1` · Status: `insufficient_evidence`
+
+没有该单元的已审核主张；不补充论文技术事实。
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 0,
+  ""missing_requirements"": 1,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 0,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 0,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 0.009495997801423073,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 0.0,
+  ""review_pass_rate"": null,
+  ""report_generation_attempts"": 0,
+  ""report_generation_successes"": 0,
+  ""report_generation_success_rate"": null,
+  ""report_status"": ""insufficient_evidence"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,True,按结构化标签核对,[]
+rqv1-abstention-blip-unprepared-page,test,abstention,True,structured_abstention_decision,completed,5,8163.6,"Transcribe the exact first full paragraph on PDF page 1 of BLIP, using only already prepared page evidence; do not parse the PDF on demand.","# Verified findings and evidence gaps
+
+Transcribe the exact first full paragraph on PDF page 1 of BLIP, using only already prepared page evidence; do not parse the PDF on demand.
+
+Status: `insufficient_evidence`
+
+当前没有足够已审核证据；所有计划单元均保留真实缺失状态。
+
+## evidence boundary
+
+### blip-2201.12086v2
+
+Requirement: `req_06bb477dc04df0ec6210a0d5f2c307be` · Status: `insufficient_evidence`
+
+没有该单元的已审核主张；不补充论文技术事实。
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 0,
+  ""missing_requirements"": 1,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 0,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 0,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 0.00846500915940851,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 0.0,
+  ""review_pass_rate"": null,
+  ""report_generation_attempts"": 0,
+  ""report_generation_successes"": 0,
+  ""report_generation_success_rate"": null,
+  ""report_status"": ""insufficient_evidence"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,True,按结构化标签核对,[]
+rqv1-abstention-blip2-unprepared-page,test,abstention,True,structured_abstention_decision,completed,3,10805.1,"Transcribe the exact first full paragraph on PDF page 5 of BLIP-2, using only already prepared page evidence; do not parse the PDF on demand.","# Verified findings and evidence gaps
+
+Transcribe the exact first full paragraph on PDF page 5 of BLIP-2, using only already prepared page evidence; do not parse the PDF on demand.
+
+Status: `insufficient_evidence`
+
+当前没有足够已审核证据；所有计划单元均保留真实缺失状态。
+
+## evidence boundary
+
+### blip-2-2301.12597v1
+
+Requirement: `req_85c5fc8bcda154376134b32bc725a61e` · Status: `insufficient_evidence`
+
+没有该单元的已审核主张；不补充论文技术事实。
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 0,
+  ""missing_requirements"": 1,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 0,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 0,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 0.008229006198234856,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 0.0,
+  ""review_pass_rate"": null,
+  ""report_generation_attempts"": 0,
+  ""report_generation_successes"": 0,
+  ""report_generation_success_rate"": null,
+  ""report_status"": ""insufficient_evidence"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,True,按结构化标签核对,[]
+rqv1-abstention-flamingo-unprepared-page,test,abstention,True,structured_abstention_decision,completed,3,5540.0,"Transcribe the exact first full paragraph on PDF page 1 of Flamingo, using only already prepared page evidence; do not parse the PDF on demand.","# Verified findings and evidence gaps
+
+Transcribe the exact first full paragraph on PDF page 1 of Flamingo, using only already prepared page evidence; do not parse the PDF on demand.
+
+Status: `insufficient_evidence`
+
+当前没有足够已审核证据；所有计划单元均保留真实缺失状态。
+
+## evidence boundary
+
+### flamingo-2204.14198v1
+
+Requirement: `req_9a9bdb4ed755fb629f745144b06ab60b` · Status: `insufficient_evidence`
+
+没有该单元的已审核主张；不补充论文技术事实。
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 0,
+  ""missing_requirements"": 1,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 0,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 0,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 0.008966002496890724,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 0.0,
+  ""review_pass_rate"": null,
+  ""report_generation_attempts"": 0,
+  ""report_generation_successes"": 0,
+  ""report_generation_success_rate"": null,
+  ""report_status"": ""insufficient_evidence"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,True,按结构化标签核对,[]
+rqv1-abstention-llava-unprepared-page,test,abstention,True,structured_abstention_decision,completed,2,2807.9,"Transcribe the exact first full paragraph on PDF page 2 of LLaVA (2304.08485v1), using only already prepared page evidence; do not parse the PDF on demand.","# Verified findings and evidence gaps
+
+Transcribe the exact first full paragraph on PDF page 2 of LLaVA (2304.08485v1), using only already prepared page evidence; do not parse the PDF on demand.
+
+Status: `insufficient_evidence`
+
+当前没有足够已审核证据；所有计划单元均保留真实缺失状态。
+
+## evidence boundary
+
+### llava-2304.08485v1
+
+Requirement: `req_2ac12da4131bc50499bb1d783547e219` · Status: `insufficient_evidence`
+
+没有该单元的已审核主张；不补充论文技术事实。
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 0,
+  ""missing_requirements"": 1,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 0,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 0,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 0.008472998160868883,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 0.0,
+  ""review_pass_rate"": null,
+  ""report_generation_attempts"": 0,
+  ""report_generation_successes"": 0,
+  ""report_generation_success_rate"": null,
+  ""report_status"": ""insufficient_evidence"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,True,按结构化标签核对,[]
+rqv1-abstention-blip2-caption-rgb,dev,abstention,True,structured_abstention_decision,completed,1,2200.6,"Using only the supplied figure caption of BLIP-2, give the exact RGB hexadecimal color of the main module boxes. Do not inspect image pixels or call a vision tool.",The supplied caption does not state any RGB hexadecimal color; the exact color of the main module boxes cannot be determined from the caption text alone.,,True,按结构化标签核对,[]
+rqv1-abstention-llava-caption-rgb,dev,abstention,True,structured_abstention_decision,completed,1,2221.2,"Using only the supplied figure caption of LLaVA (2304.08485v1), give the exact RGB hexadecimal color of the main module boxes. Do not inspect image pixels or call a vision tool.","The supplied caption only states ""Figure 1: LLaVA network architecture."" It does not specify any RGB hexadecimal colors, so the exact RGB hex color of the main module boxes cannot be determined from the caption.",,True,按结构化标签核对,[]
+rqv1-abstention-clip-symmetric-loss-answerable,dev,abstention,True,structured_abstention_decision,completed,5,12585.4,"Using only the cited prepared evidence, What loss does CLIP optimize over image-text similarity scores?","# Evidence-grounded research report
+
+Using only the cited prepared evidence, What loss does CLIP optimize over image-text similarity scores?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## evidence boundary · Verified findings
+
+### clip-2103.00020v1
+
+Requirement: `req_d8ac1848f2dccd6c50227b5ca9f26ff1` · Status: `verified`
+
+CLIP optimizes a symmetric cross entropy loss over the image-text similarity scores (maximizing cosine similarity of the N real pairs while minimizing that of the incorrect pairings).
+
+Claim: `claim_0bab7face6e688601fd8bb779dca42fa`
+
+Sources:
+
+- `ev_13217652070eda7adeb0e42abcf728eb` · clip-2103.00020v1 · Page 4
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 3115.5925080092857,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,False,按结构化标签核对,[]
+rqv1-abstention-flamingo-resampler-outputs-answerable,test,abstention,True,structured_abstention_decision,completed,6,11778.3,"Using only the cited prepared evidence, Why are visual features resampled and how many outputs are used in practice?","# Evidence-grounded research report
+
+Using only the cited prepared evidence, Why are visual features resampled and how many outputs are used in practice?
+
+Status: `completed`
+
+1 of 1 planned requirements have reviewed evidence; 0 remain missing.
+
+## evidence boundary · Verified findings
+
+### flamingo-2204.14198v1
+
+Requirement: `req_9a9bdb4ed755fb629f745144b06ab60b` · Status: `verified`
+
+The Perceiver Resampler takes a variable number of image/video features from the vision encoder and produces a fixed number of visual outputs. The motivation for resampling the visual input to a fixed, small number of outputs (in practice 64) is to significantly reduce the computational complexity of vision-text cross attention, which is particularly important when dealing with multiple long videos. The number of output tokens equals the number of learnt latent queries (64 in practice).
+
+Claim: `claim_e7c9033b6d5c92e22dc6fa068bab395e`
+
+Sources:
+
+- `ev_9262472c69770e9a098422d6b46534f9` · flamingo-2204.14198v1 · Page 11
+- `ev_1863b35f4e6e9086964ec47670f5ea7b` · flamingo-2204.14198v1 · Page 11
+- `ev_1f60e62600f7a79eae799d5ed285f571` · flamingo-2204.14198v1 · Page 9
+
+## Metrics
+
+```json
+{
+  ""total_requirements"": 1,
+  ""verified_requirements"": 1,
+  ""missing_requirements"": 0,
+  ""rejected_requirements"": 0,
+  ""resolved_requirements"": 1,
+  ""reviewed_requirements"": 1,
+  ""citation_validation_failures"": 0,
+  ""synthesis_model_calls"": 1,
+  ""protocol_corrections"": 0,
+  ""provider_retries"": 0,
+  ""synthesis_latency_ms"": 3884.378493006807,
+  ""resolution_rate"": 1.0,
+  ""evidence_coverage"": 1.0,
+  ""review_pass_rate"": 1.0,
+  ""report_generation_attempts"": 1,
+  ""report_generation_successes"": 1,
+  ""report_generation_success_rate"": 1.0,
+  ""report_status"": ""completed"",
+  ""degraded_generation"": false
+}
+```
+
+## Limitations
+
+- Only reviewed claims and prepared evidence are factual report content.
+- Structural citation validation does not prove semantic entailment or model-review correctness.
+- Missing cells are not completed from paper profiles or model knowledge.
+",,False,按结构化标签核对,[]

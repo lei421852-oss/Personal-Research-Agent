@@ -1,0 +1,437 @@
+{
+  "conclusion": "WORKFLOW_COMPLETED",
+  "completed_at": "2026-10-08T12:47:04.675451+00:00",
+  "execution_backend": "real_provider",
+  "llm_model": "deepseek-flash",
+  "reference_kind": "ai_reviewed",
+  "semantic_grader": "Codex AI assistant; ai_semantic_review",
+  "human_semantic_assessments": 0,
+  "cases_executed": 90,
+  "valid_outputs": 87,
+  "execution_failures": 3,
+  "quality_passed": 79,
+  "quality_failed_with_output": 8,
+  "provider_attempts_observed": 456,
+  "tool_calls": 107,
+  "vlm_tool_attempts": 0,
+  "recovery_attempted_requirements": 1,
+  "sum_case_latency_seconds": 863.9982103869697,
+  "grading_provider_calls": 0,
+  "scoring_provider_calls": 0,
+  "scores": {
+    "all": {
+      "accuracy": {
+        "numerator": 79,
+        "denominator": 90,
+        "value": 0.8777777777777778
+      },
+      "by_task_type": {
+        "abstention": {
+          "numerator": 15,
+          "denominator": 15,
+          "value": 1.0
+        },
+        "claim": {
+          "numerator": 26,
+          "denominator": 30,
+          "value": 0.8666666666666667
+        },
+        "comparison": {
+          "numerator": 8,
+          "denominator": 15,
+          "value": 0.5333333333333333
+        },
+        "reviewer": {
+          "numerator": 30,
+          "denominator": 30,
+          "value": 1.0
+        }
+      },
+      "invalid_predictions": 3,
+      "pending_semantic_assessments": 0,
+      "reviewer": {
+        "positive_label": "passed",
+        "confusion_matrix": {
+          "tp": 15,
+          "tn": 15,
+          "fp": 0,
+          "fn": 0
+        },
+        "valid_label_predictions": 30,
+        "positive_reference_cases": 15,
+        "negative_reference_cases": 15,
+        "label_accuracy": {
+          "numerator": 30,
+          "denominator": 30,
+          "value": 1.0
+        },
+        "false_acceptance_rate": {
+          "numerator": 0,
+          "denominator": 15,
+          "value": 0.0
+        },
+        "false_rejection_rate": {
+          "numerator": 0,
+          "denominator": 15,
+          "value": 0.0
+        }
+      },
+      "comparison": {
+        "semantic_rubric_cases": 15,
+        "components": {
+          "fact_accuracy": {
+            "numerator": 26,
+            "denominator": 30,
+            "value": 0.8666666666666667
+          },
+          "difference_correctness": {
+            "numerator": 26,
+            "denominator": 30,
+            "value": 0.8666666666666667
+          },
+          "evidence_grounding": {
+            "numerator": 25,
+            "denominator": 30,
+            "value": 0.8333333333333334
+          },
+          "scope_completeness": {
+            "numerator": 23,
+            "denominator": 30,
+            "value": 0.7666666666666667
+          }
+        },
+        "mean_quality_fraction": {
+          "numerator": 100,
+          "denominator": 120,
+          "value": 0.8333333333333334
+        }
+      }
+    },
+    "dev": {
+      "accuracy": {
+        "numerator": 17,
+        "denominator": 18,
+        "value": 0.9444444444444444
+      },
+      "by_task_type": {
+        "abstention": {
+          "numerator": 4,
+          "denominator": 4,
+          "value": 1.0
+        },
+        "claim": {
+          "numerator": 5,
+          "denominator": 5,
+          "value": 1.0
+        },
+        "comparison": {
+          "numerator": 2,
+          "denominator": 3,
+          "value": 0.6666666666666666
+        },
+        "reviewer": {
+          "numerator": 6,
+          "denominator": 6,
+          "value": 1.0
+        }
+      },
+      "invalid_predictions": 0,
+      "pending_semantic_assessments": 0,
+      "reviewer": {
+        "positive_label": "passed",
+        "confusion_matrix": {
+          "tp": 3,
+          "tn": 3,
+          "fp": 0,
+          "fn": 0
+        },
+        "valid_label_predictions": 6,
+        "positive_reference_cases": 3,
+        "negative_reference_cases": 3,
+        "label_accuracy": {
+          "numerator": 6,
+          "denominator": 6,
+          "value": 1.0
+        },
+        "false_acceptance_rate": {
+          "numerator": 0,
+          "denominator": 3,
+          "value": 0.0
+        },
+        "false_rejection_rate": {
+          "numerator": 0,
+          "denominator": 3,
+          "value": 0.0
+        }
+      },
+      "comparison": {
+        "semantic_rubric_cases": 3,
+        "components": {
+          "fact_accuracy": {
+            "numerator": 6,
+            "denominator": 6,
+            "value": 1.0
+          },
+          "difference_correctness": {
+            "numerator": 6,
+            "denominator": 6,
+            "value": 1.0
+          },
+          "evidence_grounding": {
+            "numerator": 5,
+            "denominator": 6,
+            "value": 0.8333333333333334
+          },
+          "scope_completeness": {
+            "numerator": 5,
+            "denominator": 6,
+            "value": 0.8333333333333334
+          }
+        },
+        "mean_quality_fraction": {
+          "numerator": 22,
+          "denominator": 24,
+          "value": 0.9166666666666666
+        }
+      }
+    },
+    "test": {
+      "accuracy": {
+        "numerator": 62,
+        "denominator": 72,
+        "value": 0.8611111111111112
+      },
+      "by_task_type": {
+        "abstention": {
+          "numerator": 11,
+          "denominator": 11,
+          "value": 1.0
+        },
+        "claim": {
+          "numerator": 21,
+          "denominator": 25,
+          "value": 0.84
+        },
+        "comparison": {
+          "numerator": 6,
+          "denominator": 12,
+          "value": 0.5
+        },
+        "reviewer": {
+          "numerator": 24,
+          "denominator": 24,
+          "value": 1.0
+        }
+      },
+      "invalid_predictions": 3,
+      "pending_semantic_assessments": 0,
+      "reviewer": {
+        "positive_label": "passed",
+        "confusion_matrix": {
+          "tp": 12,
+          "tn": 12,
+          "fp": 0,
+          "fn": 0
+        },
+        "valid_label_predictions": 24,
+        "positive_reference_cases": 12,
+        "negative_reference_cases": 12,
+        "label_accuracy": {
+          "numerator": 24,
+          "denominator": 24,
+          "value": 1.0
+        },
+        "false_acceptance_rate": {
+          "numerator": 0,
+          "denominator": 12,
+          "value": 0.0
+        },
+        "false_rejection_rate": {
+          "numerator": 0,
+          "denominator": 12,
+          "value": 0.0
+        }
+      },
+      "comparison": {
+        "semantic_rubric_cases": 12,
+        "components": {
+          "fact_accuracy": {
+            "numerator": 20,
+            "denominator": 24,
+            "value": 0.8333333333333334
+          },
+          "difference_correctness": {
+            "numerator": 20,
+            "denominator": 24,
+            "value": 0.8333333333333334
+          },
+          "evidence_grounding": {
+            "numerator": 20,
+            "denominator": 24,
+            "value": 0.8333333333333334
+          },
+          "scope_completeness": {
+            "numerator": 18,
+            "denominator": 24,
+            "value": 0.75
+          }
+        },
+        "mean_quality_fraction": {
+          "numerator": 78,
+          "denominator": 96,
+          "value": 0.8125
+        }
+      }
+    }
+  },
+  "failure_cases": [
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-vision-encoder",
+      "task_type": "comparison",
+      "score_source": "ai_semantic_review",
+      "grading_note": "主要骨干/层选择正确，但加入与视觉编码器比较无关的8.7%/54×性能结论，并声称整篇BLIP-2不记载Flamingo编码器；有限引用不能证明整篇缺失。",
+      "failure_details": []
+    },
+    {
+      "case_id": "rqv1-claim-clip-reported-efficiency",
+      "task_type": "claim",
+      "score_source": "operational_failure",
+      "grading_note": "无有效答案：执行失败",
+      "failure_details": [
+        {
+          "code": "dependency_failure",
+          "message": "Reviewer dependency could not complete within its permitted attempts.",
+          "details": {
+            "phase": "async_dependency",
+            "error_type": "APIConnectionError",
+            "message": "Dependency operation failed.",
+            "cause_type": "RemoteProtocolError",
+            "classification": "transient",
+            "retry_exhausted": true,
+            "attempts": 3,
+            "retry_count": 2
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "rqv1-claim-blip-vision-encoder",
+      "task_type": "claim",
+      "score_source": "operational_failure",
+      "grading_note": "无有效答案：执行失败",
+      "failure_details": [
+        {
+          "code": "dependency_failure",
+          "message": "Worker dependency call failed after its permitted attempts.",
+          "requirement_ids": [
+            "req_7007c410dd85c4a3794b0df2a1cf63f7"
+          ],
+          "details": {
+            "phase": "async_dependency",
+            "error_type": "APIConnectionError",
+            "message": "Dependency operation failed.",
+            "cause_type": "RemoteProtocolError",
+            "classification": "transient",
+            "retry_exhausted": true,
+            "attempts": 3,
+            "retry_count": 2
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "rqv1-claim-blip-med-functionalities",
+      "task_type": "claim",
+      "score_source": "operational_failure",
+      "grading_note": "无有效答案：执行失败",
+      "failure_details": [
+        {
+          "code": "dependency_failure",
+          "message": "Worker dependency call failed after its permitted attempts.",
+          "requirement_ids": [
+            "req_5f87ff14123e32c6619806e91ec54e96"
+          ],
+          "details": {
+            "phase": "async_dependency",
+            "error_type": "APIConnectionError",
+            "message": "Dependency operation failed.",
+            "cause_type": "RemoteProtocolError",
+            "classification": "transient",
+            "retry_exhausted": true,
+            "attempts": 3,
+            "retry_count": 2
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "rqv1-claim-flamingo-frozen-backbones",
+      "task_type": "claim",
+      "score_source": "ai_semantic_review",
+      "grading_note": "冻结视觉/语言骨干与Resampler部分正确，但最终声称gated cross-attention dense layers。实际只引用ev_1f60...和ev_9262...，前者止于First/Resampler，后者只解释Resampler；缺少覆盖第二连接组件和gated/dense细节的引用。生产Reviewer通过不能替代完整来源支持。",
+      "failure_details": []
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-vision-language-bridge",
+      "task_type": "comparison",
+      "score_source": "ai_semantic_review",
+      "grading_note": "BLIP-2侧未回答FC投影后prepended soft prompts这一关键接口，转向性能数字；Flamingo侧还谈BLIP-2 Q-Former两阶段，但其实际Flamingo引用不含该跨论文事实。",
+      "failure_details": []
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-frozen-trainable-scope",
+      "task_type": "comparison",
+      "score_source": "ai_semantic_review",
+      "grading_note": "BLIP-2侧only Q-Former的排他范围缺少对FC接口的完整依据，并扩展性能；Flamingo侧只笼统描述other learnable components，未完整区分跨注意力连接组件。",
+      "failure_details": []
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-training-objective",
+      "task_type": "comparison",
+      "score_source": "ai_semantic_review",
+      "grading_note": "两侧主要目标都描述正确，但添加性能比较及整篇未记载他方目标的断言，超出问题且无完整来源支持。",
+      "failure_details": []
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-language-model",
+      "task_type": "comparison",
+      "score_source": "ai_semantic_review",
+      "grading_note": "BLIP-2侧未给出有准备证据的OPT/FlanT5两家族，主要输出冻结/Q-Former与性能优势；语言模型维度的关键比较不完整。",
+      "failure_details": []
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-llava-frozen-trainable-scope",
+      "task_type": "comparison",
+      "score_source": "ai_semantic_review",
+      "grading_note": "两侧实际只聚焦生成/Stage2；遗漏LLaVA Stage1只训练W及BLIP-2第一阶段，使原参考要求的阶段范围比较不完整。",
+      "failure_details": []
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-llava-language-model",
+      "task_type": "comparison",
+      "score_source": "ai_semantic_review",
+      "grading_note": "OPT/FlanT5与LLaMA核心比较正确；额外声称整篇LLaVA没有BLIP-2底层LM信息，prepared片段不能证明整篇不存在，完整引用支持要求未满足。",
+      "failure_details": []
+    }
+  ],
+  "gold_dataset_modified": false,
+  "production_code_modified": false,
+  "frozen_files_verified": 292,
+  "stage_e_tracked_files_unchanged": 297,
+  "frozen_root_sha256": "44c7afd36c793eff86faed077b7c917a5c6a200e3d652bfbf5b19e83cff0362e",
+  "planner_evaluated": false,
+  "test_prompt_tuning_performed": false,
+  "three_system_comparative_benchmark": false,
+  "grading_protocol": "Strict completeness, material claim grounding and requested scope; rubric scores separate from boolean. Not blind human evaluation.",
+  "counting_limitations": "Provider attempts are observed client events including retries, not token billing. Case latency sum excludes two-session embedding initialization, between-batch work, coding, grading and artifact packaging. Legacy per-case Stage D baseline fields are not used for quality conclusions.",
+  "test_results": {
+    "passed": 862,
+    "failed": 0,
+    "warnings": 1
+  },
+  "static_checks": "PASS",
+  "input_run_manifest": "artifacts/quality-end-to-end/run_manifest.json",
+  "predictions": "artifacts/quality-end-to-end/predictions.jsonl",
+  "ai_assessments": "artifacts/quality-end-to-end/ai-assessments.jsonl",
+  "real_execution_records": "artifacts/quality-end-to-end/executions.jsonl"
+}

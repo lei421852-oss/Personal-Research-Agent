@@ -1,0 +1,16 @@
+{
+  "reference_kind": "ai_reviewed",
+  "grader": "Codex AI assistant",
+  "method": "ai_semantic_review",
+  "human_assessments": 0,
+  "graded_open_outputs": 42,
+  "execution_failure_cases": [
+    "rqv1-claim-clip-reported-efficiency",
+    "rqv1-claim-blip-vision-encoder",
+    "rqv1-claim-blip-med-functionalities"
+  ],
+  "open_grading_criteria": "Core requested facts/differences complete; material technical and absence claims supported by actual cited prepared evidence; no unrequested performance superiority drift. Extra supported context can be accepted when clearly bounded. Rubric axes are judged separately; overall correctness is not inferred by score threshold.",
+  "production_reviewer_not_used_as_quality_gold": true,
+  "no_string_match_semantic_scoring": true,
+  "same_ai_curation_and_grading_limit": "AI-curated references and AI-assisted output review are not independent human Gold or blind human evaluation; strict grounding/scope judgments are inspectable and may differ between reviewers."
+}

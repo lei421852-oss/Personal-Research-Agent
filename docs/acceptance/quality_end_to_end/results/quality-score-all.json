@@ -1,0 +1,3687 @@
+{
+  "status": "scored",
+  "reference_kind": "ai_reviewed",
+  "result_scope": "provisional_ai_reviewed_reference",
+  "semantic_assessment_source": "ai_assisted",
+  "human_semantic_assessment_count": 0,
+  "ai_semantic_assessment_count": 42,
+  "loaded_human_semantic_assessment_count": 0,
+  "loaded_ai_semantic_assessment_count": 42,
+  "dataset_version": "research_quality_v1",
+  "split": "all",
+  "candidate_cases": 0,
+  "human_reviewed_cases": 0,
+  "approved_gold_cases": 0,
+  "approved_ai_reference_cases": 90,
+  "metrics": {
+    "overall": {
+      "total_cases": 90,
+      "eligible_reference_cases": 90,
+      "excluded_annotation_cases": 0,
+      "excluded_split_cases": 0,
+      "scored_cases": 90,
+      "unscored_reference_cases": 0,
+      "missing_predictions": 0,
+      "invalid_predictions": 3,
+      "pending_human_assessments": 0,
+      "accuracy": {
+        "numerator": 79,
+        "denominator": 90,
+        "value": 0.8777777777777778
+      },
+      "assessment_completion": {
+        "numerator": 90,
+        "denominator": 90,
+        "value": 1.0
+      },
+      "benchmark_complete": true,
+      "reviewer": {
+        "positive_label": "passed",
+        "confusion_matrix": {
+          "tp": 15,
+          "tn": 15,
+          "fp": 0,
+          "fn": 0
+        },
+        "valid_label_predictions": 30,
+        "positive_reference_cases": 15,
+        "negative_reference_cases": 15,
+        "label_accuracy": {
+          "numerator": 30,
+          "denominator": 30,
+          "value": 1.0
+        },
+        "false_acceptance_rate": {
+          "numerator": 0,
+          "denominator": 15,
+          "value": 0.0
+        },
+        "false_rejection_rate": {
+          "numerator": 0,
+          "denominator": 15,
+          "value": 0.0
+        }
+      },
+      "abstention_decision_accuracy": {
+        "numerator": 15,
+        "denominator": 15,
+        "value": 1.0
+      },
+      "comparison": {
+        "semantic_rubric_cases": 15,
+        "components": {
+          "fact_accuracy": {
+            "numerator": 26,
+            "denominator": 30,
+            "value": 0.8666666666666667
+          },
+          "difference_correctness": {
+            "numerator": 26,
+            "denominator": 30,
+            "value": 0.8666666666666667
+          },
+          "evidence_grounding": {
+            "numerator": 25,
+            "denominator": 30,
+            "value": 0.8333333333333334
+          },
+          "scope_completeness": {
+            "numerator": 23,
+            "denominator": 30,
+            "value": 0.7666666666666667
+          }
+        },
+        "mean_quality_fraction": {
+          "numerator": 100,
+          "denominator": 120,
+          "value": 0.8333333333333334
+        }
+      }
+    },
+    "by_paper": {
+      "blip-2-2301.12597v1": {
+        "total_cases": 25,
+        "eligible_reference_cases": 25,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 25,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 18,
+          "denominator": 25,
+          "value": 0.72
+        },
+        "assessment_completion": {
+          "numerator": 25,
+          "denominator": 25,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 3,
+            "tn": 3,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 6,
+          "positive_reference_cases": 3,
+          "negative_reference_cases": 3,
+          "label_accuracy": {
+            "numerator": 6,
+            "denominator": 6,
+            "value": 1.0
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 3,
+          "denominator": 3,
+          "value": 1.0
+        },
+        "comparison": {
+          "semantic_rubric_cases": 10,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 16,
+              "denominator": 20,
+              "value": 0.8
+            },
+            "difference_correctness": {
+              "numerator": 16,
+              "denominator": 20,
+              "value": 0.8
+            },
+            "evidence_grounding": {
+              "numerator": 15,
+              "denominator": 20,
+              "value": 0.75
+            },
+            "scope_completeness": {
+              "numerator": 13,
+              "denominator": 20,
+              "value": 0.65
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 60,
+            "denominator": 80,
+            "value": 0.75
+          }
+        }
+      },
+      "blip-2201.12086v2": {
+        "total_cases": 15,
+        "eligible_reference_cases": 15,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 15,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 2,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 13,
+          "denominator": 15,
+          "value": 0.8666666666666667
+        },
+        "assessment_completion": {
+          "numerator": 15,
+          "denominator": 15,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 3,
+            "tn": 3,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 6,
+          "positive_reference_cases": 3,
+          "negative_reference_cases": 3,
+          "label_accuracy": {
+            "numerator": 6,
+            "denominator": 6,
+            "value": 1.0
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 3,
+          "denominator": 3,
+          "value": 1.0
+        },
+        "comparison": {
+          "semantic_rubric_cases": 0,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "difference_correctness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "evidence_grounding": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "scope_completeness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "clip-2103.00020v1": {
+        "total_cases": 15,
+        "eligible_reference_cases": 15,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 15,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 1,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 14,
+          "denominator": 15,
+          "value": 0.9333333333333333
+        },
+        "assessment_completion": {
+          "numerator": 15,
+          "denominator": 15,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 3,
+            "tn": 3,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 6,
+          "positive_reference_cases": 3,
+          "negative_reference_cases": 3,
+          "label_accuracy": {
+            "numerator": 6,
+            "denominator": 6,
+            "value": 1.0
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 3,
+          "denominator": 3,
+          "value": 1.0
+        },
+        "comparison": {
+          "semantic_rubric_cases": 0,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "difference_correctness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "evidence_grounding": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "scope_completeness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "flamingo-2204.14198v1": {
+        "total_cases": 25,
+        "eligible_reference_cases": 25,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 25,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 19,
+          "denominator": 25,
+          "value": 0.76
+        },
+        "assessment_completion": {
+          "numerator": 25,
+          "denominator": 25,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 3,
+            "tn": 3,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 6,
+          "positive_reference_cases": 3,
+          "negative_reference_cases": 3,
+          "label_accuracy": {
+            "numerator": 6,
+            "denominator": 6,
+            "value": 1.0
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 3,
+          "denominator": 3,
+          "value": 1.0
+        },
+        "comparison": {
+          "semantic_rubric_cases": 10,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 17,
+              "denominator": 20,
+              "value": 0.85
+            },
+            "difference_correctness": {
+              "numerator": 17,
+              "denominator": 20,
+              "value": 0.85
+            },
+            "evidence_grounding": {
+              "numerator": 16,
+              "denominator": 20,
+              "value": 0.8
+            },
+            "scope_completeness": {
+              "numerator": 14,
+              "denominator": 20,
+              "value": 0.7
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 64,
+            "denominator": 80,
+            "value": 0.8
+          }
+        }
+      },
+      "llava-2304.08485v1": {
+        "total_cases": 25,
+        "eligible_reference_cases": 25,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 25,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 23,
+          "denominator": 25,
+          "value": 0.92
+        },
+        "assessment_completion": {
+          "numerator": 25,
+          "denominator": 25,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 3,
+            "tn": 3,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 6,
+          "positive_reference_cases": 3,
+          "negative_reference_cases": 3,
+          "label_accuracy": {
+            "numerator": 6,
+            "denominator": 6,
+            "value": 1.0
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 3,
+          "denominator": 3,
+          "value": 1.0
+        },
+        "comparison": {
+          "semantic_rubric_cases": 10,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 19,
+              "denominator": 20,
+              "value": 0.95
+            },
+            "difference_correctness": {
+              "numerator": 19,
+              "denominator": 20,
+              "value": 0.95
+            },
+            "evidence_grounding": {
+              "numerator": 19,
+              "denominator": 20,
+              "value": 0.95
+            },
+            "scope_completeness": {
+              "numerator": 19,
+              "denominator": 20,
+              "value": 0.95
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 76,
+            "denominator": 80,
+            "value": 0.95
+          }
+        }
+      }
+    },
+    "by_dimension": {
+      "architecture": {
+        "total_cases": 4,
+        "eligible_reference_cases": 4,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 4,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 1,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 3,
+          "denominator": 4,
+          "value": 0.75
+        },
+        "assessment_completion": {
+          "numerator": 4,
+          "denominator": 4,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 1,
+            "tn": 1,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 2,
+          "positive_reference_cases": 1,
+          "negative_reference_cases": 1,
+          "label_accuracy": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "comparison": {
+          "semantic_rubric_cases": 0,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "difference_correctness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "evidence_grounding": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "scope_completeness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "bottleneck": {
+        "total_cases": 6,
+        "eligible_reference_cases": 6,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 6,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 6,
+          "denominator": 6,
+          "value": 1.0
+        },
+        "assessment_completion": {
+          "numerator": 6,
+          "denominator": 6,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 2,
+            "tn": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 4,
+          "positive_reference_cases": 2,
+          "negative_reference_cases": 2,
+          "label_accuracy": {
+            "numerator": 4,
+            "denominator": 4,
+            "value": 1.0
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 2,
+            "value": 0.0
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 2,
+            "value": 0.0
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "comparison": {
+          "semantic_rubric_cases": 0,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "difference_correctness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "evidence_grounding": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "scope_completeness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "data_preparation": {
+        "total_cases": 1,
+        "eligible_reference_cases": 1,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 1,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "value": 1.0
+        },
+        "assessment_completion": {
+          "numerator": 1,
+          "denominator": 1,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 0,
+            "tn": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 0,
+          "positive_reference_cases": 0,
+          "negative_reference_cases": 0,
+          "label_accuracy": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "comparison": {
+          "semantic_rubric_cases": 0,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "difference_correctness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "evidence_grounding": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "scope_completeness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "evidence_boundary": {
+        "total_cases": 15,
+        "eligible_reference_cases": 15,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 15,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 15,
+          "denominator": 15,
+          "value": 1.0
+        },
+        "assessment_completion": {
+          "numerator": 15,
+          "denominator": 15,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 0,
+            "tn": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 0,
+          "positive_reference_cases": 0,
+          "negative_reference_cases": 0,
+          "label_accuracy": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 15,
+          "denominator": 15,
+          "value": 1.0
+        },
+        "comparison": {
+          "semantic_rubric_cases": 0,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "difference_correctness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "evidence_grounding": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "scope_completeness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "frozen_trainable_scope": {
+        "total_cases": 11,
+        "eligible_reference_cases": 11,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 11,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 8,
+          "denominator": 11,
+          "value": 0.7272727272727273
+        },
+        "assessment_completion": {
+          "numerator": 11,
+          "denominator": 11,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 2,
+            "tn": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 4,
+          "positive_reference_cases": 2,
+          "negative_reference_cases": 2,
+          "label_accuracy": {
+            "numerator": 4,
+            "denominator": 4,
+            "value": 1.0
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 2,
+            "value": 0.0
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 2,
+            "value": 0.0
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "comparison": {
+          "semantic_rubric_cases": 3,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 4,
+              "denominator": 6,
+              "value": 0.6666666666666666
+            },
+            "difference_correctness": {
+              "numerator": 4,
+              "denominator": 6,
+              "value": 0.6666666666666666
+            },
+            "evidence_grounding": {
+              "numerator": 5,
+              "denominator": 6,
+              "value": 0.8333333333333334
+            },
+            "scope_completeness": {
+              "numerator": 4,
+              "denominator": 6,
+              "value": 0.6666666666666666
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 17,
+            "denominator": 24,
+            "value": 0.7083333333333334
+          }
+        }
+      },
+      "inference": {
+        "total_cases": 1,
+        "eligible_reference_cases": 1,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 1,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "value": 1.0
+        },
+        "assessment_completion": {
+          "numerator": 1,
+          "denominator": 1,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 0,
+            "tn": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 0,
+          "positive_reference_cases": 0,
+          "negative_reference_cases": 0,
+          "label_accuracy": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "comparison": {
+          "semantic_rubric_cases": 0,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "difference_correctness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "evidence_grounding": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "scope_completeness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "language_model": {
+        "total_cases": 8,
+        "eligible_reference_cases": 8,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 8,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 6,
+          "denominator": 8,
+          "value": 0.75
+        },
+        "assessment_completion": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 1,
+            "tn": 1,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 2,
+          "positive_reference_cases": 1,
+          "negative_reference_cases": 1,
+          "label_accuracy": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "comparison": {
+          "semantic_rubric_cases": 3,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 5,
+              "denominator": 6,
+              "value": 0.8333333333333334
+            },
+            "difference_correctness": {
+              "numerator": 5,
+              "denominator": 6,
+              "value": 0.8333333333333334
+            },
+            "evidence_grounding": {
+              "numerator": 5,
+              "denominator": 6,
+              "value": 0.8333333333333334
+            },
+            "scope_completeness": {
+              "numerator": 4,
+              "denominator": 6,
+              "value": 0.6666666666666666
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 19,
+            "denominator": 24,
+            "value": 0.7916666666666666
+          }
+        }
+      },
+      "objective_scope": {
+        "total_cases": 3,
+        "eligible_reference_cases": 3,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 3,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 3,
+          "denominator": 3,
+          "value": 1.0
+        },
+        "assessment_completion": {
+          "numerator": 3,
+          "denominator": 3,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 1,
+            "tn": 1,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 2,
+          "positive_reference_cases": 1,
+          "negative_reference_cases": 1,
+          "label_accuracy": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "comparison": {
+          "semantic_rubric_cases": 0,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "difference_correctness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "evidence_grounding": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "scope_completeness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "reported_experiment": {
+        "total_cases": 1,
+        "eligible_reference_cases": 1,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 1,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 1,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 0,
+          "denominator": 1,
+          "value": 0.0
+        },
+        "assessment_completion": {
+          "numerator": 1,
+          "denominator": 1,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 0,
+            "tn": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 0,
+          "positive_reference_cases": 0,
+          "negative_reference_cases": 0,
+          "label_accuracy": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "comparison": {
+          "semantic_rubric_cases": 0,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "difference_correctness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "evidence_grounding": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "scope_completeness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "training_data": {
+        "total_cases": 1,
+        "eligible_reference_cases": 1,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 1,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "value": 1.0
+        },
+        "assessment_completion": {
+          "numerator": 1,
+          "denominator": 1,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 0,
+            "tn": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 0,
+          "positive_reference_cases": 0,
+          "negative_reference_cases": 0,
+          "label_accuracy": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "comparison": {
+          "semantic_rubric_cases": 0,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "difference_correctness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "evidence_grounding": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "scope_completeness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "training_objective": {
+        "total_cases": 7,
+        "eligible_reference_cases": 7,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 7,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 6,
+          "denominator": 7,
+          "value": 0.8571428571428571
+        },
+        "assessment_completion": {
+          "numerator": 7,
+          "denominator": 7,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 1,
+            "tn": 1,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 2,
+          "positive_reference_cases": 1,
+          "negative_reference_cases": 1,
+          "label_accuracy": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "comparison": {
+          "semantic_rubric_cases": 3,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 6,
+              "denominator": 6,
+              "value": 1.0
+            },
+            "difference_correctness": {
+              "numerator": 6,
+              "denominator": 6,
+              "value": 1.0
+            },
+            "evidence_grounding": {
+              "numerator": 5,
+              "denominator": 6,
+              "value": 0.8333333333333334
+            },
+            "scope_completeness": {
+              "numerator": 5,
+              "denominator": 6,
+              "value": 0.8333333333333334
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 22,
+            "denominator": 24,
+            "value": 0.9166666666666666
+          }
+        }
+      },
+      "training_pairings": {
+        "total_cases": 3,
+        "eligible_reference_cases": 3,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 3,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 3,
+          "denominator": 3,
+          "value": 1.0
+        },
+        "assessment_completion": {
+          "numerator": 3,
+          "denominator": 3,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 1,
+            "tn": 1,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 2,
+          "positive_reference_cases": 1,
+          "negative_reference_cases": 1,
+          "label_accuracy": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "comparison": {
+          "semantic_rubric_cases": 0,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "difference_correctness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "evidence_grounding": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "scope_completeness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "training_settings": {
+        "total_cases": 4,
+        "eligible_reference_cases": 4,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 4,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 4,
+          "denominator": 4,
+          "value": 1.0
+        },
+        "assessment_completion": {
+          "numerator": 4,
+          "denominator": 4,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 1,
+            "tn": 1,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 2,
+          "positive_reference_cases": 1,
+          "negative_reference_cases": 1,
+          "label_accuracy": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "comparison": {
+          "semantic_rubric_cases": 0,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "difference_correctness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "evidence_grounding": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "scope_completeness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "video_processing": {
+        "total_cases": 3,
+        "eligible_reference_cases": 3,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 3,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 3,
+          "denominator": 3,
+          "value": 1.0
+        },
+        "assessment_completion": {
+          "numerator": 3,
+          "denominator": 3,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 1,
+            "tn": 1,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 2,
+          "positive_reference_cases": 1,
+          "negative_reference_cases": 1,
+          "label_accuracy": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "comparison": {
+          "semantic_rubric_cases": 0,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "difference_correctness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "evidence_grounding": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "scope_completeness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "vision_encoder": {
+        "total_cases": 13,
+        "eligible_reference_cases": 13,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 13,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 1,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 11,
+          "denominator": 13,
+          "value": 0.8461538461538461
+        },
+        "assessment_completion": {
+          "numerator": 13,
+          "denominator": 13,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 3,
+            "tn": 3,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 6,
+          "positive_reference_cases": 3,
+          "negative_reference_cases": 3,
+          "label_accuracy": {
+            "numerator": 6,
+            "denominator": 6,
+            "value": 1.0
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 3,
+            "value": 0.0
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "comparison": {
+          "semantic_rubric_cases": 3,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 6,
+              "denominator": 6,
+              "value": 1.0
+            },
+            "difference_correctness": {
+              "numerator": 6,
+              "denominator": 6,
+              "value": 1.0
+            },
+            "evidence_grounding": {
+              "numerator": 5,
+              "denominator": 6,
+              "value": 0.8333333333333334
+            },
+            "scope_completeness": {
+              "numerator": 5,
+              "denominator": 6,
+              "value": 0.8333333333333334
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 22,
+            "denominator": 24,
+            "value": 0.9166666666666666
+          }
+        }
+      },
+      "vision_language_bridge": {
+        "total_cases": 9,
+        "eligible_reference_cases": 9,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 9,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 8,
+          "denominator": 9,
+          "value": 0.8888888888888888
+        },
+        "assessment_completion": {
+          "numerator": 9,
+          "denominator": 9,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 1,
+            "tn": 1,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 2,
+          "positive_reference_cases": 1,
+          "negative_reference_cases": 1,
+          "label_accuracy": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "comparison": {
+          "semantic_rubric_cases": 3,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 5,
+              "denominator": 6,
+              "value": 0.8333333333333334
+            },
+            "difference_correctness": {
+              "numerator": 5,
+              "denominator": 6,
+              "value": 0.8333333333333334
+            },
+            "evidence_grounding": {
+              "numerator": 5,
+              "denominator": 6,
+              "value": 0.8333333333333334
+            },
+            "scope_completeness": {
+              "numerator": 5,
+              "denominator": 6,
+              "value": 0.8333333333333334
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 20,
+            "denominator": 24,
+            "value": 0.8333333333333334
+          }
+        }
+      }
+    },
+    "by_task_type": {
+      "abstention": {
+        "total_cases": 15,
+        "eligible_reference_cases": 15,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 15,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 15,
+          "denominator": 15,
+          "value": 1.0
+        },
+        "assessment_completion": {
+          "numerator": 15,
+          "denominator": 15,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 0,
+            "tn": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 0,
+          "positive_reference_cases": 0,
+          "negative_reference_cases": 0,
+          "label_accuracy": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 15,
+          "denominator": 15,
+          "value": 1.0
+        },
+        "comparison": {
+          "semantic_rubric_cases": 0,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "difference_correctness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "evidence_grounding": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "scope_completeness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "claim": {
+        "total_cases": 30,
+        "eligible_reference_cases": 30,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 30,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 3,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 26,
+          "denominator": 30,
+          "value": 0.8666666666666667
+        },
+        "assessment_completion": {
+          "numerator": 30,
+          "denominator": 30,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 0,
+            "tn": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 0,
+          "positive_reference_cases": 0,
+          "negative_reference_cases": 0,
+          "label_accuracy": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "comparison": {
+          "semantic_rubric_cases": 0,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "difference_correctness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "evidence_grounding": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "scope_completeness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      },
+      "comparison": {
+        "total_cases": 15,
+        "eligible_reference_cases": 15,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 15,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 8,
+          "denominator": 15,
+          "value": 0.5333333333333333
+        },
+        "assessment_completion": {
+          "numerator": 15,
+          "denominator": 15,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 0,
+            "tn": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 0,
+          "positive_reference_cases": 0,
+          "negative_reference_cases": 0,
+          "label_accuracy": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "comparison": {
+          "semantic_rubric_cases": 15,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 26,
+              "denominator": 30,
+              "value": 0.8666666666666667
+            },
+            "difference_correctness": {
+              "numerator": 26,
+              "denominator": 30,
+              "value": 0.8666666666666667
+            },
+            "evidence_grounding": {
+              "numerator": 25,
+              "denominator": 30,
+              "value": 0.8333333333333334
+            },
+            "scope_completeness": {
+              "numerator": 23,
+              "denominator": 30,
+              "value": 0.7666666666666667
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 100,
+            "denominator": 120,
+            "value": 0.8333333333333334
+          }
+        }
+      },
+      "reviewer": {
+        "total_cases": 30,
+        "eligible_reference_cases": 30,
+        "excluded_annotation_cases": 0,
+        "excluded_split_cases": 0,
+        "scored_cases": 30,
+        "unscored_reference_cases": 0,
+        "missing_predictions": 0,
+        "invalid_predictions": 0,
+        "pending_human_assessments": 0,
+        "accuracy": {
+          "numerator": 30,
+          "denominator": 30,
+          "value": 1.0
+        },
+        "assessment_completion": {
+          "numerator": 30,
+          "denominator": 30,
+          "value": 1.0
+        },
+        "benchmark_complete": true,
+        "reviewer": {
+          "positive_label": "passed",
+          "confusion_matrix": {
+            "tp": 15,
+            "tn": 15,
+            "fp": 0,
+            "fn": 0
+          },
+          "valid_label_predictions": 30,
+          "positive_reference_cases": 15,
+          "negative_reference_cases": 15,
+          "label_accuracy": {
+            "numerator": 30,
+            "denominator": 30,
+            "value": 1.0
+          },
+          "false_acceptance_rate": {
+            "numerator": 0,
+            "denominator": 15,
+            "value": 0.0
+          },
+          "false_rejection_rate": {
+            "numerator": 0,
+            "denominator": 15,
+            "value": 0.0
+          }
+        },
+        "abstention_decision_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "comparison": {
+          "semantic_rubric_cases": 0,
+          "components": {
+            "fact_accuracy": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "difference_correctness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "evidence_grounding": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "scope_completeness": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "mean_quality_fraction": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          }
+        }
+      }
+    },
+    "group_counting_note": "A cross-paper case is counted once overall and once for each involved paper; paper group denominators are not additive."
+  },
+  "case_results": [
+    {
+      "case_id": "rqv1-claim-clip-symmetric-loss",
+      "task_type": "claim",
+      "paper_ids": [
+        "clip-2103.00020v1"
+      ],
+      "dimension": "training_objective",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-clip-batch-pairings",
+      "task_type": "claim",
+      "paper_ids": [
+        "clip-2103.00020v1"
+      ],
+      "dimension": "training_pairings",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-clip-two-encoders",
+      "task_type": "claim",
+      "paper_ids": [
+        "clip-2103.00020v1"
+      ],
+      "dimension": "architecture",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-clip-zero-shot-classifier",
+      "task_type": "claim",
+      "paper_ids": [
+        "clip-2103.00020v1"
+      ],
+      "dimension": "inference",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-clip-whole-text-proxy",
+      "task_type": "claim",
+      "paper_ids": [
+        "clip-2103.00020v1"
+      ],
+      "dimension": "objective_scope",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-clip-reported-efficiency",
+      "task_type": "claim",
+      "paper_ids": [
+        "clip-2103.00020v1"
+      ],
+      "dimension": "reported_experiment",
+      "status": "invalid_prediction",
+      "correct": false,
+      "score_source": "operational_failure",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-blip-vision-encoder",
+      "task_type": "claim",
+      "paper_ids": [
+        "blip-2201.12086v2"
+      ],
+      "dimension": "vision_encoder",
+      "status": "invalid_prediction",
+      "correct": false,
+      "score_source": "operational_failure",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-blip-med-functionalities",
+      "task_type": "claim",
+      "paper_ids": [
+        "blip-2201.12086v2"
+      ],
+      "dimension": "architecture",
+      "status": "invalid_prediction",
+      "correct": false,
+      "score_source": "operational_failure",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-blip-cross-attention-placement",
+      "task_type": "claim",
+      "paper_ids": [
+        "blip-2201.12086v2"
+      ],
+      "dimension": "vision_language_bridge",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-blip-itm-negatives",
+      "task_type": "claim",
+      "paper_ids": [
+        "blip-2201.12086v2"
+      ],
+      "dimension": "training_objective",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-blip-label-smoothing",
+      "task_type": "claim",
+      "paper_ids": [
+        "blip-2201.12086v2"
+      ],
+      "dimension": "training_settings",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-blip-capfilt-initialization",
+      "task_type": "claim",
+      "paper_ids": [
+        "blip-2201.12086v2"
+      ],
+      "dimension": "data_preparation",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-blip2-two-stages",
+      "task_type": "claim",
+      "paper_ids": [
+        "blip-2-2301.12597v1"
+      ],
+      "dimension": "frozen_trainable_scope",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-blip2-query-shape",
+      "task_type": "claim",
+      "paper_ids": [
+        "blip-2-2301.12597v1"
+      ],
+      "dimension": "bottleneck",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-blip2-soft-prompts",
+      "task_type": "claim",
+      "paper_ids": [
+        "blip-2-2301.12597v1"
+      ],
+      "dimension": "vision_language_bridge",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-blip2-image-backbones",
+      "task_type": "claim",
+      "paper_ids": [
+        "blip-2-2301.12597v1"
+      ],
+      "dimension": "vision_encoder",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-blip2-llm-types",
+      "task_type": "claim",
+      "paper_ids": [
+        "blip-2-2301.12597v1"
+      ],
+      "dimension": "language_model",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-blip2-training-steps",
+      "task_type": "claim",
+      "paper_ids": [
+        "blip-2-2301.12597v1"
+      ],
+      "dimension": "training_settings",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-flamingo-vision-backbone",
+      "task_type": "claim",
+      "paper_ids": [
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "vision_encoder",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-flamingo-resampler-outputs",
+      "task_type": "claim",
+      "paper_ids": [
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "bottleneck",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-flamingo-frozen-backbones",
+      "task_type": "claim",
+      "paper_ids": [
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "frozen_trainable_scope",
+      "status": "scored",
+      "correct": false,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-flamingo-interleaved-attention",
+      "task_type": "claim",
+      "paper_ids": [
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "vision_language_bridge",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-flamingo-video-sampling",
+      "task_type": "claim",
+      "paper_ids": [
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "video_processing",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-flamingo-pretrained-lm",
+      "task_type": "claim",
+      "paper_ids": [
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "language_model",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-llava-language-model",
+      "task_type": "claim",
+      "paper_ids": [
+        "llava-2304.08485v1"
+      ],
+      "dimension": "language_model",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-llava-vision-backbone",
+      "task_type": "claim",
+      "paper_ids": [
+        "llava-2304.08485v1"
+      ],
+      "dimension": "vision_encoder",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-llava-linear-projection",
+      "task_type": "claim",
+      "paper_ids": [
+        "llava-2304.08485v1"
+      ],
+      "dimension": "vision_language_bridge",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-llava-stage-one",
+      "task_type": "claim",
+      "paper_ids": [
+        "llava-2304.08485v1"
+      ],
+      "dimension": "frozen_trainable_scope",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-llava-stage-two",
+      "task_type": "claim",
+      "paper_ids": [
+        "llava-2304.08485v1"
+      ],
+      "dimension": "frozen_trainable_scope",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-claim-llava-instruction-counts",
+      "task_type": "claim",
+      "paper_ids": [
+        "llava-2304.08485v1"
+      ],
+      "dimension": "training_data",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-clip-symmetric-loss-passed",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "clip-2103.00020v1"
+      ],
+      "dimension": "training_objective",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "passed",
+      "predicted_label": "passed",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-clip-symmetric-loss-rejected",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "clip-2103.00020v1"
+      ],
+      "dimension": "training_objective",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "rejected",
+      "predicted_label": "rejected",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-clip-batch-pairings-passed",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "clip-2103.00020v1"
+      ],
+      "dimension": "training_pairings",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "passed",
+      "predicted_label": "passed",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-clip-batch-pairings-rejected",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "clip-2103.00020v1"
+      ],
+      "dimension": "training_pairings",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "rejected",
+      "predicted_label": "rejected",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-clip-whole-text-proxy-passed",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "clip-2103.00020v1"
+      ],
+      "dimension": "objective_scope",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "passed",
+      "predicted_label": "passed",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-clip-whole-text-proxy-rejected",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "clip-2103.00020v1"
+      ],
+      "dimension": "objective_scope",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "rejected",
+      "predicted_label": "rejected",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-blip-vision-encoder-passed",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "blip-2201.12086v2"
+      ],
+      "dimension": "vision_encoder",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "passed",
+      "predicted_label": "passed",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-blip-vision-encoder-rejected",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "blip-2201.12086v2"
+      ],
+      "dimension": "vision_encoder",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "rejected",
+      "predicted_label": "rejected",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-blip-med-functionalities-passed",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "blip-2201.12086v2"
+      ],
+      "dimension": "architecture",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "passed",
+      "predicted_label": "passed",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-blip-med-functionalities-rejected",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "blip-2201.12086v2"
+      ],
+      "dimension": "architecture",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "rejected",
+      "predicted_label": "rejected",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-blip-label-smoothing-passed",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "blip-2201.12086v2"
+      ],
+      "dimension": "training_settings",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "passed",
+      "predicted_label": "passed",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-blip-label-smoothing-rejected",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "blip-2201.12086v2"
+      ],
+      "dimension": "training_settings",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "rejected",
+      "predicted_label": "rejected",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-blip2-query-shape-passed",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "blip-2-2301.12597v1"
+      ],
+      "dimension": "bottleneck",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "passed",
+      "predicted_label": "passed",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-blip2-query-shape-rejected",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "blip-2-2301.12597v1"
+      ],
+      "dimension": "bottleneck",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "rejected",
+      "predicted_label": "rejected",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-blip2-soft-prompts-passed",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "blip-2-2301.12597v1"
+      ],
+      "dimension": "vision_language_bridge",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "passed",
+      "predicted_label": "passed",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-blip2-soft-prompts-rejected",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "blip-2-2301.12597v1"
+      ],
+      "dimension": "vision_language_bridge",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "rejected",
+      "predicted_label": "rejected",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-blip2-image-backbones-passed",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "blip-2-2301.12597v1"
+      ],
+      "dimension": "vision_encoder",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "passed",
+      "predicted_label": "passed",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-blip2-image-backbones-rejected",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "blip-2-2301.12597v1"
+      ],
+      "dimension": "vision_encoder",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "rejected",
+      "predicted_label": "rejected",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-flamingo-vision-backbone-passed",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "vision_encoder",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "passed",
+      "predicted_label": "passed",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-flamingo-vision-backbone-rejected",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "vision_encoder",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "rejected",
+      "predicted_label": "rejected",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-flamingo-resampler-outputs-passed",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "bottleneck",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "passed",
+      "predicted_label": "passed",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-flamingo-resampler-outputs-rejected",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "bottleneck",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "rejected",
+      "predicted_label": "rejected",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-flamingo-video-sampling-passed",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "video_processing",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "passed",
+      "predicted_label": "passed",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-flamingo-video-sampling-rejected",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "video_processing",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "rejected",
+      "predicted_label": "rejected",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-llava-language-model-passed",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "llava-2304.08485v1"
+      ],
+      "dimension": "language_model",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "passed",
+      "predicted_label": "passed",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-llava-language-model-rejected",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "llava-2304.08485v1"
+      ],
+      "dimension": "language_model",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "rejected",
+      "predicted_label": "rejected",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-llava-stage-one-passed",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "llava-2304.08485v1"
+      ],
+      "dimension": "frozen_trainable_scope",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "passed",
+      "predicted_label": "passed",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-llava-stage-one-rejected",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "llava-2304.08485v1"
+      ],
+      "dimension": "frozen_trainable_scope",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "rejected",
+      "predicted_label": "rejected",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-llava-stage-two-passed",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "llava-2304.08485v1"
+      ],
+      "dimension": "frozen_trainable_scope",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "passed",
+      "predicted_label": "passed",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-reviewer-llava-stage-two-rejected",
+      "task_type": "reviewer",
+      "paper_ids": [
+        "llava-2304.08485v1"
+      ],
+      "dimension": "frozen_trainable_scope",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_label_comparison",
+      "expected_label": "rejected",
+      "predicted_label": "rejected",
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-vision-encoder",
+      "task_type": "comparison",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "vision_encoder",
+      "status": "scored",
+      "correct": false,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": {
+        "fact_accuracy": 2,
+        "difference_correctness": 2,
+        "evidence_grounding": 1,
+        "scope_completeness": 1
+      },
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-vision-language-bridge",
+      "task_type": "comparison",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "vision_language_bridge",
+      "status": "scored",
+      "correct": false,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": {
+        "fact_accuracy": 1,
+        "difference_correctness": 1,
+        "evidence_grounding": 1,
+        "scope_completeness": 1
+      },
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-frozen-trainable-scope",
+      "task_type": "comparison",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "frozen_trainable_scope",
+      "status": "scored",
+      "correct": false,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": {
+        "fact_accuracy": 1,
+        "difference_correctness": 1,
+        "evidence_grounding": 1,
+        "scope_completeness": 1
+      },
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-training-objective",
+      "task_type": "comparison",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "training_objective",
+      "status": "scored",
+      "correct": false,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": {
+        "fact_accuracy": 2,
+        "difference_correctness": 2,
+        "evidence_grounding": 1,
+        "scope_completeness": 1
+      },
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-language-model",
+      "task_type": "comparison",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "language_model",
+      "status": "scored",
+      "correct": false,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": {
+        "fact_accuracy": 1,
+        "difference_correctness": 1,
+        "evidence_grounding": 2,
+        "scope_completeness": 0
+      },
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-llava-vision-encoder",
+      "task_type": "comparison",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "llava-2304.08485v1"
+      ],
+      "dimension": "vision_encoder",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": {
+        "fact_accuracy": 2,
+        "difference_correctness": 2,
+        "evidence_grounding": 2,
+        "scope_completeness": 2
+      },
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-llava-vision-language-bridge",
+      "task_type": "comparison",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "llava-2304.08485v1"
+      ],
+      "dimension": "vision_language_bridge",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": {
+        "fact_accuracy": 2,
+        "difference_correctness": 2,
+        "evidence_grounding": 2,
+        "scope_completeness": 2
+      },
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-llava-frozen-trainable-scope",
+      "task_type": "comparison",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "llava-2304.08485v1"
+      ],
+      "dimension": "frozen_trainable_scope",
+      "status": "scored",
+      "correct": false,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": {
+        "fact_accuracy": 1,
+        "difference_correctness": 1,
+        "evidence_grounding": 2,
+        "scope_completeness": 1
+      },
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-llava-training-objective",
+      "task_type": "comparison",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "llava-2304.08485v1"
+      ],
+      "dimension": "training_objective",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": {
+        "fact_accuracy": 2,
+        "difference_correctness": 2,
+        "evidence_grounding": 2,
+        "scope_completeness": 2
+      },
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-llava-language-model",
+      "task_type": "comparison",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "llava-2304.08485v1"
+      ],
+      "dimension": "language_model",
+      "status": "scored",
+      "correct": false,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": {
+        "fact_accuracy": 2,
+        "difference_correctness": 2,
+        "evidence_grounding": 1,
+        "scope_completeness": 2
+      },
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-comparison-flamingo-llava-vision-encoder",
+      "task_type": "comparison",
+      "paper_ids": [
+        "flamingo-2204.14198v1",
+        "llava-2304.08485v1"
+      ],
+      "dimension": "vision_encoder",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": {
+        "fact_accuracy": 2,
+        "difference_correctness": 2,
+        "evidence_grounding": 2,
+        "scope_completeness": 2
+      },
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-comparison-flamingo-llava-vision-language-bridge",
+      "task_type": "comparison",
+      "paper_ids": [
+        "flamingo-2204.14198v1",
+        "llava-2304.08485v1"
+      ],
+      "dimension": "vision_language_bridge",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": {
+        "fact_accuracy": 2,
+        "difference_correctness": 2,
+        "evidence_grounding": 2,
+        "scope_completeness": 2
+      },
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-comparison-flamingo-llava-frozen-trainable-scope",
+      "task_type": "comparison",
+      "paper_ids": [
+        "flamingo-2204.14198v1",
+        "llava-2304.08485v1"
+      ],
+      "dimension": "frozen_trainable_scope",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": {
+        "fact_accuracy": 2,
+        "difference_correctness": 2,
+        "evidence_grounding": 2,
+        "scope_completeness": 2
+      },
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-comparison-flamingo-llava-training-objective",
+      "task_type": "comparison",
+      "paper_ids": [
+        "flamingo-2204.14198v1",
+        "llava-2304.08485v1"
+      ],
+      "dimension": "training_objective",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": {
+        "fact_accuracy": 2,
+        "difference_correctness": 2,
+        "evidence_grounding": 2,
+        "scope_completeness": 2
+      },
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-comparison-flamingo-llava-language-model",
+      "task_type": "comparison",
+      "paper_ids": [
+        "flamingo-2204.14198v1",
+        "llava-2304.08485v1"
+      ],
+      "dimension": "language_model",
+      "status": "scored",
+      "correct": true,
+      "score_source": "ai_semantic_review",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": {
+        "fact_accuracy": 2,
+        "difference_correctness": 2,
+        "evidence_grounding": 2,
+        "scope_completeness": 2
+      },
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-abstention-clip-private-manifest",
+      "task_type": "abstention",
+      "paper_ids": [
+        "clip-2103.00020v1"
+      ],
+      "dimension": "evidence_boundary",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_abstention_decision",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-abstention-blip-private-manifest",
+      "task_type": "abstention",
+      "paper_ids": [
+        "blip-2201.12086v2"
+      ],
+      "dimension": "evidence_boundary",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_abstention_decision",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-abstention-blip2-private-manifest",
+      "task_type": "abstention",
+      "paper_ids": [
+        "blip-2-2301.12597v1"
+      ],
+      "dimension": "evidence_boundary",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_abstention_decision",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-abstention-flamingo-private-manifest",
+      "task_type": "abstention",
+      "paper_ids": [
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "evidence_boundary",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_abstention_decision",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-abstention-llava-private-manifest",
+      "task_type": "abstention",
+      "paper_ids": [
+        "llava-2304.08485v1"
+      ],
+      "dimension": "evidence_boundary",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_abstention_decision",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-abstention-clip-unprepared-page",
+      "task_type": "abstention",
+      "paper_ids": [
+        "clip-2103.00020v1"
+      ],
+      "dimension": "evidence_boundary",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_abstention_decision",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-abstention-blip-unprepared-page",
+      "task_type": "abstention",
+      "paper_ids": [
+        "blip-2201.12086v2"
+      ],
+      "dimension": "evidence_boundary",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_abstention_decision",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-abstention-blip2-unprepared-page",
+      "task_type": "abstention",
+      "paper_ids": [
+        "blip-2-2301.12597v1"
+      ],
+      "dimension": "evidence_boundary",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_abstention_decision",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-abstention-flamingo-unprepared-page",
+      "task_type": "abstention",
+      "paper_ids": [
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "evidence_boundary",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_abstention_decision",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-abstention-llava-unprepared-page",
+      "task_type": "abstention",
+      "paper_ids": [
+        "llava-2304.08485v1"
+      ],
+      "dimension": "evidence_boundary",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_abstention_decision",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-abstention-blip-caption-rgb",
+      "task_type": "abstention",
+      "paper_ids": [
+        "blip-2201.12086v2"
+      ],
+      "dimension": "evidence_boundary",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_abstention_decision",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-abstention-blip2-caption-rgb",
+      "task_type": "abstention",
+      "paper_ids": [
+        "blip-2-2301.12597v1"
+      ],
+      "dimension": "evidence_boundary",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_abstention_decision",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-abstention-llava-caption-rgb",
+      "task_type": "abstention",
+      "paper_ids": [
+        "llava-2304.08485v1"
+      ],
+      "dimension": "evidence_boundary",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_abstention_decision",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-abstention-clip-symmetric-loss-answerable",
+      "task_type": "abstention",
+      "paper_ids": [
+        "clip-2103.00020v1"
+      ],
+      "dimension": "evidence_boundary",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_abstention_decision",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    },
+    {
+      "case_id": "rqv1-abstention-flamingo-resampler-outputs-answerable",
+      "task_type": "abstention",
+      "paper_ids": [
+        "flamingo-2204.14198v1"
+      ],
+      "dimension": "evidence_boundary",
+      "status": "scored",
+      "correct": true,
+      "score_source": "structured_abstention_decision",
+      "expected_label": null,
+      "predicted_label": null,
+      "comparison_rubric": null,
+      "eligible_reference": true
+    }
+  ],
+  "protocol": {
+    "open_answer_semantics": "Semantic review bound to case and prediction hashes; no string-match correctness. AI reviews require explicit ai_reviewed reference scope and remain separate from human review.",
+    "accuracy_denominator": "Cases with a known correctness value. Missing/invalid predictions are failures; ungraded open answers are reported separately, not silently treated as correct or incorrect.",
+    "reviewer_rates": "Confusion matrix and false-accept/reject denominators use valid label predictions only; missing/invalid predictions remain explicit operational failures in overall/task accuracy.",
+    "abstention": "Structured decision accuracy, not automatic semantic judgment of refusal prose.",
+    "comparison_rubric": "Four semantic-review axes, each 0..2, with explicit assessment provenance; aggregate fractions do not infer correctness from a threshold."
+  },
+  "real_provider_calls": 0,
+  "dataset_validation": {
+    "status": "structurally_valid",
+    "dataset_version": "research_quality_v1",
+    "reference_kind": "ai_reviewed",
+    "total_cases": 90,
+    "task_counts": {
+      "abstention": 15,
+      "claim": 30,
+      "comparison": 15,
+      "reviewer": 30
+    },
+    "candidate_count": 0,
+    "human_reviewed_count": 0,
+    "approved_gold_count": 0,
+    "approved_ai_reference_count": 90,
+    "rejected_count": 0,
+    "target_shortfall": {
+      "claim": 0,
+      "reviewer": 0,
+      "comparison": 0,
+      "abstention": 0
+    },
+    "fact_group_count": 34,
+    "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+    "semantic_reference_validation": "ai_original_pdf_source_review_not_independent_human_gold",
+    "split_policy": "Explicit groups and normalized identical references checked; not a semantic paraphrase detector.",
+    "real_provider_calls": 0
+  }
+}

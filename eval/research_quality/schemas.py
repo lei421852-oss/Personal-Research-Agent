@@ -369,6 +369,12 @@ class HumanAssessment(QualityModel):
         return self
 
 
+class AIAssessment(HumanAssessment):
+    """用户授权的AI语义核对，不能被当作人工评分载入。"""
+
+    method: Literal["ai_semantic_review"]
+
+
 def record_sha256(record):
     data = record.model_dump(mode="json")
     # 旧Case没有AI字段；保持历史审核记录和预测评分绑定哈希兼容。

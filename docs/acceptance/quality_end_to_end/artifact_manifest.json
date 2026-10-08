@@ -1,0 +1,131 @@
+{
+  "baseline_commit": "d4ae4c1",
+  "scope": "Quality execution adapter, explicit AI grading and real90 acceptance evidence; no production code changes.",
+  "files": [
+    {
+      "path": "data/benchmark/research_quality_v1_ai_reference/README.md",
+      "bytes": 4456,
+      "sha256": "b63f503111bc67cc74c6dea83dee94e2227789f6762e7c08576565cfc47637ad"
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/checks.json",
+      "bytes": 1294,
+      "sha256": "36b036b72cf6d765b862fef53b3fd55b0e48cd0bf9cfe25bb3348e59e345c64f"
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/evaluation_summary.json",
+      "bytes": 14035,
+      "sha256": "9c2d449d5a0778b0a28e120114bce6613cd06cd8bb717faa5f8de805cf9f2fc2"
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/formatter.txt",
+      "bytes": 28,
+      "sha256": "feca25aea532c5d75686bc968f8f8cc0dac429b2ade14ae92e7fd62276ef2992"
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/full_tests.txt",
+      "bytes": 1491,
+      "sha256": "8123ef9942c0c47252552b9796bc4d85eb59b0e64b0c75c96bbb0acf86fd9800"
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/report.md",
+      "bytes": 7216,
+      "sha256": "f405c811b85141dc0bb20db9f5932912e0b5f0061a7fc931afe6dc59e219ddaf"
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/ai-assessments.jsonl",
+      "bytes": 22036,
+      "sha256": "323e4a3c442b8b5b8b147a3244bba41929a42653df9de63d6baa1e37774f3446"
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/case_results.csv",
+      "bytes": 143614,
+      "sha256": "27022bd195830ee7e35054123098dfcfe906565fd4258ff3e5205fa65aa83831"
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/executions.jsonl",
+      "bytes": 2137383,
+      "sha256": "41a107a5e8b727fbbd26648b012cbf46e1c60ff2e255ccfc702a5da4d33108fa"
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/grading_protocol.json",
+      "bytes": 1011,
+      "sha256": "46742e427189d65d6412a0b2dffe00e3c004fad9964bca2d4da0b9fbbe8f669a"
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/predictions.jsonl",
+      "bytes": 141799,
+      "sha256": "105fb37741ff5a22d68dcd0063b52d2890bb34c4b1036a45669b62883677fbd1"
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/quality-score-all.json",
+      "bytes": 103533,
+      "sha256": "a8617e6b9b4677981b59f9e15ba660f7c0b9e663a2811be6ca0628f5d7210f76"
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/quality-score-dev.json",
+      "bytes": 100420,
+      "sha256": "8951015d13d34401699ffd2762326172902840ab8b5bd24e22bfab33fb5f5669"
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/quality-score-test.json",
+      "bytes": 102786,
+      "sha256": "0694aad427b438c7e6b3e8f9f700cede2e6d9eac1fd9160188b737c0ac35085e"
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/run_manifest.json",
+      "bytes": 1773,
+      "sha256": "192950cc52c6d89465a1db6664747370d039318ffbf2d32a31aea01f79b3fd2e"
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/ruff.txt",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/whitespace.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/research-quality-execution.md",
+      "bytes": 2308,
+      "sha256": "ae1397a10816f5c1c94ada738e8a1853007119003e633129148d77483ef44f0d"
+    },
+    {
+      "path": "eval/research_quality/execution.py",
+      "bytes": 10481,
+      "sha256": "3b839eec6a396d79084749becf68b9681d2ec5dc5d7eab69cca5ac23fdd16b72"
+    },
+    {
+      "path": "eval/research_quality/schemas.py",
+      "bytes": 14266,
+      "sha256": "5026998222096cf2ff86d50106c029f65c250400fc8d3d7eaf30c02e53a22e27"
+    },
+    {
+      "path": "eval/research_quality/scoring.py",
+      "bytes": 9918,
+      "sha256": "d81739b01ae9be11bab102ac6ef31dd73885ce2277a80f950b22989057474227"
+    },
+    {
+      "path": "scripts/run_quality_benchmark.py",
+      "bytes": 9286,
+      "sha256": "b6a2207d37b9ca9844d1defce9a1f964995b59c319002e6802d74cd316fae89e"
+    },
+    {
+      "path": "scripts/score_quality_benchmark.py",
+      "bytes": 5134,
+      "sha256": "ac3b7153ac115140e6da6977a2540f19eec5141428e35789ecd70ea93d727458"
+    },
+    {
+      "path": "tests/unit/research_quality/test_ai_scoring.py",
+      "bytes": 3308,
+      "sha256": "942219b1e6c7167e63808242620991f9821dae7b53c3e353057ae94795ccf038"
+    },
+    {
+      "path": "tests/unit/research_quality/test_execution.py",
+      "bytes": 5024,
+      "sha256": "9e389777d6eef3e60e6d5026978d9b289e8dc80bbd6161bb6615a21d2f52b42a"
+    }
+  ]
+}

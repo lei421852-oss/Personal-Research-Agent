@@ -1,0 +1,47 @@
+{
+  "run_id": "quality-20261008T120801Z",
+  "dataset_manifest_sha256": "f8a867503fca36f24ea68c553073ea4a41f5b057753d7cc2db48516a81f2667d",
+  "llm_model": "deepseek-flash",
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+  "reference_kind": "ai_reviewed",
+  "execution_configuration": {
+    "schema_version": 1,
+    "dataset": "eval/datasets/stage_e.json",
+    "papers_dir": "data/papers",
+    "additional_papers_dir": "data/research_papers",
+    "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+    "device": "cpu",
+    "index_dir": "data/chroma/stage-e",
+    "collection": "research-stage-e-text",
+    "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+    "distance": "cosine",
+    "top_k": 10,
+    "runtime": {
+      "max_concurrent_workers": 3,
+      "max_concurrent_llm": 2,
+      "max_concurrent_vlm": 1,
+      "max_concurrent_retrieval": 1,
+      "max_tool_calls_per_worker": 8,
+      "max_model_calls_per_worker": 20,
+      "max_protocol_corrections": 2,
+      "operation_timeout_seconds": 60,
+      "max_retries": 2
+    },
+    "review_runtime": {
+      "max_concurrent_reviewers": 2,
+      "max_model_calls_per_review": 3
+    },
+    "recovery": {
+      "max_research_model_calls": 200,
+      "max_research_tool_calls": 64
+    },
+    "planner_mode": "fixed_benchmark_paper_dimension_plan_no_gold",
+    "provider_temperature": "provider_default_not_sent",
+    "source_label_policy": "Source-checked candidate labels; not independently human-approved exhaustive relevance labels."
+  },
+  "created_at": "2026-10-08T12:08:01.474747+00:00",
+  "grading": "not_yet_graded",
+  "planner_tested": false,
+  "hidden_reasoning_recorded": false
+}

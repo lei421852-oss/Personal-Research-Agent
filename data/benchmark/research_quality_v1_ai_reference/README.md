@@ -2,6 +2,8 @@
 
 90条样本全部为`approved_ai_reference`，`reference_kind=ai_reviewed`。每条包含已完成的AI原PDF复核证明、中文理由、源样本哈希、审核记录哈希以及内容/划分绑定哈希。待审核样本数为0。
 
+后续已按用户授权完成90条真实执行与AI辅助评分。实际执行/评分命令见 [端到端使用说明](../../../docs/research-quality-execution.md)，结果见 [完成报告](../../../docs/acceptance/quality_end_to_end/report.md)。以下数据准备说明保留F1阶段边界；新的评测没有修改这些参考标签。
+
 审核来源是Codex AI原文复核；本集不宣称是独立人工Gold。`human_reviews`未代填。原候选与人工Gold协议保留在`research_quality_v1`，三处表述修订及初始AI记录保留在`research_quality_v1_ai_reviewed`和`docs/acceptance/stage_f1_sample_review`。
 
 ## 划分
