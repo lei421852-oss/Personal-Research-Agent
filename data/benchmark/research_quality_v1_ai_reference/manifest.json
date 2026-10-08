@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "dataset_version": "research_quality_v1",
+  "reference_kind": "ai_reviewed",
+  "prepared_at": "2026-10-08T10:03:52.680773Z",
+  "stage_e_tag": "stage-e-freeze-v1",
+  "stage_e_commit_sha": "5700c6e31d0a46fefa44f890fb7fbb1b60634124",
+  "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+  "registered_paper_ids": [
+    "blip-2-2301.12597v1",
+    "blip-2201.12086v2",
+    "clip-2103.00020v1",
+    "flamingo-2204.14198v1",
+    "llava-2304.08485v1"
+  ],
+  "purpose": "research_quality_evaluation_only",
+  "forbidden_uses": [
+    "training",
+    "prompt_optimization",
+    "threshold_tuning"
+  ],
+  "target_counts": {
+    "claim": 30,
+    "reviewer": 30,
+    "comparison": 15,
+    "abstention": 15
+  },
+  "case_files": {
+    "claim": {
+      "filename": "claim_cases.jsonl",
+      "sha256": "14839466c4b53250280f40541c9c6e7178d99b1bb12ca72aa10cf29284349e42",
+      "count": 30
+    },
+    "reviewer": {
+      "filename": "reviewer_cases.jsonl",
+      "sha256": "cfac3d3f03aae8e35cb3a74d8cb5ac2e5270e5258dd9ccaee185d37f78bd96af",
+      "count": 30
+    },
+    "comparison": {
+      "filename": "comparison_cases.jsonl",
+      "sha256": "61e8543928c6551924fb35a1ac3fb8c5113e5c1a5b444c2ddfd0d3f624973f66",
+      "count": 15
+    },
+    "abstention": {
+      "filename": "abstention_cases.jsonl",
+      "sha256": "be247195c8e39e7379e6b398d8d4d633b5dd4eea5d4a42ff9e25947cc3049c52",
+      "count": 15
+    }
+  },
+  "notes": [
+    "90 approved AI-reviewed references; not an independently human-reviewed Gold Set.",
+    "All AI approvals derive from existing original-PDF review records, with case-content and review-record hashes.",
+    "Three wording corrections from the reviewed revision are retained; expected labels and original corpus are unchanged.",
+    "18 dev / 72 test; shared fact-group connected components remain in the same split.",
+    "Open-answer prediction semantics still require separate human assessments; reference approval does not grade predictions.",
+    "Original F1 candidates, human Gold contract and Stage E corpus remain separate and preserved."
+  ]
+}

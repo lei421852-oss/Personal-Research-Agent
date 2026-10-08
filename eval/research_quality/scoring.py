@@ -1,6 +1,6 @@
 """标签可确定性计分，开放语义必须有绑定到具体预测的人工评分。"""
 
-from eval.research_quality.dataset_loader import approved_gold
+from eval.research_quality.dataset_loader import approved_references
 from eval.research_quality.metrics import metrics_report
 from eval.research_quality.schemas import (
     HumanAssessment,
@@ -26,9 +26,16 @@ def keyed(records, model):
     return result
 
 
-def score_benchmark(dataset, predictions=(), assessments=(), *, split="test"):
+def score_benchmark(
+    dataset, predictions=(), assessments=(), *, split="test", reference_kind=None
+):
     dataset = QualityDataset.model_validate(dataset.model_dump(mode="python"))
-    selected = {c.case_id for c in approved_gold(dataset, split=split)}
+    kind = reference_kind or dataset.manifest.reference_kind
+    approved = approved_references(dataset, split=split, reference_kind=kind)
+    selected = {c.case_id for c in approved}
+    approved_status = (
+        "approved_gold" if kind == "human_gold" else "approved_ai_reference"
+    )
     cases = {c.case_id: c for c in dataset.cases}
     if len(cases) != len(dataset.cases):
         raise ScoringInputError("duplicate_case_id")
@@ -71,7 +78,7 @@ def score_benchmark(dataset, predictions=(), assessments=(), *, split="test"):
             "dimension": case.dimension,
             "eligible_gold": case.case_id in selected,
             "status": "excluded_split"
-            if case.annotation_status == "approved_gold"
+            if case.annotation_status == approved_status
             else "excluded_annotation",
             "correct": None,
             "score_source": None,
@@ -135,16 +142,32 @@ def score_benchmark(dataset, predictions=(), assessments=(), *, split="test"):
                 else None,
             )
     metrics = metrics_report(rows)
-    return {
-        "status": (
-            "not_scored_no_gold_in_selected_split"
-            if any(c.annotation_status == "approved_gold" for c in dataset.cases)
-            else "not_scored_no_approved_gold"
+    if kind == "ai_reviewed":
+        # 沿用同一计数器，公开AI结果时使用reference名称，避免伪称人工Gold。
+        metrics = reference_metric_names(metrics)
+        for row in rows:
+            row["eligible_reference"] = row.pop("eligible_gold")
+    complete = metrics["overall"]["benchmark_complete"]
+    if not selected:
+        status = (
+            (
+                "not_scored_no_gold_in_selected_split"
+                if any(c.annotation_status == "approved_gold" for c in dataset.cases)
+                else "not_scored_no_approved_gold"
+            )
+            if kind == "human_gold"
+            else "not_scored_no_ai_reference_in_selected_split"
         )
-        if not selected
-        else "scored"
-        if metrics["overall"]["benchmark_complete"]
-        else "partial_pending_human_assessment",
+    elif kind == "ai_reviewed" and not predicted:
+        status = "awaiting_predictions"
+    else:
+        status = "scored" if complete else "partial_pending_human_assessment"
+    return {
+        "status": status,
+        "reference_kind": kind,
+        "result_scope": "provisional_ai_reviewed_reference"
+        if kind == "ai_reviewed"
+        else "human_gold",
         "dataset_version": dataset.manifest.dataset_version,
         "split": split,
         "candidate_cases": sum(
@@ -155,6 +178,9 @@ def score_benchmark(dataset, predictions=(), assessments=(), *, split="test"):
         ),
         "approved_gold_cases": sum(
             c.annotation_status == "approved_gold" for c in dataset.cases
+        ),
+        "approved_ai_reference_cases": sum(
+            c.annotation_status == "approved_ai_reference" for c in dataset.cases
         ),
         "metrics": metrics,
         "case_results": rows,
@@ -167,3 +193,16 @@ def score_benchmark(dataset, predictions=(), assessments=(), *, split="test"):
         },
         "real_provider_calls": 0,
     }
+
+
+def reference_metric_names(value):
+    """AI参考结果只更名分母标签，不改变任何指标公式。"""
+    if isinstance(value, dict):
+        names = {
+            "eligible_gold_cases": "eligible_reference_cases",
+            "unscored_gold_cases": "unscored_reference_cases",
+            "positive_gold_cases": "positive_reference_cases",
+            "negative_gold_cases": "negative_reference_cases",
+        }
+        return {names.get(k, k): reference_metric_names(v) for k, v in value.items()}
+    return value

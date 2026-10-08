@@ -2,6 +2,8 @@
 
 本阶段基于本地标签 `stage-e-freeze-v1`，仅新增评测数据、验证/评分模块、测试及文档。Planner、Worker、Reviewer、Recovery、Synthesis、Corpus、已有 Frozen Evaluation 与 Stage E 验收证据保持不变。
 
+后续已按用户要求完成AI原文复核并登记90条可用AI参考样本，划分为18 dev / 72 test。直接使用入口见 [AI审核参考集](../data/benchmark/research_quality_v1_ai_reference/README.md)。以下候选数量和人工Gold约定描述原始F1数据；AI参考来源与人工Gold分开记录，不代填人审身份。
+
 ## 当前状态
 
 | 项目 | 数量 |

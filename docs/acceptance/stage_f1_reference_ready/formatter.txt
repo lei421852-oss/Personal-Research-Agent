@@ -1,0 +1,14 @@
+unformatted: File would be reformatted
+   --> tests/unit/research_quality/test_ai_references.py:180:12
+    |
+179 |     assert all(record_sha256(c) == original[c.case_id] for c in dataset.cases)
+    -     assert '"reference_kind"' not in (
+    -         ROOT / "data/benchmark/research_quality_v1/manifest.json"
+    -     ).read_text()
+180 +     assert (
+181 +         '"reference_kind"'
+182 +         not in (ROOT / "data/benchmark/research_quality_v1/manifest.json").read_text()
+183 +     )
+    |
+
+1 file would be reformatted, 202 files already formatted

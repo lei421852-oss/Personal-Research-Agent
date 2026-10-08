@@ -683,7 +683,8 @@ def main():
     for task in ["claim", "reviewer", "comparison", "abstention"]:
         rows = [c for c in cases if c.task_type == task]
         filename = task + "_cases.jsonl"
-        content = "".join(c.model_dump_json() + "\n" for c in rows)
+        # 旧候选版本不写新AI字段，保持历史JSONL与清单字节不变。
+        content = "".join(c.model_dump_json(exclude={"ai_review"}) + "\n" for c in rows)
         contents[filename] = content
         files[task] = {
             "filename": filename,
@@ -715,7 +716,9 @@ def main():
     validation = validate_dataset(
         QualityDataset(manifest=manifest, cases=cases), records, snapshot
     )
-    contents["manifest.json"] = manifest.model_dump_json(indent=2) + "\n"
+    contents["manifest.json"] = (
+        manifest.model_dump_json(indent=2, exclude={"reference_kind"}) + "\n"
+    )
     # 先检查所有目标，再写文件；任何人工编辑都不会被静默覆盖。
     for filename, text in contents.items():
         path = args.output_dir / filename

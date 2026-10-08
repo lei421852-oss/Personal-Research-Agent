@@ -1,0 +1,64 @@
+[
+  {
+    "name": "full_tests",
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "pytest",
+      "-q"
+    ],
+    "started_at": "2026-10-08T11:27:12.669315+00:00",
+    "elapsed_seconds": 12.256,
+    "exit_code": 0,
+    "log_path": "docs/acceptance/stage_f1_reference_ready/full_tests.txt"
+  },
+  {
+    "name": "ruff",
+    "command": [
+      "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+      "check",
+      "app",
+      "tests",
+      "scripts",
+      "eval"
+    ],
+    "started_at": "2026-10-08T11:27:28.210510+00:00",
+    "elapsed_seconds": 0.013,
+    "exit_code": 0,
+    "log_path": "docs/acceptance/stage_f1_reference_ready/ruff.txt"
+  },
+  {
+    "name": "formatter",
+    "command": [
+      "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+      "format",
+      "--check",
+      "app",
+      "tests",
+      "scripts",
+      "eval"
+    ],
+    "started_at": "2026-10-08T11:27:28.223153+00:00",
+    "elapsed_seconds": 0.009,
+    "exit_code": 1,
+    "log_path": "docs/acceptance/stage_f1_reference_ready/formatter.txt"
+  },
+  {
+    "name": "formatter",
+    "attempt": 2,
+    "reason": "Normalize final test assertion layout; no semantic change.",
+    "command": [
+      "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+      "format",
+      "--check",
+      "app",
+      "tests",
+      "scripts",
+      "eval"
+    ],
+    "started_at": "2026-10-08T11:29:22.988226+00:00",
+    "elapsed_seconds": 0.011,
+    "exit_code": 0,
+    "log_path": "docs/acceptance/stage_f1_reference_ready/formatter_final.txt"
+  }
+]

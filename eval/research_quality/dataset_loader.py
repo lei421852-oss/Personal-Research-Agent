@@ -48,6 +48,24 @@ def approved_gold(dataset, *, split="test"):
     ]
 
 
+def approved_references(dataset, *, split="test", reference_kind=None):
+    """按显式数据来源选择参考集；AI参考不计入人工Gold。"""
+    dataset = QualityDataset.model_validate(dataset.model_dump(mode="python"))
+    kind = reference_kind or dataset.manifest.reference_kind
+    if kind != dataset.manifest.reference_kind:
+        raise ValueError("Reference kind differs from dataset manifest")
+    if kind == "human_gold":
+        return approved_gold(dataset, split=split)
+    if split not in {"dev", "test", "all"}:
+        raise ValueError("Reference selection requires dev, test or all")
+    return [
+        c
+        for c in dataset.cases
+        if c.annotation_status == "approved_ai_reference"
+        and (split == "all" or c.split == split)
+    ]
+
+
 def evaluation_input(case):
     """未来执行器只取得问题与待审材料，不获得参考答案或预期标签。"""
     payload = {

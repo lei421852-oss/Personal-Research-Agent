@@ -61,6 +61,29 @@ class HumanGoldReview(QualityModel):
         return self
 
 
+class AIReferenceReview(QualityModel):
+    """AI来源复核证明；与实际人工审核记录分开。"""
+
+    reviewer: NonEmpty
+    reviewed_at: datetime
+    method: Literal["ai_original_pdf_source_review"]
+    verdict: Literal["verified"]
+    source_case_sha256: SHA256
+    review_record_sha256: SHA256
+    case_content_sha256: SHA256
+    corpus_snapshot_id: SHA256
+    checked_evidence_ids: list[NonEmpty]
+    checked_boundary_scope: StrictBool = False
+    notes: NonEmpty
+
+    @model_validator(mode="after")
+    def checked(self):
+        if self.reviewed_at.tzinfo is None:
+            raise ValueError("AI review timestamp requires a timezone")
+        unique(self.checked_evidence_ids)
+        return self
+
+
 class AnnotationProvenance(QualityModel):
     reference_origin: Literal["original_prepared_pdf"]
     author: NonEmpty
@@ -140,8 +163,11 @@ class QualityCase(QualityModel):
         "abstain",
         "answer_with_limits",
     ]
-    annotation_status: Literal["draft", "pending_review", "approved_gold", "rejected"]
+    annotation_status: Literal[
+        "draft", "pending_review", "approved_gold", "approved_ai_reference", "rejected"
+    ]
     annotation_provenance: AnnotationProvenance
+    ai_review: AIReferenceReview | None = None
     fact_group_ids: list[NonEmpty] = Field(min_length=1)
     split: Split = "unassigned"
     usage_partition: Literal["benchmark_only", "model_optimization"] = "benchmark_only"
@@ -242,6 +268,22 @@ class QualityCase(QualityModel):
                 raise ValueError(
                     "Gold review must cover all sources and boundary conditions"
                 )
+        elif self.annotation_status == "approved_ai_reference":
+            review = self.ai_review
+            if (
+                review is None
+                or self.split == "unassigned"
+                or self.usage_partition != "benchmark_only"
+            ):
+                raise ValueError("AI reference requires source review and a split")
+            if set(review.checked_evidence_ids) != set(self.gold_evidence_ids) or (
+                self.abstention and not review.checked_boundary_scope
+            ):
+                raise ValueError(
+                    "AI reference review must cover sources and boundaries"
+                )
+            if review.case_content_sha256 != reference_content_sha256(self):
+                raise ValueError("AI reference review content hash mismatch")
         elif self.annotation_status == "rejected":
             reviews = self.annotation_provenance.human_reviews
             if not reviews or reviews[-1].verdict != "rejected":
@@ -260,6 +302,7 @@ class CaseFile(QualityModel):
 class QualityManifest(QualityModel):
     schema_version: Literal[1] = 1
     dataset_version: Literal["research_quality_v1"]
+    reference_kind: Literal["human_gold", "ai_reviewed"] = "human_gold"
     prepared_at: datetime
     stage_e_tag: Literal["stage-e-freeze-v1"]
     stage_e_commit_sha: Annotated[str, Field(pattern=r"^[0-9a-f]{40}$")]
@@ -275,6 +318,21 @@ class QualityManifest(QualityModel):
 class QualityDataset(QualityModel):
     manifest: QualityManifest
     cases: list[QualityCase]
+
+    @model_validator(mode="after")
+    def reference_kind_matches_approval(self):
+        for case in self.cases:
+            if (
+                case.annotation_status == "approved_ai_reference"
+                and self.manifest.reference_kind != "ai_reviewed"
+            ):
+                raise ValueError("AI reference approval requires ai_reviewed manifest")
+            if (
+                case.annotation_status == "approved_gold"
+                and self.manifest.reference_kind != "human_gold"
+            ):
+                raise ValueError("Human Gold requires human_gold manifest")
+        return self
 
 
 class QualityPrediction(QualityModel):
@@ -312,4 +370,16 @@ class HumanAssessment(QualityModel):
 
 
 def record_sha256(record):
-    return canonical_hash(record.model_dump(mode="json"))
+    data = record.model_dump(mode="json")
+    # 旧Case没有AI字段；保持历史审核记录和预测评分绑定哈希兼容。
+    if isinstance(record, QualityCase) and data.get("ai_review") is None:
+        data.pop("ai_review", None)
+    return canonical_hash(data)
+
+
+def reference_content_sha256(case):
+    """绑定问题、答案、标签、引用及划分，排除审核证明本身避免循环哈希。"""
+    data = case.model_dump(mode="json") if isinstance(case, QualityCase) else dict(case)
+    for key in ("annotation_status", "annotation_provenance", "ai_review"):
+        data.pop(key, None)
+    return canonical_hash(data)

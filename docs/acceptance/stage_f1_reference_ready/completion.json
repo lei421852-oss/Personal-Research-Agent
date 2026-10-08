@@ -1,0 +1,54 @@
+{
+  "conclusion": "PASS",
+  "scope": "Completed AI-reviewed reference dataset; not independent human Gold or model-quality execution.",
+  "time": "2026-10-08T11:29:29.918643+00:00",
+  "approved_ai_reference_count": 90,
+  "pending_count": 0,
+  "human_reviewed_count": 0,
+  "approved_human_gold_count": 0,
+  "reference_kind": "ai_reviewed",
+  "split_counts": {
+    "dev": 18,
+    "test": 72
+  },
+  "split_task_counts": {
+    "dev": {
+      "claim": 5,
+      "reviewer": 6,
+      "comparison": 3,
+      "abstention": 4
+    },
+    "test": {
+      "claim": 25,
+      "reviewer": 24,
+      "comparison": 12,
+      "abstention": 11
+    }
+  },
+  "fact_groups": 34,
+  "fact_group_leakage": 0,
+  "reference_dataset": "data/benchmark/research_quality_v1_ai_reference",
+  "source_revision": "data/benchmark/research_quality_v1_ai_reviewed",
+  "original_review_ledger": "docs/acceptance/stage_f1_sample_review/case_reviews.jsonl",
+  "original_f1_data_and_acceptance_preserved": true,
+  "stage_e_frozen_files_verified": 292,
+  "stage_e_original_tracked_files_preserved": 297,
+  "full_tests_passed": 846,
+  "new_tests": 17,
+  "failed_tests": 0,
+  "warnings": 1,
+  "final_static_checks_passed": true,
+  "provider_api_calls": 0,
+  "F2_started": false,
+  "remote_git_operations": 0,
+  "score_entry_status": "awaiting_predictions",
+  "test_reference_denominator": 72,
+  "all_reference_denominator": 90,
+  "dataset_manifest_sha256": "f8a867503fca36f24ea68c553073ea4a41f5b057753d7cc2db48516a81f2667d",
+  "baseline_commit": "6992210",
+  "limitations": [
+    "AI reference approvals have explicit source identity, not independent human verification.",
+    "Open prediction semantics still require actual separate assessments; no future prediction was automatically graded.",
+    "Connected-group split is not fully stratified by boundary subtype: caption-only is dev-only."
+  ]
+}

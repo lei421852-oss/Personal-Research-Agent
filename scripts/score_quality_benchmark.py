@@ -25,6 +25,7 @@ def main():
     parser.add_argument("--predictions", type=Path)
     parser.add_argument("--assessments", type=Path)
     parser.add_argument("--split", choices=["dev", "test", "all"], default="test")
+    parser.add_argument("--reference-kind", choices=["human_gold", "ai_reviewed"])
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -38,7 +39,11 @@ def main():
             load_jsonl(args.assessments, HumanAssessment) if args.assessments else []
         )
         report = score_benchmark(
-            dataset, predictions, assessments, split=args.split
+            dataset,
+            predictions,
+            assessments,
+            split=args.split,
+            reference_kind=args.reference_kind,
         ) | {"dataset_validation": validation}
         code = 0
     except (BenchmarkValidationError, ValueError, OSError) as exc:

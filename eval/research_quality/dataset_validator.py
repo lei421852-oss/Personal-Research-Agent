@@ -62,6 +62,16 @@ def validate_dataset(dataset: QualityDataset, records, snapshot):
     groups, references = defaultdict(list), defaultdict(list)
     for case in dataset.cases:
         prefix = case.case_id + ":"
+        if case.annotation_status == "approved_ai_reference" and (
+            manifest.reference_kind != "ai_reviewed"
+            or case.ai_review.corpus_snapshot_id != snapshot["snapshot_id"]
+        ):
+            issues.append(prefix + "ai_reference_kind_or_snapshot_mismatch")
+        if (
+            case.annotation_status == "approved_gold"
+            and manifest.reference_kind != "human_gold"
+        ):
+            issues.append(prefix + "human_gold_in_ai_reference_dataset")
         if not set(case.paper_ids) <= papers:
             issues.append(prefix + "unknown_paper")
         if case.usage_partition != "benchmark_only":
@@ -153,6 +163,7 @@ def validate_dataset(dataset: QualityDataset, records, snapshot):
     return {
         "status": "structurally_valid",
         "dataset_version": manifest.dataset_version,
+        "reference_kind": manifest.reference_kind,
         "total_cases": len(dataset.cases),
         "task_counts": dict(sorted(counts.items())),
         "candidate_count": sum(
@@ -160,13 +171,18 @@ def validate_dataset(dataset: QualityDataset, records, snapshot):
         ),
         "human_reviewed_count": reviewed,
         "approved_gold_count": approved,
+        "approved_ai_reference_count": sum(
+            c.annotation_status == "approved_ai_reference" for c in dataset.cases
+        ),
         "rejected_count": sum(c.annotation_status == "rejected" for c in dataset.cases),
         "target_shortfall": {
             t: max(0, n - counts[t]) for t, n in manifest.target_counts.items()
         },
         "fact_group_count": len(groups),
         "corpus_snapshot_id": snapshot["snapshot_id"],
-        "semantic_reference_validation": "requires_human_original_pdf_review",
+        "semantic_reference_validation": "ai_original_pdf_source_review_not_independent_human_gold"
+        if manifest.reference_kind == "ai_reviewed"
+        else "requires_human_original_pdf_review",
         "split_policy": "Explicit groups and normalized identical references checked; not a semantic paraphrase detector.",
         "real_provider_calls": 0,
     }

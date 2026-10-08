@@ -1,0 +1,45 @@
+{
+  "checks": [
+    {
+      "name": "validation",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.validate_quality_benchmark",
+        "--dataset",
+        "data/benchmark/research_quality_v1_ai_reference",
+        "--output",
+        "docs/acceptance/stage_f1_reference_ready/dataset_validation.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "scoring_entry",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.score_quality_benchmark",
+        "--dataset",
+        "data/benchmark/research_quality_v1_ai_reference",
+        "--reference-kind",
+        "ai_reviewed",
+        "--split",
+        "all",
+        "--output",
+        "docs/acceptance/stage_f1_reference_ready/scoring_entry.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "repeat_finalization",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.finalize_quality_references"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "byte_identical_on_repeat": true,
+  "provider_api_calls": 0
+}

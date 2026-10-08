@@ -1,0 +1,28 @@
+{
+  "status": "structurally_valid",
+  "dataset_version": "research_quality_v1",
+  "reference_kind": "ai_reviewed",
+  "total_cases": 90,
+  "task_counts": {
+    "abstention": 15,
+    "claim": 30,
+    "comparison": 15,
+    "reviewer": 30
+  },
+  "candidate_count": 0,
+  "human_reviewed_count": 0,
+  "approved_gold_count": 0,
+  "approved_ai_reference_count": 90,
+  "rejected_count": 0,
+  "target_shortfall": {
+    "claim": 0,
+    "reviewer": 0,
+    "comparison": 0,
+    "abstention": 0
+  },
+  "fact_group_count": 34,
+  "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+  "semantic_reference_validation": "ai_original_pdf_source_review_not_independent_human_gold",
+  "split_policy": "Explicit groups and normalized identical references checked; not a semantic paraphrase detector.",
+  "real_provider_calls": 0
+}
