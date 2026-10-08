@@ -103,6 +103,13 @@ def _load_paper(paper_dir: Path):
             path,
             entry.caption,
         )
+    if (paper_dir / "source_manifest.json").exists() or (
+        paper_dir / "prepared_evidence.jsonl"
+    ).exists():
+        # 新语料在进入现有 Repository/索引前验证完整来源，失败时不降级加载。
+        from app.research.corpus_validation import validate_prepared_paper
+
+        validate_prepared_paper(paper_dir, metadata, list(texts.values()), figures)
     return metadata, list(texts.values()), figures, locations
 
 
@@ -111,11 +118,27 @@ def load_text_corpus(paper_dir: Path) -> list[TextEvidence]:
     return _load_paper(paper_dir)[1]
 
 
-def load_paper_corpus(papers_dir: Path) -> PaperCorpus:
+def load_paper_corpus(
+    papers_dir: Path, *, additional_papers_dir: Path | None = None
+) -> PaperCorpus:
     texts, figures, locations, aliases, metadata = [], [], {}, {}, []
-    for directory in sorted(papers_dir.iterdir()):
+    directories = list(papers_dir.iterdir())
+    if additional_papers_dir is not None:
+        directories.extend(additional_papers_dir.iterdir())
+    for directory in sorted(directories):
         if not directory.is_dir() or directory.name.startswith("."):
             continue
+        if (
+            additional_papers_dir is not None
+            and directory.parent.resolve() == additional_papers_dir.resolve()
+            and not all(
+                (directory / name).is_file()
+                for name in ("source_manifest.json", "prepared_evidence.jsonl")
+            )
+        ):
+            raise ValueError(
+                "Additional research corpus requires complete source provenance"
+            )
         meta, paper_text, paper_figures, paper_locations = _load_paper(directory)
         if meta.paper_key != directory.name:
             raise ValueError("Paper key differs from directory name")
