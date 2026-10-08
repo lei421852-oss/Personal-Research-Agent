@@ -1,0 +1,15 @@
+[
+  {
+    "phase": "engineering_smoke_before_formal_experiment",
+    "cause": "Deterministic CLI regression test exposed missing final Reviewer infrastructure classification.",
+    "change": "Diagnostic classification now checks final merged workers/reviews/report, not only initial Worker errors.",
+    "production_policy_changed": false,
+    "prompt_tuned": false,
+    "semantic_grade_used": false,
+    "preserved_smoke_archive": "engineering_smoke_attempts/attempt_01",
+    "pre_repair_cli_sha256": "2142ada31f7a44ca35425f36077b2b8b1780eff081d4f45e71017262e66891a7",
+    "post_repair_cli_sha256": "d7fa39f2c7f7479d432cff30df31ea5d8b3d978e5b96cbe374d565ee6d350c89",
+    "nonformal_smoke_model_calls": 7,
+    "nonformal_smoke_tool_calls": 2
+  }
+]

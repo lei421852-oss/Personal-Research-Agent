@@ -1,0 +1,146 @@
+{
+  "experiment": "F3.1-E_known_failure_diagnostic",
+  "created_at": "2026-10-08T17:18:02.291008+00:00",
+  "baseline_commit": "a38715b8eaa461daefce1f6713d673cf3828e73d",
+  "git_head": "a38715b8eaa461daefce1f6713d673cf3828e73d",
+  "git_branch": "feature/stage-f3-1-worker-coverage",
+  "initial_git_status": "?? docs/diagnostics/quality_failures_2026_10_09/artifact_manifest.json\n?? docs/diagnostics/quality_failures_2026_10_09/findings.json\n?? docs/diagnostics/quality_failures_2026_10_09/report.md\n?? docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-frozen-trainable-scope.md\n?? docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-language-model.md\n?? docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-training-objective.md\n?? docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-vision-encoder.md\n?? docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-vision-language-bridge.md\n?? docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-llava-frozen-trainable-scope.md\n?? docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-llava-language-model.md\n?? docs/diagnostics/quality_failures_2026_10_09/verification.json\n?? eval/research_quality/coverage_execution.py\n?? eval/research_quality/coverage_experiment_metrics.py\n?? scripts/export_quality_failure_traces.py\n?? scripts/run_worker_coverage_comparison.py\n?? tests/research_quality/test_failure_trace_export.py\n?? tests/unit/research/test_coverage_execution.py\n?? tests/unit/research/test_coverage_experiment_cli.py\n?? tests/unit/research/test_coverage_experiment_metrics.py\n",
+  "fixed_configuration": {
+    "requests_sha256": "562abaad25ab0df0b2e05dd70fd516a8c203865bb1afb7f942c280b00453c6b8",
+    "source_f2_executions_sha256": "41a107a5e8b727fbbd26648b012cbf46e1c60ff2e255ccfc702a5da4d33108fa",
+    "configuration": {
+      "schema_version": 1,
+      "dataset": "eval/datasets/stage_e.json",
+      "papers_dir": "data/papers",
+      "additional_papers_dir": "data/research_papers",
+      "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+      "device": "cpu",
+      "index_dir": "data/chroma/stage-e",
+      "collection": "research-stage-e-text",
+      "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+      "distance": "cosine",
+      "top_k": 10,
+      "runtime": {
+        "max_concurrent_workers": 3,
+        "max_concurrent_llm": 2,
+        "max_concurrent_vlm": 1,
+        "max_concurrent_retrieval": 1,
+        "max_tool_calls_per_worker": 8,
+        "max_model_calls_per_worker": 20,
+        "max_protocol_corrections": 2,
+        "operation_timeout_seconds": 60,
+        "max_retries": 2
+      },
+      "review_runtime": {
+        "max_concurrent_reviewers": 2,
+        "max_model_calls_per_review": 3
+      },
+      "recovery": {
+        "max_research_model_calls": 200,
+        "max_research_tool_calls": 64
+      },
+      "planner_mode": "fixed_benchmark_paper_dimension_plan_no_gold",
+      "provider_temperature": "provider_default_not_sent",
+      "source_label_policy": "Source-checked candidate labels; not independently human-approved exhaustive relevance labels."
+    },
+    "llm_model": "deepseek-flash",
+    "llm_base_url": "https://api.deepseek.com",
+    "vlm_model": "deepseek-flash",
+    "vlm_base_url": "https://api.deepseek.com",
+    "case_watchdog_seconds": 420,
+    "index_content_sha256": "266d1057540f44d6dc84826053d5a9b62e6b705fdc7dbbaad749fc1f4a43aeab",
+    "code_sha256": {
+      "app/research/coverage_models.py": "563dc02ec6a7f7353cf8e28b22a1916ec4a6c7739a52bcfdc8d1f439e4ee4f5f",
+      "app/research/coverage_worker.py": "6ce7ae4c40db4bde057f6d40855c95bdcbf384577eecf5d3f250763b656b8167",
+      "eval/research_quality/coverage_comparison.py": "7f0cbe9d9a71c6be2c0362bb1733d3a7a9ce10a8399e97988e95af9acfa8ca63",
+      "eval/research_quality/coverage_execution.py": "6f44e954abf530dfca2724411d8b4444af769b898e5c069cbcb9e4279f2e97c4",
+      "scripts/run_worker_coverage_comparison.py": "d7fa39f2c7f7479d432cff30df31ea5d8b3d978e5b96cbe374d565ee6d350c89"
+    }
+  },
+  "smoke_case_id": "rqv1-comparison-blip2-flamingo-vision-encoder",
+  "formal_configuration_frozen": true,
+  "cases": [
+    "rqv1-comparison-blip2-flamingo-vision-encoder",
+    "rqv1-comparison-blip2-flamingo-vision-language-bridge",
+    "rqv1-comparison-blip2-flamingo-frozen-trainable-scope",
+    "rqv1-comparison-blip2-flamingo-training-objective",
+    "rqv1-comparison-blip2-flamingo-language-model",
+    "rqv1-comparison-blip2-llava-frozen-trainable-scope",
+    "rqv1-comparison-blip2-llava-language-model"
+  ],
+  "integrity_before": {
+    "status": "PASS",
+    "frozen_files_checked": 292,
+    "protected_artifacts_checked": 47,
+    "frozen_mismatches": [],
+    "protected_artifact_mismatches": [],
+    "frozen_manifest_root_changed": false,
+    "provider_calls": 0
+  },
+  "intentional_treatment_difference": "Explicit CoverageAwarePaperWorker protocol, policy, coverage gate and deterministic claim assembly from F3.1.",
+  "confounds_and_limits": [
+    "Known failure diagnostic subset, not unknown-data generalization.",
+    "Provider alias and stochastic responses may drift across dates; no underlying model weight revision is exposed.",
+    "F2 did not archive endpoint or embedding cache revision; same configured model/index are verified, hidden revisions cannot be compared.",
+    "Read-only instrumentation and a 420-second case watchdog are new; baseline had operation budgets but no archived case watchdog.",
+    "Same AI-assisted semantic review family, no blind independent human Gold assessment."
+  ],
+  "repairs": [
+    {
+      "phase": "engineering_smoke_before_formal_experiment",
+      "cause": "Deterministic CLI regression test exposed missing final Reviewer infrastructure classification.",
+      "change": "Diagnostic classification now checks final merged workers/reviews/report, not only initial Worker errors.",
+      "production_policy_changed": false,
+      "prompt_tuned": false,
+      "semantic_grade_used": false,
+      "preserved_smoke_archive": "engineering_smoke_attempts/attempt_01",
+      "pre_repair_cli_sha256": "2142ada31f7a44ca35425f36077b2b8b1780eff081d4f45e71017262e66891a7",
+      "post_repair_cli_sha256": "d7fa39f2c7f7479d432cff30df31ea5d8b3d978e5b96cbe374d565ee6d350c89",
+      "nonformal_smoke_model_calls": 7,
+      "nonformal_smoke_tool_calls": 2
+    }
+  ],
+  "initialization_records": [
+    {
+      "embedding_initialization_ms": 5287.825036997674
+    },
+    {
+      "embedding_initialization_ms": 5016.084436007077
+    }
+  ],
+  "smoke_result": {
+    "case_id": "rqv1-comparison-blip2-flamingo-vision-encoder",
+    "engineering_chain_passed": true,
+    "semantic_quality_used_to_tune": false
+  },
+  "completed_case_ids": [
+    "rqv1-comparison-blip2-flamingo-vision-encoder",
+    "rqv1-comparison-blip2-flamingo-vision-language-bridge",
+    "rqv1-comparison-blip2-flamingo-frozen-trainable-scope",
+    "rqv1-comparison-blip2-flamingo-training-objective",
+    "rqv1-comparison-blip2-flamingo-language-model",
+    "rqv1-comparison-blip2-llava-frozen-trainable-scope",
+    "rqv1-comparison-blip2-llava-language-model"
+  ],
+  "index_after_sha256": "266d1057540f44d6dc84826053d5a9b62e6b705fdc7dbbaad749fc1f4a43aeab",
+  "integrity_after": {
+    "status": "PASS",
+    "frozen_files_checked": 292,
+    "protected_artifacts_checked": 47,
+    "frozen_mismatches": [],
+    "protected_artifact_mismatches": [],
+    "frozen_manifest_root_changed": false,
+    "provider_calls": 0
+  },
+  "post_run_audit": {
+    "frozen_formal_runtime_config_unchanged": true,
+    "formal_cases": 7,
+    "formal_provider_attempts": 101,
+    "nonformal_engineering_smoke_provider_attempts": 7,
+    "grade_provider_calls": 0,
+    "timing_boundary_note": "F2 wall_time_ms starts before runtime setup and is captured before final drain/close; Treatment is captured after drain/close and diagnostic collection, with some setup before its timer. These timing boundaries and server load differences prevent exact causal attribution of latency delta.",
+    "watchdog_triggered_cases": 0,
+    "recovery_attempted_cases": 0,
+    "semantic_reference_read_by_worker": false
+  }
+}

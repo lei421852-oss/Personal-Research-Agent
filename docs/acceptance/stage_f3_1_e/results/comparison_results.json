@@ -1,0 +1,1201 @@
+[
+  {
+    "case_id": "rqv1-comparison-blip2-flamingo-vision-encoder",
+    "original_f2_semantic_correct": false,
+    "baseline_execution": {
+      "worker_statuses": [
+        "completed",
+        "completed"
+      ],
+      "requirement_status_counts": {
+        "supported": 2
+      },
+      "requirement_count": 2,
+      "reviewer_status_counts": {
+        "passed": 2
+      },
+      "report_status": "completed",
+      "degraded_generation": false,
+      "infra_failure": false,
+      "infra_classification_source": "public_error_type",
+      "output_protocol_failure": false,
+      "unknown_dependency_failure": false,
+      "execution_failed": false,
+      "insufficient_requirement_count": 0,
+      "missing_prediction": false
+    },
+    "treatment_execution": {
+      "worker_statuses": [
+        "completed",
+        "completed"
+      ],
+      "requirement_status_counts": {
+        "supported": 2
+      },
+      "requirement_count": 2,
+      "reviewer_status_counts": {
+        "passed": 2
+      },
+      "report_status": "completed",
+      "degraded_generation": false,
+      "infra_failure": false,
+      "infra_classification_source": "explicit_execution_flag",
+      "output_protocol_failure": false,
+      "unknown_dependency_failure": false,
+      "execution_failed": false,
+      "insufficient_requirement_count": 0,
+      "missing_prediction": false
+    },
+    "baseline_cost": {
+      "model_calls": 15,
+      "tool_calls": 4,
+      "latency_ms": 15794.562601004145,
+      "provider_attempts": 15
+    },
+    "treatment_cost": {
+      "model_calls": 9,
+      "tool_calls": 2,
+      "latency_ms": 13117.385103003471,
+      "provider_attempts": 9
+    },
+    "baseline_semantics": {
+      "semantic_correct": false,
+      "effective_answer": true,
+      "abstention_reasonable": null,
+      "six_dimension_scores": {
+        "factual_accuracy": 2,
+        "evidence_support": 1,
+        "requirement_completeness": 2,
+        "comparison_quality": 2,
+        "scope_compliance": 1,
+        "abstention_reasonableness": null
+      },
+      "comparison_rubric": {
+        "fact_accuracy": 2,
+        "difference_correctness": 2,
+        "evidence_grounding": 1,
+        "scope_completeness": 1
+      },
+      "unsupported_additional_assertions": 1,
+      "evidence_boundary_violations": 1,
+      "premature_supported": 0,
+      "semantic_completeness": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      }
+    },
+    "treatment_semantics": {
+      "semantic_correct": true,
+      "effective_answer": true,
+      "abstention_reasonable": null,
+      "six_dimension_scores": {
+        "factual_accuracy": 2,
+        "evidence_support": 2,
+        "requirement_completeness": 2,
+        "comparison_quality": 2,
+        "scope_compliance": 2,
+        "abstention_reasonableness": null
+      },
+      "comparison_rubric": {
+        "fact_accuracy": 2,
+        "difference_correctness": 2,
+        "evidence_grounding": 2,
+        "scope_completeness": 2
+      },
+      "unsupported_additional_assertions": 0,
+      "evidence_boundary_violations": 0,
+      "premature_supported": 0,
+      "semantic_completeness": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      }
+    },
+    "semantic_scoring_eligible": true,
+    "structured_coverage": {
+      "semantics": "Policy-declared coverage, not independently validated semantic completeness.",
+      "attribute_status_counts": {
+        "covered": 6,
+        "missing": 0,
+        "not_applicable": 0
+      },
+      "attribute_coverage_rate": {
+        "numerator": 6,
+        "denominator": 6,
+        "value": 1.0
+      },
+      "complete_requirement_rate": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      },
+      "authoritative_requirement_count": 2,
+      "missing_coverage_requirement_count": 0,
+      "coverage_attempt_count": 2,
+      "coverage_report_count": 2,
+      "coverage_guard": {
+        "coverage_rejections": 0,
+        "additional_model_calls": 0,
+        "additional_tool_calls": 0
+      }
+    },
+    "change_class": "improved",
+    "change_reason": "核心事实保留，消除无关性能对比及整篇否定；并非从错误骨干修正为正确骨干。",
+    "sensitivity": {
+      "threshold_description": "只判断请求的核心事实是否完整正确，附加句问题另列；不是编辑输出、放行附加断言或修改F2标签。",
+      "disputed_original_case": true,
+      "baseline_strict_passed": false,
+      "baseline_core_scope_passed": true,
+      "treatment_strict_passed": true,
+      "treatment_core_scope_passed": true,
+      "note": "core口径只判断请求的编码器事实，单独保留附加句违规；不是修改原标签或认可全文否定。"
+    },
+    "cost_change": {
+      "model_calls": {
+        "delta": -6,
+        "ratio": 0.6
+      },
+      "tool_calls": {
+        "delta": -2,
+        "ratio": 0.5
+      },
+      "latency_ms": {
+        "delta": -2677.177498000674,
+        "ratio": 0.8305000546307961
+      },
+      "provider_attempts": {
+        "delta": -6,
+        "ratio": 0.6
+      }
+    }
+  },
+  {
+    "case_id": "rqv1-comparison-blip2-flamingo-vision-language-bridge",
+    "original_f2_semantic_correct": false,
+    "baseline_execution": {
+      "worker_statuses": [
+        "completed",
+        "completed"
+      ],
+      "requirement_status_counts": {
+        "supported": 2
+      },
+      "requirement_count": 2,
+      "reviewer_status_counts": {
+        "passed": 2
+      },
+      "report_status": "completed",
+      "degraded_generation": false,
+      "infra_failure": false,
+      "infra_classification_source": "public_error_type",
+      "output_protocol_failure": false,
+      "unknown_dependency_failure": false,
+      "execution_failed": false,
+      "insufficient_requirement_count": 0,
+      "missing_prediction": false
+    },
+    "treatment_execution": {
+      "worker_statuses": [
+        "completed",
+        "completed"
+      ],
+      "requirement_status_counts": {
+        "supported": 2
+      },
+      "requirement_count": 2,
+      "reviewer_status_counts": {
+        "passed": 2
+      },
+      "report_status": "completed",
+      "degraded_generation": false,
+      "infra_failure": false,
+      "infra_classification_source": "explicit_execution_flag",
+      "output_protocol_failure": false,
+      "unknown_dependency_failure": false,
+      "execution_failed": false,
+      "insufficient_requirement_count": 0,
+      "missing_prediction": false
+    },
+    "baseline_cost": {
+      "model_calls": 11,
+      "tool_calls": 2,
+      "latency_ms": 11440.248875995167,
+      "provider_attempts": 11
+    },
+    "treatment_cost": {
+      "model_calls": 11,
+      "tool_calls": 3,
+      "latency_ms": 19159.86662400246,
+      "provider_attempts": 11
+    },
+    "baseline_semantics": {
+      "semantic_correct": false,
+      "effective_answer": false,
+      "abstention_reasonable": null,
+      "six_dimension_scores": {
+        "factual_accuracy": 2,
+        "evidence_support": 1,
+        "requirement_completeness": 1,
+        "comparison_quality": 1,
+        "scope_compliance": 1,
+        "abstention_reasonableness": null
+      },
+      "comparison_rubric": {
+        "fact_accuracy": 1,
+        "difference_correctness": 1,
+        "evidence_grounding": 1,
+        "scope_completeness": 1
+      },
+      "unsupported_additional_assertions": 1,
+      "evidence_boundary_violations": 1,
+      "premature_supported": 1,
+      "semantic_completeness": {
+        "numerator": 1,
+        "denominator": 2,
+        "value": 0.5
+      }
+    },
+    "treatment_semantics": {
+      "semantic_correct": false,
+      "effective_answer": false,
+      "abstention_reasonable": null,
+      "six_dimension_scores": {
+        "factual_accuracy": 2,
+        "evidence_support": 2,
+        "requirement_completeness": 1,
+        "comparison_quality": 1,
+        "scope_compliance": 2,
+        "abstention_reasonableness": null
+      },
+      "comparison_rubric": {
+        "fact_accuracy": 1,
+        "difference_correctness": 1,
+        "evidence_grounding": 2,
+        "scope_completeness": 1
+      },
+      "unsupported_additional_assertions": 0,
+      "evidence_boundary_violations": 0,
+      "premature_supported": 1,
+      "semantic_completeness": {
+        "numerator": 1,
+        "denominator": 2,
+        "value": 0.5
+      }
+    },
+    "semantic_scoring_eligible": true,
+    "structured_coverage": {
+      "semantics": "Policy-declared coverage, not independently validated semantic completeness.",
+      "attribute_status_counts": {
+        "covered": 6,
+        "missing": 0,
+        "not_applicable": 0
+      },
+      "attribute_coverage_rate": {
+        "numerator": 6,
+        "denominator": 6,
+        "value": 1.0
+      },
+      "complete_requirement_rate": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      },
+      "authoritative_requirement_count": 2,
+      "missing_coverage_requirement_count": 0,
+      "coverage_attempt_count": 2,
+      "coverage_report_count": 2,
+      "coverage_guard": {
+        "coverage_rejections": 0,
+        "additional_model_calls": 0,
+        "additional_tool_calls": 0
+      }
+    },
+    "change_class": "improved",
+    "change_reason": "消除局部peer事实与性能漂移，Flamingo细化；BLIP-2关键接口没有恢复，整题仍不通过。",
+    "sensitivity": {
+      "threshold_description": "只判断请求的核心事实是否完整正确，附加句问题另列；不是编辑输出、放行附加断言或修改F2标签。",
+      "disputed_original_case": false,
+      "baseline_strict_passed": false,
+      "baseline_core_scope_passed": false,
+      "treatment_strict_passed": false,
+      "treatment_core_scope_passed": false,
+      "note": "该题改善是部分质量改善，不是需求完成。"
+    },
+    "cost_change": {
+      "model_calls": {
+        "delta": 0,
+        "ratio": 1.0
+      },
+      "tool_calls": {
+        "delta": 1,
+        "ratio": 1.5
+      },
+      "latency_ms": {
+        "delta": 7719.617748007295,
+        "ratio": 1.674777081485107
+      },
+      "provider_attempts": {
+        "delta": 0,
+        "ratio": 1.0
+      }
+    }
+  },
+  {
+    "case_id": "rqv1-comparison-blip2-flamingo-frozen-trainable-scope",
+    "original_f2_semantic_correct": false,
+    "baseline_execution": {
+      "worker_statuses": [
+        "completed",
+        "completed"
+      ],
+      "requirement_status_counts": {
+        "supported": 2
+      },
+      "requirement_count": 2,
+      "reviewer_status_counts": {
+        "passed": 2
+      },
+      "report_status": "completed",
+      "degraded_generation": false,
+      "infra_failure": false,
+      "infra_classification_source": "public_error_type",
+      "output_protocol_failure": false,
+      "unknown_dependency_failure": false,
+      "execution_failed": false,
+      "insufficient_requirement_count": 0,
+      "missing_prediction": false
+    },
+    "treatment_execution": {
+      "worker_statuses": [
+        "failed",
+        "completed"
+      ],
+      "requirement_status_counts": {
+        "execution_failed": 1,
+        "supported": 1
+      },
+      "requirement_count": 2,
+      "reviewer_status_counts": {
+        "not_reviewable": 1,
+        "passed": 1
+      },
+      "report_status": "completed",
+      "degraded_generation": false,
+      "infra_failure": false,
+      "infra_classification_source": "explicit_execution_flag",
+      "output_protocol_failure": true,
+      "unknown_dependency_failure": false,
+      "execution_failed": true,
+      "insufficient_requirement_count": 0,
+      "missing_prediction": false
+    },
+    "baseline_cost": {
+      "model_calls": 9,
+      "tool_calls": 3,
+      "latency_ms": 10126.722997010802,
+      "provider_attempts": 9
+    },
+    "treatment_cost": {
+      "model_calls": 21,
+      "tool_calls": 6,
+      "latency_ms": 33604.87105199718,
+      "provider_attempts": 21
+    },
+    "baseline_semantics": {
+      "semantic_correct": false,
+      "effective_answer": false,
+      "abstention_reasonable": null,
+      "six_dimension_scores": {
+        "factual_accuracy": 2,
+        "evidence_support": 1,
+        "requirement_completeness": 1,
+        "comparison_quality": 1,
+        "scope_compliance": 1,
+        "abstention_reasonableness": null
+      },
+      "comparison_rubric": {
+        "fact_accuracy": 1,
+        "difference_correctness": 1,
+        "evidence_grounding": 1,
+        "scope_completeness": 1
+      },
+      "unsupported_additional_assertions": 1,
+      "evidence_boundary_violations": 1,
+      "premature_supported": 1,
+      "semantic_completeness": {
+        "numerator": 1,
+        "denominator": 2,
+        "value": 0.5
+      }
+    },
+    "treatment_semantics": {
+      "semantic_correct": false,
+      "effective_answer": false,
+      "abstention_reasonable": null,
+      "six_dimension_scores": {
+        "factual_accuracy": 2,
+        "evidence_support": 2,
+        "requirement_completeness": 1,
+        "comparison_quality": 0,
+        "scope_compliance": 2,
+        "abstention_reasonableness": null
+      },
+      "comparison_rubric": {
+        "fact_accuracy": 1,
+        "difference_correctness": 0,
+        "evidence_grounding": 2,
+        "scope_completeness": 1
+      },
+      "unsupported_additional_assertions": 0,
+      "evidence_boundary_violations": 0,
+      "premature_supported": 0,
+      "semantic_completeness": {
+        "numerator": 1,
+        "denominator": 2,
+        "value": 0.5
+      }
+    },
+    "semantic_scoring_eligible": true,
+    "structured_coverage": {
+      "semantics": "Policy-declared coverage, not independently validated semantic completeness.",
+      "attribute_status_counts": {
+        "covered": 7,
+        "missing": 3,
+        "not_applicable": 0
+      },
+      "attribute_coverage_rate": {
+        "numerator": 7,
+        "denominator": 10,
+        "value": 0.7
+      },
+      "complete_requirement_rate": {
+        "numerator": 1,
+        "denominator": 2,
+        "value": 0.5
+      },
+      "authoritative_requirement_count": 2,
+      "missing_coverage_requirement_count": 0,
+      "coverage_attempt_count": 2,
+      "coverage_report_count": 2,
+      "coverage_guard": {
+        "coverage_rejections": 1,
+        "additional_model_calls": 4,
+        "additional_tool_calls": 2
+      }
+    },
+    "change_class": "degraded",
+    "change_reason": "Flamingo细节恢复，但原来存在的BLIP-2两阶段事实因执行协议失败未交付，完整双论文比较丢失；不将这一项判为模型技术知识错误。",
+    "sensitivity": {
+      "threshold_description": "只判断请求的核心事实是否完整正确，附加句问题另列；不是编辑输出、放行附加断言或修改F2标签。",
+      "disputed_original_case": true,
+      "baseline_strict_passed": false,
+      "baseline_core_scope_passed": false,
+      "treatment_strict_passed": false,
+      "treatment_core_scope_passed": false,
+      "note": "即不扣FC隐含范围，旧Flamingo仍未明确CA；新BLIP-2执行失败，所以两种口径都不接受完整比较。"
+    },
+    "cost_change": {
+      "model_calls": {
+        "delta": 12,
+        "ratio": 2.3333333333333335
+      },
+      "tool_calls": {
+        "delta": 3,
+        "ratio": 2.0
+      },
+      "latency_ms": {
+        "delta": 23478.148054986377,
+        "ratio": 3.3184349035632392
+      },
+      "provider_attempts": {
+        "delta": 12,
+        "ratio": 2.3333333333333335
+      }
+    }
+  },
+  {
+    "case_id": "rqv1-comparison-blip2-flamingo-training-objective",
+    "original_f2_semantic_correct": false,
+    "baseline_execution": {
+      "worker_statuses": [
+        "completed",
+        "completed"
+      ],
+      "requirement_status_counts": {
+        "supported": 2
+      },
+      "requirement_count": 2,
+      "reviewer_status_counts": {
+        "passed": 2
+      },
+      "report_status": "completed",
+      "degraded_generation": false,
+      "infra_failure": false,
+      "infra_classification_source": "public_error_type",
+      "output_protocol_failure": false,
+      "unknown_dependency_failure": false,
+      "execution_failed": false,
+      "insufficient_requirement_count": 0,
+      "missing_prediction": false
+    },
+    "treatment_execution": {
+      "worker_statuses": [
+        "completed",
+        "completed"
+      ],
+      "requirement_status_counts": {
+        "supported": 2
+      },
+      "requirement_count": 2,
+      "reviewer_status_counts": {
+        "passed": 2
+      },
+      "report_status": "completed",
+      "degraded_generation": false,
+      "infra_failure": false,
+      "infra_classification_source": "explicit_execution_flag",
+      "output_protocol_failure": false,
+      "unknown_dependency_failure": false,
+      "execution_failed": false,
+      "insufficient_requirement_count": 0,
+      "missing_prediction": false
+    },
+    "baseline_cost": {
+      "model_calls": 16,
+      "tool_calls": 9,
+      "latency_ms": 18720.032227007323,
+      "provider_attempts": 16
+    },
+    "treatment_cost": {
+      "model_calls": 11,
+      "tool_calls": 5,
+      "latency_ms": 18180.592967008124,
+      "provider_attempts": 11
+    },
+    "baseline_semantics": {
+      "semantic_correct": false,
+      "effective_answer": true,
+      "abstention_reasonable": null,
+      "six_dimension_scores": {
+        "factual_accuracy": 2,
+        "evidence_support": 1,
+        "requirement_completeness": 2,
+        "comparison_quality": 2,
+        "scope_compliance": 1,
+        "abstention_reasonableness": null
+      },
+      "comparison_rubric": {
+        "fact_accuracy": 2,
+        "difference_correctness": 2,
+        "evidence_grounding": 1,
+        "scope_completeness": 1
+      },
+      "unsupported_additional_assertions": 1,
+      "evidence_boundary_violations": 1,
+      "premature_supported": 0,
+      "semantic_completeness": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      }
+    },
+    "treatment_semantics": {
+      "semantic_correct": false,
+      "effective_answer": false,
+      "abstention_reasonable": null,
+      "six_dimension_scores": {
+        "factual_accuracy": 1,
+        "evidence_support": 1,
+        "requirement_completeness": 1,
+        "comparison_quality": 1,
+        "scope_compliance": 2,
+        "abstention_reasonableness": null
+      },
+      "comparison_rubric": {
+        "fact_accuracy": 1,
+        "difference_correctness": 1,
+        "evidence_grounding": 1,
+        "scope_completeness": 1
+      },
+      "unsupported_additional_assertions": 1,
+      "evidence_boundary_violations": 1,
+      "premature_supported": 1,
+      "semantic_completeness": {
+        "numerator": 1,
+        "denominator": 2,
+        "value": 0.5
+      }
+    },
+    "semantic_scoring_eligible": true,
+    "structured_coverage": {
+      "semantics": "Policy-declared coverage, not independently validated semantic completeness.",
+      "attribute_status_counts": {
+        "covered": 14,
+        "missing": 0,
+        "not_applicable": 0
+      },
+      "attribute_coverage_rate": {
+        "numerator": 14,
+        "denominator": 14,
+        "value": 1.0
+      },
+      "complete_requirement_rate": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      },
+      "authoritative_requirement_count": 2,
+      "missing_coverage_requirement_count": 0,
+      "coverage_attempt_count": 2,
+      "coverage_report_count": 2,
+      "coverage_guard": {
+        "coverage_rejections": 0,
+        "additional_model_calls": 0,
+        "additional_tool_calls": 0
+      }
+    },
+    "change_class": "degraded",
+    "change_reason": "减少原scope漂移，却丢失原来已回答的关键损失区别并产生一个未被原文明确支持的优化对象推断；不能仅凭covered上升判优化成功。",
+    "sensitivity": {
+      "threshold_description": "只判断请求的核心事实是否完整正确，附加句问题另列；不是编辑输出、放行附加断言或修改F2标签。",
+      "disputed_original_case": true,
+      "baseline_strict_passed": false,
+      "baseline_core_scope_passed": true,
+      "treatment_strict_passed": false,
+      "treatment_core_scope_passed": false,
+      "note": "即宽松忽略附加句，旧core训练损失正确，新core损失区别缺失；不是单纯评分口径造成的退化。"
+    },
+    "cost_change": {
+      "model_calls": {
+        "delta": -5,
+        "ratio": 0.6875
+      },
+      "tool_calls": {
+        "delta": -4,
+        "ratio": 0.5555555555555556
+      },
+      "latency_ms": {
+        "delta": -539.4392599991988,
+        "ratio": 0.9711838498215323
+      },
+      "provider_attempts": {
+        "delta": -5,
+        "ratio": 0.6875
+      }
+    }
+  },
+  {
+    "case_id": "rqv1-comparison-blip2-flamingo-language-model",
+    "original_f2_semantic_correct": false,
+    "baseline_execution": {
+      "worker_statuses": [
+        "completed",
+        "completed"
+      ],
+      "requirement_status_counts": {
+        "supported": 2
+      },
+      "requirement_count": 2,
+      "reviewer_status_counts": {
+        "passed": 2
+      },
+      "report_status": "completed",
+      "degraded_generation": false,
+      "infra_failure": false,
+      "infra_classification_source": "public_error_type",
+      "output_protocol_failure": false,
+      "unknown_dependency_failure": false,
+      "execution_failed": false,
+      "insufficient_requirement_count": 0,
+      "missing_prediction": false
+    },
+    "treatment_execution": {
+      "worker_statuses": [
+        "completed",
+        "completed"
+      ],
+      "requirement_status_counts": {
+        "supported": 2
+      },
+      "requirement_count": 2,
+      "reviewer_status_counts": {
+        "passed": 2
+      },
+      "report_status": "completed",
+      "degraded_generation": false,
+      "infra_failure": false,
+      "infra_classification_source": "explicit_execution_flag",
+      "output_protocol_failure": false,
+      "unknown_dependency_failure": false,
+      "execution_failed": false,
+      "insufficient_requirement_count": 0,
+      "missing_prediction": false
+    },
+    "baseline_cost": {
+      "model_calls": 11,
+      "tool_calls": 2,
+      "latency_ms": 12824.81872299104,
+      "provider_attempts": 11
+    },
+    "treatment_cost": {
+      "model_calls": 12,
+      "tool_calls": 5,
+      "latency_ms": 17237.8828410001,
+      "provider_attempts": 12
+    },
+    "baseline_semantics": {
+      "semantic_correct": false,
+      "effective_answer": false,
+      "abstention_reasonable": null,
+      "six_dimension_scores": {
+        "factual_accuracy": 2,
+        "evidence_support": 2,
+        "requirement_completeness": 1,
+        "comparison_quality": 1,
+        "scope_compliance": 1,
+        "abstention_reasonableness": null
+      },
+      "comparison_rubric": {
+        "fact_accuracy": 1,
+        "difference_correctness": 1,
+        "evidence_grounding": 2,
+        "scope_completeness": 0
+      },
+      "unsupported_additional_assertions": 0,
+      "evidence_boundary_violations": 0,
+      "premature_supported": 1,
+      "semantic_completeness": {
+        "numerator": 1,
+        "denominator": 2,
+        "value": 0.5
+      }
+    },
+    "treatment_semantics": {
+      "semantic_correct": true,
+      "effective_answer": true,
+      "abstention_reasonable": null,
+      "six_dimension_scores": {
+        "factual_accuracy": 2,
+        "evidence_support": 2,
+        "requirement_completeness": 2,
+        "comparison_quality": 2,
+        "scope_compliance": 2,
+        "abstention_reasonableness": null
+      },
+      "comparison_rubric": {
+        "fact_accuracy": 2,
+        "difference_correctness": 2,
+        "evidence_grounding": 2,
+        "scope_completeness": 2
+      },
+      "unsupported_additional_assertions": 0,
+      "evidence_boundary_violations": 0,
+      "premature_supported": 0,
+      "semantic_completeness": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      }
+    },
+    "semantic_scoring_eligible": true,
+    "structured_coverage": {
+      "semantics": "Policy-declared coverage, not independently validated semantic completeness.",
+      "attribute_status_counts": {
+        "covered": 6,
+        "missing": 0,
+        "not_applicable": 0
+      },
+      "attribute_coverage_rate": {
+        "numerator": 6,
+        "denominator": 6,
+        "value": 1.0
+      },
+      "complete_requirement_rate": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      },
+      "authoritative_requirement_count": 2,
+      "missing_coverage_requirement_count": 0,
+      "coverage_attempt_count": 2,
+      "coverage_report_count": 2,
+      "coverage_guard": {
+        "coverage_rejections": 0,
+        "additional_model_calls": 0,
+        "additional_tool_calls": 0
+      }
+    },
+    "change_class": "improved",
+    "change_reason": "此前缺失的BLIP-2型号与架构确已恢复并交付，移除性能漂移；Flamingo不凭空命名，符合原参考边界。",
+    "sensitivity": {
+      "threshold_description": "只判断请求的核心事实是否完整正确，附加句问题另列；不是编辑输出、放行附加断言或修改F2标签。",
+      "disputed_original_case": false,
+      "baseline_strict_passed": false,
+      "baseline_core_scope_passed": false,
+      "treatment_strict_passed": true,
+      "treatment_core_scope_passed": true,
+      "note": "Flamingo当前片段不提供具体家族名，不因没写未提供型号而扣完整性。"
+    },
+    "cost_change": {
+      "model_calls": {
+        "delta": 1,
+        "ratio": 1.0909090909090908
+      },
+      "tool_calls": {
+        "delta": 3,
+        "ratio": 2.5
+      },
+      "latency_ms": {
+        "delta": 4413.064118009061,
+        "ratio": 1.3441034304912056
+      },
+      "provider_attempts": {
+        "delta": 1,
+        "ratio": 1.0909090909090908
+      }
+    }
+  },
+  {
+    "case_id": "rqv1-comparison-blip2-llava-frozen-trainable-scope",
+    "original_f2_semantic_correct": false,
+    "baseline_execution": {
+      "worker_statuses": [
+        "completed",
+        "completed"
+      ],
+      "requirement_status_counts": {
+        "supported": 2
+      },
+      "requirement_count": 2,
+      "reviewer_status_counts": {
+        "passed": 2
+      },
+      "report_status": "completed",
+      "degraded_generation": false,
+      "infra_failure": false,
+      "infra_classification_source": "public_error_type",
+      "output_protocol_failure": false,
+      "unknown_dependency_failure": false,
+      "execution_failed": false,
+      "insufficient_requirement_count": 0,
+      "missing_prediction": false
+    },
+    "treatment_execution": {
+      "worker_statuses": [
+        "completed",
+        "completed"
+      ],
+      "requirement_status_counts": {
+        "supported": 2
+      },
+      "requirement_count": 2,
+      "reviewer_status_counts": {
+        "passed": 2
+      },
+      "report_status": "completed",
+      "degraded_generation": false,
+      "infra_failure": false,
+      "infra_classification_source": "explicit_execution_flag",
+      "output_protocol_failure": false,
+      "unknown_dependency_failure": false,
+      "execution_failed": false,
+      "insufficient_requirement_count": 0,
+      "missing_prediction": false
+    },
+    "baseline_cost": {
+      "model_calls": 11,
+      "tool_calls": 2,
+      "latency_ms": 10129.992581001716,
+      "provider_attempts": 11
+    },
+    "treatment_cost": {
+      "model_calls": 29,
+      "tool_calls": 5,
+      "latency_ms": 46787.50666299311,
+      "provider_attempts": 29
+    },
+    "baseline_semantics": {
+      "semantic_correct": false,
+      "effective_answer": false,
+      "abstention_reasonable": null,
+      "six_dimension_scores": {
+        "factual_accuracy": 2,
+        "evidence_support": 2,
+        "requirement_completeness": 1,
+        "comparison_quality": 1,
+        "scope_compliance": 1,
+        "abstention_reasonableness": null
+      },
+      "comparison_rubric": {
+        "fact_accuracy": 1,
+        "difference_correctness": 1,
+        "evidence_grounding": 2,
+        "scope_completeness": 1
+      },
+      "unsupported_additional_assertions": 0,
+      "evidence_boundary_violations": 0,
+      "premature_supported": 2,
+      "semantic_completeness": {
+        "numerator": 0,
+        "denominator": 2,
+        "value": 0.0
+      }
+    },
+    "treatment_semantics": {
+      "semantic_correct": true,
+      "effective_answer": true,
+      "abstention_reasonable": null,
+      "six_dimension_scores": {
+        "factual_accuracy": 2,
+        "evidence_support": 2,
+        "requirement_completeness": 2,
+        "comparison_quality": 2,
+        "scope_compliance": 2,
+        "abstention_reasonableness": null
+      },
+      "comparison_rubric": {
+        "fact_accuracy": 2,
+        "difference_correctness": 2,
+        "evidence_grounding": 2,
+        "scope_completeness": 2
+      },
+      "unsupported_additional_assertions": 0,
+      "evidence_boundary_violations": 0,
+      "premature_supported": 0,
+      "semantic_completeness": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      }
+    },
+    "semantic_scoring_eligible": true,
+    "structured_coverage": {
+      "semantics": "Policy-declared coverage, not independently validated semantic completeness.",
+      "attribute_status_counts": {
+        "covered": 14,
+        "missing": 0,
+        "not_applicable": 0
+      },
+      "attribute_coverage_rate": {
+        "numerator": 14,
+        "denominator": 14,
+        "value": 1.0
+      },
+      "complete_requirement_rate": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      },
+      "authoritative_requirement_count": 2,
+      "missing_coverage_requirement_count": 0,
+      "coverage_attempt_count": 2,
+      "coverage_report_count": 2,
+      "coverage_guard": {
+        "coverage_rejections": 1,
+        "additional_model_calls": 6,
+        "additional_tool_calls": 1
+      }
+    },
+    "change_class": "improved",
+    "change_reason": "原漏掉的第一阶段事实与阶段差异确已恢复；不再用第二阶段正确掩盖整项缺口。",
+    "sensitivity": {
+      "threshold_description": "只判断请求的核心事实是否完整正确，附加句问题另列；不是编辑输出、放行附加断言或修改F2标签。",
+      "disputed_original_case": false,
+      "baseline_strict_passed": false,
+      "baseline_core_scope_passed": false,
+      "treatment_strict_passed": true,
+      "treatment_core_scope_passed": true,
+      "note": "仅核对可由prepared引用支持的阶段范围，不额外要求未被原文标明的FC训练标签。"
+    },
+    "cost_change": {
+      "model_calls": {
+        "delta": 18,
+        "ratio": 2.6363636363636362
+      },
+      "tool_calls": {
+        "delta": 3,
+        "ratio": 2.5
+      },
+      "latency_ms": {
+        "delta": 36657.514081991394,
+        "ratio": 4.6187108518461
+      },
+      "provider_attempts": {
+        "delta": 18,
+        "ratio": 2.6363636363636362
+      }
+    }
+  },
+  {
+    "case_id": "rqv1-comparison-blip2-llava-language-model",
+    "original_f2_semantic_correct": false,
+    "baseline_execution": {
+      "worker_statuses": [
+        "completed",
+        "completed"
+      ],
+      "requirement_status_counts": {
+        "supported": 2
+      },
+      "requirement_count": 2,
+      "reviewer_status_counts": {
+        "passed": 2
+      },
+      "report_status": "completed",
+      "degraded_generation": false,
+      "infra_failure": false,
+      "infra_classification_source": "public_error_type",
+      "output_protocol_failure": false,
+      "unknown_dependency_failure": false,
+      "execution_failed": false,
+      "insufficient_requirement_count": 0,
+      "missing_prediction": false
+    },
+    "treatment_execution": {
+      "worker_statuses": [
+        "completed",
+        "completed"
+      ],
+      "requirement_status_counts": {
+        "supported": 2
+      },
+      "requirement_count": 2,
+      "reviewer_status_counts": {
+        "passed": 2
+      },
+      "report_status": "completed",
+      "degraded_generation": false,
+      "infra_failure": false,
+      "infra_classification_source": "explicit_execution_flag",
+      "output_protocol_failure": false,
+      "unknown_dependency_failure": false,
+      "execution_failed": false,
+      "insufficient_requirement_count": 0,
+      "missing_prediction": false
+    },
+    "baseline_cost": {
+      "model_calls": 12,
+      "tool_calls": 4,
+      "latency_ms": 14491.731080008321,
+      "provider_attempts": 12
+    },
+    "treatment_cost": {
+      "model_calls": 8,
+      "tool_calls": 3,
+      "latency_ms": 12620.598334993701,
+      "provider_attempts": 8
+    },
+    "baseline_semantics": {
+      "semantic_correct": false,
+      "effective_answer": true,
+      "abstention_reasonable": null,
+      "six_dimension_scores": {
+        "factual_accuracy": 2,
+        "evidence_support": 1,
+        "requirement_completeness": 2,
+        "comparison_quality": 2,
+        "scope_compliance": 1,
+        "abstention_reasonableness": null
+      },
+      "comparison_rubric": {
+        "fact_accuracy": 2,
+        "difference_correctness": 2,
+        "evidence_grounding": 1,
+        "scope_completeness": 2
+      },
+      "unsupported_additional_assertions": 1,
+      "evidence_boundary_violations": 1,
+      "premature_supported": 0,
+      "semantic_completeness": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      }
+    },
+    "treatment_semantics": {
+      "semantic_correct": true,
+      "effective_answer": true,
+      "abstention_reasonable": null,
+      "six_dimension_scores": {
+        "factual_accuracy": 2,
+        "evidence_support": 2,
+        "requirement_completeness": 2,
+        "comparison_quality": 2,
+        "scope_compliance": 2,
+        "abstention_reasonableness": null
+      },
+      "comparison_rubric": {
+        "fact_accuracy": 2,
+        "difference_correctness": 2,
+        "evidence_grounding": 2,
+        "scope_completeness": 2
+      },
+      "unsupported_additional_assertions": 0,
+      "evidence_boundary_violations": 0,
+      "premature_supported": 0,
+      "semantic_completeness": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      }
+    },
+    "semantic_scoring_eligible": true,
+    "structured_coverage": {
+      "semantics": "Policy-declared coverage, not independently validated semantic completeness.",
+      "attribute_status_counts": {
+        "covered": 6,
+        "missing": 0,
+        "not_applicable": 0
+      },
+      "attribute_coverage_rate": {
+        "numerator": 6,
+        "denominator": 6,
+        "value": 1.0
+      },
+      "complete_requirement_rate": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      },
+      "authoritative_requirement_count": 2,
+      "missing_coverage_requirement_count": 0,
+      "coverage_attempt_count": 2,
+      "coverage_report_count": 2,
+      "coverage_guard": {
+        "coverage_rejections": 0,
+        "additional_model_calls": 0,
+        "additional_tool_calls": 0
+      }
+    },
+    "change_class": "improved",
+    "change_reason": "保留已正确的型号对照，去除缺乏全文覆盖依据的peer否定；不是新的型号发现。",
+    "sensitivity": {
+      "threshold_description": "只判断请求的核心事实是否完整正确，附加句问题另列；不是编辑输出、放行附加断言或修改F2标签。",
+      "disputed_original_case": true,
+      "baseline_strict_passed": false,
+      "baseline_core_scope_passed": true,
+      "treatment_strict_passed": true,
+      "treatment_core_scope_passed": true,
+      "note": "core口径两组均有有效型号答案；strict差异来自附加句边界。"
+    },
+    "cost_change": {
+      "model_calls": {
+        "delta": -4,
+        "ratio": 0.6666666666666666
+      },
+      "tool_calls": {
+        "delta": -1,
+        "ratio": 0.75
+      },
+      "latency_ms": {
+        "delta": -1871.13274501462,
+        "ratio": 0.870882730663151
+      },
+      "provider_attempts": {
+        "delta": -4,
+        "ratio": 0.6666666666666666
+      }
+    }
+  }
+]

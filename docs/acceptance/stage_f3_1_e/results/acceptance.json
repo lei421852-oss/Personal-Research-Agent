@@ -1,0 +1,51 @@
+{
+  "engineering_verdict": "PASS",
+  "quality_verdict": "MIXED_CONDITIONAL",
+  "formal_cases": 7,
+  "request_identity_matches_baseline": true,
+  "formal_runtime_code_hashes_unchanged": true,
+  "all_worker_class_instances": "CoverageAwarePaperWorker",
+  "models": "deepseek-flash",
+  "embedding": "Qwen/Qwen3-Embedding-0.6B",
+  "corpus_snapshot": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+  "index_content_hash_unchanged": true,
+  "case_watchdog_triggered": 0,
+  "observed_llm_attempts": 101,
+  "observed_llm_error_types": {
+    "JSONDecodeError": 1
+  },
+  "observed_tool_attempts": 29,
+  "tool_names": {
+    "search_text": 21,
+    "read_page": 8
+  },
+  "observed_vlm_invocations": 0,
+  "actual_recovery_attempts": 0,
+  "reviewer_passed_requirements": 13,
+  "structural_citation_violations": 0,
+  "tests": {
+    "passed": 1043,
+    "new_tests": 88,
+    "failures": 0,
+    "warnings": 1,
+    "duration_seconds": 14.508
+  },
+  "integrity": {
+    "status": "PASS",
+    "frozen_files_checked": 292,
+    "protected_artifacts_checked": 47,
+    "frozen_mismatches": [],
+    "protected_artifact_mismatches": [],
+    "frozen_manifest_root_changed": false,
+    "provider_calls": 0
+  },
+  "nonformal_engineering_smoke": {
+    "model_calls": 7,
+    "tool_calls": 2,
+    "archived": true,
+    "reason": "Recording-layer infrastructure classification repair, not policy or semantic tuning."
+  },
+  "total_project_api_attempts_including_engineering_smoke": 108,
+  "remote_operations": false,
+  "f32_started": false
+}

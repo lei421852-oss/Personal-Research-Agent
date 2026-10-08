@@ -1,0 +1,1339 @@
+{
+  "protocol": {
+    "assessor": "Codex AI assistant, independent subagent review",
+    "method": "read-only source-backed AI semantic adjudication",
+    "assessed_at": "2026-10-08T17:26:59.905255+00:00",
+    "provider_calls": 0,
+    "human_assessments": 0,
+    "blind_review": false,
+    "references_used_after_execution_only": true,
+    "production_reviewer_used_as_gold": false,
+    "structured_covered_used_as_gold": false,
+    "raw_model_hidden_reasoning_used": false,
+    "source_of_facts": "actual cited prepared evidence plus original reference source quotes; no model knowledge",
+    "score_scale": {
+      "0": "任务内容未提供或不可用",
+      "1": "局部覆盖/支持不足或缺重要事实",
+      "2": "所评维度可接受",
+      "null": "当前不适用或不可判定"
+    },
+    "overall_not_score_threshold": true,
+    "original_four_axis_mapping": "沿用F2 rubric语义口径：fact_accuracy/difference_correctness也考虑所请求事实的完整交付，六维factual_accuracy单列交付正向事实正确性。",
+    "core_bounded_scope_sensitivity_definition": "只判断请求的核心事实是否完整正确，附加句问题另列；不是编辑输出、放行附加断言或修改F2标签。",
+    "limitations": [
+      "已知失败集，非盲评；AI审核参考加AI语义判断，不是独立人工Gold。",
+      "正文引文未明确BERT更新不等于BERT事实上冻结，只记支持不足。",
+      "FC投影用途不能证明FC训练状态。",
+      "附加文本无支持不等于命题已被证伪。",
+      "有效交付与事实准确性、完整性、范围合规性分别判断；execution_failed不是合理拒答。"
+    ],
+    "count_unit": "按逐题实际最终Claim中的附加命题/原文风险分组，不按引文数量或词出现次数计算；强否定没有支持也不被称为已证伪事实。"
+  },
+  "source_hashes": {
+    "treatment_executions": {
+      "path": "artifacts/quality-f3-1-comparison/treatment_executions.jsonl",
+      "sha256": "702990673cd283fc6f3f0e726f6de2eafb6e8d4c7bb0c7d24edd74457c9d66a1"
+    },
+    "baseline_executions": {
+      "path": "docs/acceptance/quality_end_to_end/results/executions.jsonl",
+      "sha256": "41a107a5e8b727fbbd26648b012cbf46e1c60ff2e255ccfc702a5da4d33108fa"
+    },
+    "baseline_assessments": {
+      "path": "docs/acceptance/quality_end_to_end/results/ai-assessments.jsonl",
+      "sha256": "323e4a3c442b8b5b8b147a3244bba41929a42653df9de63d6baa1e37774f3446"
+    },
+    "comparison_reference": {
+      "path": "data/benchmark/research_quality_v1_ai_reference/comparison_cases.jsonl",
+      "sha256": "61e8543928c6551924fb35a1ac3fb8c5113e5c1a5b444c2ddfd0d3f624973f66"
+    }
+  },
+  "summary": {
+    "case_count": 7,
+    "known_failure_diagnostic_set": true,
+    "formal_treatment_only": true,
+    "original_f2_false_labels_preserved": 7,
+    "strict_semantic_correct": {
+      "baseline": 0,
+      "treatment": 4,
+      "denominator": 7
+    },
+    "core_bounded_scope_sensitivity": {
+      "baseline": 3,
+      "treatment": 4,
+      "denominator": 7,
+      "original_labels_modified": false
+    },
+    "quality_change": {
+      "improved": 5,
+      "unchanged": 0,
+      "degraded_or_mixed_loss": 2,
+      "note": "第2题只是部分改善；第3/4题也有范围或Flamingo细节改善，但新缺失/执行失败使主要交付质量下降。"
+    },
+    "structural_complete_requirements": {
+      "treatment": 13,
+      "denominator": 14
+    },
+    "independent_reference_semantic_complete_requirements": {
+      "baseline": 9,
+      "treatment": 11,
+      "denominator": 14,
+      "basis": "原prepared-reference必要事实是否交付；不是covered、passed或有引文的同义指标。"
+    },
+    "support_boundary_issue_counts": {
+      "baseline_semantics": 5,
+      "treatment_semantics": 1
+    },
+    "unsupported_exhaustive_absence_counts": {
+      "baseline_semantics": 3,
+      "treatment_semantics": 0
+    },
+    "premature_supported_requirement_counts": {
+      "baseline_semantics": 5,
+      "treatment_semantics": 2
+    },
+    "new_execution_failed_requirements": 1,
+    "api_connection_failure_cases": 0,
+    "active_insufficient_evidence_abstentions": 0,
+    "new_unverified_assertions": 1,
+    "conclusion": "范围边界与若干核心覆盖显著改善，但语言接口仍过早完成、训练损失反而丢失、一个Worker协议失败；存在明确质量权衡，不支持直接宣称F3.1全面成功或推广到未知90题/泛化数据。",
+    "support_boundary_issue_breakdown": {
+      "peer_fact_without_local_citation": {
+        "baseline": 1,
+        "treatment": 0
+      },
+      "unsupported_exhaustive_absence": {
+        "baseline": 3,
+        "treatment": 0
+      },
+      "unproven_exclusive_trainable_scope": {
+        "baseline": 1,
+        "treatment": 0
+      },
+      "unverified_optimization_target_inference": {
+        "baseline": 0,
+        "treatment": 1
+      },
+      "proven_false_technical_propositions": {
+        "baseline": 0,
+        "treatment": 0,
+        "note": "支持不足/遗漏/失败不等于证明技术命题为假。"
+      }
+    },
+    "irrelevant_source_supported_performance_claims": {
+      "baseline": 5,
+      "treatment": 0,
+      "count_unit": "每题BLIP-2的一组8.7%/54x附加比较合计一个；数字本身有来源，非幻觉。"
+    },
+    "valid_core_comparison_delivered": {
+      "baseline": 3,
+      "treatment": 4,
+      "denominator": 7,
+      "strict_scope_and_support_required": false
+    },
+    "scope_violation_assertion_counts": {
+      "baseline_semantics": 8,
+      "treatment_semantics": 0
+    }
+  },
+  "cases": [
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-vision-encoder",
+      "baseline_semantics": {
+        "scores": {
+          "factual_accuracy": 2,
+          "evidence_support": 1,
+          "requirement_completeness": 2,
+          "comparison_quality": 2,
+          "scope_compliance": 1,
+          "abstention_reasonableness": null
+        },
+        "comparison_rubric": {
+          "fact_accuracy": 2,
+          "difference_correctness": 2,
+          "evidence_grounding": 1,
+          "scope_completeness": 1
+        },
+        "semantic_correct": false,
+        "per_paper_complete": {
+          "blip-2-2301.12597v1": true,
+          "flamingo-2204.14198v1": true
+        },
+        "rationale": "双方骨干与BLIP-2输出层正确；严格失败源于附加漂移和无穷尽依据的全文否定。",
+        "assertions_with_support_issues": [
+          {
+            "paper_id": "blip-2-2301.12597v1",
+            "assertion_or_omission": "the paper does not document Flamingo's own vision encoder",
+            "classification": "unsupported_exhaustive_absence",
+            "basis": "局部prepared引文没有穷尽全文的依据；不认定全文命题已被证伪。",
+            "evidence_ids": []
+          }
+        ],
+        "scope_violations": [
+          {
+            "paper_id": "blip-2-2301.12597v1",
+            "assertion_or_omission": "8.7% zero-shot VQAv2 / 54x fewer trainable parameters",
+            "classification": "supported_but_unrequested_performance",
+            "basis": "摘要/贡献确有这些数字，但它们不回答视觉编码器维度。",
+            "evidence_ids": [
+              "ev_9eac712dd806552d2b4d4d2e01e0f117",
+              "ev_b800026beae4f1a22793a9f31e9dfd11"
+            ]
+          }
+        ],
+        "abstention": {
+          "present": false,
+          "reasonableness": null,
+          "reason": "没有主动证据不足拒答；execution_failed 属于协议执行失败，不能当作合理拒答。"
+        },
+        "partial_or_missing_delivery": [],
+        "factual_accuracy_scope": "只评估实际交付的正向技术事实；漏答单列为完整性缺口。无支持的全文否定不是已证实事实错误。",
+        "support_issue_count": 1,
+        "unsupported_exhaustive_absence_count": 1,
+        "scope_violation_count": 1,
+        "valid_answer_delivered": true,
+        "premature_supported_requirement_count": 0,
+        "unsupported_additional_assertion_count": 1
+      },
+      "treatment_semantics": {
+        "scores": {
+          "factual_accuracy": 2,
+          "evidence_support": 2,
+          "requirement_completeness": 2,
+          "comparison_quality": 2,
+          "scope_compliance": 2,
+          "abstention_reasonableness": null
+        },
+        "comparison_rubric": {
+          "fact_accuracy": 2,
+          "difference_correctness": 2,
+          "evidence_grounding": 2,
+          "scope_completeness": 2
+        },
+        "semantic_correct": true,
+        "per_paper_complete": {
+          "blip-2-2301.12597v1": true,
+          "flamingo-2204.14198v1": true
+        },
+        "rationale": "CLIP ViT-L/14、EVA-CLIP ViT-G/14及second-last-layer与NFNet-F6均由本论文引文支持。Flamingo的空间网格/时间位置特征也有原文；未再比较性能或断言同伴论文信息缺失。",
+        "assertions_with_support_issues": [],
+        "scope_violations": [],
+        "abstention": {
+          "present": false,
+          "reasonableness": null,
+          "reason": "没有主动证据不足拒答；execution_failed 属于协议执行失败，不能当作合理拒答。"
+        },
+        "partial_or_missing_delivery": [],
+        "factual_accuracy_scope": "只评估实际交付的正向技术事实；漏答单列为完整性缺口。无支持的全文否定不是已证实事实错误。",
+        "support_issue_count": 0,
+        "unsupported_exhaustive_absence_count": 0,
+        "scope_violation_count": 0,
+        "valid_answer_delivered": true,
+        "premature_supported_requirement_count": 0,
+        "unsupported_additional_assertion_count": 0
+      },
+      "change": {
+        "classification": "improved",
+        "reason": "核心事实保留，消除无关性能对比及整篇否定；并非从错误骨干修正为正确骨干。",
+        "recovered_missing_core_facts": [],
+        "removed_supported_but_irrelevant_performance": true,
+        "removed_unsupported_assertions": 1
+      },
+      "sensitivity": {
+        "disputed_original_case": true,
+        "baseline_strict_acceptable": false,
+        "baseline_core_bounded_scope_acceptable": true,
+        "treatment_strict_acceptable": true,
+        "treatment_core_bounded_scope_acceptable": true,
+        "note": "core口径只判断请求的编码器事实，单独保留附加句违规；不是修改原标签或认可全文否定。"
+      },
+      "original_f2_assessment": {
+        "case_id": "rqv1-comparison-blip2-flamingo-vision-encoder",
+        "case_sha256": "6d34c1bbf48e7868b9d9c09112bb77ecb98a0fc18bd6bc3e7a7215ddac61db0d",
+        "prediction_sha256": "821ce3bf821bb1ddf8937410b1912c482362ed921a84d899810f91ad34e98f6b",
+        "assessor": "Codex AI assistant",
+        "assessed_at": "2026-10-08T12:37:51.852658Z",
+        "method": "ai_semantic_review",
+        "semantic_correct": false,
+        "comparison_rubric": {
+          "fact_accuracy": 2,
+          "difference_correctness": 2,
+          "evidence_grounding": 1,
+          "scope_completeness": 1
+        },
+        "notes": "主要骨干/层选择正确，但加入与视觉编码器比较无关的8.7%/54×性能结论，并声称整篇BLIP-2不记载Flamingo编码器；有限引用不能证明整篇缺失。"
+      },
+      "dimension": "vision_encoder",
+      "question": "Compare BLIP-2 and Flamingo on vision encoder using only the prepared corpus.",
+      "checked_reference_evidence_ids": [
+        "ev_03da035280d198641cd7bcb081b6f845",
+        "ev_9331722f1a47399ab173e624d02c6985"
+      ],
+      "baseline_record_sha256": "9d8b2bd6888ca50e9ed0679a93e245a70d0c94ffd579c49cc2c290d0f90e87fc",
+      "treatment_record_sha256": "001c54d205f572cf8eafdf9db1b53acb09326bccd14d874784c3424ea1655b69",
+      "treatment_final_claims_checked": [
+        {
+          "claim_id": "claim_5e39bc27f05e7443e7a9f39bfdf26e96",
+          "paper_id": "blip-2-2301.12597v1",
+          "evidence_ids": [
+            "ev_9331722f1a47399ab173e624d02c6985"
+          ]
+        },
+        {
+          "claim_id": "claim_c8cc32e8ba64f1df47e08349f1955038",
+          "paper_id": "flamingo-2204.14198v1",
+          "evidence_ids": [
+            "ev_03da035280d198641cd7bcb081b6f845",
+            "ev_1f60e62600f7a79eae799d5ed285f571",
+            "ev_e86416c4f3b10aeabf3180b5f807d7be",
+            "ev_1863b35f4e6e9086964ec47670f5ea7b"
+          ]
+        }
+      ],
+      "treatment_protocol_execution_failure": []
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-vision-language-bridge",
+      "baseline_semantics": {
+        "scores": {
+          "factual_accuracy": 2,
+          "evidence_support": 1,
+          "requirement_completeness": 1,
+          "comparison_quality": 1,
+          "scope_compliance": 1,
+          "abstention_reasonableness": null
+        },
+        "comparison_rubric": {
+          "fact_accuracy": 1,
+          "difference_correctness": 1,
+          "evidence_grounding": 1,
+          "scope_completeness": 1
+        },
+        "semantic_correct": false,
+        "per_paper_complete": {
+          "blip-2-2301.12597v1": false,
+          "flamingo-2204.14198v1": true
+        },
+        "rationale": "Flamingo主要桥接链路已有依据，但本地Claim夹带BLIP-2事实；BLIP-2缺FC投影、prepended soft prompts。",
+        "assertions_with_support_issues": [
+          {
+            "paper_id": "flamingo-2204.14198v1",
+            "assertion_or_omission": "BLIP-2 uses a lightweight Q-Former in two stages",
+            "classification": "peer_fact_not_supported_by_local_citations",
+            "basis": "该事实可能在另一论文单元有依据，但此Flamingo Claim的实际三条本地引文不能支持BLIP-2机制。",
+            "evidence_ids": [
+              "ev_1f60e62600f7a79eae799d5ed285f571",
+              "ev_9262472c69770e9a098422d6b46534f9",
+              "ev_218bd889fec22dc20b36a380b0e0fb62"
+            ]
+          }
+        ],
+        "scope_violations": [
+          {
+            "paper_id": "blip-2-2301.12597v1",
+            "assertion_or_omission": "8.7% / 54x performance contrast",
+            "classification": "supported_but_unrequested_performance",
+            "basis": "实际摘要有数字，问题要求接口机制。",
+            "evidence_ids": []
+          },
+          {
+            "paper_id": "flamingo-2204.14198v1",
+            "assertion_or_omission": "This contrasts with BLIP-2 Q-Former in two stages",
+            "classification": "peer_technical_fact_in_local_claim",
+            "basis": "全局比较应连接分别有本地依据的事实，不把同伴技术事实置入Flamingo本地Claim。",
+            "evidence_ids": []
+          }
+        ],
+        "abstention": {
+          "present": false,
+          "reasonableness": null,
+          "reason": "没有主动证据不足拒答；execution_failed 属于协议执行失败，不能当作合理拒答。"
+        },
+        "partial_or_missing_delivery": [],
+        "factual_accuracy_scope": "只评估实际交付的正向技术事实；漏答单列为完整性缺口。无支持的全文否定不是已证实事实错误。",
+        "support_issue_count": 1,
+        "unsupported_exhaustive_absence_count": 0,
+        "scope_violation_count": 2,
+        "valid_answer_delivered": false,
+        "premature_supported_requirement_count": 1,
+        "unsupported_additional_assertion_count": 1
+      },
+      "treatment_semantics": {
+        "scores": {
+          "factual_accuracy": 2,
+          "evidence_support": 2,
+          "requirement_completeness": 1,
+          "comparison_quality": 1,
+          "scope_compliance": 2,
+          "abstention_reasonableness": null
+        },
+        "comparison_rubric": {
+          "fact_accuracy": 1,
+          "difference_correctness": 1,
+          "evidence_grounding": 2,
+          "scope_completeness": 1
+        },
+        "semantic_correct": false,
+        "per_paper_complete": {
+          "blip-2-2301.12597v1": false,
+          "flamingo-2204.14198v1": true
+        },
+        "rationale": "Flamingo Resampler→interleaved cross-attention链路完整且无同伴事实。BLIP-2只描述Q-Former/32x768瓶颈/连接冻结LLM；language_interface=covered并不能替代FC映射到text embedding维度、prepend软提示的关键接口说明。",
+        "assertions_with_support_issues": [],
+        "scope_violations": [],
+        "abstention": {
+          "present": false,
+          "reasonableness": null,
+          "reason": "没有主动证据不足拒答；execution_failed 属于协议执行失败，不能当作合理拒答。"
+        },
+        "partial_or_missing_delivery": [
+          {
+            "paper_id": "blip-2-2301.12597v1",
+            "missing": "FC projection to LLM text-embedding dimension and prepended soft visual prompts",
+            "available_source_id": "ev_e4829335e46c87be4cada6e262bdd856",
+            "available_in_fixed_corpus": true,
+            "in_final_report": false,
+            "observed_by_worker": false
+          }
+        ],
+        "factual_accuracy_scope": "只评估实际交付的正向技术事实；漏答单列为完整性缺口。无支持的全文否定不是已证实事实错误。",
+        "support_issue_count": 0,
+        "unsupported_exhaustive_absence_count": 0,
+        "scope_violation_count": 0,
+        "valid_answer_delivered": false,
+        "premature_supported_requirement_count": 1,
+        "unsupported_additional_assertion_count": 0
+      },
+      "change": {
+        "classification": "improved",
+        "reason": "消除局部peer事实与性能漂移，Flamingo细化；BLIP-2关键接口没有恢复，整题仍不通过。",
+        "recovered_missing_core_facts": [],
+        "remaining_missing_core_facts": [
+          "BLIP-2 FC projection and prepended soft prompts"
+        ],
+        "removed_supported_but_irrelevant_performance": true,
+        "removed_unsupported_assertions": 1
+      },
+      "sensitivity": {
+        "disputed_original_case": false,
+        "baseline_strict_acceptable": false,
+        "baseline_core_bounded_scope_acceptable": false,
+        "treatment_strict_acceptable": false,
+        "treatment_core_bounded_scope_acceptable": false,
+        "note": "该题改善是部分质量改善，不是需求完成。"
+      },
+      "original_f2_assessment": {
+        "case_id": "rqv1-comparison-blip2-flamingo-vision-language-bridge",
+        "case_sha256": "cddb6f6729d67a77dff199df4885b385bc23c36e57ae930ee9b81c01cfa1f617",
+        "prediction_sha256": "874c6a064c2ddc4af77659682806c33fa3cf480159c600401c93ce4c852f1b0c",
+        "assessor": "Codex AI assistant",
+        "assessed_at": "2026-10-08T12:37:51.854186Z",
+        "method": "ai_semantic_review",
+        "semantic_correct": false,
+        "comparison_rubric": {
+          "fact_accuracy": 1,
+          "difference_correctness": 1,
+          "evidence_grounding": 1,
+          "scope_completeness": 1
+        },
+        "notes": "BLIP-2侧未回答FC投影后prepended soft prompts这一关键接口，转向性能数字；Flamingo侧还谈BLIP-2 Q-Former两阶段，但其实际Flamingo引用不含该跨论文事实。"
+      },
+      "dimension": "vision_language_bridge",
+      "question": "Compare BLIP-2 and Flamingo on vision language bridge using only the prepared corpus.",
+      "checked_reference_evidence_ids": [
+        "ev_1f60e62600f7a79eae799d5ed285f571",
+        "ev_a802881b56aa396b45e4431996b61ae5",
+        "ev_e4829335e46c87be4cada6e262bdd856"
+      ],
+      "baseline_record_sha256": "e970d95ac257ec3e883f6329d7993f868a244bb0242dee31838c8eee2769611f",
+      "treatment_record_sha256": "b9297a399135bc0b09809dc5d7a24ca1b3ef7036f3101f737e6395d9cfb72f3c",
+      "treatment_final_claims_checked": [
+        {
+          "claim_id": "claim_5b0567a72f03198708fcc77687c89bf0",
+          "paper_id": "blip-2-2301.12597v1",
+          "evidence_ids": [
+            "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+            "ev_b800026beae4f1a22793a9f31e9dfd11",
+            "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+            "ev_65bb1fa95a078ec3cacc188e7d033199",
+            "ev_09615ea9669f8dd3e5b0bd7a980253fe"
+          ]
+        },
+        {
+          "claim_id": "claim_d4b3b4b1d5840530691f7119748f14b8",
+          "paper_id": "flamingo-2204.14198v1",
+          "evidence_ids": [
+            "ev_1f60e62600f7a79eae799d5ed285f571",
+            "ev_a802881b56aa396b45e4431996b61ae5",
+            "ev_9262472c69770e9a098422d6b46534f9",
+            "ev_218bd889fec22dc20b36a380b0e0fb62"
+          ]
+        }
+      ],
+      "treatment_protocol_execution_failure": []
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-frozen-trainable-scope",
+      "baseline_semantics": {
+        "scores": {
+          "factual_accuracy": 2,
+          "evidence_support": 1,
+          "requirement_completeness": 1,
+          "comparison_quality": 1,
+          "scope_compliance": 1,
+          "abstention_reasonableness": null
+        },
+        "comparison_rubric": {
+          "fact_accuracy": 1,
+          "difference_correctness": 1,
+          "evidence_grounding": 1,
+          "scope_completeness": 1
+        },
+        "semantic_correct": false,
+        "per_paper_complete": {
+          "blip-2-2301.12597v1": true,
+          "flamingo-2204.14198v1": false
+        },
+        "rationale": "BLIP-2两阶段与冻结骨干有依据，但only范围未穷尽；Flamingo缺明确CA组件。FC是否训练不作为已证实错误。",
+        "assertions_with_support_issues": [
+          {
+            "paper_id": "blip-2-2301.12597v1",
+            "assertion_or_omission": "only a lightweight Q-Former trained",
+            "classification": "unproven_exclusive_trainable_scope",
+            "basis": "引文确认训练Q-Former和冻结骨干，不足穷尽所有参数；FC用途段落也不能单独证明FC训练状态。",
+            "evidence_ids": []
+          }
+        ],
+        "scope_violations": [
+          {
+            "paper_id": "blip-2-2301.12597v1",
+            "assertion_or_omission": "outperforms Flamingo80B by 8.7% with 54x fewer parameters",
+            "classification": "supported_but_unrequested_performance",
+            "basis": "数字有出处，但不是冻结/更新范围事实。",
+            "evidence_ids": []
+          }
+        ],
+        "abstention": {
+          "present": false,
+          "reasonableness": null,
+          "reason": "没有主动证据不足拒答；execution_failed 属于协议执行失败，不能当作合理拒答。"
+        },
+        "partial_or_missing_delivery": [],
+        "factual_accuracy_scope": "只评估实际交付的正向技术事实；漏答单列为完整性缺口。无支持的全文否定不是已证实事实错误。",
+        "support_issue_count": 1,
+        "unsupported_exhaustive_absence_count": 0,
+        "scope_violation_count": 1,
+        "valid_answer_delivered": false,
+        "premature_supported_requirement_count": 1,
+        "unsupported_additional_assertion_count": 1
+      },
+      "treatment_semantics": {
+        "scores": {
+          "factual_accuracy": 2,
+          "evidence_support": 2,
+          "requirement_completeness": 1,
+          "comparison_quality": 0,
+          "scope_compliance": 2,
+          "abstention_reasonableness": null
+        },
+        "comparison_rubric": {
+          "fact_accuracy": 1,
+          "difference_correctness": 0,
+          "evidence_grounding": 2,
+          "scope_completeness": 1
+        },
+        "semantic_correct": false,
+        "per_paper_complete": {
+          "blip-2-2301.12597v1": false,
+          "flamingo-2204.14198v1": true
+        },
+        "rationale": "Flamingo明确Frozen vision/LM与trainable Resampler/CA，补齐旧遗漏；BLIP-2多次提交协议ValueError后，Provider工具参数JSONDecodeError终止，无BLIP-2可交付Claim。其execution_failed不是证据不足或API连接错误。",
+        "assertions_with_support_issues": [],
+        "scope_violations": [],
+        "abstention": {
+          "present": false,
+          "reasonableness": null,
+          "reason": "没有主动证据不足拒答；execution_failed 属于协议执行失败，不能当作合理拒答。"
+        },
+        "partial_or_missing_delivery": [
+          {
+            "paper_id": "blip-2-2301.12597v1",
+            "missing": "all final requirement facts",
+            "status": "execution_failed",
+            "failure_type": "JSONDecodeError",
+            "failure_kind": "provider_tool_arguments_protocol",
+            "valid_abstention": false
+          }
+        ],
+        "factual_accuracy_scope": "只评估实际交付的正向技术事实；漏答单列为完整性缺口。无支持的全文否定不是已证实事实错误。",
+        "support_issue_count": 0,
+        "unsupported_exhaustive_absence_count": 0,
+        "scope_violation_count": 0,
+        "valid_answer_delivered": false,
+        "premature_supported_requirement_count": 0,
+        "unsupported_additional_assertion_count": 0
+      },
+      "change": {
+        "classification": "degraded",
+        "mixed_change": true,
+        "reason": "Flamingo细节恢复，但原来存在的BLIP-2两阶段事实因执行协议失败未交付，完整双论文比较丢失；不将这一项判为模型技术知识错误。",
+        "recovered_missing_core_facts": [
+          "Flamingo trainable cross-attention links"
+        ],
+        "new_missing_core_facts": [
+          "BLIP-2 reviewed frozen/trainable scope"
+        ],
+        "removed_supported_but_irrelevant_performance": true,
+        "removed_unsupported_assertions": 1
+      },
+      "sensitivity": {
+        "disputed_original_case": true,
+        "baseline_strict_acceptable": false,
+        "baseline_core_bounded_scope_acceptable": false,
+        "treatment_strict_acceptable": false,
+        "treatment_core_bounded_scope_acceptable": false,
+        "note": "即不扣FC隐含范围，旧Flamingo仍未明确CA；新BLIP-2执行失败，所以两种口径都不接受完整比较。"
+      },
+      "original_f2_assessment": {
+        "case_id": "rqv1-comparison-blip2-flamingo-frozen-trainable-scope",
+        "case_sha256": "68c030ba5403ed17d877d6b69d2634c41e45cfd7e9981077ddd4ee44278f3037",
+        "prediction_sha256": "f56eb6d6f917e12903ac6a5f3b1e75142ac7b8672459d074b3ee039e7501b931",
+        "assessor": "Codex AI assistant",
+        "assessed_at": "2026-10-08T12:37:51.854283Z",
+        "method": "ai_semantic_review",
+        "semantic_correct": false,
+        "comparison_rubric": {
+          "fact_accuracy": 1,
+          "difference_correctness": 1,
+          "evidence_grounding": 1,
+          "scope_completeness": 1
+        },
+        "notes": "BLIP-2侧only Q-Former的排他范围缺少对FC接口的完整依据，并扩展性能；Flamingo侧只笼统描述other learnable components，未完整区分跨注意力连接组件。"
+      },
+      "dimension": "frozen_trainable_scope",
+      "question": "Compare BLIP-2 and Flamingo on frozen trainable scope using only the prepared corpus.",
+      "checked_reference_evidence_ids": [
+        "ev_1f60e62600f7a79eae799d5ed285f571",
+        "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+        "ev_a802881b56aa396b45e4431996b61ae5"
+      ],
+      "baseline_record_sha256": "3e67822e8b7c05eef3eb9a886b75f48fef7cdc71ca935aa5fbbfaa59ad630efc",
+      "treatment_record_sha256": "cf0580f5e91b93d8b624e4bcd7279eb41648b00017f07ba725f073920078fb83",
+      "treatment_final_claims_checked": [
+        {
+          "claim_id": "claim_61f1cc9fa8d85d2d93a44e7407bd9c55",
+          "paper_id": "flamingo-2204.14198v1",
+          "evidence_ids": [
+            "ev_03da035280d198641cd7bcb081b6f845",
+            "ev_1f60e62600f7a79eae799d5ed285f571",
+            "ev_a802881b56aa396b45e4431996b61ae5",
+            "ev_e86416c4f3b10aeabf3180b5f807d7be",
+            "ev_218bd889fec22dc20b36a380b0e0fb62",
+            "ev_9262472c69770e9a098422d6b46534f9"
+          ]
+        }
+      ],
+      "treatment_protocol_execution_failure": [
+        {
+          "paper_id": "blip-2-2301.12597v1",
+          "error": {
+            "code": "dependency_failure",
+            "message": "Worker dependency call failed after its permitted attempts.",
+            "requirement_ids": [
+              "req_cbbd4eeb305e2c8c829b7e2bd2729cb9"
+            ],
+            "details": {
+              "phase": "async_dependency",
+              "error_type": "JSONDecodeError",
+              "message": "Provider tool arguments are not valid JSON.",
+              "hint": "Inspect public tool-call format; raw model output is not retained.",
+              "classification": "permanent",
+              "retry_exhausted": false,
+              "attempts": 1,
+              "retry_count": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-training-objective",
+      "baseline_semantics": {
+        "scores": {
+          "factual_accuracy": 2,
+          "evidence_support": 1,
+          "requirement_completeness": 2,
+          "comparison_quality": 2,
+          "scope_compliance": 1,
+          "abstention_reasonableness": null
+        },
+        "comparison_rubric": {
+          "fact_accuracy": 2,
+          "difference_correctness": 2,
+          "evidence_grounding": 1,
+          "scope_completeness": 1
+        },
+        "semantic_correct": false,
+        "per_paper_complete": {
+          "blip-2-2301.12597v1": true,
+          "flamingo-2204.14198v1": true
+        },
+        "rationale": "BLIP-2 LM/prefix-LM损失和Flamingo contrastive→next-token目标原来均有支持；附加范围/全文否定造成严格失败。",
+        "assertions_with_support_issues": [
+          {
+            "paper_id": "blip-2-2301.12597v1",
+            "assertion_or_omission": "paper does not state Flamingo's training objective",
+            "classification": "unsupported_exhaustive_absence",
+            "basis": "实际prepared片段不能证明整篇缺失；也不应由单侧Worker断言全局比较不可完成。",
+            "evidence_ids": []
+          }
+        ],
+        "scope_violations": [
+          {
+            "paper_id": "blip-2-2301.12597v1",
+            "assertion_or_omission": "8.7% / 54x performance comparison",
+            "classification": "supported_but_unrequested_performance",
+            "basis": "摘要确有数字，不是损失函数比较。",
+            "evidence_ids": []
+          }
+        ],
+        "abstention": {
+          "present": false,
+          "reasonableness": null,
+          "reason": "没有主动证据不足拒答；execution_failed 属于协议执行失败，不能当作合理拒答。"
+        },
+        "partial_or_missing_delivery": [],
+        "factual_accuracy_scope": "只评估实际交付的正向技术事实；漏答单列为完整性缺口。无支持的全文否定不是已证实事实错误。",
+        "support_issue_count": 1,
+        "unsupported_exhaustive_absence_count": 1,
+        "scope_violation_count": 1,
+        "valid_answer_delivered": true,
+        "premature_supported_requirement_count": 0,
+        "unsupported_additional_assertion_count": 1
+      },
+      "treatment_semantics": {
+        "scores": {
+          "factual_accuracy": 1,
+          "evidence_support": 1,
+          "requirement_completeness": 1,
+          "comparison_quality": 1,
+          "scope_compliance": 2,
+          "abstention_reasonableness": null
+        },
+        "comparison_rubric": {
+          "fact_accuracy": 1,
+          "difference_correctness": 1,
+          "evidence_grounding": 1,
+          "scope_completeness": 1
+        },
+        "semantic_correct": false,
+        "per_paper_complete": {
+          "blip-2-2301.12597v1": false,
+          "flamingo-2204.14198v1": true
+        },
+        "rationale": "新BLIP-2只说第一阶段三目标以及第二阶段FC/软提示用途，未交付decoder LM loss与encoder-decoder prefix LM loss这两项原基线已有且当前Corpus可提供的核心目标。其losses属性/阶段字段虽自报covered，实际填入接口用途；Flamingo目标主要正确，但BERT/text encoder更新对象没有明确引用支持。 对实际交付的全部正向技术断言，准确性只能部分确认：text encoder更新待验证，因此factual_accuracy记1，而不是无保留的2；支持不足不是事实已证伪。",
+        "assertions_with_support_issues": [
+          {
+            "paper_id": "flamingo-2204.14198v1",
+            "assertion_or_omission": "Stage 1 optimizes the vision encoder and text encoder",
+            "classification": "unverified_optimization_target_inference",
+            "basis": "所引段落说明mean-pooled BERT输出参与对比相似度，没有明确BERT参数更新；没有使用全文或模型知识补证。此断言支持不足，不宣称参数事实上必然不更新。",
+            "evidence_ids": [
+              "ev_e86416c4f3b10aeabf3180b5f807d7be",
+              "ev_03da035280d198641cd7bcb081b6f845"
+            ]
+          }
+        ],
+        "scope_violations": [],
+        "abstention": {
+          "present": false,
+          "reasonableness": null,
+          "reason": "没有主动证据不足拒答；execution_failed 属于协议执行失败，不能当作合理拒答。"
+        },
+        "partial_or_missing_delivery": [
+          {
+            "paper_id": "blip-2-2301.12597v1",
+            "missing": "language modeling loss for decoder LLM versus prefix language modeling loss for encoder-decoder LLM",
+            "available_source_id": "ev_234984c983953494ce28027dc2716acc",
+            "available_in_fixed_corpus": true,
+            "in_final_report": false,
+            "observed_by_worker": false
+          }
+        ],
+        "factual_accuracy_scope": "对实际交付的全部正向技术断言评分：主要训练目标事实有支持，但text encoder参数更新断言没有明确来源，无法充分确认准确性，故不给无保留满分。没有认定该断言在论文全文层面必定为假。遗漏另计为需求完整性。",
+        "support_issue_count": 1,
+        "unsupported_exhaustive_absence_count": 0,
+        "scope_violation_count": 0,
+        "valid_answer_delivered": false,
+        "premature_supported_requirement_count": 1,
+        "unsupported_additional_assertion_count": 1
+      },
+      "change": {
+        "classification": "degraded",
+        "mixed_change": true,
+        "reason": "减少原scope漂移，却丢失原来已回答的关键损失区别并产生一个未被原文明确支持的优化对象推断；不能仅凭covered上升判优化成功。",
+        "recovered_missing_core_facts": [],
+        "new_missing_core_facts": [
+          "BLIP-2 LM loss versus prefix LM loss"
+        ],
+        "removed_supported_but_irrelevant_performance": true,
+        "removed_unsupported_assertions": 1,
+        "new_unverified_assertions": 1
+      },
+      "sensitivity": {
+        "disputed_original_case": true,
+        "baseline_strict_acceptable": false,
+        "baseline_core_bounded_scope_acceptable": true,
+        "treatment_strict_acceptable": false,
+        "treatment_core_bounded_scope_acceptable": false,
+        "note": "即宽松忽略附加句，旧core训练损失正确，新core损失区别缺失；不是单纯评分口径造成的退化。"
+      },
+      "original_f2_assessment": {
+        "case_id": "rqv1-comparison-blip2-flamingo-training-objective",
+        "case_sha256": "f35c362a229f7b63e761d5918111c4a6a8146d5c7196bbd3254fee3e9d4c129f",
+        "prediction_sha256": "9bf966a1ae441b1af83e122ced3d807c69408f820cd00285ab1a232b9a20dd70",
+        "assessor": "Codex AI assistant",
+        "assessed_at": "2026-10-08T12:37:51.854383Z",
+        "method": "ai_semantic_review",
+        "semantic_correct": false,
+        "comparison_rubric": {
+          "fact_accuracy": 2,
+          "difference_correctness": 2,
+          "evidence_grounding": 1,
+          "scope_completeness": 1
+        },
+        "notes": "两侧主要目标都描述正确，但添加性能比较及整篇未记载他方目标的断言，超出问题且无完整来源支持。"
+      },
+      "dimension": "training_objective",
+      "question": "Compare BLIP-2 and Flamingo on training objective using only the prepared corpus.",
+      "checked_reference_evidence_ids": [
+        "ev_234984c983953494ce28027dc2716acc",
+        "ev_a802881b56aa396b45e4431996b61ae5",
+        "ev_e86416c4f3b10aeabf3180b5f807d7be"
+      ],
+      "baseline_record_sha256": "1320cb45dfe8f53747ecd88bed31a7e5ff49002319c09232ff76ad25a3a3212f",
+      "treatment_record_sha256": "9f18e0aa59ffe1b5bbdff0d4168adbbbae8ce189789945108987c5a7efb1991b",
+      "treatment_final_claims_checked": [
+        {
+          "claim_id": "claim_4334cb6f681b4f09e9cc9c19d7578b9a",
+          "paper_id": "blip-2-2301.12597v1",
+          "evidence_ids": [
+            "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+            "ev_9eac712dd806552d2b4d4d2e01e0f117",
+            "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+            "ev_242192f04216b43089535562ea0dcec9",
+            "ev_e4829335e46c87be4cada6e262bdd856"
+          ]
+        },
+        {
+          "claim_id": "claim_8b35f2bab9e7191580df6ca1309e4fb9",
+          "paper_id": "flamingo-2204.14198v1",
+          "evidence_ids": [
+            "ev_1f60e62600f7a79eae799d5ed285f571",
+            "ev_e86416c4f3b10aeabf3180b5f807d7be",
+            "ev_a802881b56aa396b45e4431996b61ae5",
+            "ev_03da035280d198641cd7bcb081b6f845",
+            "ev_218bd889fec22dc20b36a380b0e0fb62"
+          ]
+        }
+      ],
+      "treatment_protocol_execution_failure": [],
+      "score_revision_note": {
+        "revised_at": "2026-10-08T17:35:54.848706+00:00",
+        "previous_sha256": "47af69fda26202d171d1f9c3b39700d74f07135012fe62895e47ea37d4f9dd58",
+        "previous_artifact": "artifacts/quality-f3-1-comparison/independent_ai_review.pre_revision.json",
+        "case_id": "rqv1-comparison-blip2-flamingo-training-objective",
+        "field": "treatment_semantics.scores.factual_accuracy",
+        "previous_value": 2,
+        "revised_value": 1,
+        "reason": "上一版本给实际交付正向事实无保留满分，但同段存在原引文未明确支持的text encoder参数更新断言。仅基于prepared文本不能充分确认准确性，应记部分确认1；并非将未知更新状态认定为事实错误。",
+        "strict_semantic_correct_unchanged": true,
+        "strict_pass_count_unchanged": 4,
+        "original_f2_labels_modified": false,
+        "provider_calls": 0,
+        "revision_kind": "clarify_positive_assertion_factual_accuracy_uncertainty",
+        "strict_semantic_correct_before": false,
+        "strict_semantic_correct_after": false
+      }
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-flamingo-language-model",
+      "baseline_semantics": {
+        "scores": {
+          "factual_accuracy": 2,
+          "evidence_support": 2,
+          "requirement_completeness": 1,
+          "comparison_quality": 1,
+          "scope_compliance": 1,
+          "abstention_reasonableness": null
+        },
+        "comparison_rubric": {
+          "fact_accuracy": 1,
+          "difference_correctness": 1,
+          "evidence_grounding": 2,
+          "scope_completeness": 0
+        },
+        "semantic_correct": false,
+        "per_paper_complete": {
+          "blip-2-2301.12597v1": false,
+          "flamingo-2204.14198v1": true
+        },
+        "rationale": "BLIP-2只答冻结LLM与Q-Former，缺OPT/FlanT5；Flamingo autoregressive/frozen事实有支持。",
+        "assertions_with_support_issues": [],
+        "scope_violations": [
+          {
+            "paper_id": "blip-2-2301.12597v1",
+            "assertion_or_omission": "8.7% / 54x superiority used instead of model family",
+            "classification": "supported_but_unrequested_performance",
+            "basis": "数字有来源，OPT/FlanT5家族反而遗漏。",
+            "evidence_ids": []
+          }
+        ],
+        "abstention": {
+          "present": false,
+          "reasonableness": null,
+          "reason": "没有主动证据不足拒答；execution_failed 属于协议执行失败，不能当作合理拒答。"
+        },
+        "partial_or_missing_delivery": [],
+        "factual_accuracy_scope": "只评估实际交付的正向技术事实；漏答单列为完整性缺口。无支持的全文否定不是已证实事实错误。",
+        "support_issue_count": 0,
+        "unsupported_exhaustive_absence_count": 0,
+        "scope_violation_count": 1,
+        "valid_answer_delivered": false,
+        "premature_supported_requirement_count": 1,
+        "unsupported_additional_assertion_count": 0
+      },
+      "treatment_semantics": {
+        "scores": {
+          "factual_accuracy": 2,
+          "evidence_support": 2,
+          "requirement_completeness": 2,
+          "comparison_quality": 2,
+          "scope_compliance": 2,
+          "abstention_reasonableness": null
+        },
+        "comparison_rubric": {
+          "fact_accuracy": 2,
+          "difference_correctness": 2,
+          "evidence_grounding": 2,
+          "scope_completeness": 2
+        },
+        "semantic_correct": true,
+        "per_paper_complete": {
+          "blip-2-2301.12597v1": true,
+          "flamingo-2204.14198v1": true
+        },
+        "rationale": "BLIP-2明确OPT decoder与FlanT5 encoder-decoder、冻结状态，实际引文含型号。Flamingo保留原prepared支持的pretrained autoregressive frozen LM与交错CA；没有靠模型记忆猜具体家族。model_family=covered的命名只是较宽泛的自报，不当作具体型号已知。",
+        "assertions_with_support_issues": [],
+        "scope_violations": [],
+        "abstention": {
+          "present": false,
+          "reasonableness": null,
+          "reason": "没有主动证据不足拒答；execution_failed 属于协议执行失败，不能当作合理拒答。"
+        },
+        "partial_or_missing_delivery": [],
+        "factual_accuracy_scope": "只评估实际交付的正向技术事实；漏答单列为完整性缺口。无支持的全文否定不是已证实事实错误。",
+        "support_issue_count": 0,
+        "unsupported_exhaustive_absence_count": 0,
+        "scope_violation_count": 0,
+        "valid_answer_delivered": true,
+        "premature_supported_requirement_count": 0,
+        "unsupported_additional_assertion_count": 0,
+        "structural_property_caveat": {
+          "paper_id": "flamingo-2204.14198v1",
+          "aspect_id": "model_family",
+          "claimed_status": "covered",
+          "specific_model_family_name_supported": false,
+          "generic_autoregressive_description_supported": true,
+          "reference_requirement_satisfied": true,
+          "note": "family覆盖标签粒度不准确，但原题允许generic已提供事实；不使用模型记忆强求任何具体家族名。"
+        }
+      },
+      "change": {
+        "classification": "improved",
+        "reason": "此前缺失的BLIP-2型号与架构确已恢复并交付，移除性能漂移；Flamingo不凭空命名，符合原参考边界。",
+        "recovered_missing_core_facts": [
+          "BLIP-2 OPT decoder / FlanT5 encoder-decoder"
+        ],
+        "removed_supported_but_irrelevant_performance": true,
+        "removed_unsupported_assertions": 0
+      },
+      "sensitivity": {
+        "disputed_original_case": false,
+        "baseline_strict_acceptable": false,
+        "baseline_core_bounded_scope_acceptable": false,
+        "treatment_strict_acceptable": true,
+        "treatment_core_bounded_scope_acceptable": true,
+        "note": "Flamingo当前片段不提供具体家族名，不因没写未提供型号而扣完整性。"
+      },
+      "original_f2_assessment": {
+        "case_id": "rqv1-comparison-blip2-flamingo-language-model",
+        "case_sha256": "f63e376eef4269ffe6deddb9adc81ef0ea5c8a4859955f54e8e23fe0a1956301",
+        "prediction_sha256": "6fdce39581e9f4b63e0e0e1a2dc2115e24fc5e949fd601395e0f131ff354570f",
+        "assessor": "Codex AI assistant",
+        "assessed_at": "2026-10-08T12:37:51.854473Z",
+        "method": "ai_semantic_review",
+        "semantic_correct": false,
+        "comparison_rubric": {
+          "fact_accuracy": 1,
+          "difference_correctness": 1,
+          "evidence_grounding": 2,
+          "scope_completeness": 0
+        },
+        "notes": "BLIP-2侧未给出有准备证据的OPT/FlanT5两家族，主要输出冻结/Q-Former与性能优势；语言模型维度的关键比较不完整。"
+      },
+      "dimension": "language_model",
+      "question": "Compare BLIP-2 and Flamingo on language model using only the prepared corpus.",
+      "checked_reference_evidence_ids": [
+        "ev_1f60e62600f7a79eae799d5ed285f571",
+        "ev_9331722f1a47399ab173e624d02c6985"
+      ],
+      "baseline_record_sha256": "a5c2d9d07655473873dde0e0442cc338854c2901ba3f8b1dfaad0386968790ae",
+      "treatment_record_sha256": "8470e08e4a2182579fb699781247673365c13187ceb67fd2866a1b8e2032501c",
+      "treatment_final_claims_checked": [
+        {
+          "claim_id": "claim_50351b7b35ed7fca5ce8ed5ae93339eb",
+          "paper_id": "blip-2-2301.12597v1",
+          "evidence_ids": [
+            "ev_9331722f1a47399ab173e624d02c6985",
+            "ev_09615ea9669f8dd3e5b0bd7a980253fe",
+            "ev_234984c983953494ce28027dc2716acc",
+            "ev_9eac712dd806552d2b4d4d2e01e0f117",
+            "ev_525a1f73be26c523e5fb57a5a02a3ecc"
+          ]
+        },
+        {
+          "claim_id": "claim_26f32ae337996e6bae940dbcf43a5fbd",
+          "paper_id": "flamingo-2204.14198v1",
+          "evidence_ids": [
+            "ev_1f60e62600f7a79eae799d5ed285f571",
+            "ev_a802881b56aa396b45e4431996b61ae5",
+            "ev_218bd889fec22dc20b36a380b0e0fb62"
+          ]
+        }
+      ],
+      "treatment_protocol_execution_failure": []
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-llava-frozen-trainable-scope",
+      "baseline_semantics": {
+        "scores": {
+          "factual_accuracy": 2,
+          "evidence_support": 2,
+          "requirement_completeness": 1,
+          "comparison_quality": 1,
+          "scope_compliance": 1,
+          "abstention_reasonableness": null
+        },
+        "comparison_rubric": {
+          "fact_accuracy": 1,
+          "difference_correctness": 1,
+          "evidence_grounding": 2,
+          "scope_completeness": 1
+        },
+        "semantic_correct": false,
+        "per_paper_complete": {
+          "blip-2-2301.12597v1": false,
+          "llava-2304.08485v1": false
+        },
+        "rationale": "双方Stage2主要事实已有依据，但遗漏BLIP-2 representation stage和LLaVA Stage1只训练W。",
+        "assertions_with_support_issues": [],
+        "scope_violations": [
+          {
+            "paper_id": "llava-2304.08485v1",
+            "assertion_or_omission": "BLIP-2 Q-former described as more sophisticated/expensive",
+            "classification": "source_supported_peer_comparison_outside_local_scope",
+            "basis": "这项LLaVA原文有描述，因此不叫事实幻觉；对本地冻结范围问题属于范围扩展。",
+            "evidence_ids": [
+              "ev_d39623f7635492ff9c1a349e90426601"
+            ]
+          }
+        ],
+        "abstention": {
+          "present": false,
+          "reasonableness": null,
+          "reason": "没有主动证据不足拒答；execution_failed 属于协议执行失败，不能当作合理拒答。"
+        },
+        "partial_or_missing_delivery": [],
+        "factual_accuracy_scope": "只评估实际交付的正向技术事实；漏答单列为完整性缺口。无支持的全文否定不是已证实事实错误。",
+        "support_issue_count": 0,
+        "unsupported_exhaustive_absence_count": 0,
+        "scope_violation_count": 1,
+        "valid_answer_delivered": false,
+        "premature_supported_requirement_count": 2,
+        "unsupported_additional_assertion_count": 0
+      },
+      "treatment_semantics": {
+        "scores": {
+          "factual_accuracy": 2,
+          "evidence_support": 2,
+          "requirement_completeness": 2,
+          "comparison_quality": 2,
+          "scope_compliance": 2,
+          "abstention_reasonableness": null
+        },
+        "comparison_rubric": {
+          "fact_accuracy": 2,
+          "difference_correctness": 2,
+          "evidence_grounding": 2,
+          "scope_completeness": 2
+        },
+        "semantic_correct": true,
+        "per_paper_complete": {
+          "blip-2-2301.12597v1": true,
+          "llava-2304.08485v1": true
+        },
+        "rationale": "BLIP-2明确Q-Former两阶段与冻结图像/LLM；LLaVA明确Stage1视觉/LLM冻结只训练W，Stage2视觉冻结更新W+LLM。各方使用本地阶段原文。BLIP-2的FC功能有来源，但没有额外断言其更新状态；不从功能推断训练。",
+        "assertions_with_support_issues": [],
+        "scope_violations": [],
+        "abstention": {
+          "present": false,
+          "reasonableness": null,
+          "reason": "没有主动证据不足拒答；execution_failed 属于协议执行失败，不能当作合理拒答。"
+        },
+        "partial_or_missing_delivery": [],
+        "factual_accuracy_scope": "只评估实际交付的正向技术事实；漏答单列为完整性缺口。无支持的全文否定不是已证实事实错误。",
+        "support_issue_count": 0,
+        "unsupported_exhaustive_absence_count": 0,
+        "scope_violation_count": 0,
+        "valid_answer_delivered": true,
+        "premature_supported_requirement_count": 0,
+        "unsupported_additional_assertion_count": 0
+      },
+      "change": {
+        "classification": "improved",
+        "reason": "原漏掉的第一阶段事实与阶段差异确已恢复；不再用第二阶段正确掩盖整项缺口。",
+        "recovered_missing_core_facts": [
+          "BLIP-2 stage1 representation-learning scope",
+          "LLaVA Stage1 vision/LLM frozen and W-only trained"
+        ],
+        "removed_supported_but_irrelevant_performance": false,
+        "removed_unsupported_assertions": 0
+      },
+      "sensitivity": {
+        "disputed_original_case": false,
+        "baseline_strict_acceptable": false,
+        "baseline_core_bounded_scope_acceptable": false,
+        "treatment_strict_acceptable": true,
+        "treatment_core_bounded_scope_acceptable": true,
+        "note": "仅核对可由prepared引用支持的阶段范围，不额外要求未被原文标明的FC训练标签。"
+      },
+      "original_f2_assessment": {
+        "case_id": "rqv1-comparison-blip2-llava-frozen-trainable-scope",
+        "case_sha256": "3e44a0154800596a5c36714561898fe3d5a1e396200440f330f207bcdf6f6334",
+        "prediction_sha256": "e044c3bd603598d03d88d39eadc73e0707d58585635a1590a0dec0b70c5aca8d",
+        "assessor": "Codex AI assistant",
+        "assessed_at": "2026-10-08T12:37:51.854754Z",
+        "method": "ai_semantic_review",
+        "semantic_correct": false,
+        "comparison_rubric": {
+          "fact_accuracy": 1,
+          "difference_correctness": 1,
+          "evidence_grounding": 2,
+          "scope_completeness": 1
+        },
+        "notes": "两侧实际只聚焦生成/Stage2；遗漏LLaVA Stage1只训练W及BLIP-2第一阶段，使原参考要求的阶段范围比较不完整。"
+      },
+      "dimension": "frozen_trainable_scope",
+      "question": "Compare BLIP-2 and LLaVA (2304.08485v1) on frozen trainable scope using only the prepared corpus.",
+      "checked_reference_evidence_ids": [
+        "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+        "ev_84b236a4049e358dd2a7dda5bddb4464",
+        "ev_c445999410b5ee326425346ce4b2377b"
+      ],
+      "baseline_record_sha256": "336464f1c30efc437e41e2c53e23e4b76726fc9abf8f395c70583b1ac4ad0bbd",
+      "treatment_record_sha256": "5a025d3c067afcefd79d91d86a210762fa2f0c320c44a6b0c4dea195507e6f00",
+      "treatment_final_claims_checked": [
+        {
+          "claim_id": "claim_1dadcda1e3f5579035621c340e060f64",
+          "paper_id": "blip-2-2301.12597v1",
+          "evidence_ids": [
+            "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+            "ev_9331722f1a47399ab173e624d02c6985",
+            "ev_e4829335e46c87be4cada6e262bdd856",
+            "ev_242192f04216b43089535562ea0dcec9"
+          ]
+        },
+        {
+          "claim_id": "claim_cba4044963e8cdf3a88471d42b030bd0",
+          "paper_id": "llava-2304.08485v1",
+          "evidence_ids": [
+            "ev_c445999410b5ee326425346ce4b2377b",
+            "ev_84b236a4049e358dd2a7dda5bddb4464"
+          ]
+        }
+      ],
+      "treatment_protocol_execution_failure": []
+    },
+    {
+      "case_id": "rqv1-comparison-blip2-llava-language-model",
+      "baseline_semantics": {
+        "scores": {
+          "factual_accuracy": 2,
+          "evidence_support": 1,
+          "requirement_completeness": 2,
+          "comparison_quality": 2,
+          "scope_compliance": 1,
+          "abstention_reasonableness": null
+        },
+        "comparison_rubric": {
+          "fact_accuracy": 2,
+          "difference_correctness": 2,
+          "evidence_grounding": 1,
+          "scope_completeness": 2
+        },
+        "semantic_correct": false,
+        "per_paper_complete": {
+          "blip-2-2301.12597v1": true,
+          "llava-2304.08485v1": true
+        },
+        "rationale": "OPT/FlanT5与LLaMA正确；全文缺失附加断言没有穷尽依据。",
+        "assertions_with_support_issues": [
+          {
+            "paper_id": "llava-2304.08485v1",
+            "assertion_or_omission": "does not document BLIP-2's underlying LLM (OPT/Flan-T5) in this paper",
+            "classification": "unsupported_exhaustive_absence",
+            "basis": "局部LLaVA引文不能证明全文所有位置不含型号；不认定该全文命题已经被证伪。",
+            "evidence_ids": []
+          }
+        ],
+        "scope_violations": [
+          {
+            "paper_id": "llava-2304.08485v1",
+            "assertion_or_omission": "BLIP-2 Q-former and checkpoint comparisons in the LLaVA local LM claim",
+            "classification": "peer_information_outside_local_dimension",
+            "basis": "原段落确有提及，但对于本地LLM家族/架构不是必要技术事实。",
+            "evidence_ids": []
+          }
+        ],
+        "abstention": {
+          "present": false,
+          "reasonableness": null,
+          "reason": "没有主动证据不足拒答；execution_failed 属于协议执行失败，不能当作合理拒答。"
+        },
+        "partial_or_missing_delivery": [],
+        "factual_accuracy_scope": "只评估实际交付的正向技术事实；漏答单列为完整性缺口。无支持的全文否定不是已证实事实错误。",
+        "support_issue_count": 1,
+        "unsupported_exhaustive_absence_count": 1,
+        "scope_violation_count": 1,
+        "valid_answer_delivered": true,
+        "premature_supported_requirement_count": 0,
+        "unsupported_additional_assertion_count": 1
+      },
+      "treatment_semantics": {
+        "scores": {
+          "factual_accuracy": 2,
+          "evidence_support": 2,
+          "requirement_completeness": 2,
+          "comparison_quality": 2,
+          "scope_compliance": 2,
+          "abstention_reasonableness": null
+        },
+        "comparison_rubric": {
+          "fact_accuracy": 2,
+          "difference_correctness": 2,
+          "evidence_grounding": 2,
+          "scope_completeness": 2
+        },
+        "semantic_correct": true,
+        "per_paper_complete": {
+          "blip-2-2301.12597v1": true,
+          "llava-2304.08485v1": true
+        },
+        "rationale": "BLIP-2 OPT/FlanT5类型与冻结状态正确；LLaVA v1选择LLaMA及Stage2更新LLM均有本地引文，未再声称LLaVA全文不记录BLIP-2型号。LLaVA architecture covered描述较泛，但没有创造prepared不支持的decoder型细节。",
+        "assertions_with_support_issues": [],
+        "scope_violations": [],
+        "abstention": {
+          "present": false,
+          "reasonableness": null,
+          "reason": "没有主动证据不足拒答；execution_failed 属于协议执行失败，不能当作合理拒答。"
+        },
+        "partial_or_missing_delivery": [],
+        "factual_accuracy_scope": "只评估实际交付的正向技术事实；漏答单列为完整性缺口。无支持的全文否定不是已证实事实错误。",
+        "support_issue_count": 0,
+        "unsupported_exhaustive_absence_count": 0,
+        "scope_violation_count": 0,
+        "valid_answer_delivered": true,
+        "premature_supported_requirement_count": 0,
+        "unsupported_additional_assertion_count": 0
+      },
+      "change": {
+        "classification": "improved",
+        "reason": "保留已正确的型号对照，去除缺乏全文覆盖依据的peer否定；不是新的型号发现。",
+        "recovered_missing_core_facts": [],
+        "removed_supported_but_irrelevant_performance": false,
+        "removed_unsupported_assertions": 1
+      },
+      "sensitivity": {
+        "disputed_original_case": true,
+        "baseline_strict_acceptable": false,
+        "baseline_core_bounded_scope_acceptable": true,
+        "treatment_strict_acceptable": true,
+        "treatment_core_bounded_scope_acceptable": true,
+        "note": "core口径两组均有有效型号答案；strict差异来自附加句边界。"
+      },
+      "original_f2_assessment": {
+        "case_id": "rqv1-comparison-blip2-llava-language-model",
+        "case_sha256": "fc8136a03f7a3227fe0ea1be9c9a132b895f5ad39cf1870b2e6975332609685e",
+        "prediction_sha256": "81082f557b725429bea8a533f3207acd871c7f4d6ad8d0dc0b42b2113b928df3",
+        "assessor": "Codex AI assistant",
+        "assessed_at": "2026-10-08T12:37:51.854925Z",
+        "method": "ai_semantic_review",
+        "semantic_correct": false,
+        "comparison_rubric": {
+          "fact_accuracy": 2,
+          "difference_correctness": 2,
+          "evidence_grounding": 1,
+          "scope_completeness": 2
+        },
+        "notes": "OPT/FlanT5与LLaMA核心比较正确；额外声称整篇LLaVA没有BLIP-2底层LM信息，prepared片段不能证明整篇不存在，完整引用支持要求未满足。"
+      },
+      "dimension": "language_model",
+      "question": "Compare BLIP-2 and LLaVA (2304.08485v1) on language model using only the prepared corpus.",
+      "checked_reference_evidence_ids": [
+        "ev_9331722f1a47399ab173e624d02c6985",
+        "ev_ebe5ff3e83181708c609e82e314f4f59"
+      ],
+      "baseline_record_sha256": "716e6d6e42a1389f569579326780520a764c3dacc37b91733fc82099e55ee620",
+      "treatment_record_sha256": "e3e16717fca2bf9e5ac9760f417c0668bf0b12e68bae81c00ddc6c5eef529e3b",
+      "treatment_final_claims_checked": [
+        {
+          "claim_id": "claim_f4082c3f7c157cdec2a4aa4adc1df07d",
+          "paper_id": "blip-2-2301.12597v1",
+          "evidence_ids": [
+            "ev_9331722f1a47399ab173e624d02c6985",
+            "ev_234984c983953494ce28027dc2716acc",
+            "ev_e4829335e46c87be4cada6e262bdd856",
+            "ev_4825dfc97130014274b3be0682b0bffe"
+          ]
+        },
+        {
+          "claim_id": "claim_db950844ac4d1053469a1927fdcf6615",
+          "paper_id": "llava-2304.08485v1",
+          "evidence_ids": [
+            "ev_ebe5ff3e83181708c609e82e314f4f59",
+            "ev_5418ad7d89b668e2ce1dba87be8f7efd",
+            "ev_84b236a4049e358dd2a7dda5bddb4464"
+          ]
+        }
+      ],
+      "treatment_protocol_execution_failure": []
+    }
+  ],
+  "score_revision_note": {
+    "revised_at": "2026-10-08T17:35:54.848706+00:00",
+    "previous_sha256": "47af69fda26202d171d1f9c3b39700d74f07135012fe62895e47ea37d4f9dd58",
+    "previous_artifact": "artifacts/quality-f3-1-comparison/independent_ai_review.pre_revision.json",
+    "case_id": "rqv1-comparison-blip2-flamingo-training-objective",
+    "field": "treatment_semantics.scores.factual_accuracy",
+    "previous_value": 2,
+    "revised_value": 1,
+    "reason": "上一版本给实际交付正向事实无保留满分，但同段存在原引文未明确支持的text encoder参数更新断言。仅基于prepared文本不能充分确认准确性，应记部分确认1；并非将未知更新状态认定为事实错误。",
+    "strict_semantic_correct_unchanged": true,
+    "strict_pass_count_unchanged": 4,
+    "original_f2_labels_modified": false,
+    "provider_calls": 0,
+    "revision_kind": "clarify_positive_assertion_factual_accuracy_uncertainty",
+    "strict_semantic_correct_before": false,
+    "strict_semantic_correct_after": false
+  }
+}

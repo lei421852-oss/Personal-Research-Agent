@@ -1,0 +1,112 @@
+{
+  "case_id": "rqv1-comparison-blip2-flamingo-frozen-trainable-scope",
+  "confirmed_before_final_json_failure": [
+    {
+      "provider_attempt": 4,
+      "actual_top_level_aspects": [
+        "training_stages"
+      ],
+      "missing_top_level_aspects": [
+        "frozen_modules",
+        "updated_modules"
+      ],
+      "unexpected_top_level_aspects": [],
+      "has_stage_details": true,
+      "reason": "Frozen coverage validator requires exact top-level aspect set, separately from each stage."
+    },
+    {
+      "provider_attempt": 5,
+      "actual_top_level_aspects": [
+        "stage1_frozen_modules",
+        "stage1_updated_modules",
+        "stage2_frozen_modules",
+        "stage2_updated_modules",
+        "training_stages"
+      ],
+      "missing_top_level_aspects": [
+        "frozen_modules",
+        "updated_modules"
+      ],
+      "unexpected_top_level_aspects": [
+        "stage1_frozen_modules",
+        "stage1_updated_modules",
+        "stage2_frozen_modules",
+        "stage2_updated_modules"
+      ],
+      "has_stage_details": false,
+      "reason": "Frozen coverage validator requires exact top-level aspect set, separately from each stage."
+    },
+    {
+      "provider_attempt": 6,
+      "actual_top_level_aspects": [
+        "training_stages"
+      ],
+      "missing_top_level_aspects": [
+        "frozen_modules",
+        "updated_modules"
+      ],
+      "unexpected_top_level_aspects": [],
+      "has_stage_details": true,
+      "reason": "Frozen coverage validator requires exact top-level aspect set, separately from each stage."
+    },
+    {
+      "provider_attempt": 7,
+      "actual_top_level_aspects": [
+        "training_stages"
+      ],
+      "missing_top_level_aspects": [
+        "frozen_modules",
+        "updated_modules"
+      ],
+      "unexpected_top_level_aspects": [],
+      "has_stage_details": true,
+      "reason": "Frozen coverage validator requires exact top-level aspect set, separately from each stage."
+    },
+    {
+      "provider_attempt": 8,
+      "actual_top_level_aspects": [
+        "training_stages"
+      ],
+      "missing_top_level_aspects": [
+        "frozen_modules",
+        "updated_modules"
+      ],
+      "unexpected_top_level_aspects": [],
+      "has_stage_details": true,
+      "reason": "Frozen coverage validator requires exact top-level aspect set, separately from each stage."
+    },
+    {
+      "provider_attempt": 9,
+      "actual_top_level_aspects": [
+        "training_stages"
+      ],
+      "missing_top_level_aspects": [
+        "frozen_modules",
+        "updated_modules"
+      ],
+      "unexpected_top_level_aspects": [],
+      "has_stage_details": true,
+      "reason": "Frozen coverage validator requires exact top-level aspect set, separately from each stage."
+    }
+  ],
+  "final_error": {
+    "code": "dependency_failure",
+    "message": "Worker dependency call failed after its permitted attempts.",
+    "requirement_ids": [
+      "req_cbbd4eeb305e2c8c829b7e2bd2729cb9"
+    ],
+    "details": {
+      "phase": "async_dependency",
+      "error_type": "JSONDecodeError",
+      "message": "Provider tool arguments are not valid JSON.",
+      "hint": "Inspect public tool-call format; raw model output is not retained.",
+      "classification": "permanent",
+      "retry_exhausted": false,
+      "attempts": 1,
+      "retry_count": 0
+    }
+  },
+  "hypothesis": "Complex nested coverage plus generic feedback may have contributed to repeated correction attempts; causal link to malformed final JSON is unverified.",
+  "raw_malformed_json_saved": false,
+  "provider_calls_for_this_diagnosis": 0
+}

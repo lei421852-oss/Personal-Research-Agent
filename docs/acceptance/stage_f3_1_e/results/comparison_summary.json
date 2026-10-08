@@ -1,0 +1,347 @@
+{
+  "case_count": 7,
+  "treatment_execution_count": 7,
+  "assessment_count": 7,
+  "change_counts": {
+    "degraded": 2,
+    "improved": 5,
+    "not_comparable": 0,
+    "unchanged": 0
+  },
+  "original_f2_quality": {
+    "numerator": 0,
+    "denominator": 7,
+    "value": 0.0
+  },
+  "treatment_quality": {
+    "numerator": 4,
+    "denominator": 7,
+    "value": 0.5714285714285714
+  },
+  "baseline_semantics": {
+    "six_dimension_scores": {
+      "factual_accuracy": {
+        "mean": 2.0,
+        "assessed_cases": 7
+      },
+      "evidence_support": {
+        "mean": 1.2857142857142858,
+        "assessed_cases": 7
+      },
+      "requirement_completeness": {
+        "mean": 1.4285714285714286,
+        "assessed_cases": 7
+      },
+      "comparison_quality": {
+        "mean": 1.4285714285714286,
+        "assessed_cases": 7
+      },
+      "scope_compliance": {
+        "mean": 1.0,
+        "assessed_cases": 7
+      },
+      "abstention_reasonableness": {
+        "mean": null,
+        "assessed_cases": 0
+      }
+    },
+    "semantic_counts": {
+      "unsupported_additional_assertions": {
+        "total": 5,
+        "assessed_cases": 7
+      },
+      "evidence_boundary_violations": {
+        "total": 5,
+        "assessed_cases": 7
+      },
+      "premature_supported": {
+        "total": 5,
+        "assessed_cases": 7
+      }
+    },
+    "effective_answer_rate": {
+      "numerator": 3,
+      "denominator": 7,
+      "value": 0.42857142857142855
+    },
+    "reasonable_abstention_rate": {
+      "numerator": 0,
+      "denominator": 0,
+      "value": null
+    },
+    "independent_semantic_completeness": {
+      "numerator": 9,
+      "denominator": 14,
+      "value": 0.6428571428571429
+    },
+    "provenance": "AI-assisted semantic judgments supplied separately; not human Gold."
+  },
+  "treatment_semantics": {
+    "six_dimension_scores": {
+      "factual_accuracy": {
+        "mean": 1.8571428571428572,
+        "assessed_cases": 7
+      },
+      "evidence_support": {
+        "mean": 1.8571428571428572,
+        "assessed_cases": 7
+      },
+      "requirement_completeness": {
+        "mean": 1.5714285714285714,
+        "assessed_cases": 7
+      },
+      "comparison_quality": {
+        "mean": 1.4285714285714286,
+        "assessed_cases": 7
+      },
+      "scope_compliance": {
+        "mean": 2.0,
+        "assessed_cases": 7
+      },
+      "abstention_reasonableness": {
+        "mean": null,
+        "assessed_cases": 0
+      }
+    },
+    "semantic_counts": {
+      "unsupported_additional_assertions": {
+        "total": 1,
+        "assessed_cases": 7
+      },
+      "evidence_boundary_violations": {
+        "total": 1,
+        "assessed_cases": 7
+      },
+      "premature_supported": {
+        "total": 2,
+        "assessed_cases": 7
+      }
+    },
+    "effective_answer_rate": {
+      "numerator": 4,
+      "denominator": 7,
+      "value": 0.5714285714285714
+    },
+    "reasonable_abstention_rate": {
+      "numerator": 0,
+      "denominator": 0,
+      "value": null
+    },
+    "independent_semantic_completeness": {
+      "numerator": 11,
+      "denominator": 14,
+      "value": 0.7857142857142857
+    },
+    "provenance": "AI-assisted semantic judgments supplied separately; not human Gold."
+  },
+  "structured_complete_requirements": {
+    "numerator": 13,
+    "denominator": 14,
+    "value": 0.9285714285714286
+  },
+  "missing_coverage_requirement_count": 0,
+  "operational_counts": {
+    "missing_treatment_executions": 0,
+    "missing_predictions": 0,
+    "infrastructure_failure_cases": 0,
+    "output_protocol_failure_cases": 1,
+    "unknown_dependency_failure_cases": 0,
+    "execution_failed_cases": 1,
+    "new_insufficient_requirements": 0
+  },
+  "baseline_cost": {
+    "model_calls": {
+      "total": 85,
+      "recorded_cases": 7,
+      "missing_cases": 0
+    },
+    "tool_calls": {
+      "total": 26,
+      "recorded_cases": 7,
+      "missing_cases": 0
+    },
+    "latency_ms": {
+      "total": 93528.10908501851,
+      "recorded_cases": 7,
+      "missing_cases": 0
+    },
+    "provider_attempts": {
+      "total": 85,
+      "recorded_cases": 7,
+      "missing_cases": 0
+    }
+  },
+  "treatment_cost": {
+    "model_calls": {
+      "total": 101,
+      "recorded_cases": 7,
+      "missing_cases": 0
+    },
+    "tool_calls": {
+      "total": 29,
+      "recorded_cases": 7,
+      "missing_cases": 0
+    },
+    "latency_ms": {
+      "total": 160708.70358499815,
+      "recorded_cases": 7,
+      "missing_cases": 0
+    },
+    "provider_attempts": {
+      "total": 101,
+      "recorded_cases": 7,
+      "missing_cases": 0
+    }
+  },
+  "cost_change": {
+    "model_calls": {
+      "paired_cases": 7,
+      "baseline_total": 85,
+      "treatment_total": 101,
+      "delta": 16,
+      "ratio": 1.188235294117647
+    },
+    "tool_calls": {
+      "paired_cases": 7,
+      "baseline_total": 26,
+      "treatment_total": 29,
+      "delta": 3,
+      "ratio": 1.1153846153846154
+    },
+    "latency_ms": {
+      "paired_cases": 7,
+      "baseline_total": 93528.10908501851,
+      "treatment_total": 160708.70358499815,
+      "delta": 67180.59449997963,
+      "ratio": 1.7182930902506692
+    },
+    "provider_attempts": {
+      "paired_cases": 7,
+      "baseline_total": 85,
+      "treatment_total": 101,
+      "delta": 16,
+      "ratio": 1.188235294117647
+    }
+  },
+  "scope": "Seven known failure cases are diagnostic data, not a generalization benchmark.",
+  "quality_semantics": "covered, Reviewer passed and insufficient_evidence do not by themselves imply semantic success; execution_failed is not reasonable abstention.",
+  "independent_ai_review": {
+    "case_count": 7,
+    "known_failure_diagnostic_set": true,
+    "formal_treatment_only": true,
+    "original_f2_false_labels_preserved": 7,
+    "strict_semantic_correct": {
+      "baseline": 0,
+      "treatment": 4,
+      "denominator": 7
+    },
+    "core_bounded_scope_sensitivity": {
+      "baseline": 3,
+      "treatment": 4,
+      "denominator": 7,
+      "original_labels_modified": false
+    },
+    "quality_change": {
+      "improved": 5,
+      "unchanged": 0,
+      "degraded_or_mixed_loss": 2,
+      "note": "第2题只是部分改善；第3/4题也有范围或Flamingo细节改善，但新缺失/执行失败使主要交付质量下降。"
+    },
+    "structural_complete_requirements": {
+      "treatment": 13,
+      "denominator": 14
+    },
+    "independent_reference_semantic_complete_requirements": {
+      "baseline": 9,
+      "treatment": 11,
+      "denominator": 14,
+      "basis": "原prepared-reference必要事实是否交付；不是covered、passed或有引文的同义指标。"
+    },
+    "support_boundary_issue_counts": {
+      "baseline_semantics": 5,
+      "treatment_semantics": 1
+    },
+    "unsupported_exhaustive_absence_counts": {
+      "baseline_semantics": 3,
+      "treatment_semantics": 0
+    },
+    "premature_supported_requirement_counts": {
+      "baseline_semantics": 5,
+      "treatment_semantics": 2
+    },
+    "new_execution_failed_requirements": 1,
+    "api_connection_failure_cases": 0,
+    "active_insufficient_evidence_abstentions": 0,
+    "new_unverified_assertions": 1,
+    "conclusion": "范围边界与若干核心覆盖显著改善，但语言接口仍过早完成、训练损失反而丢失、一个Worker协议失败；存在明确质量权衡，不支持直接宣称F3.1全面成功或推广到未知90题/泛化数据。",
+    "support_boundary_issue_breakdown": {
+      "peer_fact_without_local_citation": {
+        "baseline": 1,
+        "treatment": 0
+      },
+      "unsupported_exhaustive_absence": {
+        "baseline": 3,
+        "treatment": 0
+      },
+      "unproven_exclusive_trainable_scope": {
+        "baseline": 1,
+        "treatment": 0
+      },
+      "unverified_optimization_target_inference": {
+        "baseline": 0,
+        "treatment": 1
+      },
+      "proven_false_technical_propositions": {
+        "baseline": 0,
+        "treatment": 0,
+        "note": "支持不足/遗漏/失败不等于证明技术命题为假。"
+      }
+    },
+    "irrelevant_source_supported_performance_claims": {
+      "baseline": 5,
+      "treatment": 0,
+      "count_unit": "每题BLIP-2的一组8.7%/54x附加比较合计一个；数字本身有来源，非幻觉。"
+    },
+    "valid_core_comparison_delivered": {
+      "baseline": 3,
+      "treatment": 4,
+      "denominator": 7,
+      "strict_scope_and_support_required": false
+    },
+    "scope_violation_assertion_counts": {
+      "baseline_semantics": 8,
+      "treatment_semantics": 0
+    }
+  },
+  "semantic_protocol": {
+    "assessor": "Codex AI assistant, independent subagent review",
+    "method": "read-only source-backed AI semantic adjudication",
+    "assessed_at": "2026-10-08T17:26:59.905255+00:00",
+    "provider_calls": 0,
+    "human_assessments": 0,
+    "blind_review": false,
+    "references_used_after_execution_only": true,
+    "production_reviewer_used_as_gold": false,
+    "structured_covered_used_as_gold": false,
+    "raw_model_hidden_reasoning_used": false,
+    "source_of_facts": "actual cited prepared evidence plus original reference source quotes; no model knowledge",
+    "score_scale": {
+      "0": "任务内容未提供或不可用",
+      "1": "局部覆盖/支持不足或缺重要事实",
+      "2": "所评维度可接受",
+      "null": "当前不适用或不可判定"
+    },
+    "overall_not_score_threshold": true,
+    "original_four_axis_mapping": "沿用F2 rubric语义口径：fact_accuracy/difference_correctness也考虑所请求事实的完整交付，六维factual_accuracy单列交付正向事实正确性。",
+    "core_bounded_scope_sensitivity_definition": "只判断请求的核心事实是否完整正确，附加句问题另列；不是编辑输出、放行附加断言或修改F2标签。",
+    "limitations": [
+      "已知失败集，非盲评；AI审核参考加AI语义判断，不是独立人工Gold。",
+      "正文引文未明确BERT更新不等于BERT事实上冻结，只记支持不足。",
+      "FC投影用途不能证明FC训练状态。",
+      "附加文本无支持不等于命题已被证伪。",
+      "有效交付与事实准确性、完整性、范围合规性分别判断；execution_failed不是合理拒答。"
+    ],
+    "count_unit": "按逐题实际最终Claim中的附加命题/原文风险分组，不按引文数量或词出现次数计算；强否定没有支持也不被称为已证伪事实。"
+  },
+  "source_independent_review_sha256": "89c93b01d89d1696390fd9e385325c701dd27800a598053735bc8713025bcc08"
+}
