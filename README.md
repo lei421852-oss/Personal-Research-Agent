@@ -12,7 +12,7 @@
 | **Understand · 读图** | 将 Figure、caption 与已准备的页面文本一起交给 VLM，分开记录观察与解释 |
 | **Decide · 选动作** | 模型看到每轮 Observation 后，自主选择工具、补充上下文或调用 `finish` |
 
-**当前规模：25 篇论文发现元数据；其中 3 篇具备 25 条 TextEvidence、3 条 FigureEvidence。V0.1 冻结评测集仍为 40 题。** V0.1 基线为 **257 passed**；当前全量 **646 passed**（2026-10-08）。真实 Demo 与模拟验证分别标记；完整三系统正式比较尚未完成。
+**当前规模：25 篇论文发现元数据；其中 3 篇具备 25 条 TextEvidence、3 条 FigureEvidence。V0.1 冻结评测集仍为 40 题。** V0.1 基线为 **257 passed**；当前全量 **703 passed**（2026-10-08）。真实 Demo 与模拟验证分别标记；完整三系统正式比较尚未完成。
 
 快速阅读：[架构](#系统架构) · [三个-demo](#三个-demo) · [失败分析](#失败分析) · [快速开始](#快速开始) · [限制](#当前限制)
 
@@ -88,15 +88,23 @@ Worker 按需求记录候选证据、逻辑搜索次数和最后新增数，显�
 
 `DeterministicReviewValidator → EvidenceReviewer → ReviewResult` 先验证结构、当前 Corpus 身份、同论文来源和 Worker 观察账本，再审核完整 claim 的语义支持。Reviewer 没有研究工具，不改 claim、不搜索、不生成跨论文答案。审核以固定数量消费者与独立 Reviewer/LLM 配额执行；语义 rejected 不重试，Provider 失败保持 typed not_reviewable；不足和执行失败跳过模型。
 
-Stage A 新增 21 项、Stage B 新增 69 项确定性测试。一次真实审核中，Flamingo 5 项 passed、5 次模型调用、0 重试；BLIP-2/LLaVA 10 项 insufficient 全部跳过，0 Reviewer 调用。此结果只验证工程链路，不是模型正确率 Benchmark；现有 API/UI 未接入审核，也没有 Reviewer→Worker 恢复。独立综合由下文 Stage C 提供。详见 [审核架构、契约与运行方式](docs/evidence-review.md)。
+Stage A 新增 21 项、Stage B 新增 69 项确定性测试。一次真实审核中，Flamingo 5 项 passed、5 次模型调用、0 重试；BLIP-2/LLaVA 10 项 insufficient 全部跳过，0 Reviewer 调用。此结果只验证工程链路，不是模型正确率 Benchmark；现有 API/UI 未接入审核。该阶段尚无恢复，后续综合/恢复分别见 Stage C/D。详见 [审核架构、契约与运行方式](docs/evidence-review.md)。
 
 ## 严格证据驱动的结构化综合报告
 
 Stage C 增加 `ResearchPlan → WorkerResult → ReviewResult → SynthesisInput → ResearchReport`。只将验证通过且审核 passed 的原主张交给模型组织章节与合法引用，正文、来源和完整 Paper × Dimension 缺失矩阵由程序组装。被拒绝正文不进入事实上下文；重复审核返回结构化错误，不任意选择 passed。
 
-模型/协议/预算失败时保留最小确定性报告，明确标为 generation_degraded；无已审核证据是合法不足报告，不调用 Provider；取消保持 cancelled 并传播。第一版不生成自由技术摘要或未经审核的胜负/等价关系，比较仅为同维度已验证主张并列，没有新研究循环、API/UI 接入或 Reviewer→Worker 恢复。
+模型/协议/预算失败时保留最小确定性报告，明确标为 generation_degraded；无已审核证据是合法不足报告，不调用 Provider；取消保持 cancelled 并传播。第一版不生成自由技术摘要或未经审核的胜负/等价关系，比较仅为同维度已验证主张并列。Stage C 本身不启动研究循环、API/UI 或审核恢复；一次恢复由下文独立 Stage D 提供。
 
 复用 Stage A/B 的一次真实综合：3 篇×5维度、5 条 Flamingo 原主张、10 个不足单元；1 次模型调用、0纠正/重试，约10.49秒。生成成功率1/1，但 EvidenceCoverage仅5/15。同一输入的受控 Fake 引文违规演示被单独标记，预算耗尽后保留5条事实及10个缺失格。新增64项测试，原582项保留。详见 [综合契约、指标与运行方式](docs/research-synthesis.md)。
+
+## 审核反馈驱动的一次恢复
+
+Stage D 仅恢复明确rejected、有有效反馈且存在Prepared Evidence的需求，同论文目标合并交给原Worker Pool。Worker使用已观察旧证据缩小claim或定向检索；再次审核通过后才能成为最终事实。初始通过项不改，失败、取消、再次拒绝分别保留；历史与最终唯一活动状态分离。恢复不足只进入历史，不把原审核拒绝改写成普通不足。
+
+max_recovery_rounds固定1，完整请求模型/工具预算先分配给恢复Worker、再次Reviewer和可选原Synthesis，重试消耗原预算。最小Worker补丁保留正常模式；没有新研究循环、语料扩展或API/UI接入。
+
+受控初始Flamingo拒绝下的一次真实运行：旧证据缩小主张、再次审核passed，Worker/Reviewer/原Synthesis各1模型调用，0新增工具，约27.57秒，4个初始通过项保持，最终5verified/10insufficient。Fake再次拒绝和无语料跳过分开标记，均0真实Provider调用；这些是工程验证，不是自然恢复成功率。新增57项测试，原646项保留。详见 [恢复契约、预算和合并规则](docs/research-recovery.md)。
 
 ## 为什么做这个项目？
 

@@ -166,6 +166,7 @@ class PaperResearchWorker:
         config: ResearchRuntimeConfig | None = None,
         *,
         paper_catalog=None,
+        recovery_context=None,
         clock=perf_counter,
     ):
         if llm_adapter.resource_gate is not tool_adapter.resource_gate:
@@ -173,6 +174,7 @@ class PaperResearchWorker:
         self.llm, self.tools, self.resolver = llm_adapter, tool_adapter, resolver
         self.config = config or llm_adapter.resource_gate.config
         self.paper_catalog, self.clock = paper_catalog, clock
+        self.recovery_context = recovery_context
         self.last_result: WorkerResult | None = None
         self.state: WorkerState | None = None
         self._running = False
@@ -199,6 +201,59 @@ class PaperResearchWorker:
             + tools["retried_dependency_calls"]
             - self._tool_base["retried_dependency_calls"],
         }
+
+    def _budget_limits(self):
+        models, tools = (
+            self.config.max_model_calls_per_worker,
+            self.config.max_tool_calls_per_worker,
+        )
+        if self.recovery_context is not None:
+            models = min(models, self.recovery_context.remaining_budget.model_calls)
+            tools = min(tools, self.recovery_context.remaining_budget.tool_calls)
+        return models, tools
+
+    def _seed_recovery(self, task):
+        # 恢复只接受经绑定的拒绝快照；不是通用 Resume，也不恢复已通过需求。
+        from app.research.recovery_models import RecoveryTask
+
+        recovery = RecoveryTask.model_validate(
+            self.recovery_context.model_dump(mode="python", warnings=False)
+        )
+        if recovery.worker_task().model_dump() != task.model_dump():
+            raise ValueError("Recovery context differs from the exact target task")
+        self.recovery_context = recovery
+        texts, figures = [], []
+        for identity in dict.fromkeys(
+            e for f in recovery.reviewer_feedback for e in f.prior_evidence_ids
+        ):
+            item = self.resolver.resolve(identity)
+            record = {
+                "evidence_id": identity,
+                "paper_id": item.paper_id,
+                "page": item.page,
+                "text": item.text,
+            }
+            if isinstance(item, FigureEvidence):
+                record.update(
+                    figure_id=item.figure_id,
+                    caption=item.caption,
+                    asset_ref=f"asset:{identity}",
+                )
+                figures.append(record)
+            else:
+                texts.append(record)
+        self._collect_checked(
+            ToolObservation(
+                status="success",
+                tool_name="recovery_prior_evidence",
+                summary="Trusted prior observed evidence restored for rejected targets only.",
+                payload={"evidence": texts, "figures": figures},
+            )
+        )
+        for feedback in recovery.reviewer_feedback:
+            self.state.requirement_research[
+                feedback.requirement_id
+            ].candidate_evidence_ids = list(feedback.prior_evidence_ids)
 
     def _schemas(self):
         schemas = [
@@ -243,7 +298,7 @@ class PaperResearchWorker:
             ),
             None,
         )
-        return {
+        context = {
             "paper_id": state.paper_id,
             "paper_evidence_available": availability,
             "candidate_evidence_semantics": "Candidate evidence records investigation provenance only. Policy must judge support and explicitly resolve requirements before retrieving more evidence.",
@@ -294,14 +349,28 @@ class PaperResearchWorker:
                 compact_value(o.model_dump(mode="json")) for o in state.observations
             ],
             "remaining_budget": {
-                "tool_calls": self.config.max_tool_calls_per_worker
-                - counts["tool_calls"],
-                "model_calls": self.config.max_model_calls_per_worker
-                - counts["model_calls"],
+                "tool_calls": self._budget_limits()[1] - counts["tool_calls"],
+                "model_calls": self._budget_limits()[0] - counts["model_calls"],
                 "protocol_corrections": self.config.max_protocol_corrections
                 - state.protocol_corrections_used,
             },
         }
+        if self.recovery_context is not None:
+            recovery = self.recovery_context
+            context["recovery"] = {
+                "attempt_index": recovery.attempt_index,
+                "target_requirement_ids": recovery.target_requirement_ids,
+                "rejected_requirements": [
+                    r.model_dump(mode="json")
+                    for r in recovery.prior_worker_result.requirements
+                    if r.requirement_id in recovery.target_requirement_ids
+                ],
+                "reviewer_feedback": [
+                    f.model_dump(mode="json") for f in recovery.reviewer_feedback
+                ],
+                "instruction": "The prior claims were rejected, not verified facts. Narrow/correct them using observed evidence or investigate the specific gap. Do not resubmit an unchanged claim with unchanged citations. Explicitly resolve only these targets; every new supported claim needs re-review.",
+            }
+        return context
 
     def _remember(self, observation):
         self.state.observations.append(observation)
@@ -440,6 +509,18 @@ class PaperResearchWorker:
                 original.model_dump() | resolution.model_dump()
             )
             if item.status == RequirementStatus.SUPPORTED:
+                if self.recovery_context is not None:
+                    prior = next(
+                        r
+                        for r in self.recovery_context.prior_worker_result.requirements
+                        if r.requirement_id == item.requirement_id
+                    )
+                    if item.claim == prior.claim and set(item.evidence_ids) == set(
+                        prior.evidence_ids
+                    ):
+                        raise ValueError(
+                            "Unchanged rejected claim and citations cannot be directly resubmitted"
+                        )
                 CitationValidator().validate(
                     item.evidence_ids, list(self.state.collected_evidence)
                 )
@@ -548,6 +629,18 @@ class PaperResearchWorker:
         self._llm_base, self._tool_base = self.llm.snapshot(), self.tools.snapshot()
         started = self.clock()
         try:
+            if self.recovery_context is not None:
+                try:
+                    self._seed_recovery(task)
+                except (ValueError, TypeError, AttributeError, KeyError):
+                    return self._result(
+                        task,
+                        started,
+                        error=WorkerError(
+                            code="invalid_recovery_context",
+                            message="Recovery target or prior evidence binding is invalid.",
+                        ),
+                    )
             if task.paper_id not in self.resolver.paper_ids:
                 return self._result(
                     task,
@@ -577,10 +670,7 @@ class PaperResearchWorker:
             while any(
                 r.status == RequirementStatus.PENDING for r in self.state.requirements
             ):
-                remaining = (
-                    self.config.max_model_calls_per_worker
-                    - self._counts()["model_calls"]
-                )
+                remaining = self._budget_limits()[0] - self._counts()["model_calls"]
                 if remaining <= 0:
                     return self._result(
                         task,
@@ -593,7 +683,15 @@ class PaperResearchWorker:
                 decision_started = self.clock()
                 response = await self.llm.complete(
                     messages=[
-                        {"role": "system", "content": WORKER_POLICY},
+                        {
+                            "role": "system",
+                            "content": WORKER_POLICY
+                            + (
+                                "\nUse recovery feedback to correct rejected claims. Prior claims are hypotheses, not verified facts. Resolve only the pending targets; never restore an unchanged rejected claim with the same citations."
+                                if self.recovery_context is not None
+                                else ""
+                            ),
+                        },
                         {
                             "role": "user",
                             "content": json.dumps(
@@ -696,13 +794,12 @@ class PaperResearchWorker:
                             )
                         else:
                             budget = (
-                                self.config.max_tool_calls_per_worker
-                                - self._counts()["tool_calls"]
+                                self._budget_limits()[1] - self._counts()["tool_calls"]
                             )
                             if action.name == "analyze_figure":
                                 budget = min(
                                     budget,
-                                    self.config.max_model_calls_per_worker
+                                    self._budget_limits()[0]
                                     - self._counts()["model_calls"],
                                 )
                             if budget <= 0:
