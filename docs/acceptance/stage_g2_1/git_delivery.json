@@ -1,0 +1,15 @@
+{
+  "branch": "fix/stage-g2-1-worker-protocol",
+  "execution_head": "2fa15eab8716994ce3f7c32e57c65cc9b345de94",
+  "preceding_commits": [
+    {
+      "sha": "19a8199ed55dae5db7aa8ab674d2d7dd134700f7"
+    },
+    {
+      "sha": "2fa15eab8716994ce3f7c32e57c65cc9b345de94"
+    }
+  ],
+  "final_commit_message": "docs: record single worker protocol validation",
+  "self_reference_note": "承载本记录的最终SHA由Git和外部交付清单记录。",
+  "remote_operations": 0
+}

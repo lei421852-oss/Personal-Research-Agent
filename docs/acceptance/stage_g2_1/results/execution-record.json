@@ -1,0 +1,1866 @@
+{
+  "full_execution_sha256": "676652cf760df8a80926a8b470c6cd63f631642412c73be052f013a4dd2208df",
+  "retrievals_sha256": "1712af6aa8b30e7e9db80c5eb5655ab774151bfe5f35ce2fbaacffa4329aebf1",
+  "preparation": {
+    "plan": {
+      "dimensions": [
+        {
+          "dimension_id": "blip2_qformer_mechanism",
+          "name": "BLIP-2 Q-Former mechanism and visual-language interface",
+          "description": "Investigate the mechanism the user attributes to BLIP-2: how the Q-Former produces a visual-language interface between a frozen visual encoder and a language model. Look for the architectural description and the ablation comparisons supporting each design choice.",
+          "research_question": "In this paper, how is the Q-Former designed as an interface between the vision encoder and the language model, and how does it extract and reformulate visual features for the language model?"
+        },
+        {
+          "dimension_id": "blip2_language_transfer_path",
+          "name": "BLIP-2 path from visual features into the language model",
+          "description": "Determine how (and with what text conditioning, if any) the query-based interface's output is passed into the language model, and what the paper states about what the language model receives as input. Fall back to an explicit evidence gap where unspecified.",
+          "research_question": "In this paper, what does the language model receive from the Q-Former output, and through what input pathway are the visual features transferred to the language model during training and inference?"
+        },
+        {
+          "dimension_id": "blip2_training_objectives",
+          "name": "BLIP-2 training-stage objectives of the interface",
+          "description": "Investigate any staged training of the visual-language interface and the representations learned by the queries during those stages, exactly as stated or omitted in the paper. Do not assume a particular number or type of stages.",
+          "research_question": "In this paper, which training objectives (if any) are used to train the Q-Former and the visual-language interface, and what do the queries learn to represent at each training stage described?"
+        },
+        {
+          "dimension_id": "flamingo_perceiver_resampler",
+          "name": "Flamingo Perceiver Resampler and visual feature aggregation",
+          "description": "Investigate the mechanism the user attributes to Flamingo: how the Perceiver Resampler aggregates variable numbers of visual features into a fixed set of outputs before they reach the language model.",
+          "research_question": "In this paper, how does the Perceiver Resampler reduce a variable number of visual features into a fixed number of outputs, and what role do learnable latent queries play in this aggregation?"
+        },
+        {
+          "dimension_id": "flamingo_gated_cross_attention",
+          "name": "Flamingo gated cross-attention insertion into the language model",
+          "description": "Investigate how the resampled visual features are injected into the language model through gated cross-attention: where the layers are inserted, how attention is configured, and how the gates are initialized and trained, as stated in the paper.",
+          "research_question": "In this paper, how are gated cross-attention layers added to the language model to condition it on the resampled visual features, and how are the gating and initialization of those layers described?"
+        },
+        {
+          "dimension_id": "flamingo_architecture_freeze",
+          "name": "Flamingo component training and freezing arrangement",
+          "description": "Investigate which components the paper states are frozen or trainable when visual conditioning is added, and any stated rationale. Ask whether freezing occurs rather than assuming it does.",
+          "research_question": "In this paper, which model components are frozen versus trained when the visual-language connection is added, and what rationale does the paper give for this arrangement?"
+        },
+        {
+          "dimension_id": "interaction_difference",
+          "name": "Differences in visual-language interaction behavior",
+          "description": "Compare the two mechanism types on the dimension the user asks about: the nature of the interaction and its cost. Use only each paper's own descriptions to characterize them, rather than importing external assumptions.",
+          "research_question": "In this paper, how is the visual-language interaction characterized—bidirectionally through a querying module, or additively through cross-attention—and what compute cost, structural changes to the language model, and number of newly trained parameters does the paper report for that interaction?"
+        }
+      ],
+      "question": "Compare the visual-language connection mechanisms in BLIP-2 and Flamingo. Explain how each paper transfers visual features into its language model, covering BLIP-2's Q-Former and visual-language interface, and Flamingo's Perceiver Resampler and gated cross-attention. Identify the main differences in visual-language interaction, and cite prepared paper evidence for each finding. Mark unsupported details as evidence gaps.",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "flamingo-2204.14198v1"
+      ]
+    },
+    "requirements": [
+      {
+        "requirement_id": "req_e19ea943240204a26cb56cbb87c94ce0",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "blip2_qformer_mechanism",
+        "question": "In this paper, how is the Q-Former designed as an interface between the vision encoder and the language model, and how does it extract and reformulate visual features for the language model?",
+        "required": true,
+        "status": "pending",
+        "claim": null,
+        "evidence_ids": []
+      },
+      {
+        "requirement_id": "req_64aab1b7787c2b237ec6d8cc2f3c1eb0",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "blip2_language_transfer_path",
+        "question": "In this paper, what does the language model receive from the Q-Former output, and through what input pathway are the visual features transferred to the language model during training and inference?",
+        "required": true,
+        "status": "pending",
+        "claim": null,
+        "evidence_ids": []
+      },
+      {
+        "requirement_id": "req_d92d50b90f7369f8728705f60572f512",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "blip2_training_objectives",
+        "question": "In this paper, which training objectives (if any) are used to train the Q-Former and the visual-language interface, and what do the queries learn to represent at each training stage described?",
+        "required": true,
+        "status": "pending",
+        "claim": null,
+        "evidence_ids": []
+      },
+      {
+        "requirement_id": "req_0f10028e54f726d1be066c1f6b805b92",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "flamingo_perceiver_resampler",
+        "question": "In this paper, how does the Perceiver Resampler reduce a variable number of visual features into a fixed number of outputs, and what role do learnable latent queries play in this aggregation?",
+        "required": true,
+        "status": "pending",
+        "claim": null,
+        "evidence_ids": []
+      },
+      {
+        "requirement_id": "req_488d6ef7f53c8b23b39b348b7ae81a72",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "flamingo_gated_cross_attention",
+        "question": "In this paper, how are gated cross-attention layers added to the language model to condition it on the resampled visual features, and how are the gating and initialization of those layers described?",
+        "required": true,
+        "status": "pending",
+        "claim": null,
+        "evidence_ids": []
+      },
+      {
+        "requirement_id": "req_5ea4dbb5caf92b23846abfcba93c13cd",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "flamingo_architecture_freeze",
+        "question": "In this paper, which model components are frozen versus trained when the visual-language connection is added, and what rationale does the paper give for this arrangement?",
+        "required": true,
+        "status": "pending",
+        "claim": null,
+        "evidence_ids": []
+      },
+      {
+        "requirement_id": "req_fdf49c34db1de272c3a0807c6de25405",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "interaction_difference",
+        "question": "In this paper, how is the visual-language interaction characterized—bidirectionally through a querying module, or additively through cross-attention—and what compute cost, structural changes to the language model, and number of newly trained parameters does the paper report for that interaction?",
+        "required": true,
+        "status": "pending",
+        "claim": null,
+        "evidence_ids": []
+      },
+      {
+        "requirement_id": "req_472304b624f534754f88a7a1ce8df1ca",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "blip2_qformer_mechanism",
+        "question": "In this paper, how is the Q-Former designed as an interface between the vision encoder and the language model, and how does it extract and reformulate visual features for the language model?",
+        "required": true,
+        "status": "pending",
+        "claim": null,
+        "evidence_ids": []
+      },
+      {
+        "requirement_id": "req_9640a28c422eede971e8bb1150400a35",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "blip2_language_transfer_path",
+        "question": "In this paper, what does the language model receive from the Q-Former output, and through what input pathway are the visual features transferred to the language model during training and inference?",
+        "required": true,
+        "status": "pending",
+        "claim": null,
+        "evidence_ids": []
+      },
+      {
+        "requirement_id": "req_06063a5ddc0e2564ae49b3ba7bb8292f",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "blip2_training_objectives",
+        "question": "In this paper, which training objectives (if any) are used to train the Q-Former and the visual-language interface, and what do the queries learn to represent at each training stage described?",
+        "required": true,
+        "status": "pending",
+        "claim": null,
+        "evidence_ids": []
+      },
+      {
+        "requirement_id": "req_2f68888fa1d7cc279e07413a66bb28c1",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "flamingo_perceiver_resampler",
+        "question": "In this paper, how does the Perceiver Resampler reduce a variable number of visual features into a fixed number of outputs, and what role do learnable latent queries play in this aggregation?",
+        "required": true,
+        "status": "pending",
+        "claim": null,
+        "evidence_ids": []
+      },
+      {
+        "requirement_id": "req_a67a1d796abb3f49bd724aa2f7acfe32",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "flamingo_gated_cross_attention",
+        "question": "In this paper, how are gated cross-attention layers added to the language model to condition it on the resampled visual features, and how are the gating and initialization of those layers described?",
+        "required": true,
+        "status": "pending",
+        "claim": null,
+        "evidence_ids": []
+      },
+      {
+        "requirement_id": "req_f10c07f2388998f46e381d5bfbf19ef9",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "flamingo_architecture_freeze",
+        "question": "In this paper, which model components are frozen versus trained when the visual-language connection is added, and what rationale does the paper give for this arrangement?",
+        "required": true,
+        "status": "pending",
+        "claim": null,
+        "evidence_ids": []
+      },
+      {
+        "requirement_id": "req_c58007dd9e860a4a249c61b2e1764eee",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "interaction_difference",
+        "question": "In this paper, how is the visual-language interaction characterized—bidirectionally through a querying module, or additively through cross-attention—and what compute cost, structural changes to the language model, and number of newly trained parameters does the paper report for that interaction?",
+        "required": true,
+        "status": "pending",
+        "claim": null,
+        "evidence_ids": []
+      }
+    ],
+    "worker_tasks": [
+      {
+        "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+        "paper_id": "blip-2-2301.12597v1",
+        "requirements": [
+          {
+            "requirement_id": "req_e19ea943240204a26cb56cbb87c94ce0",
+            "paper_id": "blip-2-2301.12597v1",
+            "dimension_id": "blip2_qformer_mechanism",
+            "question": "In this paper, how is the Q-Former designed as an interface between the vision encoder and the language model, and how does it extract and reformulate visual features for the language model?",
+            "required": true,
+            "status": "pending",
+            "claim": null,
+            "evidence_ids": []
+          },
+          {
+            "requirement_id": "req_64aab1b7787c2b237ec6d8cc2f3c1eb0",
+            "paper_id": "blip-2-2301.12597v1",
+            "dimension_id": "blip2_language_transfer_path",
+            "question": "In this paper, what does the language model receive from the Q-Former output, and through what input pathway are the visual features transferred to the language model during training and inference?",
+            "required": true,
+            "status": "pending",
+            "claim": null,
+            "evidence_ids": []
+          },
+          {
+            "requirement_id": "req_d92d50b90f7369f8728705f60572f512",
+            "paper_id": "blip-2-2301.12597v1",
+            "dimension_id": "blip2_training_objectives",
+            "question": "In this paper, which training objectives (if any) are used to train the Q-Former and the visual-language interface, and what do the queries learn to represent at each training stage described?",
+            "required": true,
+            "status": "pending",
+            "claim": null,
+            "evidence_ids": []
+          },
+          {
+            "requirement_id": "req_0f10028e54f726d1be066c1f6b805b92",
+            "paper_id": "blip-2-2301.12597v1",
+            "dimension_id": "flamingo_perceiver_resampler",
+            "question": "In this paper, how does the Perceiver Resampler reduce a variable number of visual features into a fixed number of outputs, and what role do learnable latent queries play in this aggregation?",
+            "required": true,
+            "status": "pending",
+            "claim": null,
+            "evidence_ids": []
+          },
+          {
+            "requirement_id": "req_488d6ef7f53c8b23b39b348b7ae81a72",
+            "paper_id": "blip-2-2301.12597v1",
+            "dimension_id": "flamingo_gated_cross_attention",
+            "question": "In this paper, how are gated cross-attention layers added to the language model to condition it on the resampled visual features, and how are the gating and initialization of those layers described?",
+            "required": true,
+            "status": "pending",
+            "claim": null,
+            "evidence_ids": []
+          },
+          {
+            "requirement_id": "req_5ea4dbb5caf92b23846abfcba93c13cd",
+            "paper_id": "blip-2-2301.12597v1",
+            "dimension_id": "flamingo_architecture_freeze",
+            "question": "In this paper, which model components are frozen versus trained when the visual-language connection is added, and what rationale does the paper give for this arrangement?",
+            "required": true,
+            "status": "pending",
+            "claim": null,
+            "evidence_ids": []
+          },
+          {
+            "requirement_id": "req_fdf49c34db1de272c3a0807c6de25405",
+            "paper_id": "blip-2-2301.12597v1",
+            "dimension_id": "interaction_difference",
+            "question": "In this paper, how is the visual-language interaction characterized—bidirectionally through a querying module, or additively through cross-attention—and what compute cost, structural changes to the language model, and number of newly trained parameters does the paper report for that interaction?",
+            "required": true,
+            "status": "pending",
+            "claim": null,
+            "evidence_ids": []
+          }
+        ]
+      },
+      {
+        "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+        "paper_id": "flamingo-2204.14198v1",
+        "requirements": [
+          {
+            "requirement_id": "req_472304b624f534754f88a7a1ce8df1ca",
+            "paper_id": "flamingo-2204.14198v1",
+            "dimension_id": "blip2_qformer_mechanism",
+            "question": "In this paper, how is the Q-Former designed as an interface between the vision encoder and the language model, and how does it extract and reformulate visual features for the language model?",
+            "required": true,
+            "status": "pending",
+            "claim": null,
+            "evidence_ids": []
+          },
+          {
+            "requirement_id": "req_9640a28c422eede971e8bb1150400a35",
+            "paper_id": "flamingo-2204.14198v1",
+            "dimension_id": "blip2_language_transfer_path",
+            "question": "In this paper, what does the language model receive from the Q-Former output, and through what input pathway are the visual features transferred to the language model during training and inference?",
+            "required": true,
+            "status": "pending",
+            "claim": null,
+            "evidence_ids": []
+          },
+          {
+            "requirement_id": "req_06063a5ddc0e2564ae49b3ba7bb8292f",
+            "paper_id": "flamingo-2204.14198v1",
+            "dimension_id": "blip2_training_objectives",
+            "question": "In this paper, which training objectives (if any) are used to train the Q-Former and the visual-language interface, and what do the queries learn to represent at each training stage described?",
+            "required": true,
+            "status": "pending",
+            "claim": null,
+            "evidence_ids": []
+          },
+          {
+            "requirement_id": "req_2f68888fa1d7cc279e07413a66bb28c1",
+            "paper_id": "flamingo-2204.14198v1",
+            "dimension_id": "flamingo_perceiver_resampler",
+            "question": "In this paper, how does the Perceiver Resampler reduce a variable number of visual features into a fixed number of outputs, and what role do learnable latent queries play in this aggregation?",
+            "required": true,
+            "status": "pending",
+            "claim": null,
+            "evidence_ids": []
+          },
+          {
+            "requirement_id": "req_a67a1d796abb3f49bd724aa2f7acfe32",
+            "paper_id": "flamingo-2204.14198v1",
+            "dimension_id": "flamingo_gated_cross_attention",
+            "question": "In this paper, how are gated cross-attention layers added to the language model to condition it on the resampled visual features, and how are the gating and initialization of those layers described?",
+            "required": true,
+            "status": "pending",
+            "claim": null,
+            "evidence_ids": []
+          },
+          {
+            "requirement_id": "req_f10c07f2388998f46e381d5bfbf19ef9",
+            "paper_id": "flamingo-2204.14198v1",
+            "dimension_id": "flamingo_architecture_freeze",
+            "question": "In this paper, which model components are frozen versus trained when the visual-language connection is added, and what rationale does the paper give for this arrangement?",
+            "required": true,
+            "status": "pending",
+            "claim": null,
+            "evidence_ids": []
+          },
+          {
+            "requirement_id": "req_c58007dd9e860a4a249c61b2e1764eee",
+            "paper_id": "flamingo-2204.14198v1",
+            "dimension_id": "interaction_difference",
+            "question": "In this paper, how is the visual-language interaction characterized—bidirectionally through a querying module, or additively through cross-attention—and what compute cost, structural changes to the language model, and number of newly trained parameters does the paper report for that interaction?",
+            "required": true,
+            "status": "pending",
+            "claim": null,
+            "evidence_ids": []
+          }
+        ]
+      }
+    ],
+    "trace": {
+      "events": [
+        "planner_started",
+        "planner_completed"
+      ],
+      "status": "success",
+      "candidate_paper_count": 2,
+      "dimension_count": 7,
+      "dimension_ids": [
+        "blip2_qformer_mechanism",
+        "blip2_language_transfer_path",
+        "blip2_training_objectives",
+        "flamingo_perceiver_resampler",
+        "flamingo_gated_cross_attention",
+        "flamingo_architecture_freeze",
+        "interaction_difference"
+      ],
+      "requirement_count": 14,
+      "worker_task_count": 2,
+      "model_calls": 1,
+      "latency_ms": 5559.65459800791,
+      "error_code": null,
+      "error_message": null,
+      "failure": null
+    }
+  },
+  "initial_worker_results": [
+    {
+      "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+      "paper_id": "blip-2-2301.12597v1",
+      "status": "completed",
+      "requirements": [
+        {
+          "requirement_id": "req_e19ea943240204a26cb56cbb87c94ce0",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "blip2_qformer_mechanism",
+          "question": "In this paper, how is the Q-Former designed as an interface between the vision encoder and the language model, and how does it extract and reformulate visual features for the language model?",
+          "required": true,
+          "status": "supported",
+          "claim": "Q-Former is a Querying Transformer designed as an information bottleneck interface between a frozen image encoder and the LLM, pre-trained in two stages (vision-language representation learning with a frozen image encoder, then vision-to-language generative learning with a frozen LLM). It uses 32 learnable queries of dimension 768 (Z = 32×768, much smaller than frozen image features e.g. 257×1024 for ViT-L/14), and the bottleneck architecture together with pre-training objectives forces the queries to extract visual information most relevant/informative to the text.",
+          "evidence_ids": [
+            "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+            "ev_65bb1fa95a078ec3cacc188e7d033199",
+            "ev_242192f04216b43089535562ea0dcec9",
+            "ev_e4829335e46c87be4cada6e262bdd856"
+          ]
+        },
+        {
+          "requirement_id": "req_64aab1b7787c2b237ec6d8cc2f3c1eb0",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "blip2_language_transfer_path",
+          "question": "In this paper, what does the language model receive from the Q-Former output, and through what input pathway are the visual features transferred to the language model during training and inference?",
+          "required": true,
+          "status": "supported",
+          "claim": "In the generative pre-training stage the LLM receives the Q-Former output query embeddings Z; an FC layer linearly projects Z to the LLM text-embedding dimension, and the projected query embeddings are prepended to the input text embeddings as soft visual prompts conditioning the LLM on the visual representation extracted by the Q-Former (serving as an information bottleneck).",
+          "evidence_ids": [
+            "ev_e4829335e46c87be4cada6e262bdd856"
+          ]
+        },
+        {
+          "requirement_id": "req_d92d50b90f7369f8728705f60572f512",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "blip2_training_objectives",
+          "question": "In this paper, which training objectives (if any) are used to train the Q-Former and the visual-language interface, and what do the queries learn to represent at each training stage described?",
+          "required": true,
+          "status": "supported",
+          "claim": "In the representation learning stage, Q-Former is connected to a frozen image encoder and pre-trained on image-text pairs with three jointly optimized pre-training objectives (inspired by BLIP) that share input format and model parameters, each using a different attention masking strategy between queries and text, so that queries learn to extract visual representation most informative of the text. In the generative pre-training stage, Q-Former is connected to a frozen LLM to harvest its generative language capability, with queries acting as soft visual prompts / an information bottleneck.",
+          "evidence_ids": [
+            "ev_242192f04216b43089535562ea0dcec9",
+            "ev_e4829335e46c87be4cada6e262bdd856",
+            "ev_525a1f73be26c523e5fb57a5a02a3ecc"
+          ]
+        },
+        {
+          "requirement_id": "req_0f10028e54f726d1be066c1f6b805b92",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "flamingo_perceiver_resampler",
+          "question": "In this paper, how does the Perceiver Resampler reduce a variable number of visual features into a fixed number of outputs, and what role do learnable latent queries play in this aggregation?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_488d6ef7f53c8b23b39b348b7ae81a72",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "flamingo_gated_cross_attention",
+          "question": "In this paper, how are gated cross-attention layers added to the language model to condition it on the resampled visual features, and how are the gating and initialization of those layers described?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_5ea4dbb5caf92b23846abfcba93c13cd",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "flamingo_architecture_freeze",
+          "question": "In this paper, which model components are frozen versus trained when the visual-language connection is added, and what rationale does the paper give for this arrangement?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_fdf49c34db1de272c3a0807c6de25405",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "interaction_difference",
+          "question": "In this paper, how is the visual-language interaction characterized—bidirectionally through a querying module, or additively through cross-attention—and what compute cost, structural changes to the language model, and number of newly trained parameters does the paper report for that interaction?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        }
+      ],
+      "error": null,
+      "attempts": 1,
+      "latency_ms": 22444.557420007186,
+      "trace": {
+        "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+        "paper_id": "blip-2-2301.12597v1",
+        "requirement_count": 7,
+        "resolved_count": 7,
+        "status": "completed",
+        "tool_calls": 7,
+        "model_calls": 10,
+        "llm_calls": 10,
+        "vlm_tool_attempts": 0,
+        "protocol_corrections": 0,
+        "retry_count": 0,
+        "dependency_calls": 17,
+        "retried_dependency_calls": 0,
+        "latency_ms": 22444.557420007186,
+        "actions": [
+          {
+            "step": 1,
+            "tool_name": "search_text",
+            "arguments": {
+              "query": "Q-Former interface between vision encoder and language model extract visual features queries",
+              "paper_ids": [
+                "blip-2-2301.12597v1"
+              ],
+              "top_k": 5,
+              "requirement_ids": [
+                "req_e19ea943240204a26cb56cbb87c94ce0",
+                "req_64aab1b7787c2b237ec6d8cc2f3c1eb0"
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_e19ea943240204a26cb56cbb87c94ce0",
+              "req_64aab1b7787c2b237ec6d8cc2f3c1eb0"
+            ],
+            "last_new_evidence_count": 5,
+            "summary": "Retrieved 5 text evidence items.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_e4829335e46c87be4cada6e262bdd856",
+              "ev_65bb1fa95a078ec3cacc188e7d033199",
+              "ev_242192f04216b43089535562ea0dcec9",
+              "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+            ],
+            "latency_ms": 314.8820830101613
+          },
+          {
+            "step": 2,
+            "tool_name": "search_text",
+            "arguments": {
+              "query": "Q-Former architecture queries cross-attention image features extract visual representation",
+              "paper_ids": [
+                "blip-2-2301.12597v1"
+              ],
+              "requirement_ids": [
+                "req_e19ea943240204a26cb56cbb87c94ce0",
+                "req_64aab1b7787c2b237ec6d8cc2f3c1eb0"
+              ],
+              "top_k": 5
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_e19ea943240204a26cb56cbb87c94ce0",
+              "req_64aab1b7787c2b237ec6d8cc2f3c1eb0"
+            ],
+            "last_new_evidence_count": 0,
+            "summary": "Retrieved 5 text evidence items.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_e4829335e46c87be4cada6e262bdd856",
+              "ev_65bb1fa95a078ec3cacc188e7d033199",
+              "ev_242192f04216b43089535562ea0dcec9",
+              "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+            ],
+            "latency_ms": 215.89567098999396
+          },
+          {
+            "step": 3,
+            "tool_name": "read_page",
+            "arguments": {
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 3,
+              "requirement_ids": [
+                "req_e19ea943240204a26cb56cbb87c94ce0",
+                "req_64aab1b7787c2b237ec6d8cc2f3c1eb0",
+                "req_d92d50b90f7369f8728705f60572f512"
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_e19ea943240204a26cb56cbb87c94ce0",
+              "req_64aab1b7787c2b237ec6d8cc2f3c1eb0",
+              "req_d92d50b90f7369f8728705f60572f512"
+            ],
+            "last_new_evidence_count": 0,
+            "summary": "Read 2 text items and 0 figures from prepared regions; this is not a full-page PDF read.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_e4829335e46c87be4cada6e262bdd856",
+              "ev_65bb1fa95a078ec3cacc188e7d033199",
+              "ev_242192f04216b43089535562ea0dcec9",
+              "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+            ],
+            "latency_ms": 4.537314991466701
+          },
+          {
+            "step": 4,
+            "tool_name": "resolve_requirements",
+            "arguments": {
+              "resolutions": [
+                {
+                  "requirement_id": "req_e19ea943240204a26cb56cbb87c94ce0",
+                  "status": "supported",
+                  "evidence_ids": [
+                    "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+                    "ev_65bb1fa95a078ec3cacc188e7d033199",
+                    "ev_242192f04216b43089535562ea0dcec9",
+                    "ev_e4829335e46c87be4cada6e262bdd856"
+                  ]
+                },
+                {
+                  "requirement_id": "req_64aab1b7787c2b237ec6d8cc2f3c1eb0",
+                  "status": "supported",
+                  "evidence_ids": [
+                    "ev_e4829335e46c87be4cada6e262bdd856"
+                  ]
+                },
+                {
+                  "requirement_id": "req_d92d50b90f7369f8728705f60572f512",
+                  "status": "supported",
+                  "evidence_ids": [
+                    "ev_242192f04216b43089535562ea0dcec9",
+                    "ev_e4829335e46c87be4cada6e262bdd856",
+                    "ev_525a1f73be26c523e5fb57a5a02a3ecc"
+                  ]
+                }
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [],
+            "last_new_evidence_count": 0,
+            "summary": "Resolved 3 paper-local requirements.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_e4829335e46c87be4cada6e262bdd856",
+              "ev_65bb1fa95a078ec3cacc188e7d033199",
+              "ev_242192f04216b43089535562ea0dcec9",
+              "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+            ],
+            "latency_ms": 1.348783989669755
+          },
+          {
+            "step": 5,
+            "tool_name": "search_text",
+            "arguments": {
+              "query": "frozen image encoder frozen LLM train only Q-Former linear projection",
+              "paper_ids": [
+                "blip-2-2301.12597v1"
+              ],
+              "top_k": 5,
+              "requirement_ids": [
+                "req_5ea4dbb5caf92b23846abfcba93c13cd"
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_5ea4dbb5caf92b23846abfcba93c13cd"
+            ],
+            "last_new_evidence_count": 2,
+            "summary": "Retrieved 5 text evidence items.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_e4829335e46c87be4cada6e262bdd856",
+              "ev_65bb1fa95a078ec3cacc188e7d033199",
+              "ev_242192f04216b43089535562ea0dcec9",
+              "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+              "ev_9331722f1a47399ab173e624d02c6985",
+              "ev_234984c983953494ce28027dc2716acc"
+            ],
+            "latency_ms": 234.46766097913496
+          },
+          {
+            "step": 6,
+            "tool_name": "search_text",
+            "arguments": {
+              "query": "gated cross-attention layers frozen LLM initialization",
+              "paper_ids": [
+                "blip-2-2301.12597v1"
+              ],
+              "requirement_ids": [
+                "req_488d6ef7f53c8b23b39b348b7ae81a72",
+                "req_5ea4dbb5caf92b23846abfcba93c13cd",
+                "req_fdf49c34db1de272c3a0807c6de25405",
+                "req_0f10028e54f726d1be066c1f6b805b92"
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_488d6ef7f53c8b23b39b348b7ae81a72",
+              "req_5ea4dbb5caf92b23846abfcba93c13cd",
+              "req_fdf49c34db1de272c3a0807c6de25405",
+              "req_0f10028e54f726d1be066c1f6b805b92"
+            ],
+            "last_new_evidence_count": 1,
+            "summary": "Retrieved 3 text evidence items.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_e4829335e46c87be4cada6e262bdd856",
+              "ev_65bb1fa95a078ec3cacc188e7d033199",
+              "ev_242192f04216b43089535562ea0dcec9",
+              "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+              "ev_9331722f1a47399ab173e624d02c6985",
+              "ev_234984c983953494ce28027dc2716acc",
+              "ev_4825dfc97130014274b3be0682b0bffe"
+            ],
+            "latency_ms": 190.30359102180228
+          },
+          {
+            "step": 7,
+            "tool_name": "read_page",
+            "arguments": {
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 3,
+              "requirement_ids": [
+                "req_0f10028e54f726d1be066c1f6b805b92",
+                "req_488d6ef7f53c8b23b39b348b7ae81a72",
+                "req_5ea4dbb5caf92b23846abfcba93c13cd",
+                "req_fdf49c34db1de272c3a0807c6de25405"
+              ]
+            },
+            "status": "error",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_0f10028e54f726d1be066c1f6b805b92",
+              "req_488d6ef7f53c8b23b39b348b7ae81a72",
+              "req_5ea4dbb5caf92b23846abfcba93c13cd",
+              "req_fdf49c34db1de272c3a0807c6de25405"
+            ],
+            "last_new_evidence_count": 0,
+            "summary": "This exact lookup already completed. Reuse collected evidence or identify a different information need.",
+            "issue_code": "redundant_action",
+            "failure": null,
+            "evidence_ids": [
+              "ev_e4829335e46c87be4cada6e262bdd856",
+              "ev_65bb1fa95a078ec3cacc188e7d033199",
+              "ev_242192f04216b43089535562ea0dcec9",
+              "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+              "ev_9331722f1a47399ab173e624d02c6985",
+              "ev_234984c983953494ce28027dc2716acc",
+              "ev_4825dfc97130014274b3be0682b0bffe"
+            ],
+            "latency_ms": 0.5213720141910017
+          },
+          {
+            "step": 8,
+            "tool_name": "search_text",
+            "arguments": {
+              "query": "Perceiver Resampler learnable latent queries fixed number of visual features",
+              "paper_ids": [
+                "blip-2-2301.12597v1"
+              ],
+              "requirement_ids": [
+                "req_0f10028e54f726d1be066c1f6b805b92",
+                "req_488d6ef7f53c8b23b39b348b7ae81a72",
+                "req_fdf49c34db1de272c3a0807c6de25405"
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_0f10028e54f726d1be066c1f6b805b92",
+              "req_488d6ef7f53c8b23b39b348b7ae81a72",
+              "req_fdf49c34db1de272c3a0807c6de25405"
+            ],
+            "last_new_evidence_count": 0,
+            "summary": "Retrieved 3 text evidence items.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_e4829335e46c87be4cada6e262bdd856",
+              "ev_65bb1fa95a078ec3cacc188e7d033199",
+              "ev_242192f04216b43089535562ea0dcec9",
+              "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+              "ev_9331722f1a47399ab173e624d02c6985",
+              "ev_234984c983953494ce28027dc2716acc",
+              "ev_4825dfc97130014274b3be0682b0bffe"
+            ],
+            "latency_ms": 226.6032399784308
+          },
+          {
+            "step": 9,
+            "tool_name": "search_text",
+            "arguments": {
+              "query": "Perceiver Resampler learnable latent queries fixed number of visual features Flamingo gated cross-attention frozen",
+              "paper_ids": [
+                "blip-2-2301.12597v1"
+              ],
+              "requirement_ids": [
+                "req_0f10028e54f726d1be066c1f6b805b92",
+                "req_488d6ef7f53c8b23b39b348b7ae81a72",
+                "req_5ea4dbb5caf92b23846abfcba93c13cd",
+                "req_fdf49c34db1de272c3a0807c6de25405"
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_0f10028e54f726d1be066c1f6b805b92",
+              "req_488d6ef7f53c8b23b39b348b7ae81a72",
+              "req_5ea4dbb5caf92b23846abfcba93c13cd",
+              "req_fdf49c34db1de272c3a0807c6de25405"
+            ],
+            "last_new_evidence_count": 0,
+            "summary": "Retrieved 3 text evidence items.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_e4829335e46c87be4cada6e262bdd856",
+              "ev_65bb1fa95a078ec3cacc188e7d033199",
+              "ev_242192f04216b43089535562ea0dcec9",
+              "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+              "ev_9331722f1a47399ab173e624d02c6985",
+              "ev_234984c983953494ce28027dc2716acc",
+              "ev_4825dfc97130014274b3be0682b0bffe"
+            ],
+            "latency_ms": 294.6618320129346
+          },
+          {
+            "step": 10,
+            "tool_name": "resolve_requirements",
+            "arguments": {
+              "resolutions": [
+                {
+                  "requirement_id": "req_0f10028e54f726d1be066c1f6b805b92",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                },
+                {
+                  "requirement_id": "req_488d6ef7f53c8b23b39b348b7ae81a72",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                },
+                {
+                  "requirement_id": "req_5ea4dbb5caf92b23846abfcba93c13cd",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                },
+                {
+                  "requirement_id": "req_fdf49c34db1de272c3a0807c6de25405",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                }
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [],
+            "last_new_evidence_count": 0,
+            "summary": "Resolved 4 paper-local requirements.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_e4829335e46c87be4cada6e262bdd856",
+              "ev_65bb1fa95a078ec3cacc188e7d033199",
+              "ev_242192f04216b43089535562ea0dcec9",
+              "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+              "ev_9331722f1a47399ab173e624d02c6985",
+              "ev_234984c983953494ce28027dc2716acc",
+              "ev_4825dfc97130014274b3be0682b0bffe"
+            ],
+            "latency_ms": 1.1899480014108121
+          }
+        ]
+      },
+      "observed_evidence_ids": [
+        "ev_e4829335e46c87be4cada6e262bdd856",
+        "ev_65bb1fa95a078ec3cacc188e7d033199",
+        "ev_242192f04216b43089535562ea0dcec9",
+        "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+        "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+        "ev_9331722f1a47399ab173e624d02c6985",
+        "ev_234984c983953494ce28027dc2716acc",
+        "ev_4825dfc97130014274b3be0682b0bffe"
+      ]
+    },
+    {
+      "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+      "paper_id": "flamingo-2204.14198v1",
+      "status": "completed",
+      "requirements": [
+        {
+          "requirement_id": "req_472304b624f534754f88a7a1ce8df1ca",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "blip2_qformer_mechanism",
+          "question": "In this paper, how is the Q-Former designed as an interface between the vision encoder and the language model, and how does it extract and reformulate visual features for the language model?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_9640a28c422eede971e8bb1150400a35",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "blip2_language_transfer_path",
+          "question": "In this paper, what does the language model receive from the Q-Former output, and through what input pathway are the visual features transferred to the language model during training and inference?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_06063a5ddc0e2564ae49b3ba7bb8292f",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "blip2_training_objectives",
+          "question": "In this paper, which training objectives (if any) are used to train the Q-Former and the visual-language interface, and what do the queries learn to represent at each training stage described?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_2f68888fa1d7cc279e07413a66bb28c1",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "flamingo_perceiver_resampler",
+          "question": "In this paper, how does the Perceiver Resampler reduce a variable number of visual features into a fixed number of outputs, and what role do learnable latent queries play in this aggregation?",
+          "required": true,
+          "status": "supported",
+          "claim": "The Perceiver Resampler takes a variable number of image or video features from the vision encoder and produces a fixed number of visual outputs (in practice 64) by learning a predefined number of latent input queries: after adding learned temporal position encodings, the flattened (and concatenated) visual features form keys/values, and the latent queries are fed to a transformer stack that cross-attends to these visual features. The number of output tokens equals the number of learned latent queries. Unlike DETR/Perceiver, the keys and values computed from the learned latents are concatenated to the keys and values from the visual features. The motivation for resampling to a fixed, small number of outputs is to reduce the computational complexity of vision-text cross attention, particularly for multiple long videos.",
+          "evidence_ids": [
+            "ev_9262472c69770e9a098422d6b46534f9",
+            "ev_1863b35f4e6e9086964ec47670f5ea7b",
+            "ev_1f60e62600f7a79eae799d5ed285f571",
+            "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+          ]
+        },
+        {
+          "requirement_id": "req_a67a1d796abb3f49bd724aa2f7acfe32",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "flamingo_gated_cross_attention",
+          "question": "In this paper, how are gated cross-attention layers added to the language model to condition it on the resampled visual features, and how are the gating and initialization of those layers described?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_f10c07f2388998f46e381d5bfbf19ef9",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "flamingo_architecture_freeze",
+          "question": "In this paper, which model components are frozen versus trained when the visual-language connection is added, and what rationale does the paper give for this arrangement?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        },
+        {
+          "requirement_id": "req_c58007dd9e860a4a249c61b2e1764eee",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "interaction_difference",
+          "question": "In this paper, how is the visual-language interaction characterized—bidirectionally through a querying module, or additively through cross-attention—and what compute cost, structural changes to the language model, and number of newly trained parameters does the paper report for that interaction?",
+          "required": true,
+          "status": "insufficient_evidence",
+          "claim": null,
+          "evidence_ids": []
+        }
+      ],
+      "error": null,
+      "attempts": 1,
+      "latency_ms": 6626.827910018619,
+      "trace": {
+        "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+        "paper_id": "flamingo-2204.14198v1",
+        "requirement_count": 7,
+        "resolved_count": 7,
+        "status": "completed",
+        "tool_calls": 1,
+        "model_calls": 2,
+        "llm_calls": 2,
+        "vlm_tool_attempts": 0,
+        "protocol_corrections": 0,
+        "retry_count": 0,
+        "dependency_calls": 3,
+        "retried_dependency_calls": 0,
+        "latency_ms": 6626.827910018619,
+        "actions": [
+          {
+            "step": 1,
+            "tool_name": "search_text",
+            "arguments": {
+              "query": "Perceiver Resampler fixed number of visual features learnable latent queries",
+              "paper_ids": [
+                "flamingo-2204.14198v1"
+              ],
+              "top_k": 5,
+              "requirement_ids": [
+                "req_2f68888fa1d7cc279e07413a66bb28c1",
+                "req_a67a1d796abb3f49bd724aa2f7acfe32"
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [
+              "req_2f68888fa1d7cc279e07413a66bb28c1",
+              "req_a67a1d796abb3f49bd724aa2f7acfe32"
+            ],
+            "last_new_evidence_count": 5,
+            "summary": "Retrieved 5 text evidence items.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_9262472c69770e9a098422d6b46534f9",
+              "ev_1863b35f4e6e9086964ec47670f5ea7b",
+              "ev_1f60e62600f7a79eae799d5ed285f571",
+              "ev_03da035280d198641cd7bcb081b6f845",
+              "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+            ],
+            "latency_ms": 184.2882479832042
+          },
+          {
+            "step": 2,
+            "tool_name": "resolve_requirements",
+            "arguments": {
+              "resolutions": [
+                {
+                  "requirement_id": "req_2f68888fa1d7cc279e07413a66bb28c1",
+                  "status": "supported",
+                  "evidence_ids": [
+                    "ev_9262472c69770e9a098422d6b46534f9",
+                    "ev_1863b35f4e6e9086964ec47670f5ea7b",
+                    "ev_1f60e62600f7a79eae799d5ed285f571",
+                    "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+                  ]
+                },
+                {
+                  "requirement_id": "req_a67a1d796abb3f49bd724aa2f7acfe32",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                },
+                {
+                  "requirement_id": "req_f10c07f2388998f46e381d5bfbf19ef9",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                },
+                {
+                  "requirement_id": "req_472304b624f534754f88a7a1ce8df1ca",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                },
+                {
+                  "requirement_id": "req_9640a28c422eede971e8bb1150400a35",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                },
+                {
+                  "requirement_id": "req_06063a5ddc0e2564ae49b3ba7bb8292f",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                },
+                {
+                  "requirement_id": "req_c58007dd9e860a4a249c61b2e1764eee",
+                  "status": "insufficient_evidence",
+                  "evidence_ids": []
+                }
+              ]
+            },
+            "status": "success",
+            "protocol_recovery": false,
+            "investigated_requirement_ids": [],
+            "last_new_evidence_count": 5,
+            "summary": "Resolved 7 paper-local requirements.",
+            "issue_code": null,
+            "failure": null,
+            "evidence_ids": [
+              "ev_9262472c69770e9a098422d6b46534f9",
+              "ev_1863b35f4e6e9086964ec47670f5ea7b",
+              "ev_1f60e62600f7a79eae799d5ed285f571",
+              "ev_03da035280d198641cd7bcb081b6f845",
+              "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+            ],
+            "latency_ms": 2.019726001890376
+          }
+        ]
+      },
+      "observed_evidence_ids": [
+        "ev_9262472c69770e9a098422d6b46534f9",
+        "ev_1863b35f4e6e9086964ec47670f5ea7b",
+        "ev_1f60e62600f7a79eae799d5ed285f571",
+        "ev_03da035280d198641cd7bcb081b6f845",
+        "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+      ]
+    }
+  ],
+  "initial_review_results": [
+    {
+      "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+      "requirement_id": "req_e19ea943240204a26cb56cbb87c94ce0",
+      "paper_id": "blip-2-2301.12597v1",
+      "status": "passed",
+      "reason_code": "evidence_supports_claim",
+      "claim": "Q-Former is a Querying Transformer designed as an information bottleneck interface between a frozen image encoder and the LLM, pre-trained in two stages (vision-language representation learning with a frozen image encoder, then vision-to-language generative learning with a frozen LLM). It uses 32 learnable queries of dimension 768 (Z = 32×768, much smaller than frozen image features e.g. 257×1024 for ViT-L/14), and the bottleneck architecture together with pre-training objectives forces the queries to extract visual information most relevant/informative to the text.",
+      "evidence_ids": [
+        "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+        "ev_65bb1fa95a078ec3cacc188e7d033199",
+        "ev_242192f04216b43089535562ea0dcec9",
+        "ev_e4829335e46c87be4cada6e262bdd856"
+      ],
+      "validation_status": "passed",
+      "skip_reason": null,
+      "issue": null,
+      "trace": {
+        "model_calls": 1,
+        "retry_count": 0,
+        "latency_ms": 1933.567441010382
+      }
+    },
+    {
+      "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+      "requirement_id": "req_64aab1b7787c2b237ec6d8cc2f3c1eb0",
+      "paper_id": "blip-2-2301.12597v1",
+      "status": "passed",
+      "reason_code": "evidence_supports_claim",
+      "claim": "In the generative pre-training stage the LLM receives the Q-Former output query embeddings Z; an FC layer linearly projects Z to the LLM text-embedding dimension, and the projected query embeddings are prepended to the input text embeddings as soft visual prompts conditioning the LLM on the visual representation extracted by the Q-Former (serving as an information bottleneck).",
+      "evidence_ids": [
+        "ev_e4829335e46c87be4cada6e262bdd856"
+      ],
+      "validation_status": "passed",
+      "skip_reason": null,
+      "issue": null,
+      "trace": {
+        "model_calls": 1,
+        "retry_count": 0,
+        "latency_ms": 3728.5401209956035
+      }
+    },
+    {
+      "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+      "requirement_id": "req_d92d50b90f7369f8728705f60572f512",
+      "paper_id": "blip-2-2301.12597v1",
+      "status": "passed",
+      "reason_code": "evidence_supports_claim",
+      "claim": "In the representation learning stage, Q-Former is connected to a frozen image encoder and pre-trained on image-text pairs with three jointly optimized pre-training objectives (inspired by BLIP) that share input format and model parameters, each using a different attention masking strategy between queries and text, so that queries learn to extract visual representation most informative of the text. In the generative pre-training stage, Q-Former is connected to a frozen LLM to harvest its generative language capability, with queries acting as soft visual prompts / an information bottleneck.",
+      "evidence_ids": [
+        "ev_242192f04216b43089535562ea0dcec9",
+        "ev_e4829335e46c87be4cada6e262bdd856",
+        "ev_525a1f73be26c523e5fb57a5a02a3ecc"
+      ],
+      "validation_status": "passed",
+      "skip_reason": null,
+      "issue": null,
+      "trace": {
+        "model_calls": 1,
+        "retry_count": 0,
+        "latency_ms": 2371.6960989986546
+      }
+    },
+    {
+      "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+      "requirement_id": "req_0f10028e54f726d1be066c1f6b805b92",
+      "paper_id": "blip-2-2301.12597v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    },
+    {
+      "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+      "requirement_id": "req_488d6ef7f53c8b23b39b348b7ae81a72",
+      "paper_id": "blip-2-2301.12597v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    },
+    {
+      "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+      "requirement_id": "req_5ea4dbb5caf92b23846abfcba93c13cd",
+      "paper_id": "blip-2-2301.12597v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    },
+    {
+      "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+      "requirement_id": "req_fdf49c34db1de272c3a0807c6de25405",
+      "paper_id": "blip-2-2301.12597v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    },
+    {
+      "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+      "requirement_id": "req_472304b624f534754f88a7a1ce8df1ca",
+      "paper_id": "flamingo-2204.14198v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    },
+    {
+      "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+      "requirement_id": "req_9640a28c422eede971e8bb1150400a35",
+      "paper_id": "flamingo-2204.14198v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    },
+    {
+      "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+      "requirement_id": "req_06063a5ddc0e2564ae49b3ba7bb8292f",
+      "paper_id": "flamingo-2204.14198v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    },
+    {
+      "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+      "requirement_id": "req_2f68888fa1d7cc279e07413a66bb28c1",
+      "paper_id": "flamingo-2204.14198v1",
+      "status": "passed",
+      "reason_code": "evidence_supports_claim",
+      "claim": "The Perceiver Resampler takes a variable number of image or video features from the vision encoder and produces a fixed number of visual outputs (in practice 64) by learning a predefined number of latent input queries: after adding learned temporal position encodings, the flattened (and concatenated) visual features form keys/values, and the latent queries are fed to a transformer stack that cross-attends to these visual features. The number of output tokens equals the number of learned latent queries. Unlike DETR/Perceiver, the keys and values computed from the learned latents are concatenated to the keys and values from the visual features. The motivation for resampling to a fixed, small number of outputs is to reduce the computational complexity of vision-text cross attention, particularly for multiple long videos.",
+      "evidence_ids": [
+        "ev_9262472c69770e9a098422d6b46534f9",
+        "ev_1863b35f4e6e9086964ec47670f5ea7b",
+        "ev_1f60e62600f7a79eae799d5ed285f571",
+        "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+      ],
+      "validation_status": "passed",
+      "skip_reason": null,
+      "issue": null,
+      "trace": {
+        "model_calls": 1,
+        "retry_count": 0,
+        "latency_ms": 2530.4253170033917
+      }
+    },
+    {
+      "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+      "requirement_id": "req_a67a1d796abb3f49bd724aa2f7acfe32",
+      "paper_id": "flamingo-2204.14198v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    },
+    {
+      "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+      "requirement_id": "req_f10c07f2388998f46e381d5bfbf19ef9",
+      "paper_id": "flamingo-2204.14198v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    },
+    {
+      "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+      "requirement_id": "req_c58007dd9e860a4a249c61b2e1764eee",
+      "paper_id": "flamingo-2204.14198v1",
+      "status": "not_reviewable",
+      "reason_code": null,
+      "claim": null,
+      "evidence_ids": [],
+      "validation_status": "passed",
+      "skip_reason": "insufficient_evidence",
+      "issue": null,
+      "trace": {
+        "model_calls": 0,
+        "retry_count": 0,
+        "latency_ms": 0.0
+      }
+    }
+  ],
+  "recovery_metrics": {
+    "recovery_eligible_count": 0,
+    "recovery_attempted_count": 0,
+    "recovery_passed_count": 0,
+    "recovery_failed_count": 0,
+    "recovery_skipped_count": 14,
+    "recovery_conversion_rate": null,
+    "additional_model_calls": 2,
+    "additional_tool_calls": 0,
+    "recovery_latency_ms": 11409.515470004408,
+    "recovery_rounds_used": 0,
+    "prior_usage": {
+      "model_calls": 16,
+      "tool_calls": 8
+    },
+    "reserved_budget": {
+      "model_calls": 5,
+      "tool_calls": 0
+    },
+    "research_usage": {
+      "model_calls": 18,
+      "tool_calls": 8
+    }
+  },
+  "recovery_eligibility": [
+    {
+      "requirement_id": "req_e19ea943240204a26cb56cbb87c94ce0",
+      "paper_id": "blip-2-2301.12597v1",
+      "eligible": false,
+      "reason_code": "review_passed"
+    },
+    {
+      "requirement_id": "req_64aab1b7787c2b237ec6d8cc2f3c1eb0",
+      "paper_id": "blip-2-2301.12597v1",
+      "eligible": false,
+      "reason_code": "review_passed"
+    },
+    {
+      "requirement_id": "req_d92d50b90f7369f8728705f60572f512",
+      "paper_id": "blip-2-2301.12597v1",
+      "eligible": false,
+      "reason_code": "review_passed"
+    },
+    {
+      "requirement_id": "req_0f10028e54f726d1be066c1f6b805b92",
+      "paper_id": "blip-2-2301.12597v1",
+      "eligible": false,
+      "reason_code": "insufficient_evidence"
+    },
+    {
+      "requirement_id": "req_488d6ef7f53c8b23b39b348b7ae81a72",
+      "paper_id": "blip-2-2301.12597v1",
+      "eligible": false,
+      "reason_code": "insufficient_evidence"
+    },
+    {
+      "requirement_id": "req_5ea4dbb5caf92b23846abfcba93c13cd",
+      "paper_id": "blip-2-2301.12597v1",
+      "eligible": false,
+      "reason_code": "insufficient_evidence"
+    },
+    {
+      "requirement_id": "req_fdf49c34db1de272c3a0807c6de25405",
+      "paper_id": "blip-2-2301.12597v1",
+      "eligible": false,
+      "reason_code": "insufficient_evidence"
+    },
+    {
+      "requirement_id": "req_472304b624f534754f88a7a1ce8df1ca",
+      "paper_id": "flamingo-2204.14198v1",
+      "eligible": false,
+      "reason_code": "insufficient_evidence"
+    },
+    {
+      "requirement_id": "req_9640a28c422eede971e8bb1150400a35",
+      "paper_id": "flamingo-2204.14198v1",
+      "eligible": false,
+      "reason_code": "insufficient_evidence"
+    },
+    {
+      "requirement_id": "req_06063a5ddc0e2564ae49b3ba7bb8292f",
+      "paper_id": "flamingo-2204.14198v1",
+      "eligible": false,
+      "reason_code": "insufficient_evidence"
+    },
+    {
+      "requirement_id": "req_2f68888fa1d7cc279e07413a66bb28c1",
+      "paper_id": "flamingo-2204.14198v1",
+      "eligible": false,
+      "reason_code": "review_passed"
+    },
+    {
+      "requirement_id": "req_a67a1d796abb3f49bd724aa2f7acfe32",
+      "paper_id": "flamingo-2204.14198v1",
+      "eligible": false,
+      "reason_code": "insufficient_evidence"
+    },
+    {
+      "requirement_id": "req_f10c07f2388998f46e381d5bfbf19ef9",
+      "paper_id": "flamingo-2204.14198v1",
+      "eligible": false,
+      "reason_code": "insufficient_evidence"
+    },
+    {
+      "requirement_id": "req_c58007dd9e860a4a249c61b2e1764eee",
+      "paper_id": "flamingo-2204.14198v1",
+      "eligible": false,
+      "reason_code": "insufficient_evidence"
+    }
+  ],
+  "synthesis_input": {
+    "plan": {
+      "dimensions": [
+        {
+          "dimension_id": "blip2_qformer_mechanism",
+          "name": "BLIP-2 Q-Former mechanism and visual-language interface",
+          "description": "Investigate the mechanism the user attributes to BLIP-2: how the Q-Former produces a visual-language interface between a frozen visual encoder and a language model. Look for the architectural description and the ablation comparisons supporting each design choice.",
+          "research_question": "In this paper, how is the Q-Former designed as an interface between the vision encoder and the language model, and how does it extract and reformulate visual features for the language model?"
+        },
+        {
+          "dimension_id": "blip2_language_transfer_path",
+          "name": "BLIP-2 path from visual features into the language model",
+          "description": "Determine how (and with what text conditioning, if any) the query-based interface's output is passed into the language model, and what the paper states about what the language model receives as input. Fall back to an explicit evidence gap where unspecified.",
+          "research_question": "In this paper, what does the language model receive from the Q-Former output, and through what input pathway are the visual features transferred to the language model during training and inference?"
+        },
+        {
+          "dimension_id": "blip2_training_objectives",
+          "name": "BLIP-2 training-stage objectives of the interface",
+          "description": "Investigate any staged training of the visual-language interface and the representations learned by the queries during those stages, exactly as stated or omitted in the paper. Do not assume a particular number or type of stages.",
+          "research_question": "In this paper, which training objectives (if any) are used to train the Q-Former and the visual-language interface, and what do the queries learn to represent at each training stage described?"
+        },
+        {
+          "dimension_id": "flamingo_perceiver_resampler",
+          "name": "Flamingo Perceiver Resampler and visual feature aggregation",
+          "description": "Investigate the mechanism the user attributes to Flamingo: how the Perceiver Resampler aggregates variable numbers of visual features into a fixed set of outputs before they reach the language model.",
+          "research_question": "In this paper, how does the Perceiver Resampler reduce a variable number of visual features into a fixed number of outputs, and what role do learnable latent queries play in this aggregation?"
+        },
+        {
+          "dimension_id": "flamingo_gated_cross_attention",
+          "name": "Flamingo gated cross-attention insertion into the language model",
+          "description": "Investigate how the resampled visual features are injected into the language model through gated cross-attention: where the layers are inserted, how attention is configured, and how the gates are initialized and trained, as stated in the paper.",
+          "research_question": "In this paper, how are gated cross-attention layers added to the language model to condition it on the resampled visual features, and how are the gating and initialization of those layers described?"
+        },
+        {
+          "dimension_id": "flamingo_architecture_freeze",
+          "name": "Flamingo component training and freezing arrangement",
+          "description": "Investigate which components the paper states are frozen or trainable when visual conditioning is added, and any stated rationale. Ask whether freezing occurs rather than assuming it does.",
+          "research_question": "In this paper, which model components are frozen versus trained when the visual-language connection is added, and what rationale does the paper give for this arrangement?"
+        },
+        {
+          "dimension_id": "interaction_difference",
+          "name": "Differences in visual-language interaction behavior",
+          "description": "Compare the two mechanism types on the dimension the user asks about: the nature of the interaction and its cost. Use only each paper's own descriptions to characterize them, rather than importing external assumptions.",
+          "research_question": "In this paper, how is the visual-language interaction characterized—bidirectionally through a querying module, or additively through cross-attention—and what compute cost, structural changes to the language model, and number of newly trained parameters does the paper report for that interaction?"
+        }
+      ],
+      "question": "Compare the visual-language connection mechanisms in BLIP-2 and Flamingo. Explain how each paper transfers visual features into its language model, covering BLIP-2's Q-Former and visual-language interface, and Flamingo's Perceiver Resampler and gated cross-attention. Identify the main differences in visual-language interaction, and cite prepared paper evidence for each finding. Mark unsupported details as evidence gaps.",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "flamingo-2204.14198v1"
+      ]
+    },
+    "cells": [
+      {
+        "requirement_id": "req_e19ea943240204a26cb56cbb87c94ce0",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "blip2_qformer_mechanism",
+        "status": "verified",
+        "claim_id": "claim_cbf63baaf4c7f9cb7b3e06fe9d9d005b"
+      },
+      {
+        "requirement_id": "req_64aab1b7787c2b237ec6d8cc2f3c1eb0",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "blip2_language_transfer_path",
+        "status": "verified",
+        "claim_id": "claim_2d0a653fc263fa8c0eccc38f35c8afe4"
+      },
+      {
+        "requirement_id": "req_d92d50b90f7369f8728705f60572f512",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "blip2_training_objectives",
+        "status": "verified",
+        "claim_id": "claim_1b2e06d00bad094258a4285c9a509e4e"
+      },
+      {
+        "requirement_id": "req_0f10028e54f726d1be066c1f6b805b92",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "flamingo_perceiver_resampler",
+        "status": "insufficient_evidence",
+        "claim_id": null
+      },
+      {
+        "requirement_id": "req_488d6ef7f53c8b23b39b348b7ae81a72",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "flamingo_gated_cross_attention",
+        "status": "insufficient_evidence",
+        "claim_id": null
+      },
+      {
+        "requirement_id": "req_5ea4dbb5caf92b23846abfcba93c13cd",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "flamingo_architecture_freeze",
+        "status": "insufficient_evidence",
+        "claim_id": null
+      },
+      {
+        "requirement_id": "req_fdf49c34db1de272c3a0807c6de25405",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "interaction_difference",
+        "status": "insufficient_evidence",
+        "claim_id": null
+      },
+      {
+        "requirement_id": "req_472304b624f534754f88a7a1ce8df1ca",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "blip2_qformer_mechanism",
+        "status": "insufficient_evidence",
+        "claim_id": null
+      },
+      {
+        "requirement_id": "req_9640a28c422eede971e8bb1150400a35",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "blip2_language_transfer_path",
+        "status": "insufficient_evidence",
+        "claim_id": null
+      },
+      {
+        "requirement_id": "req_06063a5ddc0e2564ae49b3ba7bb8292f",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "blip2_training_objectives",
+        "status": "insufficient_evidence",
+        "claim_id": null
+      },
+      {
+        "requirement_id": "req_2f68888fa1d7cc279e07413a66bb28c1",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "flamingo_perceiver_resampler",
+        "status": "verified",
+        "claim_id": "claim_87e210ba8ea56f9ae47c01bd83886fe3"
+      },
+      {
+        "requirement_id": "req_a67a1d796abb3f49bd724aa2f7acfe32",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "flamingo_gated_cross_attention",
+        "status": "insufficient_evidence",
+        "claim_id": null
+      },
+      {
+        "requirement_id": "req_f10c07f2388998f46e381d5bfbf19ef9",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "flamingo_architecture_freeze",
+        "status": "insufficient_evidence",
+        "claim_id": null
+      },
+      {
+        "requirement_id": "req_c58007dd9e860a4a249c61b2e1764eee",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "interaction_difference",
+        "status": "insufficient_evidence",
+        "claim_id": null
+      }
+    ],
+    "verified_claims": [
+      {
+        "claim_id": "claim_cbf63baaf4c7f9cb7b3e06fe9d9d005b",
+        "requirement_id": "req_e19ea943240204a26cb56cbb87c94ce0",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "blip2_qformer_mechanism",
+        "text": "Q-Former is a Querying Transformer designed as an information bottleneck interface between a frozen image encoder and the LLM, pre-trained in two stages (vision-language representation learning with a frozen image encoder, then vision-to-language generative learning with a frozen LLM). It uses 32 learnable queries of dimension 768 (Z = 32×768, much smaller than frozen image features e.g. 257×1024 for ViT-L/14), and the bottleneck architecture together with pre-training objectives forces the queries to extract visual information most relevant/informative to the text.",
+        "evidence": [
+          {
+            "evidence_id": "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 2,
+            "modality": "text",
+            "text": "We propose BLIP-2, a new vision-language pre-training method that bootstraps from frozen pre-trained unimodal models. In order to bridge the modality gap, we propose a Querying Transformer (Q-Former) pre-trained in two stages: (1) vision-language representation learning stage with a frozen image encoder and (2) vision-to-language genera- tive learning stage with a frozen LLM. This section ﬁrst introduces the model architecture of Q-Former, and then delineates the two-stage pre-training procedures.",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_65bb1fa95a078ec3cacc188e7d033199",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 3,
+            "modality": "text",
+            "text": "In our experiments, we use 32 queries where each query has a dimension of 768 (same as the hidden dimension of the Q-Former). We use Z to denote the output query representation. The size of Z (32 × 768) is much smaller than the size of frozen image features (e.g. 257 × 1024 for ViT-L/14). This bottleneck architecture works together with our pre-training objectives into forcing the queries to extract visual information that is most relevant to the text.",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_242192f04216b43089535562ea0dcec9",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 3,
+            "modality": "text",
+            "text": "In the representation learning stage, we connect Q-Former to a frozen image encoder and perform pre-training using image-text pairs. We aim to train the Q-Former such that the queries can learn to extract visual representation that is most informative of the text. Inspired by BLIP (Li et al., 2022), we jointly optimize three pre-training objectives that share the same input format and model parameters. Each objec- tive employs a different attention masking strategy between queries and text to control their interaction (see Figure 2).",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_e4829335e46c87be4cada6e262bdd856",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 4,
+            "modality": "text",
+            "text": "In the generative pre-training stage, we connect Q- Former (with the frozen image encoder attached) to a frozen LLM to harvest the LLM’s generative language capability. As shown in Figure 3, we use a fully-connected (FC) layer to linearly project the output query embeddings Z into the same dimension as the text embedding of the LLM. The projected query embeddings are then prepended to the input text embeddings. They function as soft visual prompts that condition the LLM on visual representation extracted by the Q-Former. Since the Q-Former has been pre-trained to extract language-informative visual representation, it ef- fectively functions as an information bottleneck that feeds the most useful information to the LLM while removing irrelevant visual information. This reduces the burden of the LLM to learn vision-language alignment, thus mitigating the catastrophic forgetting problem.",
+            "caption": null,
+            "figure_id": null
+          }
+        ]
+      },
+      {
+        "claim_id": "claim_2d0a653fc263fa8c0eccc38f35c8afe4",
+        "requirement_id": "req_64aab1b7787c2b237ec6d8cc2f3c1eb0",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "blip2_language_transfer_path",
+        "text": "In the generative pre-training stage the LLM receives the Q-Former output query embeddings Z; an FC layer linearly projects Z to the LLM text-embedding dimension, and the projected query embeddings are prepended to the input text embeddings as soft visual prompts conditioning the LLM on the visual representation extracted by the Q-Former (serving as an information bottleneck).",
+        "evidence": [
+          {
+            "evidence_id": "ev_e4829335e46c87be4cada6e262bdd856",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 4,
+            "modality": "text",
+            "text": "In the generative pre-training stage, we connect Q- Former (with the frozen image encoder attached) to a frozen LLM to harvest the LLM’s generative language capability. As shown in Figure 3, we use a fully-connected (FC) layer to linearly project the output query embeddings Z into the same dimension as the text embedding of the LLM. The projected query embeddings are then prepended to the input text embeddings. They function as soft visual prompts that condition the LLM on visual representation extracted by the Q-Former. Since the Q-Former has been pre-trained to extract language-informative visual representation, it ef- fectively functions as an information bottleneck that feeds the most useful information to the LLM while removing irrelevant visual information. This reduces the burden of the LLM to learn vision-language alignment, thus mitigating the catastrophic forgetting problem.",
+            "caption": null,
+            "figure_id": null
+          }
+        ]
+      },
+      {
+        "claim_id": "claim_1b2e06d00bad094258a4285c9a509e4e",
+        "requirement_id": "req_d92d50b90f7369f8728705f60572f512",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "blip2_training_objectives",
+        "text": "In the representation learning stage, Q-Former is connected to a frozen image encoder and pre-trained on image-text pairs with three jointly optimized pre-training objectives (inspired by BLIP) that share input format and model parameters, each using a different attention masking strategy between queries and text, so that queries learn to extract visual representation most informative of the text. In the generative pre-training stage, Q-Former is connected to a frozen LLM to harvest its generative language capability, with queries acting as soft visual prompts / an information bottleneck.",
+        "evidence": [
+          {
+            "evidence_id": "ev_242192f04216b43089535562ea0dcec9",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 3,
+            "modality": "text",
+            "text": "In the representation learning stage, we connect Q-Former to a frozen image encoder and perform pre-training using image-text pairs. We aim to train the Q-Former such that the queries can learn to extract visual representation that is most informative of the text. Inspired by BLIP (Li et al., 2022), we jointly optimize three pre-training objectives that share the same input format and model parameters. Each objec- tive employs a different attention masking strategy between queries and text to control their interaction (see Figure 2).",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_e4829335e46c87be4cada6e262bdd856",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 4,
+            "modality": "text",
+            "text": "In the generative pre-training stage, we connect Q- Former (with the frozen image encoder attached) to a frozen LLM to harvest the LLM’s generative language capability. As shown in Figure 3, we use a fully-connected (FC) layer to linearly project the output query embeddings Z into the same dimension as the text embedding of the LLM. The projected query embeddings are then prepended to the input text embeddings. They function as soft visual prompts that condition the LLM on visual representation extracted by the Q-Former. Since the Q-Former has been pre-trained to extract language-informative visual representation, it ef- fectively functions as an information bottleneck that feeds the most useful information to the LLM while removing irrelevant visual information. This reduces the burden of the LLM to learn vision-language alignment, thus mitigating the catastrophic forgetting problem.",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 2,
+            "modality": "text",
+            "text": "We propose BLIP-2, a new vision-language pre-training method that bootstraps from frozen pre-trained unimodal models. In order to bridge the modality gap, we propose a Querying Transformer (Q-Former) pre-trained in two stages: (1) vision-language representation learning stage with a frozen image encoder and (2) vision-to-language genera- tive learning stage with a frozen LLM. This section ﬁrst introduces the model architecture of Q-Former, and then delineates the two-stage pre-training procedures.",
+            "caption": null,
+            "figure_id": null
+          }
+        ]
+      },
+      {
+        "claim_id": "claim_87e210ba8ea56f9ae47c01bd83886fe3",
+        "requirement_id": "req_2f68888fa1d7cc279e07413a66bb28c1",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "flamingo_perceiver_resampler",
+        "text": "The Perceiver Resampler takes a variable number of image or video features from the vision encoder and produces a fixed number of visual outputs (in practice 64) by learning a predefined number of latent input queries: after adding learned temporal position encodings, the flattened (and concatenated) visual features form keys/values, and the latent queries are fed to a transformer stack that cross-attends to these visual features. The number of output tokens equals the number of learned latent queries. Unlike DETR/Perceiver, the keys and values computed from the learned latents are concatenated to the keys and values from the visual features. The motivation for resampling to a fixed, small number of outputs is to reduce the computational complexity of vision-text cross attention, particularly for multiple long videos.",
+        "evidence": [
+          {
+            "evidence_id": "ev_9262472c69770e9a098422d6b46534f9",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 11,
+            "modality": "text",
+            "text": "architecture in Figure 3. It takes as input a variable number of image or video features from the vision encoder and produces a ﬁxed number of visual outputs as illustrated in Figure 4 (hence the name Resampler). The motivation for re-sampling the visual input to a ﬁxed and small number (in practice 64) of outputs is to signiﬁcantly reduce the computational complexity of vision-text cross attention, particularly important when dealing with multiple long videos. In similar spirit to Perceiver (Jaegle et al., 2021) and DETR (Carion et al., 2020), we learn a predeﬁned number of latent input queries. These latent queries are fed to a transformer stack and cross attend to the ﬂattened visual features",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_1863b35f4e6e9086964ec47670f5ea7b",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 11,
+            "modality": "text",
+            "text": "𝑋𝑓. These visual features are obtained by ﬁrst adding a learnt temporal position encoding to each spatial grid of features corresponding to a given frame of the video (an image being considered as a single-frame video). Note that we only use temporal encodings and no spatial grid position encodings; we did not observe improvements from the latter, potentially because CNNs implicitly encode space information channel-wise (Islam et al., 2021). The visual features are then ﬂattened and concatenated as illustrated in Figure 4. The number of output tokens of the Resampler is thus equal to the number of learnt latent queries. Unlike in DETR and Perceiver, the keys and values computed from the learnt latents are concatenated to the keys and values obtained from 𝑋𝑓, which we found to perform slightly better. We show later in the ablation studies (Section 4.4), that using such a vision-language resampler module outperforms a plain transformer and an MLP. More architectural details are provided in Table 13.",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 9,
+            "modality": "text",
+            "text": "The architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.",
+            "caption": null,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_feb34e007ade9b3e9d28cbb6e7deb391",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 10,
+            "modality": "text",
+            "text": "is then ﬂattened to 1D as shown in Figure 4. Our model also handles video inputs. In this setting, frames are sampled at 1 FPS, encoded independently to obtain a sequence of 𝑇feature maps 𝑋𝑓which are then concatenated before being fed to downstream components (Figure 4).",
+            "caption": null,
+            "figure_id": null
+          }
+        ]
+      }
+    ],
+    "missing_evidence": [
+      {
+        "requirement_id": "req_0f10028e54f726d1be066c1f6b805b92",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "flamingo_perceiver_resampler",
+        "status": "insufficient_evidence",
+        "issue": null
+      },
+      {
+        "requirement_id": "req_488d6ef7f53c8b23b39b348b7ae81a72",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "flamingo_gated_cross_attention",
+        "status": "insufficient_evidence",
+        "issue": null
+      },
+      {
+        "requirement_id": "req_5ea4dbb5caf92b23846abfcba93c13cd",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "flamingo_architecture_freeze",
+        "status": "insufficient_evidence",
+        "issue": null
+      },
+      {
+        "requirement_id": "req_fdf49c34db1de272c3a0807c6de25405",
+        "paper_id": "blip-2-2301.12597v1",
+        "dimension_id": "interaction_difference",
+        "status": "insufficient_evidence",
+        "issue": null
+      },
+      {
+        "requirement_id": "req_472304b624f534754f88a7a1ce8df1ca",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "blip2_qformer_mechanism",
+        "status": "insufficient_evidence",
+        "issue": null
+      },
+      {
+        "requirement_id": "req_9640a28c422eede971e8bb1150400a35",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "blip2_language_transfer_path",
+        "status": "insufficient_evidence",
+        "issue": null
+      },
+      {
+        "requirement_id": "req_06063a5ddc0e2564ae49b3ba7bb8292f",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "blip2_training_objectives",
+        "status": "insufficient_evidence",
+        "issue": null
+      },
+      {
+        "requirement_id": "req_a67a1d796abb3f49bd724aa2f7acfe32",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "flamingo_gated_cross_attention",
+        "status": "insufficient_evidence",
+        "issue": null
+      },
+      {
+        "requirement_id": "req_f10c07f2388998f46e381d5bfbf19ef9",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "flamingo_architecture_freeze",
+        "status": "insufficient_evidence",
+        "issue": null
+      },
+      {
+        "requirement_id": "req_c58007dd9e860a4a249c61b2e1764eee",
+        "paper_id": "flamingo-2204.14198v1",
+        "dimension_id": "interaction_difference",
+        "status": "insufficient_evidence",
+        "issue": null
+      }
+    ],
+    "allowed_claim_ids": [
+      "claim_cbf63baaf4c7f9cb7b3e06fe9d9d005b",
+      "claim_2d0a653fc263fa8c0eccc38f35c8afe4",
+      "claim_1b2e06d00bad094258a4285c9a509e4e",
+      "claim_87e210ba8ea56f9ae47c01bd83886fe3"
+    ],
+    "allowed_evidence_ids": [
+      "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+      "ev_65bb1fa95a078ec3cacc188e7d033199",
+      "ev_242192f04216b43089535562ea0dcec9",
+      "ev_e4829335e46c87be4cada6e262bdd856",
+      "ev_9262472c69770e9a098422d6b46534f9",
+      "ev_1863b35f4e6e9086964ec47670f5ea7b",
+      "ev_1f60e62600f7a79eae799d5ed285f571",
+      "ev_feb34e007ade9b3e9d28cbb6e7deb391"
+    ],
+    "resolved_requirements": 14,
+    "reviewed_requirements": 4
+  },
+  "synthesis_trace": [
+    {
+      "event": "protocol_rejection",
+      "issue_code": "invalid_evidence_reference",
+      "correction_allowed": true,
+      "model_calls": 1,
+      "provider_retries": 0
+    },
+    {
+      "event": "validated_report",
+      "model_calls": 2,
+      "protocol_corrections": 1
+    }
+  ],
+  "worker_classes_observed": [
+    "PaperResearchWorker",
+    "PaperResearchWorker"
+  ],
+  "protocol_feedback": [
+    {
+      "paper_id": "blip-2-2301.12597v1",
+      "events": []
+    },
+    {
+      "paper_id": "flamingo-2204.14198v1",
+      "events": []
+    }
+  ]
+}

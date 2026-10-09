@@ -1,0 +1,77 @@
+{
+  "stage": "G2.1",
+  "status": "PASS",
+  "scope": "worker_protocol_reliability",
+  "real_worker_protocol_status": "PASS",
+  "complete_research_topic_status": "CONDITIONAL",
+  "formal_validation_runs": 1,
+  "old_frozen_entry_modified": false,
+  "protocol_adapter_enabled_only_in_new_entry": true,
+  "production_controller_constraints_changed": false,
+  "coverage_worker_enabled": false,
+  "tests": {
+    "passed": 1071,
+    "failed": 0,
+    "new_tests": 17,
+    "warnings": 1,
+    "seconds": 14.77
+  },
+  "ruff": "PASS",
+  "formatter_files": 232,
+  "worker_multiple_actions_before_after": [
+    4,
+    0
+  ],
+  "worker_invalid_arguments_before_after": [
+    8,
+    0
+  ],
+  "llm_calls_before_after": [
+    31,
+    19
+  ],
+  "tool_calls_before_after": [
+    9,
+    8
+  ],
+  "latency_ms_before_after": [
+    41957.309173987596,
+    52691.41204998596
+  ],
+  "worker_execution_failures_before_after": [
+    6,
+    0
+  ],
+  "verified_requirements_before_after": [
+    5,
+    4
+  ],
+  "requirement_counts_before_after": [
+    12,
+    14
+  ],
+  "comparisons_before_after": [
+    0,
+    0
+  ],
+  "plan_regeneration_is_confound": true,
+  "independent_human_fact_review": "not_performed",
+  "verification": "verification.json",
+  "citation_references": 12,
+  "unique_citations": 8,
+  "final_structural_citation_violations": 0,
+  "blocked_synthesis_citation_attempts": 1,
+  "preserved_original_tracked_files": 501,
+  "preserved_original_untracked_files": 13,
+  "preserved_g2_runtime_files": 10,
+  "known_limits": [
+    "Only one real validation; no causal isolation or generalization proof.",
+    "Paper-specific Planner axes produced an asymmetric Paper×Dimension matrix.",
+    "Worker insufficiency and evidence completeness need semantic review.",
+    "New feedback recovery was verified with Fake tests, not triggered in this real run.",
+    "Frozen old entry has not been silently replaced."
+  ],
+  "remote_operations": 0,
+  "second_real_optimization_run": false,
+  "g3_started": false
+}

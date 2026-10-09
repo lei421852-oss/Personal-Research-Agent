@@ -1,0 +1,15 @@
+usage: run_worker_protocol_demo.py [-h] --output-dir OUTPUT_DIR
+                                   [--baseline BASELINE] [--config CONFIG]
+                                   [--env-file ENV_FILE] [--timeout TIMEOUT]
+                                   [--execute]
+
+G2.1只运行一次真实验证；G2材料只读，默认仅预检。
+
+options:
+  -h, --help            show this help message and exit
+  --output-dir OUTPUT_DIR
+  --baseline BASELINE
+  --config CONFIG
+  --env-file ENV_FILE
+  --timeout TIMEOUT
+  --execute

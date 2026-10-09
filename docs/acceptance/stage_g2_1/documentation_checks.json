@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "links_checked": 21,
+  "broken_links": [],
+  "commands": [
+    {
+      "module": "scripts.run_worker_protocol_demo",
+      "flags": [
+        "--output-dir"
+      ]
+    },
+    {
+      "module": "scripts.run_worker_protocol_demo",
+      "flags": [
+        "--output-dir",
+        "--execute"
+      ]
+    },
+    {
+      "module": "scripts.run_worker_protocol_demo",
+      "flags": [
+        "--output-dir"
+      ]
+    },
+    {
+      "module": "scripts.run_worker_protocol_demo",
+      "flags": [
+        "--output-dir",
+        "--execute"
+      ]
+    }
+  ],
+  "provider_calls": 0
+}

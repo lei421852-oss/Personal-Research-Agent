@@ -1,0 +1,19 @@
+{
+  "git_head": "2fa15eab8716994ce3f7c32e57c65cc9b345de94",
+  "source_hashes": {
+    "app/research/worker_protocol.py": "aea1b45bbdb4b3fdcb7c38440d64e514b4f2d09bdf4b83f0bacfd077f0a9d954",
+    "app/research/protocol_runtime.py": "295f53e1dd9f7678270845e6631c6a1dc469214ca74c2aac9e4285bd07ed6ea2",
+    "scripts/run_worker_protocol_demo.py": "d47982cc5e284b6ef63033cb62b24870671de4bcc99acdb7cfb469f002722c17",
+    "app/research/worker.py": "9f7962a56fd7d8ec4b9576fdf4380d75d599ff8573a83c266aeb2cfc577c7349",
+    "app/research/reviewer.py": "79a7879941bfc8bdac3b04db73e70a10918f5f32d41fbdfcad2ee231f05c80bb",
+    "app/research/recovery_orchestrator.py": "39b3929fc0f508b55369c4c676e990eda5c02ed316de9ec728a1c285361df236",
+    "app/research/synthesis_agent.py": "d95b9fa3d36916c0b3de10c461f69282318baaecd91c4b5d2e6d3b406ec90c92"
+  },
+  "baseline_sha256": "423123c2dc6fa1cf81d36f4c3e90870a9a31c9e9993f7cfe8f6033305d413756",
+  "question": "Compare the visual-language connection mechanisms in BLIP-2 and Flamingo. Explain how each paper transfers visual features into its language model, covering BLIP-2's Q-Former and visual-language interface, and Flamingo's Perceiver Resampler and gated cross-attention. Identify the main differences in visual-language interaction, and cite prepared paper evidence for each finding. Mark unsupported details as evidence gaps.",
+  "paper_ids": [
+    "blip-2-2301.12597v1",
+    "flamingo-2204.14198v1"
+  ],
+  "formal_attempt": 1
+}

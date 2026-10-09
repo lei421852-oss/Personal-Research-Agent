@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "scope": "engineering_and_record_identity",
+  "original_files": {
+    "tracked_files": {
+      "checked": 501,
+      "mismatches": []
+    },
+    "untracked_files": {
+      "checked": 13,
+      "mismatches": []
+    },
+    "g2_runtime_artifacts": {
+      "checked": 10,
+      "mismatches": []
+    }
+  },
+  "frozen": {
+    "status": "PASS",
+    "frozen_files_checked": 292,
+    "protected_artifacts_checked": 47,
+    "frozen_mismatches": [],
+    "protected_artifact_mismatches": [],
+    "frozen_manifest_root_changed": false,
+    "provider_calls": 0
+  },
+  "f3_protected_checked": 60,
+  "f3_mismatches": [],
+  "report_exact_match": true,
+  "review_admission_checked": true,
+  "source_hashes_unchanged_since_formal_start": true,
+  "index_unchanged": true,
+  "worker_classes_observed": [
+    "PaperResearchWorker",
+    "PaperResearchWorker"
+  ],
+  "coverage_worker_enabled": false,
+  "citation_references": 12,
+  "unique_citations": 8,
+  "verified_claims": 4,
+  "cross_paper_comparison_count": 0,
+  "cross_paper_citation_validity_rate": null,
+  "comparison_detection_method": "Structural claim membership, paper scope, dimension and exact evidence-union checks; not semantic entailment.",
+  "final_structural_citation_violations": 0,
+  "full_execution_sha256": "676652cf760df8a80926a8b470c6cd63f631642412c73be052f013a4dd2208df",
+  "secret_values_found": 0,
+  "hidden_reasoning_fields_found": 0,
+  "independent_human_fact_review": "not_performed",
+  "verification_provider_calls": 0
+}
