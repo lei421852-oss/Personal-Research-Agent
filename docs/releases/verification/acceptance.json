@@ -16,7 +16,7 @@
     "failed": 0,
     "warnings": 1,
     "exit_code": 0,
-    "duration_seconds": 48.97,
+    "duration_seconds": 48.89,
     "includes_preexisting_untracked_diagnostic_tests": 12
   },
   "clean_checkout_offline_tests": {
@@ -52,5 +52,7 @@
     "Local resources excluded from Git; clean checkout differs from historical integration environment.",
     "Frozen package metadata remains 0.1.0; source checkout required.",
     "Original whole-snapshot verifier retains README mismatch; new release verifier validates explicit approved exception."
-  ]
+  ],
+  "post_merge_verification_commit": "d8fe20d871fbc80175fdf6b5b14740a91b22100e",
+  "remote_integration_audit": "docs/releases/verification/remote_integration.json"
 }

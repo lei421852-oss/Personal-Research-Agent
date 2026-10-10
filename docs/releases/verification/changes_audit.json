@@ -2,6 +2,7 @@
   "status": "PASS",
   "existing_files_changed": [
     "README.md",
+    "docs/README.md",
     "docs/architecture/react-workbench.md",
     "docs/architecture/system-overview.md",
     "docs/architecture/workbench.md",

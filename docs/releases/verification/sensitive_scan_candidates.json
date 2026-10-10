@@ -1,7 +1,7 @@
 {
   "status": "REVIEW_REQUIRED",
-  "worktree_files_scanned": 686,
-  "reachable_history_blobs_scanned": 904,
+  "worktree_files_scanned": 716,
+  "reachable_history_blobs_scanned": 966,
   "configured_credential_matches_or_pattern_candidates": [
     {
       "identity": "tests/test_workbench_language.py",

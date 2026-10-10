@@ -33,7 +33,7 @@
 
 | 检查 | 本轮实测与证据 |
 |---|---|
-| 完整 pytest | **1265 passed，0 failed，48.97 秒**；1 项既有 Starlette/httpx 弃用警告，[日志](verification/test_results.txt) |
+| 完整 pytest | **1265 passed，0 failed，48.89 秒**；1 项既有 Starlette/httpx 弃用警告，[日志](verification/test_results.txt) |
 | 干净已提交源码离线副本 | **1251 passed、1 skipped、1 deselected，49.20 秒**，[日志](verification/clean_checkout_offline_tests.txt) |
 | Ruff | PASS，[日志](verification/lint_results.txt) |
 | Python 格式 | 267 files already formatted，[日志](verification/format_results.txt) |
@@ -92,3 +92,6 @@
 ## 7. Git 交付核验
 
 发布以文档、演示材料、最终验收分别提交；完整提交与推送目标在最终用户交付记录中列出。最终标签解析的提交须与 GitHub `main` 相同；保留既有用户未跟踪文件，不执行 force push。推送后再通过远程 ref 核验，而不只依赖本地成功消息。
+
+
+远程 main 原有五个文档提交导致第一次非强制原子推送被拒绝，0 个 ref 更新。随后只获取并正常合并旧文档，保留全部原产物，唯一导航冲突融合双方链接。合并后再次完整测试1265通过；没有 force push 或生产代码变更。证据见 [remote_integration.json](verification/remote_integration.json)。尚未发布的本地 v1.0.0 标签随后指向最终复核提交。

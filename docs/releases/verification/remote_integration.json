@@ -1,0 +1,43 @@
+{
+  "remote_parent": "72c07a752703178fdc48e9dceaa5dc530fc9cbc6",
+  "merge_commit": "d8fe20d871fbc80175fdf6b5b14740a91b22100e",
+  "remote_documentation_commits_preserved": 5,
+  "paths_imported_or_navigation_merged": [
+    "PROJECT.md",
+    "docs/README.md",
+    "docs/acceptance/stage_g4_2/acceptance.json",
+    "docs/acceptance/stage_g4_2/acceptance_report.md",
+    "docs/acceptance/stage_g4_2/artifact_manifest.json",
+    "docs/acceptance/stage_g4_2/baseline.json",
+    "docs/acceptance/stage_g4_2/browser_check.json",
+    "docs/acceptance/stage_g4_2/clean_source_check.json",
+    "docs/acceptance/stage_g4_2/documentation_checks.json",
+    "docs/acceptance/stage_g4_2/engineering_checks.json",
+    "docs/acceptance/stage_g4_2/integrity_checks.json",
+    "docs/acceptance/stage_g4_2/lint_results.txt",
+    "docs/acceptance/stage_g4_2/remote_preflight.json",
+    "docs/acceptance/stage_g4_2/sensitive_scan.json",
+    "docs/acceptance/stage_g4_2/test_results.txt",
+    "docs/acceptance/stage_g4_2/tracked_test_results.txt",
+    "docs/project/README.md",
+    "docs/project/highlights.md",
+    "docs/project/images/g2-1-replay.png",
+    "docs/project/images/sources.json",
+    "docs/project/resume-and-interview.md",
+    "docs/project/showcase.md"
+  ],
+  "production_changes": [],
+  "navigation_conflicts_resolved": [
+    "docs/README.md"
+  ],
+  "remote_navigation_update": "PROJECT.md points to current homepage; old project documents preserved.",
+  "initial_atomic_push_exit_code": 1,
+  "initial_atomic_push_refs_updated": 0,
+  "force_push_used": false,
+  "post_merge_full_tests": {
+    "passed": 1265,
+    "failed": 0,
+    "seconds": 48.89
+  },
+  "remote_parent_is_ancestor": true
+}
