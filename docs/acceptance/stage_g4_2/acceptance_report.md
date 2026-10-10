@@ -50,10 +50,14 @@ G4.2重新运行了现有浏览器验证入口，明确禁用真实研究。8项
 | scripts.launch --check | UI/replay/real配置准备条件通过，0付费探测。 |
 | 现有冻结CLI | Stage E 292、原受保护产物47项通过，退出码0。 |
 | 浏览器首用/真实历史回放 | 8项PASS，新Provider/检索/Embedding为0。 |
+| 已跟踪源码测试 | 1143 passed，原12项未跟踪诊断测试未纳入发布；使用现有本地索引环境。 |
+| 干净源码启动 | Git源码副本无.env/无索引，UI与历史回放可用，G2.1原4论断/10缺失保留，正常退出。 |
 | 文档与指标 | 新文档相对链接、截图SHA及核心实验声明核对通过。 |
 | 敏感信息 | 当前文本和HEAD可达历史启发式扫描未发现疑似生产凭据/私钥，无被跟踪.env、无GitHub100MiB大文件阻塞；安全测试固定假Key单独记录。 |
 
 日志见 [engineering_checks.json](engineering_checks.json)、[测试](test_results.txt)、[静态](lint_results.txt)、[敏感扫描](sensitive_scan.json)、[文档审计](documentation_checks.json)。没有以旧G4.1测试报告代替本轮执行。一条既有Starlette/httpx弃用警告未造成失败，本阶段不改依赖。
+
+可复现性补充见 [clean_source_check.json](clean_source_check.json) 与 [已跟踪测试日志](tracked_test_results.txt)。本机1155包含12项用户原未跟踪诊断；发布源码为1143项，某项索引集成检查依赖未提交的本地SQLite索引。干净源码只复用本机已有依赖、清除Provider配置并验证回放，没有宣称全新环境安装或缺索引也能跑完整测试。因发现这一口径差异，额外增加一次文档/验收补充提交，不改代码、测试或原产物。
 
 ## 5. 文件保护与Git发布
 

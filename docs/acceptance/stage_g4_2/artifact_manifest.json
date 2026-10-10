@@ -2,7 +2,7 @@
   "stage": "G4.2",
   "source_head": "9e56ac22ca541c2dde0d2d8b656febc9b0d729f9",
   "document_commit": "6539ac51174f9e7a7d9d493326ac5d8854a7b232",
-  "artifact_count": 19,
+  "artifact_count": 21,
   "artifacts": [
     {
       "path": "PROJECT.md",
@@ -16,13 +16,13 @@
     },
     {
       "path": "docs/acceptance/stage_g4_2/acceptance.json",
-      "bytes": 1772,
-      "sha256": "0c28b08a84015f0e9ec751b251c085e7a7930bf717389ee2f34f75392cb4210b"
+      "bytes": 2620,
+      "sha256": "047e0847be8ac966897534fde8565f1d5c711ad15c8d9b2c8772ee6b305afa59"
     },
     {
       "path": "docs/acceptance/stage_g4_2/acceptance_report.md",
-      "bytes": 7151,
-      "sha256": "a85ff24fed0e324a0bfb94be9e71f9c88581f29732e6440beadb1fa2884ccd5e"
+      "bytes": 7933,
+      "sha256": "f1aa0f43087ea000ffb0ea353a18f817e4ed6d09387db435bbab0855c2f4a440"
     },
     {
       "path": "docs/acceptance/stage_g4_2/baseline.json",
@@ -35,9 +35,14 @@
       "sha256": "3baf85764384499788ffccea91e8f78c8a87a6f2e73f97c570430a3586f6fec8"
     },
     {
+      "path": "docs/acceptance/stage_g4_2/clean_source_check.json",
+      "bytes": 788,
+      "sha256": "a2b4e9b02940f99257909e9bf5ba7ac725a425056a00d7aa04b1a6bfe20ba657"
+    },
+    {
       "path": "docs/acceptance/stage_g4_2/documentation_checks.json",
-      "bytes": 32136,
-      "sha256": "ab6997a299b2f67b6bcbccec4c34c74f52aef9e1fd4d805d436e9bc4f5e2009a"
+      "bytes": 32881,
+      "sha256": "2714a3d6ae4ec7c614e0adb3081631c407866e5cff0e9bd98789f45307d7f380"
     },
     {
       "path": "docs/acceptance/stage_g4_2/engineering_checks.json",
@@ -70,9 +75,14 @@
       "sha256": "2c1c7cb1f1444172f08c50f92e32f9cc9cca9b5176d2ec33d6eb1101471d5970"
     },
     {
+      "path": "docs/acceptance/stage_g4_2/tracked_test_results.txt",
+      "bytes": 1812,
+      "sha256": "dd1d2a04e7142271cb15fff06e8da7832385812ed898d09496b1775aab3113b2"
+    },
+    {
       "path": "docs/project/README.md",
-      "bytes": 7804,
-      "sha256": "731f8a6578c5fb099295a334e7f37f7f336f66746ca82cfc07fdc3cda902d72a"
+      "bytes": 8358,
+      "sha256": "d29588df5c983b3b337db3009fcb0f15e404423c551000cda2b41e1e83ea953f"
     },
     {
       "path": "docs/project/highlights.md",
@@ -91,8 +101,8 @@
     },
     {
       "path": "docs/project/resume-and-interview.md",
-      "bytes": 18408,
-      "sha256": "8e23e8f29b0bb46e6cc95eca808900ed1ce5f7ce3365ca6d271c3625dce14d54"
+      "bytes": 18846,
+      "sha256": "6a5ab84b1dd404f1c6ad8f0c07bb3389f577707cb4b1c973acb681208a312cf9"
     },
     {
       "path": "docs/project/showcase.md",

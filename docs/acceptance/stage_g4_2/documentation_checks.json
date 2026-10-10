@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "checked_at": "2026-10-10T15:31:08.975873+08:00",
+  "checked_at": "2026-10-10T15:42:48.901309+08:00",
   "documents": [
     "PROJECT.md",
     "docs/README.md",
@@ -10,7 +10,7 @@
     "docs/project/showcase.md",
     "docs/acceptance/stage_g4_2/acceptance_report.md"
   ],
-  "local_links_checked": 199,
+  "local_links_checked": 203,
   "links": [
     {
       "document": "PROJECT.md",
@@ -303,6 +303,12 @@
     {
       "document": "docs/project/README.md",
       "target": "docs/reports/experiment-summary.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/acceptance/stage_g4_2/clean_source_check.json",
       "anchor": null,
       "exists": true
     },
@@ -663,6 +669,12 @@
     {
       "document": "docs/project/resume-and-interview.md",
       "target": "docs/architecture/workbench.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/acceptance/stage_g4_2/clean_source_check.json",
       "anchor": null,
       "exists": true
     },
@@ -1191,6 +1203,18 @@
     {
       "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
       "target": "docs/acceptance/stage_g4_2/documentation_checks.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_2/clean_source_check.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_2/tracked_test_results.txt",
       "anchor": null,
       "exists": true
     },
