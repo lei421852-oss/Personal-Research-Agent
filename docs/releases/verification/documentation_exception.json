@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "path": "README.md",
+  "authorization": "explicit_user_approval_2026-10-11",
+  "authorization_statement": "允许根 README 文档例外，保留历史 SHA",
+  "historical_tag": "stage-e-freeze-v1",
+  "historical_sha256": "ec3682b4e15768a8ce6e87f14268470fec822e506d07fd5306ac42f2bf861d43",
+  "release_sha256": "8549bd6a3da75fa292d5bbdd0625d206a2cf0bd7fa8c6bc2db6e0f8ffe3a6db0",
+  "scope": "Documentation only; no algorithm, data, historical manifest or test expectation exception."
+}

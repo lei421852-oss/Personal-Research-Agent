@@ -1,12 +1,14 @@
 # 工作台架构与事件契约
 
-G4.1 在冻结研究链外增加接口和运行管理，不改变各研究模块的语义规则。旧 `app.main`、原 API/UI 和历史数据不变；新入口为 [app.workbench](../../app/workbench.py)，启动为 [scripts.launch](../../scripts/launch.py)。
+本文更新至 G4.3。工作台在冻结研究链外增加接口和运行管理，不改变各研究模块的语义规则。旧 `app.main`、原 API/UI 和历史数据不变；新入口为 [app.workbench](../../app/workbench.py)，启动为 [scripts.launch](../../scripts/launch.py)。
 
 ```mermaid
 flowchart TD
     Web[原生 HTML / CSS / JS] --> API[独立 Research API]
     API --> Manager[ResearchRunManager]
-    Manager --> Live[WorkbenchRuntime]
+    Manager --> Main[ReActWorkbenchRuntime / 主 Agent]
+    Main -->|可选研究工具| Live[WorkbenchRuntime]
+    Main -->|直接 / 工具证据回答| Presenter
     Manager --> Replay[只读 ReplayRepository]
     Live --> Planner[真实 ResearchPlanner]
     Planner --> Chain[复用 run_protocol_case]
@@ -46,9 +48,9 @@ Worker 在原资源 Gate 内并发。引用校验在语义审核之前；Validat
 
 | 方法与路径 | 用途 |
 | --- | --- |
-| `GET /api/research/papers` | 实际有正文证据的 Prepared 论文。 |
+| `GET /api/research/papers` | Prepared 论文与本地 Catalog 元数据，可用性分别标记。 |
 | `GET /api/research/health` | UI / replay / real readiness。 |
-| `POST /api/research/runs` | question、2–3 个合法 paper_ids、可选 max_model_calls 1–200；202。 |
+| `POST /api/research/runs` | 只需 question；可选 1–3 个 Catalog paper_ids 与 max_model_calls 1–200；202。 |
 | `GET /api/research/runs/{run_id}` | 状态、取消请求、成本和报告可用性。 |
 | `GET /api/research/runs/{run_id}/events?after=0` | 严格递增序号与 next_cursor，旧事件不重复返回。 |
 | `GET /api/research/runs/{run_id}/report` | 公开报告 DTO 或真实部分诊断，无事实时不补写。 |
@@ -88,3 +90,12 @@ queued → running → completed / failed / cancelled。研究 completed 不保�
 前端使用textContent，论文和报告不能执行为HTML。报告只来自原ResearchReport，损坏引用显示report_invalid；未审核草稿不拼入最终事实。证据保留report_snapshot，当前Corpus匹配状态与模型passed/人审分别标记。
 
 工程测试、浏览器历史回放、实际启动验证分别记录；本阶段没有新的Provider研究。见 [使用指南](../guides/ui-quickstart.md) 与 [验收报告](../acceptance/stage_g4_1/acceptance_report.md)。
+
+
+## 当前默认交互与展示
+
+用户只输入问题，论文目录是只读资源展示。主 Agent 依据观察选择普通工具或研究工具；API 不负责选择论文。结果先呈现 direct_answer、引用和 limitations，再展开 detailed_report。
+
+当前静态前端根据实际事件自动选择线性轨迹 / 多 Agent 树。ResearchTool 或已记录的研究角色触发协作图；Worker、Validator、Reviewer 按公开论文或需求归属分支；未归属审核保留公共分支，未执行 Recovery 与缺失占位不伪装成真实节点。节点更新和点击详情均复用既有事件，不新增或改写研究动作。历史树是回放，不能证明本次实时执行。
+
+默认调用预算与协议自纠正详见[主 Agent 架构](react-workbench.md)，新环境要求见[Quickstart](../guides/quickstart.md)。

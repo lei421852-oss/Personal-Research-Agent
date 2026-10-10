@@ -1,5 +1,7 @@
 # 开发与使用指南
 
+当前用户入口及新环境步骤见 [v1.0.0 Quickstart](quickstart.md)。下文保留 Stage G1 的旧入口与开发细节，不代表当前工作台仍未接入多 Agent。
+
 本指南对应 Stage G1，基于真实配置和 CLI；默认从**源码仓库根目录**执行。第一次阅读可先看 [架构总览](../architecture/system-overview.md) 与 [工程清单](../architecture/engineering-inventory.md)。本轮仅执行帮助、只读校验、完整测试和现有静态检查，未执行以下安装、准备、索引或真实模型命令。
 
 ## 1. 环境与依赖
