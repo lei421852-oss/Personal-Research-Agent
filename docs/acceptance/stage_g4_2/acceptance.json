@@ -1,0 +1,53 @@
+{
+  "stage": "G4.2",
+  "status": "PASS",
+  "accepted_at": "2026-10-10T15:31:08.975873+08:00",
+  "scope": "工程/文档/本地版本发布，不是新的研究质量评测。",
+  "source_head": "9e56ac22ca541c2dde0d2d8b656febc9b0d729f9",
+  "branch": "release/stage-g4-2-final-delivery",
+  "project_homepage": "docs/project/README.md",
+  "root_navigation": "PROJECT.md",
+  "root_readme_preserved": true,
+  "tests": {
+    "passed": 1155,
+    "failed": 0,
+    "new_tests": 0,
+    "removed_tests": 0,
+    "warnings": 1,
+    "duration_seconds": 24.36
+  },
+  "ruff_exit_code": 0,
+  "formatter_exit_code": 0,
+  "formatted_python_files": 249,
+  "browser_check": {
+    "status": "PASS",
+    "checks": 8,
+    "provider_calls": 0
+  },
+  "documentation_checks": "documentation_checks.json",
+  "integrity_checks": "integrity_checks.json",
+  "sensitive_scan": "sensitive_scan.json",
+  "local_tag": {
+    "name": "v0.1.0-research-agent",
+    "type": "annotated",
+    "creation_policy": "after_all_checks_pass",
+    "verification": "final_delivery_record_and_git_refs"
+  },
+  "stage_e_original_tag_object": "2cfb1eda67f7fdf4f587f603556d789de1bc46e5",
+  "stage_e_tag_unchanged": true,
+  "push_authorized_by_user": true,
+  "push_target": "git@github.com:lei421852-oss/Personal-Research-Agent.git",
+  "original_origin_preserved": true,
+  "new_provider_calls": 0,
+  "quality_evaluations_rerun": 0,
+  "index_rebuilds": 0,
+  "semantic_changes": 0,
+  "blockers": [],
+  "known_limitations": [
+    "自动根README仍为冻结历史页，当前主页位于docs/project并有根PROJECT入口。",
+    "没有独立人审和新的UI付费端到端研究。",
+    "工作台仍为单进程内存管理，取消需drain。",
+    "原wheel打包范围未更改。"
+  ],
+  "next_stage_started": false
+}

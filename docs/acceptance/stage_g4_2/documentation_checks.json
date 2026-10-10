@@ -1,0 +1,1217 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-10-10T15:31:08.975873+08:00",
+  "documents": [
+    "PROJECT.md",
+    "docs/README.md",
+    "docs/project/README.md",
+    "docs/project/highlights.md",
+    "docs/project/resume-and-interview.md",
+    "docs/project/showcase.md",
+    "docs/acceptance/stage_g4_2/acceptance_report.md"
+  ],
+  "local_links_checked": 199,
+  "links": [
+    {
+      "document": "PROJECT.md",
+      "target": "docs/project/README.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "PROJECT.md",
+      "target": "docs/project/README.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "PROJECT.md",
+      "target": "docs/project/showcase.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "PROJECT.md",
+      "target": "docs/guides/ui-quickstart.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "PROJECT.md",
+      "target": "docs/project/highlights.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "PROJECT.md",
+      "target": "docs/reports/technical-report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "PROJECT.md",
+      "target": "docs/project/resume-and-interview.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "PROJECT.md",
+      "target": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "PROJECT.md",
+      "target": "README.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/project/README.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/project/showcase.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/project/highlights.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/project/resume-and-interview.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/guides/ui-quickstart.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/architecture/system-overview.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/architecture/engineering-inventory.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/guides/development.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/architecture/documentation-audit.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/acceptance/stage_g1/acceptance_report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "README.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/acceptance/stage_e_freeze/freeze_manifest.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/research-planner.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/async-research.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/evidence-review.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/research-recovery.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/research-synthesis.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/paper-discovery.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/query-expansion.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/paper-profiles.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/stage-e-evaluation.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/research-quality-benchmark.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/research-quality-execution.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/acceptance/quality_end_to_end/results/run_manifest.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/worker-coverage.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/acceptance/stage_f3_1_e/acceptance_report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/README.md",
+      "target": "docs/demos/README.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/project/README.md",
+      "anchor": "快速开始",
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/project/showcase.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/project/highlights.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/project/resume-and-interview.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/reports/technical-report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/project/images/g2-1-replay.png",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/project/showcase.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/architecture/system-overview.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/architecture/workbench.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": ".env.example",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/guides/development.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/guides/ui-quickstart.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/reports/experiment-summary.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/architecture/system-overview.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/architecture/workbench.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/guides/development.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/guides/ui-quickstart.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/reports/technical-report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/reports/experiment-summary.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/reports/design-decisions.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/demos/blip2-vs-flamingo/README.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/acceptance/stage_g2_1/acceptance_report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/demos/workbench-replay.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/project/showcase.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/project/highlights.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/project/resume-and-interview.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "README.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "PROJECT.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/README.md",
+      "target": "docs/README.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/planner.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/requirements.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/orchestrator.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/worker.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/review_runtime.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/synthesis_input.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/synthesis_runtime.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/workbench_runtime.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/protocol_runtime.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "docs/reports/experiment-summary.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/evidence/resolver.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/evidence/citations.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/review_validation.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/synthesis_input.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/synthesis_validator.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "docs/acceptance/stage_g2_1/comparison_summary.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "docs/reports/experiment-summary.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/runtime.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/async_tools.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/retry.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/worker_protocol.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/recovery_eligibility.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/recovery_orchestrator.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/run_manager.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/workbench_runtime.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "docs/reports/experiment-summary.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/run_events.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/run_presenter.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/run_replay.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "docs/architecture/workbench.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "docs/reports/experiment-summary.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "docs/reports/design-decisions.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "docs/acceptance/stage_g3/experiment_audit.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "app/research/coverage_worker.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/highlights.md",
+      "target": "scripts/run_worker_coverage_comparison.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/reports/technical-report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/reports/technical-report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/reports/experiment-summary.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/architecture/workbench.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/reports/technical-report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/reports/experiment-summary.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/reports/design-decisions.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/reports/experiment-summary.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/requirements.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/demos/blip2-vs-flamingo/g2-1-comparison.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/worker.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/worker_protocol.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/review_validation.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/worker.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/worker_protocol.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/reports/technical-report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/synthesis_input.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/review_validation.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/evidence/citations.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/reviewer.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/reports/experiment-summary.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/reviewer.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/reports/experiment-summary.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/retry.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/worker.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/recovery_eligibility.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/recovery_orchestrator.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/coverage_worker.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/acceptance/stage_f3_1_e/acceptance_report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/reports/design-decisions.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/acceptance/stage_g2_1/diagnosis.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/worker_protocol.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/protocol_runtime.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/acceptance/stage_g2_1/acceptance_report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/acceptance/stage_g2_1/comparison_summary.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/acceptance/quality_end_to_end/report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/reports/experiment-summary.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "eval/research_quality/scoring.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/reports/experiment-summary.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/reports/experiment-summary.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/acceptance/stage_f3_1_e/acceptance_report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/runtime.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/orchestrator.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/architecture/workbench.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/run_events.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/run_presenter.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/architecture/workbench.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/demos/workbench-replay.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/architecture/engineering-inventory.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/architecture/workbench.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/reports/technical-report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/reports/technical-report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/demos/README.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/reviewer.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/synthesis_input.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/synthesis_validator.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "app/research/synthesis_runtime.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/guides/ui-quickstart.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/reports/technical-report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/resume-and-interview.md",
+      "target": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/showcase.md",
+      "target": "docs/project/images/sources.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/showcase.md",
+      "target": "docs/acceptance/stage_g4_1/browser_check.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/showcase.md",
+      "target": "docs/project/images/g2-1-replay.png",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/showcase.md",
+      "target": "docs/acceptance/stage_g2_1/acceptance_report.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/showcase.md",
+      "target": "app/workbench.py",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/showcase.md",
+      "target": "docs/guides/ui-quickstart.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/showcase.md",
+      "target": "docs/guides/development.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/showcase.md",
+      "target": "docs/architecture/workbench.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/showcase.md",
+      "target": "docs/acceptance/stage_g4_1/screenshots/g2-failure-details.png",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/showcase.md",
+      "target": "docs/demos/blip2-vs-flamingo/failure-analysis.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/showcase.md",
+      "target": "docs/acceptance/stage_g4_1/screenshots/g2-1-evidence.png",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/showcase.md",
+      "target": "docs/acceptance/stage_g2_1/results/execution-record.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/showcase.md",
+      "target": "docs/acceptance/stage_g2_1/results/research-report.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/showcase.md",
+      "target": "docs/acceptance/stage_g2_1/results/execution-summary.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/showcase.md",
+      "target": "docs/acceptance/stage_g4_1/replay_manifest.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/showcase.md",
+      "target": "docs/reports/experiment-summary.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/project/showcase.md",
+      "target": "docs/guides/ui-quickstart.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "target": "docs/project/README.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "target": "PROJECT.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "target": "docs/README.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "target": "docs/project/showcase.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "target": "docs/project/images/sources.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "target": "docs/project/highlights.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "target": "docs/project/resume-and-interview.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_2/browser_check.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "target": "docs/reports/experiment-summary.md",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_2/engineering_checks.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_2/test_results.txt",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_2/lint_results.txt",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_2/sensitive_scan.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_2/documentation_checks.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_2/integrity_checks.json",
+      "anchor": null,
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_2/remote_preflight.json",
+      "anchor": null,
+      "exists": true
+    }
+  ],
+  "images_checked": 3,
+  "image_source": "real_G4_1_replay",
+  "core_metric_claims_matched_to_G3": true,
+  "root_readme_frozen_preserved": true,
+  "navigation_change": "docs/README.md only allowed existing-file change",
+  "issues": [],
+  "new_provider_calls": 0
+}
