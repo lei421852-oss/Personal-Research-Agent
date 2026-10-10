@@ -1,3 +1,5 @@
+> 当前默认入口：ReAct 主 Agent。只输入问题，多论文研究是可选工具；原 Prepared-only 选择/手选界面为历史说明。[自主编排架构](../architecture/react-workbench.md) / [使用指南](react-workbench.md)。
+
 # 多智能体研究工作台：安装、启动与使用
 
 本指南对应 Stage G4.2 中文动态工作台。界面复用 G2.1 原默认 Worker、协议适配、Reviewer、Recovery 和 Synthesis，不启用 F3.1 Coverage Worker。旧 `app.main` 单问题应用保持不变。

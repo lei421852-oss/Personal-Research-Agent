@@ -1,0 +1,212 @@
+{
+  "stage": "G4.2 ReAct Orchestration",
+  "status": "PASS",
+  "scope": "engineering_contracts_scripted_domain_integration_browser_and_existing_history_replay",
+  "accepted_at": "2026-10-10T21:45:27.194794+08:00",
+  "branch": "feature/stage-g4-2-react-orchestration",
+  "base_head": "1a941ad539bc1aaa371f9537be59a404070f29e1",
+  "tests": {
+    "baseline": 1220,
+    "passed": 1258,
+    "new": 38,
+    "removed": 0,
+    "failed": 0,
+    "warnings": 1,
+    "seconds": 47.91,
+    "exit_code": 0,
+    "preexisting_untracked_diagnostic_tests": 12,
+    "new_committed_source_test_count": 1246
+  },
+  "static_checks": {
+    "ruff": {
+      "command": [
+        "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+        "check",
+        "app",
+        "tests",
+        "scripts",
+        "eval"
+      ],
+      "exit_code": 0
+    },
+    "formatter": {
+      "command": [
+        "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+        "format",
+        "--check",
+        "app",
+        "tests",
+        "scripts",
+        "eval"
+      ],
+      "exit_code": 0
+    }
+  },
+  "runtime_paths": [
+    {
+      "execution_mode": "direct",
+      "answer_status": "answered",
+      "model_calls": 2,
+      "tool_calls": 0,
+      "main_decision_steps": 1,
+      "research_calls": 0,
+      "citations": 0
+    },
+    {
+      "execution_mode": "tools",
+      "answer_status": "answered",
+      "model_calls": 3,
+      "tool_calls": 1,
+      "main_decision_steps": 2,
+      "research_calls": 0,
+      "citations": 0
+    },
+    {
+      "execution_mode": "multi_agent_research",
+      "answer_status": "answered",
+      "model_calls": 12,
+      "tool_calls": 4,
+      "main_decision_steps": 3,
+      "research_calls": 1,
+      "citations": 2
+    }
+  ],
+  "browser": {
+    "status": "PASS",
+    "checks": [
+      "direct: 无论文选择、实际角色、答案首屏、中英文、刷新恢复、窄屏布局。",
+      "tools: 无论文选择、实际角色、答案首屏、中英文、刷新恢复、窄屏布局。",
+      "multi_agent_research: 无论文选择、实际角色、答案首屏、中英文、刷新恢复、窄屏布局。",
+      "G2/G2.1真实历史只读回放，原文和中文副本保留。"
+    ],
+    "page_errors": [],
+    "screenshots": [
+      {
+        "path": "scripted-direct.png",
+        "source": "scripted_domain_wiring"
+      },
+      {
+        "path": "scripted-tools.png",
+        "source": "scripted_domain_wiring"
+      },
+      {
+        "path": "scripted-multi_agent_research.png",
+        "source": "scripted_domain_wiring"
+      },
+      {
+        "path": "historical-g2.png",
+        "source": "existing_real_history_offline_replay"
+      },
+      {
+        "path": "historical-g2-1.png",
+        "source": "existing_real_history_offline_replay"
+      }
+    ],
+    "real_provider_calls": 0,
+    "new_real_research_runs": 0,
+    "embedding_calls": 0,
+    "index_rebuilds": 0,
+    "semantic_quality_verified": false
+  },
+  "protected_files": {
+    "status": "PASS",
+    "groups": {
+      "stage_e_frozen": {
+        "checked": 292,
+        "mismatches": []
+      },
+      "untracked_files": {
+        "checked": 13,
+        "mismatches": []
+      },
+      "historical_runtime_artifacts": {
+        "checked": 40,
+        "mismatches": []
+      },
+      "existing_index_files": {
+        "checked": 9,
+        "mismatches": [
+          "data/chroma/stage-e/25306326-0796-41ce-bb9d-dbe8b7a0f680/length.bin",
+          "data/chroma/stage-e/chroma.sqlite3"
+        ],
+        "comparison_scope": "older_chinese_ui_index_fingerprints_carried_into_initial_list",
+        "note": "Two byte hashes differ from the older reference. Current mtimes predate this task; actual launch preserves all 9 current files. No restoration or rebuild performed.",
+        "mismatch_details": [
+          {
+            "path": "data/chroma/stage-e/25306326-0796-41ce-bb9d-dbe8b7a0f680/length.bin",
+            "current_sha256": "dbb2d9861b6eb4e432cf74054f1aa49730dc807fa644357d6f4f56a3ecc1448e",
+            "mtime_utc": "2026-10-10T08:51:53.382432+00:00"
+          },
+          {
+            "path": "data/chroma/stage-e/chroma.sqlite3",
+            "current_sha256": "b097d4ede6fcf9d857c781b3033659aaa58c45e257597751262c4a89edce8703",
+            "mtime_utc": "2026-10-10T08:51:53.363651+00:00"
+          }
+        ],
+        "all_mismatch_mtimes_precede_task": true,
+        "current_source_binding": {
+          "record_count": 46,
+          "embedding_dimension": 1024
+        },
+        "current_launch_preserves_files": true
+      },
+      "paper_index_files": {
+        "checked": 5,
+        "mismatches": []
+      },
+      "profile_cache": {
+        "checked": 1,
+        "mismatches": []
+      },
+      "historical_tracked_data_reports_and_tests": {
+        "checked": 412,
+        "mismatches": []
+      },
+      "stage-e-freeze-v1": {
+        "expected": "2cfb1eda67f7fdf4f587f603556d789de1bc46e5",
+        "actual": "2cfb1eda67f7fdf4f587f603556d789de1bc46e5",
+        "unchanged": true
+      },
+      "v0.1.0-research-agent": {
+        "expected": "86afd9fd2b4cbce8fd71069c52057115dca2c25b",
+        "actual": "86afd9fd2b4cbce8fd71069c52057115dca2c25b",
+        "unchanged": true
+      }
+    },
+    "index_rebuilds": 0,
+    "profile_extraction_calls": 0,
+    "protected_artifacts_modified": false
+  },
+  "environment": {
+    "pydantic": "2.13.5",
+    "fastapi": "0.142.2",
+    "uvicorn": "0.54.0",
+    "openai": "2.54.0",
+    "chromadb": "1.5.9",
+    "torch": "2.13.0+cu130",
+    "transformers": "4.57.6",
+    "playwright": "1.63.0",
+    "python": "3.12.3",
+    "ruff": "ruff 0.16.5"
+  },
+  "real_provider_calls": 0,
+  "new_real_quality_runs": 0,
+  "embedding_calls": 0,
+  "index_rebuilds": 0,
+  "coverage_worker_default_enabled": false,
+  "core_agent_loop_modified": false,
+  "production_retrieval_modified": false,
+  "core_planner_worker_reviewer_recovery_synthesis_modified": false,
+  "known_limitations": [
+    "Initial index byte manifest reused an older reference: 2 existing-file hashes differ, predating this task; current launch is byte-preserving and 46 evidence records validate.",
+    "No new real-provider autonomous policy or Chinese semantic quality assessment.",
+    "Citation identity validation does not prove semantic entailment of new main-agent wording.",
+    "Main loop remains strict single-action; multiple actions stop safely.",
+    "25 local metadata documents, 5 prepared papers; no external live search.",
+    "Single-process history and soft cancellation waiting for synchronous dependencies.",
+    "Ruff verified with the preexisting local executable; project environment has no local Ruff executable."
+  ],
+  "remote_operations": 0,
+  "new_tags": 0,
+  "next_stage_started": false
+}

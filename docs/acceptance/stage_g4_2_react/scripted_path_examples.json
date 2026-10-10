@@ -1,0 +1,2309 @@
+[
+  {
+    "path": "direct",
+    "report": {
+      "title": "Answer to the user's question",
+      "markdown": "",
+      "paper_ids": [],
+      "verified_claims": [],
+      "missing_requirements": [],
+      "comparisons": [],
+      "diagnostics": {},
+      "human_review": "not_performed",
+      "status": "completed",
+      "question": "Explain an evidence-grounded agent.",
+      "original_question": "Explain an evidence-grounded agent.",
+      "execution_question": "Explain an evidence-grounded agent.",
+      "answer_status": "answered",
+      "direct_answer": "A direct answer to the user's question.",
+      "key_findings": [],
+      "citations": [],
+      "limitations": [
+        "General explanation; not checked against paper evidence or Reviewer."
+      ],
+      "detailed_report": null,
+      "execution_mode": "direct",
+      "source_references": [],
+      "answer_review_status": "not_independently_reviewed",
+      "evidence_level": "general",
+      "metrics": {
+        "model_calls": 2,
+        "llm_calls": 2,
+        "vlm_calls": 0,
+        "model_remaining": 198,
+        "tool_calls": 0,
+        "tool_remaining": 64,
+        "role_model_calls": {
+          "main_agent": 1,
+          "report_language": 1
+        },
+        "tool_usage": {},
+        "total_latency_ms": 29.56934900066699,
+        "main_tool_calls": 0,
+        "main_decision_steps": 1,
+        "research_calls": 0
+      },
+      "generation_degraded": false,
+      "language": {
+        "status": "translated",
+        "source_sha256": "4b764c09a59b01ee7b530c86f461596d6ec036eba20d8f99f55ef37c8aa8dccc",
+        "model_calls": 1,
+        "latency_ms": 0.0,
+        "issue_code": null,
+        "translation_source": "model",
+        "translation_review": "not_independently_reviewed"
+      },
+      "chinese_report": {
+        "title": "中文展示：Answer to the user's question",
+        "markdown": "# 中文展示：Answer to the user's question\n\n中文展示：Explain an evidence-grounded agent.\n\n## 直接回答\n\n中文展示：A direct answer to the user's question.\n\n## 已审核事实\n\n当前没有足够的已审核事实。\n\n## 证据缺口与失败状态\n\n没有记录缺失需求。\n\n## 跨论文比较\n\n原报告未形成已核验的跨论文比较，不据此补写比较结论。\n\n## 限制\n\n- 中文展示：General explanation; not checked against paper evidence or Reviewer.\n\n中文为字段级展示翻译，未进行独立人工事实审核；原始报告、引用和审核状态保持不变。",
+        "paper_ids": [],
+        "verified_claims": [],
+        "missing_requirements": [],
+        "comparisons": [],
+        "diagnostics": {},
+        "human_review": "not_performed",
+        "status": "completed",
+        "question": "中文展示：Explain an evidence-grounded agent.",
+        "original_question": "Explain an evidence-grounded agent.",
+        "execution_question": "Explain an evidence-grounded agent.",
+        "answer_status": "answered",
+        "direct_answer": "中文展示：A direct answer to the user's question.",
+        "key_findings": [],
+        "citations": [],
+        "limitations": [
+          "中文展示：General explanation; not checked against paper evidence or Reviewer."
+        ],
+        "detailed_report": null,
+        "execution_mode": "direct",
+        "source_references": [],
+        "answer_review_status": "not_independently_reviewed",
+        "evidence_level": "general",
+        "metrics": {
+          "model_calls": 2,
+          "llm_calls": 2,
+          "vlm_calls": 0,
+          "model_remaining": 198,
+          "tool_calls": 0,
+          "tool_remaining": 64,
+          "role_model_calls": {
+            "main_agent": 1,
+            "report_language": 1
+          },
+          "tool_usage": {},
+          "total_latency_ms": 29.56934900066699,
+          "main_tool_calls": 0,
+          "main_decision_steps": 1,
+          "research_calls": 0
+        },
+        "generation_degraded": false,
+        "language": {
+          "status": "pending"
+        },
+        "chinese_report": null
+      },
+      "trace": []
+    }
+  },
+  {
+    "path": "tools",
+    "report": {
+      "title": "Answer to the user's question",
+      "markdown": "",
+      "paper_ids": [],
+      "verified_claims": [],
+      "missing_requirements": [],
+      "comparisons": [],
+      "diagnostics": {},
+      "human_review": "not_performed",
+      "status": "completed",
+      "question": "Compare BLIP-2 and Flamingo design evidence.",
+      "original_question": "Compare BLIP-2 and Flamingo design evidence.",
+      "execution_question": "Compare BLIP-2 and Flamingo design evidence.",
+      "answer_status": "answered",
+      "direct_answer": "A direct answer to the user's question.",
+      "key_findings": [],
+      "citations": [],
+      "limitations": [
+        "Paper metadata discovery only; no prepared-body verification."
+      ],
+      "detailed_report": null,
+      "execution_mode": "tools",
+      "source_references": [
+        {
+          "paper_id": "blip-2-2301.12597v1",
+          "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+          "year": 2023,
+          "venue": "arXiv preprint",
+          "score": 1.0,
+          "abstract_snippet": "BLIP-2 reduces vision-language training costs by retaining pretrained image encoders and language models as frozen components. A lightweight querying Transformer bridges them through successive representation-learning and generative-training stages. The resulting model supports v",
+          "paper_discovered": true,
+          "paper_evidence_available": true,
+          "retrieved_by": [
+            {
+              "query": "Compare BLIP-2 and Flamingo design evidence.",
+              "rank": 1,
+              "score": 1.0
+            }
+          ],
+          "source_kind": "paper_metadata"
+        },
+        {
+          "paper_id": "flamingo-2204.14198v1",
+          "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+          "year": 2022,
+          "venue": "arXiv preprint",
+          "score": 1.0,
+          "abstract_snippet": "Flamingo connects pretrained visual and language components to process images or videos interleaved with text. Training on multimodal web sequences enables adaptation from a small number of prompted examples. Evaluation covers image and video understanding, including visual quest",
+          "paper_discovered": true,
+          "paper_evidence_available": true,
+          "retrieved_by": [
+            {
+              "query": "Compare BLIP-2 and Flamingo design evidence.",
+              "rank": 2,
+              "score": 1.0
+            }
+          ],
+          "source_kind": "paper_metadata"
+        }
+      ],
+      "answer_review_status": "not_independently_reviewed",
+      "evidence_level": "metadata",
+      "metrics": {
+        "model_calls": 3,
+        "llm_calls": 3,
+        "vlm_calls": 0,
+        "model_remaining": 197,
+        "tool_calls": 1,
+        "tool_remaining": 63,
+        "role_model_calls": {
+          "main_agent": 2,
+          "report_language": 1
+        },
+        "tool_usage": {
+          "main": 1
+        },
+        "total_latency_ms": 47.94568400029675,
+        "main_tool_calls": 1,
+        "main_decision_steps": 2,
+        "research_calls": 0
+      },
+      "generation_degraded": false,
+      "language": {
+        "status": "translated",
+        "source_sha256": "0c95892d112dba420955542cc3e7385963821d639d76922480d1147f44fb0eb5",
+        "model_calls": 1,
+        "latency_ms": 0.0,
+        "issue_code": null,
+        "translation_source": "model",
+        "translation_review": "not_independently_reviewed"
+      },
+      "chinese_report": {
+        "title": "中文展示：Answer to the user's question",
+        "markdown": "# 中文展示：Answer to the user's question\n\n中文展示：Compare BLIP-2 and Flamingo design evidence.\n\n## 直接回答\n\n中文展示：A direct answer to the user's question.\n\n## 已审核事实\n\n当前没有足够的已审核事实。\n\n## 证据缺口与失败状态\n\n没有记录缺失需求。\n\n## 跨论文比较\n\n原报告未形成已核验的跨论文比较，不据此补写比较结论。\n\n## 限制\n\n- 中文展示：Paper metadata discovery only; no prepared-body verification.\n\n中文为字段级展示翻译，未进行独立人工事实审核；原始报告、引用和审核状态保持不变。",
+        "paper_ids": [],
+        "verified_claims": [],
+        "missing_requirements": [],
+        "comparisons": [],
+        "diagnostics": {},
+        "human_review": "not_performed",
+        "status": "completed",
+        "question": "中文展示：Compare BLIP-2 and Flamingo design evidence.",
+        "original_question": "Compare BLIP-2 and Flamingo design evidence.",
+        "execution_question": "Compare BLIP-2 and Flamingo design evidence.",
+        "answer_status": "answered",
+        "direct_answer": "中文展示：A direct answer to the user's question.",
+        "key_findings": [],
+        "citations": [],
+        "limitations": [
+          "中文展示：Paper metadata discovery only; no prepared-body verification."
+        ],
+        "detailed_report": null,
+        "execution_mode": "tools",
+        "source_references": [
+          {
+            "paper_id": "blip-2-2301.12597v1",
+            "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+            "year": 2023,
+            "venue": "arXiv preprint",
+            "score": 1.0,
+            "abstract_snippet": "BLIP-2 reduces vision-language training costs by retaining pretrained image encoders and language models as frozen components. A lightweight querying Transformer bridges them through successive representation-learning and generative-training stages. The resulting model supports v",
+            "paper_discovered": true,
+            "paper_evidence_available": true,
+            "retrieved_by": [
+              {
+                "query": "Compare BLIP-2 and Flamingo design evidence.",
+                "rank": 1,
+                "score": 1.0
+              }
+            ],
+            "source_kind": "paper_metadata"
+          },
+          {
+            "paper_id": "flamingo-2204.14198v1",
+            "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+            "year": 2022,
+            "venue": "arXiv preprint",
+            "score": 1.0,
+            "abstract_snippet": "Flamingo connects pretrained visual and language components to process images or videos interleaved with text. Training on multimodal web sequences enables adaptation from a small number of prompted examples. Evaluation covers image and video understanding, including visual quest",
+            "paper_discovered": true,
+            "paper_evidence_available": true,
+            "retrieved_by": [
+              {
+                "query": "Compare BLIP-2 and Flamingo design evidence.",
+                "rank": 2,
+                "score": 1.0
+              }
+            ],
+            "source_kind": "paper_metadata"
+          }
+        ],
+        "answer_review_status": "not_independently_reviewed",
+        "evidence_level": "metadata",
+        "metrics": {
+          "model_calls": 3,
+          "llm_calls": 3,
+          "vlm_calls": 0,
+          "model_remaining": 197,
+          "tool_calls": 1,
+          "tool_remaining": 63,
+          "role_model_calls": {
+            "main_agent": 2,
+            "report_language": 1
+          },
+          "tool_usage": {
+            "main": 1
+          },
+          "total_latency_ms": 47.94568400029675,
+          "main_tool_calls": 1,
+          "main_decision_steps": 2,
+          "research_calls": 0
+        },
+        "generation_degraded": false,
+        "language": {
+          "status": "pending"
+        },
+        "chinese_report": null
+      },
+      "trace": [
+        {
+          "tool_call_id": "main-1",
+          "tool_name": "search_papers",
+          "arguments": {
+            "query": "Compare BLIP-2 and Flamingo design evidence.",
+            "top_k": 2
+          },
+          "status": "success",
+          "latency_ms": 3.2712870015529916,
+          "result_count": 2,
+          "retrieved_paper_ids": [
+            "blip-2-2301.12597v1",
+            "flamingo-2204.14198v1"
+          ],
+          "failure": null
+        }
+      ]
+    }
+  },
+  {
+    "path": "multi_agent_research",
+    "report": {
+      "status": "completed",
+      "title": "Evidence-grounded research report",
+      "question": "Compare BLIP-2 and Flamingo design evidence.",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "flamingo-2204.14198v1"
+      ],
+      "markdown": "# Evidence-grounded research report\n\nCompare BLIP-2 and Flamingo design evidence.\n\nStatus: `completed`\n\n2 of 2 planned requirements have reviewed evidence; 0 remain missing.\n\n## Design · Verified findings\n\n### blip-2-2301.12597v1\n\nRequirement: `req_5022dd88074f74df19f17e80ba08da91` · Status: `verified`\n\nThe cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.\n\nClaim: `claim_e66f10a2ee183797d5dcc49fc118d239`\n\nSources:\n\n- `ev_9eac712dd806552d2b4d4d2e01e0f117` · blip-2-2301.12597v1 · Page 1\n\n### flamingo-2204.14198v1\n\nRequirement: `req_3dd5db247868d4ca359e6660b07a291f` · Status: `verified`\n\nUnifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.\n\nClaim: `claim_d33a835bd567d2629c41e494cfa1801a`\n\nSources:\n\n- `ev_218bd889fec22dc20b36a380b0e0fb62` · flamingo-2204.14198v1 · Page 4\n\nSide-by-side verified claims: `claim_e66f10a2ee183797d5dcc49fc118d239`, `claim_d33a835bd567d2629c41e494cfa1801a`\n\n## Metrics\n\n```json\n{\n  \"total_requirements\": 2,\n  \"verified_requirements\": 2,\n  \"missing_requirements\": 0,\n  \"rejected_requirements\": 0,\n  \"resolved_requirements\": 2,\n  \"reviewed_requirements\": 2,\n  \"citation_validation_failures\": 0,\n  \"synthesis_model_calls\": 1,\n  \"protocol_corrections\": 0,\n  \"provider_retries\": 0,\n  \"synthesis_latency_ms\": 3.9495099990745075,\n  \"resolution_rate\": 1.0,\n  \"evidence_coverage\": 1.0,\n  \"review_pass_rate\": 1.0,\n  \"report_generation_attempts\": 1,\n  \"report_generation_successes\": 1,\n  \"report_generation_success_rate\": 1.0,\n  \"report_status\": \"completed\",\n  \"degraded_generation\": false\n}\n```\n\n## Limitations\n\n- Only reviewed claims and prepared evidence are factual report content.\n- Structural citation validation does not prove semantic entailment or model-review correctness.\n- Missing cells are not completed from paper profiles or model knowledge.\n",
+      "verified_claims": [
+        {
+          "claim_id": "claim_e66f10a2ee183797d5dcc49fc118d239",
+          "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "design",
+          "text": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+          "evidence": [
+            {
+              "evidence_id": "ev_9eac712dd806552d2b4d4d2e01e0f117",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 1,
+              "modality": "text",
+              "text": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+              "caption": null,
+              "figure_id": null,
+              "source": "report_snapshot",
+              "corpus_check": "not_checked"
+            }
+          ],
+          "review_status": "passed",
+          "evidence_ids": [
+            "ev_9eac712dd806552d2b4d4d2e01e0f117"
+          ]
+        },
+        {
+          "claim_id": "claim_d33a835bd567d2629c41e494cfa1801a",
+          "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "design",
+          "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+          "evidence": [
+            {
+              "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 4,
+              "modality": "text",
+              "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+              "caption": null,
+              "figure_id": null,
+              "source": "report_snapshot",
+              "corpus_check": "not_checked"
+            }
+          ],
+          "review_status": "passed",
+          "evidence_ids": [
+            "ev_218bd889fec22dc20b36a380b0e0fb62"
+          ]
+        }
+      ],
+      "missing_requirements": [],
+      "comparisons": [
+        {
+          "relation": "side_by_side",
+          "paper_ids": [
+            "blip-2-2301.12597v1",
+            "flamingo-2204.14198v1"
+          ],
+          "claim_ids": [
+            "claim_e66f10a2ee183797d5dcc49fc118d239",
+            "claim_d33a835bd567d2629c41e494cfa1801a"
+          ],
+          "evidence_ids": [
+            "ev_218bd889fec22dc20b36a380b0e0fb62",
+            "ev_9eac712dd806552d2b4d4d2e01e0f117"
+          ],
+          "dimension_id": "design"
+        }
+      ],
+      "limitations": [
+        "Citation identity checks do not prove the main answer's semantic entailment or independent review.",
+        "Only reviewed claims and prepared evidence are factual report content.",
+        "Structural citation validation does not prove semantic entailment or model-review correctness.",
+        "Missing cells are not completed from paper profiles or model knowledge."
+      ],
+      "metrics": {
+        "total_requirements": 2,
+        "verified_requirements": 2,
+        "missing_requirements": 0,
+        "rejected_requirements": 0,
+        "resolved_requirements": 2,
+        "reviewed_requirements": 2,
+        "citation_validation_failures": 0,
+        "synthesis_model_calls": 1,
+        "protocol_corrections": 0,
+        "provider_retries": 0,
+        "synthesis_latency_ms": 3.9495099990745075,
+        "resolution_rate": 1.0,
+        "evidence_coverage": 1.0,
+        "review_pass_rate": 1.0,
+        "report_generation_attempts": 1,
+        "report_generation_successes": 1,
+        "report_generation_success_rate": 1.0,
+        "report_status": "completed",
+        "degraded_generation": false,
+        "model_calls": 12,
+        "model_calls_scope": "all_physical_model_attempts_including_vlm",
+        "tool_calls": 4,
+        "total_latency_ms": 675.1699919987004,
+        "vlm_calls": 0,
+        "llm_calls": 12,
+        "model_remaining": 188,
+        "tool_remaining": 60,
+        "role_model_calls": {
+          "main_agent": 3,
+          "planner": 1,
+          "worker": 4,
+          "reviewer": 2,
+          "synthesis": 1,
+          "report_language": 1
+        },
+        "tool_usage": {
+          "main": 2,
+          "research": 2
+        },
+        "main_tool_calls": 2,
+        "main_decision_steps": 3,
+        "research_calls": 1
+      },
+      "human_review": "not_performed",
+      "diagnostics": {
+        "planner": {
+          "candidate_paper_count": 2,
+          "error_code": null,
+          "status": "success",
+          "requirement_count": 2,
+          "model_calls": 1,
+          "events": [
+            "planner_started",
+            "planner_completed"
+          ],
+          "latency_ms": 2.850099997885991,
+          "worker_task_count": 2,
+          "dimension_ids": [
+            "design"
+          ],
+          "dimension_count": 1,
+          "dimensions": [
+            {
+              "dimension_id": "design",
+              "description": "Investigate design.",
+              "research_question": "What design does this paper document?",
+              "name": "Design"
+            }
+          ],
+          "paper_ids": [
+            "blip-2-2301.12597v1",
+            "flamingo-2204.14198v1"
+          ]
+        },
+        "workers": [
+          {
+            "observed_evidence_ids": [
+              "ev_9eac712dd806552d2b4d4d2e01e0f117"
+            ],
+            "latency_ms": 60.23502699827077,
+            "attempts": 1,
+            "status": "completed",
+            "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+            "paper_id": "blip-2-2301.12597v1",
+            "requirements": [
+              {
+                "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+                "dimension_id": "design",
+                "status": "supported",
+                "paper_id": "blip-2-2301.12597v1",
+                "required": true,
+                "question": "What design does this paper document?",
+                "evidence_ids": [
+                  "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                ],
+                "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions."
+              }
+            ],
+            "trace": {
+              "protocol_corrections": 0,
+              "dependency_calls": 3,
+              "status": "completed",
+              "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+              "retried_dependency_calls": 0,
+              "llm_calls": 2,
+              "resolved_count": 1,
+              "paper_id": "blip-2-2301.12597v1",
+              "vlm_tool_attempts": 0,
+              "requirement_count": 1,
+              "model_calls": 2,
+              "tool_calls": 1,
+              "latency_ms": 60.23502699827077,
+              "retry_count": 0,
+              "actions": [
+                {
+                  "status": "success",
+                  "summary": "Retrieved 1 text evidence items.",
+                  "investigated_requirement_ids": [
+                    "req_5022dd88074f74df19f17e80ba08da91"
+                  ],
+                  "evidence_ids": [
+                    "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                  ],
+                  "issue_code": null,
+                  "step": 1,
+                  "tool_name": "search_text",
+                  "latency_ms": 7.919887997559272,
+                  "protocol_recovery": false,
+                  "last_new_evidence_count": 1,
+                  "arguments": {
+                    "top_k": 1,
+                    "paper_ids": [
+                      "blip-2-2301.12597v1"
+                    ],
+                    "query": "Prepared design evidence"
+                  }
+                },
+                {
+                  "status": "success",
+                  "summary": "Resolved 1 paper-local requirements.",
+                  "investigated_requirement_ids": [],
+                  "evidence_ids": [
+                    "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                  ],
+                  "issue_code": null,
+                  "step": 2,
+                  "tool_name": "resolve_requirement",
+                  "latency_ms": 0.3683459981402848,
+                  "protocol_recovery": false,
+                  "last_new_evidence_count": 1,
+                  "arguments": {
+                    "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+                    "status": "supported",
+                    "evidence_ids": [
+                      "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                    ]
+                  }
+                }
+              ]
+            },
+            "error": null
+          },
+          {
+            "observed_evidence_ids": [
+              "ev_218bd889fec22dc20b36a380b0e0fb62"
+            ],
+            "latency_ms": 56.97016100020846,
+            "attempts": 1,
+            "status": "completed",
+            "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+            "paper_id": "flamingo-2204.14198v1",
+            "requirements": [
+              {
+                "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+                "dimension_id": "design",
+                "status": "supported",
+                "paper_id": "flamingo-2204.14198v1",
+                "required": true,
+                "question": "What design does this paper document?",
+                "evidence_ids": [
+                  "ev_218bd889fec22dc20b36a380b0e0fb62"
+                ],
+                "claim": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance."
+              }
+            ],
+            "trace": {
+              "protocol_corrections": 0,
+              "dependency_calls": 3,
+              "status": "completed",
+              "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+              "retried_dependency_calls": 0,
+              "llm_calls": 2,
+              "resolved_count": 1,
+              "paper_id": "flamingo-2204.14198v1",
+              "vlm_tool_attempts": 0,
+              "requirement_count": 1,
+              "model_calls": 2,
+              "tool_calls": 1,
+              "latency_ms": 56.97016100020846,
+              "retry_count": 0,
+              "actions": [
+                {
+                  "status": "success",
+                  "summary": "Retrieved 1 text evidence items.",
+                  "investigated_requirement_ids": [
+                    "req_3dd5db247868d4ca359e6660b07a291f"
+                  ],
+                  "evidence_ids": [
+                    "ev_218bd889fec22dc20b36a380b0e0fb62"
+                  ],
+                  "issue_code": null,
+                  "step": 1,
+                  "tool_name": "search_text",
+                  "latency_ms": 26.325244001782266,
+                  "protocol_recovery": false,
+                  "last_new_evidence_count": 1,
+                  "arguments": {
+                    "top_k": 1,
+                    "paper_ids": [
+                      "flamingo-2204.14198v1"
+                    ],
+                    "query": "Prepared design evidence"
+                  }
+                },
+                {
+                  "status": "success",
+                  "summary": "Resolved 1 paper-local requirements.",
+                  "investigated_requirement_ids": [],
+                  "evidence_ids": [
+                    "ev_218bd889fec22dc20b36a380b0e0fb62"
+                  ],
+                  "issue_code": null,
+                  "step": 2,
+                  "tool_name": "resolve_requirement",
+                  "latency_ms": 0.3932409999833908,
+                  "protocol_recovery": false,
+                  "last_new_evidence_count": 1,
+                  "arguments": {
+                    "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+                    "status": "supported",
+                    "evidence_ids": [
+                      "ev_218bd889fec22dc20b36a380b0e0fb62"
+                    ]
+                  }
+                }
+              ]
+            },
+            "error": null
+          }
+        ],
+        "reviews": [
+          {
+            "reason_code": "evidence_supports_claim",
+            "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+            "status": "passed",
+            "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+            "paper_id": "blip-2-2301.12597v1",
+            "skip_reason": null,
+            "evidence_ids": [
+              "ev_9eac712dd806552d2b4d4d2e01e0f117"
+            ],
+            "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+            "validation_status": "passed",
+            "trace": {
+              "model_calls": 1,
+              "latency_ms": 6.757917999493657,
+              "retry_count": 0
+            },
+            "issue": null
+          },
+          {
+            "reason_code": "evidence_supports_claim",
+            "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+            "status": "passed",
+            "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+            "paper_id": "flamingo-2204.14198v1",
+            "skip_reason": null,
+            "evidence_ids": [
+              "ev_218bd889fec22dc20b36a380b0e0fb62"
+            ],
+            "claim": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+            "validation_status": "passed",
+            "trace": {
+              "model_calls": 1,
+              "latency_ms": 5.216126999584958,
+              "retry_count": 0
+            },
+            "issue": null
+          }
+        ],
+        "recovery": {
+          "reserved_budget": {
+            "model_calls": 5,
+            "tool_calls": 0
+          },
+          "recovery_eligible_count": 0,
+          "recovery_rounds_used": 0,
+          "recovery_conversion_rate": null,
+          "additional_model_calls": 1,
+          "prior_usage": {
+            "model_calls": 6,
+            "tool_calls": 2
+          },
+          "recovery_skipped_count": 2,
+          "recovery_attempted_count": 0,
+          "additional_tool_calls": 0,
+          "research_usage": {
+            "model_calls": 7,
+            "tool_calls": 2
+          },
+          "recovery_latency_ms": 6.12128099965048,
+          "recovery_passed_count": 0,
+          "recovery_failed_count": 0,
+          "eligibility": [
+            {
+              "reason_code": "review_passed",
+              "eligible": false,
+              "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+              "paper_id": "blip-2-2301.12597v1"
+            },
+            {
+              "reason_code": "review_passed",
+              "eligible": false,
+              "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+              "paper_id": "flamingo-2204.14198v1"
+            }
+          ],
+          "tasks": [],
+          "final_requirements": [
+            {
+              "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+              "dimension_id": "design",
+              "status": "supported",
+              "paper_id": "blip-2-2301.12597v1",
+              "required": true,
+              "question": "What design does this paper document?",
+              "evidence_ids": [
+                "ev_9eac712dd806552d2b4d4d2e01e0f117"
+              ],
+              "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions."
+            },
+            {
+              "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+              "dimension_id": "design",
+              "status": "supported",
+              "paper_id": "flamingo-2204.14198v1",
+              "required": true,
+              "question": "What design does this paper document?",
+              "evidence_ids": [
+                "ev_218bd889fec22dc20b36a380b0e0fb62"
+              ],
+              "claim": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance."
+            }
+          ],
+          "final_reviews": [
+            {
+              "reason_code": "evidence_supports_claim",
+              "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+              "status": "passed",
+              "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+              "paper_id": "blip-2-2301.12597v1",
+              "skip_reason": null,
+              "evidence_ids": [
+                "ev_9eac712dd806552d2b4d4d2e01e0f117"
+              ],
+              "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+              "validation_status": "passed"
+            },
+            {
+              "reason_code": "evidence_supports_claim",
+              "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+              "status": "passed",
+              "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+              "paper_id": "flamingo-2204.14198v1",
+              "skip_reason": null,
+              "evidence_ids": [
+                "ev_218bd889fec22dc20b36a380b0e0fb62"
+              ],
+              "claim": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+              "validation_status": "passed"
+            }
+          ]
+        }
+      },
+      "generation_degraded": false,
+      "original_question": "Compare BLIP-2 and Flamingo design evidence.",
+      "execution_question": "Compare BLIP-2 and Flamingo design evidence.",
+      "answer_status": "answered",
+      "direct_answer": "A direct answer to the user's question.",
+      "key_findings": [
+        {
+          "text": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+          "claim_id": "claim_e66f10a2ee183797d5dcc49fc118d239",
+          "paper_id": "blip-2-2301.12597v1",
+          "evidence_ids": [
+            "ev_9eac712dd806552d2b4d4d2e01e0f117"
+          ],
+          "review_status": "passed"
+        },
+        {
+          "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+          "claim_id": "claim_d33a835bd567d2629c41e494cfa1801a",
+          "paper_id": "flamingo-2204.14198v1",
+          "evidence_ids": [
+            "ev_218bd889fec22dc20b36a380b0e0fb62"
+          ],
+          "review_status": "passed"
+        }
+      ],
+      "citations": [
+        {
+          "evidence_id": "ev_9eac712dd806552d2b4d4d2e01e0f117",
+          "paper_id": "blip-2-2301.12597v1",
+          "page": 1,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+          "paper_id": "flamingo-2204.14198v1",
+          "page": 4,
+          "figure_id": null
+        }
+      ],
+      "detailed_report": {
+        "status": "completed",
+        "title": "Evidence-grounded research report",
+        "question": "Compare BLIP-2 and Flamingo design evidence.",
+        "paper_ids": [
+          "blip-2-2301.12597v1",
+          "flamingo-2204.14198v1"
+        ],
+        "markdown": "# Evidence-grounded research report\n\nCompare BLIP-2 and Flamingo design evidence.\n\nStatus: `completed`\n\n2 of 2 planned requirements have reviewed evidence; 0 remain missing.\n\n## Design · Verified findings\n\n### blip-2-2301.12597v1\n\nRequirement: `req_5022dd88074f74df19f17e80ba08da91` · Status: `verified`\n\nThe cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.\n\nClaim: `claim_e66f10a2ee183797d5dcc49fc118d239`\n\nSources:\n\n- `ev_9eac712dd806552d2b4d4d2e01e0f117` · blip-2-2301.12597v1 · Page 1\n\n### flamingo-2204.14198v1\n\nRequirement: `req_3dd5db247868d4ca359e6660b07a291f` · Status: `verified`\n\nUnifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.\n\nClaim: `claim_d33a835bd567d2629c41e494cfa1801a`\n\nSources:\n\n- `ev_218bd889fec22dc20b36a380b0e0fb62` · flamingo-2204.14198v1 · Page 4\n\nSide-by-side verified claims: `claim_e66f10a2ee183797d5dcc49fc118d239`, `claim_d33a835bd567d2629c41e494cfa1801a`\n\n## Metrics\n\n```json\n{\n  \"total_requirements\": 2,\n  \"verified_requirements\": 2,\n  \"missing_requirements\": 0,\n  \"rejected_requirements\": 0,\n  \"resolved_requirements\": 2,\n  \"reviewed_requirements\": 2,\n  \"citation_validation_failures\": 0,\n  \"synthesis_model_calls\": 1,\n  \"protocol_corrections\": 0,\n  \"provider_retries\": 0,\n  \"synthesis_latency_ms\": 3.9495099990745075,\n  \"resolution_rate\": 1.0,\n  \"evidence_coverage\": 1.0,\n  \"review_pass_rate\": 1.0,\n  \"report_generation_attempts\": 1,\n  \"report_generation_successes\": 1,\n  \"report_generation_success_rate\": 1.0,\n  \"report_status\": \"completed\",\n  \"degraded_generation\": false\n}\n```\n\n## Limitations\n\n- Only reviewed claims and prepared evidence are factual report content.\n- Structural citation validation does not prove semantic entailment or model-review correctness.\n- Missing cells are not completed from paper profiles or model knowledge.\n",
+        "verified_claims": [
+          {
+            "claim_id": "claim_e66f10a2ee183797d5dcc49fc118d239",
+            "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+            "paper_id": "blip-2-2301.12597v1",
+            "dimension_id": "design",
+            "text": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+            "evidence": [
+              {
+                "evidence_id": "ev_9eac712dd806552d2b4d4d2e01e0f117",
+                "paper_id": "blip-2-2301.12597v1",
+                "page": 1,
+                "modality": "text",
+                "text": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+                "caption": null,
+                "figure_id": null,
+                "source": "report_snapshot",
+                "corpus_check": "not_checked"
+              }
+            ],
+            "review_status": "passed",
+            "evidence_ids": [
+              "ev_9eac712dd806552d2b4d4d2e01e0f117"
+            ]
+          },
+          {
+            "claim_id": "claim_d33a835bd567d2629c41e494cfa1801a",
+            "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+            "paper_id": "flamingo-2204.14198v1",
+            "dimension_id": "design",
+            "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+            "evidence": [
+              {
+                "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+                "paper_id": "flamingo-2204.14198v1",
+                "page": 4,
+                "modality": "text",
+                "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+                "caption": null,
+                "figure_id": null,
+                "source": "report_snapshot",
+                "corpus_check": "not_checked"
+              }
+            ],
+            "review_status": "passed",
+            "evidence_ids": [
+              "ev_218bd889fec22dc20b36a380b0e0fb62"
+            ]
+          }
+        ],
+        "missing_requirements": [],
+        "comparisons": [
+          {
+            "relation": "side_by_side",
+            "paper_ids": [
+              "blip-2-2301.12597v1",
+              "flamingo-2204.14198v1"
+            ],
+            "claim_ids": [
+              "claim_e66f10a2ee183797d5dcc49fc118d239",
+              "claim_d33a835bd567d2629c41e494cfa1801a"
+            ],
+            "evidence_ids": [
+              "ev_218bd889fec22dc20b36a380b0e0fb62",
+              "ev_9eac712dd806552d2b4d4d2e01e0f117"
+            ],
+            "dimension_id": "design"
+          }
+        ],
+        "limitations": [
+          "Only reviewed claims and prepared evidence are factual report content.",
+          "Structural citation validation does not prove semantic entailment or model-review correctness.",
+          "Missing cells are not completed from paper profiles or model knowledge."
+        ],
+        "metrics": {
+          "total_requirements": 2,
+          "verified_requirements": 2,
+          "missing_requirements": 0,
+          "rejected_requirements": 0,
+          "resolved_requirements": 2,
+          "reviewed_requirements": 2,
+          "citation_validation_failures": 0,
+          "synthesis_model_calls": 1,
+          "protocol_corrections": 0,
+          "provider_retries": 0,
+          "synthesis_latency_ms": 3.9495099990745075,
+          "resolution_rate": 1.0,
+          "evidence_coverage": 1.0,
+          "review_pass_rate": 1.0,
+          "report_generation_attempts": 1,
+          "report_generation_successes": 1,
+          "report_generation_success_rate": 1.0,
+          "report_status": "completed",
+          "degraded_generation": false,
+          "model_calls": 8,
+          "model_calls_scope": "all_physical_model_attempts_including_vlm",
+          "tool_calls": 2,
+          "total_latency_ms": 142.07993800300756,
+          "vlm_calls": 0,
+          "llm_calls": 8
+        },
+        "human_review": "not_performed",
+        "diagnostics": {
+          "planner": {
+            "candidate_paper_count": 2,
+            "error_code": null,
+            "status": "success",
+            "requirement_count": 2,
+            "model_calls": 1,
+            "events": [
+              "planner_started",
+              "planner_completed"
+            ],
+            "latency_ms": 2.850099997885991,
+            "worker_task_count": 2,
+            "dimension_ids": [
+              "design"
+            ],
+            "dimension_count": 1,
+            "dimensions": [
+              {
+                "dimension_id": "design",
+                "description": "Investigate design.",
+                "research_question": "What design does this paper document?",
+                "name": "Design"
+              }
+            ],
+            "paper_ids": [
+              "blip-2-2301.12597v1",
+              "flamingo-2204.14198v1"
+            ]
+          },
+          "workers": [
+            {
+              "observed_evidence_ids": [
+                "ev_9eac712dd806552d2b4d4d2e01e0f117"
+              ],
+              "latency_ms": 60.23502699827077,
+              "attempts": 1,
+              "status": "completed",
+              "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+              "paper_id": "blip-2-2301.12597v1",
+              "requirements": [
+                {
+                  "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+                  "dimension_id": "design",
+                  "status": "supported",
+                  "paper_id": "blip-2-2301.12597v1",
+                  "required": true,
+                  "question": "What design does this paper document?",
+                  "evidence_ids": [
+                    "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                  ],
+                  "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions."
+                }
+              ],
+              "trace": {
+                "protocol_corrections": 0,
+                "dependency_calls": 3,
+                "status": "completed",
+                "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+                "retried_dependency_calls": 0,
+                "llm_calls": 2,
+                "resolved_count": 1,
+                "paper_id": "blip-2-2301.12597v1",
+                "vlm_tool_attempts": 0,
+                "requirement_count": 1,
+                "model_calls": 2,
+                "tool_calls": 1,
+                "latency_ms": 60.23502699827077,
+                "retry_count": 0,
+                "actions": [
+                  {
+                    "status": "success",
+                    "summary": "Retrieved 1 text evidence items.",
+                    "investigated_requirement_ids": [
+                      "req_5022dd88074f74df19f17e80ba08da91"
+                    ],
+                    "evidence_ids": [
+                      "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                    ],
+                    "issue_code": null,
+                    "step": 1,
+                    "tool_name": "search_text",
+                    "latency_ms": 7.919887997559272,
+                    "protocol_recovery": false,
+                    "last_new_evidence_count": 1,
+                    "arguments": {
+                      "top_k": 1,
+                      "paper_ids": [
+                        "blip-2-2301.12597v1"
+                      ],
+                      "query": "Prepared design evidence"
+                    }
+                  },
+                  {
+                    "status": "success",
+                    "summary": "Resolved 1 paper-local requirements.",
+                    "investigated_requirement_ids": [],
+                    "evidence_ids": [
+                      "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                    ],
+                    "issue_code": null,
+                    "step": 2,
+                    "tool_name": "resolve_requirement",
+                    "latency_ms": 0.3683459981402848,
+                    "protocol_recovery": false,
+                    "last_new_evidence_count": 1,
+                    "arguments": {
+                      "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+                      "status": "supported",
+                      "evidence_ids": [
+                        "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "error": null
+            },
+            {
+              "observed_evidence_ids": [
+                "ev_218bd889fec22dc20b36a380b0e0fb62"
+              ],
+              "latency_ms": 56.97016100020846,
+              "attempts": 1,
+              "status": "completed",
+              "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+              "paper_id": "flamingo-2204.14198v1",
+              "requirements": [
+                {
+                  "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+                  "dimension_id": "design",
+                  "status": "supported",
+                  "paper_id": "flamingo-2204.14198v1",
+                  "required": true,
+                  "question": "What design does this paper document?",
+                  "evidence_ids": [
+                    "ev_218bd889fec22dc20b36a380b0e0fb62"
+                  ],
+                  "claim": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance."
+                }
+              ],
+              "trace": {
+                "protocol_corrections": 0,
+                "dependency_calls": 3,
+                "status": "completed",
+                "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+                "retried_dependency_calls": 0,
+                "llm_calls": 2,
+                "resolved_count": 1,
+                "paper_id": "flamingo-2204.14198v1",
+                "vlm_tool_attempts": 0,
+                "requirement_count": 1,
+                "model_calls": 2,
+                "tool_calls": 1,
+                "latency_ms": 56.97016100020846,
+                "retry_count": 0,
+                "actions": [
+                  {
+                    "status": "success",
+                    "summary": "Retrieved 1 text evidence items.",
+                    "investigated_requirement_ids": [
+                      "req_3dd5db247868d4ca359e6660b07a291f"
+                    ],
+                    "evidence_ids": [
+                      "ev_218bd889fec22dc20b36a380b0e0fb62"
+                    ],
+                    "issue_code": null,
+                    "step": 1,
+                    "tool_name": "search_text",
+                    "latency_ms": 26.325244001782266,
+                    "protocol_recovery": false,
+                    "last_new_evidence_count": 1,
+                    "arguments": {
+                      "top_k": 1,
+                      "paper_ids": [
+                        "flamingo-2204.14198v1"
+                      ],
+                      "query": "Prepared design evidence"
+                    }
+                  },
+                  {
+                    "status": "success",
+                    "summary": "Resolved 1 paper-local requirements.",
+                    "investigated_requirement_ids": [],
+                    "evidence_ids": [
+                      "ev_218bd889fec22dc20b36a380b0e0fb62"
+                    ],
+                    "issue_code": null,
+                    "step": 2,
+                    "tool_name": "resolve_requirement",
+                    "latency_ms": 0.3932409999833908,
+                    "protocol_recovery": false,
+                    "last_new_evidence_count": 1,
+                    "arguments": {
+                      "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+                      "status": "supported",
+                      "evidence_ids": [
+                        "ev_218bd889fec22dc20b36a380b0e0fb62"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "error": null
+            }
+          ],
+          "reviews": [
+            {
+              "reason_code": "evidence_supports_claim",
+              "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+              "status": "passed",
+              "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+              "paper_id": "blip-2-2301.12597v1",
+              "skip_reason": null,
+              "evidence_ids": [
+                "ev_9eac712dd806552d2b4d4d2e01e0f117"
+              ],
+              "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+              "validation_status": "passed",
+              "trace": {
+                "model_calls": 1,
+                "latency_ms": 6.757917999493657,
+                "retry_count": 0
+              },
+              "issue": null
+            },
+            {
+              "reason_code": "evidence_supports_claim",
+              "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+              "status": "passed",
+              "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+              "paper_id": "flamingo-2204.14198v1",
+              "skip_reason": null,
+              "evidence_ids": [
+                "ev_218bd889fec22dc20b36a380b0e0fb62"
+              ],
+              "claim": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+              "validation_status": "passed",
+              "trace": {
+                "model_calls": 1,
+                "latency_ms": 5.216126999584958,
+                "retry_count": 0
+              },
+              "issue": null
+            }
+          ],
+          "recovery": {
+            "reserved_budget": {
+              "model_calls": 5,
+              "tool_calls": 0
+            },
+            "recovery_eligible_count": 0,
+            "recovery_rounds_used": 0,
+            "recovery_conversion_rate": null,
+            "additional_model_calls": 1,
+            "prior_usage": {
+              "model_calls": 6,
+              "tool_calls": 2
+            },
+            "recovery_skipped_count": 2,
+            "recovery_attempted_count": 0,
+            "additional_tool_calls": 0,
+            "research_usage": {
+              "model_calls": 7,
+              "tool_calls": 2
+            },
+            "recovery_latency_ms": 6.12128099965048,
+            "recovery_passed_count": 0,
+            "recovery_failed_count": 0,
+            "eligibility": [
+              {
+                "reason_code": "review_passed",
+                "eligible": false,
+                "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+                "paper_id": "blip-2-2301.12597v1"
+              },
+              {
+                "reason_code": "review_passed",
+                "eligible": false,
+                "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+                "paper_id": "flamingo-2204.14198v1"
+              }
+            ],
+            "tasks": [],
+            "final_requirements": [
+              {
+                "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+                "dimension_id": "design",
+                "status": "supported",
+                "paper_id": "blip-2-2301.12597v1",
+                "required": true,
+                "question": "What design does this paper document?",
+                "evidence_ids": [
+                  "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                ],
+                "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions."
+              },
+              {
+                "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+                "dimension_id": "design",
+                "status": "supported",
+                "paper_id": "flamingo-2204.14198v1",
+                "required": true,
+                "question": "What design does this paper document?",
+                "evidence_ids": [
+                  "ev_218bd889fec22dc20b36a380b0e0fb62"
+                ],
+                "claim": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance."
+              }
+            ],
+            "final_reviews": [
+              {
+                "reason_code": "evidence_supports_claim",
+                "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+                "status": "passed",
+                "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+                "paper_id": "blip-2-2301.12597v1",
+                "skip_reason": null,
+                "evidence_ids": [
+                  "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                ],
+                "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+                "validation_status": "passed"
+              },
+              {
+                "reason_code": "evidence_supports_claim",
+                "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+                "status": "passed",
+                "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+                "paper_id": "flamingo-2204.14198v1",
+                "skip_reason": null,
+                "evidence_ids": [
+                  "ev_218bd889fec22dc20b36a380b0e0fb62"
+                ],
+                "claim": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+                "validation_status": "passed"
+              }
+            ]
+          }
+        },
+        "generation_degraded": false
+      },
+      "execution_mode": "multi_agent_research",
+      "source_references": [
+        {
+          "source_kind": "research_report",
+          "report_reference": "report_79b5dd6c476352c0acfff180b2b91a71146c984fd6c713c6922c7c3183024ade",
+          "sha256": "79b5dd6c476352c0acfff180b2b91a71146c984fd6c713c6922c7c3183024ade",
+          "research_status": "completed",
+          "answer_review": "not_independently_reviewed"
+        }
+      ],
+      "answer_review_status": "not_independently_reviewed",
+      "evidence_level": "research",
+      "language": {
+        "status": "translated",
+        "source_sha256": "7978cb7ba2204e6ce3c90214d44e87944c0c00c2fa75e27ac928eed198f91aa3",
+        "model_calls": 1,
+        "latency_ms": 0.0,
+        "issue_code": null,
+        "translation_source": "model",
+        "translation_review": "not_independently_reviewed"
+      },
+      "chinese_report": {
+        "status": "completed",
+        "title": "中文展示：Evidence-grounded research report",
+        "question": "中文展示：Compare BLIP-2 and Flamingo design evidence.",
+        "paper_ids": [
+          "blip-2-2301.12597v1",
+          "flamingo-2204.14198v1"
+        ],
+        "markdown": "# 中文展示：Evidence-grounded research report\n\n中文展示：Compare BLIP-2 and Flamingo design evidence.\n\n## 直接回答\n\n中文展示：A direct answer to the user's question.\n\n## 已审核事实\n\n### blip-2-2301.12597v1 · 中文展示：Design\n\n中文展示：The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.\n\n- 引用：blip-2-2301.12597v1 · 第 1 页（ev_9eac712dd806552d2b4d4d2e01e0f117）\n\n### flamingo-2204.14198v1 · 中文展示：Design\n\n中文展示：Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.\n\n- 引用：flamingo-2204.14198v1 · 第 4 页（ev_218bd889fec22dc20b36a380b0e0fb62）\n\n## 证据缺口与失败状态\n\n没有记录缺失需求。\n\n## 跨论文比较\n\n### 中文展示：Design\n- blip-2-2301.12597v1：中文展示：The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.（claim_e66f10a2ee183797d5dcc49fc118d239）\n- flamingo-2204.14198v1：中文展示：Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.（claim_d33a835bd567d2629c41e494cfa1801a）\n\n## 限制\n\n- 中文展示：Citation identity checks do not prove the main answer's semantic entailment or independent review.\n- 中文展示：Only reviewed claims and prepared evidence are factual report content.\n- 中文展示：Structural citation validation does not prove semantic entailment or model-review correctness.\n- 中文展示：Missing cells are not completed from paper profiles or model knowledge.\n\n中文为字段级展示翻译，未进行独立人工事实审核；原始报告、引用和审核状态保持不变。",
+        "verified_claims": [
+          {
+            "claim_id": "claim_e66f10a2ee183797d5dcc49fc118d239",
+            "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+            "paper_id": "blip-2-2301.12597v1",
+            "dimension_id": "design",
+            "text": "中文展示：The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+            "evidence": [
+              {
+                "evidence_id": "ev_9eac712dd806552d2b4d4d2e01e0f117",
+                "paper_id": "blip-2-2301.12597v1",
+                "page": 1,
+                "modality": "text",
+                "text": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+                "caption": null,
+                "figure_id": null,
+                "source": "report_snapshot",
+                "corpus_check": "not_checked"
+              }
+            ],
+            "review_status": "passed",
+            "evidence_ids": [
+              "ev_9eac712dd806552d2b4d4d2e01e0f117"
+            ]
+          },
+          {
+            "claim_id": "claim_d33a835bd567d2629c41e494cfa1801a",
+            "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+            "paper_id": "flamingo-2204.14198v1",
+            "dimension_id": "design",
+            "text": "中文展示：Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+            "evidence": [
+              {
+                "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+                "paper_id": "flamingo-2204.14198v1",
+                "page": 4,
+                "modality": "text",
+                "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+                "caption": null,
+                "figure_id": null,
+                "source": "report_snapshot",
+                "corpus_check": "not_checked"
+              }
+            ],
+            "review_status": "passed",
+            "evidence_ids": [
+              "ev_218bd889fec22dc20b36a380b0e0fb62"
+            ]
+          }
+        ],
+        "missing_requirements": [],
+        "comparisons": [
+          {
+            "relation": "side_by_side",
+            "paper_ids": [
+              "blip-2-2301.12597v1",
+              "flamingo-2204.14198v1"
+            ],
+            "claim_ids": [
+              "claim_e66f10a2ee183797d5dcc49fc118d239",
+              "claim_d33a835bd567d2629c41e494cfa1801a"
+            ],
+            "evidence_ids": [
+              "ev_218bd889fec22dc20b36a380b0e0fb62",
+              "ev_9eac712dd806552d2b4d4d2e01e0f117"
+            ],
+            "dimension_id": "design"
+          }
+        ],
+        "limitations": [
+          "中文展示：Citation identity checks do not prove the main answer's semantic entailment or independent review.",
+          "中文展示：Only reviewed claims and prepared evidence are factual report content.",
+          "中文展示：Structural citation validation does not prove semantic entailment or model-review correctness.",
+          "中文展示：Missing cells are not completed from paper profiles or model knowledge."
+        ],
+        "metrics": {
+          "total_requirements": 2,
+          "verified_requirements": 2,
+          "missing_requirements": 0,
+          "rejected_requirements": 0,
+          "resolved_requirements": 2,
+          "reviewed_requirements": 2,
+          "citation_validation_failures": 0,
+          "synthesis_model_calls": 1,
+          "protocol_corrections": 0,
+          "provider_retries": 0,
+          "synthesis_latency_ms": 3.9495099990745075,
+          "resolution_rate": 1.0,
+          "evidence_coverage": 1.0,
+          "review_pass_rate": 1.0,
+          "report_generation_attempts": 1,
+          "report_generation_successes": 1,
+          "report_generation_success_rate": 1.0,
+          "report_status": "completed",
+          "degraded_generation": false,
+          "model_calls": 12,
+          "model_calls_scope": "all_physical_model_attempts_including_vlm",
+          "tool_calls": 4,
+          "total_latency_ms": 675.1699919987004,
+          "vlm_calls": 0,
+          "llm_calls": 12,
+          "model_remaining": 188,
+          "tool_remaining": 60,
+          "role_model_calls": {
+            "main_agent": 3,
+            "planner": 1,
+            "worker": 4,
+            "reviewer": 2,
+            "synthesis": 1,
+            "report_language": 1
+          },
+          "tool_usage": {
+            "main": 2,
+            "research": 2
+          },
+          "main_tool_calls": 2,
+          "main_decision_steps": 3,
+          "research_calls": 1
+        },
+        "human_review": "not_performed",
+        "diagnostics": {
+          "planner": {
+            "candidate_paper_count": 2,
+            "error_code": null,
+            "status": "success",
+            "requirement_count": 2,
+            "model_calls": 1,
+            "events": [
+              "planner_started",
+              "planner_completed"
+            ],
+            "latency_ms": 2.850099997885991,
+            "worker_task_count": 2,
+            "dimension_ids": [
+              "design"
+            ],
+            "dimension_count": 1,
+            "dimensions": [
+              {
+                "dimension_id": "design",
+                "description": "中文展示：Investigate design.",
+                "research_question": "中文展示：What design does this paper document?",
+                "name": "中文展示：Design"
+              }
+            ],
+            "paper_ids": [
+              "blip-2-2301.12597v1",
+              "flamingo-2204.14198v1"
+            ]
+          },
+          "workers": [
+            {
+              "observed_evidence_ids": [
+                "ev_9eac712dd806552d2b4d4d2e01e0f117"
+              ],
+              "latency_ms": 60.23502699827077,
+              "attempts": 1,
+              "status": "completed",
+              "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+              "paper_id": "blip-2-2301.12597v1",
+              "requirements": [
+                {
+                  "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+                  "dimension_id": "design",
+                  "status": "supported",
+                  "paper_id": "blip-2-2301.12597v1",
+                  "required": true,
+                  "question": "What design does this paper document?",
+                  "evidence_ids": [
+                    "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                  ],
+                  "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions."
+                }
+              ],
+              "trace": {
+                "protocol_corrections": 0,
+                "dependency_calls": 3,
+                "status": "completed",
+                "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+                "retried_dependency_calls": 0,
+                "llm_calls": 2,
+                "resolved_count": 1,
+                "paper_id": "blip-2-2301.12597v1",
+                "vlm_tool_attempts": 0,
+                "requirement_count": 1,
+                "model_calls": 2,
+                "tool_calls": 1,
+                "latency_ms": 60.23502699827077,
+                "retry_count": 0,
+                "actions": [
+                  {
+                    "status": "success",
+                    "summary": "Retrieved 1 text evidence items.",
+                    "investigated_requirement_ids": [
+                      "req_5022dd88074f74df19f17e80ba08da91"
+                    ],
+                    "evidence_ids": [
+                      "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                    ],
+                    "issue_code": null,
+                    "step": 1,
+                    "tool_name": "search_text",
+                    "latency_ms": 7.919887997559272,
+                    "protocol_recovery": false,
+                    "last_new_evidence_count": 1,
+                    "arguments": {
+                      "top_k": 1,
+                      "paper_ids": [
+                        "blip-2-2301.12597v1"
+                      ],
+                      "query": "Prepared design evidence"
+                    }
+                  },
+                  {
+                    "status": "success",
+                    "summary": "Resolved 1 paper-local requirements.",
+                    "investigated_requirement_ids": [],
+                    "evidence_ids": [
+                      "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                    ],
+                    "issue_code": null,
+                    "step": 2,
+                    "tool_name": "resolve_requirement",
+                    "latency_ms": 0.3683459981402848,
+                    "protocol_recovery": false,
+                    "last_new_evidence_count": 1,
+                    "arguments": {
+                      "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+                      "status": "supported",
+                      "evidence_ids": [
+                        "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "error": null
+            },
+            {
+              "observed_evidence_ids": [
+                "ev_218bd889fec22dc20b36a380b0e0fb62"
+              ],
+              "latency_ms": 56.97016100020846,
+              "attempts": 1,
+              "status": "completed",
+              "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+              "paper_id": "flamingo-2204.14198v1",
+              "requirements": [
+                {
+                  "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+                  "dimension_id": "design",
+                  "status": "supported",
+                  "paper_id": "flamingo-2204.14198v1",
+                  "required": true,
+                  "question": "What design does this paper document?",
+                  "evidence_ids": [
+                    "ev_218bd889fec22dc20b36a380b0e0fb62"
+                  ],
+                  "claim": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance."
+                }
+              ],
+              "trace": {
+                "protocol_corrections": 0,
+                "dependency_calls": 3,
+                "status": "completed",
+                "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+                "retried_dependency_calls": 0,
+                "llm_calls": 2,
+                "resolved_count": 1,
+                "paper_id": "flamingo-2204.14198v1",
+                "vlm_tool_attempts": 0,
+                "requirement_count": 1,
+                "model_calls": 2,
+                "tool_calls": 1,
+                "latency_ms": 56.97016100020846,
+                "retry_count": 0,
+                "actions": [
+                  {
+                    "status": "success",
+                    "summary": "Retrieved 1 text evidence items.",
+                    "investigated_requirement_ids": [
+                      "req_3dd5db247868d4ca359e6660b07a291f"
+                    ],
+                    "evidence_ids": [
+                      "ev_218bd889fec22dc20b36a380b0e0fb62"
+                    ],
+                    "issue_code": null,
+                    "step": 1,
+                    "tool_name": "search_text",
+                    "latency_ms": 26.325244001782266,
+                    "protocol_recovery": false,
+                    "last_new_evidence_count": 1,
+                    "arguments": {
+                      "top_k": 1,
+                      "paper_ids": [
+                        "flamingo-2204.14198v1"
+                      ],
+                      "query": "Prepared design evidence"
+                    }
+                  },
+                  {
+                    "status": "success",
+                    "summary": "Resolved 1 paper-local requirements.",
+                    "investigated_requirement_ids": [],
+                    "evidence_ids": [
+                      "ev_218bd889fec22dc20b36a380b0e0fb62"
+                    ],
+                    "issue_code": null,
+                    "step": 2,
+                    "tool_name": "resolve_requirement",
+                    "latency_ms": 0.3932409999833908,
+                    "protocol_recovery": false,
+                    "last_new_evidence_count": 1,
+                    "arguments": {
+                      "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+                      "status": "supported",
+                      "evidence_ids": [
+                        "ev_218bd889fec22dc20b36a380b0e0fb62"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "error": null
+            }
+          ],
+          "reviews": [
+            {
+              "reason_code": "evidence_supports_claim",
+              "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+              "status": "passed",
+              "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+              "paper_id": "blip-2-2301.12597v1",
+              "skip_reason": null,
+              "evidence_ids": [
+                "ev_9eac712dd806552d2b4d4d2e01e0f117"
+              ],
+              "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+              "validation_status": "passed",
+              "trace": {
+                "model_calls": 1,
+                "latency_ms": 6.757917999493657,
+                "retry_count": 0
+              },
+              "issue": null
+            },
+            {
+              "reason_code": "evidence_supports_claim",
+              "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+              "status": "passed",
+              "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+              "paper_id": "flamingo-2204.14198v1",
+              "skip_reason": null,
+              "evidence_ids": [
+                "ev_218bd889fec22dc20b36a380b0e0fb62"
+              ],
+              "claim": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+              "validation_status": "passed",
+              "trace": {
+                "model_calls": 1,
+                "latency_ms": 5.216126999584958,
+                "retry_count": 0
+              },
+              "issue": null
+            }
+          ],
+          "recovery": {
+            "reserved_budget": {
+              "model_calls": 5,
+              "tool_calls": 0
+            },
+            "recovery_eligible_count": 0,
+            "recovery_rounds_used": 0,
+            "recovery_conversion_rate": null,
+            "additional_model_calls": 1,
+            "prior_usage": {
+              "model_calls": 6,
+              "tool_calls": 2
+            },
+            "recovery_skipped_count": 2,
+            "recovery_attempted_count": 0,
+            "additional_tool_calls": 0,
+            "research_usage": {
+              "model_calls": 7,
+              "tool_calls": 2
+            },
+            "recovery_latency_ms": 6.12128099965048,
+            "recovery_passed_count": 0,
+            "recovery_failed_count": 0,
+            "eligibility": [
+              {
+                "reason_code": "review_passed",
+                "eligible": false,
+                "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+                "paper_id": "blip-2-2301.12597v1"
+              },
+              {
+                "reason_code": "review_passed",
+                "eligible": false,
+                "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+                "paper_id": "flamingo-2204.14198v1"
+              }
+            ],
+            "tasks": [],
+            "final_requirements": [
+              {
+                "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+                "dimension_id": "design",
+                "status": "supported",
+                "paper_id": "blip-2-2301.12597v1",
+                "required": true,
+                "question": "What design does this paper document?",
+                "evidence_ids": [
+                  "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                ],
+                "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions."
+              },
+              {
+                "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+                "dimension_id": "design",
+                "status": "supported",
+                "paper_id": "flamingo-2204.14198v1",
+                "required": true,
+                "question": "What design does this paper document?",
+                "evidence_ids": [
+                  "ev_218bd889fec22dc20b36a380b0e0fb62"
+                ],
+                "claim": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance."
+              }
+            ],
+            "final_reviews": [
+              {
+                "reason_code": "evidence_supports_claim",
+                "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+                "status": "passed",
+                "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+                "paper_id": "blip-2-2301.12597v1",
+                "skip_reason": null,
+                "evidence_ids": [
+                  "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                ],
+                "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+                "validation_status": "passed"
+              },
+              {
+                "reason_code": "evidence_supports_claim",
+                "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+                "status": "passed",
+                "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+                "paper_id": "flamingo-2204.14198v1",
+                "skip_reason": null,
+                "evidence_ids": [
+                  "ev_218bd889fec22dc20b36a380b0e0fb62"
+                ],
+                "claim": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+                "validation_status": "passed"
+              }
+            ]
+          }
+        },
+        "generation_degraded": false,
+        "original_question": "Compare BLIP-2 and Flamingo design evidence.",
+        "execution_question": "Compare BLIP-2 and Flamingo design evidence.",
+        "answer_status": "answered",
+        "direct_answer": "中文展示：A direct answer to the user's question.",
+        "key_findings": [
+          {
+            "text": "中文展示：The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+            "claim_id": "claim_e66f10a2ee183797d5dcc49fc118d239",
+            "paper_id": "blip-2-2301.12597v1",
+            "evidence_ids": [
+              "ev_9eac712dd806552d2b4d4d2e01e0f117"
+            ],
+            "review_status": "passed"
+          },
+          {
+            "text": "中文展示：Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+            "claim_id": "claim_d33a835bd567d2629c41e494cfa1801a",
+            "paper_id": "flamingo-2204.14198v1",
+            "evidence_ids": [
+              "ev_218bd889fec22dc20b36a380b0e0fb62"
+            ],
+            "review_status": "passed"
+          }
+        ],
+        "citations": [
+          {
+            "evidence_id": "ev_9eac712dd806552d2b4d4d2e01e0f117",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 1,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 4,
+            "figure_id": null
+          }
+        ],
+        "detailed_report": {
+          "status": "completed",
+          "title": "Evidence-grounded research report",
+          "question": "Compare BLIP-2 and Flamingo design evidence.",
+          "paper_ids": [
+            "blip-2-2301.12597v1",
+            "flamingo-2204.14198v1"
+          ],
+          "markdown": "# Evidence-grounded research report\n\nCompare BLIP-2 and Flamingo design evidence.\n\nStatus: `completed`\n\n2 of 2 planned requirements have reviewed evidence; 0 remain missing.\n\n## Design · Verified findings\n\n### blip-2-2301.12597v1\n\nRequirement: `req_5022dd88074f74df19f17e80ba08da91` · Status: `verified`\n\nThe cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.\n\nClaim: `claim_e66f10a2ee183797d5dcc49fc118d239`\n\nSources:\n\n- `ev_9eac712dd806552d2b4d4d2e01e0f117` · blip-2-2301.12597v1 · Page 1\n\n### flamingo-2204.14198v1\n\nRequirement: `req_3dd5db247868d4ca359e6660b07a291f` · Status: `verified`\n\nUnifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.\n\nClaim: `claim_d33a835bd567d2629c41e494cfa1801a`\n\nSources:\n\n- `ev_218bd889fec22dc20b36a380b0e0fb62` · flamingo-2204.14198v1 · Page 4\n\nSide-by-side verified claims: `claim_e66f10a2ee183797d5dcc49fc118d239`, `claim_d33a835bd567d2629c41e494cfa1801a`\n\n## Metrics\n\n```json\n{\n  \"total_requirements\": 2,\n  \"verified_requirements\": 2,\n  \"missing_requirements\": 0,\n  \"rejected_requirements\": 0,\n  \"resolved_requirements\": 2,\n  \"reviewed_requirements\": 2,\n  \"citation_validation_failures\": 0,\n  \"synthesis_model_calls\": 1,\n  \"protocol_corrections\": 0,\n  \"provider_retries\": 0,\n  \"synthesis_latency_ms\": 3.9495099990745075,\n  \"resolution_rate\": 1.0,\n  \"evidence_coverage\": 1.0,\n  \"review_pass_rate\": 1.0,\n  \"report_generation_attempts\": 1,\n  \"report_generation_successes\": 1,\n  \"report_generation_success_rate\": 1.0,\n  \"report_status\": \"completed\",\n  \"degraded_generation\": false\n}\n```\n\n## Limitations\n\n- Only reviewed claims and prepared evidence are factual report content.\n- Structural citation validation does not prove semantic entailment or model-review correctness.\n- Missing cells are not completed from paper profiles or model knowledge.\n",
+          "verified_claims": [
+            {
+              "claim_id": "claim_e66f10a2ee183797d5dcc49fc118d239",
+              "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+              "paper_id": "blip-2-2301.12597v1",
+              "dimension_id": "design",
+              "text": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+              "evidence": [
+                {
+                  "evidence_id": "ev_9eac712dd806552d2b4d4d2e01e0f117",
+                  "paper_id": "blip-2-2301.12597v1",
+                  "page": 1,
+                  "modality": "text",
+                  "text": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+                  "caption": null,
+                  "figure_id": null,
+                  "source": "report_snapshot",
+                  "corpus_check": "not_checked"
+                }
+              ],
+              "review_status": "passed",
+              "evidence_ids": [
+                "ev_9eac712dd806552d2b4d4d2e01e0f117"
+              ]
+            },
+            {
+              "claim_id": "claim_d33a835bd567d2629c41e494cfa1801a",
+              "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+              "paper_id": "flamingo-2204.14198v1",
+              "dimension_id": "design",
+              "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+              "evidence": [
+                {
+                  "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+                  "paper_id": "flamingo-2204.14198v1",
+                  "page": 4,
+                  "modality": "text",
+                  "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+                  "caption": null,
+                  "figure_id": null,
+                  "source": "report_snapshot",
+                  "corpus_check": "not_checked"
+                }
+              ],
+              "review_status": "passed",
+              "evidence_ids": [
+                "ev_218bd889fec22dc20b36a380b0e0fb62"
+              ]
+            }
+          ],
+          "missing_requirements": [],
+          "comparisons": [
+            {
+              "relation": "side_by_side",
+              "paper_ids": [
+                "blip-2-2301.12597v1",
+                "flamingo-2204.14198v1"
+              ],
+              "claim_ids": [
+                "claim_e66f10a2ee183797d5dcc49fc118d239",
+                "claim_d33a835bd567d2629c41e494cfa1801a"
+              ],
+              "evidence_ids": [
+                "ev_218bd889fec22dc20b36a380b0e0fb62",
+                "ev_9eac712dd806552d2b4d4d2e01e0f117"
+              ],
+              "dimension_id": "design"
+            }
+          ],
+          "limitations": [
+            "Only reviewed claims and prepared evidence are factual report content.",
+            "Structural citation validation does not prove semantic entailment or model-review correctness.",
+            "Missing cells are not completed from paper profiles or model knowledge."
+          ],
+          "metrics": {
+            "total_requirements": 2,
+            "verified_requirements": 2,
+            "missing_requirements": 0,
+            "rejected_requirements": 0,
+            "resolved_requirements": 2,
+            "reviewed_requirements": 2,
+            "citation_validation_failures": 0,
+            "synthesis_model_calls": 1,
+            "protocol_corrections": 0,
+            "provider_retries": 0,
+            "synthesis_latency_ms": 3.9495099990745075,
+            "resolution_rate": 1.0,
+            "evidence_coverage": 1.0,
+            "review_pass_rate": 1.0,
+            "report_generation_attempts": 1,
+            "report_generation_successes": 1,
+            "report_generation_success_rate": 1.0,
+            "report_status": "completed",
+            "degraded_generation": false,
+            "model_calls": 8,
+            "model_calls_scope": "all_physical_model_attempts_including_vlm",
+            "tool_calls": 2,
+            "total_latency_ms": 142.07993800300756,
+            "vlm_calls": 0,
+            "llm_calls": 8
+          },
+          "human_review": "not_performed",
+          "diagnostics": {
+            "planner": {
+              "candidate_paper_count": 2,
+              "error_code": null,
+              "status": "success",
+              "requirement_count": 2,
+              "model_calls": 1,
+              "events": [
+                "planner_started",
+                "planner_completed"
+              ],
+              "latency_ms": 2.850099997885991,
+              "worker_task_count": 2,
+              "dimension_ids": [
+                "design"
+              ],
+              "dimension_count": 1,
+              "dimensions": [
+                {
+                  "dimension_id": "design",
+                  "description": "Investigate design.",
+                  "research_question": "What design does this paper document?",
+                  "name": "Design"
+                }
+              ],
+              "paper_ids": [
+                "blip-2-2301.12597v1",
+                "flamingo-2204.14198v1"
+              ]
+            },
+            "workers": [
+              {
+                "observed_evidence_ids": [
+                  "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                ],
+                "latency_ms": 60.23502699827077,
+                "attempts": 1,
+                "status": "completed",
+                "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+                "paper_id": "blip-2-2301.12597v1",
+                "requirements": [
+                  {
+                    "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+                    "dimension_id": "design",
+                    "status": "supported",
+                    "paper_id": "blip-2-2301.12597v1",
+                    "required": true,
+                    "question": "What design does this paper document?",
+                    "evidence_ids": [
+                      "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                    ],
+                    "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions."
+                  }
+                ],
+                "trace": {
+                  "protocol_corrections": 0,
+                  "dependency_calls": 3,
+                  "status": "completed",
+                  "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+                  "retried_dependency_calls": 0,
+                  "llm_calls": 2,
+                  "resolved_count": 1,
+                  "paper_id": "blip-2-2301.12597v1",
+                  "vlm_tool_attempts": 0,
+                  "requirement_count": 1,
+                  "model_calls": 2,
+                  "tool_calls": 1,
+                  "latency_ms": 60.23502699827077,
+                  "retry_count": 0,
+                  "actions": [
+                    {
+                      "status": "success",
+                      "summary": "Retrieved 1 text evidence items.",
+                      "investigated_requirement_ids": [
+                        "req_5022dd88074f74df19f17e80ba08da91"
+                      ],
+                      "evidence_ids": [
+                        "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                      ],
+                      "issue_code": null,
+                      "step": 1,
+                      "tool_name": "search_text",
+                      "latency_ms": 7.919887997559272,
+                      "protocol_recovery": false,
+                      "last_new_evidence_count": 1,
+                      "arguments": {
+                        "top_k": 1,
+                        "paper_ids": [
+                          "blip-2-2301.12597v1"
+                        ],
+                        "query": "Prepared design evidence"
+                      }
+                    },
+                    {
+                      "status": "success",
+                      "summary": "Resolved 1 paper-local requirements.",
+                      "investigated_requirement_ids": [],
+                      "evidence_ids": [
+                        "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                      ],
+                      "issue_code": null,
+                      "step": 2,
+                      "tool_name": "resolve_requirement",
+                      "latency_ms": 0.3683459981402848,
+                      "protocol_recovery": false,
+                      "last_new_evidence_count": 1,
+                      "arguments": {
+                        "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+                        "status": "supported",
+                        "evidence_ids": [
+                          "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "error": null
+              },
+              {
+                "observed_evidence_ids": [
+                  "ev_218bd889fec22dc20b36a380b0e0fb62"
+                ],
+                "latency_ms": 56.97016100020846,
+                "attempts": 1,
+                "status": "completed",
+                "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+                "paper_id": "flamingo-2204.14198v1",
+                "requirements": [
+                  {
+                    "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+                    "dimension_id": "design",
+                    "status": "supported",
+                    "paper_id": "flamingo-2204.14198v1",
+                    "required": true,
+                    "question": "What design does this paper document?",
+                    "evidence_ids": [
+                      "ev_218bd889fec22dc20b36a380b0e0fb62"
+                    ],
+                    "claim": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance."
+                  }
+                ],
+                "trace": {
+                  "protocol_corrections": 0,
+                  "dependency_calls": 3,
+                  "status": "completed",
+                  "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+                  "retried_dependency_calls": 0,
+                  "llm_calls": 2,
+                  "resolved_count": 1,
+                  "paper_id": "flamingo-2204.14198v1",
+                  "vlm_tool_attempts": 0,
+                  "requirement_count": 1,
+                  "model_calls": 2,
+                  "tool_calls": 1,
+                  "latency_ms": 56.97016100020846,
+                  "retry_count": 0,
+                  "actions": [
+                    {
+                      "status": "success",
+                      "summary": "Retrieved 1 text evidence items.",
+                      "investigated_requirement_ids": [
+                        "req_3dd5db247868d4ca359e6660b07a291f"
+                      ],
+                      "evidence_ids": [
+                        "ev_218bd889fec22dc20b36a380b0e0fb62"
+                      ],
+                      "issue_code": null,
+                      "step": 1,
+                      "tool_name": "search_text",
+                      "latency_ms": 26.325244001782266,
+                      "protocol_recovery": false,
+                      "last_new_evidence_count": 1,
+                      "arguments": {
+                        "top_k": 1,
+                        "paper_ids": [
+                          "flamingo-2204.14198v1"
+                        ],
+                        "query": "Prepared design evidence"
+                      }
+                    },
+                    {
+                      "status": "success",
+                      "summary": "Resolved 1 paper-local requirements.",
+                      "investigated_requirement_ids": [],
+                      "evidence_ids": [
+                        "ev_218bd889fec22dc20b36a380b0e0fb62"
+                      ],
+                      "issue_code": null,
+                      "step": 2,
+                      "tool_name": "resolve_requirement",
+                      "latency_ms": 0.3932409999833908,
+                      "protocol_recovery": false,
+                      "last_new_evidence_count": 1,
+                      "arguments": {
+                        "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+                        "status": "supported",
+                        "evidence_ids": [
+                          "ev_218bd889fec22dc20b36a380b0e0fb62"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "error": null
+              }
+            ],
+            "reviews": [
+              {
+                "reason_code": "evidence_supports_claim",
+                "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+                "status": "passed",
+                "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+                "paper_id": "blip-2-2301.12597v1",
+                "skip_reason": null,
+                "evidence_ids": [
+                  "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                ],
+                "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+                "validation_status": "passed",
+                "trace": {
+                  "model_calls": 1,
+                  "latency_ms": 6.757917999493657,
+                  "retry_count": 0
+                },
+                "issue": null
+              },
+              {
+                "reason_code": "evidence_supports_claim",
+                "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+                "status": "passed",
+                "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+                "paper_id": "flamingo-2204.14198v1",
+                "skip_reason": null,
+                "evidence_ids": [
+                  "ev_218bd889fec22dc20b36a380b0e0fb62"
+                ],
+                "claim": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+                "validation_status": "passed",
+                "trace": {
+                  "model_calls": 1,
+                  "latency_ms": 5.216126999584958,
+                  "retry_count": 0
+                },
+                "issue": null
+              }
+            ],
+            "recovery": {
+              "reserved_budget": {
+                "model_calls": 5,
+                "tool_calls": 0
+              },
+              "recovery_eligible_count": 0,
+              "recovery_rounds_used": 0,
+              "recovery_conversion_rate": null,
+              "additional_model_calls": 1,
+              "prior_usage": {
+                "model_calls": 6,
+                "tool_calls": 2
+              },
+              "recovery_skipped_count": 2,
+              "recovery_attempted_count": 0,
+              "additional_tool_calls": 0,
+              "research_usage": {
+                "model_calls": 7,
+                "tool_calls": 2
+              },
+              "recovery_latency_ms": 6.12128099965048,
+              "recovery_passed_count": 0,
+              "recovery_failed_count": 0,
+              "eligibility": [
+                {
+                  "reason_code": "review_passed",
+                  "eligible": false,
+                  "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+                  "paper_id": "blip-2-2301.12597v1"
+                },
+                {
+                  "reason_code": "review_passed",
+                  "eligible": false,
+                  "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+                  "paper_id": "flamingo-2204.14198v1"
+                }
+              ],
+              "tasks": [],
+              "final_requirements": [
+                {
+                  "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+                  "dimension_id": "design",
+                  "status": "supported",
+                  "paper_id": "blip-2-2301.12597v1",
+                  "required": true,
+                  "question": "What design does this paper document?",
+                  "evidence_ids": [
+                    "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                  ],
+                  "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions."
+                },
+                {
+                  "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+                  "dimension_id": "design",
+                  "status": "supported",
+                  "paper_id": "flamingo-2204.14198v1",
+                  "required": true,
+                  "question": "What design does this paper document?",
+                  "evidence_ids": [
+                    "ev_218bd889fec22dc20b36a380b0e0fb62"
+                  ],
+                  "claim": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance."
+                }
+              ],
+              "final_reviews": [
+                {
+                  "reason_code": "evidence_supports_claim",
+                  "requirement_id": "req_5022dd88074f74df19f17e80ba08da91",
+                  "status": "passed",
+                  "worker_task_id": "worker_1079ffa010ab2b8b566cdc565e7da999",
+                  "paper_id": "blip-2-2301.12597v1",
+                  "skip_reason": null,
+                  "evidence_ids": [
+                    "ev_9eac712dd806552d2b4d4d2e01e0f117"
+                  ],
+                  "claim": "The cost of vision-and-language pre-training has become increasingly prohibitive due to end-to- end training of large-scale models. This paper proposes BLIP-2, a generic and efﬁcient pre- training strategy that bootstraps vision-language pre-training from off-the-shelf frozen pre-trained image encoders and frozen large language mod- els. BLIP-2 bridges the modality gap with a lightweight Querying Transformer, which is pre- trained in two stages. The ﬁrst stage boot- straps vision-language representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen language model. BLIP-2 achieves state-of-the-art performance on various vision- language tasks, despite having signiﬁcantly fewer trainable parameters than existing methods. For example, our model outperforms Flamingo80B by 8.7% on zero-shot VQAv2 with 54x fewer train- able parameters. We also demonstrate the model’s emerging capabilities of zero-shot image-to-text generation that can follow natural language in- structions.",
+                  "validation_status": "passed"
+                },
+                {
+                  "reason_code": "evidence_supports_claim",
+                  "requirement_id": "req_3dd5db247868d4ca359e6660b07a291f",
+                  "status": "passed",
+                  "worker_task_id": "worker_83ebd57c35bcb993c909ecda9dd66fe2",
+                  "paper_id": "flamingo-2204.14198v1",
+                  "skip_reason": null,
+                  "evidence_ids": [
+                    "ev_218bd889fec22dc20b36a380b0e0fb62"
+                  ],
+                  "claim": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+                  "validation_status": "passed"
+                }
+              ]
+            }
+          },
+          "generation_degraded": false
+        },
+        "execution_mode": "multi_agent_research",
+        "source_references": [
+          {
+            "source_kind": "research_report",
+            "report_reference": "report_79b5dd6c476352c0acfff180b2b91a71146c984fd6c713c6922c7c3183024ade",
+            "sha256": "79b5dd6c476352c0acfff180b2b91a71146c984fd6c713c6922c7c3183024ade",
+            "research_status": "completed",
+            "answer_review": "not_independently_reviewed"
+          }
+        ],
+        "answer_review_status": "not_independently_reviewed",
+        "evidence_level": "research",
+        "language": {
+          "status": "pending"
+        },
+        "chinese_report": null
+      },
+      "trace": [
+        {
+          "tool_call_id": "main-1",
+          "tool_name": "search_papers",
+          "arguments": {
+            "query": "Compare BLIP-2 and Flamingo design evidence.",
+            "top_k": 2
+          },
+          "status": "success",
+          "latency_ms": 3.544135997799458,
+          "result_count": 2,
+          "retrieved_paper_ids": [
+            "blip-2-2301.12597v1",
+            "flamingo-2204.14198v1"
+          ],
+          "failure": null
+        },
+        {
+          "tool_call_id": "main-2",
+          "tool_name": "run_multi_agent_research",
+          "arguments": {
+            "research_goal": "Compare BLIP-2 and Flamingo design evidence.",
+            "selected_paper_ids": [
+              "blip-2-2301.12597v1",
+              "flamingo-2204.14198v1"
+            ],
+            "selection_source": "retrieved",
+            "selection_rationale": {
+              "blip-2-2301.12597v1": "Relevant to the original question.",
+              "flamingo-2204.14198v1": "Relevant to the original question."
+            }
+          },
+          "status": "success",
+          "latency_ms": 375.0112329980766,
+          "result_count": 2,
+          "failure": null
+        }
+      ]
+    }
+  }
+]

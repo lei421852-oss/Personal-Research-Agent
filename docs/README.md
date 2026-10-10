@@ -1,3 +1,5 @@
+> 当前默认入口：ReAct 主 Agent。只输入问题，多论文研究是可选工具；原 Prepared-only 选择/手选界面为历史说明。[自主编排架构](architecture/react-workbench.md) / [使用指南](guides/react-workbench.md)。
+
 # 项目文档导航
 
 **2026-10-10 · 中文动态工作台：** [启动与使用](guides/ui-quickstart.md) · [事件、自动选论文与语言边界](architecture/chinese-dynamic-workbench.md) · [G4.2 验收记录](acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md)。本分支从G4.1扩展，保留此前已发布分支和标签；本轮没有推送或新建版本标签。
@@ -25,4 +27,4 @@
 | [Coverage Worker](worker-coverage.md)、[F3.1-E 报告](acceptance/stage_f3_1_e/acceptance_report.md) | 显式可选实验；七题是已知失败诊断集，不能证明未知数据的泛化，也没有默认替换旧 Worker。 |
 | [历史 Demo](demos/README.md) | 每条 Demo 的 Real / Scripted / Documented 状态及检索模式必须保留；不能把受控检索或历史 VLM Smoke 当作当前研究视觉质量结论。 |
 
-本轮不新增研究功能，不移动生产模块，不调用真实 Provider，不重建索引。API/UI 仍然是已有单 Agent 入口；多论文研究报告通过独立脚本或库组合运行。
+以上为历史 G1 阶段范围；当前默认入口与可选研究工具请以本页顶部 ReAct 说明为准。

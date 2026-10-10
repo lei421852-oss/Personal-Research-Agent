@@ -1,0 +1,54 @@
+{
+  "ui_ready": true,
+  "replay_ready": true,
+  "language_adapter_ready": true,
+  "main_agent_ready": true,
+  "real_research_ready": true,
+  "dependencies": [
+    {
+      "name": "ui_assets",
+      "status": "ready",
+      "message": "工作台静态资源完整。"
+    },
+    {
+      "name": "configuration",
+      "status": "ready",
+      "message": "固定研究配置已加载。"
+    },
+    {
+      "name": "prepared_corpus",
+      "status": "ready",
+      "message": "预处理论文证据及来源校验通过。"
+    },
+    {
+      "name": "provider",
+      "status": "ready",
+      "message": "模型服务配置完整；尚未发送请求。"
+    },
+    {
+      "name": "language_adapter",
+      "status": "ready",
+      "message": "语言适配模型配置完整；启动预检不会发送请求。"
+    },
+    {
+      "name": "embedding_cache",
+      "status": "ready",
+      "message": "本地模型缓存存在；尚未加载模型或执行 Embedding。"
+    },
+    {
+      "name": "evidence_index",
+      "status": "ready",
+      "message": "既有索引与全部 Prepared Evidence 绑定一致。"
+    }
+  ],
+  "limits": {
+    "max_concurrent_runs": 1,
+    "max_papers": 3,
+    "max_queued_runs": 2,
+    "max_model_calls": 200,
+    "max_tool_calls": 64,
+    "timeout_seconds": 420,
+    "history_retained_runs": 20,
+    "history_ttl_seconds": 3600
+  }
+}

@@ -1,3 +1,5 @@
+> 当前默认入口：ReAct 主 Agent。只输入问题，多论文研究是可选工具；原 Prepared-only 选择/手选界面为历史说明。[自主编排架构](react-workbench.md) / [使用指南](../guides/react-workbench.md)。
+
 # 中文动态研究工作台：适配边界与事件规则
 
 本轮从 G4.1 最终提交建立 `feature/stage-g4-2-chinese-dynamic-ui`。此前作品集发布分支和 `v0.1.0-research-agent` 标签保留，当前新增工作不推送、不覆盖标签。非冻结工作台层适配用户输入与展示，原 Planner、默认 Worker、Reviewer、Recovery、Synthesis、引用规则、Prepared Corpus 及检索排序保持不变。

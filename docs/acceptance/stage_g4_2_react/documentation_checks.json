@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "files_checked": 6,
+  "links_checked": 58,
+  "issues": [],
+  "commands_checked": [
+    "scripts.launch --check",
+    "scripts.launch --port",
+    "scripts.check_react_workbench_ui --output-dir --font-file",
+    "pytest -q",
+    "ruff check",
+    "ruff format --check",
+    "scripts.verify_worker_coverage_baseline"
+  ]
+}

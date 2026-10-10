@@ -1,0 +1,76 @@
+{
+  "status": "PASS",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "scripts.launch",
+    "--port",
+    "50341"
+  ],
+  "checks": [
+    "原统一启动入口实际监听本机地址，首页HTTP200。",
+    "5篇实际Prepared论文、就绪API和静态资源可访问。",
+    "实际服务读取G2.1真实记录，4论断/10缺失，没有提交真实研究。",
+    "SIGINT/Ctrl+C正常退出，原索引所有物理文件SHA256未变化。"
+  ],
+  "exit_code": 0,
+  "prepared_paper_count": 5,
+  "health": {
+    "ui_ready": true,
+    "replay_ready": true,
+    "language_adapter_ready": true,
+    "main_agent_ready": true,
+    "real_research_ready": true,
+    "dependencies": [
+      {
+        "name": "ui_assets",
+        "status": "ready"
+      },
+      {
+        "name": "configuration",
+        "status": "ready"
+      },
+      {
+        "name": "prepared_corpus",
+        "status": "ready"
+      },
+      {
+        "name": "provider",
+        "status": "ready"
+      },
+      {
+        "name": "language_adapter",
+        "status": "ready"
+      },
+      {
+        "name": "embedding_cache",
+        "status": "ready"
+      },
+      {
+        "name": "evidence_index",
+        "status": "ready"
+      }
+    ],
+    "limits": {
+      "max_concurrent_runs": 1,
+      "max_papers": 3,
+      "max_queued_runs": 2,
+      "max_model_calls": 200,
+      "max_tool_calls": 64,
+      "timeout_seconds": 420,
+      "history_retained_runs": 20,
+      "history_ttl_seconds": 3600
+    }
+  },
+  "replay_case_id": "g2-1",
+  "replay_events": 33,
+  "verified_claims": 4,
+  "missing_requirements": 10,
+  "index_files_checked": 9,
+  "index_changed": false,
+  "real_provider_calls": 0,
+  "retrieval_calls": 0,
+  "embedding_calls": 0,
+  "real_research_requests": 0,
+  "note": "真正启动默认工作台服务；只访问健康/静态资源/历史API。历史成本由原记录展示，不计为本轮调用。"
+}

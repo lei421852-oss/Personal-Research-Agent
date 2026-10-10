@@ -1,0 +1,2 @@
+/home/lei/project/projects/personal-rag/.venv/bin/ruff check app tests scripts eval
+All checks passed!

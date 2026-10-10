@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "groups": {
+    "stage_e_frozen": {
+      "checked": 292,
+      "mismatches": []
+    },
+    "untracked_files": {
+      "checked": 13,
+      "mismatches": []
+    },
+    "historical_runtime_artifacts": {
+      "checked": 40,
+      "mismatches": []
+    },
+    "existing_index_files": {
+      "checked": 9,
+      "mismatches": [
+        "data/chroma/stage-e/25306326-0796-41ce-bb9d-dbe8b7a0f680/length.bin",
+        "data/chroma/stage-e/chroma.sqlite3"
+      ],
+      "comparison_scope": "older_chinese_ui_index_fingerprints_carried_into_initial_list",
+      "note": "Two byte hashes differ from the older reference. Current mtimes predate this task; actual launch preserves all 9 current files. No restoration or rebuild performed.",
+      "mismatch_details": [
+        {
+          "path": "data/chroma/stage-e/25306326-0796-41ce-bb9d-dbe8b7a0f680/length.bin",
+          "current_sha256": "dbb2d9861b6eb4e432cf74054f1aa49730dc807fa644357d6f4f56a3ecc1448e",
+          "mtime_utc": "2026-10-10T08:51:53.382432+00:00"
+        },
+        {
+          "path": "data/chroma/stage-e/chroma.sqlite3",
+          "current_sha256": "b097d4ede6fcf9d857c781b3033659aaa58c45e257597751262c4a89edce8703",
+          "mtime_utc": "2026-10-10T08:51:53.363651+00:00"
+        }
+      ],
+      "all_mismatch_mtimes_precede_task": true,
+      "current_source_binding": {
+        "record_count": 46,
+        "embedding_dimension": 1024
+      },
+      "current_launch_preserves_files": true
+    },
+    "paper_index_files": {
+      "checked": 5,
+      "mismatches": []
+    },
+    "profile_cache": {
+      "checked": 1,
+      "mismatches": []
+    },
+    "historical_tracked_data_reports_and_tests": {
+      "checked": 412,
+      "mismatches": []
+    },
+    "stage-e-freeze-v1": {
+      "expected": "2cfb1eda67f7fdf4f587f603556d789de1bc46e5",
+      "actual": "2cfb1eda67f7fdf4f587f603556d789de1bc46e5",
+      "unchanged": true
+    },
+    "v0.1.0-research-agent": {
+      "expected": "86afd9fd2b4cbce8fd71069c52057115dca2c25b",
+      "actual": "86afd9fd2b4cbce8fd71069c52057115dca2c25b",
+      "unchanged": true
+    }
+  },
+  "index_rebuilds": 0,
+  "profile_extraction_calls": 0,
+  "protected_artifacts_modified": false
+}
