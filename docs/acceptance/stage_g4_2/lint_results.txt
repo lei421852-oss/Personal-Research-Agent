@@ -1,0 +1,7 @@
+/home/lei/project/projects/personal-rag/.venv/bin/ruff check app tests scripts eval
+All checks passed!
+exit_code=0
+
+/home/lei/project/projects/personal-rag/.venv/bin/ruff format --check app tests scripts eval
+249 files already formatted
+exit_code=0

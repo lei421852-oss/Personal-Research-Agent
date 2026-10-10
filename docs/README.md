@@ -2,7 +2,11 @@
 
 # 项目文档导航
 
-**2026-10-10 · 中文动态工作台：** [启动与使用](guides/ui-quickstart.md) · [事件、自动选论文与语言边界](architecture/chinese-dynamic-workbench.md) · [G4.2 验收记录](acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md)。本分支从G4.1扩展，保留此前已发布分支和标签；本轮没有推送或新建版本标签。
+**v1.0.0 当前入口：** [正式 README](../README.md) · [Quickstart](guides/quickstart.md) · [演示与验证边界](demos/demo-cases.md) · [简历与面试](portfolio/project-summary.md) · [最终验收](releases/final-acceptance-report.md)。
+
+**历史 G4.2 发布资料：** [旧项目主页](project/README.md) · [旧工作台展示](project/showcase.md) · [技术亮点](project/highlights.md) · [旧求职材料](project/resume-and-interview.md)。这些文件与原验收产物保留，旧“根README仍冻结不更新”说明适用于当时，当前仅根README文档例外已经用户授权。
+
+**2026-10-10 中文动态工作台阶段：** [旧使用说明](guides/ui-quickstart.md) · [阶段架构](architecture/chinese-dynamic-workbench.md) · [验收记录](acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md)。当前默认入口以顶部 ReAct 与 v1.0.0 文档为准。
 
 本导航于 **2026-10-09 / Stage G1** 根据仓库源码整理。阅读顺序：
 
@@ -16,7 +20,7 @@
 
 | 材料 | 如何理解 |
 | --- | --- |
-| [仓库 README](../README.md) | Stage E 冻结材料，保留当时的数字和阶段说明；其中“当前测试数”和部分“尚未实现”应结合阶段日期阅读。G1 不改写冻结文件。 |
+| [仓库 README](../README.md) | v1.0.0 正式主页；经用户授权更新唯一根README文档项，原SHA由历史标签保留。算法与数据冻结不变。 |
 | [Stage E 冻结清单](acceptance/stage_e_freeze/freeze_manifest.json) | 292 个文件的原始 SHA256；冻结的是这些文件，不是禁止增加独立文档或实验组件。 |
 | [Planner](research-planner.md)、[异步 Worker](async-research.md) | 对应实现阶段的职责与验收；不能用早期“不含 Reviewer/Synthesis”判断当前仓库没有后续模块。 |
 | [Reviewer](evidence-review.md)、[Recovery](research-recovery.md)、[Synthesis](research-synthesis.md) | 当前研究链路的模块说明，配合 G1 总览阅读。 |

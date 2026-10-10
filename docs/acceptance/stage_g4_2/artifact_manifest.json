@@ -1,0 +1,118 @@
+{
+  "stage": "G4.2",
+  "source_head": "9e56ac22ca541c2dde0d2d8b656febc9b0d729f9",
+  "document_commit": "6539ac51174f9e7a7d9d493326ac5d8854a7b232",
+  "artifact_count": 21,
+  "artifacts": [
+    {
+      "path": "PROJECT.md",
+      "bytes": 1071,
+      "sha256": "bd7dd77005bb8f489ce3c3f93b13cd7deadc8d31f20a3846c54c9fa7e40f6897"
+    },
+    {
+      "path": "docs/README.md",
+      "bytes": 3244,
+      "sha256": "cff36641d98f87a3068e20c512c2205b2825205a9dc34941352b833bef60704c"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2/acceptance.json",
+      "bytes": 2620,
+      "sha256": "047e0847be8ac966897534fde8565f1d5c711ad15c8d9b2c8772ee6b305afa59"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2/acceptance_report.md",
+      "bytes": 7933,
+      "sha256": "f1aa0f43087ea000ffb0ea353a18f817e4ed6d09387db435bbab0855c2f4a440"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2/baseline.json",
+      "bytes": 100819,
+      "sha256": "30636016e0f2a0e6ce099cd44a79e4b1acb47f98aad0dd92ddf5d87707e8fbf6"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2/browser_check.json",
+      "bytes": 1500,
+      "sha256": "3baf85764384499788ffccea91e8f78c8a87a6f2e73f97c570430a3586f6fec8"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2/clean_source_check.json",
+      "bytes": 788,
+      "sha256": "a2b4e9b02940f99257909e9bf5ba7ac725a425056a00d7aa04b1a6bfe20ba657"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2/documentation_checks.json",
+      "bytes": 32881,
+      "sha256": "2714a3d6ae4ec7c614e0adb3081631c407866e5cff0e9bd98789f45307d7f380"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2/engineering_checks.json",
+      "bytes": 4470,
+      "sha256": "f7d513afb8af5fc3ee69c18f0bb3b71897fdf499c53b4add6252af1769e4cc61"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2/integrity_checks.json",
+      "bytes": 812,
+      "sha256": "29a75239cac2bd936625ac5719e7445fd6f266605bb9ad9cc401e191e8577538"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2/lint_results.txt",
+      "bytes": 249,
+      "sha256": "d203d6da324118160a76eef37068cf497b5840736a18b83394b6741f0bfe449b"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2/remote_preflight.json",
+      "bytes": 473,
+      "sha256": "2aafd7914df5cbf744957928471069f38cd2acd0b9871f1c077b931956b3b3bf"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2/sensitive_scan.json",
+      "bytes": 2836,
+      "sha256": "31b32b06dd909f66a08c2f13c08790d32002f7d4539ce8b50ff84ed27311dbd2"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2/test_results.txt",
+      "bytes": 1892,
+      "sha256": "2c1c7cb1f1444172f08c50f92e32f9cc9cca9b5176d2ec33d6eb1101471d5970"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2/tracked_test_results.txt",
+      "bytes": 1812,
+      "sha256": "dd1d2a04e7142271cb15fff06e8da7832385812ed898d09496b1775aab3113b2"
+    },
+    {
+      "path": "docs/project/README.md",
+      "bytes": 8358,
+      "sha256": "d29588df5c983b3b337db3009fcb0f15e404423c551000cda2b41e1e83ea953f"
+    },
+    {
+      "path": "docs/project/highlights.md",
+      "bytes": 14846,
+      "sha256": "2be02a26675297a8fdd7f1697fe66b0df273f67a81482855b246340b44a52f9c"
+    },
+    {
+      "path": "docs/project/images/g2-1-replay.png",
+      "bytes": 401567,
+      "sha256": "5daf8314cb12d01c90f2c00feaf66ace0a84a69e87fd751bee4ffd92381853a6"
+    },
+    {
+      "path": "docs/project/images/sources.json",
+      "bytes": 2767,
+      "sha256": "48a36fab0243f53f37781514e8f3ff5b9799e5aed3c3df10ece79c55da41fc56"
+    },
+    {
+      "path": "docs/project/resume-and-interview.md",
+      "bytes": 18846,
+      "sha256": "6a5ab84b1dd404f1c6ad8f0c07bb3389f577707cb4b1c973acb681208a312cf9"
+    },
+    {
+      "path": "docs/project/showcase.md",
+      "bytes": 9559,
+      "sha256": "a4879b951b3ae01a684322c47060371e62a5f0651c729d2ce07d7cb38b9fc756"
+    }
+  ],
+  "excluded_self": [
+    "docs/acceptance/stage_g4_2/artifact_manifest.json"
+  ],
+  "commit_tag_push_note": "最终验收commit、附注标签和推送回执在最终交付记录核验，避免自引用。",
+  "new_provider_calls": 0
+}

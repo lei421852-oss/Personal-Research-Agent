@@ -1,0 +1,11 @@
+{
+  "user_authorized_push": true,
+  "target": "git@github.com:lei421852-oss/Personal-Research-Agent.git",
+  "remote_name": "research-agent",
+  "original_origin_preserved": true,
+  "initial_remote_refs": [],
+  "initial_read_access_exit_code": 0,
+  "push_strategy": "non_force_atomic_main_release_branch_and_one_annotated_tag",
+  "stage_e_tag_untouched": true,
+  "note": "用户后续明确要求完成后推送，覆盖原计划仅本地Git限制；不推送原origin。"
+}

@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "original_tracked_checked": 582,
+  "unchanged_tracked": 581,
+  "allowed_navigation_changes": [
+    {
+      "path": "docs/README.md",
+      "before_sha256": "c424428120c003ba23c75977eb38cb4c3b31821626b462de15a8a0f4138e67ba",
+      "after_sha256": "cff36641d98f87a3068e20c512c2205b2825205a9dc34941352b833bef60704c"
+    }
+  ],
+  "unexpected_changes": [],
+  "groups": {
+    "untracked_files": {
+      "checked": 13,
+      "mismatches": []
+    },
+    "historical_runtime_artifacts": {
+      "checked": 40,
+      "mismatches": []
+    },
+    "stage_e_frozen": {
+      "checked": 292,
+      "mismatches": []
+    }
+  },
+  "root_readme_unchanged": true,
+  "historical_reports_data_unchanged": true,
+  "stage_e_fingerprint_root": "44c7afd36c793eff86faed077b7c917a5c6a200e3d652bfbf5b19e83cff0362e"
+}

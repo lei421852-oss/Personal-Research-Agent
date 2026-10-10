@@ -1,0 +1,111 @@
+{
+  "status": "PASS",
+  "current_files_checked": 600,
+  "historical_blob_candidates_checked": 799,
+  "suspected_secret_locations": [],
+  "synthetic_test_fixture_matches": [
+    {
+      "path": "tests/test_research_run_manager.py",
+      "patterns": [
+        "api_key"
+      ],
+      "scope": "current_tree"
+    },
+    {
+      "path": "tests/test_research_runs_api.py",
+      "patterns": [
+        "api_key"
+      ],
+      "scope": "current_tree"
+    },
+    {
+      "path": "tests/unit/agent/test_diagnostics.py",
+      "patterns": [
+        "api_key"
+      ],
+      "scope": "current_tree"
+    },
+    {
+      "path": "tests/unit/research/test_review_runtime.py",
+      "patterns": [
+        "api_key"
+      ],
+      "scope": "current_tree"
+    },
+    {
+      "path": "tests/unit/tools/test_paper_tools.py",
+      "patterns": [
+        "api_key"
+      ],
+      "scope": "current_tree"
+    },
+    {
+      "path": "tests/unit/tools/test_redaction.py",
+      "patterns": [
+        "api_key"
+      ],
+      "scope": "current_tree"
+    },
+    {
+      "object": "348940e8c5562bbc10ad58a7bc275a4a46ac106a",
+      "path": "tests/test_research_run_manager.py",
+      "patterns": [
+        "api_key"
+      ],
+      "scope": "reachable_history"
+    },
+    {
+      "object": "65ffdd9c8f65912c958b9eb2ae994f0c61b68fa2",
+      "path": "tests/test_research_runs_api.py",
+      "patterns": [
+        "api_key"
+      ],
+      "scope": "reachable_history"
+    },
+    {
+      "object": "d50367526464346941a33cfa0d77c1bd32c9e588",
+      "path": "tests/unit/agent/test_diagnostics.py",
+      "patterns": [
+        "api_key"
+      ],
+      "scope": "reachable_history"
+    },
+    {
+      "object": "f86acfaed700e319ad4e484ec62a1b5120231156",
+      "path": "tests/unit/research/test_review_runtime.py",
+      "patterns": [
+        "api_key"
+      ],
+      "scope": "reachable_history"
+    },
+    {
+      "object": "2fdf6e200099fce893d5a0ffbb8d6622a3061b3c",
+      "path": "tests/unit/tools/test_paper_tools.py",
+      "patterns": [
+        "api_key"
+      ],
+      "scope": "reachable_history"
+    },
+    {
+      "object": "a9d61b8578c3edc3ec15e82ea1c76aabd05f1e8a",
+      "path": "tests/unit/tools/test_redaction.py",
+      "patterns": [
+        "api_key"
+      ],
+      "scope": "reachable_history"
+    },
+    {
+      "object": "6ff0e63714c96b9746b2e1b35b2afcb44b3fa019",
+      "path": "tests/unit/tools/test_paper_tools.py",
+      "patterns": [
+        "api_key"
+      ],
+      "scope": "reachable_history"
+    }
+  ],
+  "tracked_environment_files": [],
+  "github_large_object_blockers": [],
+  "secret_values_printed": false,
+  "scope_note": "启发式凭据/私钥扫描覆盖当前文本和HEAD可达≤10MiB文本；测试目录命中是固定安全测试夹具，并非生产凭据。不能证明穷尽所有潜在敏感值。",
+  "provider_calls": 0
+}
