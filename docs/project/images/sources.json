@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "purpose": "Stage G4.2 existing historical replay UI showcase",
+  "images": [
+    {
+      "path": "docs/project/images/g2-1-replay.png",
+      "sha256": "5daf8314cb12d01c90f2c00feaf66ace0a84a69e87fd751bee4ffd92381853a6",
+      "bytes": 401567,
+      "width": 1500,
+      "height": 1745,
+      "source": "replay",
+      "case_id": "g2-1",
+      "provenance": "existing_G4_1_browser_capture_copied",
+      "original_or_capture_record": "/tmp/stage-g4-1-ui/workbench-g2-1-replay.png",
+      "verification_record": "docs/acceptance/stage_g4_1/browser_check.json",
+      "new_provider_calls": 0,
+      "new_retrieval_calls": 0,
+      "capture_record_pointer": "/screenshots/2",
+      "original_delivery_hash_available": false
+    },
+    {
+      "path": "docs/acceptance/stage_g4_1/screenshots/g2-failure-details.png",
+      "sha256": "5d46ce72590b887e16686f794663fe3980cb70460499e56982aeffd56318ec3a",
+      "bytes": 396675,
+      "width": 1500,
+      "height": 1745,
+      "source": "replay",
+      "case_id": "g2",
+      "provenance": "existing_G4_1_tracked_capture_referenced",
+      "original_or_capture_record": "docs/acceptance/stage_g4_1/browser_check.json",
+      "verification_record": "docs/acceptance/stage_g4_1/browser_check.json",
+      "new_provider_calls": 0,
+      "new_retrieval_calls": 0,
+      "capture_record_pointer": "/screenshots/0",
+      "original_delivery_hash_available": true
+    },
+    {
+      "path": "docs/acceptance/stage_g4_1/screenshots/g2-1-evidence.png",
+      "sha256": "051cbdbb04713d7ef4cc4095f61791d38a91d3ec900f510eb310ca9ceac58e4e",
+      "bytes": 396974,
+      "width": 1500,
+      "height": 1745,
+      "source": "replay",
+      "case_id": "g2-1",
+      "provenance": "existing_G4_1_tracked_capture_referenced",
+      "original_or_capture_record": "docs/acceptance/stage_g4_1/browser_check.json",
+      "verification_record": "docs/acceptance/stage_g4_1/browser_check.json",
+      "new_provider_calls": 0,
+      "new_retrieval_calls": 0,
+      "capture_record_pointer": "/screenshots/3",
+      "original_delivery_hash_available": true
+    }
+  ],
+  "copied_image_is_byte_identical": true,
+  "new_screenshots_generated": 0,
+  "source_classification_note": "Screenshots display historical files; they are not new live research executions.",
+  "capture_record_sha256": "30509e872a68d4122afbbbe3a2840a6346944ac5811c2f87608fa122101a88e7",
+  "replay_source_manifest": "docs/acceptance/stage_g4_1/replay_manifest.json",
+  "replay_source_manifest_sha256": "641119998c5b65667f19d510f3df46020fe8013b720d7083d716054a7054869d",
+  "original_delivery_manifest": "docs/acceptance/stage_g4_1/artifact_manifest.json",
+  "original_delivery_manifest_sha256": "607406a05695824676d81f6b7d178b383f7d830fe43ac9668103af090ef2ace4"
+}
