@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "original_tracked_files": 582,
+  "unchanged_tracked_files": 571,
+  "allowed_changes": [
+    "app/api/research_runs.py",
+    "app/research/run_events.py",
+    "app/research/run_manager.py",
+    "app/research/workbench_dependencies.py",
+    "app/research/workbench_runtime.py",
+    "app/workbench.py",
+    "app/workbench_web/app.js",
+    "app/workbench_web/index.html",
+    "app/workbench_web/style.css",
+    "docs/README.md",
+    "docs/guides/ui-quickstart.md"
+  ],
+  "unexpected_changes": [],
+  "checks": {
+    "stage_e_frozen": {
+      "checked": 292,
+      "mismatches": []
+    },
+    "untracked_files": {
+      "checked": 13,
+      "mismatches": []
+    },
+    "historical_runtime_artifacts": {
+      "checked": 40,
+      "mismatches": []
+    },
+    "existing_index_files": {
+      "checked": 9,
+      "mismatches": []
+    }
+  },
+  "original_tags_unchanged": true,
+  "stage_e_fingerprint_root": "44c7afd36c793eff86faed077b7c917a5c6a200e3d652bfbf5b19e83cff0362e"
+}

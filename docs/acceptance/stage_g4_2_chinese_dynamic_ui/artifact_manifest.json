@@ -1,0 +1,217 @@
+{
+  "stage": "G4.2 Chinese Dynamic UI",
+  "base_commit": "9e56ac22ca541c2dde0d2d8b656febc9b0d729f9",
+  "implementation_commit": "840e8e980f841899f01864acbaffbfc23f8fe6b6",
+  "artifacts": [
+    {
+      "path": "app/api/research_runs.py",
+      "bytes": 2684,
+      "sha256": "3d46d657bd3427ffbf9f7b18235eca29e059ffd9d29bd8227f4fc829c64e041f"
+    },
+    {
+      "path": "app/research/paper_selection.py",
+      "bytes": 4073,
+      "sha256": "eda3d03e44e264387db03332fc8178c7158983d39c8b5eb332f782da3fb4b1a0"
+    },
+    {
+      "path": "app/research/query_language.py",
+      "bytes": 8102,
+      "sha256": "94fbba2644b585bbed639044b193911c5f57d8b3f1f7bdccd837482978a9638d"
+    },
+    {
+      "path": "app/research/report_language.py",
+      "bytes": 14230,
+      "sha256": "58ca7d89b8da90735f66bf365c1ede3aacbb2a9f962a283af4b280f50bf279f8"
+    },
+    {
+      "path": "app/research/run_events.py",
+      "bytes": 2604,
+      "sha256": "3259f02982e1a082f62c843f662ef3126dde986122779d3cc9b64ac48a09e29b"
+    },
+    {
+      "path": "app/research/run_manager.py",
+      "bytes": 21353,
+      "sha256": "156caba16628b651ad8b64edeed139e75bf1ee719bd10cb73cc0f081ade7abc8"
+    },
+    {
+      "path": "app/research/workbench_dependencies.py",
+      "bytes": 14997,
+      "sha256": "904ea4a4f292d1ce4126c23a16faeec85215eb9af34c674c709e8f0309146b3d"
+    },
+    {
+      "path": "app/research/workbench_runtime.py",
+      "bytes": 28232,
+      "sha256": "c63e6a0c32e25c4c47200888f823f3c1f2ce4d32313e5c5aa07fd72aff71ca59"
+    },
+    {
+      "path": "app/workbench.py",
+      "bytes": 3044,
+      "sha256": "dfe32f790a0d5793970abc1f518330bfa40115ed983448e99b9bc940a94a522f"
+    },
+    {
+      "path": "app/workbench_web/app.js",
+      "bytes": 43336,
+      "sha256": "f36e9199aef4d4a0f6645d373e3187b855d7ed4de99d9322b80835aa5fb165d5"
+    },
+    {
+      "path": "app/workbench_web/index.html",
+      "bytes": 7123,
+      "sha256": "f4db572596063a82646e49d718162a16521cb6f6e8f3209feb98d89ddec25e2d"
+    },
+    {
+      "path": "app/workbench_web/style.css",
+      "bytes": 13115,
+      "sha256": "766295792b217140bf0d68653bf53584162d7275f514d54edd1a8540d32ee1e6"
+    },
+    {
+      "path": "data/workbench_translations/g2-1.json",
+      "bytes": 6751,
+      "sha256": "8b89b52e87250479b8b38fd2c010e974b377cddad5dbec83265d46035630e22f"
+    },
+    {
+      "path": "data/workbench_translations/g2.json",
+      "bytes": 6207,
+      "sha256": "bc9084b465926683282416cb8bce0f28a94111abf925c05aa99ca9e775f56e86"
+    },
+    {
+      "path": "docs/README.md",
+      "bytes": 3204,
+      "sha256": "ff7fd9c748ec6ebbeeb84d8017f70ef343d7c41f04433cf69f6b46e2672ada35"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance.json",
+      "bytes": 4734,
+      "sha256": "8b8fad36d8b05addb2778e577e58661bcaa8fff72d174bf4abb33ef791e65275"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "bytes": 9973,
+      "sha256": "51bdb43fafa0861504271702c781fcf7230efe8a90b088f2fbd6595ecc39f61b"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/baseline.json",
+      "bytes": 165405,
+      "sha256": "62322a5ec8fdb11d138b57fd4014c86240bef59684deef9207d54e4abc2ada14"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/browser_check.json",
+      "bytes": 3565,
+      "sha256": "578cd69671add514a843dde74513448f24907dfe322c56e0305db117163e2a4b"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/documentation_checks.json",
+      "bytes": 8318,
+      "sha256": "9262236164a8c48cfc1b582dc75d21b534ad66feea688084153e3cea28736dec"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/engineering_audit.json",
+      "bytes": 1774,
+      "sha256": "668c3a50de55613d191e549ceacf44421b2a8bef4fb892e0841d7a5fd9bc6d99"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/integrity_checks.json",
+      "bytes": 990,
+      "sha256": "b7365e90e8077bcb2645c3899174b3df938f9701a00b9263ef8bf6b7fcb53389"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/launch_results.txt",
+      "bytes": 671,
+      "sha256": "fff750d4a4f92b8c0a126b54cd1f8113e907201435d797adbc5d287468b69aaa"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/launch_verification.json",
+      "bytes": 1351,
+      "sha256": "cd9b066b8eae8de9c43ef1f33cc354047ff04a3933296266b86061dbb31607e2"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/lint_results.txt",
+      "bytes": 225,
+      "sha256": "09bf1be3e0794a1bf0dc628bd3afaab8e0c8addd3a125603d5a9a38d9db0d1c4"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/screenshot_sources.json",
+      "bytes": 1639,
+      "sha256": "faf3d4831f7fa0bc614b56cb2287f39c305da2b0da05291d3a60d850087d72ee"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/screenshots/chinese-fake-auto-pipeline.png",
+      "bytes": 465736,
+      "sha256": "854c953388d4475e17c42951794385479dba6b1e0339af3eb0c016d955ef78af"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/screenshots/chinese-g2-1-replay.png",
+      "bytes": 513336,
+      "sha256": "9e622f5e3820de8758f794a5f5dad0694576080388cb6827b0cef098b7949b46"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/screenshots/chinese-g2-replay.png",
+      "bytes": 1227049,
+      "sha256": "75b332e16edb7aa06e27bd3b33f279185a6f397577b35e2a3770a2a7ed225d1a"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/screenshots/chinese-mobile-replay.png",
+      "bytes": 467562,
+      "sha256": "ea46b57f672d3028e23a62bb76227750e157e3c2c25963e28f91315d1e16ef3b"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/screenshots/chinese-workbench-initial.png",
+      "bytes": 154345,
+      "sha256": "79ce85a7cccd5d716edc484b29e0cdbbb386c9a620ea1150377dab9ccbfd05a9"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/sensitive_scan.json",
+      "bytes": 1717,
+      "sha256": "d1bef8647c94b05951571ab6767ffbed3d457d42a63fd358245de134bb43709b"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/static_check.json",
+      "bytes": 552,
+      "sha256": "5813b0208cf3e6ae90a659e5df91e8058ee2eb3dc10c64a0071326ccc3d3c963"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/test_check.json",
+      "bytes": 217,
+      "sha256": "842be31e16feee2144d2357008e9d14e316e9a9d01fd369a6fb536b53d246fe1"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/test_results.txt",
+      "bytes": 1892,
+      "sha256": "fc4a0a45f59f921a3391ecc80eade4c2d4b37960928703f4649764350ebd403c"
+    },
+    {
+      "path": "docs/architecture/chinese-dynamic-workbench.md",
+      "bytes": 5125,
+      "sha256": "91c17b4da4839fb62d2489a75d131b1baf65757ef436bfd389bea6c8da49a440"
+    },
+    {
+      "path": "docs/guides/ui-quickstart.md",
+      "bytes": 9496,
+      "sha256": "efbd596d7597ad80135774a3a71937c75435e749f1c921a1f6885452bb563081"
+    },
+    {
+      "path": "scripts/check_chinese_workbench_ui.py",
+      "bytes": 15246,
+      "sha256": "70be05ecfa5e28fbac4143c36c4cb6813d29485ef20e9bfc05049a54aca06c54"
+    },
+    {
+      "path": "tests/test_chinese_workbench_api.py",
+      "bytes": 7006,
+      "sha256": "cc2fcc8c68bfe933c4e9ae8bed4cc02d6b35bd903b2f0febd39cff034ff89a56"
+    },
+    {
+      "path": "tests/test_chinese_workbench_runtime.py",
+      "bytes": 14055,
+      "sha256": "59428a6fa0fee51e1c52c7e7553bacbe284bef301c25c7a5603f25f7cb1dc26f"
+    },
+    {
+      "path": "tests/test_workbench_language.py",
+      "bytes": 14419,
+      "sha256": "bd980789854c48cc07876f8f2a90929b789b67dd619058a0ea96d2f4b490f4fb"
+    }
+  ],
+  "artifact_count": 41,
+  "excluded_self": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/artifact_manifest.json",
+  "final_commit_record": "Git_and_external_delivery_manifest",
+  "real_provider_calls": 0,
+  "remote_operations": 0
+}

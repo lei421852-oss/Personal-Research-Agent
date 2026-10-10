@@ -1,0 +1,155 @@
+{
+  "stage": "G4.2 Chinese Dynamic UI",
+  "status": "PASS",
+  "accepted_at": "2026-10-10T16:46:06.493240+08:00",
+  "branch": "feature/stage-g4-2-chinese-dynamic-ui",
+  "base_commit": "9e56ac22ca541c2dde0d2d8b656febc9b0d729f9",
+  "scope": "engineering_ui_language_contracts_fake_domain_pipeline_and_historical_replay",
+  "tests": {
+    "baseline": 1155,
+    "passed": 1220,
+    "failed": 0,
+    "new": 65,
+    "language_new": 43,
+    "backend_new": 22,
+    "unchanged_old_test_files": true,
+    "preexisting_untracked_diagnostic_tests": 12,
+    "intended_git_source_tests": 1208,
+    "exit_code": 0
+  },
+  "static_checks": {
+    "ruff_exit_code": 0,
+    "formatter_exit_code": 0,
+    "python_files": 256
+  },
+  "browser_checks": {
+    "passed": 10,
+    "errors": [],
+    "history_cases": [
+      {
+        "case_id": "g2",
+        "verified_claims": 5,
+        "missing_requirements": 7,
+        "events": 29
+      },
+      {
+        "case_id": "g2-1",
+        "verified_claims": 4,
+        "missing_requirements": 10,
+        "events": 33
+      }
+    ],
+    "fake_provider_pipeline": {
+      "run_id": "7a3e6ccf4d504e8ba8dfced76d7a9cdf",
+      "status": "completed",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "flamingo-2204.14198v1"
+      ],
+      "metrics": {
+        "total_requirements": 2,
+        "verified_requirements": 2,
+        "missing_requirements": 0,
+        "rejected_requirements": 0,
+        "resolved_requirements": 2,
+        "reviewed_requirements": 2,
+        "citation_validation_failures": 0,
+        "synthesis_model_calls": 1,
+        "protocol_corrections": 0,
+        "provider_retries": 0,
+        "synthesis_latency_ms": 2.9050960001768544,
+        "resolution_rate": 1.0,
+        "evidence_coverage": 1.0,
+        "review_pass_rate": 1.0,
+        "report_generation_attempts": 1,
+        "report_generation_successes": 1,
+        "report_generation_success_rate": 1.0,
+        "report_status": "completed",
+        "degraded_generation": false,
+        "model_calls": 17,
+        "model_calls_scope": "all_physical_model_attempts_including_vlm",
+        "tool_calls": 4,
+        "total_latency_ms": 455.27504199890245,
+        "vlm_calls": 0,
+        "llm_calls": 17
+      },
+      "verified_claims": 2,
+      "language_status": "translated",
+      "fake_clients": 13,
+      "independent_semantic_quality_verified": false
+    }
+  },
+  "actual_local_service_start": true,
+  "shutdown_exit_code": 0,
+  "protected_checks": {
+    "status": "PASS",
+    "original_tracked_files": 582,
+    "unchanged_tracked_files": 571,
+    "allowed_changes": [
+      "app/api/research_runs.py",
+      "app/research/run_events.py",
+      "app/research/run_manager.py",
+      "app/research/workbench_dependencies.py",
+      "app/research/workbench_runtime.py",
+      "app/workbench.py",
+      "app/workbench_web/app.js",
+      "app/workbench_web/index.html",
+      "app/workbench_web/style.css",
+      "docs/README.md",
+      "docs/guides/ui-quickstart.md"
+    ],
+    "unexpected_changes": [],
+    "checks": {
+      "stage_e_frozen": {
+        "checked": 292,
+        "mismatches": []
+      },
+      "untracked_files": {
+        "checked": 13,
+        "mismatches": []
+      },
+      "historical_runtime_artifacts": {
+        "checked": 40,
+        "mismatches": []
+      },
+      "existing_index_files": {
+        "checked": 9,
+        "mismatches": []
+      }
+    },
+    "original_tags_unchanged": true,
+    "stage_e_fingerprint_root": "44c7afd36c793eff86faed077b7c917a5c6a200e3d652bfbf5b19e83cff0362e"
+  },
+  "documentation_links_checked": 58,
+  "prepared_corpus": {
+    "papers": 5,
+    "text_evidence": 46,
+    "figure_evidence": 5
+  },
+  "catalog_papers": 25,
+  "adapter_call_limits": {
+    "query_language": 1,
+    "paper_selection": 1,
+    "report_language": 1,
+    "shared_physical_model_budget_max": 200
+  },
+  "coverage_worker_enabled": false,
+  "new_real_provider_calls": 0,
+  "new_real_research_quality_runs": 0,
+  "real_embedding_calls": 0,
+  "production_index_rebuilds": 0,
+  "remote_operations": 0,
+  "new_tags_created": false,
+  "original_tags_unchanged": true,
+  "next_stage_started": false,
+  "blockers": [],
+  "known_limitations": [
+    "结构与身份校验不证明翻译语义等价；没有新增独立人审。",
+    "新语言适配与自动选择未调用真实Provider，只有Fake与历史UI验证。",
+    "客户端没有token/货币成本信息，仅记录物理调用和耗时。",
+    "沿用2–3论文协议，单选明确拒绝。",
+    "单进程内存任务；重启丢失当前任务，取消等待同步drain。",
+    "旧check_workbench_ui保留G4.1布局规则，本轮使用新脚本。"
+  ],
+  "final_git_sha_record": "local_git_and_external_delivery_manifest"
+}

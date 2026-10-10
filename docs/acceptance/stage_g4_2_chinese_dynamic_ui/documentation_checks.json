@@ -1,0 +1,296 @@
+{
+  "status": "PASS",
+  "links": [
+    {
+      "source": "docs/README.md",
+      "target": "guides/ui-quickstart.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "architecture/chinese-dynamic-workbench.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "architecture/system-overview.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "architecture/engineering-inventory.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "guides/development.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "architecture/documentation-audit.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "acceptance/stage_g1/acceptance_report.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "../README.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "acceptance/stage_e_freeze/freeze_manifest.json",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "research-planner.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "async-research.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "evidence-review.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "research-recovery.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "research-synthesis.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "paper-discovery.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "query-expansion.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "paper-profiles.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "stage-e-evaluation.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "research-quality-benchmark.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "research-quality-execution.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "acceptance/quality_end_to_end/results/run_manifest.json",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "worker-coverage.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "acceptance/stage_f3_1_e/acceptance_report.md",
+      "exists": true
+    },
+    {
+      "source": "docs/README.md",
+      "target": "demos/README.md",
+      "exists": true
+    },
+    {
+      "source": "docs/guides/ui-quickstart.md",
+      "target": "development.md",
+      "exists": true
+    },
+    {
+      "source": "docs/guides/ui-quickstart.md",
+      "target": "../../.env.example",
+      "exists": true
+    },
+    {
+      "source": "docs/guides/ui-quickstart.md",
+      "target": "../../configs/cross_paper_eval.json",
+      "exists": true
+    },
+    {
+      "source": "docs/guides/ui-quickstart.md",
+      "target": "../demos/workbench-replay.md",
+      "exists": true
+    },
+    {
+      "source": "docs/guides/ui-quickstart.md",
+      "target": "../architecture/workbench.md",
+      "exists": true
+    },
+    {
+      "source": "docs/guides/ui-quickstart.md",
+      "target": "../acceptance/stage_g4_1/acceptance_report.md",
+      "exists": true
+    },
+    {
+      "source": "docs/guides/ui-quickstart.md",
+      "target": "../architecture/chinese-dynamic-workbench.md",
+      "exists": true
+    },
+    {
+      "source": "docs/architecture/chinese-dynamic-workbench.md",
+      "target": "../guides/ui-quickstart.md",
+      "exists": true
+    },
+    {
+      "source": "docs/architecture/chinese-dynamic-workbench.md",
+      "target": "../acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "baseline.json",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "engineering_audit.json",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "../../../app/research/paper_selection.py",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "../../../app/research/run_manager.py",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "../../../app/research/query_language.py",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "../../../app/research/report_language.py",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "../../../app/research/workbench_runtime.py",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "../../../app/research/workbench_dependencies.py",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "../../../app/api/research_runs.py",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "../../../app/research/run_events.py",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "../../../app/workbench_web/index.html",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "../../../app/workbench_web/app.js",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "../../../app/workbench_web/style.css",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "../../../data/workbench_translations/g2-1.json",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "screenshots/chinese-g2-1-replay.png",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "screenshot_sources.json",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "test_check.json",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "test_results.txt",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "static_check.json",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "lint_results.txt",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "launch_verification.json",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "browser_check.json",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "../../guides/ui-quickstart.md",
+      "exists": true
+    },
+    {
+      "source": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md",
+      "target": "../../architecture/chinese-dynamic-workbench.md",
+      "exists": true
+    }
+  ],
+  "checked": 58
+}

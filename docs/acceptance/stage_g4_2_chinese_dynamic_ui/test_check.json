@@ -1,0 +1,14 @@
+{
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "pytest",
+    "-q"
+  ],
+  "exit_code": 0,
+  "passed": 1220,
+  "failed": 0,
+  "duration_seconds": 40.83,
+  "log": "test_results.txt",
+  "real_provider_calls": 0
+}

@@ -1,0 +1,96 @@
+{
+  "status": "PASS",
+  "verification_type": "real_browser_historical_replay_and_fake_provider_domain_integration",
+  "real_provider_calls": 0,
+  "real_research_quality_runs": 0,
+  "embedding_calls": 0,
+  "index_rebuilds": 0,
+  "checks": [
+    "桌面三栏黑白灰页面，初始零节点、零勾选，缺Provider仍可回放。",
+    "G2原Worker协议失败可查看，历史失败没有被中文版改为成功。",
+    "g2中文离线回放保留5事实/7缺口，原文可切换，无未执行Recovery节点。",
+    "g2-1中文离线回放保留4事实/10缺口，原文可切换，无未执行Recovery节点。",
+    "节点过程详情、原论文引用页码和正文可查看，最终报告独立保持可见。",
+    "乱序/重复事件去重排序，刷新同run恢复不新增POST。",
+    "390px窄屏上下布局无横向溢出。",
+    "受控翻译失败保留原报告，HTML作为文本展示不执行。",
+    "Fake Provider中文无勾选请求真正进入原Planner/默认Worker/Reviewer/一轮Recovery/Synthesis并形成合法报告。",
+    "真实页面支持手选范围，单选明确提示；自动选择及中文展示调用计入同一预算。"
+  ],
+  "history_cases": [
+    {
+      "case_id": "g2",
+      "verified_claims": 5,
+      "missing_requirements": 7,
+      "events": 29
+    },
+    {
+      "case_id": "g2-1",
+      "verified_claims": 4,
+      "missing_requirements": 10,
+      "events": 33
+    }
+  ],
+  "fake_provider_pipeline": {
+    "run_id": "7a3e6ccf4d504e8ba8dfced76d7a9cdf",
+    "status": "completed",
+    "paper_ids": [
+      "blip-2-2301.12597v1",
+      "flamingo-2204.14198v1"
+    ],
+    "metrics": {
+      "total_requirements": 2,
+      "verified_requirements": 2,
+      "missing_requirements": 0,
+      "rejected_requirements": 0,
+      "resolved_requirements": 2,
+      "reviewed_requirements": 2,
+      "citation_validation_failures": 0,
+      "synthesis_model_calls": 1,
+      "protocol_corrections": 0,
+      "provider_retries": 0,
+      "synthesis_latency_ms": 2.9050960001768544,
+      "resolution_rate": 1.0,
+      "evidence_coverage": 1.0,
+      "review_pass_rate": 1.0,
+      "report_generation_attempts": 1,
+      "report_generation_successes": 1,
+      "report_generation_success_rate": 1.0,
+      "report_status": "completed",
+      "degraded_generation": false,
+      "model_calls": 17,
+      "model_calls_scope": "all_physical_model_attempts_including_vlm",
+      "tool_calls": 4,
+      "total_latency_ms": 455.27504199890245,
+      "vlm_calls": 0,
+      "llm_calls": 17
+    },
+    "verified_claims": 2,
+    "language_status": "translated",
+    "fake_clients": 13,
+    "independent_semantic_quality_verified": false
+  },
+  "page_errors": [],
+  "screenshots": [
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/screenshots/chinese-workbench-initial.png",
+      "source": "real_ui_no_run"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/screenshots/chinese-g2-replay.png",
+      "source": "historical_replay_offline_translation"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/screenshots/chinese-g2-1-replay.png",
+      "source": "historical_replay_offline_translation"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/screenshots/chinese-mobile-replay.png",
+      "source": "historical_replay_offline_translation"
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/screenshots/chinese-fake-auto-pipeline.png",
+      "source": "fake_provider_default_domain_pipeline"
+    }
+  ]
+}

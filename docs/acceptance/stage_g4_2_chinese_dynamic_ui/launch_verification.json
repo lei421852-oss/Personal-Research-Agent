@@ -1,0 +1,65 @@
+{
+  "status": "PASS",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "scripts.launch",
+    "--port",
+    "49037"
+  ],
+  "verification": "actual_scripts_launch_local_service",
+  "page_status": 200,
+  "health": {
+    "ui_ready": true,
+    "replay_ready": true,
+    "language_adapter_ready": true,
+    "real_research_ready": true,
+    "dependencies": [
+      {
+        "name": "ui_assets",
+        "status": "ready"
+      },
+      {
+        "name": "configuration",
+        "status": "ready"
+      },
+      {
+        "name": "prepared_corpus",
+        "status": "ready"
+      },
+      {
+        "name": "provider",
+        "status": "ready"
+      },
+      {
+        "name": "language_adapter",
+        "status": "ready"
+      },
+      {
+        "name": "embedding_cache",
+        "status": "ready"
+      },
+      {
+        "name": "evidence_index",
+        "status": "ready"
+      }
+    ],
+    "limits": {
+      "max_concurrent_runs": 1,
+      "max_papers": 3,
+      "max_queued_runs": 2,
+      "max_model_calls": 200,
+      "max_tool_calls": 64,
+      "timeout_seconds": 420,
+      "history_retained_runs": 20,
+      "history_ttl_seconds": 3600
+    }
+  },
+  "replay_cases": 2,
+  "research_post_requests": 0,
+  "provider_calls": 0,
+  "embedding_calls": 0,
+  "index_rebuilds": 0,
+  "shutdown_exit_code": 0,
+  "existing_user_server_stopped": false
+}

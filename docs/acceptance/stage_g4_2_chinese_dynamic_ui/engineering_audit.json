@@ -1,0 +1,42 @@
+{
+  "stage": "G4.2 Chinese Dynamic UI",
+  "request_sha256": "fd8eb02af1384b4727de258721c4ede919478e279456671b719f7c76baf29f48",
+  "reviewed_modules": [
+    "app/api/research_runs.py",
+    "app/research/run_manager.py",
+    "app/research/run_events.py",
+    "app/research/run_presenter.py",
+    "app/research/workbench_runtime.py",
+    "app/research/workbench_dependencies.py",
+    "app/research/run_replay.py",
+    "app/workbench.py",
+    "app/workbench_web/index.html",
+    "app/workbench_web/app.js",
+    "app/workbench_web/style.css",
+    "scripts/launch.py",
+    "app/research/planner.py",
+    "app/research/protocol_runtime.py",
+    "app/research/synthesis_models.py"
+  ],
+  "confirmed_facts": [
+    "Planner accepts already selected catalog IDs and dynamically proposes dimensions; it does not select papers.",
+    "G4.1 UI requires2–3manualpaperIDs and pre-renders pending nodes.",
+    "PreparedCorpus is5papers/46text/5figures; catalog is25metadata documents.",
+    "Original report DTO exposes verified claims, missing statuses, citations, diagnostics and metrics.",
+    "ResourceGate and _RequestBudget can be reused in the non-frozen workbench."
+  ],
+  "allowed_changes": [
+    "non-frozenworkbench request/run layers",
+    "new prepared-only selection adapter",
+    "new bounded language adapters and independent translationfixtures",
+    "webUI",
+    "relatedtests/browserverification/guides"
+  ],
+  "frozen_files_modified": false,
+  "previous_release_branch": "release/stage-g4-2-final-delivery",
+  "previous_release_head": "72c07a752703178fdc48e9dceaa5dc530fc9cbc6",
+  "previous_release_tag_preserved": "86afd9fd2b4cbce8fd71069c52057115dca2c25b",
+  "start_base": "9e56ac22ca541c2dde0d2d8b656febc9b0d729f9",
+  "remote_operations": 0,
+  "provider_calls": 0
+}

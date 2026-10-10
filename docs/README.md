@@ -1,5 +1,7 @@
 # 项目文档导航
 
+**2026-10-10 · 中文动态工作台：** [启动与使用](guides/ui-quickstart.md) · [事件、自动选论文与语言边界](architecture/chinese-dynamic-workbench.md) · [G4.2 验收记录](acceptance/stage_g4_2_chinese_dynamic_ui/acceptance_report.md)。本分支从G4.1扩展，保留此前已发布分支和标签；本轮没有推送或新建版本标签。
+
 本导航于 **2026-10-09 / Stage G1** 根据仓库源码整理。阅读顺序：
 
 1. [系统架构与能力边界](architecture/system-overview.md)：先区分单 Agent 演示和多论文研究链路。

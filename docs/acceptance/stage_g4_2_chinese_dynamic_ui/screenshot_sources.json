@@ -1,0 +1,36 @@
+{
+  "screenshots": [
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/screenshots/chinese-workbench-initial.png",
+      "sha256": "79ce85a7cccd5d716edc484b29e0cdbbb386c9a620ea1150377dab9ccbfd05a9",
+      "source": "real_ui_no_run",
+      "independent_human_fact_review": false
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/screenshots/chinese-g2-replay.png",
+      "sha256": "75b332e16edb7aa06e27bd3b33f279185a6f397577b35e2a3770a2a7ed225d1a",
+      "source": "historical_replay_offline_translation",
+      "independent_human_fact_review": false
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/screenshots/chinese-g2-1-replay.png",
+      "sha256": "9e622f5e3820de8758f794a5f5dad0694576080388cb6827b0cef098b7949b46",
+      "source": "historical_replay_offline_translation",
+      "independent_human_fact_review": false
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/screenshots/chinese-mobile-replay.png",
+      "sha256": "ea46b57f672d3028e23a62bb76227750e157e3c2c25963e28f91315d1e16ef3b",
+      "source": "historical_replay_offline_translation",
+      "independent_human_fact_review": false
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_chinese_dynamic_ui/screenshots/chinese-fake-auto-pipeline.png",
+      "sha256": "854c953388d4475e17c42951794385479dba6b1e0339af3eb0c016d955ef78af",
+      "source": "fake_provider_default_domain_pipeline",
+      "independent_human_fact_review": false
+    }
+  ],
+  "real_provider_calls": 0,
+  "note": "实际网页截图；回放来自受保护历史记录，Fake界面仅验证工程链路。"
+}

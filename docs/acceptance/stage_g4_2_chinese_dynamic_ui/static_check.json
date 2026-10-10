@@ -1,0 +1,29 @@
+{
+  "checks": [
+    {
+      "command": [
+        "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+        "check",
+        "app",
+        "tests",
+        "scripts",
+        "eval"
+      ],
+      "exit_code": 0,
+      "output": "All checks passed!\n"
+    },
+    {
+      "command": [
+        "/home/lei/project/projects/personal-rag/.venv/bin/ruff",
+        "format",
+        "--check",
+        "app",
+        "tests",
+        "scripts",
+        "eval"
+      ],
+      "exit_code": 0,
+      "output": "256 files already formatted\n"
+    }
+  ]
+}
