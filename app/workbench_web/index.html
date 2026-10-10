@@ -34,10 +34,11 @@
     <section class="workflow-panel panel" aria-labelledby="workflow-title">
       <div class="workflow-heading"><h2 id="workflow-title">执行过程</h2><span id="mode-badge" class="badge neutral">尚未运行</span></div>
       <p id="run-question" class="run-question muted">节点将在收到真实执行记录后出现。</p>
+      <p id="workflow-layout" class="workflow-layout" aria-live="polite">等待执行</p>
       <div class="source-legend"><span>实时调用</span><span>记录推导</span><span>历史回放</span></div>
       <p id="event-warning" class="report-notice" hidden></p>
       <div class="workflow timeline" id="workflow"><div class="timeline-empty"><span aria-hidden="true">○</span><p>等待研究任务</p><p class="small muted">这里不会预先生成研究角色或模拟进度。</p></div></div>
-      <p class="graph-note">点击节点查看过程详情。仅展示已记录的状态；无原始时间时不推定时间。恢复节点仅在实际执行后出现。</p>
+      <p id="workflow-note" class="graph-note">点击节点查看过程详情。仅展示已记录的状态；无原始时间时不推定时间。恢复节点仅在实际执行后出现。</p>
       <details class="advanced execution-details"><summary>执行统计与原始事件 <span id="event-count" class="small muted">0 条</span></summary><div id="metrics" class="metrics-strip"><div><strong>—</strong><span>模型调用</span></div><div><strong>—</strong><span>工具调用</span></div><div><strong>—</strong><span>已审核需求</span></div><div><strong>—</strong><span>实际耗时</span></div></div><ol id="event-list" class="event-list"><li class="muted small empty-event">尚无执行记录。</li></ol></details>
     </section>
 

@@ -788,3 +788,35 @@ footer {
 
 /* 论文目录只供资源浏览，避免25篇元数据把输入操作挤出首屏。 */
 .paper-options { max-height:260px; overflow:auto; }
+
+/* 展示真实协作的职责树；窄屏折成单列，保留缩进及分支归属。 */
+.workflow-layout { margin:10px 0 12px; color:#444; font-size:12px; font-weight:600; }
+.collaboration-tree { margin-top:12px; }
+.tree-list,.paper-branches { list-style:none; padding:0; margin:0; min-width:0; }
+.tree-item { position:relative; min-width:0; margin:0 0 12px; }
+.tree-list .tree-list { margin:12px 0 0 9px; padding-left:16px; border-left:1px solid #d8d8d8; }
+.tree-list .tree-list > .tree-item:before { content:""; position:absolute; left:-17px; top:19px; width:16px; border-top:1px solid #d8d8d8; }
+.tree-item:last-child { margin-bottom:0; }
+.tree-caption { margin:3px 0 12px; font-size:12px; color:#555; }
+.paper-branches { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr)); gap:14px; }
+.paper-branch { min-width:0; border:1px solid #dedede; border-radius:var(--radius); padding:11px 9px; background:#fafafa; }
+.paper-branch-title { margin:0 0 12px; font-size:12px; font-weight:600; overflow-wrap:anywhere; }
+.paper-branch .tree-list { margin-left:3px; padding-left:9px; }
+.paper-branch .tree-list > .tree-item:before { left:-10px; width:9px; }
+.collaboration-tree .node-top { flex-wrap:wrap; gap:5px; }
+.collaboration-tree .node-title { font-size:12px; overflow-wrap:anywhere; }
+.collaboration-tree .node-summary { overflow-wrap:anywhere; }
+.collaboration-tree .node-bottom { flex-wrap:wrap; }
+@media(max-width:680px) {
+  .paper-branches { grid-template-columns:minmax(0,1fr); }
+  .tree-list .tree-list { padding-left:12px; margin-left:4px; }
+  .tree-list .tree-list > .tree-item:before { left:-13px; width:12px; }
+}
+/* 分工组的连接线表达归属，状态与时间始终来自各节点的事件。 */
+.paper-branches { position:relative; padding-top:14px; border-top:1px solid #d8d8d8; }
+.paper-branch { position:relative; }
+.paper-branch:before { content:""; position:absolute; left:50%; top:-15px; height:14px; border-left:1px solid #d8d8d8; }
+@media(max-width:680px) {
+  .paper-branches { padding-top:0; border-top:0; padding-left:12px; border-left:1px solid #d8d8d8; }
+  .paper-branch:before { left:-13px; top:20px; height:0; width:12px; border-left:0; border-top:1px solid #d8d8d8; }
+}

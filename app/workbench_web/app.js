@@ -152,15 +152,126 @@ function rebuildNodes() {
       : {...event,details,first_event_id:previous.first_event_id,records:[...previous.records,event]});
   }
 }
+// 同一节点在两种布局中复用详情、状态和点击行为，不制造新的执行节点。
+function nodeCard(event) {
+  state.displayNodes.set(event.node_id,event);
+  const type = event.node_type, paper = event.details?.paper_id;
+  const button = element("button", `node ${event.status}${state.selectedNode === event.node_id ? " selected" : ""}`);
+  button.type = "button"; button.dataset.nodeId = event.node_id; button.dataset.nodeType = type;
+  const title = paper && ["Worker","Validator","Reviewer","Recovery"].includes(type)
+    ? `${shortPaperTitle(paper)} · ${NODE_LABELS[type]}` : NODE_LABELS[type];
+  const top = element("div", "node-top");
+  top.append(element("span", "node-title", title),badge(labelStatus(event.status),event.status));
+  button.append(top,element("p", "node-summary", visibleSummary(event)));
+  const bottom = element("div", "node-bottom");
+  bottom.append(element("span", "node-origin", SOURCE_LABELS[event.source] || "来源无记录"));
+  if (event.timestamp && event.source !== "derived" && type !== "Validator") {
+    const date = new Date(event.timestamp);
+    if (!Number.isNaN(date.getTime())) bottom.append(element("time", "node-time", date.toLocaleTimeString("zh-CN",{hour12:false})));
+  }
+  button.append(bottom);
+  button.addEventListener("click", () => { state.selectedNode = event.node_id; renderNodes(); renderNodeDetails(event); selectTab("node-panel"); });
+  return button;
+}
+function treeItem(event) {
+  const item = element("li", "tree-item");
+  item.append(nodeCard(event));
+  return item;
+}
+function treeList(events, className = "") {
+  const list = element("ul", `tree-list ${className}`);
+  for (const event of events) list.append(treeItem(event));
+  return list;
+}
+function renderResearchBranches(actual) {
+  const list = element("ul", "tree-list research-branches");
+  const roles = new Set(["Planner","Worker","Validator","Reviewer","Recovery","Synthesis"]);
+  const records = actual.filter(event => roles.has(event.node_type));
+  if (!records.length) return list;
+  for (const event of records.filter(e => e.node_type === "Planner")) list.append(treeItem(event));
+  // 仅按公开 paper_id / Worker 需求映射归属；无身份记录的审核保持在公共分支。
+  const requirementPapers = new Map();
+  for (const event of records) {
+    for (const requirement of event.details?.requirements || []) {
+      const paper = requirement.paper_id || event.details?.paper_id;
+      if (!paper || !requirement.requirement_id) continue;
+      const previous = requirementPapers.get(requirement.requirement_id);
+      requirementPapers.set(requirement.requirement_id, previous === undefined || previous === paper ? paper : null);
+    }
+  }
+  const papers = new Map(), common = [];
+  for (const event of records.filter(e => !["Planner","Synthesis"].includes(e.node_type))) {
+    const paper = event.details?.paper_id || requirementPapers.get(event.details?.requirement_id);
+    if (!paper) { common.push(event); continue; }
+    if (!papers.has(paper)) papers.set(paper, []);
+    papers.get(paper).push(event);
+  }
+  if (papers.size) {
+    const fork = element("li", "tree-item tree-fork");
+    fork.append(element("p", "tree-caption", `按论文分工 · ${papers.size} 个已记录分支`));
+    const branches = element("ul", "paper-branches");
+    for (const [paper, events] of papers) {
+      const branch = element("li", "paper-branch"); branch.dataset.paperId = paper;
+      branch.append(element("h3", "paper-branch-title", shortPaperTitle(paper)),treeList(events));
+      branches.append(branch);
+    }
+    fork.append(branches); list.append(fork);
+  }
+  if (common.length) {
+    const shared = element("li", "tree-item shared-branch");
+    shared.append(element("p", "tree-caption", "公共审核 / 恢复记录"),treeList(common));
+    list.append(shared);
+  }
+  // 综合阶段是汇总角色，按真实事件出现；不提前生成等待中的综合节点。
+  for (const event of records.filter(e => e.node_type === "Synthesis")) list.append(treeItem(event));
+  return list;
+}
+function renderTree(actual, target) {
+  const tree = element("ul", "tree-list workflow-tree");
+  tree.setAttribute("aria-label", "已记录的多 Agent 协作职责树");
+  const researchRoles = new Set(["Planner","Worker","Validator","Reviewer","Recovery","Synthesis"]);
+  for (const event of actual.filter(e => ["QueryLanguage","PaperSelection"].includes(e.node_type))) tree.append(treeItem(event));
+  const main = actual.find(e => e.node_type === "MainAgent");
+  const mainItem = main ? treeItem(main) : null;
+  const actions = element("ul", "tree-list main-actions");
+  let researchAttached = false;
+  for (const event of actual.filter(e => !researchRoles.has(e.node_type) && !["MainAgent","QueryLanguage","PaperSelection","ReportLanguage"].includes(e.node_type))) {
+    const item = treeItem(event);
+    if (event.node_type === "ResearchTool" && !researchAttached) {
+      const branches = renderResearchBranches(actual);
+      if (branches.childElementCount) item.append(branches);
+      researchAttached = true;
+    }
+    actions.append(item);
+  }
+  if (mainItem) { if (actions.childElementCount) mainItem.append(actions); tree.append(mainItem); }
+  else for (const item of [...actions.children]) tree.append(item);
+  // 历史默认研究入口没有主 Agent / ResearchTool；仅展示历史中真实存在的研究角色。
+  if (!researchAttached) {
+    const branches = renderResearchBranches(actual);
+    for (const item of [...branches.children]) (mainItem ? (mainItem.querySelector(".main-actions") || mainItem) : tree).append(item);
+  }
+  for (const event of actual.filter(e => e.node_type === "ReportLanguage")) tree.append(treeItem(event));
+  target.append(tree);
+}
 function renderNodes() {
   state.displayNodes.clear();
   const target = $("#workflow"); target.replaceChildren();
-  const actual = [...state.nodes.values()].filter((event) => !(event.node_type === "Recovery" && (event.status === "skipped" || event.details?.triggered === false)));
+  const actual = [...state.nodes.values()].filter((event) => event.details?.record_available !== false && !(event.node_type === "Recovery" && (event.status === "skipped" || event.details?.triggered === false)));
+  // 布局依据实际研究调用/角色事件，不按问题关键词或论文数量判定协作。
+  const collaborative = actual.some(event => ["ResearchTool","Planner","Worker","Reviewer","Synthesis"].includes(event.node_type));
+  target.dataset.layout = collaborative ? "tree" : "linear";
+  target.className = `workflow ${collaborative ? "collaboration-tree" : "timeline"}`;
+  $("#workflow-layout").textContent = !actual.length ? "等待执行" : collaborative ? "多 Agent 协作 · 树状" : "单 Agent · 线性";
+  $("#workflow-note").textContent = collaborative
+    ? "树状图按实际角色与论文归属组织；连线不代表执行时间或同时并发。点击节点查看工作、证据与错误。"
+    : "按首次记录顺序展示主 Agent 与工具；只有实际调用多 Agent 研究后才切换树状图。点击节点查看详情。";
   if (!actual.length) {
     const empty = element("div", "timeline-empty");
     empty.append(element("span", "", "○"),element("p", "", state.run ? "等待实际执行记录" : "等待研究任务"),element("p", "small muted", "节点仅由后端事件产生，不预置研究流程。"));
     target.append(empty); return;
   }
+  if (collaborative) { renderTree(actual,target); return; }
   const groups = [], counts = {};
   for (const event of actual) {
     let group = groups[groups.length - 1];
@@ -190,25 +301,7 @@ function renderNodes() {
         if (isChecks) wrapper.append(element("p", "small muted review-role", NODE_LABELS[type]));
         wrapper.append(list); lists.set(type,list);
       }
-      state.displayNodes.set(event.node_id,event);
-      const button = element("button", `node ${event.status}${state.selectedNode === event.node_id ? " selected" : ""}`);
-      button.type = "button"; button.dataset.nodeId = event.node_id;
-      button.dataset.nodeType = type;
-      const top = element("div", "node-top");
-      const paper = event.details?.paper_id;
-      const title = type === "Worker" ? `${shortPaperTitle(paper)} · 研究` : isChecks && paper ? `${shortPaperTitle(paper)} · ${type === "Reviewer" ? "审核" : "引用核验"}` : NODE_LABELS[type];
-      top.append(element("span", "node-title", title),badge(labelStatus(event.status),event.status));
-      button.append(top,element("p", "node-summary", visibleSummary(event)));
-      const bottom = element("div", "node-bottom");
-      bottom.append(element("span", "node-origin", SOURCE_LABELS[event.source] || "来源无记录"));
-      // 推导状态不拥有实时生命周期；只有实际事件的原时间可以显示。
-      if (event.timestamp && event.source !== "derived" && type !== "Validator") {
-        const date = new Date(event.timestamp);
-        if (!Number.isNaN(date.getTime())) bottom.append(element("time", "node-time", date.toLocaleTimeString("zh-CN",{hour12:false})));
-      }
-      button.append(bottom);
-      button.addEventListener("click", () => { state.selectedNode = event.node_id; renderNodes(); renderNodeDetails(event); selectTab("node-panel"); });
-      list.append(button);
+      list.append(nodeCard(event));
     }
     target.append(wrapper);
   }

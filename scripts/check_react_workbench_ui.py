@@ -76,6 +76,9 @@ def main():
                     page.on("pageerror", lambda error: errors.append(str(error)))
                     page.goto(url)
                     expect(page.locator("#workflow .node")).to_have_count(0)
+                    expect(page.locator("#workflow")).to_have_attribute(
+                        "data-layout", "linear"
+                    )
                     expect(page.locator("#papers input")).to_have_count(0)
                     expect(page.locator("#papers .paper-option")).to_have_count(25)
                     expect(page.locator("#start-button")).to_be_enabled()
@@ -96,11 +99,35 @@ def main():
                         "#workflow [data-node-type='MainAgent']"
                     ).count()
                     if mode != "multi_agent_research":
+                        expect(page.locator("#workflow")).to_have_attribute(
+                            "data-layout", "linear"
+                        )
+                        expect(page.locator("#workflow-layout")).to_have_text(
+                            "单 Agent · 线性"
+                        )
                         expect(
                             page.locator("#workflow [data-node-type='Worker']")
                         ).to_have_count(0)
                         expect(page.locator("#report-full-text")).to_have_count(0)
                     else:
+                        expect(page.locator("#workflow")).to_have_attribute(
+                            "data-layout", "tree"
+                        )
+                        expect(page.locator("#workflow-layout")).to_have_text(
+                            "多 Agent 协作 · 树状"
+                        )
+                        expect(page.locator("#workflow .paper-branch")).to_have_count(2)
+                        for paper_id in PAPERS:
+                            branch = page.locator(
+                                f'#workflow .paper-branch[data-paper-id="{paper_id}"]'
+                            )
+                            expect(
+                                branch.locator("[data-node-type=Worker]")
+                            ).to_have_count(1)
+                            branch.locator("[data-node-type=Worker]").click()
+                            expect(page.locator("#node-details")).to_contain_text(
+                                paper_id
+                            )
                         assert page.locator(
                             "#workflow [data-node-type='Worker']"
                         ).count()
@@ -109,6 +136,51 @@ def main():
                         ).count()
                         expect(page.locator("#report-full-text")).not_to_have_attribute(
                             "open", ""
+                        )
+                    if mode == "multi_agent_research":
+                        records = page.request.get(
+                            f"{url}/api/research/runs/{identity}/events"
+                        ).json()["events"]
+                        original_node_count = page.locator(
+                            "#workflow button.node"
+                        ).count()
+                        handoff_index = next(
+                            i
+                            for i, e in enumerate(records)
+                            if e["node_type"] == "ResearchTool"
+                        )
+
+                        def display_prefix(items, page=page):
+                            page.evaluate(
+                                "items => {state.events=items; rebuildNodes(); renderNodes();}",
+                                items,
+                            )
+
+                        display_prefix(records[:handoff_index])
+                        expect(page.locator("#workflow")).to_have_attribute(
+                            "data-layout", "linear"
+                        )
+                        display_prefix(records[: handoff_index + 1])
+                        expect(page.locator("#workflow")).to_have_attribute(
+                            "data-layout", "tree"
+                        )
+                        expect(
+                            page.locator("#workflow [data-node-type=Worker]")
+                        ).to_have_count(0)
+                        worker_index = next(
+                            i
+                            for i, e in enumerate(records)
+                            if e["node_type"] == "Worker"
+                            and e["details"].get("paper_id")
+                        )
+                        display_prefix(records[: worker_index + 1])
+                        expect(page.locator("#workflow .paper-branch")).to_have_count(1)
+                        display_prefix(records)
+                        expect(page.locator("#workflow button.node")).to_have_count(
+                            original_node_count
+                        )
+                        checks.append(
+                            "协作调用触发线性转树状；角色按记录出现；首个Worker只出现一个论文分支；节点不重复。"
                         )
                     report = page.request.get(
                         f"{url}/api/research/runs/{identity}/report"
@@ -120,6 +192,12 @@ def main():
                     pictures.append(
                         {"path": path.name, "source": "scripted_domain_wiring"}
                     )
+                    if mode == "multi_agent_research":
+                        tree_path = args.output_dir / "scripted-collaboration-tree.png"
+                        page.locator(".workflow-panel").screenshot(path=str(tree_path))
+                        pictures.append(
+                            {"path": tree_path.name, "source": "scripted_domain_wiring"}
+                        )
                     examples.append({"path": mode, "report": report})
                     page.locator("#report-language-en").click()
                     expect(page.locator("#direct-answer")).to_contain_text(
@@ -131,6 +209,17 @@ def main():
                     assert page.locator("body").evaluate(
                         "e=>e.scrollWidth<=innerWidth+1"
                     )
+                    if mode == "multi_agent_research":
+                        mobile_path = (
+                            args.output_dir / "scripted-multi-agent-mobile.png"
+                        )
+                        page.screenshot(path=str(mobile_path), full_page=True)
+                        pictures.append(
+                            {
+                                "path": mobile_path.name,
+                                "source": "scripted_domain_wiring",
+                            }
+                        )
                     page.close()
                     checks.append(
                         f"{mode}: 无论文选择、实际角色、答案首屏、中英文、刷新恢复、窄屏布局。"
@@ -146,6 +235,9 @@ def main():
                         "历史记录已载入", timeout=15000
                     )
                     expect(page.locator("#direct-answer")).to_be_visible()
+                    expect(page.locator("#workflow")).to_have_attribute(
+                        "data-layout", "tree"
+                    )
                     path = args.output_dir / f"historical-{case}.png"
                     page.screenshot(path=str(path), full_page=True)
                     pictures.append(
