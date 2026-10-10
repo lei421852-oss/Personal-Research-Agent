@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "configured_credentials_checked": 1,
+  "credential_leak_paths": [],
+  "tracked_env_file": false,
+  "raw_provider_messages_exported": false
+}

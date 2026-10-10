@@ -1,0 +1,110 @@
+{
+  "validated_source_commit": "0f64e9b9ddbe289591a33c74f9d0b24b50bd8cfe",
+  "files": [
+    {
+      "path": "docs/acceptance/stage_g4_2_react/acceptance.json",
+      "sha256": "f7d7769653a180e0b938bc52eeb3593ebba270ab6af5d044c4472c23c939a943",
+      "bytes": 6739
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/acceptance_report.md",
+      "sha256": "9b168d6c9b42bbedb739d1eb7eb02cbbc64c30df8773305cd503f4d28be25720",
+      "bytes": 7243
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/baseline.json",
+      "sha256": "dcbcd72d591117d4f1f89a9d864daf96c1f1b11b9137ccaf5b19a966e416b4a0",
+      "bytes": 159250
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/browser_check.json",
+      "sha256": "5a6af7de673a291cbaf2779e87f226b2ea487839836eccfa96abd256bc03c7ce",
+      "bytes": 1126
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/delivery_record.json",
+      "sha256": "b5a6f9efa9f62fb0318a3809fc952e5f24a8965976467fbf3088e1a804d3181f",
+      "bytes": 835
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/documentation_checks.json",
+      "sha256": "fc08f28e8530eafea38581c1373841e18ff8977eb28015015fb425c411a6ac73",
+      "bytes": 345
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/formatter_results.txt",
+      "sha256": "f72e94136c30e80cb41cb75467e51e3eeea22d4a1f1dacc9557b1f1a565b9e80",
+      "bytes": 121
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/frozen_check.json",
+      "sha256": "fb3da9a7a88a582931e57e9238d3005a55514f8ea25c484d31dc6c1f0287a483",
+      "bytes": 221
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/integrity_checks.json",
+      "sha256": "5d84f4c881799f835c6595e74189d509c77786d56e02a846b6c208202f5b14ce",
+      "bytes": 2212
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/launch_precheck.json",
+      "sha256": "4a56357d418ae761004c707eedb5c454853eb722750cb8934c43aa06e1f073ad",
+      "bytes": 1370
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/launch_results.txt",
+      "sha256": "6e4e966eb0ad0e821ab23664379200f642e4e41f73311bad0cbe349f42d03a69",
+      "bytes": 1046
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/launch_verification.json",
+      "sha256": "356e47669cdc68ebf602232eced69befcb6d36b6e909833ca12ebd2cdba72790",
+      "bytes": 1906
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/ruff_results.txt",
+      "sha256": "44c592126359ae5e2288437db0b33de8c535312bce0163b33bf6e28efdd4b62a",
+      "bytes": 103
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/screenshots/historical-g2-1.png",
+      "sha256": "a7811771f8aec3314a86b3f64a6db35432e87f9963ef51fb459205e71652134f",
+      "bytes": 510787
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/screenshots/historical-g2.png",
+      "sha256": "e2bcded0fec07480c12bd42524ea7ead091d9c31a1e4f6ee9fdb87d50c93dcff",
+      "bytes": 511906
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/screenshots/scripted-direct.png",
+      "sha256": "62cb1030d0d404918177a514298da6fc492ee2dd2eeb736e4a8d7f0eb9059dbe",
+      "bytes": 173876
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/screenshots/scripted-multi_agent_research.png",
+      "sha256": "dc8f9146ff04ffabfc84ec8be285bf71037b7216b2ea6307d23a87efc62e2ca0",
+      "bytes": 311809
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/screenshots/scripted-tools.png",
+      "sha256": "3fbff6d2e015963ad5c2ee4ea2a54b1945fd80f74732aa1f697a812ca59d5d1f",
+      "bytes": 186498
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/scripted_path_examples.json",
+      "sha256": "c3fbdcfac82382885e0f19ed6618ddb959d8df87aa42a433bc74e590c0eafe3a",
+      "bytes": 157129
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/sensitive_scan.json",
+      "sha256": "b0660cd1053255a273191f17c393d445c6f466551111bb3daea6ece3902e7250",
+      "bytes": 165
+    },
+    {
+      "path": "docs/acceptance/stage_g4_2_react/test_results.txt",
+      "sha256": "840dcae9c041ad72ebe04b9bc250ef399a6aed1b6e018392ef270c1f1ce224cc",
+      "bytes": 1982
+    }
+  ]
+}

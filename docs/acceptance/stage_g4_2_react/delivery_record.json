@@ -1,0 +1,21 @@
+{
+  "validated_source_commit": "0f64e9b9ddbe289591a33c74f9d0b24b50bd8cfe",
+  "branch": "feature/stage-g4-2-react-orchestration",
+  "commits_before_delivery_metadata": [
+    "0f64e9b9ddbe289591a33c74f9d0b24b50bd8cfe fix: redact private thought fields from public research traces",
+    "3f5e1b137d54af301b175831bdb4657c57f2188c test: verify react orchestration and document acceptance",
+    "94d6c9a5353022e3dcf729911c0d029c10ed2db8 feat: expose answer-first react research workbench",
+    "fe2156578f537b82fa8fd992a345eac4739756a4 feat: connect bounded react agent to optional research tool"
+  ],
+  "delivery_commit_lookup": [
+    "git",
+    "log",
+    "-1",
+    "--format=%H",
+    "--",
+    "docs/acceptance/stage_g4_2_react/delivery_record.json"
+  ],
+  "original_untracked_file_count": 13,
+  "remote_operations": 0,
+  "new_tags": 0
+}

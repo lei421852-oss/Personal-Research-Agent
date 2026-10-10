@@ -25,7 +25,7 @@
 | 工具辅助 | search_papers → finish → 中文转换 | 2 | 3 | 1 | 0 |
 | 动态升级 | search_papers → run_multi_agent_research → finish → 中文转换 | 3 | 12 | 4 | 1 |
 
-第三条实际进入原 Planner、2 个默认 Worker、Reviewer、Synthesis，然后研究 Observation 回到主 Agent 上下文。2 个已审核 Claim/2 条引用由程序校验；模型新编写的直接回答仍标记 `not_independently_reviewed`。该演示没有触发 Recovery；其有界行为由现有回归覆盖，未伪画恢复成功。
+第三条实际进入原 Planner、2 个默认 Worker、Reviewer、Synthesis，然后研究 Observation 回到主 Agent 上下文。2 个模拟审核通过的 Claim/2 条引用由程序校验；模型新编写的直接回答仍标记 `not_independently_reviewed`。该演示没有触发 Recovery；其有界行为由现有回归覆盖，未伪画恢复成功。
 
 详细 DTO、来源、调用数和主工具 trace 见 [scripted_path_examples.json](scripted_path_examples.json)。截图文件名和 [browser_check.json](browser_check.json) 明确标记模拟模型与已有真实历史的区别。
 
@@ -35,7 +35,7 @@
 
 | 检查 | 结果 | 证据 |
 | --- | --- | --- |
-| 完整 pytest | **1258 passed**，0 failed，1 既有 Starlette/httpx 弃用警告，47.91 秒 | [test_results.txt](test_results.txt) |
+| 完整 pytest | **1258 passed**，0 failed，1 既有 Starlette/httpx 弃用警告，61.55 秒 | [test_results.txt](test_results.txt) |
 | 新增测试 | 38；旧基线 1220 项，没有删除旧测试 | [测试文件](../../../tests/test_react_workbench.py) |
 | Ruff | exit 0 | [ruff_results.txt](ruff_results.txt) |
 | 格式检查 | exit 0，265 个 Python 文件 | [formatter_results.txt](formatter_results.txt) |
