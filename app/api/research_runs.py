@@ -5,7 +5,7 @@ from typing import Annotated
 from fastapi import APIRouter, Query, Request
 
 from app.research.run_events import sanitize_public
-from app.research.run_manager import ResearchRunRequest
+from app.research.run_manager import MainAgentRunRequest
 
 router = APIRouter(prefix="/api/research", tags=["research"])
 
@@ -51,7 +51,7 @@ def health(request: Request):
 
 
 @router.post("/runs", status_code=202)
-async def create_run(body: ResearchRunRequest, request: Request):
+async def create_run(body: MainAgentRunRequest, request: Request):
     return await manager(request).create(body)
 
 

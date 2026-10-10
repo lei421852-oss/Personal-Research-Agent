@@ -38,6 +38,16 @@ class ResearchRunRequest(BaseModel):
         return self
 
 
+class MainAgentRunRequest(ResearchRunRequest):
+    """主Agent入口接受问题；API可选范围允许1–3篇，界面不要求选择。"""
+
+    @model_validator(mode="after")
+    def unique_papers(self):
+        if len(self.paper_ids) != len(set(self.paper_ids)):
+            raise ValueError("paper_ids must be unique")
+        return self
+
+
 class RunManagerError(Exception):
     def __init__(self, code, message, status_code=409):
         super().__init__(code)
@@ -195,8 +205,16 @@ class ResearchRunManager:
                 "service_stopping", "服务正在停止，不能启动新任务。", 503
             )
         self._prune()
+        is_main = getattr(self.runner, "main_agent_entry", False)
+        if not is_main and len(request.paper_ids) == 1:
+            raise RunManagerError("invalid_papers", "旧研究入口要求2–3篇论文。", 422)
         try:
-            known = {paper["paper_id"] for paper in self.dependencies.papers()}
+            if is_main:
+                from app.papers.catalog import load_paper_catalog
+
+                known = set(load_paper_catalog().documents)
+            else:
+                known = {paper["paper_id"] for paper in self.dependencies.papers()}
         except Exception:  # noqa: BLE001 - 语料失败使用稳定公开错误，不回显内部路径
             raise RunManagerError(
                 "research_unavailable", "预处理论文语料不可用；请查看健康状态。", 503
@@ -218,7 +236,12 @@ class ResearchRunManager:
         if len(active) >= self.max_concurrent_runs + self.max_queued_runs:
             raise RunManagerError("run_capacity", "研究运行及排队数量已达上限。", 429)
         health = self.dependencies.health()
-        if not health["real_research_ready"]:
+        ready = (
+            health.get("main_agent_ready", health.get("real_research_ready", False))
+            if is_main
+            else health["real_research_ready"]
+        )
+        if not ready:
             raise RunManagerError(
                 "research_unavailable",
                 "真实研究依赖尚未就绪；可以查看健康状态或历史回放。",
@@ -258,6 +281,10 @@ class ResearchRunManager:
         )
         if execution.get("paper_ids"):
             run.paper_ids = list(execution["paper_ids"])
+        if execution.get("entry_kind") == "react":
+            # 主入口已有实时角色事件；不能从旧报告结构推定未执行的角色。
+            run.report = sanitize_public(execution["answer_first"])
+            return
         for event in execution_events(execution, source=source):
             self._append(run, **event)
         run.report = present_execution(execution)
@@ -345,10 +372,16 @@ class ResearchRunManager:
             )
             if snapshot:
                 self._attach(run, snapshot)
-            if (
-                snapshot
-                and snapshot.get("research", {}).get("status") == "completed"
-                and "report_language" in snapshot
+            if snapshot and (
+                (
+                    snapshot.get("research", {}).get("status") == "completed"
+                    and "report_language" in snapshot
+                )
+                or (
+                    snapshot.get("entry_kind") == "react"
+                    and snapshot.get("answer_first", {}).get("answer_status")
+                    in {"answered", "partial"}
+                )
             ):
                 run.status = "completed"
                 run.error = {
@@ -427,6 +460,17 @@ class ResearchRunManager:
             if language.status == "translated"
             else None
         )
+        if getattr(self.runner, "main_agent_entry", False):
+            from app.research.answer_first import historical_answer
+
+            original = run.report
+            run.report = historical_answer(original)
+            run.report["language"] = original["language"]
+            run.report["chinese_report"] = (
+                historical_answer(original["chinese_report"])
+                if original.get("chinese_report")
+                else None
+            )
         # 这里只表示历史文件已加载；原研究失败/不足保留在 report、节点和 historical_status。
         run.status = "completed"
         run.finished_at = time.monotonic()
@@ -446,6 +490,8 @@ class ResearchRunManager:
                 "research_question": run.research_question,
                 "query_language": run.query_language,
                 "paper_selection": run.paper_selection,
+                "answer_status": (run.report or {}).get("answer_status"),
+                "execution_mode": (run.report or {}).get("execution_mode"),
                 "report_language_status": (run.report or {})
                 .get("language", {})
                 .get("status"),

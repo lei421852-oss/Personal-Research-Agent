@@ -785,3 +785,6 @@ footer {
     scroll-behavior:auto!important
   }
 }
+
+/* 论文目录只供资源浏览，避免25篇元数据把输入操作挤出首屏。 */
+.paper-options { max-height:260px; overflow:auto; }

@@ -4,13 +4,13 @@
 const API = "/api/research";
 const STORAGE_KEY = "personal-agent-workbench-run-id";
 const ACTIVE_STATUSES = new Set(["queued", "running"]);
-const NODE_TYPES = ["QueryLanguage", "PaperSelection", "Planner", "Worker", "Validator", "Reviewer", "Recovery", "Synthesis", "ReportLanguage"];
+const NODE_TYPES = ["MainAgent", "PaperSearch", "QueryExpansion", "Evidence", "ResearchTool", "QueryLanguage", "PaperSelection", "Planner", "Worker", "Validator", "Reviewer", "Recovery", "Synthesis", "ReportLanguage"];
 const TERMINAL_NODE_STATUSES = new Set(["completed", "failed", "skipped"]);
 const STATUS_LABELS = {pending:"等待记录",queued:"排队中",running:"运行中",completed:"已完成",failed:"执行失败",cancelled:"已取消",skipped:"已跳过",partial_success:"部分完成",insufficient_evidence:"证据不足",execution_failed:"执行失败",verified:"已审核",review_rejected:"审核拒绝",review_unavailable:"审核不可用",generation_degraded:"降级生成",supported:"有证据支持",passed:"审核通过",rejected:"审核拒绝",cancel_requested:"正在取消"};
 Object.assign(STATUS_LABELS,{translated:"已转换",not_needed:"无需转换",unavailable:"不可用",empty:"没有结果",empty_result:"没有结果",invalid_arguments:"参数不合法",redundant_action:"重复动作已阻止",dependency_failure:"依赖失败",internal_failure:"内部执行失败"});
 const SOURCE_LABELS = {live:"实时调用",derived:"记录推导",replay:"历史回放"};
-const NODE_LABELS = {QueryLanguage:"问题语言转换",PaperSelection:"自动论文选择",Planner:"研究规划",Worker:"论文研究",Validator:"引用结构验证",Reviewer:"论断审核",Recovery:"定向恢复",Synthesis:"综合生成",ReportLanguage:"报告中文转换"};
-const ROLE_DESCRIPTIONS = {QueryLanguage:"保留原问题并生成内部研究问题",PaperSelection:"仅从已准备正文证据的论文中选择",Planner:"拆分研究维度与证据需求",Worker:"每篇论文独立检索和提交论断",Validator:"核对引用身份与论文归属",Reviewer:"模型辅助审核论断与证据",Recovery:"针对实际未通过的需求进行有界恢复",Synthesis:"仅组织已审核事实与缺失状态",ReportLanguage:"翻译可读文本，保留权威引用和状态"};
+const NODE_LABELS = {MainAgent:"主 Agent",PaperSearch:"论文检索",QueryExpansion:"查询扩展",Evidence:"证据工具",ResearchTool:"深入研究工具",QueryLanguage:"问题语言转换",PaperSelection:"自动论文选择",Planner:"研究规划",Worker:"论文研究",Validator:"引用结构验证",Reviewer:"论断审核",Recovery:"定向恢复",Synthesis:"综合生成",ReportLanguage:"报告中文转换"};
+const ROLE_DESCRIPTIONS = {MainAgent:"按问题、观察结果和预算决定下一动作",PaperSearch:"查询真实本地论文索引",QueryExpansion:"只生成检索查询，不执行检索",Evidence:"实际读取文本或图像证据",ResearchTool:"可选调用已有多论文研究链",QueryLanguage:"保留原问题并生成内部研究问题",PaperSelection:"仅从已准备正文证据的论文中选择",Planner:"拆分研究维度与证据需求",Worker:"每篇论文独立检索和提交论断",Validator:"核对引用身份与论文归属",Reviewer:"模型辅助审核论断与证据",Recovery:"针对实际未通过的需求进行有界恢复",Synthesis:"仅组织已审核事实与缺失状态",ReportLanguage:"翻译可读文本，保留权威引用和状态"};
 const DETAIL_LABELS = {paper_id:"论文",paper_ids:"论文范围",dimension_id:"研究维度",dimension:"研究维度",dimensions:"研究维度",requirement_id:"需求 ID",requirements:"研究需求",requirement_count:"需求数量",total_requirements:"需求总数",verified_requirements:"已审核需求",missing_requirements:"缺失需求",resolved_requirements:"合法终态需求",execution_failed_requirements:"执行失败需求",model_calls:"模型调用",tool_calls:"工具调用",protocol_corrections:"协议纠正",provider_retries:"服务重试",latency_ms:"实际耗时 (ms)",elapsed_ms:"实际耗时 (ms)",status:"执行状态",reason:"原因",reason_code:"原因代码",stop_reason:"终止原因",issue_code:"问题代码",code:"错误代码",message:"错误信息",error:"错误",issue:"问题",review_status:"审核状态",validation_status:"引用校验",triggered:"是否触发",recovered_requirements:"恢复需求",metrics:"执行统计",summary:"摘要",instruction:"反馈指令",recovery_instruction:"反馈指令",actual_action_count:"实际动作数",expected:"协议要求",evidence_ids:"证据 ID",claim_ids:"论断 ID",source:"数据来源",explanation:"来源说明",recorded_at:"原记录时间",note:"记录说明",started_at:"开始时间",finished_at:"结束时间",concurrency:"并发上限",validation:"引用校验",validation_results:"引用校验结果",valid:"校验通过",violations:"校验违规",validation_failures:"校验失败数",passed:"通过数",rejected:"拒绝数",unavailable:"不可用数",completed:"完成数",failed:"失败数",skipped:"跳过数",attempts:"尝试次数",retryable:"允许重试",completed_requirements:"已完成需求",insufficient_requirements:"证据不足需求",eligible_requirements:"可恢复需求",reason_counts:"原因统计"};
 Object.assign(DETAIL_LABELS,{name:"名称",description:"说明",research_question:"研究问题",question:"问题",claim:"原始提交论断",required:"必要需求",dimension_count:"维度数量",dimension_ids:"研究维度",worker_task_count:"Worker 数量",candidate_paper_count:"候选论文数",worker_task_id:"Worker 任务",resolved_count:"合法终态需求",observed_evidence_ids:"已观察证据",tool_name:"工具名称",arguments:"工具参数",query:"检索问题",top_k:"返回数量",page:"PDF 页码",figure_id:"图号",figure_evidence_id:"图像证据",context_evidence_ids:"上下文证据",limitations:"限制",phase:"失败阶段",error_type:"错误类型",hint:"恢复提示",field:"参数字段",type:"字段错误",execution_status:"执行状态",retry_count:"重试次数",correction_allowed:"允许协议纠正",step:"实际步骤",requirement_ids:"需求 ID",investigated_requirement_ids:"调查需求",skip_reason:"跳过原因",record_available:"记录是否存在",generation_degraded:"是否降级",synthesis_model_calls:"综合模型调用",citation_validation_failures:"引用校验失败",evidence_coverage:"已审核证据覆盖率",resolution_rate:"合法终态率",review_pass_rate:"模型审核通过率",report_generation_success_rate:"报告生成成功率",degraded_generation:"降级生成",total_latency_ms:"实际总耗时 (ms)",synthesis_latency_ms:"综合耗时 (ms)",additional_model_calls:"额外模型调用",additional_tool_calls:"额外工具调用",recovery_eligible_count:"可恢复需求",recovery_attempted_count:"已尝试恢复",recovery_passed_count:"恢复后审核通过",recovery_failed_count:"恢复失败",recovery_skipped_count:"跳过恢复",recovery_rounds_used:"已使用恢复轮次",recovery_latency_ms:"恢复耗时 (ms)",eligible:"允许恢复",eligibility:"恢复资格",tasks:"实际恢复任务",final_requirements:"恢复后需求",final_reviews:"恢复后审核",recovery_task_id:"恢复任务",target_requirement_ids:"目标需求",attempt_index:"尝试序号",max_attempts:"最多尝试次数",protocol_recovery:"协议恢复",llm_calls:"策略模型调用",vlm_tool_attempts:"视觉工具尝试",dependency_calls:"依赖调用",retried_dependency_calls:"依赖重试",last_new_evidence_count:"新增证据数"});
 Object.assign(DETAIL_LABELS,{original_question:"原始问题",research_question:"内部研究问题",language_mode:"语言模式",selected_paper_ids:"实际选择的论文",selection_status:"论文选择状态",reasons:"选择说明",source_language:"问题语言",translation_review:"翻译审核说明",translated:"已转换",source_status:"原始状态",target_language:"展示语言",translation_status:"转换状态",evidence:"证据摘要",text:"原始证据正文",caption:"图注",score:"检索得分",retrieval_score:"检索得分",result_count:"结果数量",executed:"是否实际执行",evidence_available:"正文证据可用",unavailable_paper_ids:"缺少正文证据的论文"});
@@ -40,7 +40,6 @@ function dimensionTitle(id,report = null) {
 }
 function badge(text, kind = "neutral") { return element("span", `badge ${kind}`, text); }
 function hasActiveRun() { return Boolean(state.run && ACTIVE_STATUSES.has(state.run.status)); }
-function selectedPapers() { return [...document.querySelectorAll("#papers input:checked")].map((input) => input.value); }
 function displayValue(value) {
   if (value === null || value === undefined) return "无记录";
   if (typeof value === "boolean") return value ? "是" : "否";
@@ -74,9 +73,8 @@ async function request(path, options = {}) {
 }
 function setControls() {
   const busy = hasActiveRun() || state.posting;
-  const ready = state.health?.real_research_ready === true;
-  const paperCount = selectedPapers().length;
-  const validScope = paperCount === 0 || (paperCount >= 2 && paperCount <= 3);
+  const ready = (state.health?.main_agent_ready ?? state.health?.real_research_ready) === true;
+  const validScope = true;
   const valid = $("#question").value.trim().length > 0 && validScope;
   $("#start-button").disabled = busy || !ready || !valid;
   $("#start-button").textContent = state.posting ? "正在创建任务…" : hasActiveRun() ? "任务运行中" : "开始研究";
@@ -86,25 +84,17 @@ function setControls() {
   $("#replay-select").disabled = busy || state.replays.length === 0;
   $("#question").disabled = busy;
   $("#original-language").disabled = busy;
-  document.querySelectorAll("#papers input").forEach((input) => { input.disabled = busy; });
-  $("#selection-mode").textContent = paperCount === 0 ? "未选择：系统自动确定研究论文。" : `已选择 ${paperCount} 篇：在指定论文范围内研究。`;
-  $("#form-hint").textContent = !validScope ? "当前研究协议支持 2–3 篇论文；可取消勾选，改用自动选择。" : !ready ? "真实研究依赖尚未就绪；仍可使用顶部历史回放。" : busy ? "正在执行任务，输入已锁定，避免重复提交。" : "自动选择仅使用有正文证据的论文；目录元数据不等于可研究语料。";
+  $("#selection-mode").textContent = "论文库仅供资源浏览，不要求选择论文。";
+  $("#form-hint").textContent = !validScope ? "当前研究协议支持 2–3 篇论文；可取消勾选，改用自动选择。" : !ready ? "真实研究依赖尚未就绪；仍可使用顶部历史回放。" : busy ? "正在执行任务，输入已锁定，避免重复提交。" : "主 Agent 自主选择动作；本地目录元数据不等于正文证据。";
 }
 function renderPapers() {
-  const container = $("#papers");
-  container.replaceChildren();
-  if (!state.papers.length) { container.append(element("p", "muted small", "当前没有可研究的预处理论文。")); return; }
+  const container = $("#papers"); container.replaceChildren();
   for (const paper of state.papers) {
-    const option = element("label", "paper-option");
-    const input = element("input"); input.type = "checkbox"; input.value = paper.paper_id;
-    // 零勾选是自动研究模式，不在浏览器内替用户预选固定论文组合。
-    input.checked = false;
-    const text = element("span");
-    text.append(element("span", "paper-name", shortPaperTitle(paper.paper_id)), element("span", "paper-info", `正文证据可用 · ${paper.text_evidence_count ?? "—"} 条文本`));
-    option.title = paper.title;
-    option.append(input,text); container.append(option);
-    input.addEventListener("change",setControls);
+    const option = element("div", "paper-option"), text = element("span");
+    text.append(element("span", "paper-name", shortPaperTitle(paper.paper_id)), element("span", "paper-info", paper.availability === "metadata_only" ? "仅元数据 · 正文未准备" : "正文证据可用"));
+    option.title = paper.title; option.append(text); container.append(option);
   }
+  if (!state.papers.length) container.append(element("p", "muted small", "论文资源暂不可用，仍可查看历史记录。"));
 }
 function renderHealth() {
   const container = $("#health"); container.replaceChildren();
@@ -297,8 +287,9 @@ function renderRun() {
   $("#run-question").textContent = state.run.question || "问题无记录";
   $("#task-question").textContent = state.run.question || "问题无记录";
   const selected = state.run.paper_selection?.selected_paper_ids || state.run.paper_ids || [];
-  $("#selection-result").textContent = selected.length ? `实际研究范围：${selected.map(shortPaperTitle).join("、")}` : state.run.mode === "replay" ? "研究范围以历史执行记录为准。" : "自动选择结果将在实际选择后显示。";
-  if (state.run.report_language_status === "pending") $("#run-status").textContent = "研究已完成，正在生成中文版本";
+  $("#selection-result").textContent = selected.length ? `实际研究范围：${selected.map(shortPaperTitle).join("、")}` : state.run.mode === "replay" ? "研究范围以历史执行记录为准。" : "主 Agent 根据实际问题与观察决定是否选择论文。";
+  if (state.run.mode !== "replay" && state.run.status === "completed" && state.run.answer_status) $("#run-status").textContent = ({answered:"已完成",partial:"部分回答",insufficient:"证据不足",failed:"执行失败"})[state.run.answer_status] || labelStatus(state.run.status);
+  if (state.run.report_language_status === "pending") $("#run-status").textContent = "答案已生成，正在转换中文";
   $("#run-id").textContent = state.run.run_id;
   const metrics = {...(state.report?.metrics || {}),...(state.run.metrics || {})};
   const values = [numberMetric(metrics,["model_calls","total_model_calls"]),numberMetric(metrics,["tool_calls","total_tool_calls"]),numberMetric(metrics,["verified_requirements","verified_requirement_count"]),numberMetric(metrics,["total_latency_ms","latency_ms","wall_time_ms"])];
@@ -350,7 +341,7 @@ function renderReport() {
   const language = original?.language || {};
   const useChinese = state.reportLanguage === "zh" && Boolean(original?.chinese_report);
   const report = useChinese ? original.chinese_report : original;
-  if (state.reportLanguage === "en") notice.textContent = "英文权威原文：原始报告、论断和引用完整保留。";
+  if (state.reportLanguage === "en") notice.textContent = "英文原始输出：回答、报告和引用完整保留；原始模型输出不等同于人工已核实。";
   else if (useChinese) notice.textContent = state.run?.mode === "replay" ? "历史回放中文阅读版：不调用模型，不修改原始记录；翻译未经独立人工事实审核。" : "中文阅读版：仅转换可读文本，原始引用与审核状态保持不变；翻译不等于独立人工审核。";
   else if (language.status === "failed") notice.textContent = `中文转换失败，已回退权威原文。${language.issue_code ? `错误类别：${language.issue_code}。` : ""}原研究结果未被改写。`;
   else if (language.status === "pending" || state.run?.report_language_status === "pending") notice.textContent = "研究已完成，正在生成中文版本；当前先展示权威原文。";
@@ -374,8 +365,25 @@ function renderReport() {
       target.append(origin);
     }
   }
+  if (report.direct_answer) {
+    const direct = element("section", "direct-answer"); direct.id = "direct-answer";
+    direct.append(element("h4", "report-section-title", "直接回答"), element("p", "evidence-text", report.direct_answer));
+    target.append(direct);
+    if (report.execution_mode) target.append(element("p", "small muted", `实际路径：${({direct:"直接回答",tools:"工具辅助",multi_agent_research:"多 Agent 研究",historical_replay:"历史回放"})[report.execution_mode] || report.execution_mode}`));
+    const findings = report.key_findings || [];
+    if (findings.length) target.append(element("h4", "report-section-title", "回答要点与来源"));
+    for (const finding of findings) {
+      const card = element("article", "claim-card"), excerpt = finding.text.length > 240 ? finding.text.slice(0,240) + "…" : finding.text;
+      card.append(element("p", "evidence-text", excerpt), element("p", "small muted", `${shortPaperTitle(finding.paper_id)} · ${finding.review_status === "passed" ? "原论断经模型审核" : "当前事实未独立审核"}${finding.text.length > 240 ? " · 原文节选" : ""}`));
+      if (finding.text.length > 240) { const full=element("details","report-source");full.append(element("summary","small muted","展开原论断"),element("p","evidence-text",finding.text));card.append(full); }
+      const raw = finding.claim_id ? (original.verified_claims||[]).find(c=>c.claim_id===finding.claim_id) : (original.key_findings||[]).find(f=>f.evidence_ids?.join()===finding.evidence_ids?.join());
+      if (raw?.evidence?.length) { const button=element("button","text-button","查看原始证据"); button.type="button";button.addEventListener("click",()=>{renderEvidence(raw.evidence,finding.claim_id ? raw : null);selectTab("evidence-panel");});card.append(button); }
+      target.append(card);
+    }
+    for (const citation of report.citations || []) target.append(element("p", "citation-row", `${shortPaperTitle(citation.paper_id)} · 第 ${citation.page} 页${citation.figure_id ? ` · ${citation.figure_id}` : ""}`));
+  }
   const claims = report.verified_claims || [];
-  if (claims.length) {
+  if (claims.length && !(report.direct_answer && report.key_findings?.length)) {
     target.append(element("h4", "report-section-title", `已审核论断 · ${claims.length} 项`));
     for (const claim of claims) {
       const card = element("article", "claim-card");
@@ -386,7 +394,7 @@ function renderReport() {
       const originalClaim = (original.verified_claims || []).find((item) => item.claim_id === claim.claim_id) || claim;
       button.addEventListener("click", () => showClaimEvidence(originalClaim)); card.append(button); target.append(card);
     }
-  } else target.append(element("p", "missing-card", "当前没有足够已审核证据，不能补充论文技术事实。"));
+  } else if (!report.direct_answer) target.append(element("p", "missing-card", "当前没有足够已审核证据，不能补充论文技术事实。"));
   const missing = report.missing_requirements || [];
   if (missing.length) {
     target.append(element("h4", "report-section-title", `未完成或证据缺失 · ${missing.length} 项`));
@@ -395,11 +403,12 @@ function renderReport() {
   const fullReport = element("details", "report-source"); fullReport.id = "report-full-text";
   fullReport.append(element("summary", "report-section-title", useChinese ? "中文阅读版全文" : "权威原报告全文"));
   // 报告文本包含模型输出，始终当作纯文本，不执行 Markdown 内的任意 HTML。
-  fullReport.append(element("pre", "report-text", report.markdown || "报告全文无记录。")); target.append(fullReport);
+  fullReport.append(element("pre", "report-text", report.markdown || "报告全文无记录。"));
   if ((report.limitations || []).length) {
     target.append(element("h4", "report-section-title", "研究限制")); const list = element("ul", "limitations-list");
     for (const limitation of report.limitations) list.append(element("li", "", limitation)); target.append(list);
   }
+  if (report.detailed_report || !report.direct_answer) target.append(fullReport);
 }
 function selectTab(panelId) {
   if (panelId === "report-panel") { const full = $("#report-full-text"); if (full) full.open = true; $("#result-title").scrollIntoView({block:"start"}); return; }
@@ -456,11 +465,11 @@ async function pollRun() {
 }
 async function startRun(event) {
   event.preventDefault();
-  if (state.posting || hasActiveRun() || !state.health?.real_research_ready) return;
-  const question = $("#question").value.trim(),paper_ids = selectedPapers();
-  if (!question || (paper_ids.length !== 0 && paper_ids.length < 2) || paper_ids.length > 3) { showError("请输入研究问题；可不勾选论文自动研究，手动范围需选择 2–3 篇。"); return; }
+  if (state.posting || hasActiveRun() || !(state.health?.main_agent_ready ?? state.health?.real_research_ready)) return;
+  const question = $("#question").value.trim();
+  if (!question) { showError("请输入研究问题。"); return; }
   state.posting = true; setControls(); showError("");
-  try { resetRun(await request("/runs",{method:"POST",body:JSON.stringify({question,paper_ids,language_mode:$("#original-language").checked ? "original" : "auto"})})); await pollRun(); }
+  try { resetRun(await request("/runs",{method:"POST",body:JSON.stringify({question,language_mode:$("#original-language").checked ? "original" : "auto"})})); await pollRun(); }
   catch (error) { showError(error.message); }
   finally { state.posting = false; setControls(); }
 }
@@ -489,7 +498,7 @@ async function initialize() {
   $("#report-language-zh").addEventListener("click", () => { state.reportLanguage = "zh"; renderReport(); });
   $("#report-language-en").addEventListener("click", () => { state.reportLanguage = "en"; renderReport(); });
   const results = await Promise.allSettled([request("/papers"),request("/health"),request("/replays")]);
-  if (results[0].status === "fulfilled") state.papers = results[0].value.papers || [];
+  if (results[0].status === "fulfilled") state.papers = results[0].value.catalog?.length ? results[0].value.catalog : (results[0].value.papers || []);
   if (results[1].status === "fulfilled") state.health = results[1].value;
   if (results[2].status === "fulfilled") state.replays = results[2].value.cases || [];
   renderPapers(); renderHealth(); renderReplays(); renderNodes();

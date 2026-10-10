@@ -70,10 +70,14 @@ def report_source_sha256(report: dict) -> str:
 def readable_report_fields(report: dict) -> dict[str, str]:
     """只开放报告可读字段，原始证据正文和身份字段不进入翻译协议。"""
     fields = {}
-    for key in ("title", "question"):
+    for key in ("title", "question", "direct_answer"):
         value = report.get(key)
         if isinstance(value, str) and value.strip():
             fields[f"/{key}"] = value
+    for index, finding in enumerate(report.get("key_findings", [])):
+        value = finding.get("text")
+        if isinstance(value, str) and value.strip():
+            fields[f"/key_findings/{index}/text"] = value
     for index, claim in enumerate(report.get("verified_claims", [])):
         value = claim.get("text")
         if isinstance(value, str) and value.strip():
@@ -119,6 +123,8 @@ def render_chinese_report(report: dict) -> str:
         "## 已审核事实",
         "",
     ]
+    if report.get("direct_answer"):
+        lines[4:4] = ["## 直接回答", "", report["direct_answer"], ""]
     claims = report.get("verified_claims", [])
     if not claims:
         lines.extend(["当前没有足够的已审核事实。", ""])

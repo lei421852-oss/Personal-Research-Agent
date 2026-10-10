@@ -18,12 +18,12 @@ def create_app(*, manager_factory=None):
     @asynccontextmanager
     async def lifespan(application):
         if manager_factory is None:
+            from app.research.react_runtime import ReActWorkbenchRuntime
             from app.research.run_replay import ReplayRepository
             from app.research.workbench_dependencies import WorkbenchDependencies
-            from app.research.workbench_runtime import WorkbenchRuntime
 
             dependencies = WorkbenchDependencies()
-            runtime = WorkbenchRuntime(dependencies)
+            runtime = ReActWorkbenchRuntime(dependencies)
             created = ResearchRunManager(
                 runtime,
                 dependencies,
@@ -62,7 +62,7 @@ def create_app(*, manager_factory=None):
             content={
                 "error": {
                     "code": "invalid_request",
-                    "message": "请输入非空问题（最多4000字符）；不选论文进入自动模式，手选需2–3篇不同的已准备论文，模型调用预算为1–200。",
+                    "message": "请输入非空问题（最多4000字符）；可选API范围为1–3篇已登记论文，模型调用预算为1–200。界面只需输入问题。",
                 }
             },
         )

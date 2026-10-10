@@ -14,16 +14,16 @@
   </header>
   <main class="workbench">
     <aside class="config-panel panel" aria-label="研究输入">
-      <div class="section-heading"><h2>研究输入</h2><p>从当前论文库中开展证据驱动的研究。</p></div>
+      <div class="section-heading"><h2>研究输入</h2><p>只需提出问题，主 Agent 自主决定是否检索或深入研究。</p></div>
       <form id="research-form">
         <label class="field-label" for="question">研究问题</label>
         <textarea id="question" rows="7" maxlength="4000" placeholder="例如：比较 BLIP-2 与 Flamingo 如何将视觉特征接入语言模型，并给出论文证据。">比较 BLIP-2 与 Flamingo 的视觉语言连接机制，说明 Q-Former、Perceiver Resampler 与门控交叉注意力如何将视觉特征传递给语言模型，并引用当前论文库中的证据。</textarea>
-        <div class="label-row"><span class="field-label" id="papers-label">当前论文库</span><span class="small muted">可选范围</span></div>
-        <div id="papers" class="paper-options" role="group" aria-labelledby="papers-label"><p class="muted">正在读取论文库…</p></div>
-        <p id="selection-mode" class="selection-mode">未选择：系统自动确定研究论文。</p>
-        <p id="form-hint" class="muted small">这里只列出已准备正文证据的论文，目录元数据不等于可研究语料。</p>
         <button id="start-button" class="button primary" type="submit" disabled>开始研究</button>
         <button id="cancel-button" class="button secondary" type="button" disabled>取消当前任务</button>
+        <div class="label-row"><span class="field-label" id="papers-label">当前论文库</span><span class="small muted">只读资源</span></div>
+        <div id="papers" class="paper-options" role="group" aria-labelledby="papers-label"><p class="muted">正在读取论文库…</p></div>
+        <p id="selection-mode" class="selection-mode">论文库仅展示资源，不需要手动指定研究对象。</p>
+        <p id="form-hint" class="muted small">本地目录与正文证据分别标记；暂不支持外部实时论文搜索。</p>
         <details class="advanced"><summary>更多设置与运行环境</summary><label class="original-mode"><input id="original-language" type="checkbox">问题原文直通（排查语言转换时使用）</label><p class="small muted">中文或中英混合问题默认进行语言适配；英文问题直接进入原有研究链。</p><div class="label-row"><h3 id="health-title">运行环境</h3><button id="refresh-health" class="text-button" type="button">刷新</button></div><div id="health" aria-live="polite"><p class="muted small">正在检查…</p></div><p id="budget-hint" class="small muted"></p></details>
       </form>
       <section class="task-section" aria-labelledby="task-title"><h3 id="task-title">当前任务</h3><span id="run-status" class="run-status" aria-live="polite">等待任务</span><p id="task-question" class="small muted">尚未创建任务。</p><p id="selection-result" class="small muted"></p><p id="run-id" class="run-id"></p></section>
@@ -42,7 +42,7 @@
     </section>
 
     <aside class="details-panel panel" aria-label="研究结果">
-      <section class="final-result" aria-labelledby="result-title"><div class="result-heading"><h2 id="result-title">最终研究报告</h2><button id="tab-report" class="text-button" type="button">查看全文</button></div><div class="language-tabs" role="tablist" aria-label="报告语言"><button id="report-language-zh" class="language-tab active" role="tab" aria-selected="true" type="button">中文报告</button><button id="report-language-en" class="language-tab" role="tab" aria-selected="false" type="button">英文原文</button></div><p id="report-language-notice" class="report-notice" aria-live="polite">保留权威原报告与引用，中文版本仅用于阅读。</p><section id="report-panel" aria-label="最终报告"><div id="report-details" class="empty-state"><h3>尚无研究报告</h3><p>研究完成后在此展示报告。执行失败时，仍保留可用事实与缺失状态。</p></div></section></section>
+      <section class="final-result" aria-labelledby="result-title"><div class="result-heading"><h2 id="result-title">研究回答</h2><button id="tab-report" class="text-button" type="button">查看全文</button></div><div class="language-tabs" role="tablist" aria-label="报告语言"><button id="report-language-zh" class="language-tab active" role="tab" aria-selected="true" type="button">中文回答</button><button id="report-language-en" class="language-tab" role="tab" aria-selected="false" type="button">英文原文</button></div><p id="report-language-notice" class="report-notice" aria-live="polite">保留权威原报告与引用，中文版本仅用于阅读。</p><section id="report-panel" aria-label="最终报告"><div id="report-details" class="empty-state"><h3>尚无研究报告</h3><p>答案完成后首先显示直接回答。执行失败时，仍保留可用事实与缺失状态。</p></div></section></section>
       <section class="process-result" aria-labelledby="process-title"><h2 id="process-title">过程结果</h2><div class="tabs" role="tablist" aria-label="过程结果类型"><button id="tab-node" class="tab active" role="tab" aria-selected="true" aria-controls="node-panel" data-panel="node-panel">过程详情</button><button id="tab-evidence" class="tab" role="tab" aria-selected="false" aria-controls="evidence-panel" data-panel="evidence-panel">引用证据</button></div><section id="node-panel" class="detail-content" role="tabpanel" aria-labelledby="tab-node"><div id="node-details" class="empty-state"><h3>等待执行记录</h3><p>点击中间节点查看研究需求、工具调用、证据与实际错误。</p></div></section><section id="evidence-panel" class="detail-content" role="tabpanel" aria-labelledby="tab-evidence" hidden><div id="evidence-details" class="empty-state"><h3>尚无证据</h3><p>引用可追溯至论文与 PDF 页码，无记录的字段明确标注。</p></div></section></section>
     </aside>
   </main>
