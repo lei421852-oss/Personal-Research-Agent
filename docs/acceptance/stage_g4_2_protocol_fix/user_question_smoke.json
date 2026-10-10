@@ -1,0 +1,1689 @@
+{
+  "question": "比较 BLIP-2 与 Flamingo 的视觉语言连接机制，说明 Q-Former、Perceiver Resampler 与门控交叉注意力如何将视觉特征传递给语言模型，并引用当前论文库中的证据。",
+  "real_provider_used": true,
+  "execution": {
+    "question": "比较 BLIP-2 与 Flamingo 的视觉语言连接机制，说明 Q-Former、Perceiver Resampler 与门控交叉注意力如何将视觉特征传递给语言模型，并引用当前论文库中的证据。",
+    "paper_ids": [],
+    "status": "completed",
+    "coverage_worker_enabled": false,
+    "entry_kind": "react",
+    "query_language": {
+      "original_question": "比较 BLIP-2 与 Flamingo 的视觉语言连接机制，说明 Q-Former、Perceiver Resampler 与门控交叉注意力如何将视觉特征传递给语言模型，并引用当前论文库中的证据。",
+      "research_question": "Compare the vision-language connection mechanisms of BLIP-2 and Flamingo, explain how Q-Former, Perceiver Resampler, and gated cross-attention transmit visual features to the language model, and cite evidence from the current paper library.",
+      "status": "adapted",
+      "mode": "auto",
+      "terms": [
+        "BLIP-2",
+        "Flamingo",
+        "Q-Former",
+        "Perceiver",
+        "Resampler"
+      ],
+      "model_calls": 1,
+      "latency_ms": 0.0,
+      "issue_code": null
+    },
+    "main_agent": {
+      "status": "completed",
+      "tool_calls": 2,
+      "decision_steps": 4,
+      "protocol_corrections": 1,
+      "protocol_trace": [
+        {
+          "decision_step": 1,
+          "status": "rejected",
+          "protocol_corrections": 0,
+          "issue_code": "multiple_actions",
+          "expected": "exactly_one_action",
+          "actual_action_count": 2,
+          "executed": false,
+          "instruction": "No rejected action was executed. Submit exactly ONE function/tool call using an available tool's schema, then wait for its observation. If several actions are useful, choose one yourself. Do not batch calls.",
+          "valid_structure": {
+            "tool_calls": [
+              {
+                "name": "<one available tool or finish>",
+                "arguments": "<object matching that tool's schema>"
+              }
+            ]
+          }
+        },
+        {
+          "decision_step": 2,
+          "status": "recovered",
+          "protocol_corrections": 1,
+          "actual_action_count": 1
+        }
+      ],
+      "stop_details": {},
+      "trace": [
+        {
+          "tool_call_id": "call_00_ma61W6fLq59oaQsJBiBG6454",
+          "tool_name": "search_text",
+          "arguments": {
+            "query": "Q-Former Querying Transformer visual features to language model two-stage",
+            "paper_ids": [
+              "blip-2-2301.12597v1"
+            ],
+            "top_k": 5
+          },
+          "status": "success",
+          "latency_ms": 4070.335744996555,
+          "result_count": 5,
+          "failure": null
+        },
+        {
+          "tool_call_id": "call_00_l02bhNftMS4HGb4h5PkT7511",
+          "tool_name": "search_text",
+          "arguments": {
+            "query": "Perceiver Resampler gated cross-attention visual features language model Flamingo",
+            "paper_ids": [
+              "flamingo-2204.14198v1"
+            ],
+            "top_k": 6
+          },
+          "status": "success",
+          "latency_ms": 111.94424299901584,
+          "result_count": 6,
+          "failure": null
+        }
+      ]
+    },
+    "answer_first": {
+      "title": "Answer to the user's question",
+      "markdown": "",
+      "paper_ids": [],
+      "verified_claims": [],
+      "missing_requirements": [],
+      "comparisons": [],
+      "diagnostics": {},
+      "human_review": "not_performed",
+      "status": "completed",
+      "question": "比较 BLIP-2 与 Flamingo 的视觉语言连接机制，说明 Q-Former、Perceiver Resampler 与门控交叉注意力如何将视觉特征传递给语言模型，并引用当前论文库中的证据。",
+      "original_question": "比较 BLIP-2 与 Flamingo 的视觉语言连接机制，说明 Q-Former、Perceiver Resampler 与门控交叉注意力如何将视觉特征传递给语言模型，并引用当前论文库中的证据。",
+      "execution_question": "Compare the vision-language connection mechanisms of BLIP-2 and Flamingo, explain how Q-Former, Perceiver Resampler, and gated cross-attention transmit visual features to the language model, and cite evidence from the current paper library.",
+      "answer_status": "answered",
+      "direct_answer": "## Comparison of BLIP-2 and Flamingo vision-to-language connection mechanisms\n\nBoth models freeze a pretrained image encoder and a pretrained language model and insert a small, trainable \"bridge\" module between them, so visual features reach the LLM only through that bottleneck. They differ in the bridge's design and in how the visual signal is injected into the LM.\n\n### BLIP-2 — Q-Former as a querying bottleneck\n\n- **Overall scheme.** BLIP-2 bootstraps frozen unimodal models and bridges the modality gap with a **Querying Transformer (Q-Former)** pre-trained in two stages: (1) vision-language representation learning with a frozen image encoder, and (2) vision-to-language generative learning with a frozen LLM [ev_525a1f73be26c523e5fb57a5a02a3ecc, ev_53277b945c2ff7e5d33bf907ba8d96b5].\n- **How Q-Former extracts visual features.** In stage 1 it is connected to the frozen image encoder and trained on image-text pairs so that its queries learn visual representations most informative of the text, jointly optimizing three pretraining objectives that share parameters but use different query–text attention masks [ev_242192f04216b43089535562ea0dcec9].\n- **Bottleneck size.** A fixed set of **32 queries** of dimension 768 yields output query embeddings Z of size 32×768, far smaller than the frozen image features (e.g., 257×1024 for ViT-L/14); this bottleneck plus the pretraining objectives force the queries to keep only text-relevant visual information [ev_65bb1fa95a078ec3cacc188e7d033199].\n- **How features reach the LLM.** In stage 2, the Q-Former (with frozen image encoder attached) is connected to a frozen LLM; a fully-connected layer linearly projects Z into the LLM's text-embedding dimension, and the projected query embeddings are **prepended to the input text embeddings** as **soft visual prompts**. Because the Q-Former already extracts language-informative representations, it acts as an information bottleneck feeding the most useful information to the LLM, reducing the LLM's burden of learning vision-language alignment and mitigating catastrophic forgetting [ev_e4829335e46c87be4cada6e262bdd856].\n\n### Flamingo — Perceiver Resampler + gated cross-attention\n\n- **Overall scheme.** Flamingo freezes a pretrained CLIP-style contrastive vision encoder (to extract semantic spatial features) and a pretrained autoregressive LM, then links them with two learnable components while keeping the pretrained weights frozen [ev_1f60e62600f7a79eae799d5ed285f571].\n- **Perceiver Resampler.** It takes a variable number of image/video features from the vision encoder and produces a **fixed number (in practice 64) of visual outputs**, cross-attending to flattened visual features from learned latent queries (in the spirit of Perceiver/DETR). Resampling to a fixed, small number of tokens greatly reduces the computational cost of vision-text cross-attention, especially for long videos [ev_9262472c69770e9a098422d6b46534f9]. Visual features get a learned temporal position encoding (images treated as single-frame video) and are flattened and concatenated; unlike DETR/Perceiver, Flamingo concatenates the keys/values from the learned latents with those from the visual features, which performed slightly better, and the Resampler outperformed plain transformer and MLP variants [ev_1863b35f4e6e9086964ec47670f5ea7b].\n- **Gated cross-attention into the LM.** The resampled visual tokens condition the **frozen LM via freshly initialized cross-attention layers interleaved between the pretrained LM layers**, giving the LM an expressive way to incorporate visual information for next-token prediction [ev_a802881b56aa396b45e4431996b61ae5]. To preserve the pretrained LM's language ability without destabilizing it, these cross-attention layers are interleaved with frozen language-only self-attention layers; because they are newly initialized, **specific gating mechanisms** are introduced to minimize their effect at initialization, greatly improving stability and final performance [ev_218bd889fec22dc20b36a380b0e0fb62].\n\n### Key contrasts\n\n| Aspect | BLIP-2 | Flamingo |\n|---|---|---|\n| Bridge module | Q-Former (32 learned queries, 768-d) | Perceiver Resampler (64 latent queries) |\n| Training signal for the bridge | Two-stage: representation learning with image encoder, then generative with frozen LLM | Visual tokens used to condition the frozen LM through newly initialized cross-attention layers |\n| Injection point | Projected query embeddings prepended as **soft visual prompts** to the LLM's text input | Visual tokens injected via **cross-attention layers interleaved** between frozen LM layers |\n| Stability device | Q-Former pretrained objectives act as information bottleneck, reducing LLM alignment burden / forgetting | **Gating** in freshly initialized cross-attention layers to preserve pretrained LM behavior |\n| Token count | 32 query embeddings (much smaller than encoder features) | Fixed 64 visual tokens, motivated by reducing cross-attention cost |\n\n**Common core:** both resample the encoder's many spatial features into a small fixed set of learned-query tokens (a bottleneck), then hand those to a frozen LM — BLIP-2 as prepended soft prompts, Flamingo as a separately attended cross-attention stream with gates.\n\n### Limitations\n- Evidence is page-level text from the two papers; the details above are confined to what the retrieved passages state. Specific gating-formula details and BLIP-2's exact injection module naming were not retrieved beyond the described FC projection + prepending, and Flamingo's Section 3.1.2 cross-attention specifics (beyond interleaving and gating) were not directly read.\n- No claim of overall superiority of either model is made; the papers' own ablations were not the subject of this comparison.",
+      "key_findings": [
+        {
+          "text": "We propose BLIP-2, a new vision-language pre-training method that bootstraps from frozen pre-trained unimodal models. In order to bridge the modality gap, we propose a Querying Transformer (Q-Former) pre-trained in two stages: (1) vision-language representation learning stage with a frozen image encoder and (2) vision-to-language genera- tive learning stage with a frozen LLM. This section ﬁrst introduces the model architecture of Q-Former, and then delineates the two-stage pre-training procedures.",
+          "paper_id": "blip-2-2301.12597v1",
+          "evidence_ids": [
+            "ev_525a1f73be26c523e5fb57a5a02a3ecc"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 2,
+              "text": "We propose BLIP-2, a new vision-language pre-training method that bootstraps from frozen pre-trained unimodal models. In order to bridge the modality gap, we propose a Querying Transformer (Q-Former) pre-trained in two stages: (1) vision-language representation learning stage with a frozen image encoder and (2) vision-to-language genera- tive learning stage with a frozen LLM. This section ﬁrst introduces the model architecture of Q-Former, and then delineates the two-stage pre-training procedures.",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "• BLIP-2 effectively leverages both frozen pre-trained im- age models and language models. We bridge the modality gap using a Q-Former pre-trained in two-stages: repre- sentation learning stage and generative learning stage. BLIP-2 achieves state-of-the-art performance on various vision-language tasks including visual question answer- ing, image captioning, and image-text retrieval.",
+          "paper_id": "blip-2-2301.12597v1",
+          "evidence_ids": [
+            "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 2,
+              "text": "• BLIP-2 effectively leverages both frozen pre-trained im- age models and language models. We bridge the modality gap using a Q-Former pre-trained in two-stages: repre- sentation learning stage and generative learning stage. BLIP-2 achieves state-of-the-art performance on various vision-language tasks including visual question answer- ing, image captioning, and image-text retrieval.",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "In the representation learning stage, we connect Q-Former to a frozen image encoder and perform pre-training using image-text pairs. We aim to train the Q-Former such that the queries can learn to extract visual representation that is most informative of the text. Inspired by BLIP (Li et al., 2022), we jointly optimize three pre-training objectives that share the same input format and model parameters. Each objec- tive employs a different attention masking strategy between queries and text to control their interaction (see Figure 2).",
+          "paper_id": "blip-2-2301.12597v1",
+          "evidence_ids": [
+            "ev_242192f04216b43089535562ea0dcec9"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_242192f04216b43089535562ea0dcec9",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 3,
+              "text": "In the representation learning stage, we connect Q-Former to a frozen image encoder and perform pre-training using image-text pairs. We aim to train the Q-Former such that the queries can learn to extract visual representation that is most informative of the text. Inspired by BLIP (Li et al., 2022), we jointly optimize three pre-training objectives that share the same input format and model parameters. Each objec- tive employs a different attention masking strategy between queries and text to control their interaction (see Figure 2).",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "In our experiments, we use 32 queries where each query has a dimension of 768 (same as the hidden dimension of the Q-Former). We use Z to denote the output query representation. The size of Z (32 × 768) is much smaller than the size of frozen image features (e.g. 257 × 1024 for ViT-L/14). This bottleneck architecture works together with our pre-training objectives into forcing the queries to extract visual information that is most relevant to the text.",
+          "paper_id": "blip-2-2301.12597v1",
+          "evidence_ids": [
+            "ev_65bb1fa95a078ec3cacc188e7d033199"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_65bb1fa95a078ec3cacc188e7d033199",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 3,
+              "text": "In our experiments, we use 32 queries where each query has a dimension of 768 (same as the hidden dimension of the Q-Former). We use Z to denote the output query representation. The size of Z (32 × 768) is much smaller than the size of frozen image features (e.g. 257 × 1024 for ViT-L/14). This bottleneck architecture works together with our pre-training objectives into forcing the queries to extract visual information that is most relevant to the text.",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "In the generative pre-training stage, we connect Q- Former (with the frozen image encoder attached) to a frozen LLM to harvest the LLM’s generative language capability. As shown in Figure 3, we use a fully-connected (FC) layer to linearly project the output query embeddings Z into the same dimension as the text embedding of the LLM. The projected query embeddings are then prepended to the input text embeddings. They function as soft visual prompts that condition the LLM on visual representation extracted by the Q-Former. Since the Q-Former has been pre-trained to extract language-informative visual representation, it ef- fectively functions as an information bottleneck that feeds the most useful information to the LLM while removing irrelevant visual information. This reduces the burden of the LLM to learn vision-language alignment, thus mitigating the catastrophic forgetting problem.",
+          "paper_id": "blip-2-2301.12597v1",
+          "evidence_ids": [
+            "ev_e4829335e46c87be4cada6e262bdd856"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_e4829335e46c87be4cada6e262bdd856",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 4,
+              "text": "In the generative pre-training stage, we connect Q- Former (with the frozen image encoder attached) to a frozen LLM to harvest the LLM’s generative language capability. As shown in Figure 3, we use a fully-connected (FC) layer to linearly project the output query embeddings Z into the same dimension as the text embedding of the LLM. The projected query embeddings are then prepended to the input text embeddings. They function as soft visual prompts that condition the LLM on visual representation extracted by the Q-Former. Since the Q-Former has been pre-trained to extract language-informative visual representation, it ef- fectively functions as an information bottleneck that feeds the most useful information to the LLM while removing irrelevant visual information. This reduces the burden of the LLM to learn vision-language alignment, thus mitigating the catastrophic forgetting problem.",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "The architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.",
+          "paper_id": "flamingo-2204.14198v1",
+          "evidence_ids": [
+            "ev_1f60e62600f7a79eae799d5ed285f571"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 9,
+              "text": "The architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "architecture in Figure 3. It takes as input a variable number of image or video features from the vision encoder and produces a ﬁxed number of visual outputs as illustrated in Figure 4 (hence the name Resampler). The motivation for re-sampling the visual input to a ﬁxed and small number (in practice 64) of outputs is to signiﬁcantly reduce the computational complexity of vision-text cross attention, particularly important when dealing with multiple long videos. In similar spirit to Perceiver (Jaegle et al., 2021) and DETR (Carion et al., 2020), we learn a predeﬁned number of latent input queries. These latent queries are fed to a transformer stack and cross attend to the ﬂattened visual features",
+          "paper_id": "flamingo-2204.14198v1",
+          "evidence_ids": [
+            "ev_9262472c69770e9a098422d6b46534f9"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_9262472c69770e9a098422d6b46534f9",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 11,
+              "text": "architecture in Figure 3. It takes as input a variable number of image or video features from the vision encoder and produces a ﬁxed number of visual outputs as illustrated in Figure 4 (hence the name Resampler). The motivation for re-sampling the visual input to a ﬁxed and small number (in practice 64) of outputs is to signiﬁcantly reduce the computational complexity of vision-text cross attention, particularly important when dealing with multiple long videos. In similar spirit to Perceiver (Jaegle et al., 2021) and DETR (Carion et al., 2020), we learn a predeﬁned number of latent input queries. These latent queries are fed to a transformer stack and cross attend to the ﬂattened visual features",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "𝑋𝑓. These visual features are obtained by ﬁrst adding a learnt temporal position encoding to each spatial grid of features corresponding to a given frame of the video (an image being considered as a single-frame video). Note that we only use temporal encodings and no spatial grid position encodings; we did not observe improvements from the latter, potentially because CNNs implicitly encode space information channel-wise (Islam et al., 2021). The visual features are then ﬂattened and concatenated as illustrated in Figure 4. The number of output tokens of the Resampler is thus equal to the number of learnt latent queries. Unlike in DETR and Perceiver, the keys and values computed from the learnt latents are concatenated to the keys and values obtained from 𝑋𝑓, which we found to perform slightly better. We show later in the ablation studies (Section 4.4), that using such a vision-language resampler module outperforms a plain transformer and an MLP. More architectural details are provided in Table 13.",
+          "paper_id": "flamingo-2204.14198v1",
+          "evidence_ids": [
+            "ev_1863b35f4e6e9086964ec47670f5ea7b"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_1863b35f4e6e9086964ec47670f5ea7b",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 11,
+              "text": "𝑋𝑓. These visual features are obtained by ﬁrst adding a learnt temporal position encoding to each spatial grid of features corresponding to a given frame of the video (an image being considered as a single-frame video). Note that we only use temporal encodings and no spatial grid position encodings; we did not observe improvements from the latter, potentially because CNNs implicitly encode space information channel-wise (Islam et al., 2021). The visual features are then ﬂattened and concatenated as illustrated in Figure 4. The number of output tokens of the Resampler is thus equal to the number of learnt latent queries. Unlike in DETR and Perceiver, the keys and values computed from the learnt latents are concatenated to the keys and values obtained from 𝑋𝑓, which we found to perform slightly better. We show later in the ablation studies (Section 4.4), that using such a vision-language resampler module outperforms a plain transformer and an MLP. More architectural details are provided in Table 13.",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "Second, those visual tokens are used to condition the frozen LM using freshly initialised cross attention layers (Section 3.1.2) that are interleaved between the pretrained LM layers. These new layers oﬀer an expressive way for the LM to incorporate visual information for the next-token prediction task.",
+          "paper_id": "flamingo-2204.14198v1",
+          "evidence_ids": [
+            "ev_a802881b56aa396b45e4431996b61ae5"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 10,
+              "text": "Second, those visual tokens are used to condition the frozen LM using freshly initialised cross attention layers (Section 3.1.2) that are interleaved between the pretrained LM layers. These new layers oﬀer an expressive way for the LM to incorporate visual information for the next-token prediction task.",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+          "paper_id": "flamingo-2204.14198v1",
+          "evidence_ids": [
+            "ev_218bd889fec22dc20b36a380b0e0fb62"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 4,
+              "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        }
+      ],
+      "citations": [
+        {
+          "evidence_id": "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+          "paper_id": "blip-2-2301.12597v1",
+          "page": 2,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+          "paper_id": "blip-2-2301.12597v1",
+          "page": 2,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_242192f04216b43089535562ea0dcec9",
+          "paper_id": "blip-2-2301.12597v1",
+          "page": 3,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_65bb1fa95a078ec3cacc188e7d033199",
+          "paper_id": "blip-2-2301.12597v1",
+          "page": 3,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_e4829335e46c87be4cada6e262bdd856",
+          "paper_id": "blip-2-2301.12597v1",
+          "page": 4,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+          "paper_id": "flamingo-2204.14198v1",
+          "page": 9,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_9262472c69770e9a098422d6b46534f9",
+          "paper_id": "flamingo-2204.14198v1",
+          "page": 11,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_1863b35f4e6e9086964ec47670f5ea7b",
+          "paper_id": "flamingo-2204.14198v1",
+          "page": 11,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+          "paper_id": "flamingo-2204.14198v1",
+          "page": 10,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+          "paper_id": "flamingo-2204.14198v1",
+          "page": 4,
+          "figure_id": null
+        }
+      ],
+      "limitations": [
+        "Citation identity checks do not prove the main answer's semantic entailment or independent review."
+      ],
+      "detailed_report": null,
+      "execution_mode": "tools",
+      "source_references": [],
+      "answer_review_status": "not_independently_reviewed",
+      "evidence_level": "evidence",
+      "metrics": {
+        "model_calls": 6,
+        "llm_calls": 6,
+        "vlm_calls": 0,
+        "model_remaining": 194,
+        "tool_calls": 2,
+        "tool_remaining": 62,
+        "role_model_calls": {
+          "query_language": 1,
+          "main_agent": 4,
+          "report_language": 1
+        },
+        "tool_usage": {
+          "main": 2
+        },
+        "total_latency_ms": 28950.22183499532,
+        "main_tool_calls": 2,
+        "main_decision_steps": 4,
+        "main_protocol_corrections": 1,
+        "research_calls": 0
+      },
+      "generation_degraded": false,
+      "language": {
+        "status": "translated",
+        "source_sha256": "b5d786c2734f4d6c949acadf5eb1023808771b9ff769afa78e2ab4ccfd05f66d",
+        "model_calls": 1,
+        "latency_ms": 0.0,
+        "issue_code": null,
+        "translation_source": "model",
+        "translation_review": "not_independently_reviewed"
+      },
+      "chinese_report": {
+        "title": "对用户问题的回答",
+        "markdown": "# 对用户问题的回答\n\n比较 BLIP-2 与 Flamingo 的视觉语言连接机制，说明 Q-Former、Perceiver Resampler 与门控交叉注意力如何将视觉特征传递给语言模型，并引用当前论文库中的证据。\n\n## 直接回答\n\n## BLIP-2 与 Flamingo 视觉到语言连接机制的比较\n\n两个模型都冻结预训练的图像编码器和预训练的语言模型，并在二者之间插入一个小型、可训练的“桥接”模块，因此视觉特征仅通过该瓶颈到达 LLM。它们的不同之处在于桥接模块的设计以及视觉信号注入 LM 的方式。\n\n### BLIP-2 —— 作为查询瓶颈的 Q-Former\n\n- **整体方案。** BLIP-2 引导（bootstraps）冻结的单模态模型，并用一个分两阶段预训练的 **查询 Transformer（Querying Transformer，Q-Former）** 来弥合模态差距：（1）使用冻结图像编码器的视觉语言表示学习，以及（2）使用冻结 LLM 的视觉到语言生成学习 [ev_525a1f73be26c523e5fb57a5a02a3ecc, ev_53277b945c2ff7e5d33bf907ba8d96b5]。\n- **Q-Former 如何提取视觉特征。** 在第 1 阶段，它连接到冻结的图像编码器，并在图像-文本对上训练，使其查询学习到对文本最具信息量的视觉表示，同时联合优化三个预训练目标，这些目标共享参数但使用不同的查询-文本注意力掩码 [ev_242192f04216b43089535562ea0dcec9]。\n- **瓶颈规模。** 一组固定的 **32 个查询**，维度为 768，产生大小为 32×768 的输出查询嵌入 Z，远小于冻结的图像特征（例如 ViT-L/14 为 257×1024）；该瓶颈加上预训练目标迫使查询仅保留与文本相关的视觉信息 [ev_65bb1fa95a078ec3cacc188e7d033199]。\n- **特征如何到达 LLM。** 在第 2 阶段，Q-Former（附带冻结图像编码器）连接到冻结的 LLM；一个全连接层将 Z 线性投影到 LLM 的文本嵌入维度，且投影后的查询嵌入被 **前置到输入文本嵌入** 作为 **软视觉提示（soft visual prompts）**。由于 Q-Former 已经提取了语言信息丰富的表示，它充当信息瓶颈，向 LLM 提供最有用的信息，减轻 LLM 学习视觉语言对齐的负担，并缓解灾难性遗忘 [ev_e4829335e46c87be4cada6e262bdd856]。\n\n### Flamingo —— Perceiver Resampler + 门控交叉注意力\n\n- **整体方案。** Flamingo 冻结一个预训练的 CLIP 式对比视觉编码器（用于提取语义空间特征）和一个预训练的自回归 LM，然后用两个可学习组件将它们连接起来，同时保持预训练权重冻结 [ev_1f60e62600f7a79eae799d5ed285f571]。\n- **Perceiver Resampler。** 它从视觉编码器接收可变数量的图像/视频特征，并产生 **固定数量（实践中为 64）的视觉输出**，通过从学习到的潜在查询对展平的视觉特征进行交叉注意力（秉承 Perceiver/DETR 的思路）。重采样为固定且少量的 token 可大幅降低视觉-文本交叉注意力的计算成本，尤其是对于长视频 [ev_9262472c69770e9a098422d6b46534f9]。视觉特征获得学习到的时间位置编码（图像被视为单帧视频），并被展平和拼接；与 DETR/Perceiver 不同，Flamingo 将来自学习到的潜在向量的键/值与来自视觉特征的键/值拼接，其表现略好，且 Resampler 优于普通 transformer 和 MLP 变体 [ev_1863b35f4e6e9086964ec47670f5ea7b]。\n- **门控交叉注意力进入 LM。** 重采样后的视觉 token 通过 **新初始化的交叉注意力层，穿插在预训练 LM 层之间**，来条件化 **冻结的 LM**，为 LM 提供一种富有表现力的方式，将视觉信息纳入下一 token 预测 [ev_a802881b56aa396b45e4431996b61ae5]。为在不破坏预训练 LM 的情况下保留其语言能力，这些交叉注意力层与冻结的纯语言自注意力层交错；由于它们是新初始化的，因此引入了 **特定的门控机制**，以最小化其在初始化时的影响，从而大幅提升稳定性和最终性能 [ev_218bd889fec22dc20b36a380b0e0fb62]。\n\n### 关键对比\n\n| 方面 | BLIP-2 | Flamingo |\n|---|---|---|\n| 桥接模块 | Q-Former（32 个学习到的查询，768 维） | Perceiver Resampler（64 个潜在查询） |\n| 桥接模块的训练信号 | 两阶段：先用图像编码器进行表示学习，再与冻结 LLM 进行生成学习 | 视觉 token 用于通过新初始化的交叉注意力层条件化冻结的 LM |\n| 注入点 | 投影后的查询嵌入作为 **软视觉提示** 前置到 LLM 的文本输入 | 视觉 token 通过 **穿插** 在冻结 LM 层之间的 **交叉注意力层** 注入 |\n| 稳定性手段 | Q-Former 预训练目标充当信息瓶颈，减轻 LLM 对齐负担/遗忘 | 在新初始化的交叉注意力层中使用 **门控** 以保留预训练 LM 行为 |\n| token 数量 | 32 个查询嵌入（远小于编码器特征） | 固定的 64 个视觉 token，其动机是降低交叉注意力成本 |\n\n**共同核心：** 两者都将编码器的众多空间特征重采样为一小组固定的学习查询 token（瓶颈），然后将这些交给冻结的 LM —— BLIP-2 作为前置的软提示，Flamingo 作为带门控的、单独进行注意力的交叉注意力流。\n\n### 局限性\n- 证据是来自两篇论文的页面级文本；上述细节仅限于所检索到的段落所陈述的内容。除所描述的 FC 投影 + 前置之外，未检索到具体的门控公式细节以及 BLIP-2 的确切注入模块命名，也未直接阅读 Flamingo 第 3.1.2 节交叉注意力的具体内容（除交错和门控之外）。\n- 未声称任一模型具有整体优越性；两篇论文自身的消融实验并非本比较的主题。\n\n## 已审核事实\n\n当前没有足够的已审核事实。\n\n## 证据缺口与失败状态\n\n没有记录缺失需求。\n\n## 跨论文比较\n\n原报告未形成已核验的跨论文比较，不据此补写比较结论。\n\n## 限制\n\n- 引用身份核查并不证明主要答案的语义蕴含或独立评审。\n\n中文为字段级展示翻译，未进行独立人工事实审核；原始报告、引用和审核状态保持不变。",
+        "paper_ids": [],
+        "verified_claims": [],
+        "missing_requirements": [],
+        "comparisons": [],
+        "diagnostics": {},
+        "human_review": "not_performed",
+        "status": "completed",
+        "question": "比较 BLIP-2 与 Flamingo 的视觉语言连接机制，说明 Q-Former、Perceiver Resampler 与门控交叉注意力如何将视觉特征传递给语言模型，并引用当前论文库中的证据。",
+        "original_question": "比较 BLIP-2 与 Flamingo 的视觉语言连接机制，说明 Q-Former、Perceiver Resampler 与门控交叉注意力如何将视觉特征传递给语言模型，并引用当前论文库中的证据。",
+        "execution_question": "Compare the vision-language connection mechanisms of BLIP-2 and Flamingo, explain how Q-Former, Perceiver Resampler, and gated cross-attention transmit visual features to the language model, and cite evidence from the current paper library.",
+        "answer_status": "answered",
+        "direct_answer": "## BLIP-2 与 Flamingo 视觉到语言连接机制的比较\n\n两个模型都冻结预训练的图像编码器和预训练的语言模型，并在二者之间插入一个小型、可训练的“桥接”模块，因此视觉特征仅通过该瓶颈到达 LLM。它们的不同之处在于桥接模块的设计以及视觉信号注入 LM 的方式。\n\n### BLIP-2 —— 作为查询瓶颈的 Q-Former\n\n- **整体方案。** BLIP-2 引导（bootstraps）冻结的单模态模型，并用一个分两阶段预训练的 **查询 Transformer（Querying Transformer，Q-Former）** 来弥合模态差距：（1）使用冻结图像编码器的视觉语言表示学习，以及（2）使用冻结 LLM 的视觉到语言生成学习 [ev_525a1f73be26c523e5fb57a5a02a3ecc, ev_53277b945c2ff7e5d33bf907ba8d96b5]。\n- **Q-Former 如何提取视觉特征。** 在第 1 阶段，它连接到冻结的图像编码器，并在图像-文本对上训练，使其查询学习到对文本最具信息量的视觉表示，同时联合优化三个预训练目标，这些目标共享参数但使用不同的查询-文本注意力掩码 [ev_242192f04216b43089535562ea0dcec9]。\n- **瓶颈规模。** 一组固定的 **32 个查询**，维度为 768，产生大小为 32×768 的输出查询嵌入 Z，远小于冻结的图像特征（例如 ViT-L/14 为 257×1024）；该瓶颈加上预训练目标迫使查询仅保留与文本相关的视觉信息 [ev_65bb1fa95a078ec3cacc188e7d033199]。\n- **特征如何到达 LLM。** 在第 2 阶段，Q-Former（附带冻结图像编码器）连接到冻结的 LLM；一个全连接层将 Z 线性投影到 LLM 的文本嵌入维度，且投影后的查询嵌入被 **前置到输入文本嵌入** 作为 **软视觉提示（soft visual prompts）**。由于 Q-Former 已经提取了语言信息丰富的表示，它充当信息瓶颈，向 LLM 提供最有用的信息，减轻 LLM 学习视觉语言对齐的负担，并缓解灾难性遗忘 [ev_e4829335e46c87be4cada6e262bdd856]。\n\n### Flamingo —— Perceiver Resampler + 门控交叉注意力\n\n- **整体方案。** Flamingo 冻结一个预训练的 CLIP 式对比视觉编码器（用于提取语义空间特征）和一个预训练的自回归 LM，然后用两个可学习组件将它们连接起来，同时保持预训练权重冻结 [ev_1f60e62600f7a79eae799d5ed285f571]。\n- **Perceiver Resampler。** 它从视觉编码器接收可变数量的图像/视频特征，并产生 **固定数量（实践中为 64）的视觉输出**，通过从学习到的潜在查询对展平的视觉特征进行交叉注意力（秉承 Perceiver/DETR 的思路）。重采样为固定且少量的 token 可大幅降低视觉-文本交叉注意力的计算成本，尤其是对于长视频 [ev_9262472c69770e9a098422d6b46534f9]。视觉特征获得学习到的时间位置编码（图像被视为单帧视频），并被展平和拼接；与 DETR/Perceiver 不同，Flamingo 将来自学习到的潜在向量的键/值与来自视觉特征的键/值拼接，其表现略好，且 Resampler 优于普通 transformer 和 MLP 变体 [ev_1863b35f4e6e9086964ec47670f5ea7b]。\n- **门控交叉注意力进入 LM。** 重采样后的视觉 token 通过 **新初始化的交叉注意力层，穿插在预训练 LM 层之间**，来条件化 **冻结的 LM**，为 LM 提供一种富有表现力的方式，将视觉信息纳入下一 token 预测 [ev_a802881b56aa396b45e4431996b61ae5]。为在不破坏预训练 LM 的情况下保留其语言能力，这些交叉注意力层与冻结的纯语言自注意力层交错；由于它们是新初始化的，因此引入了 **特定的门控机制**，以最小化其在初始化时的影响，从而大幅提升稳定性和最终性能 [ev_218bd889fec22dc20b36a380b0e0fb62]。\n\n### 关键对比\n\n| 方面 | BLIP-2 | Flamingo |\n|---|---|---|\n| 桥接模块 | Q-Former（32 个学习到的查询，768 维） | Perceiver Resampler（64 个潜在查询） |\n| 桥接模块的训练信号 | 两阶段：先用图像编码器进行表示学习，再与冻结 LLM 进行生成学习 | 视觉 token 用于通过新初始化的交叉注意力层条件化冻结的 LM |\n| 注入点 | 投影后的查询嵌入作为 **软视觉提示** 前置到 LLM 的文本输入 | 视觉 token 通过 **穿插** 在冻结 LM 层之间的 **交叉注意力层** 注入 |\n| 稳定性手段 | Q-Former 预训练目标充当信息瓶颈，减轻 LLM 对齐负担/遗忘 | 在新初始化的交叉注意力层中使用 **门控** 以保留预训练 LM 行为 |\n| token 数量 | 32 个查询嵌入（远小于编码器特征） | 固定的 64 个视觉 token，其动机是降低交叉注意力成本 |\n\n**共同核心：** 两者都将编码器的众多空间特征重采样为一小组固定的学习查询 token（瓶颈），然后将这些交给冻结的 LM —— BLIP-2 作为前置的软提示，Flamingo 作为带门控的、单独进行注意力的交叉注意力流。\n\n### 局限性\n- 证据是来自两篇论文的页面级文本；上述细节仅限于所检索到的段落所陈述的内容。除所描述的 FC 投影 + 前置之外，未检索到具体的门控公式细节以及 BLIP-2 的确切注入模块命名，也未直接阅读 Flamingo 第 3.1.2 节交叉注意力的具体内容（除交错和门控之外）。\n- 未声称任一模型具有整体优越性；两篇论文自身的消融实验并非本比较的主题。",
+        "key_findings": [
+          {
+            "text": "我们提出 BLIP-2，一种新的视觉语言预训练方法，它从冻结的预训练单模态模型引导而来。为弥合模态差距，我们提出一个分两阶段预训练的查询 Transformer（Q-Former）：（1）使用冻结图像编码器的视觉语言表示学习阶段，以及（2）使用冻结 LLM 的视觉到语言生成学习阶段。本节首先介绍 Q-Former 的模型架构，然后阐述两阶段预训练流程。",
+            "paper_id": "blip-2-2301.12597v1",
+            "evidence_ids": [
+              "ev_525a1f73be26c523e5fb57a5a02a3ecc"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+                "paper_id": "blip-2-2301.12597v1",
+                "page": 2,
+                "text": "We propose BLIP-2, a new vision-language pre-training method that bootstraps from frozen pre-trained unimodal models. In order to bridge the modality gap, we propose a Querying Transformer (Q-Former) pre-trained in two stages: (1) vision-language representation learning stage with a frozen image encoder and (2) vision-to-language genera- tive learning stage with a frozen LLM. This section ﬁrst introduces the model architecture of Q-Former, and then delineates the two-stage pre-training procedures.",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "• BLIP-2 有效利用了冻结的预训练图像模型和语言模型。我们使用分两阶段预训练的 Q-Former 弥合模态差距：表示学习阶段和生成学习阶段。BLIP-2 在多种视觉语言任务上取得最先进性能，包括视觉问答、图像描述和图像-文本检索。",
+            "paper_id": "blip-2-2301.12597v1",
+            "evidence_ids": [
+              "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+                "paper_id": "blip-2-2301.12597v1",
+                "page": 2,
+                "text": "• BLIP-2 effectively leverages both frozen pre-trained im- age models and language models. We bridge the modality gap using a Q-Former pre-trained in two-stages: repre- sentation learning stage and generative learning stage. BLIP-2 achieves state-of-the-art performance on various vision-language tasks including visual question answer- ing, image captioning, and image-text retrieval.",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "在表示学习阶段，我们将 Q-Former 连接到冻结的图像编码器，并使用图像-文本对进行预训练。我们的目标是训练 Q-Former，使查询能够学习提取对文本最具信息量的视觉表示。受 BLIP（Li et al., 2022）启发，我们联合优化三个预训练目标，它们共享相同的输入格式和模型参数。每个目标在查询与文本之间采用不同的注意力掩码策略来控制它们的交互（见图 2）。",
+            "paper_id": "blip-2-2301.12597v1",
+            "evidence_ids": [
+              "ev_242192f04216b43089535562ea0dcec9"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_242192f04216b43089535562ea0dcec9",
+                "paper_id": "blip-2-2301.12597v1",
+                "page": 3,
+                "text": "In the representation learning stage, we connect Q-Former to a frozen image encoder and perform pre-training using image-text pairs. We aim to train the Q-Former such that the queries can learn to extract visual representation that is most informative of the text. Inspired by BLIP (Li et al., 2022), we jointly optimize three pre-training objectives that share the same input format and model parameters. Each objec- tive employs a different attention masking strategy between queries and text to control their interaction (see Figure 2).",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "在我们的实验中，我们使用 32 个查询，每个查询维度为 768（与 Q-Former 的隐藏维度相同）。我们用 Z 表示输出查询表示。Z 的大小（32 × 768）远小于冻结图像特征的大小（例如 ViT-L/14 为 257 × 1024）。这种瓶颈架构与我们的预训练目标共同作用，迫使查询提取与文本最相关的视觉信息。",
+            "paper_id": "blip-2-2301.12597v1",
+            "evidence_ids": [
+              "ev_65bb1fa95a078ec3cacc188e7d033199"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_65bb1fa95a078ec3cacc188e7d033199",
+                "paper_id": "blip-2-2301.12597v1",
+                "page": 3,
+                "text": "In our experiments, we use 32 queries where each query has a dimension of 768 (same as the hidden dimension of the Q-Former). We use Z to denote the output query representation. The size of Z (32 × 768) is much smaller than the size of frozen image features (e.g. 257 × 1024 for ViT-L/14). This bottleneck architecture works together with our pre-training objectives into forcing the queries to extract visual information that is most relevant to the text.",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "在生成式预训练阶段，我们将 Q-Former（附带冻结图像编码器）连接到冻结的 LLM，以获取 LLM 的生成语言能力。如图 3 所示，我们使用全连接（FC）层将输出查询嵌入 Z 线性投影到与 LLM 文本嵌入相同的维度。随后投影后的查询嵌入被前置到输入文本嵌入。它们作为软视觉提示（soft visual prompts），使 LLM 以 Q-Former 提取的视觉表示为条件。由于 Q-Former 已被预训练以提取语言信息丰富的视觉表示，它有效地充当信息瓶颈，向 LLM 提供最有用的信息，同时移除无关的视觉信息。这减轻了 LLM 学习视觉语言对齐的负担，从而缓解灾难性遗忘问题。",
+            "paper_id": "blip-2-2301.12597v1",
+            "evidence_ids": [
+              "ev_e4829335e46c87be4cada6e262bdd856"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_e4829335e46c87be4cada6e262bdd856",
+                "paper_id": "blip-2-2301.12597v1",
+                "page": 4,
+                "text": "In the generative pre-training stage, we connect Q- Former (with the frozen image encoder attached) to a frozen LLM to harvest the LLM’s generative language capability. As shown in Figure 3, we use a fully-connected (FC) layer to linearly project the output query embeddings Z into the same dimension as the text embedding of the LLM. The projected query embeddings are then prepended to the input text embeddings. They function as soft visual prompts that condition the LLM on visual representation extracted by the Q-Former. Since the Q-Former has been pre-trained to extract language-informative visual representation, it ef- fectively functions as an information bottleneck that feeds the most useful information to the LLM while removing irrelevant visual information. This reduces the burden of the LLM to learn vision-language alignment, thus mitigating the catastrophic forgetting problem.",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "图 3 所示的架构组件是 Flamingo 模型性能的关键，它们是根据两个目标选择的。第一个目标是在无需花费从头训练计算量的情况下利用预训练模型。在视觉方面，我们以对比文本-图像方法预训练视觉编码器，类似 CLIP（Radford et al., 2021）。该模型的作用是提取语义空间特征，描述人们希望查询视觉数据所涉及的那些属性：颜色、形状、性质、物体位置等。在语言方面，我们从一个在大规模多样文本语料上训练的现有自回归语言模型（LM）开始（Hoffmann et al., 2022）。通过这样做，Flamingo 模型获得强大的生成语言能力，并可访问存储在 LM 权重中的大量知识。第二个目标是和谐地桥接这些预训练模型。为此，我们冻结这些模型的权重，使其初始能力保持不变。然后我们通过两个可学习架构组件将它们连接起来。首先，Perceiver Resampler（第 3.1.1 节）从视觉编码器接收时空特征（来自图像或视频），并输出一组固定大小的视觉 token。",
+            "paper_id": "flamingo-2204.14198v1",
+            "evidence_ids": [
+              "ev_1f60e62600f7a79eae799d5ed285f571"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+                "paper_id": "flamingo-2204.14198v1",
+                "page": 9,
+                "text": "The architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "图 3 中的架构。它将来自视觉编码器的可变数量的图像或视频特征作为输入，并产生固定数量的视觉输出，如图 4 所示（因此得名 Resampler）。将视觉输入重采样为固定且少量（实践中为 64）输出的动机是显著降低视觉-文本交叉注意力的计算复杂度，这在处理多个长视频时尤为重要。与 Perceiver（Jaegle et al., 2021）和 DETR（Carion et al., 2020）思路类似，我们学习一组预定义数量的潜在输入查询。这些潜在查询被送入 transformer 堆栈，并对展平的视觉特征进行交叉注意力",
+            "paper_id": "flamingo-2204.14198v1",
+            "evidence_ids": [
+              "ev_9262472c69770e9a098422d6b46534f9"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_9262472c69770e9a098422d6b46534f9",
+                "paper_id": "flamingo-2204.14198v1",
+                "page": 11,
+                "text": "architecture in Figure 3. It takes as input a variable number of image or video features from the vision encoder and produces a ﬁxed number of visual outputs as illustrated in Figure 4 (hence the name Resampler). The motivation for re-sampling the visual input to a ﬁxed and small number (in practice 64) of outputs is to signiﬁcantly reduce the computational complexity of vision-text cross attention, particularly important when dealing with multiple long videos. In similar spirit to Perceiver (Jaegle et al., 2021) and DETR (Carion et al., 2020), we learn a predeﬁned number of latent input queries. These latent queries are fed to a transformer stack and cross attend to the ﬂattened visual features",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "𝑋𝑓。这些视觉特征通过首先为视频给定帧的每个空间网格特征添加学习到的时间位置编码而获得（图像被视为单帧视频）。注意我们只使用时间编码，不使用空间网格位置编码；我们未观察到后者带来改进，可能是因为 CNN 以通道方式隐式编码空间信息（Islam et al., 2021）。随后视觉特征被展平和拼接，如图 4 所示。因此 Resampler 的输出 token 数量等于学习到的潜在查询数量。与 DETR 和 Perceiver 不同，从学习到的潜在向量计算出的键和值被拼接到从 𝑋𝑓 获得的键和值上，我们发现其表现略好。我们稍后在消融研究（第 4.4 节）中表明，使用这种视觉语言重采样模块优于普通 transformer 和 MLP。更多架构细节见表 13。",
+            "paper_id": "flamingo-2204.14198v1",
+            "evidence_ids": [
+              "ev_1863b35f4e6e9086964ec47670f5ea7b"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_1863b35f4e6e9086964ec47670f5ea7b",
+                "paper_id": "flamingo-2204.14198v1",
+                "page": 11,
+                "text": "𝑋𝑓. These visual features are obtained by ﬁrst adding a learnt temporal position encoding to each spatial grid of features corresponding to a given frame of the video (an image being considered as a single-frame video). Note that we only use temporal encodings and no spatial grid position encodings; we did not observe improvements from the latter, potentially because CNNs implicitly encode space information channel-wise (Islam et al., 2021). The visual features are then ﬂattened and concatenated as illustrated in Figure 4. The number of output tokens of the Resampler is thus equal to the number of learnt latent queries. Unlike in DETR and Perceiver, the keys and values computed from the learnt latents are concatenated to the keys and values obtained from 𝑋𝑓, which we found to perform slightly better. We show later in the ablation studies (Section 4.4), that using such a vision-language resampler module outperforms a plain transformer and an MLP. More architectural details are provided in Table 13.",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "其次，这些视觉 token 被用于通过新初始化的交叉注意力层（第 3.1.2 节）来条件化冻结的 LM，这些层穿插在预训练 LM 层之间。这些新层为 LM 提供了一种富有表现力的方式，将视觉信息纳入下一 token 预测任务。",
+            "paper_id": "flamingo-2204.14198v1",
+            "evidence_ids": [
+              "ev_a802881b56aa396b45e4431996b61ae5"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+                "paper_id": "flamingo-2204.14198v1",
+                "page": 10,
+                "text": "Second, those visual tokens are used to condition the frozen LM using freshly initialised cross attention layers (Section 3.1.2) that are interleaved between the pretrained LM layers. These new layers oﬀer an expressive way for the LM to incorporate visual information for the next-token prediction task.",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "统一强大的单模态模型。从预训练 LM 开始训练多模态视觉与语言模型，有可能节省最初训练 LM 所用的巨大计算资源。然而，仅用文本训练的 LM 没有内置手段来纳入其他模态的输入。将此类输入引入预训练 LM 是我们设置中的一个挑战：至关重要的是，在仍充分发挥模型对新模态输入的完整能力和深度的同时，保持预训练模型的语言理解与生成能力完全不受损害，避免任何破坏性干预。为应对这一困难，我们提出将交叉注意力层与在训练期间保持冻结的常规纯语言自注意力层交错。为最小化这些新增层在初始化时的影响，我们引入特定的门控机制，大幅提升稳定性和最终性能。",
+            "paper_id": "flamingo-2204.14198v1",
+            "evidence_ids": [
+              "ev_218bd889fec22dc20b36a380b0e0fb62"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+                "paper_id": "flamingo-2204.14198v1",
+                "page": 4,
+                "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          }
+        ],
+        "citations": [
+          {
+            "evidence_id": "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 2,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 2,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_242192f04216b43089535562ea0dcec9",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 3,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_65bb1fa95a078ec3cacc188e7d033199",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 3,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_e4829335e46c87be4cada6e262bdd856",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 4,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 9,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_9262472c69770e9a098422d6b46534f9",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 11,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_1863b35f4e6e9086964ec47670f5ea7b",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 11,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 10,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 4,
+            "figure_id": null
+          }
+        ],
+        "limitations": [
+          "引用身份核查并不证明主要答案的语义蕴含或独立评审。"
+        ],
+        "detailed_report": null,
+        "execution_mode": "tools",
+        "source_references": [],
+        "answer_review_status": "not_independently_reviewed",
+        "evidence_level": "evidence",
+        "metrics": {
+          "model_calls": 6,
+          "llm_calls": 6,
+          "vlm_calls": 0,
+          "model_remaining": 194,
+          "tool_calls": 2,
+          "tool_remaining": 62,
+          "role_model_calls": {
+            "query_language": 1,
+            "main_agent": 4,
+            "report_language": 1
+          },
+          "tool_usage": {
+            "main": 2
+          },
+          "total_latency_ms": 28950.22183499532,
+          "main_tool_calls": 2,
+          "main_decision_steps": 4,
+          "main_protocol_corrections": 1,
+          "research_calls": 0
+        },
+        "generation_degraded": false,
+        "language": {
+          "status": "pending"
+        },
+        "chinese_report": null
+      },
+      "trace": [
+        {
+          "tool_call_id": "call_00_ma61W6fLq59oaQsJBiBG6454",
+          "tool_name": "search_text",
+          "arguments": {
+            "query": "Q-Former Querying Transformer visual features to language model two-stage",
+            "paper_ids": [
+              "blip-2-2301.12597v1"
+            ],
+            "top_k": 5
+          },
+          "status": "success",
+          "latency_ms": 4070.335744996555,
+          "result_count": 5,
+          "failure": null
+        },
+        {
+          "tool_call_id": "call_00_l02bhNftMS4HGb4h5PkT7511",
+          "tool_name": "search_text",
+          "arguments": {
+            "query": "Perceiver Resampler gated cross-attention visual features language model Flamingo",
+            "paper_ids": [
+              "flamingo-2204.14198v1"
+            ],
+            "top_k": 6
+          },
+          "status": "success",
+          "latency_ms": 111.94424299901584,
+          "result_count": 6,
+          "failure": null
+        }
+      ]
+    },
+    "original_answer": {
+      "title": "Answer to the user's question",
+      "markdown": "",
+      "paper_ids": [],
+      "verified_claims": [],
+      "missing_requirements": [],
+      "comparisons": [],
+      "diagnostics": {},
+      "human_review": "not_performed",
+      "status": "completed",
+      "question": "比较 BLIP-2 与 Flamingo 的视觉语言连接机制，说明 Q-Former、Perceiver Resampler 与门控交叉注意力如何将视觉特征传递给语言模型，并引用当前论文库中的证据。",
+      "original_question": "比较 BLIP-2 与 Flamingo 的视觉语言连接机制，说明 Q-Former、Perceiver Resampler 与门控交叉注意力如何将视觉特征传递给语言模型，并引用当前论文库中的证据。",
+      "execution_question": "Compare the vision-language connection mechanisms of BLIP-2 and Flamingo, explain how Q-Former, Perceiver Resampler, and gated cross-attention transmit visual features to the language model, and cite evidence from the current paper library.",
+      "answer_status": "answered",
+      "direct_answer": "## Comparison of BLIP-2 and Flamingo vision-to-language connection mechanisms\n\nBoth models freeze a pretrained image encoder and a pretrained language model and insert a small, trainable \"bridge\" module between them, so visual features reach the LLM only through that bottleneck. They differ in the bridge's design and in how the visual signal is injected into the LM.\n\n### BLIP-2 — Q-Former as a querying bottleneck\n\n- **Overall scheme.** BLIP-2 bootstraps frozen unimodal models and bridges the modality gap with a **Querying Transformer (Q-Former)** pre-trained in two stages: (1) vision-language representation learning with a frozen image encoder, and (2) vision-to-language generative learning with a frozen LLM [ev_525a1f73be26c523e5fb57a5a02a3ecc, ev_53277b945c2ff7e5d33bf907ba8d96b5].\n- **How Q-Former extracts visual features.** In stage 1 it is connected to the frozen image encoder and trained on image-text pairs so that its queries learn visual representations most informative of the text, jointly optimizing three pretraining objectives that share parameters but use different query–text attention masks [ev_242192f04216b43089535562ea0dcec9].\n- **Bottleneck size.** A fixed set of **32 queries** of dimension 768 yields output query embeddings Z of size 32×768, far smaller than the frozen image features (e.g., 257×1024 for ViT-L/14); this bottleneck plus the pretraining objectives force the queries to keep only text-relevant visual information [ev_65bb1fa95a078ec3cacc188e7d033199].\n- **How features reach the LLM.** In stage 2, the Q-Former (with frozen image encoder attached) is connected to a frozen LLM; a fully-connected layer linearly projects Z into the LLM's text-embedding dimension, and the projected query embeddings are **prepended to the input text embeddings** as **soft visual prompts**. Because the Q-Former already extracts language-informative representations, it acts as an information bottleneck feeding the most useful information to the LLM, reducing the LLM's burden of learning vision-language alignment and mitigating catastrophic forgetting [ev_e4829335e46c87be4cada6e262bdd856].\n\n### Flamingo — Perceiver Resampler + gated cross-attention\n\n- **Overall scheme.** Flamingo freezes a pretrained CLIP-style contrastive vision encoder (to extract semantic spatial features) and a pretrained autoregressive LM, then links them with two learnable components while keeping the pretrained weights frozen [ev_1f60e62600f7a79eae799d5ed285f571].\n- **Perceiver Resampler.** It takes a variable number of image/video features from the vision encoder and produces a **fixed number (in practice 64) of visual outputs**, cross-attending to flattened visual features from learned latent queries (in the spirit of Perceiver/DETR). Resampling to a fixed, small number of tokens greatly reduces the computational cost of vision-text cross-attention, especially for long videos [ev_9262472c69770e9a098422d6b46534f9]. Visual features get a learned temporal position encoding (images treated as single-frame video) and are flattened and concatenated; unlike DETR/Perceiver, Flamingo concatenates the keys/values from the learned latents with those from the visual features, which performed slightly better, and the Resampler outperformed plain transformer and MLP variants [ev_1863b35f4e6e9086964ec47670f5ea7b].\n- **Gated cross-attention into the LM.** The resampled visual tokens condition the **frozen LM via freshly initialized cross-attention layers interleaved between the pretrained LM layers**, giving the LM an expressive way to incorporate visual information for next-token prediction [ev_a802881b56aa396b45e4431996b61ae5]. To preserve the pretrained LM's language ability without destabilizing it, these cross-attention layers are interleaved with frozen language-only self-attention layers; because they are newly initialized, **specific gating mechanisms** are introduced to minimize their effect at initialization, greatly improving stability and final performance [ev_218bd889fec22dc20b36a380b0e0fb62].\n\n### Key contrasts\n\n| Aspect | BLIP-2 | Flamingo |\n|---|---|---|\n| Bridge module | Q-Former (32 learned queries, 768-d) | Perceiver Resampler (64 latent queries) |\n| Training signal for the bridge | Two-stage: representation learning with image encoder, then generative with frozen LLM | Visual tokens used to condition the frozen LM through newly initialized cross-attention layers |\n| Injection point | Projected query embeddings prepended as **soft visual prompts** to the LLM's text input | Visual tokens injected via **cross-attention layers interleaved** between frozen LM layers |\n| Stability device | Q-Former pretrained objectives act as information bottleneck, reducing LLM alignment burden / forgetting | **Gating** in freshly initialized cross-attention layers to preserve pretrained LM behavior |\n| Token count | 32 query embeddings (much smaller than encoder features) | Fixed 64 visual tokens, motivated by reducing cross-attention cost |\n\n**Common core:** both resample the encoder's many spatial features into a small fixed set of learned-query tokens (a bottleneck), then hand those to a frozen LM — BLIP-2 as prepended soft prompts, Flamingo as a separately attended cross-attention stream with gates.\n\n### Limitations\n- Evidence is page-level text from the two papers; the details above are confined to what the retrieved passages state. Specific gating-formula details and BLIP-2's exact injection module naming were not retrieved beyond the described FC projection + prepending, and Flamingo's Section 3.1.2 cross-attention specifics (beyond interleaving and gating) were not directly read.\n- No claim of overall superiority of either model is made; the papers' own ablations were not the subject of this comparison.",
+      "key_findings": [
+        {
+          "text": "We propose BLIP-2, a new vision-language pre-training method that bootstraps from frozen pre-trained unimodal models. In order to bridge the modality gap, we propose a Querying Transformer (Q-Former) pre-trained in two stages: (1) vision-language representation learning stage with a frozen image encoder and (2) vision-to-language genera- tive learning stage with a frozen LLM. This section ﬁrst introduces the model architecture of Q-Former, and then delineates the two-stage pre-training procedures.",
+          "paper_id": "blip-2-2301.12597v1",
+          "evidence_ids": [
+            "ev_525a1f73be26c523e5fb57a5a02a3ecc"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 2,
+              "text": "We propose BLIP-2, a new vision-language pre-training method that bootstraps from frozen pre-trained unimodal models. In order to bridge the modality gap, we propose a Querying Transformer (Q-Former) pre-trained in two stages: (1) vision-language representation learning stage with a frozen image encoder and (2) vision-to-language genera- tive learning stage with a frozen LLM. This section ﬁrst introduces the model architecture of Q-Former, and then delineates the two-stage pre-training procedures.",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "• BLIP-2 effectively leverages both frozen pre-trained im- age models and language models. We bridge the modality gap using a Q-Former pre-trained in two-stages: repre- sentation learning stage and generative learning stage. BLIP-2 achieves state-of-the-art performance on various vision-language tasks including visual question answer- ing, image captioning, and image-text retrieval.",
+          "paper_id": "blip-2-2301.12597v1",
+          "evidence_ids": [
+            "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 2,
+              "text": "• BLIP-2 effectively leverages both frozen pre-trained im- age models and language models. We bridge the modality gap using a Q-Former pre-trained in two-stages: repre- sentation learning stage and generative learning stage. BLIP-2 achieves state-of-the-art performance on various vision-language tasks including visual question answer- ing, image captioning, and image-text retrieval.",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "In the representation learning stage, we connect Q-Former to a frozen image encoder and perform pre-training using image-text pairs. We aim to train the Q-Former such that the queries can learn to extract visual representation that is most informative of the text. Inspired by BLIP (Li et al., 2022), we jointly optimize three pre-training objectives that share the same input format and model parameters. Each objec- tive employs a different attention masking strategy between queries and text to control their interaction (see Figure 2).",
+          "paper_id": "blip-2-2301.12597v1",
+          "evidence_ids": [
+            "ev_242192f04216b43089535562ea0dcec9"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_242192f04216b43089535562ea0dcec9",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 3,
+              "text": "In the representation learning stage, we connect Q-Former to a frozen image encoder and perform pre-training using image-text pairs. We aim to train the Q-Former such that the queries can learn to extract visual representation that is most informative of the text. Inspired by BLIP (Li et al., 2022), we jointly optimize three pre-training objectives that share the same input format and model parameters. Each objec- tive employs a different attention masking strategy between queries and text to control their interaction (see Figure 2).",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "In our experiments, we use 32 queries where each query has a dimension of 768 (same as the hidden dimension of the Q-Former). We use Z to denote the output query representation. The size of Z (32 × 768) is much smaller than the size of frozen image features (e.g. 257 × 1024 for ViT-L/14). This bottleneck architecture works together with our pre-training objectives into forcing the queries to extract visual information that is most relevant to the text.",
+          "paper_id": "blip-2-2301.12597v1",
+          "evidence_ids": [
+            "ev_65bb1fa95a078ec3cacc188e7d033199"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_65bb1fa95a078ec3cacc188e7d033199",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 3,
+              "text": "In our experiments, we use 32 queries where each query has a dimension of 768 (same as the hidden dimension of the Q-Former). We use Z to denote the output query representation. The size of Z (32 × 768) is much smaller than the size of frozen image features (e.g. 257 × 1024 for ViT-L/14). This bottleneck architecture works together with our pre-training objectives into forcing the queries to extract visual information that is most relevant to the text.",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "In the generative pre-training stage, we connect Q- Former (with the frozen image encoder attached) to a frozen LLM to harvest the LLM’s generative language capability. As shown in Figure 3, we use a fully-connected (FC) layer to linearly project the output query embeddings Z into the same dimension as the text embedding of the LLM. The projected query embeddings are then prepended to the input text embeddings. They function as soft visual prompts that condition the LLM on visual representation extracted by the Q-Former. Since the Q-Former has been pre-trained to extract language-informative visual representation, it ef- fectively functions as an information bottleneck that feeds the most useful information to the LLM while removing irrelevant visual information. This reduces the burden of the LLM to learn vision-language alignment, thus mitigating the catastrophic forgetting problem.",
+          "paper_id": "blip-2-2301.12597v1",
+          "evidence_ids": [
+            "ev_e4829335e46c87be4cada6e262bdd856"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_e4829335e46c87be4cada6e262bdd856",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 4,
+              "text": "In the generative pre-training stage, we connect Q- Former (with the frozen image encoder attached) to a frozen LLM to harvest the LLM’s generative language capability. As shown in Figure 3, we use a fully-connected (FC) layer to linearly project the output query embeddings Z into the same dimension as the text embedding of the LLM. The projected query embeddings are then prepended to the input text embeddings. They function as soft visual prompts that condition the LLM on visual representation extracted by the Q-Former. Since the Q-Former has been pre-trained to extract language-informative visual representation, it ef- fectively functions as an information bottleneck that feeds the most useful information to the LLM while removing irrelevant visual information. This reduces the burden of the LLM to learn vision-language alignment, thus mitigating the catastrophic forgetting problem.",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "The architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.",
+          "paper_id": "flamingo-2204.14198v1",
+          "evidence_ids": [
+            "ev_1f60e62600f7a79eae799d5ed285f571"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 9,
+              "text": "The architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "architecture in Figure 3. It takes as input a variable number of image or video features from the vision encoder and produces a ﬁxed number of visual outputs as illustrated in Figure 4 (hence the name Resampler). The motivation for re-sampling the visual input to a ﬁxed and small number (in practice 64) of outputs is to signiﬁcantly reduce the computational complexity of vision-text cross attention, particularly important when dealing with multiple long videos. In similar spirit to Perceiver (Jaegle et al., 2021) and DETR (Carion et al., 2020), we learn a predeﬁned number of latent input queries. These latent queries are fed to a transformer stack and cross attend to the ﬂattened visual features",
+          "paper_id": "flamingo-2204.14198v1",
+          "evidence_ids": [
+            "ev_9262472c69770e9a098422d6b46534f9"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_9262472c69770e9a098422d6b46534f9",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 11,
+              "text": "architecture in Figure 3. It takes as input a variable number of image or video features from the vision encoder and produces a ﬁxed number of visual outputs as illustrated in Figure 4 (hence the name Resampler). The motivation for re-sampling the visual input to a ﬁxed and small number (in practice 64) of outputs is to signiﬁcantly reduce the computational complexity of vision-text cross attention, particularly important when dealing with multiple long videos. In similar spirit to Perceiver (Jaegle et al., 2021) and DETR (Carion et al., 2020), we learn a predeﬁned number of latent input queries. These latent queries are fed to a transformer stack and cross attend to the ﬂattened visual features",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "𝑋𝑓. These visual features are obtained by ﬁrst adding a learnt temporal position encoding to each spatial grid of features corresponding to a given frame of the video (an image being considered as a single-frame video). Note that we only use temporal encodings and no spatial grid position encodings; we did not observe improvements from the latter, potentially because CNNs implicitly encode space information channel-wise (Islam et al., 2021). The visual features are then ﬂattened and concatenated as illustrated in Figure 4. The number of output tokens of the Resampler is thus equal to the number of learnt latent queries. Unlike in DETR and Perceiver, the keys and values computed from the learnt latents are concatenated to the keys and values obtained from 𝑋𝑓, which we found to perform slightly better. We show later in the ablation studies (Section 4.4), that using such a vision-language resampler module outperforms a plain transformer and an MLP. More architectural details are provided in Table 13.",
+          "paper_id": "flamingo-2204.14198v1",
+          "evidence_ids": [
+            "ev_1863b35f4e6e9086964ec47670f5ea7b"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_1863b35f4e6e9086964ec47670f5ea7b",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 11,
+              "text": "𝑋𝑓. These visual features are obtained by ﬁrst adding a learnt temporal position encoding to each spatial grid of features corresponding to a given frame of the video (an image being considered as a single-frame video). Note that we only use temporal encodings and no spatial grid position encodings; we did not observe improvements from the latter, potentially because CNNs implicitly encode space information channel-wise (Islam et al., 2021). The visual features are then ﬂattened and concatenated as illustrated in Figure 4. The number of output tokens of the Resampler is thus equal to the number of learnt latent queries. Unlike in DETR and Perceiver, the keys and values computed from the learnt latents are concatenated to the keys and values obtained from 𝑋𝑓, which we found to perform slightly better. We show later in the ablation studies (Section 4.4), that using such a vision-language resampler module outperforms a plain transformer and an MLP. More architectural details are provided in Table 13.",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "Second, those visual tokens are used to condition the frozen LM using freshly initialised cross attention layers (Section 3.1.2) that are interleaved between the pretrained LM layers. These new layers oﬀer an expressive way for the LM to incorporate visual information for the next-token prediction task.",
+          "paper_id": "flamingo-2204.14198v1",
+          "evidence_ids": [
+            "ev_a802881b56aa396b45e4431996b61ae5"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 10,
+              "text": "Second, those visual tokens are used to condition the frozen LM using freshly initialised cross attention layers (Section 3.1.2) that are interleaved between the pretrained LM layers. These new layers oﬀer an expressive way for the LM to incorporate visual information for the next-token prediction task.",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+          "paper_id": "flamingo-2204.14198v1",
+          "evidence_ids": [
+            "ev_218bd889fec22dc20b36a380b0e0fb62"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+              "paper_id": "flamingo-2204.14198v1",
+              "page": 4,
+              "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        }
+      ],
+      "citations": [
+        {
+          "evidence_id": "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+          "paper_id": "blip-2-2301.12597v1",
+          "page": 2,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+          "paper_id": "blip-2-2301.12597v1",
+          "page": 2,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_242192f04216b43089535562ea0dcec9",
+          "paper_id": "blip-2-2301.12597v1",
+          "page": 3,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_65bb1fa95a078ec3cacc188e7d033199",
+          "paper_id": "blip-2-2301.12597v1",
+          "page": 3,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_e4829335e46c87be4cada6e262bdd856",
+          "paper_id": "blip-2-2301.12597v1",
+          "page": 4,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+          "paper_id": "flamingo-2204.14198v1",
+          "page": 9,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_9262472c69770e9a098422d6b46534f9",
+          "paper_id": "flamingo-2204.14198v1",
+          "page": 11,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_1863b35f4e6e9086964ec47670f5ea7b",
+          "paper_id": "flamingo-2204.14198v1",
+          "page": 11,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+          "paper_id": "flamingo-2204.14198v1",
+          "page": 10,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+          "paper_id": "flamingo-2204.14198v1",
+          "page": 4,
+          "figure_id": null
+        }
+      ],
+      "limitations": [
+        "Citation identity checks do not prove the main answer's semantic entailment or independent review."
+      ],
+      "detailed_report": null,
+      "execution_mode": "tools",
+      "source_references": [],
+      "answer_review_status": "not_independently_reviewed",
+      "evidence_level": "evidence",
+      "metrics": {
+        "model_calls": 5,
+        "llm_calls": 5,
+        "vlm_calls": 0,
+        "model_remaining": 195,
+        "tool_calls": 2,
+        "tool_remaining": 62,
+        "role_model_calls": {
+          "query_language": 1,
+          "main_agent": 4
+        },
+        "tool_usage": {
+          "main": 2
+        }
+      },
+      "generation_degraded": false
+    },
+    "model_calls_observed": 6,
+    "llm_calls_observed": 6,
+    "vlm_calls_observed": 0,
+    "total_latency_ms": 28950.22183499532,
+    "handoffs": []
+  },
+  "events": [
+    {
+      "node_type": "QueryLanguage",
+      "node_id": "query_language",
+      "status": "running",
+      "event_type": "started",
+      "summary": "正在适配中文问题，原始意图保留。",
+      "details": {},
+      "source": "live"
+    },
+    {
+      "node_type": "QueryLanguage",
+      "node_id": "query_language",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "真实模型调用已开始；此事件不代表该阶段完成。",
+      "details": {
+        "role": "query_language",
+        "activity": "model_request_started"
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "QueryLanguage",
+      "node_id": "query_language",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "真实模型调用返回；工具动作尚需原 Controller 校验。",
+      "details": {
+        "role": "query_language",
+        "activity": "model_request_returned",
+        "latency_ms": 1518.910432998382,
+        "requested_action_count": 1,
+        "requested_actions": [
+          {
+            "tool_name": "translate_research_question"
+          }
+        ]
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "QueryLanguage",
+      "node_id": "query_language",
+      "status": "completed",
+      "event_type": "completed",
+      "summary": "问题语言适配完成。",
+      "details": {
+        "original_question": "比较 BLIP-2 与 Flamingo 的视觉语言连接机制，说明 Q-Former、Perceiver Resampler 与门控交叉注意力如何将视觉特征传递给语言模型，并引用当前论文库中的证据。",
+        "research_question": "Compare the vision-language connection mechanisms of BLIP-2 and Flamingo, explain how Q-Former, Perceiver Resampler, and gated cross-attention transmit visual features to the language model, and cite evidence from the current paper library.",
+        "status": "adapted",
+        "mode": "auto",
+        "terms": [
+          "BLIP-2",
+          "Flamingo",
+          "Q-Former",
+          "Perceiver",
+          "Resampler"
+        ],
+        "model_calls": 1,
+        "latency_ms": 0.0,
+        "issue_code": null
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "MainAgent",
+      "node_id": "aggregate:main_agent",
+      "status": "running",
+      "event_type": "started",
+      "summary": "主Agent已启动；下一动作由模型决定，多Agent研究不是固定流程。",
+      "details": {
+        "question": "比较 BLIP-2 与 Flamingo 的视觉语言连接机制，说明 Q-Former、Perceiver Resampler 与门控交叉注意力如何将视觉特征传递给语言模型，并引用当前论文库中的证据。"
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "MainAgent",
+      "node_id": "aggregate:main_agent",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "真实模型调用已开始；此事件不代表该阶段完成。",
+      "details": {
+        "role": "main_agent",
+        "activity": "model_request_started"
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "MainAgent",
+      "node_id": "aggregate:main_agent",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "真实模型调用返回；工具动作尚需原 Controller 校验。",
+      "details": {
+        "role": "main_agent",
+        "activity": "model_request_returned",
+        "latency_ms": 1283.8745179979014,
+        "requested_action_count": 2,
+        "requested_actions": [
+          {
+            "tool_name": "search_text"
+          },
+          {
+            "tool_name": "search_text"
+          }
+        ]
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "MainAgent",
+      "node_id": "aggregate:main_agent",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "主Agent动作协议违规：未执行工具，进行有界纠正。",
+      "details": {
+        "protocol_feedback": {
+          "decision_step": 1,
+          "status": "rejected",
+          "protocol_corrections": 0,
+          "issue_code": "multiple_actions",
+          "expected": "exactly_one_action",
+          "actual_action_count": 2,
+          "executed": false,
+          "instruction": "No rejected action was executed. Submit exactly ONE function/tool call using an available tool's schema, then wait for its observation. If several actions are useful, choose one yourself. Do not batch calls.",
+          "valid_structure": {
+            "tool_calls": [
+              {
+                "name": "<one available tool or finish>",
+                "arguments": "<object matching that tool's schema>"
+              }
+            ]
+          }
+        }
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "MainAgent",
+      "node_id": "aggregate:main_agent",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "真实模型调用已开始；此事件不代表该阶段完成。",
+      "details": {
+        "role": "main_agent",
+        "activity": "model_request_started"
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "MainAgent",
+      "node_id": "aggregate:main_agent",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "真实模型调用返回；工具动作尚需原 Controller 校验。",
+      "details": {
+        "role": "main_agent",
+        "activity": "model_request_returned",
+        "latency_ms": 1078.5675769948284,
+        "requested_action_count": 1,
+        "requested_actions": [
+          {
+            "tool_name": "search_text"
+          }
+        ]
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "MainAgent",
+      "node_id": "aggregate:main_agent",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "主Agent已恢复单动作协议。",
+      "details": {
+        "protocol_feedback": {
+          "decision_step": 2,
+          "status": "recovered",
+          "protocol_corrections": 1,
+          "actual_action_count": 1
+        }
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "Evidence",
+      "node_id": "action:1:search_text",
+      "status": "running",
+      "event_type": "started",
+      "summary": "已校验主Agent工具动作，正在实际执行。",
+      "details": {
+        "tool_name": "search_text",
+        "arguments": {
+          "query": "Q-Former Querying Transformer visual features to language model two-stage",
+          "paper_ids": [
+            "blip-2-2301.12597v1"
+          ],
+          "top_k": 5
+        }
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "Evidence",
+      "node_id": "action:1:search_text",
+      "status": "completed",
+      "event_type": "completed",
+      "summary": "Retrieved 5 text evidence items.",
+      "details": {
+        "tool_name": "search_text",
+        "status": "success",
+        "issue_code": null,
+        "result_count": 5,
+        "paper_ids": [],
+        "evidence_ids": [
+          "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+          "ev_e4829335e46c87be4cada6e262bdd856",
+          "ev_65bb1fa95a078ec3cacc188e7d033199",
+          "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+          "ev_242192f04216b43089535562ea0dcec9"
+        ],
+        "latency_ms": 4064.975961999153
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "MainAgent",
+      "node_id": "aggregate:main_agent",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "真实模型调用已开始；此事件不代表该阶段完成。",
+      "details": {
+        "role": "main_agent",
+        "activity": "model_request_started"
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "MainAgent",
+      "node_id": "aggregate:main_agent",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "真实模型调用返回；工具动作尚需原 Controller 校验。",
+      "details": {
+        "role": "main_agent",
+        "activity": "model_request_returned",
+        "latency_ms": 773.3703549965867,
+        "requested_action_count": 1,
+        "requested_actions": [
+          {
+            "tool_name": "search_text"
+          }
+        ]
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "Evidence",
+      "node_id": "action:2:search_text",
+      "status": "running",
+      "event_type": "started",
+      "summary": "已校验主Agent工具动作，正在实际执行。",
+      "details": {
+        "tool_name": "search_text",
+        "arguments": {
+          "query": "Perceiver Resampler gated cross-attention visual features language model Flamingo",
+          "paper_ids": [
+            "flamingo-2204.14198v1"
+          ],
+          "top_k": 6
+        }
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "Evidence",
+      "node_id": "action:2:search_text",
+      "status": "completed",
+      "event_type": "completed",
+      "summary": "Retrieved 6 text evidence items.",
+      "details": {
+        "tool_name": "search_text",
+        "status": "success",
+        "issue_code": null,
+        "result_count": 6,
+        "paper_ids": [],
+        "evidence_ids": [
+          "ev_1f60e62600f7a79eae799d5ed285f571",
+          "ev_9262472c69770e9a098422d6b46534f9",
+          "ev_c0b1e5bbd1cb0899c45305d4a282b86e",
+          "ev_1863b35f4e6e9086964ec47670f5ea7b",
+          "ev_218bd889fec22dc20b36a380b0e0fb62",
+          "ev_a802881b56aa396b45e4431996b61ae5"
+        ],
+        "latency_ms": 106.18965700268745
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "MainAgent",
+      "node_id": "aggregate:main_agent",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "真实模型调用已开始；此事件不代表该阶段完成。",
+      "details": {
+        "role": "main_agent",
+        "activity": "model_request_started"
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "MainAgent",
+      "node_id": "aggregate:main_agent",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "真实模型调用返回；工具动作尚需原 Controller 校验。",
+      "details": {
+        "role": "main_agent",
+        "activity": "model_request_returned",
+        "latency_ms": 7129.873123994912,
+        "requested_action_count": 1,
+        "requested_actions": [
+          {
+            "tool_name": "finish"
+          }
+        ]
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "MainAgent",
+      "node_id": "aggregate:main_agent",
+      "status": "completed",
+      "event_type": "completed",
+      "summary": "主Agent已结束，答案来源与不足状态保留。",
+      "details": {
+        "answer_status": "answered",
+        "execution_mode": "tools",
+        "tool_calls": 2
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "ReportLanguage",
+      "node_id": "report_language",
+      "status": "running",
+      "event_type": "started",
+      "summary": "答案已生成，正在准备中文展示；原文立即可查看。",
+      "details": {},
+      "source": "live",
+      "report_snapshot": {
+        "title": "Answer to the user's question",
+        "markdown": "",
+        "paper_ids": [],
+        "verified_claims": [],
+        "missing_requirements": [],
+        "comparisons": [],
+        "diagnostics": {},
+        "human_review": "not_performed",
+        "status": "completed",
+        "question": "比较 BLIP-2 与 Flamingo 的视觉语言连接机制，说明 Q-Former、Perceiver Resampler 与门控交叉注意力如何将视觉特征传递给语言模型，并引用当前论文库中的证据。",
+        "original_question": "比较 BLIP-2 与 Flamingo 的视觉语言连接机制，说明 Q-Former、Perceiver Resampler 与门控交叉注意力如何将视觉特征传递给语言模型，并引用当前论文库中的证据。",
+        "execution_question": "Compare the vision-language connection mechanisms of BLIP-2 and Flamingo, explain how Q-Former, Perceiver Resampler, and gated cross-attention transmit visual features to the language model, and cite evidence from the current paper library.",
+        "answer_status": "answered",
+        "direct_answer": "## Comparison of BLIP-2 and Flamingo vision-to-language connection mechanisms\n\nBoth models freeze a pretrained image encoder and a pretrained language model and insert a small, trainable \"bridge\" module between them, so visual features reach the LLM only through that bottleneck. They differ in the bridge's design and in how the visual signal is injected into the LM.\n\n### BLIP-2 — Q-Former as a querying bottleneck\n\n- **Overall scheme.** BLIP-2 bootstraps frozen unimodal models and bridges the modality gap with a **Querying Transformer (Q-Former)** pre-trained in two stages: (1) vision-language representation learning with a frozen image encoder, and (2) vision-to-language generative learning with a frozen LLM [ev_525a1f73be26c523e5fb57a5a02a3ecc, ev_53277b945c2ff7e5d33bf907ba8d96b5].\n- **How Q-Former extracts visual features.** In stage 1 it is connected to the frozen image encoder and trained on image-text pairs so that its queries learn visual representations most informative of the text, jointly optimizing three pretraining objectives that share parameters but use different query–text attention masks [ev_242192f04216b43089535562ea0dcec9].\n- **Bottleneck size.** A fixed set of **32 queries** of dimension 768 yields output query embeddings Z of size 32×768, far smaller than the frozen image features (e.g., 257×1024 for ViT-L/14); this bottleneck plus the pretraining objectives force the queries to keep only text-relevant visual information [ev_65bb1fa95a078ec3cacc188e7d033199].\n- **How features reach the LLM.** In stage 2, the Q-Former (with frozen image encoder attached) is connected to a frozen LLM; a fully-connected layer linearly projects Z into the LLM's text-embedding dimension, and the projected query embeddings are **prepended to the input text embeddings** as **soft visual prompts**. Because the Q-Former already extracts language-informative representations, it acts as an information bottleneck feeding the most useful information to the LLM, reducing the LLM's burden of learning vision-language alignment and mitigating catastrophic forgetting [ev_e4829335e46c87be4cada6e262bdd856].\n\n### Flamingo — Perceiver Resampler + gated cross-attention\n\n- **Overall scheme.** Flamingo freezes a pretrained CLIP-style contrastive vision encoder (to extract semantic spatial features) and a pretrained autoregressive LM, then links them with two learnable components while keeping the pretrained weights frozen [ev_1f60e62600f7a79eae799d5ed285f571].\n- **Perceiver Resampler.** It takes a variable number of image/video features from the vision encoder and produces a **fixed number (in practice 64) of visual outputs**, cross-attending to flattened visual features from learned latent queries (in the spirit of Perceiver/DETR). Resampling to a fixed, small number of tokens greatly reduces the computational cost of vision-text cross-attention, especially for long videos [ev_9262472c69770e9a098422d6b46534f9]. Visual features get a learned temporal position encoding (images treated as single-frame video) and are flattened and concatenated; unlike DETR/Perceiver, Flamingo concatenates the keys/values from the learned latents with those from the visual features, which performed slightly better, and the Resampler outperformed plain transformer and MLP variants [ev_1863b35f4e6e9086964ec47670f5ea7b].\n- **Gated cross-attention into the LM.** The resampled visual tokens condition the **frozen LM via freshly initialized cross-attention layers interleaved between the pretrained LM layers**, giving the LM an expressive way to incorporate visual information for next-token prediction [ev_a802881b56aa396b45e4431996b61ae5]. To preserve the pretrained LM's language ability without destabilizing it, these cross-attention layers are interleaved with frozen language-only self-attention layers; because they are newly initialized, **specific gating mechanisms** are introduced to minimize their effect at initialization, greatly improving stability and final performance [ev_218bd889fec22dc20b36a380b0e0fb62].\n\n### Key contrasts\n\n| Aspect | BLIP-2 | Flamingo |\n|---|---|---|\n| Bridge module | Q-Former (32 learned queries, 768-d) | Perceiver Resampler (64 latent queries) |\n| Training signal for the bridge | Two-stage: representation learning with image encoder, then generative with frozen LLM | Visual tokens used to condition the frozen LM through newly initialized cross-attention layers |\n| Injection point | Projected query embeddings prepended as **soft visual prompts** to the LLM's text input | Visual tokens injected via **cross-attention layers interleaved** between frozen LM layers |\n| Stability device | Q-Former pretrained objectives act as information bottleneck, reducing LLM alignment burden / forgetting | **Gating** in freshly initialized cross-attention layers to preserve pretrained LM behavior |\n| Token count | 32 query embeddings (much smaller than encoder features) | Fixed 64 visual tokens, motivated by reducing cross-attention cost |\n\n**Common core:** both resample the encoder's many spatial features into a small fixed set of learned-query tokens (a bottleneck), then hand those to a frozen LM — BLIP-2 as prepended soft prompts, Flamingo as a separately attended cross-attention stream with gates.\n\n### Limitations\n- Evidence is page-level text from the two papers; the details above are confined to what the retrieved passages state. Specific gating-formula details and BLIP-2's exact injection module naming were not retrieved beyond the described FC projection + prepending, and Flamingo's Section 3.1.2 cross-attention specifics (beyond interleaving and gating) were not directly read.\n- No claim of overall superiority of either model is made; the papers' own ablations were not the subject of this comparison.",
+        "key_findings": [
+          {
+            "text": "We propose BLIP-2, a new vision-language pre-training method that bootstraps from frozen pre-trained unimodal models. In order to bridge the modality gap, we propose a Querying Transformer (Q-Former) pre-trained in two stages: (1) vision-language representation learning stage with a frozen image encoder and (2) vision-to-language genera- tive learning stage with a frozen LLM. This section ﬁrst introduces the model architecture of Q-Former, and then delineates the two-stage pre-training procedures.",
+            "paper_id": "blip-2-2301.12597v1",
+            "evidence_ids": [
+              "ev_525a1f73be26c523e5fb57a5a02a3ecc"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+                "paper_id": "blip-2-2301.12597v1",
+                "page": 2,
+                "text": "We propose BLIP-2, a new vision-language pre-training method that bootstraps from frozen pre-trained unimodal models. In order to bridge the modality gap, we propose a Querying Transformer (Q-Former) pre-trained in two stages: (1) vision-language representation learning stage with a frozen image encoder and (2) vision-to-language genera- tive learning stage with a frozen LLM. This section ﬁrst introduces the model architecture of Q-Former, and then delineates the two-stage pre-training procedures.",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "• BLIP-2 effectively leverages both frozen pre-trained im- age models and language models. We bridge the modality gap using a Q-Former pre-trained in two-stages: repre- sentation learning stage and generative learning stage. BLIP-2 achieves state-of-the-art performance on various vision-language tasks including visual question answer- ing, image captioning, and image-text retrieval.",
+            "paper_id": "blip-2-2301.12597v1",
+            "evidence_ids": [
+              "ev_53277b945c2ff7e5d33bf907ba8d96b5"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+                "paper_id": "blip-2-2301.12597v1",
+                "page": 2,
+                "text": "• BLIP-2 effectively leverages both frozen pre-trained im- age models and language models. We bridge the modality gap using a Q-Former pre-trained in two-stages: repre- sentation learning stage and generative learning stage. BLIP-2 achieves state-of-the-art performance on various vision-language tasks including visual question answer- ing, image captioning, and image-text retrieval.",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "In the representation learning stage, we connect Q-Former to a frozen image encoder and perform pre-training using image-text pairs. We aim to train the Q-Former such that the queries can learn to extract visual representation that is most informative of the text. Inspired by BLIP (Li et al., 2022), we jointly optimize three pre-training objectives that share the same input format and model parameters. Each objec- tive employs a different attention masking strategy between queries and text to control their interaction (see Figure 2).",
+            "paper_id": "blip-2-2301.12597v1",
+            "evidence_ids": [
+              "ev_242192f04216b43089535562ea0dcec9"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_242192f04216b43089535562ea0dcec9",
+                "paper_id": "blip-2-2301.12597v1",
+                "page": 3,
+                "text": "In the representation learning stage, we connect Q-Former to a frozen image encoder and perform pre-training using image-text pairs. We aim to train the Q-Former such that the queries can learn to extract visual representation that is most informative of the text. Inspired by BLIP (Li et al., 2022), we jointly optimize three pre-training objectives that share the same input format and model parameters. Each objec- tive employs a different attention masking strategy between queries and text to control their interaction (see Figure 2).",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "In our experiments, we use 32 queries where each query has a dimension of 768 (same as the hidden dimension of the Q-Former). We use Z to denote the output query representation. The size of Z (32 × 768) is much smaller than the size of frozen image features (e.g. 257 × 1024 for ViT-L/14). This bottleneck architecture works together with our pre-training objectives into forcing the queries to extract visual information that is most relevant to the text.",
+            "paper_id": "blip-2-2301.12597v1",
+            "evidence_ids": [
+              "ev_65bb1fa95a078ec3cacc188e7d033199"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_65bb1fa95a078ec3cacc188e7d033199",
+                "paper_id": "blip-2-2301.12597v1",
+                "page": 3,
+                "text": "In our experiments, we use 32 queries where each query has a dimension of 768 (same as the hidden dimension of the Q-Former). We use Z to denote the output query representation. The size of Z (32 × 768) is much smaller than the size of frozen image features (e.g. 257 × 1024 for ViT-L/14). This bottleneck architecture works together with our pre-training objectives into forcing the queries to extract visual information that is most relevant to the text.",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "In the generative pre-training stage, we connect Q- Former (with the frozen image encoder attached) to a frozen LLM to harvest the LLM’s generative language capability. As shown in Figure 3, we use a fully-connected (FC) layer to linearly project the output query embeddings Z into the same dimension as the text embedding of the LLM. The projected query embeddings are then prepended to the input text embeddings. They function as soft visual prompts that condition the LLM on visual representation extracted by the Q-Former. Since the Q-Former has been pre-trained to extract language-informative visual representation, it ef- fectively functions as an information bottleneck that feeds the most useful information to the LLM while removing irrelevant visual information. This reduces the burden of the LLM to learn vision-language alignment, thus mitigating the catastrophic forgetting problem.",
+            "paper_id": "blip-2-2301.12597v1",
+            "evidence_ids": [
+              "ev_e4829335e46c87be4cada6e262bdd856"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_e4829335e46c87be4cada6e262bdd856",
+                "paper_id": "blip-2-2301.12597v1",
+                "page": 4,
+                "text": "In the generative pre-training stage, we connect Q- Former (with the frozen image encoder attached) to a frozen LLM to harvest the LLM’s generative language capability. As shown in Figure 3, we use a fully-connected (FC) layer to linearly project the output query embeddings Z into the same dimension as the text embedding of the LLM. The projected query embeddings are then prepended to the input text embeddings. They function as soft visual prompts that condition the LLM on visual representation extracted by the Q-Former. Since the Q-Former has been pre-trained to extract language-informative visual representation, it ef- fectively functions as an information bottleneck that feeds the most useful information to the LLM while removing irrelevant visual information. This reduces the burden of the LLM to learn vision-language alignment, thus mitigating the catastrophic forgetting problem.",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "The architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.",
+            "paper_id": "flamingo-2204.14198v1",
+            "evidence_ids": [
+              "ev_1f60e62600f7a79eae799d5ed285f571"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+                "paper_id": "flamingo-2204.14198v1",
+                "page": 9,
+                "text": "The architectural components shown in Figure 3 are key to the performance of Flamingo models, and these are chosen according to two objectives. The ﬁrst objective is to leverage pretrained models without having to spend compute training them from scratch. On the vision side, we pretrain a vision encoder with a contrastive text-image approach, à la CLIP (Radford et al., 2021). The role of this model is to extract semantic spatial features that describe attributes that one would want to query about a visual datum: color, shape, nature, positions of objects, etc. On the language side, we start from an existing autoregressive language model (LM) trained on a large and diverse text corpus (Hoﬀmann et al., 2022). By doing so, Flamingo models gain strong generative language abilities and access to a large amount of knowledge stored in the LM weights. The second objective is to bridge these pretrained models harmoniously. To do so, we freeze the weights of these models so that their initial capacity remains unchanged. We then link them via two learnable architecture components. First, the Perceiver Resampler (Section 3.1.1) receives spatio-temporal features from the Vision Encoder (obtained from either image or video) and outputs a ﬁxed-size set of visual tokens.",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "architecture in Figure 3. It takes as input a variable number of image or video features from the vision encoder and produces a ﬁxed number of visual outputs as illustrated in Figure 4 (hence the name Resampler). The motivation for re-sampling the visual input to a ﬁxed and small number (in practice 64) of outputs is to signiﬁcantly reduce the computational complexity of vision-text cross attention, particularly important when dealing with multiple long videos. In similar spirit to Perceiver (Jaegle et al., 2021) and DETR (Carion et al., 2020), we learn a predeﬁned number of latent input queries. These latent queries are fed to a transformer stack and cross attend to the ﬂattened visual features",
+            "paper_id": "flamingo-2204.14198v1",
+            "evidence_ids": [
+              "ev_9262472c69770e9a098422d6b46534f9"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_9262472c69770e9a098422d6b46534f9",
+                "paper_id": "flamingo-2204.14198v1",
+                "page": 11,
+                "text": "architecture in Figure 3. It takes as input a variable number of image or video features from the vision encoder and produces a ﬁxed number of visual outputs as illustrated in Figure 4 (hence the name Resampler). The motivation for re-sampling the visual input to a ﬁxed and small number (in practice 64) of outputs is to signiﬁcantly reduce the computational complexity of vision-text cross attention, particularly important when dealing with multiple long videos. In similar spirit to Perceiver (Jaegle et al., 2021) and DETR (Carion et al., 2020), we learn a predeﬁned number of latent input queries. These latent queries are fed to a transformer stack and cross attend to the ﬂattened visual features",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "𝑋𝑓. These visual features are obtained by ﬁrst adding a learnt temporal position encoding to each spatial grid of features corresponding to a given frame of the video (an image being considered as a single-frame video). Note that we only use temporal encodings and no spatial grid position encodings; we did not observe improvements from the latter, potentially because CNNs implicitly encode space information channel-wise (Islam et al., 2021). The visual features are then ﬂattened and concatenated as illustrated in Figure 4. The number of output tokens of the Resampler is thus equal to the number of learnt latent queries. Unlike in DETR and Perceiver, the keys and values computed from the learnt latents are concatenated to the keys and values obtained from 𝑋𝑓, which we found to perform slightly better. We show later in the ablation studies (Section 4.4), that using such a vision-language resampler module outperforms a plain transformer and an MLP. More architectural details are provided in Table 13.",
+            "paper_id": "flamingo-2204.14198v1",
+            "evidence_ids": [
+              "ev_1863b35f4e6e9086964ec47670f5ea7b"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_1863b35f4e6e9086964ec47670f5ea7b",
+                "paper_id": "flamingo-2204.14198v1",
+                "page": 11,
+                "text": "𝑋𝑓. These visual features are obtained by ﬁrst adding a learnt temporal position encoding to each spatial grid of features corresponding to a given frame of the video (an image being considered as a single-frame video). Note that we only use temporal encodings and no spatial grid position encodings; we did not observe improvements from the latter, potentially because CNNs implicitly encode space information channel-wise (Islam et al., 2021). The visual features are then ﬂattened and concatenated as illustrated in Figure 4. The number of output tokens of the Resampler is thus equal to the number of learnt latent queries. Unlike in DETR and Perceiver, the keys and values computed from the learnt latents are concatenated to the keys and values obtained from 𝑋𝑓, which we found to perform slightly better. We show later in the ablation studies (Section 4.4), that using such a vision-language resampler module outperforms a plain transformer and an MLP. More architectural details are provided in Table 13.",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "Second, those visual tokens are used to condition the frozen LM using freshly initialised cross attention layers (Section 3.1.2) that are interleaved between the pretrained LM layers. These new layers oﬀer an expressive way for the LM to incorporate visual information for the next-token prediction task.",
+            "paper_id": "flamingo-2204.14198v1",
+            "evidence_ids": [
+              "ev_a802881b56aa396b45e4431996b61ae5"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+                "paper_id": "flamingo-2204.14198v1",
+                "page": 10,
+                "text": "Second, those visual tokens are used to condition the frozen LM using freshly initialised cross attention layers (Section 3.1.2) that are interleaved between the pretrained LM layers. These new layers oﬀer an expressive way for the LM to incorporate visual information for the next-token prediction task.",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+            "paper_id": "flamingo-2204.14198v1",
+            "evidence_ids": [
+              "ev_218bd889fec22dc20b36a380b0e0fb62"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+                "paper_id": "flamingo-2204.14198v1",
+                "page": 4,
+                "text": "Unifying strong single-modal models. Training a multimodal vision and language model, starting from a pretrained LM, has the potential to save the immense computational resources used to train the LM in the ﬁrst place. However, a LM trained only on text has no built-in means of incorporating inputs from other modalities. Introducing such inputs to a pretrained LM is one challenge in our setting: it is crucial to keep the pretrained model’s language understanding and generation capabilities fully intact, avoiding any destabilising interventions, while still leveraging the model’s full capacity and depth on the inputs from the new modality. To address this diﬃculty, we propose to interleave cross-attention layers with regular language-only self-attention layers that are kept frozen during training. To minimize the eﬀect of these newly added layers at initialization, we introduce speciﬁc gating mechanisms which greatly improve stability and ﬁnal performance.",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          }
+        ],
+        "citations": [
+          {
+            "evidence_id": "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 2,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 2,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_242192f04216b43089535562ea0dcec9",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 3,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_65bb1fa95a078ec3cacc188e7d033199",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 3,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_e4829335e46c87be4cada6e262bdd856",
+            "paper_id": "blip-2-2301.12597v1",
+            "page": 4,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_1f60e62600f7a79eae799d5ed285f571",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 9,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_9262472c69770e9a098422d6b46534f9",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 11,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_1863b35f4e6e9086964ec47670f5ea7b",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 11,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_a802881b56aa396b45e4431996b61ae5",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 10,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_218bd889fec22dc20b36a380b0e0fb62",
+            "paper_id": "flamingo-2204.14198v1",
+            "page": 4,
+            "figure_id": null
+          }
+        ],
+        "limitations": [
+          "Citation identity checks do not prove the main answer's semantic entailment or independent review."
+        ],
+        "detailed_report": null,
+        "execution_mode": "tools",
+        "source_references": [],
+        "answer_review_status": "not_independently_reviewed",
+        "evidence_level": "evidence",
+        "metrics": {
+          "model_calls": 5,
+          "llm_calls": 5,
+          "vlm_calls": 0,
+          "model_remaining": 195,
+          "tool_calls": 2,
+          "tool_remaining": 62,
+          "role_model_calls": {
+            "query_language": 1,
+            "main_agent": 4
+          },
+          "tool_usage": {
+            "main": 2
+          }
+        },
+        "generation_degraded": false,
+        "language": {
+          "status": "pending"
+        },
+        "chinese_report": null
+      }
+    },
+    {
+      "node_type": "ReportLanguage",
+      "node_id": "report_language",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "真实模型调用已开始；此事件不代表该阶段完成。",
+      "details": {
+        "role": "report_language",
+        "activity": "model_request_started"
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "ReportLanguage",
+      "node_id": "report_language",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "真实模型调用返回；工具动作尚需原 Controller 校验。",
+      "details": {
+        "role": "report_language",
+        "activity": "model_request_returned",
+        "latency_ms": 12130.89516999753,
+        "requested_action_count": 1,
+        "requested_actions": [
+          {
+            "tool_name": "translate_report_fields"
+          }
+        ]
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "ReportLanguage",
+      "node_id": "report_language",
+      "status": "completed",
+      "event_type": "completed",
+      "summary": "中文展示已生成；答案本身没有独立语义审核。",
+      "details": {
+        "issue_code": null
+      },
+      "source": "live"
+    }
+  ]
+}

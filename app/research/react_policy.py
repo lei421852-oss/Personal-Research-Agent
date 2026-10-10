@@ -9,6 +9,7 @@ from pydantic import Field
 from app.agent.finish import FinishAction, FinishValidationError
 from app.agent.loop import BoundedToolAgent
 from app.evidence.models import NonEmpty
+from app.llm.models import LLMResponse
 from app.research.models import ResearchModel
 from app.tools.observations import ToolObservation
 
@@ -162,8 +163,28 @@ class MainFinishAction(FinishAction):
 class MainPolicyClient:
     """仅适配新入口的系统策略；原Agent API的策略和冻结源码不变。"""
 
-    def __init__(self, client, context, budget):
+    def __init__(
+        self,
+        client,
+        context,
+        budget,
+        *,
+        emit=None,
+        max_protocol_corrections=2,
+        max_decision_steps=7,
+    ):
         self.client, self.context, self.budget = client, context, budget
+        self.emit = emit or (lambda **event: None)
+        self.max_protocol_corrections = max_protocol_corrections
+        self.max_decision_steps = max_decision_steps
+        self.decision_steps = 0
+        self.protocol_corrections = 0
+        self.protocol_trace = []
+        for value in (max_protocol_corrections, max_decision_steps):
+            if type(value) is not int or value < 0:
+                raise ValueError("invalid_main_policy_budget")
+        if not max_decision_steps:
+            raise ValueError("invalid_main_policy_budget")
 
     def complete(self, *, messages, tools):
         for message in messages:
@@ -195,7 +216,76 @@ class MainPolicyClient:
             + marker
             + decision
         )
-        return self.client.complete(messages=forwarded, tools=tools)
+        while True:
+            if self.decision_steps >= self.max_decision_steps:
+                raise RuntimeError("Main agent decision budget exhausted.")
+            self.decision_steps += 1
+            response = self.client.complete(messages=forwarded, tools=tools)
+            if not isinstance(response, LLMResponse):
+                return response  # 保留冻结 Controller 对未知响应类型的拒绝。
+            count = len(response.tool_calls)
+            if count == 1:
+                if (
+                    self.protocol_trace
+                    and self.protocol_trace[-1]["status"] == "rejected"
+                ):
+                    self._protocol_event("recovered", {"actual_action_count": 1})
+                return response
+            feedback = {
+                "issue_code": "multiple_actions" if count > 1 else "missing_action",
+                "expected": "exactly_one_action",
+                "actual_action_count": count,
+                "executed": False,
+                "instruction": (
+                    "No rejected action was executed. Submit exactly ONE function/tool call "
+                    "using an available tool's schema, then wait for its observation. "
+                    "If several actions are useful, choose one yourself. Do not batch calls."
+                ),
+                "valid_structure": {
+                    "tool_calls": [
+                        {
+                            "name": "<one available tool or finish>",
+                            "arguments": "<object matching that tool's schema>",
+                        }
+                    ],
+                },
+            }
+            self._protocol_event("rejected", feedback)
+            if (
+                self.protocol_corrections >= self.max_protocol_corrections
+                or self.decision_steps >= self.max_decision_steps
+            ):
+                # 不截取动作；原始违规响应交给冻结 Controller 安全终止。
+                return response
+            self.protocol_corrections += 1
+            # 不转发违规响应正文或推理，也不制造工具执行结果。
+            # 将协议观察作为控制器数据注入请求副本，原工具消息配对不变。
+            forwarded[0]["content"] += (
+                "\nController protocol observation (data):\n"
+                + json.dumps(feedback, ensure_ascii=False)
+            )
+
+    def _protocol_event(self, status, details):
+        event = {
+            "decision_step": self.decision_steps,
+            "status": status,
+            "protocol_corrections": self.protocol_corrections,
+            **details,
+        }
+        self.protocol_trace.append(event)
+        self.emit(
+            node_type="MainAgent",
+            node_id="aggregate:main_agent",
+            status="running",
+            event_type="progress",
+            summary=(
+                "主Agent动作协议违规：未执行工具，进行有界纠正。"
+                if status == "rejected"
+                else "主Agent已恢复单动作协议。"
+            ),
+            details={"protocol_feedback": event},
+            source="live",
+        )
 
 
 class MainResearchAgent(BoundedToolAgent):

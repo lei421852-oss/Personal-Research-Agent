@@ -1,0 +1,723 @@
+{
+  "question": "What training objective does CLIP use to align images and text?",
+  "real_provider_used": true,
+  "execution": {
+    "question": "What training objective does CLIP use to align images and text?",
+    "paper_ids": [],
+    "status": "completed",
+    "coverage_worker_enabled": false,
+    "entry_kind": "react",
+    "main_agent": {
+      "status": "completed",
+      "tool_calls": 1,
+      "decision_steps": 2,
+      "protocol_corrections": 0,
+      "protocol_trace": [],
+      "stop_details": {},
+      "trace": [
+        {
+          "tool_call_id": "call_00_KsKIJCqJ2iGflzwvVSnl9783",
+          "tool_name": "search_text",
+          "arguments": {
+            "query": "CLIP training objective contrastive loss image text alignment",
+            "paper_ids": [
+              "clip-2103.00020v1"
+            ]
+          },
+          "status": "success",
+          "latency_ms": 6923.32482799975,
+          "result_count": 3,
+          "failure": null
+        }
+      ]
+    },
+    "answer_first": {
+      "title": "Answer to the user's question",
+      "markdown": "",
+      "paper_ids": [],
+      "verified_claims": [],
+      "missing_requirements": [],
+      "comparisons": [],
+      "diagnostics": {},
+      "human_review": "not_performed",
+      "status": "completed",
+      "question": "What training objective does CLIP use to align images and text?",
+      "original_question": "What training objective does CLIP use to align images and text?",
+      "execution_question": "What training objective does CLIP use to align images and text?",
+      "answer_status": "answered",
+      "direct_answer": "CLIP aligns images and text with a contrastive objective: given a batch of N (image, text) pairs, it jointly trains an image encoder and a text encoder to predict which of the N × N possible pairings actually occurred. Concretely, it learns a multi-modal embedding space by maximizing the cosine similarity of the embeddings of the N real (matched) pairs in the batch while minimizing the cosine similarity of the N²−N incorrect pairings, optimizing a symmetric cross-entropy loss over these similarity scores. The CLIP paper notes this batch-construction technique/objective corresponds to the multi-class N-pair loss (Sohn 2016), popularized as the InfoNCE contrastive loss (Oord et al. 2018).",
+      "key_findings": [
+        {
+          "text": "Given a batch of N (image, text) pairs, CLIP is trained to predict which of the N × N possible (image, text) pairings across a batch actually occurred. To do this, CLIP learns a",
+          "paper_id": "clip-2103.00020v1",
+          "evidence_ids": [
+            "ev_b1dfdf019f902850d235d5e5f8f3ffeb"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_b1dfdf019f902850d235d5e5f8f3ffeb",
+              "paper_id": "clip-2103.00020v1",
+              "page": 4,
+              "text": "Given a batch of N (image, text) pairs, CLIP is trained to predict which of the N × N possible (image, text) pairings across a batch actually occurred. To do this, CLIP learns a",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "some label, CLIP jointly trains an image encoder and a text encoder to predict the correct pairings of a batch of (image, text) training examples. At test time the learned text encoder synthesizes a zero-shot linear classiﬁer by embedding the names or descriptions of the target dataset’s classes.",
+          "paper_id": "clip-2103.00020v1",
+          "evidence_ids": [
+            "ev_7e22d464b738e57a92e8a2d4cf3b38a4"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_7e22d464b738e57a92e8a2d4cf3b38a4",
+              "paper_id": "clip-2103.00020v1",
+              "page": 2,
+              "text": "some label, CLIP jointly trains an image encoder and a text encoder to predict the correct pairings of a batch of (image, text) training examples. At test time the learned text encoder synthesizes a zero-shot linear classiﬁer by embedding the names or descriptions of the target dataset’s classes.",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "multi-modal embedding space by jointly training an image encoder and text encoder to maximize the cosine similar- ity of the image and text embeddings of the N real pairs in the batch while minimizing the cosine similarity of the embeddings of the N 2 −N incorrect pairings. We opti- mize a symmetric cross entropy loss over these similarity scores. In Figure 3 we include pseudocode of the core of an implementation of CLIP. To our knowledge this batch con- struction technique and objective was ﬁrst introduced in the area of deep metric learning as the multi-class N-pair loss Sohn (2016), was popularized for contrastive representation learning by Oord et al. (2018) as the InfoNCE loss, and was recently adapted for contrastive (text, image) representation learning in the domain of medical imaging by Zhang et al. (2020).",
+          "paper_id": "clip-2103.00020v1",
+          "evidence_ids": [
+            "ev_13217652070eda7adeb0e42abcf728eb"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_13217652070eda7adeb0e42abcf728eb",
+              "paper_id": "clip-2103.00020v1",
+              "page": 4,
+              "text": "multi-modal embedding space by jointly training an image encoder and text encoder to maximize the cosine similar- ity of the image and text embeddings of the N real pairs in the batch while minimizing the cosine similarity of the embeddings of the N 2 −N incorrect pairings. We opti- mize a symmetric cross entropy loss over these similarity scores. In Figure 3 we include pseudocode of the core of an implementation of CLIP. To our knowledge this batch con- struction technique and objective was ﬁrst introduced in the area of deep metric learning as the multi-class N-pair loss Sohn (2016), was popularized for contrastive representation learning by Oord et al. (2018) as the InfoNCE loss, and was recently adapted for contrastive (text, image) representation learning in the domain of medical imaging by Zhang et al. (2020).",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        }
+      ],
+      "citations": [
+        {
+          "evidence_id": "ev_b1dfdf019f902850d235d5e5f8f3ffeb",
+          "paper_id": "clip-2103.00020v1",
+          "page": 4,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_7e22d464b738e57a92e8a2d4cf3b38a4",
+          "paper_id": "clip-2103.00020v1",
+          "page": 2,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_13217652070eda7adeb0e42abcf728eb",
+          "paper_id": "clip-2103.00020v1",
+          "page": 4,
+          "figure_id": null
+        }
+      ],
+      "limitations": [
+        "Citation identity checks do not prove the main answer's semantic entailment or independent review."
+      ],
+      "detailed_report": null,
+      "execution_mode": "tools",
+      "source_references": [],
+      "answer_review_status": "not_independently_reviewed",
+      "evidence_level": "evidence",
+      "metrics": {
+        "model_calls": 3,
+        "llm_calls": 3,
+        "vlm_calls": 0,
+        "model_remaining": 9,
+        "tool_calls": 1,
+        "tool_remaining": 63,
+        "role_model_calls": {
+          "main_agent": 2,
+          "report_language": 1
+        },
+        "tool_usage": {
+          "main": 1
+        },
+        "total_latency_ms": 15394.209692000004,
+        "main_tool_calls": 1,
+        "main_decision_steps": 2,
+        "main_protocol_corrections": 0,
+        "research_calls": 0
+      },
+      "generation_degraded": false,
+      "language": {
+        "status": "translated",
+        "source_sha256": "8989a67e3c1e6bf336b14d39131b80e2ee7afd9b239417ae4ad333c55a0682c8",
+        "model_calls": 1,
+        "latency_ms": 0.0,
+        "issue_code": null,
+        "translation_source": "model",
+        "translation_review": "not_independently_reviewed"
+      },
+      "chinese_report": {
+        "title": "对用户问题的回答",
+        "markdown": "# 对用户问题的回答\n\nCLIP 使用什么训练目标来对齐图像和文本？\n\n## 直接回答\n\nCLIP 使用对比目标来对齐图像和文本：给定一批 N 个（图像，文本）对，它联合训练一个图像编码器和一个文本编码器，以预测 N × N 种可能配对中实际发生的是哪一种。具体而言，它通过最大化批次中 N 个真实（匹配）对的嵌入的余弦相似度，同时最小化 N²−N 个错误配对的嵌入的余弦相似度，来学习一个多模态嵌入空间，并针对这些相似度分数优化对称交叉熵损失。CLIP 论文指出，这种批次构建技术/目标对应于多类 N 对损失（Sohn 2016），并作为 InfoNCE 对比损失（Oord et al. 2018）而广为人知。\n\n## 已审核事实\n\n当前没有足够的已审核事实。\n\n## 证据缺口与失败状态\n\n没有记录缺失需求。\n\n## 跨论文比较\n\n原报告未形成已核验的跨论文比较，不据此补写比较结论。\n\n## 限制\n\n- 引用身份检查并不能证明主要答案的语义蕴含或独立评审。\n\n中文为字段级展示翻译，未进行独立人工事实审核；原始报告、引用和审核状态保持不变。",
+        "paper_ids": [],
+        "verified_claims": [],
+        "missing_requirements": [],
+        "comparisons": [],
+        "diagnostics": {},
+        "human_review": "not_performed",
+        "status": "completed",
+        "question": "CLIP 使用什么训练目标来对齐图像和文本？",
+        "original_question": "What training objective does CLIP use to align images and text?",
+        "execution_question": "What training objective does CLIP use to align images and text?",
+        "answer_status": "answered",
+        "direct_answer": "CLIP 使用对比目标来对齐图像和文本：给定一批 N 个（图像，文本）对，它联合训练一个图像编码器和一个文本编码器，以预测 N × N 种可能配对中实际发生的是哪一种。具体而言，它通过最大化批次中 N 个真实（匹配）对的嵌入的余弦相似度，同时最小化 N²−N 个错误配对的嵌入的余弦相似度，来学习一个多模态嵌入空间，并针对这些相似度分数优化对称交叉熵损失。CLIP 论文指出，这种批次构建技术/目标对应于多类 N 对损失（Sohn 2016），并作为 InfoNCE 对比损失（Oord et al. 2018）而广为人知。",
+        "key_findings": [
+          {
+            "text": "给定一批 N 个（图像，文本）对，CLIP 被训练来预测一批中 N × N 种可能的（图像，文本）配对中实际发生的是哪一种。为此，CLIP 学习一个",
+            "paper_id": "clip-2103.00020v1",
+            "evidence_ids": [
+              "ev_b1dfdf019f902850d235d5e5f8f3ffeb"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_b1dfdf019f902850d235d5e5f8f3ffeb",
+                "paper_id": "clip-2103.00020v1",
+                "page": 4,
+                "text": "Given a batch of N (image, text) pairs, CLIP is trained to predict which of the N × N possible (image, text) pairings across a batch actually occurred. To do this, CLIP learns a",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "某个标签，CLIP 联合训练一个图像编码器和一个文本编码器，以预测一批（图像，文本）训练示例中的正确配对。在测试时，学习到的文本编码器通过嵌入目标数据集类别的名称或描述，合成一个零样本线性分类器。",
+            "paper_id": "clip-2103.00020v1",
+            "evidence_ids": [
+              "ev_7e22d464b738e57a92e8a2d4cf3b38a4"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_7e22d464b738e57a92e8a2d4cf3b38a4",
+                "paper_id": "clip-2103.00020v1",
+                "page": 2,
+                "text": "some label, CLIP jointly trains an image encoder and a text encoder to predict the correct pairings of a batch of (image, text) training examples. At test time the learned text encoder synthesizes a zero-shot linear classiﬁer by embedding the names or descriptions of the target dataset’s classes.",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "多模态嵌入空间，通过联合训练一个图像编码器和一个文本编码器，以最大化批次中 N 个真实对的图像和文本嵌入的余弦相似度，同时最小化 N 2 −N 个错误配对的嵌入的余弦相似度。我们针对这些相似度分数优化一个对称交叉熵损失。在图 3 中，我们包含了 CLIP 实现核心的伪代码。据我们所知，这种批次构建技术和目标最早在深度度量学习领域作为多类 N 对损失 Sohn（2016）被引入，由 Oord et al.（2018）作为 InfoNCE 损失在对比表示学习中推广，并且最近由 Zhang et al.（2020）在医学影像领域被改编用于对比（文本，图像）表示学习。",
+            "paper_id": "clip-2103.00020v1",
+            "evidence_ids": [
+              "ev_13217652070eda7adeb0e42abcf728eb"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_13217652070eda7adeb0e42abcf728eb",
+                "paper_id": "clip-2103.00020v1",
+                "page": 4,
+                "text": "multi-modal embedding space by jointly training an image encoder and text encoder to maximize the cosine similar- ity of the image and text embeddings of the N real pairs in the batch while minimizing the cosine similarity of the embeddings of the N 2 −N incorrect pairings. We opti- mize a symmetric cross entropy loss over these similarity scores. In Figure 3 we include pseudocode of the core of an implementation of CLIP. To our knowledge this batch con- struction technique and objective was ﬁrst introduced in the area of deep metric learning as the multi-class N-pair loss Sohn (2016), was popularized for contrastive representation learning by Oord et al. (2018) as the InfoNCE loss, and was recently adapted for contrastive (text, image) representation learning in the domain of medical imaging by Zhang et al. (2020).",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          }
+        ],
+        "citations": [
+          {
+            "evidence_id": "ev_b1dfdf019f902850d235d5e5f8f3ffeb",
+            "paper_id": "clip-2103.00020v1",
+            "page": 4,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_7e22d464b738e57a92e8a2d4cf3b38a4",
+            "paper_id": "clip-2103.00020v1",
+            "page": 2,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_13217652070eda7adeb0e42abcf728eb",
+            "paper_id": "clip-2103.00020v1",
+            "page": 4,
+            "figure_id": null
+          }
+        ],
+        "limitations": [
+          "引用身份检查并不能证明主要答案的语义蕴含或独立评审。"
+        ],
+        "detailed_report": null,
+        "execution_mode": "tools",
+        "source_references": [],
+        "answer_review_status": "not_independently_reviewed",
+        "evidence_level": "evidence",
+        "metrics": {
+          "model_calls": 3,
+          "llm_calls": 3,
+          "vlm_calls": 0,
+          "model_remaining": 9,
+          "tool_calls": 1,
+          "tool_remaining": 63,
+          "role_model_calls": {
+            "main_agent": 2,
+            "report_language": 1
+          },
+          "tool_usage": {
+            "main": 1
+          },
+          "total_latency_ms": 15394.209692000004,
+          "main_tool_calls": 1,
+          "main_decision_steps": 2,
+          "main_protocol_corrections": 0,
+          "research_calls": 0
+        },
+        "generation_degraded": false,
+        "language": {
+          "status": "pending"
+        },
+        "chinese_report": null
+      },
+      "trace": [
+        {
+          "tool_call_id": "call_00_KsKIJCqJ2iGflzwvVSnl9783",
+          "tool_name": "search_text",
+          "arguments": {
+            "query": "CLIP training objective contrastive loss image text alignment",
+            "paper_ids": [
+              "clip-2103.00020v1"
+            ]
+          },
+          "status": "success",
+          "latency_ms": 6923.32482799975,
+          "result_count": 3,
+          "failure": null
+        }
+      ]
+    },
+    "original_answer": {
+      "title": "Answer to the user's question",
+      "markdown": "",
+      "paper_ids": [],
+      "verified_claims": [],
+      "missing_requirements": [],
+      "comparisons": [],
+      "diagnostics": {},
+      "human_review": "not_performed",
+      "status": "completed",
+      "question": "What training objective does CLIP use to align images and text?",
+      "original_question": "What training objective does CLIP use to align images and text?",
+      "execution_question": "What training objective does CLIP use to align images and text?",
+      "answer_status": "answered",
+      "direct_answer": "CLIP aligns images and text with a contrastive objective: given a batch of N (image, text) pairs, it jointly trains an image encoder and a text encoder to predict which of the N × N possible pairings actually occurred. Concretely, it learns a multi-modal embedding space by maximizing the cosine similarity of the embeddings of the N real (matched) pairs in the batch while minimizing the cosine similarity of the N²−N incorrect pairings, optimizing a symmetric cross-entropy loss over these similarity scores. The CLIP paper notes this batch-construction technique/objective corresponds to the multi-class N-pair loss (Sohn 2016), popularized as the InfoNCE contrastive loss (Oord et al. 2018).",
+      "key_findings": [
+        {
+          "text": "Given a batch of N (image, text) pairs, CLIP is trained to predict which of the N × N possible (image, text) pairings across a batch actually occurred. To do this, CLIP learns a",
+          "paper_id": "clip-2103.00020v1",
+          "evidence_ids": [
+            "ev_b1dfdf019f902850d235d5e5f8f3ffeb"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_b1dfdf019f902850d235d5e5f8f3ffeb",
+              "paper_id": "clip-2103.00020v1",
+              "page": 4,
+              "text": "Given a batch of N (image, text) pairs, CLIP is trained to predict which of the N × N possible (image, text) pairings across a batch actually occurred. To do this, CLIP learns a",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "some label, CLIP jointly trains an image encoder and a text encoder to predict the correct pairings of a batch of (image, text) training examples. At test time the learned text encoder synthesizes a zero-shot linear classiﬁer by embedding the names or descriptions of the target dataset’s classes.",
+          "paper_id": "clip-2103.00020v1",
+          "evidence_ids": [
+            "ev_7e22d464b738e57a92e8a2d4cf3b38a4"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_7e22d464b738e57a92e8a2d4cf3b38a4",
+              "paper_id": "clip-2103.00020v1",
+              "page": 2,
+              "text": "some label, CLIP jointly trains an image encoder and a text encoder to predict the correct pairings of a batch of (image, text) training examples. At test time the learned text encoder synthesizes a zero-shot linear classiﬁer by embedding the names or descriptions of the target dataset’s classes.",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        },
+        {
+          "text": "multi-modal embedding space by jointly training an image encoder and text encoder to maximize the cosine similar- ity of the image and text embeddings of the N real pairs in the batch while minimizing the cosine similarity of the embeddings of the N 2 −N incorrect pairings. We opti- mize a symmetric cross entropy loss over these similarity scores. In Figure 3 we include pseudocode of the core of an implementation of CLIP. To our knowledge this batch con- struction technique and objective was ﬁrst introduced in the area of deep metric learning as the multi-class N-pair loss Sohn (2016), was popularized for contrastive representation learning by Oord et al. (2018) as the InfoNCE loss, and was recently adapted for contrastive (text, image) representation learning in the domain of medical imaging by Zhang et al. (2020).",
+          "paper_id": "clip-2103.00020v1",
+          "evidence_ids": [
+            "ev_13217652070eda7adeb0e42abcf728eb"
+          ],
+          "review_status": "not_reviewed",
+          "evidence": [
+            {
+              "evidence_id": "ev_13217652070eda7adeb0e42abcf728eb",
+              "paper_id": "clip-2103.00020v1",
+              "page": 4,
+              "text": "multi-modal embedding space by jointly training an image encoder and text encoder to maximize the cosine similar- ity of the image and text embeddings of the N real pairs in the batch while minimizing the cosine similarity of the embeddings of the N 2 −N incorrect pairings. We opti- mize a symmetric cross entropy loss over these similarity scores. In Figure 3 we include pseudocode of the core of an implementation of CLIP. To our knowledge this batch con- struction technique and objective was ﬁrst introduced in the area of deep metric learning as the multi-class N-pair loss Sohn (2016), was popularized for contrastive representation learning by Oord et al. (2018) as the InfoNCE loss, and was recently adapted for contrastive (text, image) representation learning in the domain of medical imaging by Zhang et al. (2020).",
+              "figure_id": null,
+              "caption": null
+            }
+          ]
+        }
+      ],
+      "citations": [
+        {
+          "evidence_id": "ev_b1dfdf019f902850d235d5e5f8f3ffeb",
+          "paper_id": "clip-2103.00020v1",
+          "page": 4,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_7e22d464b738e57a92e8a2d4cf3b38a4",
+          "paper_id": "clip-2103.00020v1",
+          "page": 2,
+          "figure_id": null
+        },
+        {
+          "evidence_id": "ev_13217652070eda7adeb0e42abcf728eb",
+          "paper_id": "clip-2103.00020v1",
+          "page": 4,
+          "figure_id": null
+        }
+      ],
+      "limitations": [
+        "Citation identity checks do not prove the main answer's semantic entailment or independent review."
+      ],
+      "detailed_report": null,
+      "execution_mode": "tools",
+      "source_references": [],
+      "answer_review_status": "not_independently_reviewed",
+      "evidence_level": "evidence",
+      "metrics": {
+        "model_calls": 2,
+        "llm_calls": 2,
+        "vlm_calls": 0,
+        "model_remaining": 10,
+        "tool_calls": 1,
+        "tool_remaining": 63,
+        "role_model_calls": {
+          "main_agent": 2
+        },
+        "tool_usage": {
+          "main": 1
+        }
+      },
+      "generation_degraded": false
+    },
+    "model_calls_observed": 3,
+    "llm_calls_observed": 3,
+    "vlm_calls_observed": 0,
+    "total_latency_ms": 15394.209692000004,
+    "handoffs": []
+  },
+  "events": [
+    {
+      "node_type": "MainAgent",
+      "node_id": "aggregate:main_agent",
+      "status": "running",
+      "event_type": "started",
+      "summary": "主Agent已启动；下一动作由模型决定，多Agent研究不是固定流程。",
+      "details": {
+        "question": "What training objective does CLIP use to align images and text?"
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "MainAgent",
+      "node_id": "aggregate:main_agent",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "真实模型调用已开始；此事件不代表该阶段完成。",
+      "details": {
+        "role": "main_agent",
+        "activity": "model_request_started"
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "MainAgent",
+      "node_id": "aggregate:main_agent",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "真实模型调用返回；工具动作尚需原 Controller 校验。",
+      "details": {
+        "role": "main_agent",
+        "activity": "model_request_returned",
+        "latency_ms": 1879.2989249996026,
+        "requested_action_count": 1,
+        "requested_actions": [
+          {
+            "tool_name": "search_text"
+          }
+        ]
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "Evidence",
+      "node_id": "action:1:search_text",
+      "status": "running",
+      "event_type": "started",
+      "summary": "已校验主Agent工具动作，正在实际执行。",
+      "details": {
+        "tool_name": "search_text",
+        "arguments": {
+          "query": "CLIP training objective contrastive loss image text alignment",
+          "paper_ids": [
+            "clip-2103.00020v1"
+          ],
+          "top_k": 3
+        }
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "Evidence",
+      "node_id": "action:1:search_text",
+      "status": "completed",
+      "event_type": "completed",
+      "summary": "Retrieved 3 text evidence items.",
+      "details": {
+        "tool_name": "search_text",
+        "status": "success",
+        "issue_code": null,
+        "result_count": 3,
+        "paper_ids": [],
+        "evidence_ids": [
+          "ev_b1dfdf019f902850d235d5e5f8f3ffeb",
+          "ev_7e22d464b738e57a92e8a2d4cf3b38a4",
+          "ev_13217652070eda7adeb0e42abcf728eb"
+        ],
+        "latency_ms": 6921.360457999981
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "MainAgent",
+      "node_id": "aggregate:main_agent",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "真实模型调用已开始；此事件不代表该阶段完成。",
+      "details": {
+        "role": "main_agent",
+        "activity": "model_request_started"
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "MainAgent",
+      "node_id": "aggregate:main_agent",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "真实模型调用返回；工具动作尚需原 Controller 校验。",
+      "details": {
+        "role": "main_agent",
+        "activity": "model_request_returned",
+        "latency_ms": 3119.2682570035686,
+        "requested_action_count": 1,
+        "requested_actions": [
+          {
+            "tool_name": "finish"
+          }
+        ]
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "MainAgent",
+      "node_id": "aggregate:main_agent",
+      "status": "completed",
+      "event_type": "completed",
+      "summary": "主Agent已结束，答案来源与不足状态保留。",
+      "details": {
+        "answer_status": "answered",
+        "execution_mode": "tools",
+        "tool_calls": 1
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "ReportLanguage",
+      "node_id": "report_language",
+      "status": "running",
+      "event_type": "started",
+      "summary": "答案已生成，正在准备中文展示；原文立即可查看。",
+      "details": {},
+      "source": "live",
+      "report_snapshot": {
+        "title": "Answer to the user's question",
+        "markdown": "",
+        "paper_ids": [],
+        "verified_claims": [],
+        "missing_requirements": [],
+        "comparisons": [],
+        "diagnostics": {},
+        "human_review": "not_performed",
+        "status": "completed",
+        "question": "What training objective does CLIP use to align images and text?",
+        "original_question": "What training objective does CLIP use to align images and text?",
+        "execution_question": "What training objective does CLIP use to align images and text?",
+        "answer_status": "answered",
+        "direct_answer": "CLIP aligns images and text with a contrastive objective: given a batch of N (image, text) pairs, it jointly trains an image encoder and a text encoder to predict which of the N × N possible pairings actually occurred. Concretely, it learns a multi-modal embedding space by maximizing the cosine similarity of the embeddings of the N real (matched) pairs in the batch while minimizing the cosine similarity of the N²−N incorrect pairings, optimizing a symmetric cross-entropy loss over these similarity scores. The CLIP paper notes this batch-construction technique/objective corresponds to the multi-class N-pair loss (Sohn 2016), popularized as the InfoNCE contrastive loss (Oord et al. 2018).",
+        "key_findings": [
+          {
+            "text": "Given a batch of N (image, text) pairs, CLIP is trained to predict which of the N × N possible (image, text) pairings across a batch actually occurred. To do this, CLIP learns a",
+            "paper_id": "clip-2103.00020v1",
+            "evidence_ids": [
+              "ev_b1dfdf019f902850d235d5e5f8f3ffeb"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_b1dfdf019f902850d235d5e5f8f3ffeb",
+                "paper_id": "clip-2103.00020v1",
+                "page": 4,
+                "text": "Given a batch of N (image, text) pairs, CLIP is trained to predict which of the N × N possible (image, text) pairings across a batch actually occurred. To do this, CLIP learns a",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "some label, CLIP jointly trains an image encoder and a text encoder to predict the correct pairings of a batch of (image, text) training examples. At test time the learned text encoder synthesizes a zero-shot linear classiﬁer by embedding the names or descriptions of the target dataset’s classes.",
+            "paper_id": "clip-2103.00020v1",
+            "evidence_ids": [
+              "ev_7e22d464b738e57a92e8a2d4cf3b38a4"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_7e22d464b738e57a92e8a2d4cf3b38a4",
+                "paper_id": "clip-2103.00020v1",
+                "page": 2,
+                "text": "some label, CLIP jointly trains an image encoder and a text encoder to predict the correct pairings of a batch of (image, text) training examples. At test time the learned text encoder synthesizes a zero-shot linear classiﬁer by embedding the names or descriptions of the target dataset’s classes.",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          },
+          {
+            "text": "multi-modal embedding space by jointly training an image encoder and text encoder to maximize the cosine similar- ity of the image and text embeddings of the N real pairs in the batch while minimizing the cosine similarity of the embeddings of the N 2 −N incorrect pairings. We opti- mize a symmetric cross entropy loss over these similarity scores. In Figure 3 we include pseudocode of the core of an implementation of CLIP. To our knowledge this batch con- struction technique and objective was ﬁrst introduced in the area of deep metric learning as the multi-class N-pair loss Sohn (2016), was popularized for contrastive representation learning by Oord et al. (2018) as the InfoNCE loss, and was recently adapted for contrastive (text, image) representation learning in the domain of medical imaging by Zhang et al. (2020).",
+            "paper_id": "clip-2103.00020v1",
+            "evidence_ids": [
+              "ev_13217652070eda7adeb0e42abcf728eb"
+            ],
+            "review_status": "not_reviewed",
+            "evidence": [
+              {
+                "evidence_id": "ev_13217652070eda7adeb0e42abcf728eb",
+                "paper_id": "clip-2103.00020v1",
+                "page": 4,
+                "text": "multi-modal embedding space by jointly training an image encoder and text encoder to maximize the cosine similar- ity of the image and text embeddings of the N real pairs in the batch while minimizing the cosine similarity of the embeddings of the N 2 −N incorrect pairings. We opti- mize a symmetric cross entropy loss over these similarity scores. In Figure 3 we include pseudocode of the core of an implementation of CLIP. To our knowledge this batch con- struction technique and objective was ﬁrst introduced in the area of deep metric learning as the multi-class N-pair loss Sohn (2016), was popularized for contrastive representation learning by Oord et al. (2018) as the InfoNCE loss, and was recently adapted for contrastive (text, image) representation learning in the domain of medical imaging by Zhang et al. (2020).",
+                "figure_id": null,
+                "caption": null
+              }
+            ]
+          }
+        ],
+        "citations": [
+          {
+            "evidence_id": "ev_b1dfdf019f902850d235d5e5f8f3ffeb",
+            "paper_id": "clip-2103.00020v1",
+            "page": 4,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_7e22d464b738e57a92e8a2d4cf3b38a4",
+            "paper_id": "clip-2103.00020v1",
+            "page": 2,
+            "figure_id": null
+          },
+          {
+            "evidence_id": "ev_13217652070eda7adeb0e42abcf728eb",
+            "paper_id": "clip-2103.00020v1",
+            "page": 4,
+            "figure_id": null
+          }
+        ],
+        "limitations": [
+          "Citation identity checks do not prove the main answer's semantic entailment or independent review."
+        ],
+        "detailed_report": null,
+        "execution_mode": "tools",
+        "source_references": [],
+        "answer_review_status": "not_independently_reviewed",
+        "evidence_level": "evidence",
+        "metrics": {
+          "model_calls": 2,
+          "llm_calls": 2,
+          "vlm_calls": 0,
+          "model_remaining": 10,
+          "tool_calls": 1,
+          "tool_remaining": 63,
+          "role_model_calls": {
+            "main_agent": 2
+          },
+          "tool_usage": {
+            "main": 1
+          }
+        },
+        "generation_degraded": false,
+        "language": {
+          "status": "pending"
+        },
+        "chinese_report": null
+      }
+    },
+    {
+      "node_type": "ReportLanguage",
+      "node_id": "report_language",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "真实模型调用已开始；此事件不代表该阶段完成。",
+      "details": {
+        "role": "report_language",
+        "activity": "model_request_started"
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "ReportLanguage",
+      "node_id": "report_language",
+      "status": "running",
+      "event_type": "progress",
+      "summary": "真实模型调用返回；工具动作尚需原 Controller 校验。",
+      "details": {
+        "role": "report_language",
+        "activity": "model_request_returned",
+        "latency_ms": 2705.38099300029,
+        "requested_action_count": 1,
+        "requested_actions": [
+          {
+            "tool_name": "translate_report_fields"
+          }
+        ]
+      },
+      "source": "live"
+    },
+    {
+      "node_type": "ReportLanguage",
+      "node_id": "report_language",
+      "status": "completed",
+      "event_type": "completed",
+      "summary": "中文展示已生成；答案本身没有独立语义审核。",
+      "details": {
+        "issue_code": null
+      },
+      "source": "live"
+    }
+  ]
+}

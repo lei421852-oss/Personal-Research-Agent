@@ -235,6 +235,7 @@ class ReActWorkbenchRuntime:
         paper_catalog=None,
         max_research_calls=1,
         max_tools=64,
+        max_protocol_corrections=2,
     ):
         self.dependencies = dependencies
         self.llm_factory = llm_factory or OpenAICompatibleLLMClient
@@ -244,6 +245,9 @@ class ReActWorkbenchRuntime:
         if type(max_research_calls) is not int or max_research_calls != 1:
             raise ValueError("research_calls_must_be_bounded_to_one")
         self.max_research_calls, self.max_tools = max_research_calls, max_tools
+        if type(max_protocol_corrections) is not int or max_protocol_corrections < 0:
+            raise ValueError("invalid_main_protocol_correction_budget")
+        self.max_protocol_corrections = max_protocol_corrections
 
     async def run(self, request, emit):
         started = perf_counter()
@@ -258,6 +262,7 @@ class ReActWorkbenchRuntime:
             "entry_kind": "react",
         }
         context, resolver, answer, agent, cancellation = None, None, None, None, None
+        policy = None
         full_resources = None
         discovery = self.paper_retriever
 
@@ -535,9 +540,14 @@ class ReActWorkbenchRuntime:
                 )
             executor = ContextExecutor(guarded, context, emit)
             proxy = SyncModelProxy(bridge, model("main_agent"))
-            agent = MainResearchAgent(
-                MainPolicyClient(proxy, context, budget), executor, resolver, context
+            policy = MainPolicyClient(
+                proxy,
+                context,
+                budget,
+                emit=emit,
+                max_protocol_corrections=self.max_protocol_corrections,
             )
+            agent = MainResearchAgent(policy, executor, resolver, context)
             emit(
                 node_type="MainAgent",
                 node_id="aggregate:main_agent",
@@ -556,10 +566,34 @@ class ReActWorkbenchRuntime:
             result = await _offload(
                 run_sync, on_cancel=lambda: (budget.stop(), bridge.cancel())
             )
+            if result.status == "protocol_failure" and policy.protocol_trace:
+                last = policy.protocol_trace[-1]
+                if last["status"] == "rejected":
+                    count = last["actual_action_count"]
+                    result = result.model_copy(
+                        update={
+                            "limitations": [
+                                *result.limitations,
+                                (
+                                    f"Model returned {count} actions after {policy.protocol_corrections} "
+                                    "bounded protocol corrections; rejected actions were not executed."
+                                ),
+                            ],
+                            "stop_details": {
+                                **result.stop_details,
+                                "protocol_feedback": last,
+                                "max_protocol_corrections": policy.max_protocol_corrections,
+                                "max_decision_steps": policy.max_decision_steps,
+                            },
+                        }
+                    )
+                    context.agent_result = result
             execution["main_agent"] = {
                 "status": result.status,
                 "tool_calls": result.tool_calls,
-                "decision_steps": result.model_calls,
+                "decision_steps": policy.decision_steps,
+                "protocol_corrections": policy.protocol_corrections,
+                "protocol_trace": policy.protocol_trace,
                 "stop_details": result.stop_details,
             }
             execution["main_agent"]["trace"] = [
@@ -686,8 +720,9 @@ class ReActWorkbenchRuntime:
                     "main_tool_calls": context.agent_result.tool_calls
                     if context and context.agent_result
                     else 0,
-                    "main_decision_steps": context.agent_result.model_calls
-                    if context and context.agent_result
+                    "main_decision_steps": policy.decision_steps if policy else 0,
+                    "main_protocol_corrections": policy.protocol_corrections
+                    if policy
                     else 0,
                     "research_calls": context.research_calls if context else 0,
                 }

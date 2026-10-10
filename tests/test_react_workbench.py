@@ -580,6 +580,13 @@ def test_main_agent_rejects_batch_without_executing_first_action():
     assert result["main_agent"]["status"] == "protocol_failure"
     assert not search.calls
     assert result["answer_first"]["metrics"]["tool_calls"] == 0
+    assert result["main_agent"]["decision_steps"] == 3
+    assert result["main_agent"]["protocol_corrections"] == 2
+    assert len(result["main_agent"]["protocol_trace"]) == 3
+    assert (
+        result["main_agent"]["stop_details"]["protocol_feedback"]["actual_action_count"]
+        == 2
+    )
 
 
 def test_child_has_no_recursive_research_tool():
