@@ -6,7 +6,7 @@ import json
 import time
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
-from typing import Annotated
+from typing import Annotated, Literal
 from uuid import uuid4
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, model_validator
@@ -24,12 +24,15 @@ class ResearchRunRequest(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True, str_strip_whitespace=True)
     question: Annotated[StrictStr, Field(min_length=1, max_length=4000, pattern=r"\S")]
     paper_ids: list[Annotated[StrictStr, Field(min_length=1, max_length=128)]] = Field(
-        min_length=2, max_length=3
+        default_factory=list, max_length=3
     )
+    language_mode: Literal["auto", "original"] = "auto"
     max_model_calls: Annotated[StrictInt, Field(ge=1, le=200)] = 200
 
     @model_validator(mode="after")
     def unique_papers(self):
+        if len(self.paper_ids) == 1:
+            raise ValueError("请选择2–3篇论文，或不选择以进入自动模式。")
         if len(self.paper_ids) != len(set(self.paper_ids)):
             raise ValueError("paper_ids must be unique")
         return self
@@ -58,6 +61,9 @@ class _Run:
     error: dict | None = None
     finished_at: float | None = None
     event_limit_reached: bool = False
+    research_question: str | None = None
+    query_language: dict = field(default_factory=dict)
+    paper_selection: dict = field(default_factory=dict)
 
 
 class ResearchRunManager:
@@ -119,6 +125,7 @@ class ResearchRunManager:
         payload = {
             "question": " ".join(request.question.casefold().split()),
             "papers": sorted(request.paper_ids),
+            "language_mode": request.language_mode,
         }
         return hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()
 
@@ -159,6 +166,23 @@ class ResearchRunManager:
             # Provider/检索由旧适配器在线程中执行；所有事件序号在主循环串行分配。
             def deliver():
                 if run.status not in TERMINAL:
+                    # 原报告已生成时立即可查看，翻译不阻塞原文读取。
+                    snapshot = event.pop("report_snapshot", None)
+                    if isinstance(snapshot, dict):
+                        run.report = sanitize_public(snapshot)
+                    details = event.get("details", {})
+                    if (
+                        event.get("node_type") == "QueryLanguage"
+                        and event.get("event_type") == "completed"
+                    ):
+                        run.query_language = sanitize_public(details)
+                        run.research_question = details.get("research_question")
+                    if (
+                        event.get("node_type") == "PaperSelection"
+                        and event.get("event_type") == "completed"
+                    ):
+                        run.paper_selection = sanitize_public(details)
+                        run.paper_ids = list(details.get("selected_paper_ids", []))
                     self._append(run, **event)
 
             loop.call_soon_threadsafe(deliver)
@@ -193,10 +217,17 @@ class ResearchRunManager:
             )
         if len(active) >= self.max_concurrent_runs + self.max_queued_runs:
             raise RunManagerError("run_capacity", "研究运行及排队数量已达上限。", 429)
-        if not self.dependencies.health()["real_research_ready"]:
+        health = self.dependencies.health()
+        if not health["real_research_ready"]:
             raise RunManagerError(
                 "research_unavailable",
                 "真实研究依赖尚未就绪；可以查看健康状态或历史回放。",
+                503,
+            )
+        if health.get("language_adapter_ready") is False:
+            raise RunManagerError(
+                "language_unavailable",
+                "语言适配服务配置未就绪；仍可查看原始历史回放。",
                 503,
             )
         run = _Run(
@@ -216,9 +247,52 @@ class ResearchRunManager:
 
     def _attach(self, run, execution, *, source="derived"):
         run.execution = execution
+        run.research_question = execution.get(
+            "research_question", run.research_question
+        )
+        run.query_language = sanitize_public(
+            execution.get("query_language", run.query_language)
+        )
+        run.paper_selection = sanitize_public(
+            execution.get("paper_selection", run.paper_selection)
+        )
+        if execution.get("paper_ids"):
+            run.paper_ids = list(execution["paper_ids"])
         for event in execution_events(execution, source=source):
             self._append(run, **event)
         run.report = present_execution(execution)
+        language = execution.get("report_language")
+        if isinstance(language, dict):
+            public_language = sanitize_public(
+                {
+                    key: value
+                    for key, value in language.items()
+                    if key != "display_report"
+                }
+            )
+            chinese_report = None
+            if language.get("status") == "translated":
+                from app.research.report_language import (
+                    ReportLanguageAdapter,
+                    readable_report_fields,
+                )
+
+                # 只把已校验的可读字段合并到终态 DTO，不能用翻译前快照覆盖最终成本或诊断。
+                merged = ReportLanguageAdapter().apply_translations(
+                    run.report,
+                    readable_report_fields(language.get("display_report", {})),
+                    source=language.get("translation_source", "model"),
+                    model_calls=0,
+                )
+                if merged.status == "translated":
+                    chinese_report = sanitize_public(merged.display_report)
+                    public_language["final_source_sha256"] = merged.source_sha256
+                else:
+                    public_language.update(
+                        status="failed", issue_code="final_report_translation_mismatch"
+                    )
+            run.report["language"] = public_language
+            run.report["chinese_report"] = chinese_report
 
     async def _execute(self, run, request):
         try:
@@ -236,9 +310,21 @@ class ResearchRunManager:
                     "completed" if research.get("status") == "completed" else "failed"
                 )
                 if run.status == "failed":
+                    issue_type = research.get("issue_type")
+                    known_issues = {
+                        "no_matching_prepared_papers": "当前已准备论文无法满足这项研究，未使用固定默认论文组合。",
+                        "paper_selection_failed": "自动论文选择未返回合法可研究范围；可以手动选择2–3篇论文后重试。",
+                        "query_language_failed": "问题语言转换失败，未提交错误译文；可以选择原文直通模式后重试。",
+                        "prepared_paper_unavailable": "所选论文缺少可检索的已准备正文证据。",
+                        "model_budget_exhausted": "研究模型调用预算已耗尽，已有真实结果仍保留。",
+                    }
                     run.error = {
-                        "code": "research_failed",
-                        "message": "研究执行失败；已获得的记录和报告仍可查看。",
+                        "code": issue_type
+                        if issue_type in known_issues
+                        else "research_failed",
+                        "message": known_issues.get(
+                            issue_type, "研究执行失败；已获得的记录和报告仍可查看。"
+                        ),
                     }
         except asyncio.CancelledError as exc:
             snapshot = getattr(exc, "evaluation_snapshot", None) or getattr(
@@ -259,11 +345,22 @@ class ResearchRunManager:
             )
             if snapshot:
                 self._attach(run, snapshot)
-            run.status = "failed"
-            run.error = {
-                "code": "research_timeout",
-                "message": "研究超时并已执行收尾；可查看已有事件。",
-            }
+            if (
+                snapshot
+                and snapshot.get("research", {}).get("status") == "completed"
+                and "report_language" in snapshot
+            ):
+                run.status = "completed"
+                run.error = {
+                    "code": "report_language_timeout",
+                    "message": "研究已完成，中文转换超时；原始报告和引用仍可查看。",
+                }
+            else:
+                run.status = "failed"
+                run.error = {
+                    "code": "research_timeout",
+                    "message": "研究超时并已执行收尾；可查看已有事件。",
+                }
         except Exception:  # noqa: BLE001 - API 只返回稳定错误，不导出内部异常
             run.status = "failed"
             run.error = {
@@ -318,6 +415,18 @@ class ResearchRunManager:
         )
         self._runs[run.run_id] = run
         self._attach(run, execution, source="replay")
+        from app.research.report_language import load_replay_translation
+
+        language = load_replay_translation(case_id, run.report, self.replays.root)
+        run.report["language"] = sanitize_public(
+            language.model_dump(mode="json", exclude={"display_report"})
+            | {"source": "offline_replay"}
+        )
+        run.report["chinese_report"] = (
+            sanitize_public(language.display_report)
+            if language.status == "translated"
+            else None
+        )
         # 这里只表示历史文件已加载；原研究失败/不足保留在 report、节点和 historical_status。
         run.status = "completed"
         run.finished_at = time.monotonic()
@@ -334,6 +443,12 @@ class ResearchRunManager:
                 "created_at": run.created_at,
                 "question": run.question,
                 "paper_ids": run.paper_ids,
+                "research_question": run.research_question,
+                "query_language": run.query_language,
+                "paper_selection": run.paper_selection,
+                "report_language_status": (run.report or {})
+                .get("language", {})
+                .get("status"),
                 "events_count": len(run.events),
                 "event_limit_reached": run.event_limit_reached,
                 "cancel_requested": run.cancel_requested,

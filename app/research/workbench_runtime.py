@@ -7,6 +7,7 @@ from time import perf_counter
 from app.llm.provider import OpenAICompatibleLLMClient
 from app.papers.catalog import load_paper_catalog
 from app.research.async_tools import AsyncLLMAdapter
+from app.research.paper_selection import PaperSelectionAdapter, PaperSelectionError
 from app.research.planner import ResearchPlanner, ResearchPlannerError
 from app.research.protocol_runtime import run_protocol_case
 from app.research.retry import DependencyCallError
@@ -66,6 +67,9 @@ class _ObservedClient:
             "synthesis": "Synthesis",
             "worker": "Worker",
             "recovery_worker": "Recovery",
+            "query_language": "QueryLanguage",
+            "paper_selection": "PaperSelection",
+            "report_language": "ReportLanguage",
         }[self.role]
         node = "planner" if role == "Planner" else "aggregate:" + self.role
         identity = _worker_schema_identity(tools)
@@ -280,8 +284,14 @@ class WorkbenchRuntime:
             "coverage_worker_enabled": False,
             "protocol_adapter_enabled": True,
             "planner_model_calls": 0,
+            "research_question": request.question,
+            "paper_selection": {
+                "status": "explicit" if request.paper_ids else "pending",
+                "selected_paper_ids": list(request.paper_ids),
+            },
         }
         planner_client, adapter, bridge = None, None, None
+        auxiliary_clients, auxiliary_adapters = [], []
         retriever = None
         try:
             corpus, snapshot, config, raw_retriever = await _offload(
@@ -322,21 +332,170 @@ class WorkbenchRuntime:
                     emit,
                 )
 
+            async def auxiliary(role, messages, tools):
+                observed = client(role)
+                boundary = AsyncLLMAdapter(observed, gate)
+                auxiliary_clients.append(observed)
+                auxiliary_adapters.append(boundary)
+                return await boundary.complete(
+                    messages=messages, tools=tools, attempt_budget=1
+                )
+
+            # 工作台适配只改变请求语言和候选范围，原冻结研究链仍使用原 Planner/Worker。
+            from app.research.query_language import QueryLanguageAdapter
+
+            language_mode = getattr(request, "language_mode", "auto")
+            query_adapter = QueryLanguageAdapter()
+            query_input = query_adapter.prepare(request.question, mode=language_mode)
+            if query_input is not None:
+                emit(
+                    node_type="QueryLanguage",
+                    node_id="query_language",
+                    status="running",
+                    event_type="started",
+                    summary="正在将中文问题转换为英文研究请求，原问题保留。",
+                    details={},
+                    source="live",
+                )
+                before = budget.used
+                converted_at = perf_counter()
+                try:
+                    response = await auxiliary("query_language", *query_input)
+                    converted = query_adapter.parse_response(
+                        request.question, response, mode=language_mode
+                    )
+                    execution["query_language"] = converted.model_dump(mode="json")
+                except DependencyCallError:
+                    execution["query_language"] = {
+                        "status": "failed",
+                        "original_question": request.question,
+                        "research_question": None,
+                        "issue_code": "query_language_dependency_failure",
+                    }
+                execution["query_language"].update(
+                    model_calls=budget.used - before,
+                    latency_ms=(perf_counter() - converted_at) * 1000,
+                )
+                if execution["query_language"]["status"] == "failed":
+                    emit(
+                        node_type="QueryLanguage",
+                        node_id="query_language",
+                        status="failed",
+                        event_type="failed",
+                        summary="问题语言转换失败；未向研究链提交错误的英文问题，可选择原文直通模式重试。",
+                        details=execution["query_language"],
+                        source="live",
+                    )
+                    raise WorkbenchUnavailable("query_language_failed")
+                execution["research_question"] = execution["query_language"][
+                    "research_question"
+                ]
+                emit(
+                    node_type="QueryLanguage",
+                    node_id="query_language",
+                    status="completed",
+                    event_type="completed",
+                    summary="问题语言转换完成，研究对象和约束由结构化转换保留。",
+                    details=execution["query_language"],
+                    source="live",
+                )
+            else:
+                execution["query_language"] = {
+                    "status": "passthrough",
+                    "original_question": request.question,
+                    "research_question": request.question,
+                    "model_calls": 0,
+                    "latency_ms": 0,
+                }
+
+            catalog = load_paper_catalog()
+            if not request.paper_ids:
+                papers = []
+                for item in corpus.metadata:
+                    if item.paper_id in available:
+                        document = catalog.documents.get(item.paper_id)
+                        papers.append(
+                            {
+                                "paper_id": item.paper_id,
+                                "title": item.title,
+                                "abstract": document.abstract if document else "",
+                                "availability": "prepared",
+                            }
+                        )
+                emit(
+                    node_type="PaperSelection",
+                    node_id="paper_selection",
+                    status="running",
+                    event_type="started",
+                    summary="正在从当前有正文证据的论文中确定研究范围。",
+                    details={"prepared_paper_count": len(papers)},
+                    source="live",
+                )
+                before = budget.used
+                selection_at = perf_counter()
+                try:
+                    selection_input = PaperSelectionAdapter.prepare(
+                        execution["research_question"], papers
+                    )
+                    response = await auxiliary("paper_selection", *selection_input)
+                    selection = PaperSelectionAdapter.parse_response(response, papers)
+                except (PaperSelectionError, DependencyCallError) as exc:
+                    execution["paper_selection"] = {
+                        "status": "failed",
+                        "selected_paper_ids": [],
+                        "issue_code": getattr(exc, "code", "paper_selection_failed"),
+                        "model_calls": budget.used - before,
+                        "latency_ms": (perf_counter() - selection_at) * 1000,
+                    }
+                    emit(
+                        node_type="PaperSelection",
+                        node_id="paper_selection",
+                        status="failed",
+                        event_type="failed",
+                        summary="自动论文选择失败；没有退化为固定默认论文组合。",
+                        details=execution["paper_selection"],
+                        source="live",
+                    )
+                    raise WorkbenchUnavailable("paper_selection_failed") from exc
+                execution["paper_ids"] = selection.paper_ids
+                execution["paper_selection"] = {
+                    "status": "selected" if selection.paper_ids else "empty",
+                    "selected_paper_ids": selection.paper_ids,
+                    "reasons": selection.reasons,
+                    "model_calls": budget.used - before,
+                    "latency_ms": (perf_counter() - selection_at) * 1000,
+                }
+                emit(
+                    node_type="PaperSelection",
+                    node_id="paper_selection",
+                    status="completed" if selection.paper_ids else "failed",
+                    event_type="completed" if selection.paper_ids else "failed",
+                    summary="自动选择已完成，仅选择了可研究论文。"
+                    if selection.paper_ids
+                    else "当前已准备论文无法满足这项研究；未启动规划或虚构证据。",
+                    details=execution["paper_selection"],
+                    source="live",
+                )
+                if not selection.paper_ids:
+                    raise WorkbenchUnavailable("no_matching_prepared_papers")
+
             planner_client = client("planner")
             adapter = AsyncLLMAdapter(planner_client, gate)
             bridge = _PlannerBridge(adapter, asyncio.get_running_loop())
-            planner = ResearchPlanner(bridge, load_paper_catalog())
+            planner = ResearchPlanner(bridge, catalog)
             emit(
                 node_type="Planner",
                 node_id="planner",
                 status="running",
                 event_type="started",
                 summary="真实 Planner 已启动；不注入预写计划或参考答案。",
-                details={"paper_ids": list(request.paper_ids)},
+                details={"paper_ids": execution["paper_ids"]},
                 source="live",
             )
             preparation = await _offload(
-                lambda: planner.prepare(request.question, list(request.paper_ids)),
+                lambda: planner.prepare(
+                    execution["research_question"], execution["paper_ids"]
+                ),
                 on_cancel=lambda: (budget.stop(), bridge.cancel()),
             )
             execution["preparation"] = preparation.model_dump(mode="json")
@@ -366,17 +525,105 @@ class WorkbenchRuntime:
                 execution["research"].update(
                     status="execution_failed", issue_type="model_budget_exhausted"
                 )
+            # 旧内部调用没有语言字段时保持原成本；新版 API 默认生成中文展示副本。
+            if hasattr(request, "language_mode"):
+                from app.research.report_language import ReportLanguageAdapter
+                from app.research.run_presenter import present_execution
+
+                original = present_execution(execution)
+                if original["status"] not in {"report_unavailable", "report_invalid"}:
+                    execution["report_language"] = {
+                        "status": "pending",
+                        "display_report": None,
+                        "source": "live",
+                        "model_calls": 0,
+                    }
+                    emit(
+                        node_type="ReportLanguage",
+                        node_id="report_language",
+                        status="running",
+                        event_type="started",
+                        summary="研究已完成，正在生成中文版本；英文权威报告已可查看。",
+                        details={},
+                        source="live",
+                        report_snapshot=original
+                        | {
+                            "language": {"status": "pending", "source": "live"},
+                            "chinese_report": None,
+                        },
+                    )
+                    before = budget.used
+                    translation_at = perf_counter()
+                    translator = ReportLanguageAdapter()
+                    try:
+                        translation_input = translator.prepare(original)
+                        if translation_input is None:
+                            translated = translator.not_needed(original)
+                        else:
+                            response = await auxiliary(
+                                "report_language", *translation_input
+                            )
+                            translated = translator.parse_response(original, response)
+                        execution["report_language"] = translated.model_dump(
+                            mode="json"
+                        )
+                    except Exception:  # noqa: BLE001 - 展示失败不改写权威研究结果；取消由 BaseException 传播
+                        execution["report_language"] = translator.failure(
+                            original,
+                            "report_language_dependency_failure",
+                            model_calls=0,
+                        ).model_dump(mode="json")
+                    execution["report_language"].update(
+                        source="live",
+                        model_calls=budget.used - before,
+                        latency_ms=(perf_counter() - translation_at) * 1000,
+                    )
+                    translated_ok = (
+                        execution["report_language"]["status"] == "translated"
+                    )
+                    emit(
+                        node_type="ReportLanguage",
+                        node_id="report_language",
+                        status="completed" if translated_ok else "failed",
+                        event_type="completed" if translated_ok else "failed",
+                        summary="中文展示副本已生成，原始引用和报告保持不变；译文未经过独立语义审核。"
+                        if translated_ok
+                        else "中文转换失败，保留英文权威报告和原研究终态。",
+                        details={
+                            key: value
+                            for key, value in execution["report_language"].items()
+                            if key != "display_report"
+                        },
+                        source="live",
+                    )
             # 返回本次专属对象，finally 补齐真实计数后调用方才拿到它。
             return execution
         except asyncio.CancelledError as exc:
             budget.stop()
             if bridge:
                 bridge.cancel()
-            execution["research"] = getattr(
-                exc,
-                "evaluation_snapshot",
-                {"status": "cancelled", "issue_type": "cancelled"},
-            )
+            if "report_language" in execution:
+                execution["report_language"] = {
+                    "status": "failed",
+                    "display_report": None,
+                    "issue_code": "report_language_cancelled",
+                    "source": "live",
+                }
+                emit(
+                    node_type="ReportLanguage",
+                    node_id="report_language",
+                    status="failed",
+                    event_type="failed",
+                    summary="中文转换已取消，原始研究报告仍然保留。",
+                    details={"issue_code": "report_language_cancelled"},
+                    source="live",
+                )
+            else:
+                execution["research"] = getattr(
+                    exc,
+                    "evaluation_snapshot",
+                    {"status": "cancelled", "issue_type": "cancelled"},
+                )
             exc.evaluation_snapshot = execution
             raise
         except (WorkbenchUnavailable, ResearchPlannerError) as exc:
@@ -395,6 +642,10 @@ class WorkbenchRuntime:
             budget.stop()
             if adapter:
                 await adapter.drain()
+            for boundary in auxiliary_adapters:
+                await boundary.drain()
+            for observed in auxiliary_clients:
+                observed.close()
             if planner_client:
                 execution["planner_model_calls"] = len(planner_client.calls)
                 planner_client.close()

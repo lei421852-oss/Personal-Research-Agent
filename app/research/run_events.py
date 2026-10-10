@@ -9,7 +9,15 @@ from pydantic import BaseModel, ConfigDict, Field, JsonValue, field_validator
 from app.tools.redaction import public_value, redact_text
 
 NodeType = Literal[
-    "Planner", "Worker", "Validator", "Reviewer", "Recovery", "Synthesis"
+    "Planner",
+    "Worker",
+    "Validator",
+    "Reviewer",
+    "Recovery",
+    "Synthesis",
+    "QueryLanguage",
+    "PaperSelection",
+    "ReportLanguage",
 ]
 NodeStatus = Literal["pending", "running", "completed", "failed", "skipped"]
 EventType = Literal["started", "progress", "completed", "failed", "skipped"]

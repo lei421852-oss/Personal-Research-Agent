@@ -215,6 +215,22 @@ class WorkbenchDependencies:
             for kind in ("LLM", "VLM")
         }
 
+    def language_settings(self):
+        """语言展示只依赖现有 LLM 配置，不把索引或 VLM 缺失混成语言故障。"""
+        environment = self.environment()
+        if any(
+            not (environment.get(f"LLM_{field}") or "").strip()
+            for field in ("API_KEY", "MODEL", "BASE_URL")
+        ):
+            raise WorkbenchUnavailable("language_configuration_incomplete")
+        address = urlparse(environment["LLM_BASE_URL"])
+        if address.scheme not in {"https", "http"} or not address.hostname:
+            raise WorkbenchUnavailable("language_configuration_invalid")
+        return {
+            field: environment[f"LLM_{field}"]
+            for field in ("API_KEY", "MODEL", "BASE_URL")
+        }
+
     def health(self):
         dependencies = []
         ui_ready = all(
@@ -261,6 +277,15 @@ class WorkbenchDependencies:
             "模型服务配置完整；尚未发送请求。",
             "模型服务配置不完整；仍可使用历史回放。",
         )
+        language_ready = (
+            check(
+                "language_adapter",
+                self.language_settings,
+                "语言适配模型配置完整；启动预检不会发送请求。",
+                "语言适配模型配置未就绪；历史中文副本和原文回放仍可查看。",
+            )
+            is not None
+        )
         if config:
             check(
                 "embedding_cache",
@@ -285,8 +310,13 @@ class WorkbenchDependencies:
         return {
             "ui_ready": ui_ready,
             "replay_ready": replay,
+            "language_adapter_ready": language_ready,
             "real_research_ready": bool(prepared)
-            and all(item["status"] == "ready" for item in dependencies),
+            and all(
+                item["status"] == "ready"
+                for item in dependencies
+                if item["name"] != "language_adapter"
+            ),
             "dependencies": dependencies,
             "limits": LIMITS.copy(),
         }

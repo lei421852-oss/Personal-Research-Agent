@@ -62,7 +62,7 @@ def create_app(*, manager_factory=None):
             content={
                 "error": {
                     "code": "invalid_request",
-                    "message": "请输入非空问题（最多4000字符），选择2–3篇不同的已准备论文，模型调用预算为1–200。",
+                    "message": "请输入非空问题（最多4000字符）；不选论文进入自动模式，手选需2–3篇不同的已准备论文，模型调用预算为1–200。",
                 }
             },
         )

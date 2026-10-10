@@ -20,7 +20,29 @@ def papers(request: Request):
         available = manager(request).dependencies.papers()
     except Exception:  # noqa: BLE001 - 无语料时仍可打开工作台并回放历史
         return {"papers": [], "availability": "unavailable"}
-    return {"papers": sanitize_public(available), "availability": "prepared"}
+    # 目录中的论文不等于已具备正文证据；默认可选集合仍只取 Prepared Corpus。
+    from app.papers.catalog import load_paper_catalog
+
+    try:
+        catalog = load_paper_catalog()
+        prepared_ids = {paper["paper_id"] for paper in available}
+        registered = [
+            {
+                "paper_id": paper.paper_id,
+                "title": paper.title,
+                "availability": "prepared"
+                if paper.paper_id in prepared_ids
+                else "metadata_only",
+            }
+            for paper in catalog.documents.values()
+        ]
+    except Exception:  # noqa: BLE001 - 目录缺失不妨碍已有 Prepared 列表的只读展示
+        registered = []
+    return {
+        "papers": sanitize_public(available),
+        "availability": "prepared",
+        "catalog": sanitize_public(registered),
+    }
 
 
 @router.get("/health")
