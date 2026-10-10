@@ -1,0 +1,1384 @@
+{
+  "audit_scope": "Stage E and F2 saved evidence only",
+  "new_provider_calls": 0,
+  "files": {
+    "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE双论文真实评测.json": {
+      "sha256": "43dfed7282321def50c29368281a28d153f070298cef1c7b28c526a2522e7384",
+      "bytes": 66991
+    },
+    "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json": {
+      "sha256": "f916b32e799f47e8ab6733d0f9ed15c5237221ff30da5f1e76dd81cc86104d40",
+      "bytes": 373266
+    },
+    "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE真实检索回归.json": {
+      "sha256": "9d7a1f15978d924be48aa99d06f2bde00628f31e6505ef4562a674e5d2adce25",
+      "bytes": 28349
+    },
+    "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE三论文受控Smoke.json": {
+      "sha256": "49136b9d740cca7d7756928d4d6b9ff4dd13250664a196773cb0be411970e996",
+      "bytes": 292377
+    },
+    "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE双论文受控Smoke.json": {
+      "sha256": "cb78d8b9123816cfdf7a38ae2e3ff420a115625b469911e5d70f16dfa538ac0e",
+      "bytes": 56898
+    },
+    "docs/acceptance/quality_end_to_end/results/run_manifest.json": {
+      "sha256": "192950cc52c6d89465a1db6664747370d039318ffbf2d32a31aea01f79b3fd2e",
+      "bytes": 1773
+    },
+    "docs/acceptance/quality_end_to_end/results/quality-score-all.json": {
+      "sha256": "a8617e6b9b4677981b59f9e15ba660f7c0b9e663a2811be6ca0628f5d7210f76",
+      "bytes": 103533
+    },
+    "docs/acceptance/quality_end_to_end/results/quality-score-dev.json": {
+      "sha256": "8951015d13d34401699ffd2762326172902840ab8b5bd24e22bfab33fb5f5669",
+      "bytes": 100420
+    },
+    "docs/acceptance/quality_end_to_end/results/quality-score-test.json": {
+      "sha256": "0694aad427b438c7e6b3e8f9f700cede2e6d9eac1fd9160188b737c0ac35085e",
+      "bytes": 102786
+    },
+    "docs/acceptance/quality_end_to_end/evaluation_summary.json": {
+      "sha256": "9c2d449d5a0778b0a28e120114bce6613cd06cd8bb717faa5f8de805cf9f2fc2",
+      "bytes": 14035
+    },
+    "docs/acceptance/quality_end_to_end/results/grading_protocol.json": {
+      "sha256": "46742e427189d65d6412a0b2dffe00e3c004fad9964bca2d4da0b9fbbe8f669a",
+      "bytes": 1011
+    },
+    "docs/acceptance/quality_end_to_end/results/executions.jsonl": {
+      "sha256": "41a107a5e8b727fbbd26648b012cbf46e1c60ff2e255ccfc702a5da4d33108fa",
+      "bytes": 2137383
+    },
+    "docs/acceptance/quality_end_to_end/results/predictions.jsonl": {
+      "sha256": "105fb37741ff5a22d68dcd0063b52d2890bb34c4b1036a45669b62883677fbd1",
+      "bytes": 141799
+    },
+    "docs/acceptance/quality_end_to_end/results/ai-assessments.jsonl": {
+      "sha256": "323e4a3c442b8b5b8b147a3244bba41929a42653df9de63d6baa1e37774f3446",
+      "bytes": 22036
+    }
+  },
+  "checks": [
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE双论文真实评测.json:admission:claim_d0d8319d60dbbe6670df22ad36e51865",
+      "passed": true,
+      "recomputed": [
+        "passed",
+        "passed",
+        true,
+        true
+      ],
+      "recorded": [
+        "passed",
+        "passed",
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE双论文真实评测.json:admission:claim_62875649e7c28d28a6927947a343c981",
+      "passed": true,
+      "recomputed": [
+        "passed",
+        "passed",
+        true,
+        true
+      ],
+      "recorded": [
+        "passed",
+        "passed",
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE双论文真实评测.json:comparison:0",
+      "passed": true,
+      "recomputed": [
+        true,
+        true,
+        true
+      ],
+      "recorded": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE双论文真实评测.json:requirements",
+      "passed": true,
+      "recomputed": 2,
+      "recorded": 2
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE双论文真实评测.json:verified",
+      "passed": true,
+      "recomputed": 2,
+      "recorded": 2
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE双论文真实评测.json:coverage",
+      "passed": true,
+      "recomputed": 1.0,
+      "recorded": 1.0
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE双论文真实评测.json:comparisons",
+      "passed": true,
+      "recomputed": 1,
+      "recorded": 1
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:admission:claim_e2e491af14df073ec7a98e9e420265f7",
+      "passed": true,
+      "recomputed": [
+        "passed",
+        "passed",
+        true,
+        true
+      ],
+      "recorded": [
+        "passed",
+        "passed",
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:admission:claim_0cb9ed0fe262a58ebe3ad71fbaacdeef",
+      "passed": true,
+      "recomputed": [
+        "passed",
+        "passed",
+        true,
+        true
+      ],
+      "recorded": [
+        "passed",
+        "passed",
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:admission:claim_fafb6bb43a824beff450d6ed4da556b9",
+      "passed": true,
+      "recomputed": [
+        "passed",
+        "passed",
+        true,
+        true
+      ],
+      "recorded": [
+        "passed",
+        "passed",
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:admission:claim_a2758e0663aab44d49125f522b635206",
+      "passed": true,
+      "recomputed": [
+        "passed",
+        "passed",
+        true,
+        true
+      ],
+      "recorded": [
+        "passed",
+        "passed",
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:admission:claim_3fb08a0f6e2c32a572d92f39176b1450",
+      "passed": true,
+      "recomputed": [
+        "passed",
+        "passed",
+        true,
+        true
+      ],
+      "recorded": [
+        "passed",
+        "passed",
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:admission:claim_80557581f2b9279d7cac46a5a4fea4e8",
+      "passed": true,
+      "recomputed": [
+        "passed",
+        "passed",
+        true,
+        true
+      ],
+      "recorded": [
+        "passed",
+        "passed",
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:admission:claim_78504db883f64d4d76a477dd363c99da",
+      "passed": true,
+      "recomputed": [
+        "passed",
+        "passed",
+        true,
+        true
+      ],
+      "recorded": [
+        "passed",
+        "passed",
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:admission:claim_21d9f67160c3cb621d54dde3d0fe733d",
+      "passed": true,
+      "recomputed": [
+        "passed",
+        "passed",
+        true,
+        true
+      ],
+      "recorded": [
+        "passed",
+        "passed",
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:admission:claim_74692ca97e7d274219755f651d395701",
+      "passed": true,
+      "recomputed": [
+        "passed",
+        "passed",
+        true,
+        true
+      ],
+      "recorded": [
+        "passed",
+        "passed",
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:admission:claim_17e84eeadbc4855dcab80d7359be28d3",
+      "passed": true,
+      "recomputed": [
+        "passed",
+        "passed",
+        true,
+        true
+      ],
+      "recorded": [
+        "passed",
+        "passed",
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:admission:claim_3dd03ab82c35908e77e5a752338b0a36",
+      "passed": true,
+      "recomputed": [
+        "passed",
+        "passed",
+        true,
+        true
+      ],
+      "recorded": [
+        "passed",
+        "passed",
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:admission:claim_ef67902b2d2c18e99ae625a918c62751",
+      "passed": true,
+      "recomputed": [
+        "passed",
+        "passed",
+        true,
+        true
+      ],
+      "recorded": [
+        "passed",
+        "passed",
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:admission:claim_34937cf9ba7df891c1b87afcf1fdf44e",
+      "passed": true,
+      "recomputed": [
+        "passed",
+        "passed",
+        true,
+        true
+      ],
+      "recorded": [
+        "passed",
+        "passed",
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:admission:claim_03ad75bf809493c1c9ae74e3dbfdf90d",
+      "passed": true,
+      "recomputed": [
+        "passed",
+        "passed",
+        true,
+        true
+      ],
+      "recorded": [
+        "passed",
+        "passed",
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:comparison:0",
+      "passed": true,
+      "recomputed": [
+        true,
+        true,
+        true
+      ],
+      "recorded": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:comparison:1",
+      "passed": true,
+      "recomputed": [
+        true,
+        true,
+        true
+      ],
+      "recorded": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:comparison:2",
+      "passed": true,
+      "recomputed": [
+        true,
+        true,
+        true
+      ],
+      "recorded": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:comparison:3",
+      "passed": true,
+      "recomputed": [
+        true,
+        true,
+        true
+      ],
+      "recorded": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:requirements",
+      "passed": true,
+      "recomputed": 15,
+      "recorded": 15
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:verified",
+      "passed": true,
+      "recomputed": 14,
+      "recorded": 14
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:coverage",
+      "passed": true,
+      "recomputed": 0.9333333333333333,
+      "recorded": 0.9333333333333333
+    },
+    {
+      "check": "2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json:comparisons",
+      "passed": true,
+      "recomputed": 4,
+      "recorded": 4
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:Recall@5",
+      "passed": true,
+      "recomputed": 0.24000000000000002,
+      "recorded": 0.24000000000000002
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:Recall@10",
+      "passed": true,
+      "recomputed": 0.3333333333333333,
+      "recorded": 0.3333333333333333
+    },
+    {
+      "check": "retrieval:before_stage_d_corpus:count",
+      "passed": true,
+      "recomputed": 15,
+      "recorded": 15
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:Recall@5",
+      "passed": true,
+      "recomputed": 0.74,
+      "recorded": 0.74
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:Recall@10",
+      "passed": true,
+      "recomputed": 0.9666666666666667,
+      "recorded": 0.9666666666666667
+    },
+    {
+      "check": "retrieval:after_stage_e_corpus:count",
+      "passed": true,
+      "recomputed": 15,
+      "recorded": 15
+    },
+    {
+      "check": "F2:unique_execution_ids",
+      "passed": true,
+      "recomputed": 90,
+      "recorded": 90
+    },
+    {
+      "check": "F2:execution_prediction_identity",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:all_real_provider_used",
+      "passed": true,
+      "recomputed": 90,
+      "recorded": 90
+    },
+    {
+      "check": "F2:pass_count",
+      "passed": true,
+      "recomputed": 79,
+      "recorded": 79
+    },
+    {
+      "check": "F2:score_denominator",
+      "passed": true,
+      "recomputed": 90,
+      "recorded": 90
+    },
+    {
+      "check": "F2:semantic_count",
+      "passed": true,
+      "recomputed": 42,
+      "recorded": 42
+    },
+    {
+      "check": "F2:human_count",
+      "passed": true,
+      "recomputed": 0,
+      "recorded": 0
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-clip-symmetric-loss",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-clip-batch-pairings",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-clip-two-encoders",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-clip-zero-shot-classifier",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-clip-whole-text-proxy",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-blip-cross-attention-placement",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-blip-itm-negatives",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-blip-label-smoothing",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-blip-capfilt-initialization",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-blip2-two-stages",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-blip2-query-shape",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-blip2-soft-prompts",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-blip2-image-backbones",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-blip2-llm-types",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-blip2-training-steps",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-flamingo-vision-backbone",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-flamingo-resampler-outputs",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-flamingo-frozen-backbones",
+      "passed": true,
+      "recomputed": false,
+      "recorded": false
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-flamingo-interleaved-attention",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-flamingo-video-sampling",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-flamingo-pretrained-lm",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-llava-language-model",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-llava-vision-backbone",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-llava-linear-projection",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-llava-stage-one",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-llava-stage-two",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-claim-llava-instruction-counts",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-comparison-blip2-flamingo-vision-encoder",
+      "passed": true,
+      "recomputed": false,
+      "recorded": false
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-comparison-blip2-flamingo-vision-language-bridge",
+      "passed": true,
+      "recomputed": false,
+      "recorded": false
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-comparison-blip2-flamingo-frozen-trainable-scope",
+      "passed": true,
+      "recomputed": false,
+      "recorded": false
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-comparison-blip2-flamingo-training-objective",
+      "passed": true,
+      "recomputed": false,
+      "recorded": false
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-comparison-blip2-flamingo-language-model",
+      "passed": true,
+      "recomputed": false,
+      "recorded": false
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-comparison-blip2-llava-vision-encoder",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-comparison-blip2-llava-vision-language-bridge",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-comparison-blip2-llava-frozen-trainable-scope",
+      "passed": true,
+      "recomputed": false,
+      "recorded": false
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-comparison-blip2-llava-training-objective",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-comparison-blip2-llava-language-model",
+      "passed": true,
+      "recomputed": false,
+      "recorded": false
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-comparison-flamingo-llava-vision-encoder",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-comparison-flamingo-llava-vision-language-bridge",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-comparison-flamingo-llava-frozen-trainable-scope",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-comparison-flamingo-llava-training-objective",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:AI_semantic_matches:rqv1-comparison-flamingo-llava-language-model",
+      "passed": true,
+      "recomputed": true,
+      "recorded": true
+    },
+    {
+      "check": "F2:reviewer_confusion",
+      "passed": true,
+      "recomputed": {
+        "tp": 15,
+        "tn": 15,
+        "fp": 0,
+        "fn": 0
+      },
+      "recorded": {
+        "tp": 15,
+        "tn": 15,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    {
+      "check": "F2:comparison_rubric",
+      "passed": true,
+      "recomputed": 100,
+      "recorded": 100
+    },
+    {
+      "check": "F2:cost:provider_attempts",
+      "passed": true,
+      "recomputed": 456,
+      "recorded": 456
+    },
+    {
+      "check": "F2:cost:tool_calls",
+      "passed": true,
+      "recomputed": 107,
+      "recorded": 107
+    },
+    {
+      "check": "F2:cost:sum_case_latency_seconds",
+      "passed": true,
+      "recomputed": 863.9982103869697,
+      "recorded": 863.9982103869697
+    },
+    {
+      "check": "F2:cost:vlm_attempts",
+      "passed": true,
+      "recomputed": 0,
+      "recorded": 0
+    },
+    {
+      "check": "F2:cost:recovery_attempted_requirements",
+      "passed": true,
+      "recomputed": 1,
+      "recorded": 1
+    }
+  ],
+  "stage_e": {
+    "objective": "Prepared Corpus expansion and evidence-based research chain engineering acceptance",
+    "registered_dataset_cases": 22,
+    "retrieval": {
+      "source": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE真实检索回归.json",
+      "pointer": "/retrieval_metrics",
+      "recomputed": {
+        "before_stage_d_corpus": {
+          "macro_recall_at_5": 0.24000000000000002,
+          "macro_recall_at_10": 0.3333333333333333,
+          "sample_count": 15
+        },
+        "after_stage_e_corpus": {
+          "macro_recall_at_5": 0.74,
+          "macro_recall_at_10": 0.9666666666666667,
+          "sample_count": 15
+        }
+      },
+      "label_policy": "Source-checked candidate labels; not independently human-approved exhaustive relevance labels.",
+      "limitation": "Comparison changes corpus evidence availability (3 -> 5 papers), not retrieval algorithm; source-checked candidate relevance labels are not exhaustive independent human Gold. Historical reason field is stale; status and actual rows identify retrieval_executed."
+    },
+    "two_paper_real": {
+      "source": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE双论文真实评测.json",
+      "pointers": {
+        "plan": "/plan",
+        "configuration": "/configuration",
+        "verified_claims": "/outcome/synthesis_input/verified_claims",
+        "report_metrics": "/outcome/report/metrics",
+        "aggregate": "/metrics",
+        "provider_attempts": "/llm_provider_attempts_observed"
+      },
+      "case_id": "two-paper-bridge",
+      "question": "Compare BLIP-2 and LLaVA in how they connect visual representations to the language model.",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "llava-2304.08485v1"
+      ],
+      "real_provider_used": true,
+      "planner_mode": "replay_original_verified_plan",
+      "planner_model_calls": 0,
+      "requirements": 2,
+      "verified": 2,
+      "missing": [],
+      "cross_paper_comparisons": 1,
+      "citation_validation_failures": 0,
+      "coverage": 1.0,
+      "model_calls": 9,
+      "tool_calls": 2,
+      "latency_ms": 15183.85814598878,
+      "worker_protocol_corrections": 0,
+      "vlm_attempts": 0,
+      "status": "completed",
+      "corpus_snapshot": {
+        "snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+        "papers": [
+          {
+            "paper_id": "blip-2201.12086v2",
+            "source_sha256": "63e0335cdd57c3d92b907b89c93d10befdd29b8aeed108091bbde90c121ed97a",
+            "metadata_sha256": "2171421d418f9e8757154030cb8279c33e8f8327325f44a0bed3a9e161a7823f",
+            "prepared_sha256": "0189764865606c14ef96e71c8c51cb03bcd49129a38f7f69985b59c361405628"
+          },
+          {
+            "paper_id": "clip-2103.00020v1",
+            "source_sha256": "6478b6e571a7d6fcd846d8ef77bfd60c285f1986abb8f475eedc43de403074f5",
+            "metadata_sha256": "8a0ca7cf8e96dbfcd740757918283ece5c30bfdab8c0f65cc59b2833a023abee",
+            "prepared_sha256": "7ea14fdd46b1f1aa57227e9227598ed98fd020eab5c5c8c86fd9c14558f6f463"
+          },
+          {
+            "paper_id": "flamingo-2204.14198v1",
+            "source_sha256": "79d131280bc79f659212f35f940dfd3a26013c73355a58eb2263410945780c4c",
+            "metadata_sha256": "e45db1efc4f2abb09026150a657d0749db1bc30e88c652788e36828f219caa7c",
+            "prepared_sha256": "1f74f19edc12fed812a9181b5a3bd6840295d6de992583e148cdcbf35102071a"
+          },
+          {
+            "paper_id": "blip-2-2301.12597v1",
+            "source_sha256": "0a4b93c402a6b8b0d2c5f438bbae31d447b17324b71c3e4fb6dab53e0e389bc5",
+            "metadata_sha256": "230d99c654921ea067df38070c235cdf71a10ac46b4fa5ab20eb5ccc9c4da7aa",
+            "prepared_sha256": "af6939d223423787a46bd72fc3ce68c942ecd7b7d6c3c3b07b87e273378c009c"
+          },
+          {
+            "paper_id": "llava-2304.08485v1",
+            "source_sha256": "0d5be40caf852d51a0e2636619fafc5b910788af9584fdc392abc652787560ed",
+            "metadata_sha256": "267e246529084cc39e4ed23729c5b27d020b7ab3fc9ba89c8fa08979e92f96ea",
+            "prepared_sha256": "201837067a067d3f11520fed8035163712755a8108179e4dc9115f99fa0932bb"
+          }
+        ],
+        "text_count": 46,
+        "figure_count": 5,
+        "corpus_validity_rate": 1.0,
+        "evidence_provenance_validity_rate": 1.0
+      },
+      "configuration": {
+        "schema_version": 1,
+        "dataset": "eval/datasets/stage_e.json",
+        "papers_dir": "data/papers",
+        "additional_papers_dir": "data/research_papers",
+        "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+        "device": "cpu",
+        "index_dir": "data/chroma/stage-e",
+        "collection": "research-stage-e-text",
+        "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+        "distance": "cosine",
+        "top_k": 10,
+        "runtime": {
+          "max_concurrent_workers": 3,
+          "max_concurrent_llm": 2,
+          "max_concurrent_vlm": 1,
+          "max_concurrent_retrieval": 1,
+          "max_tool_calls_per_worker": 8,
+          "max_model_calls_per_worker": 20,
+          "max_protocol_corrections": 2,
+          "operation_timeout_seconds": 60,
+          "max_retries": 2
+        },
+        "review_runtime": {
+          "max_concurrent_reviewers": 2,
+          "max_model_calls_per_review": 3
+        },
+        "recovery": {
+          "max_research_model_calls": 200,
+          "max_research_tool_calls": 64
+        },
+        "planner_mode": "replay_original_verified_plan",
+        "provider_temperature": "provider_default_not_sent",
+        "source_label_policy": "Source-checked candidate labels; not independently human-approved exhaustive relevance labels."
+      },
+      "claims": [
+        {
+          "claim_id": "claim_d0d8319d60dbbe6670df22ad36e51865",
+          "requirement_id": "req_9b812a56c386edc56b01ad7612222137",
+          "paper_id": "blip-2-2301.12597v1",
+          "dimension_id": "vision_language_bridge",
+          "text": "BLIP-2 bridges visual representations to the language model via a Querying Transformer (Q-Former) pre-trained in two stages. The Q-Former is connected to a frozen image encoder in the representation learning stage to extract language-informative visual features, and to a frozen LLM in the generative learning stage. The interface is a fully-connected (FC) layer that linearly projects the Q-Former's output query embeddings (Z) into the LLM's text-embedding dimension; these projected query embeddings are prepended to the input text embeddings and serve as soft visual prompts conditioning the LLM on the visual representation. The Q-Former thus acts as an information bottleneck between the frozen image encoder and the frozen LLM.",
+          "admission": {
+            "review_status": "passed",
+            "validation_status": "passed"
+          },
+          "evidence": [
+            {
+              "evidence_id": "ev_525a1f73be26c523e5fb57a5a02a3ecc",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 2,
+              "modality": "text"
+            },
+            {
+              "evidence_id": "ev_e4829335e46c87be4cada6e262bdd856",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 4,
+              "modality": "text"
+            },
+            {
+              "evidence_id": "ev_242192f04216b43089535562ea0dcec9",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 3,
+              "modality": "text"
+            },
+            {
+              "evidence_id": "ev_53277b945c2ff7e5d33bf907ba8d96b5",
+              "paper_id": "blip-2-2301.12597v1",
+              "page": 2,
+              "modality": "text"
+            }
+          ]
+        },
+        {
+          "claim_id": "claim_62875649e7c28d28a6927947a343c981",
+          "requirement_id": "req_638cc283fb01bf590f5233c40f49087a",
+          "paper_id": "llava-2304.08485v1",
+          "dimension_id": "vision_language_bridge",
+          "text": "LLaVA connects visual representations to the language model via a CLIP ViT-L/14 visual encoder that produces visual features Zv = g(Xv), and a trainable linear projection matrix W (a simple linear layer) that maps those image features into the language model's word embedding space, yielding visual tokens Hv/Hq of the same dimensionality as the word embedding space. The projection layer is the trainable interface mediating the connection: in Stage 2 the visual encoder weights stay frozen while the projection layer W and the LLM (φ) are updated.",
+          "admission": {
+            "review_status": "passed",
+            "validation_status": "passed"
+          },
+          "evidence": [
+            {
+              "evidence_id": "ev_5af59f6012398940516f736562f5800e",
+              "paper_id": "llava-2304.08485v1",
+              "page": 4,
+              "modality": "text"
+            },
+            {
+              "evidence_id": "ev_d39623f7635492ff9c1a349e90426601",
+              "paper_id": "llava-2304.08485v1",
+              "page": 4,
+              "modality": "text"
+            },
+            {
+              "evidence_id": "ev_84b236a4049e358dd2a7dda5bddb4464",
+              "paper_id": "llava-2304.08485v1",
+              "page": 5,
+              "modality": "text"
+            }
+          ]
+        }
+      ]
+    },
+    "three_paper_real": {
+      "source": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json",
+      "pointers": {
+        "plan": "/plan",
+        "configuration": "/configuration",
+        "verified_claims": "/outcome/synthesis_input/verified_claims",
+        "report_metrics": "/outcome/report/metrics",
+        "aggregate": "/metrics",
+        "provider_attempts": "/llm_provider_attempts_observed"
+      },
+      "case_id": "three-paper-core",
+      "question": "Compare BLIP-2, Flamingo, and LLaVA in terms of their architecture, visual-language connection, training strategy, trainable parameters, and downstream capabilities.",
+      "paper_ids": [
+        "blip-2-2301.12597v1",
+        "flamingo-2204.14198v1",
+        "llava-2304.08485v1"
+      ],
+      "real_provider_used": true,
+      "planner_mode": "replay_original_verified_plan",
+      "planner_model_calls": 0,
+      "requirements": 15,
+      "verified": 14,
+      "missing": [
+        {
+          "requirement_id": "req_33be67ee76e452d5de235b6a8e528afa",
+          "paper_id": "flamingo-2204.14198v1",
+          "dimension_id": "downstream_capabilities",
+          "status": "insufficient_evidence",
+          "issue": null
+        }
+      ],
+      "cross_paper_comparisons": 4,
+      "citation_validation_failures": 0,
+      "coverage": 0.9333333333333333,
+      "model_calls": 41,
+      "tool_calls": 11,
+      "latency_ms": 61806.083407005644,
+      "worker_protocol_corrections": 6,
+      "vlm_attempts": 0,
+      "status": "completed",
+      "corpus_snapshot": {
+        "snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+        "papers": [
+          {
+            "paper_id": "blip-2201.12086v2",
+            "source_sha256": "63e0335cdd57c3d92b907b89c93d10befdd29b8aeed108091bbde90c121ed97a",
+            "metadata_sha256": "2171421d418f9e8757154030cb8279c33e8f8327325f44a0bed3a9e161a7823f",
+            "prepared_sha256": "0189764865606c14ef96e71c8c51cb03bcd49129a38f7f69985b59c361405628"
+          },
+          {
+            "paper_id": "clip-2103.00020v1",
+            "source_sha256": "6478b6e571a7d6fcd846d8ef77bfd60c285f1986abb8f475eedc43de403074f5",
+            "metadata_sha256": "8a0ca7cf8e96dbfcd740757918283ece5c30bfdab8c0f65cc59b2833a023abee",
+            "prepared_sha256": "7ea14fdd46b1f1aa57227e9227598ed98fd020eab5c5c8c86fd9c14558f6f463"
+          },
+          {
+            "paper_id": "flamingo-2204.14198v1",
+            "source_sha256": "79d131280bc79f659212f35f940dfd3a26013c73355a58eb2263410945780c4c",
+            "metadata_sha256": "e45db1efc4f2abb09026150a657d0749db1bc30e88c652788e36828f219caa7c",
+            "prepared_sha256": "1f74f19edc12fed812a9181b5a3bd6840295d6de992583e148cdcbf35102071a"
+          },
+          {
+            "paper_id": "blip-2-2301.12597v1",
+            "source_sha256": "0a4b93c402a6b8b0d2c5f438bbae31d447b17324b71c3e4fb6dab53e0e389bc5",
+            "metadata_sha256": "230d99c654921ea067df38070c235cdf71a10ac46b4fa5ab20eb5ccc9c4da7aa",
+            "prepared_sha256": "af6939d223423787a46bd72fc3ce68c942ecd7b7d6c3c3b07b87e273378c009c"
+          },
+          {
+            "paper_id": "llava-2304.08485v1",
+            "source_sha256": "0d5be40caf852d51a0e2636619fafc5b910788af9584fdc392abc652787560ed",
+            "metadata_sha256": "267e246529084cc39e4ed23729c5b27d020b7ab3fc9ba89c8fa08979e92f96ea",
+            "prepared_sha256": "201837067a067d3f11520fed8035163712755a8108179e4dc9115f99fa0932bb"
+          }
+        ],
+        "text_count": 46,
+        "figure_count": 5,
+        "corpus_validity_rate": 1.0,
+        "evidence_provenance_validity_rate": 1.0
+      },
+      "configuration": {
+        "schema_version": 1,
+        "dataset": "eval/datasets/stage_e.json",
+        "papers_dir": "data/papers",
+        "additional_papers_dir": "data/research_papers",
+        "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+        "device": "cpu",
+        "index_dir": "data/chroma/stage-e",
+        "collection": "research-stage-e-text",
+        "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+        "distance": "cosine",
+        "top_k": 10,
+        "runtime": {
+          "max_concurrent_workers": 3,
+          "max_concurrent_llm": 2,
+          "max_concurrent_vlm": 1,
+          "max_concurrent_retrieval": 1,
+          "max_tool_calls_per_worker": 8,
+          "max_model_calls_per_worker": 20,
+          "max_protocol_corrections": 2,
+          "operation_timeout_seconds": 60,
+          "max_retries": 2
+        },
+        "review_runtime": {
+          "max_concurrent_reviewers": 2,
+          "max_model_calls_per_review": 3
+        },
+        "recovery": {
+          "max_research_model_calls": 200,
+          "max_research_tool_calls": 64
+        },
+        "planner_mode": "replay_original_verified_plan",
+        "provider_temperature": "provider_default_not_sent",
+        "source_label_policy": "Source-checked candidate labels; not independently human-approved exhaustive relevance labels."
+      },
+      "claims": []
+    },
+    "controlled_wiring": [
+      {
+        "source": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE三论文受控Smoke.json",
+        "case_id": "three-paper-core",
+        "status": "scripted_wiring_only",
+        "real_provider_used": false,
+        "quality_result_usable": false,
+        "provider_attempts": 0
+      },
+      {
+        "source": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE双论文受控Smoke.json",
+        "case_id": "two-paper-bridge",
+        "status": "scripted_wiring_only",
+        "real_provider_used": false,
+        "quality_result_usable": false,
+        "provider_attempts": 0
+      }
+    ],
+    "limitations": [
+      "Real saved adapter traces are not independent Provider billing receipts.",
+      "Verified coverage and structural citation validity do not measure human semantic correctness.",
+      "Real Stage E cases replay existing Planner plan; no fresh Planner calls.",
+      "Both real studies have VLM attempts=0; text/caption research only.",
+      "Do not combine two-paper 2 requirements and three-paper 15 requirements into generalized performance benchmark."
+    ]
+  },
+  "f2": {
+    "objective": "Module-oriented end-to-end quality execution over 90 fixed AI-reviewed references",
+    "source_results_directory": "docs/acceptance/quality_end_to_end/results",
+    "pointers": {
+      "configuration": "run_manifest.json:/execution_configuration",
+      "quality": "quality-score-all.json:/metrics/overall",
+      "case_results": "quality-score-all.json:/case_results",
+      "grading_origin": "grading_protocol.json",
+      "semantic_labels": "ai-assessments.jsonl keyed by case_id",
+      "actual_execution": "executions.jsonl keyed by case_id"
+    },
+    "run_id": "quality-20261008T120801Z",
+    "configuration": {
+      "schema_version": 1,
+      "dataset": "eval/datasets/stage_e.json",
+      "papers_dir": "data/papers",
+      "additional_papers_dir": "data/research_papers",
+      "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+      "device": "cpu",
+      "index_dir": "data/chroma/stage-e",
+      "collection": "research-stage-e-text",
+      "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+      "distance": "cosine",
+      "top_k": 10,
+      "runtime": {
+        "max_concurrent_workers": 3,
+        "max_concurrent_llm": 2,
+        "max_concurrent_vlm": 1,
+        "max_concurrent_retrieval": 1,
+        "max_tool_calls_per_worker": 8,
+        "max_model_calls_per_worker": 20,
+        "max_protocol_corrections": 2,
+        "operation_timeout_seconds": 60,
+        "max_retries": 2
+      },
+      "review_runtime": {
+        "max_concurrent_reviewers": 2,
+        "max_model_calls_per_review": 3
+      },
+      "recovery": {
+        "max_research_model_calls": 200,
+        "max_research_tool_calls": 64
+      },
+      "planner_mode": "fixed_benchmark_paper_dimension_plan_no_gold",
+      "provider_temperature": "provider_default_not_sent",
+      "source_label_policy": "Source-checked candidate labels; not independently human-approved exhaustive relevance labels."
+    },
+    "llm_model": "deepseek-flash",
+    "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+    "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+    "planner_tested": false,
+    "split_sizes": {
+      "dev": 18,
+      "test": 72
+    },
+    "counts": {
+      "executions": 90,
+      "predictions": 90,
+      "ai_semantic_assessments": 42,
+      "independent_human_assessments": 0,
+      "human_approved_gold": 0,
+      "approved_ai_reference_cases": 90,
+      "correct": 79,
+      "invalid_execution_predictions": 3,
+      "valid_outputs": 87,
+      "semantic_failures_with_output": 8
+    },
+    "by_task_type": {
+      "abstention": {
+        "correct": 15,
+        "denominator": 15
+      },
+      "claim": {
+        "correct": 26,
+        "denominator": 30
+      },
+      "comparison": {
+        "correct": 8,
+        "denominator": 15
+      },
+      "reviewer": {
+        "correct": 30,
+        "denominator": 30
+      }
+    },
+    "overall_accuracy": {
+      "numerator": 79,
+      "denominator": 90,
+      "value": 0.8777777777777778
+    },
+    "split_scores": {
+      "dev": {
+        "numerator": 17,
+        "denominator": 18,
+        "value": 0.9444444444444444
+      },
+      "test": {
+        "numerator": 62,
+        "denominator": 72,
+        "value": 0.8611111111111112
+      }
+    },
+    "reviewer_confusion_matrix": {
+      "tp": 15,
+      "tn": 15,
+      "fp": 0,
+      "fn": 0
+    },
+    "comparison_axes_scores_out_of_30": {
+      "fact_accuracy": 26,
+      "difference_correctness": 26,
+      "evidence_grounding": 25,
+      "scope_completeness": 23
+    },
+    "comparison_mean_fraction": {
+      "numerator": 100,
+      "denominator": 120,
+      "value": 0.8333333333333334
+    },
+    "execution_modes": {
+      "production_worker_review_recovery_synthesis": 57,
+      "production_reviewer_given_evidence": 30,
+      "caption_only_structured_answer_no_tools": 3
+    },
+    "abstention_note": "15 boundary/abstention decision cases include 13 unanswerable and 2 answerable controls; 15/15 is decision accuracy, not 15 correct refusals.",
+    "cost": {
+      "provider_attempts": 456,
+      "tool_calls": 107,
+      "sum_case_latency_seconds": 863.9982103869697,
+      "vlm_attempts": 0,
+      "recovery_attempted_requirements": 1
+    },
+    "failures": [
+      {
+        "case_id": "rqv1-claim-clip-reported-efficiency",
+        "task_type": "claim",
+        "score_source": "operational_failure",
+        "notes": "无有效答案：执行失败",
+        "execution_jsonl_1_based_line": 9
+      },
+      {
+        "case_id": "rqv1-claim-blip-vision-encoder",
+        "task_type": "claim",
+        "score_source": "operational_failure",
+        "notes": "无有效答案：执行失败",
+        "execution_jsonl_1_based_line": 10
+      },
+      {
+        "case_id": "rqv1-claim-blip-med-functionalities",
+        "task_type": "claim",
+        "score_source": "operational_failure",
+        "notes": "无有效答案：执行失败",
+        "execution_jsonl_1_based_line": 11
+      },
+      {
+        "case_id": "rqv1-claim-flamingo-frozen-backbones",
+        "task_type": "claim",
+        "score_source": "ai_semantic_review",
+        "notes": "冻结视觉/语言骨干与Resampler部分正确，但最终声称gated cross-attention dense layers。实际只引用ev_1f60...和ev_9262...，前者止于First/Resampler，后者只解释Resampler；缺少覆盖第二连接组件和gated/dense细节的引用。生产Reviewer通过不能替代完整来源支持。",
+        "execution_jsonl_1_based_line": 24
+      },
+      {
+        "case_id": "rqv1-comparison-blip2-flamingo-vision-encoder",
+        "task_type": "comparison",
+        "score_source": "ai_semantic_review",
+        "notes": "主要骨干/层选择正确，但加入与视觉编码器比较无关的8.7%/54×性能结论，并声称整篇BLIP-2不记载Flamingo编码器；有限引用不能证明整篇缺失。",
+        "execution_jsonl_1_based_line": 3
+      },
+      {
+        "case_id": "rqv1-comparison-blip2-flamingo-vision-language-bridge",
+        "task_type": "comparison",
+        "score_source": "ai_semantic_review",
+        "notes": "BLIP-2侧未回答FC投影后prepended soft prompts这一关键接口，转向性能数字；Flamingo侧还谈BLIP-2 Q-Former两阶段，但其实际Flamingo引用不含该跨论文事实。",
+        "execution_jsonl_1_based_line": 63
+      },
+      {
+        "case_id": "rqv1-comparison-blip2-flamingo-frozen-trainable-scope",
+        "task_type": "comparison",
+        "score_source": "ai_semantic_review",
+        "notes": "BLIP-2侧only Q-Former的排他范围缺少对FC接口的完整依据，并扩展性能；Flamingo侧只笼统描述other learnable components，未完整区分跨注意力连接组件。",
+        "execution_jsonl_1_based_line": 64
+      },
+      {
+        "case_id": "rqv1-comparison-blip2-flamingo-training-objective",
+        "task_type": "comparison",
+        "score_source": "ai_semantic_review",
+        "notes": "两侧主要目标都描述正确，但添加性能比较及整篇未记载他方目标的断言，超出问题且无完整来源支持。",
+        "execution_jsonl_1_based_line": 65
+      },
+      {
+        "case_id": "rqv1-comparison-blip2-flamingo-language-model",
+        "task_type": "comparison",
+        "score_source": "ai_semantic_review",
+        "notes": "BLIP-2侧未给出有准备证据的OPT/FlanT5两家族，主要输出冻结/Q-Former与性能优势；语言模型维度的关键比较不完整。",
+        "execution_jsonl_1_based_line": 66
+      },
+      {
+        "case_id": "rqv1-comparison-blip2-llava-frozen-trainable-scope",
+        "task_type": "comparison",
+        "score_source": "ai_semantic_review",
+        "notes": "两侧实际只聚焦生成/Stage2；遗漏LLaVA Stage1只训练W及BLIP-2第一阶段，使原参考要求的阶段范围比较不完整。",
+        "execution_jsonl_1_based_line": 69
+      },
+      {
+        "case_id": "rqv1-comparison-blip2-llava-language-model",
+        "task_type": "comparison",
+        "score_source": "ai_semantic_review",
+        "notes": "OPT/FlanT5与LLaMA核心比较正确；额外声称整篇LLaVA没有BLIP-2底层LM信息，prepared片段不能证明整篇不存在，完整引用支持要求未满足。",
+        "execution_jsonl_1_based_line": 71
+      }
+    ],
+    "limitations": [
+      "AI-curated and AI-assisted non-blind semantic evaluation; 0 independent human reviewed facts.",
+      "42 open answers (27 claim + 15 comparison) AI semantic scored; reviewer and boundary tasks use structured label comparison.",
+      "30 Reviewer examples use 15 source-supported/counterfactual pairs; zero errors do not establish 100% production semantic accuracy.",
+      "57 full research chain + 30 Reviewer-only + 3 caption-only restricted tasks; not one uniform Agent or RAG comparative benchmark.",
+      "Fixed paper/dimension plan does not assess open Planner or discovery.",
+      "All 90 cases remain in denominator, including 3 infrastructure failures, no selective reruns.",
+      "456 local Provider attempts include retries; not tokens, money or independent billing receipts.",
+      "863.998s sums case intervals only, excluding Embedding init, between-batch work, semantic grading and packaging.",
+      "run_manifest.grading=not_yet_graded is stale creation-time field; finalized score/assessments/evaluation_summary provide completed grading state.",
+      "Quality results do not imply pixel-level vision understanding; VLM attempts=0."
+    ]
+  },
+  "overall_audit_passed": true
+}

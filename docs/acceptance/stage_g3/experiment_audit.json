@@ -1,0 +1,503 @@
+{
+  "audit_stage": "G3",
+  "recorded_at": "2026-10-10T13:54:07.763460+08:00",
+  "new_provider_calls": 0,
+  "index_rebuilds": 0,
+  "independent_human_fact_reviews": 0,
+  "source_manifest": "source_manifest.json",
+  "stages": [
+    {
+      "stage": "E",
+      "objective": "Prepared Corpus expansion and evidence-based research chain engineering acceptance",
+      "design": {
+        "registered_static_cases": 22,
+        "retrieval_cases": 15,
+        "real_research_cases": 2,
+        "corpus_change": "3 papers to 5 papers"
+      },
+      "configuration": {
+        "schema_version": 1,
+        "dataset": "eval/datasets/stage_e.json",
+        "papers_dir": "data/papers",
+        "additional_papers_dir": "data/research_papers",
+        "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+        "device": "cpu",
+        "index_dir": "data/chroma/stage-e",
+        "collection": "research-stage-e-text",
+        "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+        "distance": "cosine",
+        "top_k": 10,
+        "runtime": {
+          "max_concurrent_workers": 3,
+          "max_concurrent_llm": 2,
+          "max_concurrent_vlm": 1,
+          "max_concurrent_retrieval": 1,
+          "max_tool_calls_per_worker": 8,
+          "max_model_calls_per_worker": 20,
+          "max_protocol_corrections": 2,
+          "operation_timeout_seconds": 60,
+          "max_retries": 2
+        },
+        "review_runtime": {
+          "max_concurrent_reviewers": 2,
+          "max_model_calls_per_review": 3
+        },
+        "recovery": {
+          "max_research_model_calls": 200,
+          "max_research_tool_calls": 64
+        },
+        "planner_mode": "replay_original_verified_plan",
+        "provider_temperature": "provider_default_not_sent",
+        "source_label_policy": "Source-checked candidate labels; not independently human-approved exhaustive relevance labels."
+      },
+      "metrics": {
+        "retrieval": {
+          "before_stage_d_corpus": {
+            "macro_recall_at_5": 0.24000000000000002,
+            "macro_recall_at_10": 0.3333333333333333,
+            "sample_count": 15
+          },
+          "after_stage_e_corpus": {
+            "macro_recall_at_5": 0.74,
+            "macro_recall_at_10": 0.9666666666666667,
+            "sample_count": 15
+          }
+        },
+        "two_paper": {
+          "requirements": 2,
+          "verified": 2,
+          "coverage": 1.0,
+          "cross_paper_comparisons": 1,
+          "model_calls": 9,
+          "tool_calls": 2,
+          "latency_ms": 15183.85814598878,
+          "status": "completed"
+        },
+        "three_paper": {
+          "requirements": 15,
+          "verified": 14,
+          "coverage": 0.9333333333333333,
+          "cross_paper_comparisons": 4,
+          "model_calls": 41,
+          "tool_calls": 11,
+          "latency_ms": 61806.083407005644,
+          "status": "completed"
+        }
+      },
+      "conclusion": "已有检索与研究链工程证据；语料增加与算法效果不可混淆。",
+      "limitations": [
+        "Real saved adapter traces are not independent Provider billing receipts.",
+        "Verified coverage and structural citation validity do not measure human semantic correctness.",
+        "Real Stage E cases replay existing Planner plan; no fresh Planner calls.",
+        "Both real studies have VLM attempts=0; text/caption research only.",
+        "Do not combine two-paper 2 requirements and three-paper 15 requirements into generalized performance benchmark."
+      ],
+      "audit_reference": "stage_e_f2_audit.json#/stage_e"
+    },
+    {
+      "stage": "F2",
+      "objective": "Module-oriented end-to-end quality execution over 90 fixed AI-reviewed references",
+      "design": {
+        "cases": 90,
+        "splits": {
+          "dev": 18,
+          "test": 72
+        },
+        "execution_modes": {
+          "production_worker_review_recovery_synthesis": 57,
+          "production_reviewer_given_evidence": 30,
+          "caption_only_structured_answer_no_tools": 3
+        },
+        "planner_tested": false
+      },
+      "configuration": {
+        "schema_version": 1,
+        "dataset": "eval/datasets/stage_e.json",
+        "papers_dir": "data/papers",
+        "additional_papers_dir": "data/research_papers",
+        "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+        "device": "cpu",
+        "index_dir": "data/chroma/stage-e",
+        "collection": "research-stage-e-text",
+        "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+        "distance": "cosine",
+        "top_k": 10,
+        "runtime": {
+          "max_concurrent_workers": 3,
+          "max_concurrent_llm": 2,
+          "max_concurrent_vlm": 1,
+          "max_concurrent_retrieval": 1,
+          "max_tool_calls_per_worker": 8,
+          "max_model_calls_per_worker": 20,
+          "max_protocol_corrections": 2,
+          "operation_timeout_seconds": 60,
+          "max_retries": 2
+        },
+        "review_runtime": {
+          "max_concurrent_reviewers": 2,
+          "max_model_calls_per_review": 3
+        },
+        "recovery": {
+          "max_research_model_calls": 200,
+          "max_research_tool_calls": 64
+        },
+        "planner_mode": "fixed_benchmark_paper_dimension_plan_no_gold",
+        "provider_temperature": "provider_default_not_sent",
+        "source_label_policy": "Source-checked candidate labels; not independently human-approved exhaustive relevance labels."
+      },
+      "metrics": {
+        "counts": {
+          "executions": 90,
+          "predictions": 90,
+          "ai_semantic_assessments": 42,
+          "independent_human_assessments": 0,
+          "human_approved_gold": 0,
+          "approved_ai_reference_cases": 90,
+          "correct": 79,
+          "invalid_execution_predictions": 3,
+          "valid_outputs": 87,
+          "semantic_failures_with_output": 8
+        },
+        "by_task_type": {
+          "abstention": {
+            "correct": 15,
+            "denominator": 15
+          },
+          "claim": {
+            "correct": 26,
+            "denominator": 30
+          },
+          "comparison": {
+            "correct": 8,
+            "denominator": 15
+          },
+          "reviewer": {
+            "correct": 30,
+            "denominator": 30
+          }
+        },
+        "accuracy": {
+          "numerator": 79,
+          "denominator": 90,
+          "value": 0.8777777777777778
+        },
+        "cost": {
+          "provider_attempts": 456,
+          "tool_calls": 107,
+          "sum_case_latency_seconds": 863.9982103869697,
+          "vlm_attempts": 0,
+          "recovery_attempted_requirements": 1
+        }
+      },
+      "conclusion": "AI参考口径79/90；跨论文比较8/15是主要短板。",
+      "limitations": [
+        "AI-curated and AI-assisted non-blind semantic evaluation; 0 independent human reviewed facts.",
+        "42 open answers (27 claim + 15 comparison) AI semantic scored; reviewer and boundary tasks use structured label comparison.",
+        "30 Reviewer examples use 15 source-supported/counterfactual pairs; zero errors do not establish 100% production semantic accuracy.",
+        "57 full research chain + 30 Reviewer-only + 3 caption-only restricted tasks; not one uniform Agent or RAG comparative benchmark.",
+        "Fixed paper/dimension plan does not assess open Planner or discovery.",
+        "All 90 cases remain in denominator, including 3 infrastructure failures, no selective reruns.",
+        "456 local Provider attempts include retries; not tokens, money or independent billing receipts.",
+        "863.998s sums case intervals only, excluding Embedding init, between-batch work, semantic grading and packaging.",
+        "run_manifest.grading=not_yet_graded is stale creation-time field; finalized score/assessments/evaluation_summary provide completed grading state.",
+        "Quality results do not imply pixel-level vision understanding; VLM attempts=0."
+      ],
+      "audit_reference": "stage_e_f2_audit.json#/f2"
+    },
+    {
+      "stage": "F3",
+      "objective": "定位七条比较失败的首次可观察质量风险。",
+      "design": {
+        "cases": 7,
+        "mode": "read_only_existing_executions"
+      },
+      "configuration": {
+        "provider_calls": 0,
+        "retrieval_calls": 0
+      },
+      "metrics": {
+        "first_observable_quality_risk_stage": "worker_resolve_requirement for all seven; not proof of Policy causality",
+        "reviewer_passed": 14,
+        "recovery_attempted": 0,
+        "report_completed": 7,
+        "targeted_diagnostic_tests": 12
+      },
+      "conclusion": [
+        "Missing BLIP-2 FC/prepended-soft-prompt, OPT/FlanT5 and Flamingo cross-attention snippets existed in pinned corpus but not corresponding Worker observed ledger.",
+        "Original SynthesisInput and reports preserve the same Claims; no newly synthesized technical facts or forged Citation found in this diagnosis.",
+        "True 8.7%/54x performance text is irrelevant scope drift, not fabricated numeric facts.",
+        "Earlier paper_id and multiple-actions execution errors recovered and are not independently established causes of final semantic failures."
+      ],
+      "limitations": [
+        "Reviewer input is deterministically reconstructed from recorded Worker and pinned corpus, not archived original request.",
+        "F2 did not archive full ToolObservation payload, retrieval scores/full TopK, or full Provider request-response.",
+        "Accumulated observed IDs and difference ledger do not recover complete TopK or ranking."
+      ],
+      "audit_reference": "stage_f3_audit.json#/F3"
+    },
+    {
+      "stage": "F3.1",
+      "objective": "建立可选结构化需求覆盖与提交契约。",
+      "design": {
+        "controlled_cases": 4,
+        "real_provider_calls": 0
+      },
+      "configuration": {
+        "runtime": "CoverageAwarePaperWorker inherits frozen PaperResearchWorker.run; explicit opt-in composition; default entrypoints untouched.",
+        "default_enabled": false
+      },
+      "metrics": {
+        "historical_tests_passed": 955,
+        "new_tests": 81
+      },
+      "conclusion": [
+        "Generic expected aspects for five dimensions; covered/missing/not_applicable.",
+        "Supported requires declared complete attributes/stages and observed same-paper identity-valid evidence; uncovered submission rejected with recoverable feedback.",
+        "Authoritative Claim is deterministically assembled from declared coverage facts; citations union passes parent validation.",
+        "Partially supported facts only diagnostic sidecar; unchanged official insufficiency has no Claim/citation.",
+        "Keeps model/tool budgets, shared RetryPolicy/ResourceGate, timeout/cancellation and existing status enum."
+      ],
+      "limitations": [
+        "covered is a model semantic declaration; deterministic code does not prove entailment/completeness.",
+        "A correct subject_paper_id field does not independently exclude peer-paper text.",
+        "Unknown dimensions use generic requested_facts rather than semantic auto-classification."
+      ],
+      "audit_reference": "stage_f3_audit.json#/F3_1"
+    },
+    {
+      "stage": "F3.1-E",
+      "objective": "七条已知失败上的真实配对诊断，不重跑旧Worker。",
+      "design": {
+        "cases": 7,
+        "requirements": 14,
+        "baseline": "saved_F2",
+        "treatment": "explicit_coverage_worker",
+        "blind": false
+      },
+      "configuration": {
+        "schema_version": 1,
+        "dataset": "eval/datasets/stage_e.json",
+        "papers_dir": "data/papers",
+        "additional_papers_dir": "data/research_papers",
+        "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+        "device": "cpu",
+        "index_dir": "data/chroma/stage-e",
+        "collection": "research-stage-e-text",
+        "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+        "distance": "cosine",
+        "top_k": 10,
+        "runtime": {
+          "max_concurrent_workers": 3,
+          "max_concurrent_llm": 2,
+          "max_concurrent_vlm": 1,
+          "max_concurrent_retrieval": 1,
+          "max_tool_calls_per_worker": 8,
+          "max_model_calls_per_worker": 20,
+          "max_protocol_corrections": 2,
+          "operation_timeout_seconds": 60,
+          "max_retries": 2
+        },
+        "review_runtime": {
+          "max_concurrent_reviewers": 2,
+          "max_model_calls_per_review": 3
+        },
+        "recovery": {
+          "max_research_model_calls": 200,
+          "max_research_tool_calls": 64
+        },
+        "planner_mode": "fixed_benchmark_paper_dimension_plan_no_gold",
+        "provider_temperature": "provider_default_not_sent",
+        "source_label_policy": "Source-checked candidate labels; not independently human-approved exhaustive relevance labels."
+      },
+      "metrics": {
+        "semantic_quality": {
+          "original_strict": {
+            "numerator": 0,
+            "denominator": 7
+          },
+          "treatment_strict": {
+            "numerator": 4,
+            "denominator": 7
+          },
+          "core_scope_sensitivity": {
+            "baseline": 3,
+            "treatment": 4,
+            "denominator": 7
+          },
+          "semantic_complete_requirements": {
+            "baseline": 9,
+            "treatment": 11,
+            "denominator": 14
+          },
+          "declared_structured_complete": {
+            "treatment": 13,
+            "denominator": 14
+          },
+          "change_classes": {
+            "improved": 5,
+            "degraded": 2
+          },
+          "provenance": "AI-assisted nonblind source-backed semantic adjudication, zero human assessments; original F2 false labels unchanged.",
+          "support_boundary_risks": {
+            "baseline": 5,
+            "treatment": 1
+          },
+          "premature_supported": {
+            "baseline": 5,
+            "treatment": 2
+          },
+          "irrelevant_source_supported_performance_groups": {
+            "baseline": 5,
+            "treatment": 0
+          },
+          "active_insufficient_abstentions": 0,
+          "reasonable_abstention_denominator": 0
+        },
+        "baseline_cost": {
+          "model_calls": 85,
+          "tool_calls": 26,
+          "wall_time_ms": 93528.10908501851,
+          "report_states": {
+            "completed": 7
+          },
+          "reviewer_passed": 14,
+          "reviewer_rejected": 0,
+          "recovery_attempted": 0,
+          "structural_comparison_count": 7
+        },
+        "treatment_cost": {
+          "model_calls": 101,
+          "tool_calls": 29,
+          "wall_time_ms": 160708.70358499815,
+          "report_states": {
+            "completed": 7
+          },
+          "reviewer_passed": 13,
+          "reviewer_rejected": 0,
+          "recovery_attempted": 0,
+          "structural_comparison_count": 6
+        },
+        "cost_changes": {
+          "model_calls": 18.823529411764707,
+          "tool_calls": 11.538461538461542,
+          "wall_time_ms": 71.82930902506692
+        },
+        "excluded_nonformal_smoke": {
+          "model_calls": 7,
+          "tool_calls": 2,
+          "excluded_from_formal_comparison": true,
+          "all_project_provider_attempts": 108
+        }
+      },
+      "conclusion": "严格4/7，同时存在成本增长、执行失败和遗漏；保留实验性质。",
+      "limitations": [
+        "Known failure diagnostic subset, not unknown-data generalization.",
+        "Provider alias and stochastic responses may drift across dates; no underlying model weight revision is exposed.",
+        "F2 did not archive endpoint or embedding cache revision; same configured model/index are verified, hidden revisions cannot be compared.",
+        "Read-only instrumentation and a 420-second case watchdog are new; baseline had operation budgets but no archived case watchdog.",
+        "Same AI-assisted semantic review family, no blind independent human Gold assessment.",
+        "F2 wall_time_ms starts before runtime setup and is captured before final drain/close; Treatment is captured after drain/close and diagnostic collection, with some setup before its timer. These timing boundaries and server load differences prevent exact causal attribution of latency delta."
+      ],
+      "audit_reference": "stage_f3_audit.json#/F3_1_E"
+    },
+    {
+      "stage": "G2",
+      "objective": "BLIP-2/Flamingo连接机制的一次默认研究演示。",
+      "design": {
+        "real_runs": 1,
+        "papers": 2,
+        "dimensions": 6,
+        "requirements": 12
+      },
+      "configuration": {
+        "worker": "original_default",
+        "configuration_equal_to_G2_1": true,
+        "details": "g2_audit.json#/sources"
+      },
+      "metrics": {
+        "dimensions": 6,
+        "total_requirements": 12,
+        "multiple_actions": 4,
+        "invalid_arguments": 8,
+        "worker_decisions": 24,
+        "worker_protocol_corrections": 3,
+        "worker_completed": 1,
+        "execution_failed_requirements": 6,
+        "insufficient_requirements": 1,
+        "verified_requirements": 5,
+        "resolved_requirements": 6,
+        "evidence_coverage": 0.4166666666666667,
+        "comparisons": 0,
+        "llm_calls": 31,
+        "tool_calls": 9,
+        "total_latency_ms": 41957.309173987596,
+        "report_status": "completed",
+        "synthesis_protocol_corrections": 0,
+        "synthesis_citation_validation_failures": 0,
+        "multiple_action_rate": 0.16666666666666666,
+        "invalid_argument_rate": 0.3333333333333333
+      },
+      "conclusion": "协议错误中断部分Worker，报告完成但未形成比较。",
+      "limitations": [
+        "Plan differs; requirement-wise semantic comparison is invalid.",
+        "G2.1 prevention worked in one case; recovery feedback did not trigger in real run.",
+        "Synthesis rejection count is a blocked candidate, not final hallucination rate."
+      ],
+      "audit_reference": "g2_audit.json#/comparison/baseline"
+    },
+    {
+      "stage": "G2.1",
+      "objective": "一次显式协议适配验证，不改变原Controller。",
+      "design": {
+        "real_runs": 1,
+        "papers": 2,
+        "dimensions": 7,
+        "requirements": 14,
+        "planner_plan_equal_to_G2": false
+      },
+      "configuration": {
+        "worker": "original_default_with_request_adapter",
+        "coverage_worker_enabled": false,
+        "configuration_equal_to_G2": true,
+        "details": "g2_audit.json#/sources"
+      },
+      "metrics": {
+        "dimensions": 7,
+        "total_requirements": 14,
+        "multiple_actions": 0,
+        "invalid_arguments": 0,
+        "worker_decisions": 12,
+        "worker_protocol_corrections": 0,
+        "worker_completed": 2,
+        "execution_failed_requirements": 0,
+        "insufficient_requirements": 10,
+        "verified_requirements": 4,
+        "resolved_requirements": 14,
+        "evidence_coverage": 0.2857142857142857,
+        "comparisons": 0,
+        "llm_calls": 19,
+        "tool_calls": 8,
+        "total_latency_ms": 52691.41204998596,
+        "report_status": "completed",
+        "synthesis_protocol_corrections": 1,
+        "synthesis_citation_validation_failures": 1,
+        "multiple_action_rate": 0.0,
+        "invalid_argument_rate": 0.0
+      },
+      "conclusion": "本次Worker协议错误0；14合法终态含10不足，比较0，不能推导语义质量改善。",
+      "limitations": [
+        "Planner was regenerated with the same question; 6→7 dimensions and 12→14 requirements, paper-specific axes appeared.",
+        "One non-blind engineering validation; cannot isolate causal impact or generalization.",
+        "Plan differs; requirement-wise semantic comparison is invalid.",
+        "G2.1 prevention worked in one case; recovery feedback did not trigger in real run.",
+        "Synthesis rejection count is a blocked candidate, not final hallucination rate."
+      ],
+      "audit_reference": "g2_audit.json#/comparison/validation"
+    }
+  ],
+  "aggregation_policy": "不同样本、计划、计时边界与评分口径仅并列，不合并指标。",
+  "upstream_recomputations": {
+    "stage_e_f2": 91,
+    "all_passed": true
+  }
+}

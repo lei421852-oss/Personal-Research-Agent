@@ -1,0 +1,436 @@
+{
+  "audit_stage": "G3",
+  "audit_date": "2026-10-10",
+  "scope": "Historical F3 diagnosis, F3.1 engineering and F3.1-E real diagnostic comparison. Read-only; no models or index operations.",
+  "source_manifest": [
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/report.md",
+      "sha256": "9579aabe3451eae73aa949beee92133103dbc0168ede980a0f0070d4851a099f"
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/findings.json",
+      "sha256": "f5590827026f11b87fbbc0729f0bbc2e6e26b4c1399af337980cf8c638cc93de"
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/verification.json",
+      "sha256": "f107553f46a803cd866a3d16a9892bdc5682bde958d2b4eecba98759a7f2fca3"
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1/acceptance_report.md",
+      "sha256": "cd636bbc536348d051eacf6b1def9dfcfcf742980c9ed3d8f9f2dd96aba71844"
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1/acceptance.json",
+      "sha256": "fa5b41ad2233b196104b06c3d468c5f520a911cbb0f884a099733c8f2e244b2d"
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1/controlled_traces.jsonl",
+      "sha256": "0715aeddb30820299e4d1cb7163a0d30dcd939fccda62f9463850afd12ff56e9"
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1/comparison/requests.jsonl",
+      "sha256": "562abaad25ab0df0b2e05dd70fd516a8c203865bb1afb7f942c280b00453c6b8"
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1_e/acceptance_report.md",
+      "sha256": "c027dc49ffd96c44f54d1f7c417e46f5f7e8421a39537d6a3b5221153fcdcc4e"
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1_e/results/comparison_summary.json",
+      "sha256": "a26d5d4926a1f6c19b69f3012629de6319893bb90d280416b7fda477b66456f4"
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1_e/results/comparison_results.json",
+      "sha256": "d6d5f406148d93caf6852a6d6dd74409b9e10801bcd8ef87b4cb2f133f21bd48"
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1_e/results/comparison_results.csv",
+      "sha256": "7c91141bd9a20984b929c2203b4beb0c5955d33646d6195067aa8398379bc2e8"
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1_e/results/baseline_selected_executions.jsonl",
+      "sha256": "1a337006d903304f8995a51e6e3ecb5074bfa4c1c02ed2160b1295ea8ad35949"
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1_e/results/treatment_executions.jsonl",
+      "sha256": "702990673cd283fc6f3f0e726f6de2eafb6e8d4c7bb0c7d24edd74457c9d66a1"
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1_e/results/semantic_assessments.jsonl",
+      "sha256": "edeec5cafb8118b3e4772b0c22cdb5ed9155df1e285946398ba643045ec2c8d8"
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1_e/results/independent_ai_review.json",
+      "sha256": "89c93b01d89d1696390fd9e385325c701dd27800a598053735bc8713025bcc08"
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1_e/results/experiment_manifest.json",
+      "sha256": "41f2362bdb953a18b2af556b81dd0e66bf087dc0e9e238aa8c812c6797d377b5"
+    },
+    {
+      "path": "docs/acceptance/stage_f3_1_e/results/protocol_diagnosis.json",
+      "sha256": "e01e2d95a9ab5926bd3d9da6c5fdd691c46e42073096e308b24feed214c7449d"
+    },
+    {
+      "path": "docs/acceptance/quality_end_to_end/results/executions.jsonl",
+      "sha256": "41a107a5e8b727fbbd26648b012cbf46e1c60ff2e255ccfc702a5da4d33108fa"
+    },
+    {
+      "path": "app/research/coverage_worker.py",
+      "sha256": "6ce7ae4c40db4bde057f6d40855c95bdcbf384577eecf5d3f250763b656b8167"
+    },
+    {
+      "path": "app/research/coverage_models.py",
+      "sha256": "563dc02ec6a7f7353cf8e28b22a1916ec4a6c7739a52bcfdc8d1f439e4ee4f5f"
+    },
+    {
+      "path": "docs/worker-coverage.md",
+      "sha256": "0d686d3ce42856531adab18f2b5a1f4a38078c531b27c08f22c170a3b5b1ba87"
+    }
+  ],
+  "F3": {
+    "stage_identity": "F3 is shorthand for the F2 seven-comparison-failure read-only diagnosis, not a separately executed research experiment or a separate accepted production stage.",
+    "case_count": 7,
+    "first_observable_quality_risk_stage": "worker_resolve_requirement for all seven; not proof of Policy causality",
+    "reviewed_claims": 14,
+    "reviewer_passed": 14,
+    "recovery_attempted": 0,
+    "report_completed": 7,
+    "provider_calls": 0,
+    "retrieval_calls": 0,
+    "targeted_diagnostic_tests": 12,
+    "full_suite_rerun": false,
+    "root_categories": {
+      "scope_drift_and_unproven_absence": 2,
+      "missing_interface_and_cross_paper_claim": 1,
+      "overexclusive_scope_and_incomplete_components": 1,
+      "premature_completion_missing_model_family": 1,
+      "stage_coverage_incomplete": 1,
+      "unproven_whole_paper_absence": 1
+    },
+    "confirmed": [
+      "Missing BLIP-2 FC/prepended-soft-prompt, OPT/FlanT5 and Flamingo cross-attention snippets existed in pinned corpus but not corresponding Worker observed ledger.",
+      "Original SynthesisInput and reports preserve the same Claims; no newly synthesized technical facts or forged Citation found in this diagnosis.",
+      "True 8.7%/54x performance text is irrelevant scope drift, not fabricated numeric facts.",
+      "Earlier paper_id and multiple-actions execution errors recovered and are not independently established causes of final semantic failures."
+    ],
+    "uncertain": [
+      "Cross-paper wording may cause local-task drift, but causal attribution is untested.",
+      "Reviewer accepting peer facts/whole-paper absence cannot be attributed to hidden reasoning.",
+      "First/third/fourth/seventh strict binary labels have sensitivity issues; labels retained."
+    ],
+    "source_limitations": [
+      "Reviewer input is deterministically reconstructed from recorded Worker and pinned corpus, not archived original request.",
+      "F2 did not archive full ToolObservation payload, retrieval scores/full TopK, or full Provider request-response.",
+      "Accumulated observed IDs and difference ledger do not recover complete TopK or ranking."
+    ],
+    "source_pointer": "docs/diagnostics/quality_failures_2026_10_09/report.md:7,23-41,53-57",
+    "git_status_warning": "Original diagnostics remain pre-existing untracked files; preserve them. Portable committed authoritative source is F2 executions.jsonl."
+  },
+  "F3_1": {
+    "acceptance": "Engineering PASS only",
+    "real_provider_calls": 0,
+    "controlled_synthetic_cases": 4,
+    "new_tests": 81,
+    "historical_full_suite_passed": 955,
+    "runtime": "CoverageAwarePaperWorker inherits frozen PaperResearchWorker.run; explicit opt-in composition; default entrypoints untouched.",
+    "mechanism": [
+      "Generic expected aspects for five dimensions; covered/missing/not_applicable.",
+      "Supported requires declared complete attributes/stages and observed same-paper identity-valid evidence; uncovered submission rejected with recoverable feedback.",
+      "Authoritative Claim is deterministically assembled from declared coverage facts; citations union passes parent validation.",
+      "Partially supported facts only diagnostic sidecar; unchanged official insufficiency has no Claim/citation.",
+      "Keeps model/tool budgets, shared RetryPolicy/ResourceGate, timeout/cancellation and existing status enum."
+    ],
+    "not_guaranteed": [
+      "covered is a model semantic declaration; deterministic code does not prove entailment/completeness.",
+      "A correct subject_paper_id field does not independently exclude peer-paper text.",
+      "Unknown dimensions use generic requested_facts rather than semantic auto-classification."
+    ],
+    "source_pointer": "docs/acceptance/stage_f3_1/acceptance_report.md:7-9,38-58,75-83"
+  },
+  "F3_1_E": {
+    "engineering_verdict": "PASS",
+    "quality_verdict": "MIXED/CONDITIONAL",
+    "known_failure_set": true,
+    "generalization_benchmark": false,
+    "case_count": 7,
+    "requirements": 14,
+    "baseline": "Read only saved F2 executions; never reran old Worker.",
+    "treatment": "Explicit CoverageAwarePaperWorker in initial/recovery factories; original Reviewer/Recovery/Synthesis; formal fixed configuration seven runs.",
+    "configuration": {
+      "schema_version": 1,
+      "dataset": "eval/datasets/stage_e.json",
+      "papers_dir": "data/papers",
+      "additional_papers_dir": "data/research_papers",
+      "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+      "device": "cpu",
+      "index_dir": "data/chroma/stage-e",
+      "collection": "research-stage-e-text",
+      "corpus_snapshot_id": "18fce87eb4050186aefc545a97b55d8b397108953647c5985c685102b2ea2390",
+      "distance": "cosine",
+      "top_k": 10,
+      "runtime": {
+        "max_concurrent_workers": 3,
+        "max_concurrent_llm": 2,
+        "max_concurrent_vlm": 1,
+        "max_concurrent_retrieval": 1,
+        "max_tool_calls_per_worker": 8,
+        "max_model_calls_per_worker": 20,
+        "max_protocol_corrections": 2,
+        "operation_timeout_seconds": 60,
+        "max_retries": 2
+      },
+      "review_runtime": {
+        "max_concurrent_reviewers": 2,
+        "max_model_calls_per_review": 3
+      },
+      "recovery": {
+        "max_research_model_calls": 200,
+        "max_research_tool_calls": 64
+      },
+      "planner_mode": "fixed_benchmark_paper_dimension_plan_no_gold",
+      "provider_temperature": "provider_default_not_sent",
+      "source_label_policy": "Source-checked candidate labels; not independently human-approved exhaustive relevance labels."
+    },
+    "model": "deepseek-flash",
+    "embedding": "Qwen/Qwen3-Embedding-0.6B CPU",
+    "index_collection": "research-stage-e-text",
+    "text_evidence_count": 46,
+    "planner_calls": 0,
+    "vlm_calls": 0,
+    "raw_recomputed_baseline": {
+      "model_calls": 85,
+      "tool_calls": 26,
+      "wall_time_ms": 93528.10908501851,
+      "report_states": {
+        "completed": 7
+      },
+      "reviewer_passed": 14,
+      "reviewer_rejected": 0,
+      "recovery_attempted": 0,
+      "structural_comparison_count": 7
+    },
+    "raw_recomputed_treatment": {
+      "model_calls": 101,
+      "tool_calls": 29,
+      "wall_time_ms": 160708.70358499815,
+      "report_states": {
+        "completed": 7
+      },
+      "reviewer_passed": 13,
+      "reviewer_rejected": 0,
+      "recovery_attempted": 0,
+      "structural_comparison_count": 6
+    },
+    "semantic_quality": {
+      "original_strict": {
+        "numerator": 0,
+        "denominator": 7
+      },
+      "treatment_strict": {
+        "numerator": 4,
+        "denominator": 7
+      },
+      "core_scope_sensitivity": {
+        "baseline": 3,
+        "treatment": 4,
+        "denominator": 7
+      },
+      "semantic_complete_requirements": {
+        "baseline": 9,
+        "treatment": 11,
+        "denominator": 14
+      },
+      "declared_structured_complete": {
+        "treatment": 13,
+        "denominator": 14
+      },
+      "change_classes": {
+        "improved": 5,
+        "degraded": 2
+      },
+      "provenance": "AI-assisted nonblind source-backed semantic adjudication, zero human assessments; original F2 false labels unchanged.",
+      "support_boundary_risks": {
+        "baseline": 5,
+        "treatment": 1
+      },
+      "premature_supported": {
+        "baseline": 5,
+        "treatment": 2
+      },
+      "irrelevant_source_supported_performance_groups": {
+        "baseline": 5,
+        "treatment": 0
+      },
+      "active_insufficient_abstentions": 0,
+      "reasonable_abstention_denominator": 0
+    },
+    "execution": {
+      "worker_completed": 13,
+      "worker_failed": 1,
+      "supported_requirements": 13,
+      "execution_failed_requirements": 1,
+      "connection_failures": 0,
+      "raw_provider_attempts": 101,
+      "successful_provider_attempts": 100,
+      "error_provider_attempts": 1,
+      "recovery_attempted": 0,
+      "formal_report_completed": 7
+    },
+    "cost_change_percent": {
+      "model_calls": 18.823529411764707,
+      "tool_calls": 11.538461538461542,
+      "wall_time_ms": 71.82930902506692
+    },
+    "nonformal_engineering_smoke": {
+      "model_calls": 7,
+      "tool_calls": 2,
+      "excluded_from_formal_comparison": true,
+      "all_project_provider_attempts": 108
+    },
+    "confounds": [
+      "Known failure diagnostic subset, not unknown-data generalization.",
+      "Provider alias and stochastic responses may drift across dates; no underlying model weight revision is exposed.",
+      "F2 did not archive endpoint or embedding cache revision; same configured model/index are verified, hidden revisions cannot be compared.",
+      "Read-only instrumentation and a 420-second case watchdog are new; baseline had operation budgets but no archived case watchdog.",
+      "Same AI-assisted semantic review family, no blind independent human Gold assessment.",
+      "F2 wall_time_ms starts before runtime setup and is captured before final drain/close; Treatment is captured after drain/close and diagnostic collection, with some setup before its timer. These timing boundaries and server load differences prevent exact causal attribution of latency delta."
+    ],
+    "important_failures": [
+      "Case2 language_interface=covered but no FC projection/prepended soft prompts delivered.",
+      "Case3 six coverage submissions fail top-level/stage schema, then malformed tool JSON triggers permanent parsing failure; source evidence existed; reject and preserve execution_failed, not a reasonable abstention.",
+      "Case4 losses=covered omits original LM/prefix-LM loss distinction and asserts text encoder optimization not demonstrated by cited evidence; not proof actual encoder update was false."
+    ],
+    "score_revision": "Case4 six-axis factual_accuracy 2→1; pre-revision AI review archived. Strict case remains false and aggregate4/7 unchanged.",
+    "per_case": [
+      {
+        "case_id": "rqv1-comparison-blip2-flamingo-vision-encoder",
+        "strict_pass": true,
+        "change_class": "improved",
+        "baseline_semantic_complete": 2,
+        "treatment_semantic_complete": 2,
+        "notes": "核心事实保留，消除无关性能对比及整篇否定；并非从错误骨干修正为正确骨干。",
+        "sensitivity": {
+          "threshold_description": "只判断请求的核心事实是否完整正确，附加句问题另列；不是编辑输出、放行附加断言或修改F2标签。",
+          "disputed_original_case": true,
+          "baseline_strict_passed": false,
+          "baseline_core_scope_passed": true,
+          "treatment_strict_passed": true,
+          "treatment_core_scope_passed": true,
+          "note": "core口径只判断请求的编码器事实，单独保留附加句违规；不是修改原标签或认可全文否定。"
+        }
+      },
+      {
+        "case_id": "rqv1-comparison-blip2-flamingo-vision-language-bridge",
+        "strict_pass": false,
+        "change_class": "improved",
+        "baseline_semantic_complete": 1,
+        "treatment_semantic_complete": 1,
+        "notes": "消除局部peer事实与性能漂移，Flamingo细化；BLIP-2关键接口没有恢复，整题仍不通过。",
+        "sensitivity": {
+          "threshold_description": "只判断请求的核心事实是否完整正确，附加句问题另列；不是编辑输出、放行附加断言或修改F2标签。",
+          "disputed_original_case": false,
+          "baseline_strict_passed": false,
+          "baseline_core_scope_passed": false,
+          "treatment_strict_passed": false,
+          "treatment_core_scope_passed": false,
+          "note": "该题改善是部分质量改善，不是需求完成。"
+        }
+      },
+      {
+        "case_id": "rqv1-comparison-blip2-flamingo-frozen-trainable-scope",
+        "strict_pass": false,
+        "change_class": "degraded",
+        "baseline_semantic_complete": 1,
+        "treatment_semantic_complete": 1,
+        "notes": "Flamingo细节恢复，但原来存在的BLIP-2两阶段事实因执行协议失败未交付，完整双论文比较丢失；不将这一项判为模型技术知识错误。",
+        "sensitivity": {
+          "threshold_description": "只判断请求的核心事实是否完整正确，附加句问题另列；不是编辑输出、放行附加断言或修改F2标签。",
+          "disputed_original_case": true,
+          "baseline_strict_passed": false,
+          "baseline_core_scope_passed": false,
+          "treatment_strict_passed": false,
+          "treatment_core_scope_passed": false,
+          "note": "即不扣FC隐含范围，旧Flamingo仍未明确CA；新BLIP-2执行失败，所以两种口径都不接受完整比较。"
+        }
+      },
+      {
+        "case_id": "rqv1-comparison-blip2-flamingo-training-objective",
+        "strict_pass": false,
+        "change_class": "degraded",
+        "baseline_semantic_complete": 2,
+        "treatment_semantic_complete": 1,
+        "notes": "减少原scope漂移，却丢失原来已回答的关键损失区别并产生一个未被原文明确支持的优化对象推断；不能仅凭covered上升判优化成功。",
+        "sensitivity": {
+          "threshold_description": "只判断请求的核心事实是否完整正确，附加句问题另列；不是编辑输出、放行附加断言或修改F2标签。",
+          "disputed_original_case": true,
+          "baseline_strict_passed": false,
+          "baseline_core_scope_passed": true,
+          "treatment_strict_passed": false,
+          "treatment_core_scope_passed": false,
+          "note": "即宽松忽略附加句，旧core训练损失正确，新core损失区别缺失；不是单纯评分口径造成的退化。"
+        }
+      },
+      {
+        "case_id": "rqv1-comparison-blip2-flamingo-language-model",
+        "strict_pass": true,
+        "change_class": "improved",
+        "baseline_semantic_complete": 1,
+        "treatment_semantic_complete": 2,
+        "notes": "此前缺失的BLIP-2型号与架构确已恢复并交付，移除性能漂移；Flamingo不凭空命名，符合原参考边界。",
+        "sensitivity": {
+          "threshold_description": "只判断请求的核心事实是否完整正确，附加句问题另列；不是编辑输出、放行附加断言或修改F2标签。",
+          "disputed_original_case": false,
+          "baseline_strict_passed": false,
+          "baseline_core_scope_passed": false,
+          "treatment_strict_passed": true,
+          "treatment_core_scope_passed": true,
+          "note": "Flamingo当前片段不提供具体家族名，不因没写未提供型号而扣完整性。"
+        }
+      },
+      {
+        "case_id": "rqv1-comparison-blip2-llava-frozen-trainable-scope",
+        "strict_pass": true,
+        "change_class": "improved",
+        "baseline_semantic_complete": 0,
+        "treatment_semantic_complete": 2,
+        "notes": "原漏掉的第一阶段事实与阶段差异确已恢复；不再用第二阶段正确掩盖整项缺口。",
+        "sensitivity": {
+          "threshold_description": "只判断请求的核心事实是否完整正确，附加句问题另列；不是编辑输出、放行附加断言或修改F2标签。",
+          "disputed_original_case": false,
+          "baseline_strict_passed": false,
+          "baseline_core_scope_passed": false,
+          "treatment_strict_passed": true,
+          "treatment_core_scope_passed": true,
+          "note": "仅核对可由prepared引用支持的阶段范围，不额外要求未被原文标明的FC训练标签。"
+        }
+      },
+      {
+        "case_id": "rqv1-comparison-blip2-llava-language-model",
+        "strict_pass": true,
+        "change_class": "improved",
+        "baseline_semantic_complete": 2,
+        "treatment_semantic_complete": 2,
+        "notes": "保留已正确的型号对照，去除缺乏全文覆盖依据的peer否定；不是新的型号发现。",
+        "sensitivity": {
+          "threshold_description": "只判断请求的核心事实是否完整正确，附加句问题另列；不是编辑输出、放行附加断言或修改F2标签。",
+          "disputed_original_case": true,
+          "baseline_strict_passed": false,
+          "baseline_core_scope_passed": true,
+          "treatment_strict_passed": true,
+          "treatment_core_scope_passed": true,
+          "note": "core口径两组均有有效型号答案；strict差异来自附加句边界。"
+        }
+      }
+    ],
+    "raw_consistency_checks": {
+      "original_selected_rows_equal_F2": true,
+      "original_request_identity_question_papers_dimension_preserved": true,
+      "baseline_and_treatment_plans_equal": true,
+      "csv_costs_equal_executions": true,
+      "summary_costs_equal_executions": true,
+      "semantic_counts_equal_assessments": true
+    },
+    "source_pointer": "docs/acceptance/stage_f3_1_e/acceptance_report.md:7-11,18-27,45-87; results comparison_summary.json and execution detail.metrics"
+  }
+}

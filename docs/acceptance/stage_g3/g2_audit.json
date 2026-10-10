@@ -1,0 +1,123 @@
+{
+  "stages": [
+    "G2",
+    "G2.1"
+  ],
+  "sources": [
+    {
+      "path": "docs/acceptance/stage_g2/acceptance.json",
+      "sha256": "85a2e09ad68082b9ae2cf5e3e93a0458868c1d1e5acb85c292bd61de44dc0d88"
+    },
+    {
+      "path": "docs/acceptance/stage_g2/verification.json",
+      "sha256": "24d38e6262e030819c962fb7f1e69576ba307af9ab5f7034233220bcdac97c23"
+    },
+    {
+      "path": "docs/acceptance/stage_g2_1/comparison_summary.json",
+      "sha256": "a16bd2da462a4598a8390a1d13ad5d456830d0e68fd713d2d917d81a543968ef"
+    },
+    {
+      "path": "docs/acceptance/stage_g2_1/verification.json",
+      "sha256": "7b177c22ef083f3353b900dc32e3dc27277a535b8991ca82b6acc57ee088a4c0"
+    },
+    {
+      "path": "docs/acceptance/stage_g2_1/results/execution-record.json",
+      "sha256": "41c8b9c5fece2c55b904c0805efdbad73611a812cecad9d4f498b5d7962188e4"
+    },
+    {
+      "path": "docs/demos/blip2-vs-flamingo/execution-record.json",
+      "sha256": "423123c2dc6fa1cf81d36f4c3e90870a9a31c9e9993f7cfe8f6033305d413756"
+    }
+  ],
+  "comparison": {
+    "baseline": {
+      "dimensions": 6,
+      "total_requirements": 12,
+      "multiple_actions": 4,
+      "invalid_arguments": 8,
+      "worker_decisions": 24,
+      "worker_protocol_corrections": 3,
+      "worker_completed": 1,
+      "execution_failed_requirements": 6,
+      "insufficient_requirements": 1,
+      "verified_requirements": 5,
+      "resolved_requirements": 6,
+      "evidence_coverage": 0.4166666666666667,
+      "comparisons": 0,
+      "llm_calls": 31,
+      "tool_calls": 9,
+      "total_latency_ms": 41957.309173987596,
+      "report_status": "completed",
+      "synthesis_protocol_corrections": 0,
+      "synthesis_citation_validation_failures": 0,
+      "multiple_action_rate": 0.16666666666666666,
+      "invalid_argument_rate": 0.3333333333333333
+    },
+    "validation": {
+      "dimensions": 7,
+      "total_requirements": 14,
+      "multiple_actions": 0,
+      "invalid_arguments": 0,
+      "worker_decisions": 12,
+      "worker_protocol_corrections": 0,
+      "worker_completed": 2,
+      "execution_failed_requirements": 0,
+      "insufficient_requirements": 10,
+      "verified_requirements": 4,
+      "resolved_requirements": 14,
+      "evidence_coverage": 0.2857142857142857,
+      "comparisons": 0,
+      "llm_calls": 19,
+      "tool_calls": 8,
+      "total_latency_ms": 52691.41204998596,
+      "report_status": "completed",
+      "synthesis_protocol_corrections": 1,
+      "synthesis_citation_validation_failures": 1,
+      "multiple_action_rate": 0.0,
+      "invalid_argument_rate": 0.0
+    },
+    "question_equal": true,
+    "paper_ids_equal": true,
+    "configuration_equal": true,
+    "models_equal": true,
+    "index_equal": true,
+    "plan_equal": false,
+    "confounds": [
+      "Planner was regenerated with the same question; 6→7 dimensions and 12→14 requirements, paper-specific axes appeared.",
+      "One non-blind engineering validation; cannot isolate causal impact or generalization."
+    ],
+    "protocol_engineering_status": "PASS",
+    "complete_research_topic": false,
+    "research_topic_status": "CONDITIONAL",
+    "independent_human_fact_review": "not_performed",
+    "formal_validation_runs": 1,
+    "cost_changes": {
+      "llm_calls_pct": -38.70967741935484,
+      "tool_calls_pct": -11.111111111111116,
+      "total_latency_pct": 25.583391993720173
+    }
+  },
+  "facts_recomputed": {
+    "G2": {
+      "multiple_actions": 4,
+      "invalid_arguments": 8,
+      "model_calls": 24,
+      "tool_calls": 9,
+      "resolved": 6,
+      "execution_failed": 6
+    },
+    "G2.1": {
+      "multiple_actions": 0,
+      "invalid_arguments": 0,
+      "model_calls": 12,
+      "tool_calls": 8,
+      "resolved": 14,
+      "execution_failed": 0
+    }
+  },
+  "limitations": [
+    "Plan differs; requirement-wise semantic comparison is invalid.",
+    "G2.1 prevention worked in one case; recovery feedback did not trigger in real run.",
+    "Synthesis rejection count is a blocked candidate, not final hallucination rate."
+  ]
+}
