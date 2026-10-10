@@ -31,7 +31,7 @@ class _RequestBudget:
         self.stopped = False
         self._lock = threading.Lock()
 
-    def reserve(self, kind="llm"):
+    def reserve(self, kind="llm", *, role=None):
         if kind not in {"llm", "vlm"}:
             raise ValueError("invalid_model_resource")
         with self._lock:
@@ -60,7 +60,7 @@ class _ObservedClient:
         return self.client.calls
 
     def complete(self, *, messages, tools):
-        self.budget.reserve()
+        self.budget.reserve(role=self.role)
         role = {
             "planner": "Planner",
             "reviewer": "Reviewer",
@@ -70,6 +70,8 @@ class _ObservedClient:
             "query_language": "QueryLanguage",
             "paper_selection": "PaperSelection",
             "report_language": "ReportLanguage",
+            "main_agent": "MainAgent",
+            "query_expansion": "QueryExpansion",
         }[self.role]
         node = "planner" if role == "Planner" else "aggregate:" + self.role
         identity = _worker_schema_identity(tools)
@@ -140,7 +142,7 @@ class _ObservedVision:
         self.client, self.budget, self.emit = client, budget, emit
 
     def analyze(self, image_path, prompt):
-        self.budget.reserve("vlm")
+        self.budget.reserve("vlm", role="vision")
         self.emit(
             node_type="Worker",
             node_id="aggregate:worker",
@@ -270,14 +272,28 @@ async def _offload(operation, on_cancel=None):
 
 
 class WorkbenchRuntime:
-    def __init__(self, dependencies, *, llm_factory=None, vision_factory=None):
+    def __init__(
+        self,
+        dependencies,
+        *,
+        llm_factory=None,
+        vision_factory=None,
+        shared_budget=None,
+        tool_wrapper=None,
+        allow_catalog_targets=False,
+        shared_gate=None,
+    ):
         self.dependencies = dependencies
         self.llm_factory = llm_factory or OpenAICompatibleLLMClient
         self.vision_factory = vision_factory or OpenAICompatibleVisionClient
+        self.shared_budget = shared_budget
+        self.tool_wrapper = tool_wrapper
+        self.allow_catalog_targets = allow_catalog_targets
+        self.shared_gate = shared_gate
 
     async def run(self, request, emit):
         started = perf_counter()
-        budget = _RequestBudget(request.max_model_calls)
+        budget = self.shared_budget or _RequestBudget(request.max_model_calls)
         execution = {
             "question": request.question,
             "paper_ids": list(request.paper_ids),
@@ -298,12 +314,14 @@ class WorkbenchRuntime:
                 self.dependencies.prepare_resources
             )
             available = {item.paper_id for item in corpus.text_evidence}
-            if any(identity not in available for identity in request.paper_ids):
+            if not self.allow_catalog_targets and any(
+                identity not in available for identity in request.paper_ids
+            ):
                 raise WorkbenchUnavailable("prepared_paper_unavailable")
             settings = self.dependencies.provider_settings()
             retriever = _ObservedRetriever(raw_retriever, emit)
             runtime = ResearchRuntimeConfig(**config["runtime"])
-            gate = ResourceGate(runtime)
+            gate = self.shared_gate or ResourceGate(runtime)
 
             def client(role):
                 values = settings["LLM"]
@@ -512,6 +530,11 @@ class WorkbenchRuntime:
                 },
                 source="live",
             )
+            protocol_options = (
+                {"tool_wrapper": self.tool_wrapper} if self.tool_wrapper else {}
+            )
+            if self.shared_gate:
+                protocol_options["shared_gate"] = self.shared_gate
             execution["research"] = await run_protocol_case(
                 preparation.plan,
                 corpus,
@@ -520,6 +543,7 @@ class WorkbenchRuntime:
                 retriever,
                 client,
                 vision,
+                **protocol_options,
             )
             if budget.rejected:
                 execution["research"].update(
@@ -639,7 +663,8 @@ class WorkbenchRuntime:
             }
             return execution
         finally:
-            budget.stop()
+            if self.shared_budget is None:
+                budget.stop()
             if adapter:
                 await adapter.drain()
             for boundary in auxiliary_adapters:

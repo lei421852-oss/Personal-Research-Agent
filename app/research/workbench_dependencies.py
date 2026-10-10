@@ -311,6 +311,7 @@ class WorkbenchDependencies:
             "ui_ready": ui_ready,
             "replay_ready": replay,
             "language_adapter_ready": language_ready,
+            "main_agent_ready": language_ready,
             "real_research_ready": bool(prepared)
             and all(
                 item["status"] == "ready"
@@ -327,28 +328,10 @@ class WorkbenchDependencies:
         corpus, snapshot = self.corpus(config)
         self.provider_settings()
         _read_index(config, self.root, corpus, snapshot)
-        cache = _cache_snapshot(config["embedding_model"], self.environment())
-        import torch
-        from transformers import AutoModel, AutoTokenizer
-
-        from app.retrieval.embedding import QwenEmbeddingModel
+        embedding = self.prepare_embedding(config)
         from app.retrieval.retriever import TextRetriever
         from app.retrieval.vector_store import ChromaTextVectorStore
 
-        # 复用原 Embedding 方法，仅补充离线构造所需的组件和同名属性。
-        embedding = QwenEmbeddingModel.__new__(QwenEmbeddingModel)
-        embedding.torch = torch
-        embedding.batch_size = 8
-        embedding.tokenizer = AutoTokenizer.from_pretrained(
-            str(cache), local_files_only=True, trust_remote_code=False
-        )
-        embedding.model = (
-            AutoModel.from_pretrained(
-                str(cache), local_files_only=True, trust_remote_code=False
-            )
-            .to(config["device"])
-            .eval()
-        )
         store = ChromaTextVectorStore(
             self.root / config["index_dir"], config["collection"], create=False
         )
@@ -372,3 +355,50 @@ class WorkbenchDependencies:
         )
         retriever = TextRetriever(embedding, store, paper_aliases=corpus.paper_aliases)
         return corpus, snapshot, config, retriever
+
+    def prepare_embedding(self, config=None):
+        """沿用固定本地缓存装配，论文与证据索引共享同一实例。"""
+        if getattr(self, "_embedding", None) is not None:
+            return self._embedding
+        config = config or self.config()
+        cache = _cache_snapshot(config["embedding_model"], self.environment())
+        import torch
+        from transformers import AutoModel, AutoTokenizer
+
+        from app.retrieval.embedding import QwenEmbeddingModel
+
+        # 复用原 Embedding 方法，仅补充离线构造所需的组件和同名属性。
+        embedding = QwenEmbeddingModel.__new__(QwenEmbeddingModel)
+        embedding.torch = torch
+        embedding.batch_size = 8
+        embedding.tokenizer = AutoTokenizer.from_pretrained(
+            str(cache), local_files_only=True, trust_remote_code=False
+        )
+        embedding.model = (
+            AutoModel.from_pretrained(
+                str(cache), local_files_only=True, trust_remote_code=False
+            )
+            .to(config["device"])
+            .eval()
+        )
+        self._embedding = embedding
+        return embedding
+
+    def prepare_discovery_resources(self, embedding=None):
+        """只查询既有论文索引；来源画像与索引必须完全一致。"""
+        from app.papers.retriever import PaperRetriever
+        from app.papers.store import ChromaPaperVectorStore
+        from app.research.discovery_resources import load_index_catalog
+
+        config = self.config()
+        _, binding = load_index_catalog(self.root)
+        if binding["embedding_model"] != config["embedding_model"]:
+            raise WorkbenchUnavailable("paper_index_model_mismatch")
+        embedding = embedding or self.prepare_embedding(config)
+        store = ChromaPaperVectorStore(
+            self.root / "data/chroma/paper-discovery", create=False
+        )
+        store.validate_provenance(
+            self.root / "data/paper_discovery/papers.json", config["embedding_model"]
+        )
+        return PaperRetriever(embedding, store)

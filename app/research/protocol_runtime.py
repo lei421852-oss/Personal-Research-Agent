@@ -57,7 +57,16 @@ def observable(value):
 
 
 async def run_protocol_case(
-    plan, corpus, snapshot, config, retriever, client_factory, vision_factory=None
+    plan,
+    corpus,
+    snapshot,
+    config,
+    retriever,
+    client_factory,
+    vision_factory=None,
+    *,
+    tool_wrapper=None,
+    shared_gate=None,
 ):
     """只以显式依赖组合原研究链；client_factory接收公开角色名。"""
     plan = ResearchPlan.model_validate(plan.model_dump())
@@ -74,7 +83,7 @@ async def run_protocol_case(
         > recovery_config.max_research_model_calls
     ):
         raise ValueError("Initial worst-case budget does not reserve synthesis")
-    gate = ResourceGate(runtime_config)
+    gate = shared_gate or ResourceGate(runtime_config)
     catalog = load_paper_catalog()
     resolver = EvidenceResolver(corpus, paper_catalog=catalog)
     repository = DiscoveryEvidenceRepository(corpus, catalog)
@@ -98,6 +107,12 @@ async def run_protocol_case(
             counted = CountingVisionClient(vision)
             visions.append((vision, counted))
             registry.register(AnalyzeFigureTool(resolver, FigureAnalyzer(counted)))
+        if tool_wrapper is not None:
+            # 主工作台只增加外层资源账本；原工具Schema、引用与Worker协议不变。
+            guarded = ToolRegistry()
+            for schema in registry.schemas():
+                guarded.register(tool_wrapper(registry.get(schema["name"])))
+            registry = guarded
         worker = PaperResearchWorker(
             WorkerProtocolAdapter(
                 AsyncLLMAdapter(

@@ -18,6 +18,11 @@ NodeType = Literal[
     "QueryLanguage",
     "PaperSelection",
     "ReportLanguage",
+    "MainAgent",
+    "PaperSearch",
+    "QueryExpansion",
+    "Evidence",
+    "ResearchTool",
 ]
 NodeStatus = Literal["pending", "running", "completed", "failed", "skipped"]
 EventType = Literal["started", "progress", "completed", "failed", "skipped"]
