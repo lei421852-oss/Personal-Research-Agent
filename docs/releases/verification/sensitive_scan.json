@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "worktree_files_scanned": 686,
+  "reachable_history_blobs_scanned": 904,
+  "forbidden_tracked_files": [],
+  "secret_values_recorded": false,
+  "scope": "Tracked history plus intended release files; preserves and excludes pre-existing untracked user files. Pattern scan is not a proof of absence of every possible secret.",
+  "reviewed_synthetic_test_candidates": [
+    {
+      "identity": "tests/test_workbench_language.py",
+      "type": "credential_pattern_candidate"
+    },
+    {
+      "identity": "history:tests/test_workbench_language.py@823b7dbfb18c",
+      "type": "credential_pattern_candidate"
+    }
+  ],
+  "review_decision": {
+    "classification": "known_synthetic_secret_rejection_fixture",
+    "path": "tests/test_workbench_language.py",
+    "line": 277,
+    "value_sha256": "82be8a4d9cdebab78235e6d0618fdea34065fcb6f498073283ff4ec7376e551a",
+    "evidence": "Ordered alphabet plus digits injected under defect=secret; test asserts translation rejected. Not a configured credential. Exact fixture identified, no broad candidate suppression."
+  },
+  "unresolved_candidates": []
+}

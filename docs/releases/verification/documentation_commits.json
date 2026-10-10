@@ -1,0 +1,10 @@
+[
+  {
+    "sha": "e11fd8a30ed32194aa3a40db144700fc4c8883c9",
+    "message": "docs: add demonstrations and portfolio guide"
+  },
+  {
+    "sha": "bb8ef23d3fd300729749107f29b6075cf00bc0e7",
+    "message": "docs: finalize architecture and quickstart"
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "status": "REVIEW_REQUIRED",
+  "worktree_files_scanned": 686,
+  "reachable_history_blobs_scanned": 904,
+  "configured_credential_matches_or_pattern_candidates": [
+    {
+      "identity": "tests/test_workbench_language.py",
+      "type": "credential_pattern_candidate"
+    },
+    {
+      "identity": "history:tests/test_workbench_language.py@823b7dbfb18c",
+      "type": "credential_pattern_candidate"
+    }
+  ],
+  "forbidden_tracked_files": [],
+  "secret_values_recorded": false,
+  "scope": "Tracked history plus intended release files; preserves and excludes pre-existing untracked user files. Pattern scan is not a proof of absence of every possible secret."
+}

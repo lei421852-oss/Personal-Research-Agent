@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "artifacts": [
+    {
+      "path": "docs/releases/verification/acceptance.json",
+      "sha256": "98383fe9983656de720f20b0485e845bf35eab43204aab303f3f5213d42b6fe9",
+      "bytes": 2089
+    },
+    {
+      "path": "docs/releases/verification/baseline.json",
+      "sha256": "e91ba68c1d2d0c4da8ab16610fff13ad479d429d26b2cacea68537d65ce27177",
+      "bytes": 81740
+    },
+    {
+      "path": "docs/releases/verification/browser_check.json",
+      "sha256": "94812da05f49edb44a7cb72205caa5035bb3522b93d7984b78d1bfd88354fb9f",
+      "bytes": 1460
+    },
+    {
+      "path": "docs/releases/verification/browser_stdout.txt",
+      "sha256": "ebfbc43af00344f040817e4fe2446c73933aed875a2d97572f9c0488da85810c",
+      "bytes": 1258
+    },
+    {
+      "path": "docs/releases/verification/changes_audit.json",
+      "sha256": "e42d2cb74b0d2c33a6a33a7bbfcb5f2cd69c5195e709ec9a24af623fe1277b9c",
+      "bytes": 346
+    },
+    {
+      "path": "docs/releases/verification/clean_checkout_offline_tests.txt",
+      "sha256": "c348077a960d507553f59924fbd437dc6f90097a1bbb9b30853feee246cde03f",
+      "bytes": 1974
+    },
+    {
+      "path": "docs/releases/verification/cli_checks.json",
+      "sha256": "88593ce6657ebc82200c975e4db6fabcbc66f2119d5dbc104d86d470f0ffc8b4",
+      "bytes": 834
+    },
+    {
+      "path": "docs/releases/verification/corpus_check.json",
+      "sha256": "1be6bcce9bb4cd655157cfa5d4cdc4619e887fa0c22751a898cabf8b5ebbd92f",
+      "bytes": 1917
+    },
+    {
+      "path": "docs/releases/verification/corpus_stdout.txt",
+      "sha256": "f6087f1eae847d0bc709329764f627106338263b98c898d9728588118d727074",
+      "bytes": 1725
+    },
+    {
+      "path": "docs/releases/verification/default_server_check.json",
+      "sha256": "f1aaf527ae79f8237fe552fad6553b6c59309abbecf71996590300cf5e3fc189",
+      "bytes": 1474
+    },
+    {
+      "path": "docs/releases/verification/documentation_commits.json",
+      "sha256": "cad3c44fccd3471fb11ca936692b9aeac3c4c544699fe9cc8470b696fd24461b",
+      "bytes": 253
+    },
+    {
+      "path": "docs/releases/verification/documentation_exception.json",
+      "sha256": "d516def7abd1aebbd4b30ca4b007d381bc5b1c351549a64bdc1762ab187f410c",
+      "bytes": 511
+    },
+    {
+      "path": "docs/releases/verification/documentation_links.json",
+      "sha256": "ae465865dded77583d26ba9bacf1bc9e8e0b9e02f3d0bffff5f7e1308beedf38",
+      "bytes": 64
+    },
+    {
+      "path": "docs/releases/verification/environment.json",
+      "sha256": "b62944d4c213d5ba79ea8372558e04edbdcb720ced71e70630823a2ac4191291",
+      "bytes": 385
+    },
+    {
+      "path": "docs/releases/verification/format_results.txt",
+      "sha256": "7ccd744a63228a52732244e5547732f9e5ad5cdce331c992b9b8f83879e7b68d",
+      "bytes": 28
+    },
+    {
+      "path": "docs/releases/verification/freeze_release_check.json",
+      "sha256": "a5327b17ed86821cf1b705462eb7c0e0abd8030f3901b5cc63d1031c30850961",
+      "bytes": 630
+    },
+    {
+      "path": "docs/releases/verification/lint_results.txt",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    {
+      "path": "docs/releases/verification/original_freeze_check.json",
+      "sha256": "efe96eeccd0b5748ef3294f043ce7651456fe962628e9ecf95e6fb7ac11b5419",
+      "bytes": 240
+    },
+    {
+      "path": "docs/releases/verification/protected_current_files.json",
+      "sha256": "2c9b8e9b9bba251f1f1d031bf3d78fa48272dd17c3fc2cde5d23b90e554d5418",
+      "bytes": 164
+    },
+    {
+      "path": "docs/releases/verification/sensitive_scan.json",
+      "sha256": "06c1894ca0ae48fa7de21ef974efdc672031d5d4ce6651c499d9b2f108a9f692",
+      "bytes": 1116
+    },
+    {
+      "path": "docs/releases/verification/sensitive_scan_candidates.json",
+      "sha256": "cbe541aae4d8c4d6456146921b2beff1b60b2599c797379f81a47c1c291c269e",
+      "bytes": 667
+    },
+    {
+      "path": "docs/releases/verification/server_log.txt",
+      "sha256": "6854186e34c6626427f1b5af325a619c48607c9b589b08d24e910859d49645e8",
+      "bytes": 944
+    },
+    {
+      "path": "docs/releases/verification/startup_check.json",
+      "sha256": "4a56357d418ae761004c707eedb5c454853eb722750cb8934c43aa06e1f073ad",
+      "bytes": 1370
+    },
+    {
+      "path": "docs/releases/verification/test_results.txt",
+      "sha256": "4e31f74436d97facc703f141192003ce6280f52737602886f1b1626d5780ef6e",
+      "bytes": 1937
+    }
+  ]
+}

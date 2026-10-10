@@ -1,0 +1,17 @@
+{
+  "python": "3.12.3",
+  "dependencies": {
+    "pydantic": "2.13.5",
+    "pytest": null,
+    "fastapi": "0.142.2",
+    "uvicorn": "0.54.0",
+    "openai": "2.54.0",
+    "python-dotenv": "1.2.4",
+    "torch": "2.13.0+cu130",
+    "transformers": "4.57.6",
+    "chromadb": "1.5.9",
+    "playwright": "1.63.0",
+    "huggingface-hub": "0.36.2"
+  },
+  "dependency_lockfile_present": false
+}

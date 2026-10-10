@@ -1,0 +1,72 @@
+{
+  "status": "PASS",
+  "default_entry": "scripts.launch -> app.workbench:create_app",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 7263
+    },
+    {
+      "path": "/workbench-static/app.js",
+      "status": 200,
+      "bytes": 50926
+    },
+    {
+      "path": "/workbench-static/style.css",
+      "status": 200,
+      "bytes": 15493
+    }
+  ],
+  "health": {
+    "ui_ready": true,
+    "replay_ready": true,
+    "language_adapter_ready": true,
+    "main_agent_ready": true,
+    "real_research_ready": true,
+    "dependencies": [
+      {
+        "name": "ui_assets",
+        "status": "ready"
+      },
+      {
+        "name": "configuration",
+        "status": "ready"
+      },
+      {
+        "name": "prepared_corpus",
+        "status": "ready"
+      },
+      {
+        "name": "provider",
+        "status": "ready"
+      },
+      {
+        "name": "language_adapter",
+        "status": "ready"
+      },
+      {
+        "name": "embedding_cache",
+        "status": "ready"
+      },
+      {
+        "name": "evidence_index",
+        "status": "ready"
+      }
+    ],
+    "limits": {
+      "max_concurrent_runs": 1,
+      "max_papers": 3,
+      "max_queued_runs": 2,
+      "max_model_calls": 200,
+      "max_tool_calls": 64,
+      "timeout_seconds": 420,
+      "history_retained_runs": 20,
+      "history_ttl_seconds": 3600
+    }
+  },
+  "historical_replay_available": true,
+  "provider_calls": 0,
+  "embedding_calls": 0,
+  "server_exit_code": 0
+}

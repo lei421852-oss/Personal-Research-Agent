@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "commands": [
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.launch",
+        "--help"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.ingest_papers",
+        "--help"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.validate_research_corpus",
+        "--help"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.check_react_workbench_ui",
+        "--help"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.verify_release"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "provider_calls": 0
+}

@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "stage_e_files_checked": 292,
+  "unchanged_frozen_files": 291,
+  "approved_documentation_exceptions": [
+    "README.md"
+  ],
+  "historical_readme_verified_against_original_tag": true,
+  "unapproved_frozen_mismatches": [],
+  "protected_artifacts_checked": 47,
+  "protected_artifact_mismatches": [],
+  "original_verifier": {
+    "status": "FAIL",
+    "frozen_files_checked": 292,
+    "protected_artifacts_checked": 47,
+    "frozen_mismatches": [
+      "README.md"
+    ],
+    "protected_artifact_mismatches": [],
+    "frozen_manifest_root_changed": false,
+    "provider_calls": 0
+  },
+  "provider_calls": 0
+}

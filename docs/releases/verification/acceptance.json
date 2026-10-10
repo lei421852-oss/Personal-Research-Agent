@@ -1,0 +1,56 @@
+{
+  "stage": "G4.3",
+  "client_date": "2026-10-11",
+  "status": "PASS",
+  "scope": "Engineering release and truthful documentation; not new real-provider benchmark or independent human quality approval.",
+  "production_source_commit": "84d693fa20b7ed09ce5e124fd82b16864f968db4",
+  "tested_documentation_parent_commit": "e11fd8a30ed32194aa3a40db144700fc4c8883c9",
+  "release_commit_reference": "refs/tags/v1.0.0^{commit}",
+  "release_branch": "release/v1.0.0",
+  "tag": "v1.0.0",
+  "target_remote": "research-agent",
+  "target_url": "git@github.com:lei421852-oss/Personal-Research-Agent.git",
+  "target_default_branch": "main",
+  "full_tests": {
+    "passed": 1265,
+    "failed": 0,
+    "warnings": 1,
+    "exit_code": 0,
+    "duration_seconds": 48.97,
+    "includes_preexisting_untracked_diagnostic_tests": 12
+  },
+  "clean_checkout_offline_tests": {
+    "passed": 1251,
+    "failed": 0,
+    "skipped_private_index_dependency": 1,
+    "deselected_historical_paper_index_binding": 1,
+    "exit_code": 0,
+    "duration_seconds": 49.2
+  },
+  "checks": {
+    "documentation_links": "PASS",
+    "cli_checks": "PASS",
+    "protected_current_files": "PASS",
+    "changes_audit": "PASS",
+    "freeze_release_check": "PASS",
+    "default_server_check": "PASS",
+    "browser_check": "PASS",
+    "sensitive_scan": "PASS"
+  },
+  "readme_only_freeze_exception": true,
+  "unchanged_frozen_files": 291,
+  "historical_readme_sha_verified": true,
+  "protected_artifacts_unchanged": 47,
+  "production_code_changes": 0,
+  "preexisting_user_files_preserved": 13,
+  "real_provider_calls": 0,
+  "embedding_calls": 0,
+  "index_rebuilds": 0,
+  "blocking_issues": [],
+  "known_limitations": [
+    "No saved real main-agent autonomous multi-agent trace for Demo C; explicitly pending manual verification.",
+    "Local resources excluded from Git; clean checkout differs from historical integration environment.",
+    "Frozen package metadata remains 0.1.0; source checkout required.",
+    "Original whole-snapshot verifier retains README mismatch; new release verifier validates explicit approved exception."
+  ]
+}

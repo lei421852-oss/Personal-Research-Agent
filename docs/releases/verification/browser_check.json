@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "checks": [
+    "direct: 无论文选择、实际角色、答案首屏、中英文、刷新恢复、窄屏布局。",
+    "tools: 无论文选择、实际角色、答案首屏、中英文、刷新恢复、窄屏布局。",
+    "协作调用触发线性转树状；角色按记录出现；首个Worker只出现一个论文分支；节点不重复。",
+    "multi_agent_research: 无论文选择、实际角色、答案首屏、中英文、刷新恢复、窄屏布局。",
+    "G2/G2.1真实历史只读回放，原文和中文副本保留。"
+  ],
+  "page_errors": [],
+  "screenshots": [
+    {
+      "path": "scripted-direct.png",
+      "source": "scripted_domain_wiring"
+    },
+    {
+      "path": "scripted-tools.png",
+      "source": "scripted_domain_wiring"
+    },
+    {
+      "path": "scripted-multi_agent_research.png",
+      "source": "scripted_domain_wiring"
+    },
+    {
+      "path": "scripted-collaboration-tree.png",
+      "source": "scripted_domain_wiring"
+    },
+    {
+      "path": "scripted-multi-agent-mobile.png",
+      "source": "scripted_domain_wiring"
+    },
+    {
+      "path": "historical-g2.png",
+      "source": "existing_real_history_offline_replay"
+    },
+    {
+      "path": "historical-g2-1.png",
+      "source": "existing_real_history_offline_replay"
+    }
+  ],
+  "real_provider_calls": 0,
+  "new_real_research_runs": 0,
+  "embedding_calls": 0,
+  "index_rebuilds": 0,
+  "semantic_quality_verified": false
+}

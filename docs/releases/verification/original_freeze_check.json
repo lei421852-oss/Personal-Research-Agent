@@ -1,0 +1,11 @@
+{
+  "status": "FAIL",
+  "frozen_files_checked": 292,
+  "protected_artifacts_checked": 47,
+  "frozen_mismatches": [
+    "README.md"
+  ],
+  "protected_artifact_mismatches": [],
+  "frozen_manifest_root_changed": false,
+  "provider_calls": 0
+}
