@@ -1,0 +1,498 @@
+{
+  "checked_at": "2026-10-10T13:59:00.920079+08:00",
+  "status": "PASS",
+  "documents": [
+    "docs/reports/design-decisions.md",
+    "docs/reports/experiment-summary.md",
+    "docs/reports/technical-report.md",
+    "docs/acceptance/stage_g3/acceptance_report.md"
+  ],
+  "local_links_checked": 92,
+  "links": [
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "docs/architecture/system-overview.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "docs/reports/experiment-summary.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "app/research/planner.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "app/research/requirements.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "app/research/worker.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "app/research/review_validation.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "app/research/synthesis_input.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "docs/acceptance/stage_g2_1/acceptance_report.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "app/evidence/citations.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "app/research/review_validation.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "app/research/synthesis_input.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "app/research/synthesis_validator.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "docs/acceptance/quality_end_to_end/report.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "docs/acceptance/stage_g2_1/acceptance_report.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "app/research/recovery_eligibility.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "app/research/recovery_orchestrator.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "app/research/recovery_merge.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "docs/acceptance/stage_f3_1_e/acceptance_report.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "docs/acceptance/stage_g2_1/acceptance_report.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "app/research/coverage_worker.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "eval/research_quality/coverage_execution.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "docs/acceptance/stage_f3_1_e/acceptance_report.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "docs/worker-coverage.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "docs/acceptance/stage_g2_1/diagnosis.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "app/research/worker_protocol.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "app/research/protocol_runtime.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "scripts/run_worker_protocol_demo.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "docs/acceptance/stage_g2_1/acceptance_report.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "docs/acceptance/quality_end_to_end/report.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "docs/acceptance/stage_f3_1_e/acceptance_report.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/design-decisions.md",
+      "target": "docs/demos/blip2-vs-flamingo/g2-1-comparison.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/acceptance/stage_g3/stage_e_f2_audit.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/acceptance/stage_g3/stage_f3_audit.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/acceptance/stage_g3/g2_audit.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/reports/technical-report.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE真实检索回归.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE双论文真实评测.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE三论文真实评测.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/acceptance/quality_end_to_end/results/executions.jsonl",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/acceptance/quality_end_to_end/results/quality-score-all.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/acceptance/quality_end_to_end/results/run_manifest.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/acceptance/quality_end_to_end/results/executions.jsonl",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/acceptance/stage_f3_1/acceptance_report.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/worker-coverage.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/acceptance/stage_f3_1_e/results/comparison_summary.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/acceptance/stage_f3_1_e/results/comparison_results.csv",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/acceptance/stage_f3_1_e/acceptance_report.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/demos/blip2-vs-flamingo/execution-record.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/demos/blip2-vs-flamingo/execution-summary.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/acceptance/stage_g2_1/results/execution-record.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/acceptance/stage_g2_1/comparison_summary.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "configs/cross_paper_eval.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "eval/research_quality/scoring.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/experiment-summary.md",
+      "target": "docs/acceptance/stage_g3/experiment_audit.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "docs/reports/experiment-summary.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "docs/reports/design-decisions.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "docs/acceptance/stage_g3/acceptance_report.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "docs/architecture/system-overview.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "app/research/models.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "app/research/requirements.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "app/research/worker.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "app/retrieval/retriever.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "app/retrieval/vector_store.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "app/research/review_validation.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "app/research/reviewer.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "app/research/recovery_eligibility.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "app/research/synthesis_input.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "app/research/synthesis_validator.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "app/evidence/corpus.py",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "configs/cross_paper_eval.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "docs/acceptance/stage_g3/stage_e_f2_audit.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "docs/acceptance/stage_g3/stage_f3_audit.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "docs/acceptance/stage_g3/g2_audit.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "docs/acceptance/stage_e_freeze/evidence/2026-10-08-多模态论文研究智能体-StageE双论文真实评测.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "docs/demos/blip2-vs-flamingo/failure-analysis.md",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "docs/acceptance/stage_g2_1/results/execution-record.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "docs/acceptance/stage_g3/stage_f3_audit.json",
+      "exists": true
+    },
+    {
+      "document": "docs/reports/technical-report.md",
+      "target": "docs/reports/design-decisions.md",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g3/acceptance_report.md",
+      "target": "docs/reports/technical-report.md",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g3/acceptance_report.md",
+      "target": "docs/reports/experiment-summary.md",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g3/acceptance_report.md",
+      "target": "docs/reports/design-decisions.md",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g3/acceptance_report.md",
+      "target": "docs/acceptance/stage_g3/experiment_audit.json",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g3/acceptance_report.md",
+      "target": "docs/acceptance/stage_g3/source_manifest.json",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g3/acceptance_report.md",
+      "target": "docs/acceptance/stage_g3/stage_e_f2_audit.json",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g3/acceptance_report.md",
+      "target": "docs/acceptance/stage_g3/stage_f3_audit.json",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g3/acceptance_report.md",
+      "target": "docs/acceptance/stage_g3/g2_audit.json",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g3/acceptance_report.md",
+      "target": "docs/acceptance/stage_g3/engineering_checks.json",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g3/acceptance_report.md",
+      "target": "docs/acceptance/stage_g3/integrity_checks.json",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g3/acceptance_report.md",
+      "target": "docs/acceptance/stage_g3/test_results.txt",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g3/acceptance_report.md",
+      "target": "docs/acceptance/stage_g3/lint_results.txt",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g3/acceptance_report.md",
+      "target": "docs/acceptance/stage_g3/documentation_checks.json",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g3/acceptance_report.md",
+      "target": "docs/acceptance/stage_g3/baseline.json",
+      "exists": true
+    }
+  ],
+  "source_hashes_checked": 68,
+  "upstream_metric_recomputations_passed": 91,
+  "g2_worker_counts_recomputed": true,
+  "critical_f2_f31e_claims_matched": true,
+  "peer_reviews": [
+    {
+      "scope": "Stage E/F2",
+      "result": "PASS",
+      "findings": "13+2边界、比较整题/分项、正例身份、时间与执行模式均匹配。"
+    },
+    {
+      "scope": "F3/F3.1/F3.1-E",
+      "result": "PASS",
+      "findings": "核验严格结果、覆盖与语义区别、时间口径、成本、敏感性；已澄清Policy决定证据不足。"
+    },
+    {
+      "scope": "G2/G2.1",
+      "result": "PASS",
+      "findings": "核验计划变化、显式适配、合法终态、反馈未触发、成本；已澄清并非全部维度专属。"
+    }
+  ],
+  "possible_credential_hits": [],
+  "issues": [],
+  "scope_note": "链接存在性与来源哈希为确定性检查；自然语言指标解释经只读交叉审查，不声称完全自动语义验证。",
+  "new_provider_calls": 0
+}

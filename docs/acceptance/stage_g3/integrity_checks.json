@@ -1,0 +1,38 @@
+{
+  "checked_at": "2026-10-10T13:54:07.763460+08:00",
+  "groups": {
+    "original_tracked": {
+      "checked": 526,
+      "mismatches": [],
+      "status": "PASS"
+    },
+    "original_untracked": {
+      "checked": 13,
+      "mismatches": [],
+      "status": "PASS"
+    },
+    "historical_runtime": {
+      "checked": 40,
+      "mismatches": [],
+      "status": "PASS"
+    },
+    "stage_e_frozen": {
+      "checked": 292,
+      "mismatches": [],
+      "status": "PASS"
+    },
+    "f2_protected": {
+      "checked": 47,
+      "mismatches": [],
+      "status": "PASS"
+    },
+    "f3_protected": {
+      "checked": 60,
+      "mismatches": [],
+      "status": "PASS"
+    }
+  },
+  "all_passed": true,
+  "stage_e_fingerprint_root": "44c7afd36c793eff86faed077b7c917a5c6a200e3d652bfbf5b19e83cff0362e",
+  "note": "清单有重叠，不能把各组数量相加作为独立文件总数。"
+}

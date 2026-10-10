@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "stage": "G3",
+  "git_base_commit": "822fe5575340f4f5b989b9d1764e4a0ce6a13916",
+  "document_commit": "6f1307f627cbe72b9b2a19ed5d6019e7302066ff",
+  "scope_note": "本清单记录报告与验收内容；包含自身的验收提交以Git历史和最终交付记录为准。",
+  "artifact_count": 16,
+  "artifacts": [
+    {
+      "path": "docs/acceptance/stage_g3/acceptance.json",
+      "bytes": 2681,
+      "sha256": "eae41b80332d67029683e9c630cdcd9e578272fba0e13a912e9c2f9fb6fafce3"
+    },
+    {
+      "path": "docs/acceptance/stage_g3/acceptance_report.md",
+      "bytes": 7232,
+      "sha256": "f7104c186aae046117cd6351eda4da31f86ea1c5af40e85f9b0d9bd044d6c496"
+    },
+    {
+      "path": "docs/acceptance/stage_g3/baseline.json",
+      "bytes": 92010,
+      "sha256": "d1e64e11b06fa0d3e480f2584cd9fd150b61722071eabb6fb4ae688b8e2a0c10"
+    },
+    {
+      "path": "docs/acceptance/stage_g3/documentation_checks.json",
+      "bytes": 15392,
+      "sha256": "fc0e71ad7e48cb04f88dd315d802855c56e3cb84b762e6f2179caf5d18268e37"
+    },
+    {
+      "path": "docs/acceptance/stage_g3/engineering_checks.json",
+      "bytes": 2847,
+      "sha256": "a6f3711e21b5c01cf258f7b8f22c22a20b9af22407431f28a2e651c7a17a0202"
+    },
+    {
+      "path": "docs/acceptance/stage_g3/experiment_audit.json",
+      "bytes": 20329,
+      "sha256": "6d783099f2dfcb8530d9ddef5315c7c69e0abce01c35950f4bd312e212529202"
+    },
+    {
+      "path": "docs/acceptance/stage_g3/g2_audit.json",
+      "bytes": 4024,
+      "sha256": "b3940470790bd9e14d536773dd8426d781762308046064a69266b75ead333708"
+    },
+    {
+      "path": "docs/acceptance/stage_g3/integrity_checks.json",
+      "bytes": 881,
+      "sha256": "497d83f7779d736112cf970bce7af99c6661a170774fcb16a766f9c5767e1258"
+    },
+    {
+      "path": "docs/acceptance/stage_g3/lint_results.txt",
+      "bytes": 543,
+      "sha256": "05b2b2a8e17fe01c637d63fb0e7a2ee4a0b342d24b350c816f57da16015449a0"
+    },
+    {
+      "path": "docs/acceptance/stage_g3/source_manifest.json",
+      "bytes": 14927,
+      "sha256": "78961fd5855169c120e61f43082b2f44f2bba7508ff448c90198be27a2d3b177"
+    },
+    {
+      "path": "docs/acceptance/stage_g3/stage_e_f2_audit.json",
+      "bytes": 46672,
+      "sha256": "441e3a79332eebe04e7773598e7feb327ab329a99b4fc1a3ffed3973e666e78a"
+    },
+    {
+      "path": "docs/acceptance/stage_g3/stage_f3_audit.json",
+      "bytes": 20737,
+      "sha256": "9b6e9bc2548d395b81ccf018e158e94775115652bfccb3c9875730088271ed78"
+    },
+    {
+      "path": "docs/acceptance/stage_g3/test_results.txt",
+      "bytes": 1732,
+      "sha256": "797c227af23d9a99fd6bd8b37f1c7ccdc78e3b22a9463f84d8826f6c465b3eab"
+    },
+    {
+      "path": "docs/reports/design-decisions.md",
+      "bytes": 11543,
+      "sha256": "8164d3909a84908be4e47e6ed00d88d1e23b59ea0c1de4e5f9ff36b484c512c6"
+    },
+    {
+      "path": "docs/reports/experiment-summary.md",
+      "bytes": 12379,
+      "sha256": "b9d4ca790f592aafca34018043363ed246772f7e378b1163bea3b44bf25c8a49"
+    },
+    {
+      "path": "docs/reports/technical-report.md",
+      "bytes": 17370,
+      "sha256": "c1e9a143523166c193329e69ede143c4b6a16fa175bf141afa1b37a5048056cd"
+    }
+  ],
+  "excluded_self": [
+    "docs/acceptance/stage_g3/artifact_manifest.json"
+  ],
+  "new_provider_calls": 0,
+  "remote_operations": 0
+}

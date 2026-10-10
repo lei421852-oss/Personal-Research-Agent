@@ -1,0 +1,92 @@
+{
+  "stage": "G3",
+  "status": "PASS",
+  "accepted_at": "2026-10-10T13:59:00.920079+08:00",
+  "scope": "文档、实验审计与工程回归，不是研究语义正确率验收。",
+  "original_branch": "fix/stage-g2-1-worker-protocol",
+  "original_head": "822fe5575340f4f5b989b9d1764e4a0ce6a13916",
+  "branch": "docs/stage-g3-technical-report",
+  "tests": {
+    "passed": 1071,
+    "failed": 0,
+    "warnings": 1,
+    "duration_seconds": 16.51,
+    "exit_code": 0,
+    "new_tests": 0,
+    "removed_tests": 0
+  },
+  "static_checks": {
+    "ruff_exit_code": 0,
+    "formatter_exit_code": 0,
+    "formatted_files": 232,
+    "ruff_version": "0.16.5"
+  },
+  "environment": {
+    "python": "3.12.3",
+    "dependencies": {
+      "pydantic": "2.13.5",
+      "fastapi": "0.142.2",
+      "pytest": "8.4.2",
+      "chromadb": "1.5.9",
+      "openai": "2.54.0",
+      "sentence-transformers": "not_installed",
+      "torch": "2.13.0+cu130"
+    },
+    "version_notes": {
+      "pytest": "distribution metadata has no Version; verified module __version__"
+    }
+  },
+  "document_checks": "documentation_checks.json",
+  "experiment_audit": "experiment_audit.json",
+  "source_manifest": "source_manifest.json",
+  "integrity_checks": "integrity_checks.json",
+  "protected_file_groups": {
+    "original_tracked": {
+      "checked": 526,
+      "mismatches": [],
+      "status": "PASS"
+    },
+    "original_untracked": {
+      "checked": 13,
+      "mismatches": [],
+      "status": "PASS"
+    },
+    "historical_runtime": {
+      "checked": 40,
+      "mismatches": [],
+      "status": "PASS"
+    },
+    "stage_e_frozen": {
+      "checked": 292,
+      "mismatches": [],
+      "status": "PASS"
+    },
+    "f2_protected": {
+      "checked": 47,
+      "mismatches": [],
+      "status": "PASS"
+    },
+    "f3_protected": {
+      "checked": 60,
+      "mismatches": [],
+      "status": "PASS"
+    }
+  },
+  "stage_e_fingerprint_root": "44c7afd36c793eff86faed077b7c917a5c6a200e3d652bfbf5b19e83cff0362e",
+  "new_provider_calls": 0,
+  "new_experiments": 0,
+  "index_rebuilds": 0,
+  "production_changes": 0,
+  "label_changes": 0,
+  "independent_human_fact_reviews_performed": 0,
+  "blockers": [],
+  "known_limitations": [
+    "现有结果仍主要为AI辅助非盲核对，没有独立人工Gold。",
+    "G2.1研究主题未形成比较，历史CONDITIONAL保持不变。",
+    "原13个未跟踪诊断文件保留，不静默纳入提交。",
+    "既有Starlette/httpx弃用警告未在文档任务中修改。"
+  ],
+  "git_commit_note": "按审计、报告、验收拆分；最终SHA在用户交付记录及Git历史中记录，避免自引用。",
+  "remote_operations": 0,
+  "next_stage_started": false
+}

@@ -1,0 +1,19 @@
+/home/lei/project/projects/personal-rag/.venv/bin/ruff check app tests scripts eval
+All checks passed!
+exit_code=0
+
+/home/lei/project/projects/personal-rag/.venv/bin/ruff format --check app tests scripts eval
+232 files already formatted
+exit_code=0
+
+.venv/bin/python -m scripts.verify_worker_coverage_baseline
+{
+  "status": "PASS",
+  "frozen_files_checked": 292,
+  "protected_artifacts_checked": 47,
+  "frozen_mismatches": [],
+  "protected_artifact_mismatches": [],
+  "frozen_manifest_root_changed": false,
+  "provider_calls": 0
+}
+exit_code=0
