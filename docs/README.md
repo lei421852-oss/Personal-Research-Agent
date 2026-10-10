@@ -1,5 +1,9 @@
 # 项目文档导航
 
+**当前发布入口：[项目主页](project/README.md) · [工作台展示](project/showcase.md) · [技术亮点](project/highlights.md) · [简历与面试](project/resume-and-interview.md)。**
+
+当前使用 `python -m scripts.launch` 启动独立多论文工作台；见 [UI快速开始](guides/ui-quickstart.md)。下方G1导航和阶段说明保留历史语境；根README仍是Stage E冻结快照。
+
 本导航于 **2026-10-09 / Stage G1** 根据仓库源码整理。阅读顺序：
 
 1. [系统架构与能力边界](architecture/system-overview.md)：先区分单 Agent 演示和多论文研究链路。
