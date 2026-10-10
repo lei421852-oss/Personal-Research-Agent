@@ -1,0 +1,17 @@
+工作台地址：http://127.0.0.1:60559
+启动预检：{"ui_ready": true, "replay_ready": true, "real_research_ready": true}
+INFO:     Started server process [8940]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:60559 (Press CTRL+C to quit)
+INFO:     127.0.0.1:51384 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51392 - "GET /api/research/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51400 - "GET /api/research/papers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51408 - "GET /workbench-static/app.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51418 - "POST /api/research/replays/g2-1 HTTP/1.1" 201 Created
+INFO:     127.0.0.1:51426 - "GET /api/research/runs/e59a4af7e0e4498f939fc780f37634bb/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51434 - "GET /api/research/runs/e59a4af7e0e4498f939fc780f37634bb/report HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8940]

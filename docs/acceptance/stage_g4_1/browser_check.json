@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "verification_type": "real_historical_replay_browser_check",
+  "provider_readiness": "explicitly_disabled_for_browser_check",
+  "real_provider_calls": 0,
+  "real_research_calls": 0,
+  "retrieval_calls": 0,
+  "checks": [
+    "初始页面不启动研究；Provider 缺失时禁用提交但允许回放。",
+    "g2 真实历史记录：5 条已审核论断、7 个缺失单元；Worker 状态和事件来源正确。",
+    "g2-1 真实历史记录：4 条已审核论断、10 个缺失单元；Worker 状态和事件来源正确。",
+    "报告引用可切换到真实页码、证据正文和对应论断。",
+    "刷新恢复同一 run_id；不会重复创建任务或重复展示事件。",
+    "390px 移动布局无横向溢出。",
+    "报告通过 textContent 展示，HTML/脚本不会执行。",
+    "没有浏览器异常；真实研究、Provider 与检索调用均为零。"
+  ],
+  "history_cases": [
+    {
+      "case_id": "g2",
+      "verified_claims": 5,
+      "missing_requirements": 7,
+      "event_count": 29
+    },
+    {
+      "case_id": "g2-1",
+      "verified_claims": 4,
+      "missing_requirements": 10,
+      "event_count": 33
+    }
+  ],
+  "page_errors": [],
+  "screenshots": [
+    "/tmp/stage-g4-1-ui/workbench-g2-failure-details.png",
+    "/tmp/stage-g4-1-ui/workbench-g2-replay.png",
+    "/tmp/stage-g4-1-ui/workbench-g2-1-replay.png",
+    "/tmp/stage-g4-1-ui/workbench-g2-1-evidence.png",
+    "/tmp/stage-g4-1-ui/workbench-mobile-replay.png"
+  ]
+}

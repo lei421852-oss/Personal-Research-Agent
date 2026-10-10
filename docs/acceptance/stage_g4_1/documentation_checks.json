@@ -1,0 +1,237 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-10-10T14:53:29.721298+08:00",
+  "local_links_checked": 44,
+  "links": [
+    {
+      "document": "docs/guides/ui-quickstart.md",
+      "target": "docs/guides/development.md",
+      "exists": true
+    },
+    {
+      "document": "docs/guides/ui-quickstart.md",
+      "target": ".env.example",
+      "exists": true
+    },
+    {
+      "document": "docs/guides/ui-quickstart.md",
+      "target": "configs/cross_paper_eval.json",
+      "exists": true
+    },
+    {
+      "document": "docs/guides/ui-quickstart.md",
+      "target": "docs/demos/workbench-replay.md",
+      "exists": true
+    },
+    {
+      "document": "docs/guides/ui-quickstart.md",
+      "target": "docs/architecture/workbench.md",
+      "exists": true
+    },
+    {
+      "document": "docs/guides/ui-quickstart.md",
+      "target": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "exists": true
+    },
+    {
+      "document": "docs/architecture/workbench.md",
+      "target": "app/workbench.py",
+      "exists": true
+    },
+    {
+      "document": "docs/architecture/workbench.md",
+      "target": "scripts/launch.py",
+      "exists": true
+    },
+    {
+      "document": "docs/architecture/workbench.md",
+      "target": "app/api/research_runs.py",
+      "exists": true
+    },
+    {
+      "document": "docs/architecture/workbench.md",
+      "target": "app/research/run_manager.py",
+      "exists": true
+    },
+    {
+      "document": "docs/architecture/workbench.md",
+      "target": "app/research/run_events.py",
+      "exists": true
+    },
+    {
+      "document": "docs/architecture/workbench.md",
+      "target": "app/research/run_presenter.py",
+      "exists": true
+    },
+    {
+      "document": "docs/architecture/workbench.md",
+      "target": "app/research/run_replay.py",
+      "exists": true
+    },
+    {
+      "document": "docs/architecture/workbench.md",
+      "target": "app/research/workbench_dependencies.py",
+      "exists": true
+    },
+    {
+      "document": "docs/architecture/workbench.md",
+      "target": "app/research/workbench_runtime.py",
+      "exists": true
+    },
+    {
+      "document": "docs/architecture/workbench.md",
+      "target": "app/workbench_web/index.html",
+      "exists": true
+    },
+    {
+      "document": "docs/architecture/workbench.md",
+      "target": "docs/guides/ui-quickstart.md",
+      "exists": true
+    },
+    {
+      "document": "docs/architecture/workbench.md",
+      "target": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "exists": true
+    },
+    {
+      "document": "docs/demos/workbench-replay.md",
+      "target": "docs/demos/blip2-vs-flamingo/README.md",
+      "exists": true
+    },
+    {
+      "document": "docs/demos/workbench-replay.md",
+      "target": "docs/acceptance/stage_g2_1/acceptance_report.md",
+      "exists": true
+    },
+    {
+      "document": "docs/demos/workbench-replay.md",
+      "target": "docs/acceptance/stage_g4_1/replay_manifest.json",
+      "exists": true
+    },
+    {
+      "document": "docs/demos/workbench-replay.md",
+      "target": "docs/acceptance/stage_g4_1/browser_check.json",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "app/api/research_runs.py",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "app/research/run_manager.py",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "app/research/run_events.py",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "app/research/run_presenter.py",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "app/research/workbench_runtime.py",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "app/research/workbench_dependencies.py",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "app/research/run_replay.py",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "app/workbench.py",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "app/workbench_web/index.html",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "scripts/launch.py",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "docs/guides/ui-quickstart.md",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "docs/architecture/workbench.md",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "docs/demos/workbench-replay.md",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_1/engineering_checks.json",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_1/test_results.txt",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_1/lint_results.txt",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_1/browser_check.json",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_1/launch_verification.json",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_1/screenshots/g2-failure-details.png",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_1/screenshots/g2-1-evidence.png",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_1/baseline.json",
+      "exists": true
+    },
+    {
+      "document": "docs/acceptance/stage_g4_1/acceptance_report.md",
+      "target": "docs/acceptance/stage_g4_1/integrity_checks.json",
+      "exists": true
+    }
+  ],
+  "issues": [],
+  "replay_sources_checked": 6,
+  "possible_credentials": [],
+  "commands_checked": [
+    "scripts.launch --help",
+    "scripts.launch --check",
+    "scripts.launch --port",
+    "scripts.check_workbench_ui --help"
+  ],
+  "claim_scope": "工程及历史UI验证；没有新的Provider或语义研究评测。"
+}

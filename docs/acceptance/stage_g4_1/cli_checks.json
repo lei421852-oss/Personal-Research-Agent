@@ -1,0 +1,24 @@
+[
+  {
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "scripts.launch",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: launch.py [-h] [--host HOST] [--port PORT] [--check]\n\n统一启动工作台；检查依赖或启动本地服务，均不自动执行研究任务。\n\noptions:\n  -h, --help   show this help message and exit\n  --host HOST\n  --port PORT\n  --check\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "scripts.check_workbench_ui",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: check_workbench_ui.py [-h] [--output-dir OUTPUT_DIR]\n                             [--font-file FONT_FILE]\n\n浏览器验证工作台真实历史回放；显式禁用真实研究，不调用 Provider。\n\noptions:\n  -h, --help            show this help message and exit\n  --output-dir OUTPUT_DIR\n  --font-file FONT_FILE\n                        截图可复用的本地中文字体，不复制进仓库。\n",
+    "stderr": ""
+  }
+]

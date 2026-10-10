@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "checks": {
+    "tracked_files": {
+      "checked": 543,
+      "mismatches": []
+    },
+    "untracked_files": {
+      "checked": 13,
+      "mismatches": []
+    },
+    "historical_runtime_artifacts": {
+      "checked": 40,
+      "mismatches": []
+    },
+    "stage_e_frozen": {
+      "checked": 292,
+      "mismatches": []
+    }
+  },
+  "stage_e_fingerprint_root": "44c7afd36c793eff86faed077b7c917a5c6a200e3d652bfbf5b19e83cff0362e",
+  "overlap_note": "保护清单有重叠，不能相加作为独立文件数。"
+}

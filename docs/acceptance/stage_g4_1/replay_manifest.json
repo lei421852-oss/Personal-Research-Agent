@@ -1,0 +1,46 @@
+{
+  "case_ids": [
+    "g2",
+    "g2-1"
+  ],
+  "cases": [
+    {
+      "case_id": "g2",
+      "source_files": [
+        {
+          "path": "docs/demos/blip2-vs-flamingo/execution-record.json",
+          "sha256": "423123c2dc6fa1cf81d36f4c3e90870a9a31c9e9993f7cfe8f6033305d413756"
+        },
+        {
+          "path": "docs/demos/blip2-vs-flamingo/research-report.json",
+          "sha256": "84c239c72d0ab91c3d17065b4ee00bd84b67c3f8aff42afc23abe0f66358c14a"
+        },
+        {
+          "path": "docs/demos/blip2-vs-flamingo/execution-summary.json",
+          "sha256": "5abf643c891315bf9453552dc7db0b03a2c5b5ce3ce48aee4aee80f2f1d06d6a"
+        }
+      ],
+      "note": "历史文件只读回放；节点状态由实际结果派生，不构造实时调用时间线。"
+    },
+    {
+      "case_id": "g2-1",
+      "source_files": [
+        {
+          "path": "docs/acceptance/stage_g2_1/results/execution-record.json",
+          "sha256": "41c8b9c5fece2c55b904c0805efdbad73611a812cecad9d4f498b5d7962188e4"
+        },
+        {
+          "path": "docs/acceptance/stage_g2_1/results/research-report.json",
+          "sha256": "515cc464a6a7c28f2a4af330e41672076fd6ac050993d11bdd8343f4de107f7e"
+        },
+        {
+          "path": "docs/acceptance/stage_g2_1/results/execution-summary.json",
+          "sha256": "9b902e05f2f35b70fd161771fb94c6bcea8ceb526dd15e4fd8da6962df61214f"
+        }
+      ],
+      "note": "历史文件只读回放；节点状态由实际结果派生，不构造实时调用时间线。"
+    }
+  ],
+  "provider_calls": 0,
+  "retrieval_calls": 0
+}

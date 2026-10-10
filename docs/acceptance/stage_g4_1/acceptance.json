@@ -1,0 +1,115 @@
+{
+  "stage": "G4.1",
+  "status": "PASS",
+  "accepted_at": "2026-10-10T14:53:29.721298+08:00",
+  "scope": "工程集成/实际启动/真实历史回放，不是新的真实Provider研究质量评测。",
+  "original_branch": "docs/stage-g3-technical-report",
+  "original_head": "58aa41581e136e0072eaad55dfec02dd3c05d2e6",
+  "branch": "feature/stage-g4-1-agent-workbench",
+  "tests": {
+    "baseline": 1071,
+    "passed": 1155,
+    "new_tests": 84,
+    "failed": 0,
+    "warnings": 1,
+    "duration_seconds": 24.53,
+    "exit_code": 0
+  },
+  "static_checks": {
+    "ruff_exit_code": 0,
+    "formatter_exit_code": 0,
+    "formatted_python_files": 249
+  },
+  "environment": {
+    "python": "3.12.3",
+    "ruff": "0.16.5"
+  },
+  "browser_verification": {
+    "status": "PASS",
+    "behavior_checks": 8,
+    "source": "real_historical_records",
+    "real_research_enabled": false,
+    "page_errors": []
+  },
+  "launch_verification": {
+    "status": "PASS",
+    "exit_code": 0,
+    "index_files_checked": 9,
+    "index_changed": false
+  },
+  "protected_files": {
+    "status": "PASS",
+    "checks": {
+      "tracked_files": {
+        "checked": 543,
+        "mismatches": []
+      },
+      "untracked_files": {
+        "checked": 13,
+        "mismatches": []
+      },
+      "historical_runtime_artifacts": {
+        "checked": 40,
+        "mismatches": []
+      },
+      "stage_e_frozen": {
+        "checked": 292,
+        "mismatches": []
+      }
+    },
+    "stage_e_fingerprint_root": "44c7afd36c793eff86faed077b7c917a5c6a200e3d652bfbf5b19e83cff0362e",
+    "overlap_note": "保护清单有重叠，不能相加作为独立文件数。"
+  },
+  "prepared_corpus": {
+    "papers": 5,
+    "text_evidence": 46,
+    "figure_evidence": 5
+  },
+  "limits": {
+    "concurrent_runs": 1,
+    "queued_runs": 2,
+    "papers_per_run": [
+      2,
+      3
+    ],
+    "overall_model_budget": 200,
+    "research_tool_budget": 64,
+    "wait_timeout_seconds": 420,
+    "retained_runs": 20,
+    "terminal_ttl_seconds": 3600,
+    "events_per_run": 1000
+  },
+  "new_real_provider_calls": 0,
+  "new_real_research_runs": 0,
+  "new_retrieval_calls": 0,
+  "new_embedding_calls": 0,
+  "index_rebuilds": 0,
+  "historical_replay_cases": [
+    {
+      "case_id": "g2",
+      "verified_claims": 5,
+      "missing_requirements": 7,
+      "event_count": 29
+    },
+    {
+      "case_id": "g2-1",
+      "verified_claims": 4,
+      "missing_requirements": 10,
+      "event_count": 33
+    }
+  ],
+  "documentation_checks": "documentation_checks.json",
+  "blockers": [],
+  "known_limitations": [
+    "未发起新的真实Provider研究，配置就绪不等于连通性或实际模型加载。",
+    "单进程内存，重启丢失当前任务，不多进程共享。",
+    "线程不能强杀，取消与超时需等待实际drain。",
+    "部分节点状态由记录推导，不具精确实时阶段时间。",
+    "原研究质量与人审边界保持不变。",
+    "新入口按源码运行，未改变冻结wheel打包范围。"
+  ],
+  "remote_operations": 0,
+  "tag_created": false,
+  "next_stage_started": false,
+  "git_note": "分阶段本地提交；最终SHA见交付清单与Git历史，避免自引用。"
+}
