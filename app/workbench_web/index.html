@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>多模态论文研究工作台</title>
+  <link rel="stylesheet" href="/workbench-static/style.css">
+  <script defer src="/workbench-static/app.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">研</span><div><h1>论文研究工作台</h1><p>Multimodal Research Agent · 多智能体协作</p></div></div>
+    <div class="header-note"><span class="dot"></span>证据驱动 · 有界执行</div>
+  </header>
+  <main class="workbench">
+    <aside class="config-panel panel" aria-label="研究配置">
+      <div class="section-heading"><span class="eyebrow">01 / RESEARCH</span><h2>设置研究任务</h2><p>选择已有论文，提出明确的比较问题。</p></div>
+      <form id="research-form">
+        <label class="field-label" for="question">研究问题</label>
+        <textarea id="question" rows="7" maxlength="4000">Compare BLIP-2 and Flamingo in how visual representations are connected to the language model. Explain the Q-Former, Perceiver Resampler, and gated cross-attention with evidence from the prepared papers.</textarea>
+        <div class="label-row"><span class="field-label" id="papers-label">可研究论文</span><span class="small muted">已准备证据</span></div>
+        <div id="papers" class="paper-options" role="group" aria-labelledby="papers-label"><p class="muted">正在读取语料目录…</p></div>
+        <p id="form-hint" class="muted small">论文目录来自真实 Prepared Corpus。</p>
+        <button id="start-button" class="button primary" type="submit" disabled>开始真实研究 <span aria-hidden="true">→</span></button>
+        <button id="cancel-button" class="button secondary" type="button" disabled>取消当前任务</button>
+      </form>
+      <p class="execution-notice">真实执行需要配置 Provider，可能产生 API 调用费用。模型审核通过不等于独立人工事实核验。</p>
+      <section class="dependency-section" aria-labelledby="health-title"><div class="label-row"><h3 id="health-title">运行环境</h3><button id="refresh-health" class="text-button" type="button">刷新</button></div><div id="health" aria-live="polite"><p class="muted small">正在检查…</p></div><p id="budget-hint" class="small muted"></p></section>
+      <section class="replay-section" aria-labelledby="replay-title"><div class="label-row"><h3 id="replay-title">历史真实案例</h3><span class="badge neutral">不调用模型</span></div><p class="small muted">展示已有运行记录，不重新检索，也不补写缺失结果。</p><label class="sr-only" for="replay-select">选择历史案例</label><select id="replay-select" disabled><option value="">正在读取历史案例…</option></select><button id="replay-button" class="button secondary" type="button" disabled>查看历史回放</button></section>
+      <p id="api-error" class="error-banner" role="alert" hidden></p>
+    </aside>
+
+    <section class="workflow-panel panel" aria-labelledby="workflow-title">
+      <div class="workflow-heading"><div class="section-heading"><span class="eyebrow">02 / EXECUTION</span><h2 id="workflow-title">多智能体协作流程</h2></div><span id="mode-badge" class="badge neutral">尚未运行</span></div>
+      <div class="run-overview"><div><span id="run-status" class="run-status">等待任务</span><p id="run-question" class="small muted">先设置研究问题，或选择一个历史案例。</p></div><span id="run-id" class="run-id"></span></div>
+      <div class="source-legend" aria-label="状态来源"><span><i class="source-dot live"></i>真实调用活动</span><span><i class="source-dot derived"></i>执行记录推导</span><span><i class="source-dot replay"></i>历史回放</span></div>
+      <div class="workflow" id="workflow">
+        <div class="workflow-stage" id="planner-stage"><div class="stage-caption"><span>规划</span><span>Planner</span></div><div id="planner-nodes" class="node-list"></div></div>
+        <div class="connector" aria-hidden="true">↓</div>
+        <div class="workflow-stage"><div class="stage-caption"><span>并发研究</span><span>Workers · 按论文独立执行</span></div><div id="worker-nodes" class="node-list workers"></div></div>
+        <div class="connector" aria-hidden="true">↓</div>
+        <div class="validation-stage"><div class="workflow-stage"><div class="stage-caption"><span>引用验证</span><span>确定性校验</span></div><div id="validator-nodes" class="node-list"></div></div><div class="horizontal-connector" aria-hidden="true">→</div><div class="workflow-stage"><div class="stage-caption"><span>证据审核</span><span>Reviewer</span></div><div id="reviewer-nodes" class="node-list"></div></div></div>
+        <div class="conditional-path"><span>审核结果</span><span class="conditional-line" aria-hidden="true"></span><span>需要时定向恢复</span></div>
+        <div class="workflow-stage recovery-stage"><div class="stage-caption"><span>可选恢复</span><span>Recovery · 有界条件分支</span></div><div id="recovery-nodes" class="node-list"></div></div>
+        <div class="connector" aria-hidden="true">↓</div>
+        <div class="workflow-stage"><div class="stage-caption"><span>综合报告</span><span>Synthesis · 仅使用已审核论断</span></div><div id="synthesis-nodes" class="node-list"></div></div>
+      </div>
+      <p class="graph-note">图中状态只来自后端事件。引用验证无独立生命周期时，仅显示记录中的验证结果，不推定开始或结束时间。</p>
+      <div id="metrics" class="metrics-strip"><div><strong>—</strong><span>模型调用</span></div><div><strong>—</strong><span>工具调用</span></div><div><strong>—</strong><span>已审核需求</span></div><div><strong>—</strong><span>实际耗时</span></div></div>
+      <section class="event-section" aria-labelledby="events-title"><div class="label-row"><h3 id="events-title">执行事件</h3><span id="event-count" class="small muted">0 条</span></div><ol id="event-list" class="event-list"><li class="muted small empty-event">尚无执行记录。</li></ol></section>
+    </section>
+
+    <aside class="details-panel panel" aria-label="研究详情">
+      <div class="section-heading"><span class="eyebrow">03 / EVIDENCE</span><h2>详情与研究结果</h2><p>点击流程节点，检查实际执行与证据。</p></div>
+      <div class="tabs" role="tablist" aria-label="详情类型"><button id="tab-node" class="tab active" role="tab" aria-selected="true" aria-controls="node-panel" data-panel="node-panel">节点详情</button><button id="tab-evidence" class="tab" role="tab" aria-selected="false" aria-controls="evidence-panel" data-panel="evidence-panel">证据</button><button id="tab-report" class="tab" role="tab" aria-selected="false" aria-controls="report-panel" data-panel="report-panel">研究报告</button></div>
+      <section id="node-panel" class="detail-content" role="tabpanel" aria-labelledby="tab-node"><div id="node-details" class="empty-state"><span class="empty-icon" aria-hidden="true">◇</span><h3>等待执行记录</h3><p>选择节点后，显示摘要、需求、统计和错误。这里不展示模型隐藏推理。</p></div></section>
+      <section id="evidence-panel" class="detail-content" role="tabpanel" aria-labelledby="tab-evidence" hidden><div id="evidence-details" class="empty-state"><span class="empty-icon" aria-hidden="true">▤</span><h3>尚无证据</h3><p>引用可追溯至论文与 PDF 页码。无记录的字段会明确标注。</p></div></section>
+      <section id="report-panel" class="detail-content" role="tabpanel" aria-labelledby="tab-report" hidden><div id="report-details" class="empty-state"><span class="empty-icon" aria-hidden="true">▧</span><h3>尚无研究报告</h3><p>最终报告保留证据缺口、审核状态和真实限制。</p></div></section>
+    </aside>
+  </main>
+  <footer>单机研究工作台 · 服务重启可能丢失进程内任务 · 历史回放与实时研究明确区分</footer>
+</body>
+</html>
