@@ -30,7 +30,7 @@ EventSource = Literal["live", "derived", "replay"]
 
 # 原始模型请求、响应及推理不是公开诊断字段；敏感值也不保留占位副本。
 _PRIVATE_KEY = re.compile(
-    r"reasoning|chain.?of.?thought|internal.?thought|hidden|prompt|messages?"
+    r"reasoning|chain.?of.?thought|internal.?thought|^(?:thought|thoughts)$|hidden|prompt|messages?"
     r"|raw|provider.?response|provider.?request|api.?key|secret|password"
     r"|credential|authorization|(?:^|_)token(?:$|_)|filesystem|asset.?path|traceback",
     re.IGNORECASE,

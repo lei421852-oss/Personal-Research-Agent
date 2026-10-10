@@ -828,11 +828,13 @@ def test_unsafe_fields_are_removed_from_public_answer_and_events():
         {
             "direct_answer": "<script>window.attack=1</script>",
             "reasoning_content": "private",
+            "thought": "private",
             "api_key": "sk-secret",
             "path": "/home/lei/private/file",
         }
     )
     assert "reasoning_content" not in public
+    assert "thought" not in public
     assert "api_key" not in public
     assert "/home/lei/private" not in json.dumps(public)
     assert (
