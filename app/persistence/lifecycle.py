@@ -5,6 +5,7 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from datetime import UTC, datetime
 from uuid import uuid4
 
@@ -19,6 +20,20 @@ from app.persistence.serialization import (
     sha256_hex,
 )
 from app.persistence.writer import AppendEvents, RunWriter
+
+
+@dataclass(frozen=True)
+class StartResult:
+    record: RunRecord
+    replayed: bool
+
+
+def key_hash(raw_key: str) -> str:
+    return sha256_hex({"idempotency_key": raw_key})
+
+
+def request_hash(payload: dict) -> str:
+    return sha256_hex(payload)
 
 
 class RunPersistence:
@@ -50,7 +65,8 @@ class RunPersistence:
         payload: dict,
         fingerprint: str | None,
         created_at: datetime | None = None,
-    ) -> RunRecord:
+        idempotency_key_hash: str | None = None,
+    ) -> StartResult:
         """创建 queued 记录并启动该 run 的 Writer；失败即拒绝调度。"""
 
         result = await self.repository.create_run(
@@ -60,6 +76,7 @@ class RunPersistence:
             request_hash=sha256_hex(payload),
             owner_instance_id=self.owner_instance_id,
             fingerprint=fingerprint,
+            idempotency_key_hash=idempotency_key_hash,
             created_at=created_at,
         )
         writer = (
@@ -67,9 +84,15 @@ class RunPersistence:
             if self._writer_factory is not None
             else RunWriter(self.repository, latch=self.latch)
         )
+        if result.outcome.value == "replayed":
+            # 并发同键创建：本实例不是胜方，绝不启动第二个 Writer 或 Task。
+            return StartResult(record=result.run, replayed=True)
         writer.start()
         self._writers[run_id] = writer
-        return result.run
+        return StartResult(record=result.run, replayed=False)
+
+    async def find_by_key(self, key_digest: str):
+        return await self.repository.find_by_idempotency_key(key_digest)
 
     async def mark_running(self, run_id: str) -> None:
         record = await self.repository.get_run(run_id)

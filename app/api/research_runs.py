@@ -2,7 +2,7 @@
 
 from typing import Annotated
 
-from fastapi import APIRouter, Query, Request
+from fastapi import APIRouter, Header, Query, Request, Response
 
 from app.research.run_events import sanitize_public
 from app.research.run_manager import MainAgentRunRequest
@@ -51,8 +51,21 @@ def health(request: Request):
 
 
 @router.post("/runs", status_code=202)
-async def create_run(body: MainAgentRunRequest, request: Request):
-    return await manager(request).create(body)
+async def create_run(
+    body: MainAgentRunRequest,
+    request: Request,
+    response: Response,
+    idempotency_key: Annotated[str | None, Header(alias="Idempotency-Key")] = None,
+    replay_only: Annotated[bool, Header(alias="Idempotency-Replay-Only")] = False,
+):
+    result = await manager(request).create(
+        body, idempotency_key=idempotency_key, replay_only=replay_only
+    )
+    if isinstance(result, dict) and result.get("replayed"):
+        # 重放不是新建：返回 200 并标记，避免调用方误以为又启动了一次研究。
+        response.status_code = 200
+        response.headers["Idempotency-Replayed"] = "true"
+    return result
 
 
 @router.get("/runs/{run_id}")

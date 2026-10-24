@@ -239,12 +239,51 @@ class ResearchRunManager:
             if recorded is not None and self.lifecycle is not None:
                 self.lifecycle.on_event(run.run_id, recorded)
 
-    async def create(self, request: ResearchRunRequest):
+    async def create(
+        self,
+        request: ResearchRunRequest,
+        *,
+        idempotency_key: str | None = None,
+        replay_only: bool = False,
+    ):
         if self._closed:
             raise RunManagerError(
                 "service_stopping", "服务正在停止，不能启动新任务。", 503
             )
         self._prune()
+        payload = {
+            "question": request.question,
+            "paper_ids": list(request.paper_ids),
+            "language_mode": request.language_mode,
+            "max_model_calls": request.max_model_calls,
+        }
+        key_digest = None
+        request_digest = None
+        if self.lifecycle is not None:
+            from app.persistence.lifecycle import key_hash, request_hash
+
+            request_digest = request_hash(payload)
+            if idempotency_key:
+                key_digest = key_hash(idempotency_key)
+                existing = await self.lifecycle.find_by_key(key_digest)
+                if existing is not None:
+                    if existing.request_hash != request_digest:
+                        raise RunManagerError(
+                            "idempotency_key_conflict",
+                            "同一幂等键已用于不同的请求内容。",
+                            409,
+                        )
+                    return self._persisted_status(existing, replayed=True)
+                if replay_only:
+                    raise RunManagerError(
+                        "submission_not_found",
+                        "没有找到该幂等键对应的已提交记录。",
+                        404,
+                    )
+        if replay_only:
+            raise RunManagerError(
+                "submission_not_found", "没有找到该幂等键对应的已提交记录。", 404
+            )
         is_main = getattr(self.runner, "main_agent_entry", False)
         if not is_main and len(request.paper_ids) == 1:
             raise RunManagerError("invalid_papers", "旧研究入口要求2–3篇论文。", 422)
@@ -305,17 +344,16 @@ class ResearchRunManager:
         if self.lifecycle is not None:
             # 创建记录必须先可靠提交，才有首次调度资格。
             try:
-                await self.lifecycle.start(
+                started = await self.lifecycle.start(
                     run_id=run.run_id,
-                    payload={
-                        "question": request.question,
-                        "paper_ids": list(request.paper_ids),
-                        "language_mode": request.language_mode,
-                        "max_model_calls": request.max_model_calls,
-                    },
+                    payload=payload,
                     fingerprint=fingerprint,
                     created_at=datetime.now(UTC),
+                    idempotency_key_hash=key_digest,
                 )
+                if getattr(started, "replayed", False):
+                    self._runs.pop(run.run_id, None)
+                    return self._persisted_status(started.record, replayed=True)
             except Exception:
                 LOGGER.warning("run persistence start failed", exc_info=True)
                 self._runs.pop(run.run_id, None)
@@ -481,6 +519,26 @@ class ResearchRunManager:
             task.exception()
         # 同步 done callback 不能写库；持久化收尾交给受管理的异步任务。
         self._schedule_finalize(run)
+
+    def _persisted_status(self, record, *, replayed: bool = False) -> dict:
+        """持久化记录投影；重放不改写数据库、不安排新 Task。"""
+
+        body = {
+            "run_id": record.run_id,
+            "mode": record.mode,
+            "status": record.status,
+            "created_at": record.created_at.isoformat() if record.created_at else None,
+            "question": (record.request_payload or {}).get("question"),
+            "paper_ids": list(record.effective_paper_ids or []),
+            "events_count": record.last_event_seq,
+            "cancel_requested": record.cancel_requested,
+            "error": record.error,
+            "metrics": record.metrics,
+            "report_available": record.current_report_revision is not None,
+            "historical_status": None,
+            "replayed": replayed,
+        }
+        return body
 
     def _occupies_capacity(self, run) -> bool:
         """终态但收尾未完成的 run 仍占用 admission 名额。"""

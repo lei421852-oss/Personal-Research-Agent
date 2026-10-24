@@ -156,6 +156,8 @@ class RunState:
     current_report_revision: int | None
     finalize_token: str | None = None
     finalize_sha256: str | None = None
+    request_hash: str = ""
+    request_payload: dict | None = None
 
     @property
     def terminal(self) -> bool:
@@ -181,6 +183,8 @@ class RunRecord:
     effective_paper_ids: list
     finalize_token: str | None = None
     finalize_sha256: str | None = None
+    request_hash: str = ""
+    request_payload: dict | None = None
 
 
 @dataclass(frozen=True)
@@ -364,6 +368,8 @@ def _run_record(row: ResearchRunORM) -> RunRecord:
         effective_paper_ids=list(row.effective_paper_ids or []),
         finalize_token=row.finalize_token,
         finalize_sha256=row.finalize_sha256,
+        request_hash=row.request_hash,
+        request_payload=row.request_payload,
     )
 
 
@@ -376,6 +382,8 @@ def _state(row: ResearchRunORM) -> RunState:
         current_report_revision=row.current_report_revision,
         finalize_token=row.finalize_token,
         finalize_sha256=row.finalize_sha256,
+        request_hash=row.request_hash,
+        request_payload=row.request_payload,
     )
 
 
