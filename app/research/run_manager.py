@@ -16,10 +16,37 @@ from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, model_v
 from app.research.run_events import RunEvent, sanitize_public
 from app.research.run_presenter import execution_events, present_execution
 from app.research.run_replay import ReplayError
+from app.research.scheduling import AdmissionRegistry, SchedulingFailure
 
 LOGGER = logging.getLogger(__name__)
 
 TERMINAL = frozenset({"completed", "failed", "cancelled"})
+
+# admission 失败码表：与阶段 2.0 §4.5 的错误映射逐条对应。
+_SUBMISSION_UNKNOWN = SchedulingFailure(
+    code="submission_outcome_unknown",
+    message="任务提交结果无法确认，未启动研究执行；请用同一幂等键只做查询核对。",
+    status_code=503,
+    retry_mode="reconcile_only",
+)
+_SCHEDULING_UNKNOWN = SchedulingFailure(
+    code="task_scheduling_outcome_unknown",
+    message="任务已提交但调度结果尚未确定；请用同一幂等键只做查询核对。",
+    status_code=503,
+    retry_mode="reconcile_only",
+)
+_SCHEDULING_FAILED = SchedulingFailure(
+    code="task_scheduling_failed",
+    message="任务已保存但未能安排执行，已按失败收尾；可用新的幂等键重试。",
+    status_code=500,
+    retry_mode="safe_retry",
+)
+_CLOSEOUT_INCOMPLETE = SchedulingFailure(
+    code="run_persistence_incomplete",
+    message="调度失败后的收尾未能确认落库；请先核对该任务再重试。",
+    status_code=503,
+    retry_mode="reconcile_only",
+)
 
 
 class ResearchRunRequest(BaseModel):
@@ -53,9 +80,20 @@ class MainAgentRunRequest(ResearchRunRequest):
 
 
 class RunManagerError(Exception):
-    def __init__(self, code, message, status_code=409):
+    def __init__(
+        self,
+        code,
+        message,
+        status_code=409,
+        *,
+        retry_mode: str | None = None,
+        run_id: str | None = None,
+    ):
         super().__init__(code)
         self.code, self.message, self.status_code = code, message, status_code
+        # 只在能给出确定指引时携带：调用方据此区分「可原样重试」与「只能核对」。
+        self.retry_mode = retry_mode
+        self.run_id = run_id
 
 
 @dataclass
@@ -106,6 +144,8 @@ class ResearchRunManager:
         max_events=1000,
         lifecycle=None,
         finalize_timeout=10.0,
+        admission_timeout=5.0,
+        scheduler=None,
     ):
         if (
             max_concurrent_runs < 1
@@ -114,6 +154,7 @@ class ResearchRunManager:
             or history_ttl_seconds <= 0
             or timeout_seconds <= 0
             or max_events < 1
+            or admission_timeout <= 0
         ):
             raise ValueError("Invalid run manager limits")
         self.runner = runner
@@ -127,6 +168,10 @@ class ResearchRunManager:
         self.max_events = max_events
         self.lifecycle = lifecycle
         self.finalize_timeout = finalize_timeout
+        self.admission_timeout = admission_timeout
+        # 调度入口可注入：默认 asyncio.create_task，测试用确定性替身覆盖。
+        self._scheduler = scheduler
+        self._admissions = AdmissionRegistry(timeout=admission_timeout)
         self._finalize_tasks: dict[str, asyncio.Task] = {}
         self._slots = asyncio.Semaphore(max_concurrent_runs)
         self._runs: dict[str, _Run] = {}
@@ -147,6 +192,8 @@ class ResearchRunManager:
         )
         while len(self._runs) >= self.max_retained_runs and terminal:
             del self._runs[terminal.pop(0).run_id]
+        # admission 登记不得比它所属的 run 活得更久；已失败登记单独按上限保留。
+        self._admissions.retain(set(self._runs))
 
     @staticmethod
     def _fingerprint(request):
@@ -273,15 +320,7 @@ class ResearchRunManager:
                             "同一幂等键已用于不同的请求内容。",
                             409,
                         )
-                    if existing.status not in TERMINAL and not self._is_attached(
-                        existing.run_id
-                    ):
-                        # 非终态但本实例没有对应 Task/收尾：不能假装已接管。
-                        raise RunManagerError(
-                            "run_not_attached",
-                            "该任务由其他实例持有或已失去归属，不能在此重放。",
-                            409,
-                        )
+                    existing = await self._settle_replay(existing, key_digest)
                     return self._persisted_status(existing, replayed=True)
                 if replay_only:
                     raise RunManagerError(
@@ -349,6 +388,7 @@ class ResearchRunManager:
             datetime.now(UTC).isoformat(),
             fingerprint,
         )
+        self._admissions.begin(run.run_id)
         self._runs[run.run_id] = run
         if self.lifecycle is not None:
             # 创建记录必须先可靠提交，才有首次调度资格。
@@ -360,22 +400,96 @@ class ResearchRunManager:
                     created_at=datetime.now(UTC),
                     idempotency_key_hash=key_digest,
                 )
-                if getattr(started, "replayed", False):
-                    self._runs.pop(run.run_id, None)
-                    return self._persisted_status(started.record, replayed=True)
             except Exception:
                 LOGGER.warning("run persistence start failed", exc_info=True)
+                # 提交结果无法确认：登记失败，让同键重放方立刻拿到同一判定而不是等超时。
+                self._admissions.mark_failed(run.run_id, _SUBMISSION_UNKNOWN)
                 self._runs.pop(run.run_id, None)
-                raise RunManagerError(
-                    "run_persistence_incomplete",
-                    "任务未能可靠保存，未启动研究执行。",
-                    503,
-                ) from None
-        run.task = asyncio.create_task(
-            self._execute(run, request), name=f"research:{run.run_id}"
-        )
-        run.task.add_done_callback(lambda task: self._finished(run, task))
+                raise self._failure_error(_SUBMISSION_UNKNOWN, run.run_id) from None
+            if getattr(started, "replayed", False):
+                # 并发同键的两个请求里本实例不是胜方：记录归胜方，绝不另起 Task。
+                self._runs.pop(run.run_id, None)
+                self._admissions.discard(run.run_id)
+                return self._persisted_status(started.record, replayed=True)
+        try:
+            task = self._schedule(run, request)
+        except Exception:  # 调度失败必须转成稳定公开错误
+            LOGGER.warning("run scheduling failed", exc_info=True)
+            raise await self._abandon_scheduling(run) from None
+        run.task = task
+        self._admissions.mark_registered(run.run_id, task)
+        task.add_done_callback(lambda done: self._finished(run, done))
         return self.status(run.run_id)
+
+    def _schedule(self, run, request):
+        """创建 Task；失败时关闭未运行的协程，不留下未 await 告警。"""
+
+        pending = self._execute(run, request)
+        try:
+            if self._scheduler is not None:
+                return self._scheduler(pending, name=f"research:{run.run_id}")
+            return asyncio.create_task(pending, name=f"research:{run.run_id}")
+        except BaseException:
+            pending.close()
+            raise
+
+    async def _abandon_scheduling(self, run) -> RunManagerError:
+        """已确认未安排：先提交失败收尾，再按收尾结果决定对外错误码。"""
+
+        run.status = "failed"
+        run.error = {
+            "code": "task_scheduling_failed",
+            "message": "任务已保存但未能安排执行；未调用任何研究组件。",
+        }
+        run.finished_at = time.monotonic()
+        try:
+            await asyncio.wait_for(
+                self._finish_persistently(run), self.finalize_timeout
+            )
+        except Exception:  # 收尾失败只暴露稳定错误码
+            LOGGER.warning("scheduling failure close-out failed", exc_info=True)
+            self._admissions.mark_failed(run.run_id, _CLOSEOUT_INCOMPLETE)
+            return self._failure_error(_CLOSEOUT_INCOMPLETE, run.run_id)
+        self._admissions.mark_failed(run.run_id, _SCHEDULING_FAILED)
+        return self._failure_error(_SCHEDULING_FAILED, run.run_id)
+
+    async def _settle_replay(self, existing, key_digest):
+        """重放前确认归属：本实例正在提交的 run 必须先在界内落定。"""
+
+        if existing.status in TERMINAL:
+            return existing
+        operation = self._admissions.peek(existing.run_id)
+        if operation is not None:
+            if not operation.settled:
+                # 数据库可能已提交、Task 尚未注册：等待胜方落定，不提前 409、不建第二个 Task。
+                operation = await self._admissions.settled(
+                    existing.run_id, timeout=self.admission_timeout
+                )
+                if operation is None:
+                    raise self._failure_error(_SCHEDULING_UNKNOWN, existing.run_id)
+            if operation.failure is not None:
+                # 本实例已对同一 run 作出判定：重放方拿同一结论，不另判一次。
+                raise self._failure_error(operation.failure, existing.run_id)
+            refreshed = await self.lifecycle.find_by_key(key_digest)
+            existing = refreshed or existing
+        if existing.status not in TERMINAL and not self._is_attached(existing.run_id):
+            raise RunManagerError(
+                "run_not_attached",
+                "该任务由其他实例持有或已失去归属，不能在此重放。",
+                409,
+                run_id=existing.run_id,
+            )
+        return existing
+
+    @staticmethod
+    def _failure_error(failure: SchedulingFailure, run_id: str) -> RunManagerError:
+        return RunManagerError(
+            failure.code,
+            failure.message,
+            failure.status_code,
+            retry_mode=failure.retry_mode,
+            run_id=run_id,
+        )
 
     def _attach(self, run, execution, *, source="derived"):
         run.execution = execution
@@ -532,6 +646,10 @@ class ResearchRunManager:
     def _is_attached(self, run_id: str) -> bool:
         """本实例是否仍持有该 run 的执行任务或收尾任务。"""
 
+        operation = self._admissions.peek(run_id)
+        if operation is not None and not operation.failed:
+            # 提交中或已注册都表示归属本实例；失败后不再声称持有。
+            return True
         run = self._runs.get(run_id)
         if run is None:
             return False
@@ -782,4 +900,5 @@ class ResearchRunManager:
             close = getattr(self.lifecycle, "close", None)
             if close is not None:
                 await close()
+        self._admissions.clear()
         return unfinished

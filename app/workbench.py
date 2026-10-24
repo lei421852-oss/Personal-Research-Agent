@@ -70,10 +70,13 @@ def create_app(*, manager_factory=None, database_settings=None, database_factory
 
     @application.exception_handler(RunManagerError)
     async def managed_error(request: Request, exc: RunManagerError):
-        return JSONResponse(
-            status_code=exc.status_code,
-            content={"error": {"code": exc.code, "message": exc.message}},
-        )
+        error = {"code": exc.code, "message": exc.message}
+        # 只白名扩展两个字段：调用方据此判断能否原样重试，或只能核对。
+        if exc.retry_mode is not None:
+            error["retry_mode"] = exc.retry_mode
+        if exc.run_id is not None:
+            error["run_id"] = exc.run_id
+        return JSONResponse(status_code=exc.status_code, content={"error": error})
 
     @application.exception_handler(RequestValidationError)
     async def invalid_request(request: Request, exc: RequestValidationError):
