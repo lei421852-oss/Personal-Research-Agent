@@ -1,0 +1,70 @@
+{
+  "scope": "curated stage1 verification; excludes manifest itself; gzip archives preserve original bytes",
+  "files": [
+    {
+      "path": "docs/acceptance/h2/stage1/acceptance.json",
+      "sha256": "5acb5e186eca7cbcf7e9b14219a4a0fbe8e15a1dcec7801c5d21fa3b63da481c",
+      "bytes": 10510
+    },
+    {
+      "path": "docs/acceptance/h2/stage1/acceptance_report.md",
+      "sha256": "9ed1d85962622742f05ea9292d3d687b12d61e15fb939c75b8c1c616674c60a7",
+      "bytes": 4784
+    },
+    {
+      "path": "docs/acceptance/h2/stage1/clean_pip_check.txt",
+      "sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09",
+      "bytes": 30
+    },
+    {
+      "path": "docs/acceptance/h2/stage1/clean_pytest.txt",
+      "sha256": "d9599ad1ab56e0391aba1fc11233cb3eb1953eb66f11f74ce1ff295adf3a5f10",
+      "bytes": 748
+    },
+    {
+      "path": "docs/acceptance/h2/stage1/disabled_package_absence.txt",
+      "sha256": "636de488c7e65eb8400154ec026703457b561876ea7bd73a74dfa6f19f2976e9",
+      "bytes": 29
+    },
+    {
+      "path": "docs/acceptance/h2/stage1/disabled_pip_check.txt",
+      "sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09",
+      "bytes": 30
+    },
+    {
+      "path": "docs/acceptance/h2/stage1/disabled_replay.txt",
+      "sha256": "ee36dd35325645d7f26565a1736ae517453d56a5a787ed52eac151f0e9205205",
+      "bytes": 662
+    },
+    {
+      "path": "docs/acceptance/h2/stage1/formatter_results.txt",
+      "sha256": "8ba08e36f6f4bb0596ab75d23ce15f909ac1beea6c5509d2449fc27c17f79b90",
+      "bytes": 28
+    },
+    {
+      "path": "docs/acceptance/h2/stage1/full_pytest.txt",
+      "sha256": "001f9db9a46f73824f4fde056a7bcfeba87a3c33799c742c2fe8af8202583d76",
+      "bytes": 2063
+    },
+    {
+      "path": "docs/acceptance/h2/stage1/implementation.patch.gz",
+      "sha256": "afb2fda89457dc215321ca07f0bd62a0d0c1f8b6bd97c3118614918f18a18c5c",
+      "bytes": 40450
+    },
+    {
+      "path": "docs/acceptance/h2/stage1/initial_clean_failure.txt.gz",
+      "sha256": "bb928e2e74d6d94f2251d2484c5820393b80332eb88f273563e51accfadc21f6",
+      "bytes": 1906
+    },
+    {
+      "path": "docs/acceptance/h2/stage1/integrity.json",
+      "sha256": "e135cac7ac5d7f100826f48bd97011783a2ab6d531bcd22edb308668fa94ef8b",
+      "bytes": 390
+    },
+    {
+      "path": "docs/acceptance/h2/stage1/lint_results.txt",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    }
+  ]
+}

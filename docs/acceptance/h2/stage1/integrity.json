@@ -1,0 +1,17 @@
+{
+  "original_files_checked": 730,
+  "original_changed_files": [
+    "app/workbench.py"
+  ],
+  "preexisting_untracked_checked": 13,
+  "preexisting_untracked_mismatches": [],
+  "frozen_checked": 292,
+  "frozen_raw_mismatches": [
+    "README.md"
+  ],
+  "readme_exception_matches": true,
+  "protected_checked": 47,
+  "protected_mismatches": [],
+  "f31e_checked": 34,
+  "f31e_mismatches": []
+}
