@@ -273,6 +273,15 @@ class ResearchRunManager:
                             "同一幂等键已用于不同的请求内容。",
                             409,
                         )
+                    if existing.status not in TERMINAL and not self._is_attached(
+                        existing.run_id
+                    ):
+                        # 非终态但本实例没有对应 Task/收尾：不能假装已接管。
+                        raise RunManagerError(
+                            "run_not_attached",
+                            "该任务由其他实例持有或已失去归属，不能在此重放。",
+                            409,
+                        )
                     return self._persisted_status(existing, replayed=True)
                 if replay_only:
                     raise RunManagerError(
@@ -519,6 +528,16 @@ class ResearchRunManager:
             task.exception()
         # 同步 done callback 不能写库；持久化收尾交给受管理的异步任务。
         self._schedule_finalize(run)
+
+    def _is_attached(self, run_id: str) -> bool:
+        """本实例是否仍持有该 run 的执行任务或收尾任务。"""
+
+        run = self._runs.get(run_id)
+        if run is None:
+            return False
+        if run.task is not None and not run.task.done():
+            return True
+        return run.finalize_task is not None and not run.finalize_task.done()
 
     def _persisted_status(self, record, *, replayed: bool = False) -> dict:
         """持久化记录投影；重放不改写数据库、不安排新 Task。"""

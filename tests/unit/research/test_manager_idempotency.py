@@ -193,3 +193,50 @@ def test_replay_only_without_persistence_is_404():
     code, calls = run(body())
     assert code == "submission_not_found"
     assert calls == 0
+
+
+def test_non_terminal_record_without_local_task_is_not_attached():
+    async def body():
+        existing = record(digest_for(PAYLOAD))
+        existing = type(existing)(
+            **{**existing.__dict__, "status": "running", "finished_at": None}
+        )
+        lifecycle = FakeLifecycle(existing=existing)
+        mgr, runner = manager(lifecycle)
+        try:
+            await mgr.create(request(), idempotency_key="k5")
+        except Exception as exc:  # noqa: BLE001
+            return exc.code, runner.calls
+        return None, None
+
+    code, calls = run(body())
+    assert code == "run_not_attached"
+    assert calls == 0
+
+
+def test_non_terminal_record_attached_to_local_task_replays():
+    async def body():
+        existing = record(digest_for(PAYLOAD))
+        existing = type(existing)(
+            **{**existing.__dict__, "status": "running", "finished_at": None}
+        )
+        lifecycle = FakeLifecycle(existing=existing)
+        mgr, runner = manager(lifecycle)
+
+        # 在内存中登记一个未完成的收尾任务，模拟本实例仍持有该 run。
+        mgr._runs[existing.run_id] = type(
+            "R",
+            (),
+            {
+                "run_id": existing.run_id,
+                "task": None,
+                "finished_at": None,
+                "finalize_task": type("T", (), {"done": staticmethod(lambda: False)})(),
+            },
+        )()
+        result = await mgr.create(request(), idempotency_key="k6")
+        return result["replayed"], runner.calls
+
+    replayed, calls = run(body())
+    assert replayed is True
+    assert calls == 0
