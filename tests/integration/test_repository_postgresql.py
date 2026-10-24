@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import asyncio
 import os
+from contextlib import asynccontextmanager
 from datetime import UTC, datetime
 
 import pytest
@@ -61,6 +62,76 @@ async def with_repository(body):
     await resource.start()
     try:
         return await body(ResearchRepository(resource), resource)
+    finally:
+        await resource.close()
+
+
+class _FaultInjector:
+    """只对被 arm 的那一次事务注入故障，避免误伤前置的 create。"""
+
+    def __init__(self):
+        self._mode: str | None = None
+
+    def arm(self, mode: str) -> None:
+        self._mode = mode
+
+    def consume(self) -> str | None:
+        mode, self._mode = self._mode, None
+        return mode
+
+
+class _TransactionProxy:
+    """post=提交后丢确认，pre=提交前断开。"""
+
+    def __init__(self, inner, injector: _FaultInjector):
+        self._inner = inner
+        self._injector = injector
+
+    async def __aenter__(self):
+        await self._inner.__aenter__()
+        return self
+
+    async def __aexit__(self, exc_type, exc, tb):
+        mode = self._injector.consume() if exc_type is None else None
+        if mode == "pre":
+            raise OperationalError(
+                "connection lost before commit", None, Exception("lost")
+            )
+        result = await self._inner.__aexit__(exc_type, exc, tb)
+        if mode == "post":
+            raise OperationalError("commit ack lost", None, Exception("lost"))
+        return result
+
+
+class _SessionProxy:
+    def __init__(self, inner, injector: _FaultInjector):
+        self._inner = inner
+        self._injector = injector
+
+    def begin(self):
+        return _TransactionProxy(self._inner.begin(), self._injector)
+
+    def __getattr__(self, name):
+        return getattr(self._inner, name)
+
+
+class _ResourceProxy:
+    def __init__(self, resource, injector: _FaultInjector):
+        self._resource = resource
+        self._injector = injector
+
+    @asynccontextmanager
+    async def session(self):
+        async with self._resource.session() as session:
+            yield _SessionProxy(session, self._injector)
+
+
+async def with_faulty_repository(injector: _FaultInjector, body):
+    resource = make_resource()
+    await resource.start()
+    repository = ResearchRepository(_ResourceProxy(resource, injector))
+    try:
+        return await body(repository, resource)
     finally:
         await resource.close()
 
@@ -135,8 +206,8 @@ def test_create_then_idempotent_replay():
     async def body(repo, resource):
         run_id = "1" * 32
         try:
-            first = await create(repo, run_id=run_id, key="k" * 64)
-            second = await create(repo, run_id="2" * 32, key="k" * 64)
+            first = await create(repo, run_id=run_id, key="b" * 64)
+            second = await create(repo, run_id="2" * 32, key="b" * 64)
             return first, second
         finally:
             await cleanup(resource, [run_id, "2" * 32])
@@ -391,10 +462,10 @@ def test_finalize_then_reconcile_confirmed_without_extra_write():
     assert before == after  # 核对不写库
 
 
-def test_commit_ack_lost_maps_to_unknown_then_reconcile(monkeypatch):
+def test_commit_ack_lost_maps_to_unknown_then_reconcile():
     """提交已落库但确认丢失：Repository 必须返回 unknown，核对后可确认。"""
 
-    from sqlalchemy.ext.asyncio import AsyncSession
+    injector = _FaultInjector()
 
     async def body(repo, resource):
         run_id = "0" * 31 + "1"
@@ -412,31 +483,23 @@ def test_commit_ack_lost_maps_to_unknown_then_reconcile(monkeypatch):
                 final_last_event_seq=0,
                 expected_current_revision=None,
             )
-            original = AsyncSession.commit
-
-            async def commit_then_fail(self):
-                await original(self)
-                raise OperationalError("commit ack lost", None, Exception("lost"))
-
-            monkeypatch.setattr(AsyncSession, "commit", commit_then_fail)
+            injector.arm("post")
             result = await repo.finalize_run(command)
-            monkeypatch.setattr(AsyncSession, "commit", original)
 
             reconcile = await repo.reconcile_finalize(
                 run_id, token=TOKEN, sha256=command.finalize_sha256
             )
             return result.outcome, reconcile.outcome
         finally:
-            monkeypatch.undo()
             await cleanup(resource, [run_id])
 
-    outcome, reconcile = run(with_repository(body))
+    outcome, reconcile = run(with_faulty_repository(injector, body))
     assert outcome is FinalizeOutcome.UNKNOWN
     assert reconcile is ReconcileOutcome.CONFIRMED
 
 
-def test_uncommitted_finalize_stays_pending_and_is_not_rewritten(monkeypatch):
-    from sqlalchemy.ext.asyncio import AsyncSession
+def test_uncommitted_finalize_stays_pending_and_is_not_rewritten():
+    injector = _FaultInjector()
 
     async def body(repo, resource):
         run_id = "0" * 32
@@ -454,14 +517,8 @@ def test_uncommitted_finalize_stays_pending_and_is_not_rewritten(monkeypatch):
                 final_last_event_seq=0,
                 expected_current_revision=None,
             )
-            original = AsyncSession.commit
-
-            async def fail_before_commit(self):
-                raise OperationalError("connection lost", None, Exception("lost"))
-
-            monkeypatch.setattr(AsyncSession, "commit", fail_before_commit)
+            injector.arm("pre")
             result = await repo.finalize_run(command)
-            monkeypatch.setattr(AsyncSession, "commit", original)
 
             reconcile = await repo.reconcile_finalize(
                 run_id, token=TOKEN, sha256=command.finalize_sha256
@@ -469,10 +526,9 @@ def test_uncommitted_finalize_stays_pending_and_is_not_rewritten(monkeypatch):
             state = await repo.get_run(run_id)
             return result.outcome, reconcile.outcome, state.status
         finally:
-            monkeypatch.undo()
             await cleanup(resource, [run_id])
 
-    outcome, reconcile, status = run(with_repository(body))
+    outcome, reconcile, status = run(with_faulty_repository(injector, body))
     assert outcome is FinalizeOutcome.UNKNOWN
     assert reconcile is ReconcileOutcome.STILL_PENDING
     assert status in {"queued", "running"}  # 未被自动改写

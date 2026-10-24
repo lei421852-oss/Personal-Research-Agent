@@ -94,7 +94,11 @@ class ResearchRunORM(Base):
     public_state: Mapped[dict] = mapped_column(
         JSONB, nullable=False, server_default=text("'{}'::jsonb")
     )
-    error: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
+    error: Mapped[dict | None] = mapped_column(
+        # SQL NULL 与 JSON null 必须区分：终态 CHECK 依赖 error IS NULL。
+        JSONB(none_as_null=True),
+        nullable=True,
+    )
     metrics: Mapped[dict] = mapped_column(
         JSONB, nullable=False, server_default=text("'{}'::jsonb")
     )
@@ -205,8 +209,12 @@ class ResearchReportORM(Base):
     snapshot_kind: Mapped[str] = mapped_column(Text, nullable=False)
     public_payload: Mapped[dict] = mapped_column(JSONB, nullable=False)
     payload_sha256: Mapped[str] = mapped_column(CHAR(64), nullable=False)
-    authority_payload: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
-    source_reference: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
+    authority_payload: Mapped[dict | None] = mapped_column(
+        JSONB(none_as_null=True), nullable=True
+    )
+    source_reference: Mapped[dict | None] = mapped_column(
+        JSONB(none_as_null=True), nullable=True
+    )
     created_at: Mapped[object] = mapped_column(TIMESTAMP(timezone=True), nullable=False)
 
     __table_args__ = (

@@ -558,9 +558,6 @@ class ResearchRepository:
         seqs = [event.seq for event in batch]
         if seqs != list(range(seqs[0], seqs[0] + len(seqs))):
             raise ConflictError("event_sequence_gap", run_id=run_id)
-        if seqs[0] != expected_last_seq + 1:
-            raise ConflictError("event_sequence_gap", run_id=run_id, detail=seqs[0])
-
         async with self.resource.session() as session, session.begin():
             run = await session.scalar(
                 select(ResearchRunORM)
@@ -571,13 +568,6 @@ class ResearchRepository:
                 raise RepositoryError("run_not_found", run_id=run_id)
             if run.status in TERMINAL:
                 raise ConflictError("run_already_terminal", run_id=run_id)
-            if run.last_event_seq != expected_last_seq:
-                raise ConflictError(
-                    "event_cursor_conflict",
-                    run_id=run_id,
-                    detail=run.last_event_seq,
-                )
-
             existing_rows = (
                 await session.execute(
                     select(ResearchEventORM.seq, ResearchEventORM.payload_sha256).where(
@@ -588,6 +578,22 @@ class ResearchRepository:
             ).all()
             existing = {seq: digest for seq, digest in existing_rows}
             to_insert, duplicates = plan_events(existing, batch)
+
+            if not to_insert:
+                # 整批已提交且内容一致：幂等重放，不推进高水位也不改版本。
+                return AppendResult((), tuple(duplicates), run.last_event_seq)
+
+            if run.last_event_seq != expected_last_seq:
+                raise ConflictError(
+                    "event_cursor_conflict",
+                    run_id=run_id,
+                    detail=run.last_event_seq,
+                )
+            if seqs[0] != expected_last_seq + 1 or duplicates:
+                # 只允许「全新批次」或「整批已存在」；部分重叠说明有其他写入者。
+                raise ConflictError(
+                    "event_cursor_conflict", run_id=run_id, detail=seqs[0]
+                )
 
             now = _utcnow()
             for event in to_insert:
@@ -825,12 +831,14 @@ class ResearchRepository:
                 run = await session.scalar(
                     select(ResearchRunORM).where(ResearchRunORM.run_id == run_id)
                 )
+                # 必须在 session 关闭前取值：关闭时的 rollback 会过期所有实例属性。
+                outcome = decide_reconcile(
+                    None if run is None else _state(run), token=token, sha256=sha256
+                )
+                record = None if run is None else _run_record(run)
         except StorageError:
             return ReconcileResult(ReconcileOutcome.UNAVAILABLE)
-        outcome = decide_reconcile(
-            None if run is None else _state(run), token=token, sha256=sha256
-        )
-        return ReconcileResult(outcome, None if run is None else _run_record(run))
+        return ReconcileResult(outcome, record)
 
     # ---- 内部 -----------------------------------------------------------
 

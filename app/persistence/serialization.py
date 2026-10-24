@@ -51,11 +51,11 @@ def utc_isoformat(moment: datetime) -> str:
 
 
 def _is_hex(value: str | None, length: int) -> bool:
+    # 不能用 str.islower()：纯数字字符串没有大小写字符，islower() 会返回 False。
     return (
         isinstance(value, str)
         and len(value) == length
-        and set(value) <= HEX64_CHARS
-        and value.islower()
+        and all(character in HEX64_CHARS for character in value)
     )
 
 
