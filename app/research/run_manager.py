@@ -3,6 +3,7 @@
 import asyncio
 import hashlib
 import json
+import logging
 import threading
 import time
 from dataclasses import dataclass, field
@@ -15,6 +16,8 @@ from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, model_v
 from app.research.run_events import RunEvent, sanitize_public
 from app.research.run_presenter import execution_events, present_execution
 from app.research.run_replay import ReplayError
+
+LOGGER = logging.getLogger(__name__)
 
 TERMINAL = frozenset({"completed", "failed", "cancelled"})
 
@@ -176,13 +179,13 @@ class ResearchRunManager:
         event.setdefault(
             "timestamp", datetime.now(UTC).isoformat() if source == "live" else None
         )
-        run.events.append(
-            RunEvent(
-                run_id=run.run_id,
-                event_id=len(run.events) + 1,
-                **event,
-            )
+        recorded = RunEvent(
+            run_id=run.run_id,
+            event_id=len(run.events) + 1,
+            **event,
         )
+        run.events.append(recorded)
+        return recorded
 
     def _sink(self, run):
         loop = asyncio.get_running_loop()
@@ -232,7 +235,9 @@ class ResearchRunManager:
             ):
                 run.paper_selection = sanitize_public(details)
                 run.paper_ids = list(details.get("selected_paper_ids", []))
-            self._append(run, **event)
+            recorded = self._append(run, **event)
+            if recorded is not None and self.lifecycle is not None:
+                self.lifecycle.on_event(run.run_id, recorded)
 
     async def create(self, request: ResearchRunRequest):
         if self._closed:
@@ -297,6 +302,28 @@ class ResearchRunManager:
             fingerprint,
         )
         self._runs[run.run_id] = run
+        if self.lifecycle is not None:
+            # 创建记录必须先可靠提交，才有首次调度资格。
+            try:
+                await self.lifecycle.start(
+                    run_id=run.run_id,
+                    payload={
+                        "question": request.question,
+                        "paper_ids": list(request.paper_ids),
+                        "language_mode": request.language_mode,
+                        "max_model_calls": request.max_model_calls,
+                    },
+                    fingerprint=fingerprint,
+                    created_at=datetime.now(UTC),
+                )
+            except Exception:
+                LOGGER.warning("run persistence start failed", exc_info=True)
+                self._runs.pop(run.run_id, None)
+                raise RunManagerError(
+                    "run_persistence_incomplete",
+                    "任务未能可靠保存，未启动研究执行。",
+                    503,
+                ) from None
         run.task = asyncio.create_task(
             self._execute(run, request), name=f"research:{run.run_id}"
         )
@@ -359,6 +386,9 @@ class ResearchRunManager:
     async def _execute(self, run, request):
         try:
             async with self._slots:
+                if self.lifecycle is not None:
+                    # 先持久化 running，成功后才调用 Provider/Runner。
+                    await self.lifecycle.mark_running(run.run_id)
                 run.status = "running"
                 execution = await asyncio.wait_for(
                     self.runner.run(request, self._sink(run)),
@@ -477,8 +507,9 @@ class ResearchRunManager:
             run.persistence_error = "finalize_timeout"
             run.persisted = False
         except asyncio.CancelledError:
+            # 收尾任务被取消属于明确的失败状态，记录后不再向上抛，
+            # 由 close 统一报告未完成情况。
             run.persistence_error = "finalize_cancelled"
-            raise
         except Exception as exc:  # noqa: BLE001 - 只保留稳定错误码
             run.persistence_error = getattr(exc, "code", type(exc).__name__)
             run.persisted = False
@@ -513,6 +544,8 @@ class ResearchRunManager:
             "error": run.error,
             "events": len(run.events),
             "late_events": run.late_events,
+            "report": run.report,
+            "finished_at": datetime.now(UTC),
         }
 
     async def replay(self, case_id):

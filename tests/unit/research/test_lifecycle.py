@@ -34,9 +34,21 @@ class Recorder:
 
     def __init__(self, *, gate: asyncio.Event | None = None, error=None):
         self.calls: list[dict] = []
+        self.started_runs: list[str] = []
+        self.running: list[str] = []
+        self.events: list[tuple[str, int]] = []
         self.closed = False
         self.gate = gate
         self.error = error
+
+    async def start(self, *, run_id, payload, fingerprint, created_at=None):
+        self.started_runs.append(run_id)
+
+    async def mark_running(self, run_id):
+        self.running.append(run_id)
+
+    def on_event(self, run_id, event):
+        self.events.append((run_id, event.event_id))
 
     async def finish(self, run_id, snapshot):
         if self.gate is not None:

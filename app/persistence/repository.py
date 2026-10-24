@@ -179,6 +179,8 @@ class RunRecord:
     event_limit_reached: bool
     public_state: dict
     effective_paper_ids: list
+    finalize_token: str | None = None
+    finalize_sha256: str | None = None
 
 
 @dataclass(frozen=True)
@@ -360,6 +362,8 @@ def _run_record(row: ResearchRunORM) -> RunRecord:
         event_limit_reached=row.event_limit_reached,
         public_state=row.public_state or {},
         effective_paper_ids=list(row.effective_paper_ids or []),
+        finalize_token=row.finalize_token,
+        finalize_sha256=row.finalize_sha256,
     )
 
 
