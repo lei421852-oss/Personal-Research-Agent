@@ -3,6 +3,7 @@
 import asyncio
 import hashlib
 import json
+import threading
 import time
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
@@ -74,6 +75,15 @@ class _Run:
     research_question: str | None = None
     query_language: dict = field(default_factory=dict)
     paper_selection: dict = field(default_factory=dict)
+    # 持久化生命周期：ingress 屏障、迟到事件、受管理收尾任务。
+    ingress_closed: bool = False
+    pending_deliveries: int = 0
+    delivery_event: asyncio.Event | None = None
+    late_events: int = 0
+    finalize_task: asyncio.Task | None = None
+    persisted: bool = False
+    persistence_error: str | None = None
+    delivery_lock: threading.Lock = field(default_factory=threading.Lock)
 
 
 class ResearchRunManager:
@@ -91,6 +101,8 @@ class ResearchRunManager:
         history_ttl_seconds=3600,
         timeout_seconds=420,
         max_events=1000,
+        lifecycle=None,
+        finalize_timeout=10.0,
     ):
         if (
             max_concurrent_runs < 1
@@ -110,6 +122,9 @@ class ResearchRunManager:
         self.history_ttl_seconds = history_ttl_seconds
         self.timeout_seconds = timeout_seconds
         self.max_events = max_events
+        self.lifecycle = lifecycle
+        self.finalize_timeout = finalize_timeout
+        self._finalize_tasks: dict[str, asyncio.Task] = {}
         self._slots = asyncio.Semaphore(max_concurrent_runs)
         self._runs: dict[str, _Run] = {}
         self._closed = False
@@ -173,31 +188,51 @@ class ResearchRunManager:
         loop = asyncio.get_running_loop()
 
         def emit(**event):
+            # 关闭接收后到达的回调是迟到事件：计数但不再进入报告/事件流。
+            if run.ingress_closed:
+                with run.delivery_lock:
+                    run.late_events += 1
+                return
+            with run.delivery_lock:
+                run.pending_deliveries += 1
+
             # Provider/检索由旧适配器在线程中执行；所有事件序号在主循环串行分配。
             def deliver():
-                if run.status not in TERMINAL:
-                    # 原报告已生成时立即可查看，翻译不阻塞原文读取。
-                    snapshot = event.pop("report_snapshot", None)
-                    if isinstance(snapshot, dict):
-                        run.report = sanitize_public(snapshot)
-                    details = event.get("details", {})
-                    if (
-                        event.get("node_type") == "QueryLanguage"
-                        and event.get("event_type") == "completed"
-                    ):
-                        run.query_language = sanitize_public(details)
-                        run.research_question = details.get("research_question")
-                    if (
-                        event.get("node_type") == "PaperSelection"
-                        and event.get("event_type") == "completed"
-                    ):
-                        run.paper_selection = sanitize_public(details)
-                        run.paper_ids = list(details.get("selected_paper_ids", []))
-                    self._append(run, **event)
+                try:
+                    self._deliver(run, event)
+                finally:
+                    with run.delivery_lock:
+                        run.pending_deliveries -= 1
+                        if (
+                            run.pending_deliveries == 0
+                            and run.delivery_event is not None
+                        ):
+                            run.delivery_event.set()
 
             loop.call_soon_threadsafe(deliver)
 
         return emit
+
+    def _deliver(self, run, event):
+        if run.status not in TERMINAL:
+            # 原报告已生成时立即可查看，翻译不阻塞原文读取。
+            snapshot = event.pop("report_snapshot", None)
+            if isinstance(snapshot, dict):
+                run.report = sanitize_public(snapshot)
+            details = event.get("details", {})
+            if (
+                event.get("node_type") == "QueryLanguage"
+                and event.get("event_type") == "completed"
+            ):
+                run.query_language = sanitize_public(details)
+                run.research_question = details.get("research_question")
+            if (
+                event.get("node_type") == "PaperSelection"
+                and event.get("event_type") == "completed"
+            ):
+                run.paper_selection = sanitize_public(details)
+                run.paper_ids = list(details.get("selected_paper_ids", []))
+            self._append(run, **event)
 
     async def create(self, request: ResearchRunRequest):
         if self._closed:
@@ -227,7 +262,7 @@ class ResearchRunManager:
         active = [
             r
             for r in self._runs.values()
-            if r.mode == "live" and r.status not in TERMINAL
+            if r.mode == "live" and self._occupies_capacity(r)
         ]
         if any(r.fingerprint == fingerprint for r in active):
             raise RunManagerError(
@@ -414,6 +449,71 @@ class ResearchRunManager:
             run.finished_at = time.monotonic()
         elif not task.cancelled():
             task.exception()
+        # 同步 done callback 不能写库；持久化收尾交给受管理的异步任务。
+        self._schedule_finalize(run)
+
+    def _occupies_capacity(self, run) -> bool:
+        """终态但收尾未完成的 run 仍占用 admission 名额。"""
+
+        if run.status not in TERMINAL:
+            return True
+        return run.finalize_task is not None and not run.finalize_task.done()
+
+    def _schedule_finalize(self, run) -> None:
+        if self.lifecycle is None or run.mode != "live":
+            return
+        if run.finalize_task is not None and not run.finalize_task.done():
+            return
+        task = asyncio.create_task(self._finalize(run), name=f"finalize:{run.run_id}")
+        run.finalize_task = task
+        self._finalize_tasks[run.run_id] = task
+
+    async def _finalize(self, run) -> None:
+        try:
+            await asyncio.wait_for(
+                self._finish_persistently(run), self.finalize_timeout
+            )
+        except TimeoutError:
+            run.persistence_error = "finalize_timeout"
+            run.persisted = False
+        except asyncio.CancelledError:
+            run.persistence_error = "finalize_cancelled"
+            raise
+        except Exception as exc:  # noqa: BLE001 - 只保留稳定错误码
+            run.persistence_error = getattr(exc, "code", type(exc).__name__)
+            run.persisted = False
+
+    async def _finish_persistently(self, run) -> None:
+        await self._drain_ingress(run)
+        if self.lifecycle is None:
+            return
+        await self.lifecycle.finish(run.run_id, self._snapshot(run))
+        run.persisted = True
+
+    async def _drain_ingress(self, run) -> None:
+        """停止接收新事件，并等待关闭前已接受的跨线程投递全部执行。"""
+
+        run.ingress_closed = True
+        with run.delivery_lock:
+            remaining = run.pending_deliveries
+        if remaining == 0:
+            return
+        if run.delivery_event is None:
+            run.delivery_event = asyncio.Event()
+        with run.delivery_lock:
+            if run.pending_deliveries == 0:
+                return
+        await run.delivery_event.wait()
+
+    @staticmethod
+    def _snapshot(run) -> dict:
+        return {
+            "run_id": run.run_id,
+            "status": run.status,
+            "error": run.error,
+            "events": len(run.events),
+            "late_events": run.late_events,
+        }
 
     async def replay(self, case_id):
         if self._closed:
@@ -544,6 +644,8 @@ class ResearchRunManager:
         return self.status(identity)
 
     async def close(self):
+        """拒绝新请求 → 取消研究 → 等待投递与收尾 → 关闭 lifecycle。"""
+
         self._closed = True
         pending = []
         for run in self._runs.values():
@@ -554,3 +656,20 @@ class ResearchRunManager:
                 pending.append(run.task)
         if pending:
             await asyncio.gather(*pending, return_exceptions=True)
+
+        # done callback 已登记收尾任务；这里等待它们，而不是直接关库。
+        finalizers = [task for task in self._finalize_tasks.values() if not task.done()]
+        if finalizers:
+            await asyncio.wait(finalizers, timeout=self.finalize_timeout)
+        unfinished = tuple(
+            run_id for run_id, task in self._finalize_tasks.items() if not task.done()
+        )
+        for task in self._finalize_tasks.values():
+            if task.done() and not task.cancelled():
+                task.exception()
+
+        if self.lifecycle is not None:
+            close = getattr(self.lifecycle, "close", None)
+            if close is not None:
+                await close()
+        return unfinished
