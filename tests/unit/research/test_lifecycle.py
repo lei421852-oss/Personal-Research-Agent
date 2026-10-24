@@ -41,8 +41,19 @@ class Recorder:
         self.gate = gate
         self.error = error
 
-    async def start(self, *, run_id, payload, fingerprint, created_at=None):
+    async def start(
+        self,
+        *,
+        run_id,
+        payload,
+        fingerprint,
+        created_at=None,
+        idempotency_key_hash=None,
+    ):
         self.started_runs.append(run_id)
+
+    async def find_by_key(self, digest):
+        return None
 
     async def mark_running(self, run_id):
         self.running.append(run_id)
