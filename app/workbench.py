@@ -1,6 +1,6 @@
 """独立研究工作台入口；不修改被冻结的单问题应用。"""
 
-from contextlib import asynccontextmanager
+from contextlib import AsyncExitStack, asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, Request
@@ -9,36 +9,50 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.api.research_runs import router
+from app.api.storage import router as storage_router
+from app.persistence.config import DatabaseSettings
+from app.persistence.database import DatabaseResource
+from app.persistence.errors import StorageError
 from app.research.run_manager import ResearchRunManager, RunManagerError
 
 WEB = Path(__file__).parent / "workbench_web"
 
 
-def create_app(*, manager_factory=None):
+def create_app(*, manager_factory=None, database_settings=None, database_factory=None):
     @asynccontextmanager
     async def lifespan(application):
-        if manager_factory is None:
-            from app.research.react_runtime import ReActWorkbenchRuntime
-            from app.research.run_replay import ReplayRepository
-            from app.research.workbench_dependencies import WorkbenchDependencies
-
-            dependencies = WorkbenchDependencies()
-            runtime = ReActWorkbenchRuntime(dependencies)
-            created = ResearchRunManager(
-                runtime,
-                dependencies,
-                ReplayRepository(Path(__file__).resolve().parents[1]),
+        # 后登记的Manager先关闭；即使构造或关闭失败，DB回调仍会执行。
+        async with AsyncExitStack() as cleanup:
+            settings = (
+                DatabaseSettings.from_environment()
+                if database_settings is None
+                else database_settings
             )
-        else:
-            created = manager_factory()
-        application.state.research_manager = created
-        try:
+            database = (database_factory or DatabaseResource)(settings)
+            cleanup.push_async_callback(database.close)
+            await database.start()
+            application.state.database = database
+            if manager_factory is None:
+                from app.research.react_runtime import ReActWorkbenchRuntime
+                from app.research.run_replay import ReplayRepository
+                from app.research.workbench_dependencies import WorkbenchDependencies
+
+                dependencies = WorkbenchDependencies()
+                runtime = ReActWorkbenchRuntime(dependencies)
+                created = ResearchRunManager(
+                    runtime,
+                    dependencies,
+                    ReplayRepository(Path(__file__).resolve().parents[1]),
+                )
+            else:
+                created = manager_factory()
+            cleanup.push_async_callback(created.close)
+            application.state.research_manager = created
             yield
-        finally:
-            await created.close()
 
     application = FastAPI(title="多模态论文研究工作台", lifespan=lifespan)
     application.include_router(router)
+    application.include_router(storage_router)
     application.mount(
         "/workbench-static", StaticFiles(directory=WEB), name="workbench-static"
     )
@@ -46,6 +60,13 @@ def create_app(*, manager_factory=None):
     @application.get("/", include_in_schema=False)
     def home():
         return FileResponse(WEB / "index.html", media_type="text/html")
+
+    @application.exception_handler(StorageError)
+    async def storage_error(request: Request, exc: StorageError):
+        return JSONResponse(
+            status_code=503,
+            content={"status": "unavailable", "error": exc.public_error()},
+        )
 
     @application.exception_handler(RunManagerError)
     async def managed_error(request: Request, exc: RunManagerError):
