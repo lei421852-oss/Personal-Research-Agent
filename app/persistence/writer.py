@@ -16,8 +16,10 @@ from dataclasses import dataclass
 from app.persistence.errors import StorageError
 from app.persistence.repository import (
     AppendResult,
+    ConflictError,
     EventCommand,
     RepositoryError,
+    TransitionOutcome,
 )
 from app.persistence.serialization import ReportCommand
 
@@ -59,6 +61,14 @@ class AppendEvents:
 class SaveReport:
     run_id: str
     command: ReportCommand
+
+
+@dataclass(frozen=True)
+class SavePaperSelection:
+    """已确认的实际范围；同一次研究的多个子任务保留真实选择的并集。"""
+
+    run_id: str
+    paper_ids: tuple[str, ...]
 
 
 @dataclass(frozen=True)
@@ -310,6 +320,27 @@ class RunWriter:
                 expected_last_seq=command.expected_last_seq,
             )
             self._last_event_seq = max(self._last_event_seq, result.last_event_seq)
+            return
+        if isinstance(command, SavePaperSelection):
+            record = await self.repository.get_run(command.run_id)
+            if record is None:
+                raise RepositoryError("run_not_found", run_id=command.run_id)
+            selected = list(
+                dict.fromkeys([*record.effective_paper_ids, *command.paper_ids])
+            )
+            selection = {"status": "selected", "selected_paper_ids": selected}
+            state = {**record.public_state, "paper_selection": selection}
+            if record.effective_paper_ids == selected and record.public_state == state:
+                return
+            result = await self.repository.transition_run(
+                command.run_id,
+                expected_version=record.state_version,
+                from_statuses=(record.status,),
+                to_status=record.status,
+                patch={"effective_paper_ids": selected, "public_state": state},
+            )
+            if result.outcome is not TransitionOutcome.UPDATED:
+                raise ConflictError("paper_selection_conflict", run_id=command.run_id)
             return
         if isinstance(command, SaveReport):
             await self.repository.save_report_revision(command.run_id, command.command)

@@ -19,7 +19,7 @@ from app.persistence.serialization import (
     build_report_command,
     sha256_hex,
 )
-from app.persistence.writer import AppendEvents, RunWriter
+from app.persistence.writer import AppendEvents, RunWriter, SavePaperSelection
 
 
 @dataclass(frozen=True)
@@ -151,6 +151,32 @@ class RunPersistence:
                 expected_last_seq=event.event_id - 1,
             )
         )
+        # 只有真实选择完成，或已进入持有明确范围的Planner时，才能确认实际范围。
+        selected = None
+        if (
+            event.node_type == "PaperSelection"
+            and event.event_type == "completed"
+            and event.status == "completed"
+        ):
+            selected = event.details.get("selected_paper_ids")
+        elif (
+            event.node_type == "Planner"
+            and event.event_type == "started"
+            and event.status == "running"
+        ):
+            selected = event.details.get("paper_ids")
+        if (
+            isinstance(selected, list)
+            and selected
+            and all(isinstance(item, str) and item.strip() for item in selected)
+        ):
+            # 与事件使用同一个串行队列；终态flush同时等待选择结果提交。
+            writer.submit(
+                SavePaperSelection(
+                    run_id=run_id,
+                    paper_ids=tuple(dict.fromkeys(item.strip() for item in selected)),
+                )
+            )
 
     async def finish(self, run_id: str, snapshot: dict) -> None:
         """等待屏障后用协调器提交终态；未知结果只做只读核对。"""

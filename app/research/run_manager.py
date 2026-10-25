@@ -408,7 +408,22 @@ class ResearchRunManager:
                     created_at=datetime.now(UTC),
                     idempotency_key_hash=key_digest,
                 )
-            except Exception:
+            except Exception as exc:
+                from app.persistence.repository import ConflictError
+
+                if (
+                    isinstance(exc, ConflictError)
+                    and exc.code == "duplicate_active_fingerprint"
+                    and exc.detail == "uq_research_runs_active_fingerprint"
+                ):
+                    # 数据库已明确拒绝第二条记录；撤销本次候选，不继承调度资格。
+                    self._admissions.discard(run.run_id)
+                    self._runs.pop(run.run_id, None)
+                    raise RunManagerError(
+                        "duplicate_run",
+                        "相同问题与论文的任务仍在执行，请查看已有任务。",
+                        409,
+                    ) from None
                 LOGGER.warning("run persistence start failed", exc_info=True)
                 # 提交结果无法确认：登记失败，让同键重放方立刻拿到同一判定而不是等超时。
                 self._admissions.mark_failed(run.run_id, _SUBMISSION_UNKNOWN)
@@ -674,7 +689,12 @@ class ResearchRunManager:
             "status": record.status,
             "created_at": record.created_at.isoformat() if record.created_at else None,
             "question": (record.request_payload or {}).get("question"),
-            "paper_ids": list(record.effective_paper_ids or []),
+            "paper_ids": list(
+                record.effective_paper_ids
+                or (record.request_payload or {}).get("paper_ids")
+                or []
+            ),
+            "paper_selection": (record.public_state or {}).get("paper_selection") or {},
             "events_count": record.last_event_seq,
             "cancel_requested": record.cancel_requested,
             "error": record.error,
@@ -884,6 +904,14 @@ class ResearchRunManager:
         if self.lifecycle is None:
             return None, self._get(identity), True
         memory = self._runs.get(identity)
+        if memory is not None and memory.persistence_error:
+            raise RunManagerError(
+                "run_persistence_incomplete",
+                "该任务的持久化写入未可靠完成，请只读核对已有记录。",
+                503,
+                retry_mode="reconcile_only",
+                run_id=identity,
+            )
         # 存储层故障由 DatabaseResource 转成 StorageError 上抛 → 503。
         record = await self.lifecycle.get_run(identity)
         if record is not None:
@@ -910,12 +938,10 @@ class ResearchRunManager:
         report = (memory.report if memory is not None else None) or {}
         language = report.get("language")
         language = language if isinstance(language, dict) else {}
-        if memory is not None:
-            paper_ids = list(memory.paper_ids)
-        elif record.effective_paper_ids:
+        if record.effective_paper_ids:
             paper_ids = list(record.effective_paper_ids)
         else:
-            # 创建时未写 effective_paper_ids：退回请求范围，不伪造成已选范围。
+            # 实际范围尚未确认：兼容字段只回退到数据库中的原始请求范围。
             paper_ids = list(payload.get("paper_ids") or [])
         metrics = record.metrics or report.get("metrics") or {}
         return sanitize_public(

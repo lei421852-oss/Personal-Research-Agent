@@ -1,100 +1,150 @@
-# H2.2阶段1：可选数据库基础设施
+# H2.2：研究运行持久化使用与故障处理
 
-本阶段只提供PostgreSQL连接配置、AsyncEngine、Session工厂和连接健康检查。**研究任务、事件和报告仍保存在原内存管理器中**；数据库健康不表示这些内容已持久化。本阶段没有业务ORM、Repository、Alembic或自动恢复。
+本指南对应阶段2.5的实际代码。默认仍为内存模式；启用数据库且使用默认Manager装配时，Run、Event、Report会写入PostgreSQL，状态/事件/报告三个GET以已提交记录为依据。回放仍是独立文件来源，不写成真实研究。
 
-## 安装与依赖锁
+## 安装与配置
 
-推荐Python3.12、Linux/WSL，在源码根目录操作。基础锁包含现有api/llm extras，数据库锁包含SQLAlchemy[asyncio]/asyncpg；测试锁另包含原data extra声明的PyMuPDF，供既有Prepared PDF测试使用。不自动安装Torch、下载模型或建立索引。
+基础依赖和数据库依赖沿用已有锁文件。在源码根目录的独立虚拟环境中安装：
 
 ```bash
-python3.12 -m venv artifacts/h2-stage1/dev-env
-source artifacts/h2-stage1/dev-env/bin/activate
 python -m pip install --require-hashes -r requirements-runtime.lock -r requirements-persistence.lock -r requirements-h2-test.lock
 python -m pip install --no-deps -e .
 python -m pip check
 ```
 
-仅运行时省略requirements-h2-test.lock，安装源码可用`python -m pip install --no-deps .`。项目仍要求源码checkout；wheel不是完整论文/configs/工作台资源分发包。运行锁不包含构建后端、系统包或模型缓存，相关工具链需另行记录。
+迁移工具另见`requirements-migrations.txt`。当前尚无`requirements-migrations.lock`；安装该输入文件不等于完整的哈希锁定复现。此缺口保留为后续工作，不在本阶段调整依赖配置。完整研究回归仍依赖既有retrieval/vision/data资源，最小安装通过不能替代完整测试。
 
-默认禁用数据库时只需基础运行锁，SQLAlchemy/asyncpg不必安装：
+数据库设置只读取进程环境或显式注入值，不主动加载`.env`。`H2_DATABASE_ENABLED`默认false；启用必须安全注入`H2_DATABASE_URL`。URL必须使用postgresql+asyncpg，明确主机、库名、账号、密码，只接受ssl参数disable/require/verify-full，默认require。不要在源码、ini、命令历史、日志或报告中保存完整DSN。
 
-```bash
-python -m pip install --require-hashes -r requirements-runtime.lock
-python -m pip install --no-deps -e .
-```
+| 运行方式 | 实际行为 |
+|---|---|
+| 默认禁用 | 沿用内存与回放；不导入SQLAlchemy/asyncpg/业务ORM |
+| 数据库启用，默认装配 | create_app装配ResearchRepository、TerminalCoordinator和RunPersistence，创建及三个GET走数据库 |
+| 数据库启用，注入manager_factory | 由调用方提供持久化栈，create_app不代替调用方装配 |
 
-维护者在独立工具环境生成锁，输入范围在requirements-persistence.txt和requirements-h2-test.txt中，冻结pyproject不变：
+**当前没有另一个H2_PERSISTENCE_ENABLED开关。打开H2_DATABASE_ENABLED并使用默认装配，就会启用业务持久化，不再只是连接健康检查。**
 
-```bash
-python -m pip install 'pip-tools==7.6.2'
-python -m piptools compile --extra api --extra llm --generate-hashes --no-emit-index-url --no-emit-trusted-host --output-file requirements-runtime.lock pyproject.toml
-python -m piptools compile --generate-hashes --no-emit-index-url --no-emit-trusted-host --output-file requirements-persistence.lock requirements-persistence.txt
-python -m piptools compile --generate-hashes --no-emit-index-url --no-emit-trusted-host --output-file requirements-h2-test.lock requirements-h2-test.txt
-```
-
-提交锁文件前核对没有个人包源、凭据或本地绝对路径。相同输入优先复用已有锁，不自动upgrade；版本更新必须重新安装和回归。跨平台或其他Python版本应重新解析验证。
-
-## 配置
-
-默认`H2_DATABASE_ENABLED=false`，不会读取其余H2配置、导入数据库驱动或创建连接。数据库设置只读取进程环境或create_app显式注入值，**不读取项目.env**。现有Provider的.env读取方式没有改变。
-
-启用时由部署者安全注入`H2_DATABASE_ENABLED=true`与`H2_DATABASE_URL`，不要把真实连接串放进文档、命令历史、截图或Git。驱动必须是postgresql+asyncpg，明确提供host、database、username、password，端口默认5432；特殊字符需正确URL编码。
-
-允许的查询项只有`ssl=disable|require|verify-full`，缺省require；require是加密而非证书身份验证，verify-full还校验证书/主机名。disable只用于明确的本地临时环境。其他连接参数、多个ssl值、多host/Unix socket和自定义客户端证书不在第一版范围。
-
-| 环境变量 | 默认 | 范围 |
-|---|---:|---|
-| H2_DATABASE_POOL_SIZE | 2 | 1–10 |
-| H2_DATABASE_MAX_OVERFLOW | 0 | 0–10 |
-| H2_DATABASE_POOL_TIMEOUT | 5秒 | 大于0且不超过60 |
-| H2_DATABASE_CONNECT_TIMEOUT | 5秒 | 大于0且不超过60 |
-| H2_DATABASE_COMMAND_TIMEOUT | 5秒 | 大于0且不超过60 |
-| H2_DATABASE_HEALTH_TIMEOUT | 5秒 | 大于0且不超过60 |
-
-固定pool_pre_ping=true、pool_recycle=1800秒、echo/echo_pool=false、hide_parameters=true。只使用SQLAlchemy异步池，不叠加asyncpg.create_pool；没有应用层自动重试。pre_ping能检查checkout时的失效连接，不保证事务中断可重放。
-
-## 生命周期与Session
-
-现有`python -m scripts.launch`入口保留。启用且配置有效时，在工作台lifespan中创建一个Engine和async_sessionmaker；创建本身不建立网络连接，不在startup自动探测目标。每个lifespan独立创建资源，不跨事件循环复用。
-
-启动中途失败也会清理已创建资源；关闭按Manager.close、DatabaseResource.close顺序，Manager关闭异常不跳过数据库清理。关闭拒绝新Session，清理受管理Session后await engine.dispose。
-
-`get_db_session`为需要数据库的消费者提供独立Session，expire_on_commit=false、autoflush=false，不自动commit；正常/异常退出rollback未提交事务并close，取消保持CancelledError。现有研究请求没有接入该依赖，不能把Session跨线程共享或持有至整个研究结束。
-
-取消/关闭清理有5秒预算；超时返回storage_cleanup_failed，不能声称任意驱动或外部Session一定被强制清理。所有Session应通过本资源作用域创建。
-
-## 独立连接健康检查
-
-`GET /api/storage/health`：
-
-- 默认禁用：200，status=disabled，scope=connection_only，不连接。
-- 启用后的显式检查：一次SELECT 1，成功200/ready，仅表示本次连接可用。
-- 连接/认证故障：503/storage_unavailable。
-- 池等待超时：503/storage_pool_timeout；总体/命令超时：503/storage_health_timeout。
-- 非有效lifespan或关闭中：503/storage_not_initialized或storage_closing。
-
-响应和日志不包含URL、密码或驱动原始异常。启用配置错误/缺驱动会以固定安全code使startup失败；默认禁用不受影响。研究health与launch --check仍沿用原语义，**它们不会顺便连接PostgreSQL**。本阶段不把数据库故障当研究证据不足。
-
-## 测试与授权边界
+应用账号与迁移账号分别配置。迁移唯一读取`H2_MIGRATION_DATABASE_URL`，不回退应用URL；应用启动不执行create_all、upgrade或stamp。已有启动入口仍是：
 
 ```bash
-python -m pytest -q tests/unit/persistence
-python -m pytest -q tests/integration/test_database_infrastructure_postgresql.py
-python -m pytest -q tests/test_research_runs_api.py tests/test_research_replay.py tests/unit/research/test_workbench_dependencies.py
-ruff check app tests scripts eval
-ruff format --check app tests scripts eval
+python -m scripts.launch
 ```
 
-单元测试使用Fake连接或惰性构造，不需要PostgreSQL。禁用回放测试在子进程中主动阻止SQLAlchemy/asyncpg导入。
+## 任务、事件与报告
 
-临时PostgreSQL集成测试只有维护者明确授权目标并设置`H2_TEST_DATABASE_AUTHORIZED=yes`及`H2_TEST_DATABASE_URL`才允许执行，否则skip。目标须为确认可丢弃的独立本地库，库名以personal_agent_test_开头，且与运行库不同；命名/本机地址不能代替人工授权。fixture不建库、不建表、不迁移，不回退运行URL。测试仅SELECT，包含错误rollback、pg_sleep超时、池耗尽和连接失效；不操作正式数据库或终止其backend。
+- 数据库创建记录可靠提交前，不启动研究Task；同键首次创建只有获胜者有调度资格。
+- `request_payload`保存完整已验证请求，包括原问题、请求paper_ids、language_mode和max_model_calls。活跃fingerprint不是永久幂等键，也不替代完整请求hash。
+- 事件由Manager主事件循环分配序号，经过公开字段脱敏后进入现有有界串行Writer。event_id、source及发生时间保持真实；derived/replay缺少时间时不伪造为实时事件。
+- 事件高水位仅表示连续已提交前缀。队列中待写数据不是已提交历史；GET不会以缓存掩盖数据库不可用。
+- 报告revision在命令构建期预分配并冻结；重试不自动换号。读取复核沿用唯一report_content_hash口径，覆盖schema_version、snapshot_kind、public_payload、authority_payload、source_reference。
+- 最终报告、指针、尾部事件高水位、状态、finished_at及终态token/hash按现有Repository事务提交。报告状态、答案状态与运行状态是不同词表，不能互相推导。
+- 默认内存TTL只清缓存，不删除数据库历史；首版没有新增历史列表、搜索或UI。
 
-完整旧套件仍需要原retrieval/vision/data依赖和历史资源。新环境仅最小套件通过不等于完整研究回归；缺历史索引要分别报告，而非更改测试预期或自动下载模型。
+## 论文范围的两种语义
 
-## 后续阶段及人工维护
+| 字段 | 含义 |
+|---|---|
+| request_payload.paper_ids | 原始请求候选/目标范围，选择后也不覆盖 |
+| effective_paper_ids | 已确认的实际研究范围；只有真实选择完成，或Planner已取得明确范围时才写入 |
+| public_state.paper_selection | 已提交的最小选择标记：status=selected和selected_paper_ids；不是完整选择理由或模型统计 |
 
-本阶段不会自动判死、接管、重启或清理遗留研究任务，也没有幂等创建、调度窗口标记和报告版本表；这些保留在已审查的H2.1设计中。
+实际范围由PaperSelection完成事件或带明确paper_ids的Planner开始事件确认。主Agent可以启动多个研究子任务，持久化保留这些真实确认范围的有序并集；去除空白与重复ID，不自动补论文或改写ID。
 
-后续若实现遗留任务维护，必须先停止新请求，确认全部实例/在途调用停止，只读列出run_id、owner、状态、版本、报告及事件高水位；维护者逐项授权后才按预期状态/版本短事务更新，读回核验并保留记录。未经授权不能执行DDL/DML；本指南没有维护写库CLI。
+选择确认前，effective_paper_ids仍为空且没有selected标记；任务在选择前失败不把输入范围伪装成选择结果。选择写入与事件走同一串行Writer，终态flush等待两者完成。已有CAS更新保留首次started_at，不因补充选择元数据而重置开始时间。
 
-阶段1停止于基础设施验收。Schema核验、业务模型、迁移和持久化接入均须后续独立批准。
+状态GET和同键重放中的paper_ids优先取数据库已提交effective_paper_ids；未确定时为兼容旧DTO退回数据库request_payload.paper_ids。**这时paper_ids表示请求范围，不能把非空输入误读为实际已选结果，应同时看paper_selection标记。** 不使用尚未提交的内存paper_ids冒充数据库事实。
+
+重启后仍从相同列读取范围。research_question、query_language等未覆盖写路径的展示信息仍可能为null或空字典；answer_status、execution_mode、report_language_status依赖内存展示补充时也可能为null。报告GET是报告正文、引用与版本信息的权威来源，不能从状态展示字段的缺失推断报告已丢失。
+
+## HTTP错误与重放
+
+保持Idempotency-Key及Idempotency-Replay-Only契约；同键读取先于普通活跃指纹检查。只查重放不创建记录、不调度、不调用Runner。单实例内提交/注册窗口的admission逻辑不变。
+
+| 场景 | HTTP / code | 下一步 |
+|---|---|---|
+| 新建且记录提交、Task安排成功 | 202 | 按原run_id轮询 |
+| 同键同请求、本实例持有或可靠终态 | 200，Idempotency-Replayed=true | 不执行第二次研究 |
+| 同键不同完整请求 | 409 idempotency_key_conflict | 不用修改后的请求复用原键 |
+| 当前内存已知活跃重复 | 409 duplicate_run | 查原运行，不新建 |
+| 重启后数据库明确给出活跃指纹唯一冲突 | 409 duplicate_run | 无第二条run、无额外Runner调用；不接管旧任务 |
+| 非终态但本实例未持有 | 409 run_not_attached | 原run只读查询，必要时人工处理 |
+| 只查重放未找到记录 | 404 submission_not_found | 不自动切回创建 |
+| 数据库确实无该run | 404 run_not_found | 区别于存储故障 |
+| 数据库不可用 | 503 storage_unavailable或storage_pool_timeout | 不冒充404或空结果 |
+| 创建提交结果未知/未识别的创建异常 | 503 submission_outcome_unknown，retry_mode=reconcile_only | 同键只读核对，不自动重建或调度 |
+| 调度窗口结果仍未知 | 503 task_scheduling_outcome_unknown，reconcile_only | 不由其他请求补建Task |
+| 已确认调度失败并可靠失败收尾 | 500 task_scheduling_failed，沿用既有safe_retry语义 | 不在原请求内自动安排；新研究需显式新请求 |
+| 已知写入/收尾/内容校验不完整 | 503 run_persistence_incomplete，reconcile_only | 不拿内存completed/报告冒充成功 |
+| 尚无报告 | 409 report_not_available | 已有run与报告缺失分开表达 |
+| 非法游标 | 422 invalid_cursor | 修正after |
+
+仅Repository明确识别`ConflictError.code=duplicate_active_fingerprint`且约束名为`uq_research_runs_active_fingerprint`时，创建阶段才进入新增409分支。不能把所有IntegrityError、ConflictError或超时归为409；约束名无法识别时也不能误报CREATED。其余创建异常维持保守503/reconcile_only，不扩展提交阶段判定协议。
+
+StorageError继续使用既有信封`status=unavailable,error={code,message,retryable}`；RunManagerError继续使用其既有信封，不在本轮强行统一。
+
+## UNKNOWN、FOREIGN_TERMINAL与研究失败
+
+`UNKNOWN`不等于`rolled_back`。已经发出COMMIT后无法确认结果的终态尝试，永远不能自动重新进入写路径，只能调用独立的只读reconcile_finalize。`finalize_run`与`reconcile_finalize`不是同一个操作，后者不写数据。
+
+- CONFIRMED：当前token与内容hash对应的已提交事实得到核对。
+- FOREIGN_TERMINAL：数据库有其他token的终态；保留数据库结果，不覆盖，也不能据此声称当前token提交成功。
+- STILL_PENDING/UNKNOWN/UNAVAILABLE：不自动重新finalize、不换token重写，按已有latch和错误契约保留待核对状态。
+- 终态写入只有已证明rolled_back的尝试，才可按既有规则复用同一不可变命令重试。
+
+创建阶段提交结果未知同样维持503/submission_outcome_unknown/reconcile_only；本阶段不增加新的“已知未提交”判定协议。数据库中可能确实有queued记录，也可能没有，不因猜测主动补建。
+
+`insufficient_evidence`是研究材料不足的业务结论；数据库故障、写入失败、执行中断不是证据不足。不得把它们写成已完成、无证据或可靠拒答。
+
+## 遗留任务与人工维护出口
+
+首版没有分布式锁、自动接管、自动重排、Checkpoint/Resume，也没有启动时自动清理。owner_instance_id只记录归属，不证明旧实例死亡。
+
+提交已落库但结果未知时，queued/running记录可能长期占住活跃fingerprint。同指纹新请求此时返回已知duplicate_run，不代表旧研究正在本实例执行，也不意味着允许接替。不要通过删除记录、改幂等键或绕开索引自动重跑。
+
+维护必须满足：
+
+1. 停止新研究入口和自动创建重试，确认全部应用实例及在途Provider/工具调用、写事务已停止；仅凭端口无响应或本地无Task不足以判死。
+2. 在已授权只读访问中列出run_id、owner、status、state_version、finalize_token/hash、报告revision、事件高水位及相关内容hash。
+3. 维护者逐项确认目标与原因，并明确授权该次DML；保留操作前清单。不能用本指南或旧测试授权代替正式数据库写授权。
+4. UNKNOWN对应的旧token不自动重写。若所有权与停止条件确认后需要结束遗留非终态记录，由维护者批准一次新的人工收尾操作，基于已提交状态构建新token、UTC结束时间及真实失败原因；不能声称旧token已成功。
+5. 通过既有Repository终态契约，以预期status/version、报告revision和事件高水位作条件，核对影响范围。不得仅UPDATE status而绕过终态token/hash/finished_at一致性CHECK；不删事件/报告，不改原请求、幂等键或既有报告hash。
+6. 读回并保存前后状态、版本、token、报告指针与hash、高水位、授权依据及结果。不满足预期则停止，不盲重试；确认单实例配置与存储就绪后再恢复入口。
+
+本指南不提供自动执行的清理CLI、生产UPDATE或downgrade命令。终态FOREIGN结果应只读采用并记录来源，不能为释放名额而覆盖旧终态。
+
+## 健康检查与已知边界
+
+`GET /api/storage/health`仍然是`scope=connection_only`：禁用时不连接，启用时只执行SELECT 1。ready不表示业务迁移版本正确、所有写入已提交或报告存在。研究health与数据库health也不是同一个指标。
+
+当前尚未实现命名的storage_schema_mismatch守卫、foreign_active_runs专门出口或完整public_state展示写入。本阶段不新增这些功能，迁移前应独立核对h2_0001；无自动接管/重跑的安全约束继续有效。迁移锁文件、TLS/证书、服务端崩溃和长期负载等未验证项不因阶段2.5通过而消失。
+
+## 测试与安全目标
+
+离线回归：
+
+```bash
+.venv/bin/python -m pytest -q
+.venv/bin/ruff check .
+.venv/bin/ruff format --check app tests migrations
+git diff --check
+```
+
+业务PostgreSQL测试只在维护者确认独立、可销毁目标后，安全注入：
+
+- H2_TEST_PERSISTENCE_AUTHORIZED=yes
+- H2_TEST_PERSISTENCE_DATABASE_URL
+- H2_MIGRATION_DATABASE_URL（仅迁移进程需要，不回退应用URL）
+
+这些用例不只有SELECT，还含迁移、DELETE清理、受控篡改和错误注入。**严禁指向agent_learning、生产库或需要保留的数据。** 应使用专用临时容器、回环绑定、独立数据目录和明确清理范围；运行器先验证目标所有权和隔离，再执行既有Alembic迁移。
+
+授权目标准备完成后可沿用既有入口：
+
+```bash
+.venv/bin/python -m alembic upgrade head
+.venv/bin/python -m pytest -q tests/integration/test_persistence_write_regressions_postgresql.py
+.venv/bin/python -m pytest -q tests/integration/test_admission_postgresql.py
+.venv/bin/python -m pytest -q tests/integration/test_persistent_reads_postgresql.py
+.venv/bin/python -m pytest -q tests/integration/test_end_to_end_postgresql.py
+```
+
+不使用付费Provider；Fake Runner用于研究流程输入，数据库连接、事务、约束和读写是真实PostgreSQL。授权门控未开启时跳过真库测试，不计为通过。默认禁用模式、原研究链与冻结/历史材料仍需完整回归。

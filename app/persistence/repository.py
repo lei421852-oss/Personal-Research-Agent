@@ -495,6 +495,9 @@ class ResearchRepository:
                     record = _run_record(row)
             except IntegrityError as exc:
                 conflict = _constraint_name(exc)
+                if conflict is None:
+                    # 约束身份缺失时不能把失败误报为CREATED，更不能推断为活跃冲突。
+                    raise ConflictError("create_conflict") from None
 
         if conflict is None:
             return CreateResult(CreateOutcome.CREATED, record)
@@ -557,9 +560,6 @@ class ResearchRepository:
             "updated_at": _utcnow(),
             **(patch or {}),
         }
-        if to_status == "running":
-            values.setdefault("started_at", _utcnow())
-
         async with self.resource.session() as session, session.begin():
             row = await session.scalar(
                 select(ResearchRunORM)
@@ -576,6 +576,9 @@ class ResearchRepository:
                 return TransitionResult(
                     TransitionOutcome.STATUS_CONFLICT, _run_record(row)
                 )
+            if to_status == "running" and row.started_at is None:
+                # 同状态的选择结果CAS不能重置首次开始时间。
+                values["started_at"] = _utcnow()
             for key, value in values.items():
                 setattr(row, key, value)
             await session.flush()
