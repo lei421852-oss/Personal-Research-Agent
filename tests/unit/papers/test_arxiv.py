@@ -173,8 +173,8 @@ def test_empty_is_not_dependency_failure():
     "status,category,issue",
     [
         (400, "invalid_input", "invalid_arguments"),
-        (401, "unavailable", "dependency_failure"),
-        (403, "unavailable", "dependency_failure"),
+        (401, "unavailable", "internal_failure"),
+        (403, "unavailable", "internal_failure"),
         (429, "unavailable", "dependency_failure"),
         (500, "unavailable", "dependency_failure"),
         (503, "unavailable", "dependency_failure"),
@@ -344,6 +344,8 @@ def test_enabled_invalid_configuration_returns_observation_not_startup_failure(v
         result.status == "error"
         and result.payload["error_code"] == "configuration_invalid"
     )
+
+    assert not result.issue.retryable
 
 
 def test_disabled_ignores_unrelated_bad_configuration():

@@ -54,8 +54,10 @@ export AGENT_ARXIV_TIMEOUT_SECONDS=15
 | empty | empty + empty_result，papers=[] | 合法零结果，不是依赖失败 |
 | invalid_input | error + invalid_arguments | 修正参数/查询，不能原样无条件重试 |
 | timeout | error + dependency_failure；payload.error_category=timeout | 已有预算内由模型决定，不自动重试 |
-| unavailable | error + dependency_failure；payload.error_category=unavailable | 网络、限流、HTTP 或配置不可用 |
+| unavailable | error；payload.error_category=unavailable | 网络/限流为 dependency_failure；明确配置、权限或端点错误为不可重试 internal_failure |
 | error | error + internal_failure；payload.error_category=error | 非法上游结构或其他已分类错误 |
+
+配置错误及明确 401/403/404/405/410/422 不提示原样重试；429、网络与超时可以反馈为可恢复依赖故障，但 B1 不自动执行重试。为兼容冻结 issue 枚举，语义类别请结合 error_category 与 error_code 判断。
 
 参数校验错误由现有 Executor 产生，不强求它具有新工具的 error_category 字段；依 `issue.code=invalid_arguments` 判断即可。其他常见 `payload.error_code`：arxiv_timeout、network_unavailable、configuration_invalid、upstream_http_429、upstream_http_503、upstream_query_error、invalid_upstream_response、response_too_large。
 
@@ -85,6 +87,8 @@ B1_TEST_ARXIV_AUTHORIZED=yes python -m scripts.smoke_arxiv_search \
 ```
 
 真实测试默认跳过，显式授权后执行两个真实元数据请求：合法题名请求与无匹配请求。可以设置 `B1_TEST_ARXIV_OUTPUT_DIR` 为已存在目录，导出实际 Observation/Trace；导出文件用排他创建避免覆盖。此门控不同于工作台的 AGENT_ARXIV_ENABLED，不自动启用真实模型。
+
+独立 smoke 和真服务测试未加载 Prepared Corpus，因此 paper_evidence_available 保守为 false；工作台使用真实 Corpus 注入可用集合后才允许为 true。
 
 CLI 可用 `--output` 指定新文件，父目录须已存在；不覆盖旧结果。非法参数例：传入 top_k=0 时返回 invalid_arguments 且不发送请求；其余详细边界由离线测试验证。服务不可用示例来自确定性故障夹具，不能标成真实 arXiv 故障。
 

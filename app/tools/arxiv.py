@@ -104,7 +104,17 @@ class SearchArxivTool(Tool[SearchArxivInput, ToolObservation]):
         )
 
     def _failure(self, category, code):
-        retryable = category in {"timeout", "unavailable"}
+        # 明确的配置/权限/端点错误不能靠同参数立即重试解决；不新增重试执行器。
+        permanent = code in {
+            "configuration_invalid",
+            "upstream_http_401",
+            "upstream_http_403",
+            "upstream_http_404",
+            "upstream_http_405",
+            "upstream_http_410",
+            "upstream_http_422",
+        }
+        retryable = category in {"timeout", "unavailable"} and not permanent
         issue = (
             "dependency_failure"
             if retryable
