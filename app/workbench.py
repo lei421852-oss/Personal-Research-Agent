@@ -1,7 +1,9 @@
 """独立研究工作台入口；不修改被冻结的单问题应用。"""
 
+import logging
 from contextlib import AsyncExitStack, asynccontextmanager
 from pathlib import Path
+from uuid import uuid4
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
@@ -16,6 +18,15 @@ from app.persistence.errors import StorageError
 from app.research.run_manager import ResearchRunManager, RunManagerError
 
 WEB = Path(__file__).parent / "workbench_web"
+LOGGER = logging.getLogger(__name__)
+
+
+async def _shutdown_persistence(coordinator):
+    """Manager 关闭后收口协调器；未完成收尾只记录，不静默丢弃。"""
+
+    unfinished = await coordinator.shutdown()
+    if unfinished:
+        LOGGER.warning("persistence finalize unfinished: %s", ",".join(unfinished))
 
 
 def create_app(*, manager_factory=None, database_settings=None, database_factory=None):
@@ -39,10 +50,34 @@ def create_app(*, manager_factory=None, database_settings=None, database_factory
 
                 dependencies = WorkbenchDependencies()
                 runtime = ReActWorkbenchRuntime(dependencies)
+                lifecycle = None
+                if settings.enabled:
+                    # 只在启用时导入持久化栈：禁用模式不得把 SQLAlchemy 带进运行时。
+                    from app.persistence.coordinator import (
+                        PersistenceLatch,
+                        TerminalCoordinator,
+                    )
+                    from app.persistence.lifecycle import RunPersistence
+                    from app.persistence.repository import ResearchRepository
+
+                    repository = ResearchRepository(database)
+                    latch = PersistenceLatch()
+                    coordinator = TerminalCoordinator(repository, latch=latch)
+                    lifecycle = RunPersistence(
+                        repository,
+                        owner_instance_id=uuid4().hex,
+                        coordinator=coordinator,
+                        latch=latch,
+                    )
+                    # 先登记 database.close，再登记本回调：收尾在 Manager 之后、关库之前。
+                    cleanup.push_async_callback(_shutdown_persistence, coordinator)
+                    application.state.persistence = coordinator
+                    application.state.persistence_lifecycle = lifecycle
                 created = ResearchRunManager(
                     runtime,
                     dependencies,
                     ReplayRepository(Path(__file__).resolve().parents[1]),
+                    lifecycle=lifecycle,
                 )
             else:
                 created = manager_factory()

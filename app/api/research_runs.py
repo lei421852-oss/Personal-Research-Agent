@@ -70,19 +70,27 @@ async def create_run(
 
 @router.get("/runs/{run_id}")
 async def run_status(run_id: str, request: Request):
-    return manager(request).status(run_id)
+    # 持久化模式下以数据库为权威；禁用持久化时行为与内存版完全一致。
+    return await manager(request).read_status(run_id)
 
 
 @router.get("/runs/{run_id}/events")
 async def run_events(
     run_id: str, request: Request, after: Annotated[int, Query(ge=0)] = 0
 ):
-    return manager(request).events(run_id, after)
+    return await manager(request).read_events(run_id, after)
 
 
 @router.get("/runs/{run_id}/report")
-async def report(run_id: str, request: Request):
-    return manager(request).report(run_id)
+async def report(run_id: str, request: Request, response: Response):
+    body, meta = await manager(request).read_report(run_id)
+    if meta:
+        # 版本与内容哈希走响应头：不改变既有报告 DTO，仍可离线复核。
+        response.headers["X-Report-Revision"] = str(meta["revision"])
+        response.headers["X-Report-Schema-Version"] = str(meta["schema_version"])
+        response.headers["X-Report-Snapshot-Kind"] = meta["snapshot_kind"]
+        response.headers["X-Report-Payload-SHA256"] = meta["payload_sha256"]
+    return body
 
 
 @router.post("/runs/{run_id}/cancel")

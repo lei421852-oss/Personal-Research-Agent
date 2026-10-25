@@ -11,7 +11,15 @@ from datetime import UTC, datetime
 from typing import Annotated, Literal
 from uuid import uuid4
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, model_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    StrictInt,
+    StrictStr,
+    ValidationError,
+    model_validator,
+)
 
 from app.research.run_events import RunEvent, sanitize_public
 from app.research.run_presenter import execution_events, present_execution
@@ -858,6 +866,176 @@ class ResearchRunManager:
                 "report_not_available", "当前尚未生成可展示报告。", 409
             )
         return run.report
+
+    # ---- 持久化只读查询（Batch C） --------------------------------------
+    #
+    # 三个 GET 在持久化模式下以数据库为权威：状态、时间、版本、事件与报告
+    # 都取自已提交记录，不因内存 TTL、进程重启或内存缺失而丢失，也绝不用
+    # 内存状态掩盖数据库读取失败。全部只读：不接管、不重排、不新建 Task。
+
+    async def _persisted_record(self, identity: str):
+        """解析一次读取的权威来源，返回 ``(record, memory_run, memory_only)``。
+
+        - 禁用持久化 → 完全沿用内存路径（原有行为不变）；
+        - 回放任务不落库，仍由内存回答；
+        - 其余一律以数据库记录为准，读不到就明确失败，不做缓存兜底。
+        """
+
+        if self.lifecycle is None:
+            return None, self._get(identity), True
+        memory = self._runs.get(identity)
+        # 存储层故障由 DatabaseResource 转成 StorageError 上抛 → 503。
+        record = await self.lifecycle.get_run(identity)
+        if record is not None:
+            return record, memory, False
+        if memory is not None and memory.mode == "replay":
+            return None, memory, True
+        if memory is not None:
+            # 本实例认为自己在跑，数据库却没有该记录：不猜测，也不拿内存冒充。
+            raise RunManagerError(
+                "run_persistence_incomplete",
+                "该任务在数据库中不可见，未按内存状态回答。",
+                503,
+                retry_mode="reconcile_only",
+                run_id=identity,
+            )
+        raise RunManagerError("run_not_found", "任务不存在或已过保留期限。", 404)
+
+    @staticmethod
+    def _record_status(record, memory) -> dict:
+        """数据库投影；内存只补数据库不存的字段（报告派生的展示信息）。"""
+
+        public_state = record.public_state or {}
+        payload = record.request_payload or {}
+        report = (memory.report if memory is not None else None) or {}
+        language = report.get("language")
+        language = language if isinstance(language, dict) else {}
+        if memory is not None:
+            paper_ids = list(memory.paper_ids)
+        elif record.effective_paper_ids:
+            paper_ids = list(record.effective_paper_ids)
+        else:
+            # 创建时未写 effective_paper_ids：退回请求范围，不伪造成已选范围。
+            paper_ids = list(payload.get("paper_ids") or [])
+        metrics = record.metrics or report.get("metrics") or {}
+        return sanitize_public(
+            {
+                "run_id": record.run_id,
+                "mode": record.mode,
+                "status": record.status,
+                "created_at": (
+                    record.created_at.isoformat() if record.created_at else None
+                ),
+                "question": payload.get("question"),
+                "paper_ids": paper_ids,
+                "research_question": public_state.get("research_question"),
+                "query_language": public_state.get("query_language") or {},
+                "paper_selection": public_state.get("paper_selection") or {},
+                "answer_status": report.get("answer_status"),
+                "execution_mode": report.get("execution_mode"),
+                "report_language_status": language.get("status"),
+                "events_count": record.last_event_seq,
+                "event_limit_reached": record.event_limit_reached,
+                "cancel_requested": record.cancel_requested,
+                "metrics": metrics,
+                "historical_status": None,
+                "error": record.error,
+                "report_available": record.current_report_revision is not None,
+                "details_available": record.current_report_revision is not None
+                or (memory is not None and memory.execution is not None),
+                "started_at": (
+                    record.started_at.isoformat() if record.started_at else None
+                ),
+                "finished_at": (
+                    record.finished_at.isoformat() if record.finished_at else None
+                ),
+                "state_version": record.state_version,
+                "persisted": True,
+            }
+        )
+
+    @staticmethod
+    def _persisted_event(run_id: str, row: dict) -> dict:
+        occurred_at = row.get("occurred_at")
+        try:
+            event = RunEvent(
+                run_id=run_id,
+                event_id=row["event_id"],
+                timestamp=occurred_at.isoformat() if occurred_at is not None else None,
+                node_type=row["node_type"],
+                node_id=row["node_id"],
+                status=row["status"],
+                event_type=row["event_type"],
+                source=row["source"],
+                summary=row["summary"],
+                details=row.get("details") or {},
+            )
+        except (ValidationError, KeyError, TypeError):
+            raise RunManagerError(
+                "run_persistence_incomplete",
+                "已提交事件不满足事件契约，未返回不可信数据。",
+                503,
+                retry_mode="reconcile_only",
+                run_id=run_id,
+            ) from None
+        return event.model_dump(mode="json")
+
+    async def read_status(self, identity):
+        record, memory, memory_only = await self._persisted_record(identity)
+        if memory_only:
+            return self.status(identity)
+        return self._record_status(record, memory)
+
+    async def read_events(self, identity, after=0):
+        if isinstance(after, bool) or not isinstance(after, int) or after < 0:
+            raise RunManagerError("invalid_cursor", "事件游标必须为非负整数。", 422)
+        record, _memory, memory_only = await self._persisted_record(identity)
+        if memory_only:
+            return self.events(identity, after)
+        if after > record.last_event_seq:
+            raise RunManagerError("invalid_cursor", "事件游标超过当前记录范围。", 422)
+        rows = await self.lifecycle.get_events(identity, after=after)
+        events = [self._persisted_event(identity, row) for row in rows]
+        return {
+            "events": events,
+            # 截断时退回最后一条已提交序号，调用方据此继续翻页。
+            "next_cursor": events[-1]["event_id"] if events else after,
+            "last_event_seq": record.last_event_seq,
+        }
+
+    async def read_report(self, identity):
+        """返回 ``(public_payload, meta)``；meta 供响应头携带版本与哈希。"""
+
+        _record, _memory, memory_only = await self._persisted_record(identity)
+        if memory_only:
+            return self.report(identity), {}
+        report = await self.lifecycle.get_current_report(identity)
+        if report is None:
+            raise RunManagerError(
+                "report_not_available", "当前尚未生成可展示报告。", 409
+            )
+        if report.run_id != identity:
+            raise RunManagerError(
+                "run_persistence_incomplete",
+                "报告归属与请求任务不一致，未返回。",
+                503,
+                retry_mode="reconcile_only",
+                run_id=identity,
+            )
+        if not report.content_matches():
+            raise RunManagerError(
+                "run_persistence_incomplete",
+                "已提交报告内容与其哈希不一致，未返回。",
+                503,
+                retry_mode="reconcile_only",
+                run_id=identity,
+            )
+        return sanitize_public(report.public_payload), {
+            "revision": report.revision,
+            "schema_version": report.schema_version,
+            "snapshot_kind": report.snapshot_kind,
+            "payload_sha256": report.payload_sha256,
+        }
 
     async def cancel(self, identity):
         run = self._get(identity)
