@@ -131,7 +131,7 @@ class GuardedTool(Tool):
             return self.delegate.execute(arguments)
         role = (
             "PaperSearch"
-            if self.name == "search_papers"
+            if self.name in {"search_papers", "search_arxiv"}
             else "QueryExpansion"
             if self.name == "expand_search_query"
             else "ResearchTool"
@@ -233,6 +233,7 @@ class ReActWorkbenchRuntime:
         vision_factory=None,
         paper_retriever=None,
         paper_catalog=None,
+        arxiv_client=None,
         max_research_calls=1,
         max_tools=64,
         max_protocol_corrections=2,
@@ -242,6 +243,8 @@ class ReActWorkbenchRuntime:
         self.vision_factory = vision_factory or OpenAICompatibleVisionClient
         self.paper_retriever = paper_retriever
         self.paper_catalog = paper_catalog
+        self.arxiv_client = arxiv_client
+        self._arxiv_config_loaded = arxiv_client is not None
         if type(max_research_calls) is not int or max_research_calls != 1:
             raise ValueError("research_calls_must_be_bounded_to_one")
         self.max_research_calls, self.max_tools = max_research_calls, max_tools
@@ -503,7 +506,22 @@ class ReActWorkbenchRuntime:
                     details=execution["query_language"],
                     source="live",
                 )
-            context = ResearchContext(
+            # 外部检索显式启用才接入；同一运行时复用客户端，不建立全局注册状态。
+            if not self._arxiv_config_loaded:
+                import os
+
+                from app.papers.arxiv import configured_arxiv_client
+
+                environment = getattr(self.dependencies, "environment", None)
+                environment = environment() if callable(environment) else os.environ
+                self.arxiv_client = configured_arxiv_client(environment)
+                self._arxiv_config_loaded = True
+            context_type = ResearchContext
+            if self.arxiv_client is not None:
+                from app.research.external_discovery import ExternalDiscoveryContext
+
+                context_type = ExternalDiscoveryContext
+            context = context_type(
                 request.question,
                 question,
                 catalog,
@@ -520,6 +538,12 @@ class ReActWorkbenchRuntime:
                 paper_catalog=catalog,
                 query_expander=expander,
             )
+            if self.arxiv_client is not None:
+                from app.tools.arxiv import SearchArxivTool
+
+                registry.register(
+                    SearchArxivTool(self.arxiv_client, catalog, context.prepared_ids)
+                )
             registry.register(
                 MultiAgentResearchTool(
                     context,
