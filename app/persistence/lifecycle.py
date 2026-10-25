@@ -94,6 +94,21 @@ class RunPersistence:
     async def find_by_key(self, key_digest: str):
         return await self.repository.find_by_idempotency_key(key_digest)
 
+    # ---- 只读查询 -------------------------------------------------------
+    #
+    # 三个 GET 的权威数据源。全部只读：不建记录、不推进状态、不启动 Task。
+    # 存储层故障由 DatabaseResource 转成 StorageError，调用方据此返回 503，
+    # 不回退到内存缓存。
+
+    async def get_run(self, run_id: str):
+        return await self.repository.get_run(run_id)
+
+    async def get_events(self, run_id: str, *, after: int = 0):
+        return await self.repository.get_events(run_id, after=after)
+
+    async def get_current_report(self, run_id: str):
+        return await self.repository.get_current_report(run_id)
+
     async def mark_running(self, run_id: str) -> None:
         record = await self.repository.get_run(run_id)
         if record is None or record.status != "queued":

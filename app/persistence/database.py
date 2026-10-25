@@ -150,7 +150,9 @@ class DatabaseResource:
                 from sqlalchemy.exc import DBAPIError
                 from sqlalchemy.exc import TimeoutError as PoolTimeout
 
-                if isinstance(original, (DBAPIError, PoolTimeout)):
+                # asyncpg 的连接失败在某些路径上会以原始 OSError 冒泡（如连接被拒、
+                # DNS 解析失败），不会包成 DBAPIError；同样属于「数据库不可用」。
+                if isinstance(original, (DBAPIError, PoolTimeout, OSError)):
                     code = (
                         "storage_pool_timeout"
                         if isinstance(original, PoolTimeout)

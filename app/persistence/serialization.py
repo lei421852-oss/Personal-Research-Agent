@@ -90,6 +90,27 @@ class ReportCommand:
         }
 
 
+def report_content_hash(
+    *,
+    schema_version: int,
+    snapshot_kind: str,
+    public_payload: dict,
+    authority_payload: dict | None = None,
+    source_reference: dict | None = None,
+) -> str:
+    """报告内容哈希的统一口径；写入与读取复核必须共用同一函数。"""
+
+    return sha256_hex(
+        {
+            "schema_version": schema_version,
+            "snapshot_kind": snapshot_kind,
+            "public_payload": public_payload,
+            "authority_payload": authority_payload,
+            "source_reference": source_reference,
+        }
+    )
+
+
 def build_report_command(
     *,
     expected_current_revision: int | None,
@@ -109,13 +130,6 @@ def build_report_command(
     if expected_current_revision is not None and expected_current_revision < 0:
         raise ValueError("expected_current_revision must be >= 0")
     revision = (expected_current_revision or 0) + 1
-    content = {
-        "schema_version": schema_version,
-        "snapshot_kind": snapshot_kind,
-        "public_payload": public_payload,
-        "authority_payload": authority_payload,
-        "source_reference": source_reference,
-    }
     return ReportCommand(
         revision=revision,
         revision_token=revision_token,
@@ -123,7 +137,13 @@ def build_report_command(
         schema_version=schema_version,
         snapshot_kind=snapshot_kind,
         public_payload=public_payload,
-        payload_sha256=sha256_hex(content),
+        payload_sha256=report_content_hash(
+            schema_version=schema_version,
+            snapshot_kind=snapshot_kind,
+            public_payload=public_payload,
+            authority_payload=authority_payload,
+            source_reference=source_reference,
+        ),
         authority_payload=authority_payload,
         source_reference=source_reference,
     )

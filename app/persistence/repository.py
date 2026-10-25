@@ -189,11 +189,37 @@ class RunRecord:
 
 @dataclass(frozen=True)
 class ReportRecord:
+    """已提交报告版本；后四个字段供读取侧复核内容哈希与来源。"""
+
     run_id: str
     revision: int
     revision_token: str
     payload_sha256: str
     public_payload: dict
+    schema_version: int = 1
+    snapshot_kind: str = "answer_first"
+    authority_payload: dict | None = None
+    source_reference: dict | None = None
+
+    def expected_sha256(self) -> str:
+        """按写入口径重算内容哈希，供调用方判定数据完整性。"""
+
+        from app.persistence.serialization import report_content_hash
+
+        return report_content_hash(
+            schema_version=self.schema_version,
+            snapshot_kind=self.snapshot_kind,
+            public_payload=self.public_payload,
+            authority_payload=self.authority_payload,
+            source_reference=self.source_reference,
+        )
+
+    def content_matches(self) -> bool:
+        try:
+            return self.expected_sha256() == self.payload_sha256
+        except (TypeError, ValueError):
+            # 无法重算（非 JSON 可序列化等）一律视为不可复核。
+            return False
 
 
 @dataclass(frozen=True)
@@ -862,6 +888,10 @@ class ResearchRepository:
             revision_token=row.revision_token,
             payload_sha256=row.payload_sha256,
             public_payload=row.public_payload,
+            schema_version=row.schema_version,
+            snapshot_kind=row.snapshot_kind,
+            authority_payload=row.authority_payload,
+            source_reference=row.source_reference,
         )
 
 

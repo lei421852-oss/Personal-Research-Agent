@@ -236,6 +236,33 @@ def test_real_engine_and_factory_construction_is_lazy_without_connection():
     asyncio.run(run())
 
 
+def test_raw_connection_error_maps_to_storage_unavailable():
+    """asyncpg 的连接失败可能以原始 OSError 冒泡，也必须是 503 而不是 500。"""
+
+    async def run():
+        db, _f = resource()
+        await db.start()
+        codes = []
+        try:
+            for error in (
+                ConnectionRefusedError(111, "refused"),
+                OSError("network unreachable"),
+            ):
+                try:
+                    async with db.session():
+                        raise error
+                except StorageError as exc:
+                    codes.append((exc.code, exc.retryable))
+        finally:
+            await db.close()
+        return codes
+
+    assert asyncio.run(run()) == [
+        ("storage_unavailable", True),
+        ("storage_unavailable", True),
+    ]
+
+
 def test_close_marks_resource_closing_before_background_cleanup_runs():
     async def run():
         db, f = resource()
