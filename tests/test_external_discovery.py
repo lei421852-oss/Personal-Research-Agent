@@ -205,7 +205,7 @@ def test_external_search_uses_existing_shared_tool_budget():
     assert feedback["payload"]["issue_code"] == "tool_budget_exhausted"
 
 
-def test_external_timeout_is_feedback_not_empty_or_automatic_retry():
+def test_external_timeout_is_feedback_after_one_bounded_transport_retry():
     transport = Transport(error=TimeoutError("private timeout"))
     case = run(
         [
@@ -220,6 +220,49 @@ def test_external_timeout_is_feedback_not_empty_or_automatic_retry():
     observation = json.loads(case.calls[1][-1]["content"])
     assert observation["status"] == "error"
     assert observation["payload"]["error_category"] == "timeout"
-    assert len(transport.calls) == 1
+    assert len(transport.calls) == 2
     assert not any(e["node_type"] == "Planner" for e in case.events)
     assert case.result["answer_first"]["citations"] == []
+
+
+def test_policy_can_reformulate_after_exhausted_transport_retries():
+    from app.papers.arxiv import HTTPResponse
+
+    class RecoveringTransport(Transport):
+        def __call__(self, url, timeout):
+            self.calls.append((url, timeout))
+            return (
+                HTTPResponse(503, b"", "application/xml")
+                if len(self.calls) <= 2
+                else feed()
+            )
+
+    transport = RecoveringTransport()
+    case = run(
+        [
+            ("search_arxiv", {"query": "ti:first"}),
+            ("search_arxiv", {"query": "ti:revised"}),
+            metadata_finish,
+        ],
+        api=client(transport),
+    )
+    first = json.loads(case.calls[1][-1]["content"])
+    assert first["status"] == "error" and first["payload"]["execution"]["attempts"] == 2
+    assert len(transport.calls) == 3 and "revised" in transport.calls[-1][0]
+    assert case.result["status"] == "completed"
+    assert not any(e["node_type"] == "Planner" for e in case.events)
+
+
+def test_same_failed_action_cannot_create_unbounded_transport_requests():
+    transport = Transport(error=ConnectionError("offline network failure"))
+    case = run(
+        [
+            ("search_arxiv", {"query": "ti:same"}),
+            ("search_arxiv", {"query": "ti:same"}),
+            finish("insufficient", limitations=["Network unavailable."]),
+        ],
+        api=client(transport),
+    )
+    assert len(transport.calls) <= 4 and len(case.calls) <= 3
+    assert case.result["status"] != "completed"
+    assert not any(e["node_type"] == "Planner" for e in case.events)

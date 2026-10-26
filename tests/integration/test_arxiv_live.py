@@ -13,8 +13,9 @@ from app.tools.executor import ToolExecutor
 from app.tools.registry import ToolRegistry
 
 pytestmark = pytest.mark.skipif(
-    os.environ.get("B1_TEST_ARXIV_AUTHORIZED") != "yes",
-    reason="Real arXiv tool calls require B1_TEST_ARXIV_AUTHORIZED=yes",
+    os.environ.get("B1_TEST_ARXIV_AUTHORIZED") != "yes"
+    or os.environ.get("B2_TEST_ARXIV_AUTHORIZED") != "yes",
+    reason="Legacy B1 live tests on B2 code also require fresh B2_TEST_ARXIV_AUTHORIZED=yes",
 )
 
 

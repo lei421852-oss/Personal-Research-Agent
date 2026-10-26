@@ -173,6 +173,15 @@ class GuardedTool(Tool):
                         for e in observation.payload.get("evidence", [])
                     ],
                     "latency_ms": (perf_counter() - started) * 1000,
+                    **(
+                        {
+                            "transport_execution": observation.payload.get(
+                                "execution", {}
+                            )
+                        }
+                        if self.name == "search_arxiv"
+                        else {}
+                    ),
                 },
                 source="live",
             )
@@ -256,6 +265,7 @@ class ReActWorkbenchRuntime:
         started = perf_counter()
         budget = UnifiedRunBudget(request.max_model_calls, self.max_tools)
         bridge = AsyncDecisionBridge()
+        arxiv_cancel = threading.Event()
         adapters, clients, visions = [], [], []
         execution = {
             "question": request.question,
@@ -542,7 +552,12 @@ class ReActWorkbenchRuntime:
                 from app.tools.arxiv import SearchArxivTool
 
                 registry.register(
-                    SearchArxivTool(self.arxiv_client, catalog, context.prepared_ids)
+                    SearchArxivTool(
+                        self.arxiv_client,
+                        catalog,
+                        context.prepared_ids,
+                        cancel_event=arxiv_cancel,
+                    )
                 )
             registry.register(
                 MultiAgentResearchTool(
@@ -588,7 +603,8 @@ class ReActWorkbenchRuntime:
                 return result
 
             result = await _offload(
-                run_sync, on_cancel=lambda: (budget.stop(), bridge.cancel())
+                run_sync,
+                on_cancel=lambda: (arxiv_cancel.set(), budget.stop(), bridge.cancel()),
             )
             if result.status == "protocol_failure" and policy.protocol_trace:
                 last = policy.protocol_trace[-1]
@@ -695,6 +711,7 @@ class ReActWorkbenchRuntime:
             execution["original_answer"] = original_answer
             return execution
         except asyncio.CancelledError as exc:
+            arxiv_cancel.set()
             budget.stop()
             bridge.cancel()
             cancellation = exc

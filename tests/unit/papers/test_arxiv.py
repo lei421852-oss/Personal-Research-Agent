@@ -180,13 +180,15 @@ def test_empty_is_not_dependency_failure():
         (503, "unavailable", "dependency_failure"),
     ],
 )
-def test_http_failure_is_classified_and_not_retried(status, category, issue):
+def test_http_failure_is_classified_with_bounded_retry(status, category, issue):
     transport = Transport(HTTPResponse(status, b"private upstream body", "text/plain"))
     ex, _ = executor(transport)
     result = ex.execute("search_arxiv", {"query": QUERY})
     assert result.status == "error" and result.issue.code == issue
     assert result.payload["error_category"] == category
-    assert len(transport.calls) == 1
+    expected = 2 if status in {429, 500, 503} else 1
+    assert len(transport.calls) == expected
+    assert result.payload["execution"]["attempts"] == expected
     assert "private upstream body" not in result.model_dump_json()
 
 

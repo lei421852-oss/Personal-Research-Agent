@@ -18,9 +18,9 @@ def main():
     parser.add_argument("--top-k", type=int, default=5)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
-    if os.environ.get("B1_TEST_ARXIV_AUTHORIZED") != "yes":
+    if os.environ.get("B2_TEST_ARXIV_AUTHORIZED") != "yes":
         parser.error(
-            "Set B1_TEST_ARXIV_AUTHORIZED=yes to authorize one real metadata request."
+            "Set B2_TEST_ARXIV_AUTHORIZED=yes to authorize one real metadata tool call (at most two HTTP attempts)."
         )
     registry = ToolRegistry()
     registry.register(SearchArxivTool(ArxivClient(), load_paper_catalog()))
