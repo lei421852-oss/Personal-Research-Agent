@@ -243,6 +243,7 @@ class ReActWorkbenchRuntime:
         paper_retriever=None,
         paper_catalog=None,
         arxiv_client=None,
+        external_tool_sources=(),
         max_research_calls=1,
         max_tools=64,
         max_protocol_corrections=2,
@@ -253,6 +254,7 @@ class ReActWorkbenchRuntime:
         self.paper_retriever = paper_retriever
         self.paper_catalog = paper_catalog
         self.arxiv_client = arxiv_client
+        self.external_tool_sources = tuple(external_tool_sources)
         self._arxiv_config_loaded = arxiv_client is not None
         if type(max_research_calls) is not int or max_research_calls != 1:
             raise ValueError("research_calls_must_be_bounded_to_one")
@@ -266,6 +268,9 @@ class ReActWorkbenchRuntime:
         budget = UnifiedRunBudget(request.max_model_calls, self.max_tools)
         bridge = AsyncDecisionBridge()
         arxiv_cancel = threading.Event()
+        external_sessions, external_setup = [], []
+        external_cleanup_failed = False
+        external_close_errors = set()
         adapters, clients, visions = [], [], []
         execution = {
             "question": request.question,
@@ -559,6 +564,45 @@ class ReActWorkbenchRuntime:
                         cancel_event=arxiv_cancel,
                     )
                 )
+            # 只有管理员显式注入并启用的本地来源才发现；工具仍走相同Registry/预算。
+            for source in self.external_tool_sources:
+                if not source.config.enabled:
+                    continue
+                from app.tools.integrations.error_mapper import ExternalToolError
+
+                try:
+                    session = source.open(cancel_event=arxiv_cancel)
+                    external_sessions.append(session)
+                    names = await _offload(
+                        lambda session=session: session.register(registry),
+                        on_cancel=arxiv_cancel.set,
+                    )
+                    external_setup.append(
+                        {
+                            "provider": source.config.provider,
+                            "registered_tools": list(names),
+                        }
+                    )
+                except (ExternalToolError, ValueError) as exc:
+                    # 发现失败不是empty，也不阻止无关的核心工具正常使用。
+                    external_setup.append(
+                        {
+                            "provider": source.config.provider,
+                            "issue_code": "external_tools_unavailable",
+                            "external_error_code": exc.code
+                            if isinstance(exc, ExternalToolError)
+                            else "invalid_configuration",
+                        }
+                    )
+                    emit(
+                        node_type="MainAgent",
+                        node_id="aggregate:main_agent",
+                        status="running",
+                        event_type="progress",
+                        summary="配置的外部工具未能接入；核心工具继续可用。",
+                        details=external_setup[-1],
+                        source="live",
+                    )
             registry.register(
                 MultiAgentResearchTool(
                     context,
@@ -729,6 +773,26 @@ class ReActWorkbenchRuntime:
             execution["issue_type"] = "main_agent_dependency_failure"
             return execution
         finally:
+            for session in external_sessions:
+                try:
+                    session.close()
+                except Exception:  # noqa: BLE001 - 清理失败明确记录，不伪装为正常完成
+                    external_cleanup_failed = True
+                    external_close_errors.add(id(session))
+            if self.external_tool_sources:
+                execution["external_tools"] = {
+                    "setup": external_setup,
+                    "sessions": [
+                        {
+                            "provider": session.config.provider,
+                            "calls": list(session.client.records),
+                            "cleanup_confirmed": not session.client.active_pids
+                            and id(session) not in external_close_errors,
+                        }
+                        for session in external_sessions
+                    ],
+                    "cleanup_failed": external_cleanup_failed,
+                }
             if cancellation:
                 bridge.cancel()
             await bridge.drain()
@@ -746,6 +810,15 @@ class ReActWorkbenchRuntime:
                     resolver = EvidenceResolver(PaperCorpus((), (), {}, {}, ()))
                 execution["answer_first"] = failure_answer(
                     context, resolver, budget, cancelled=bool(cancellation)
+                )
+            if external_cleanup_failed and not cancellation:
+                execution["status"] = "failed"
+                execution["issue_type"] = "external_tool_cleanup_failed"
+                execution["answer_first"].update(
+                    status="failed", answer_status="failed"
+                )
+                execution["answer_first"]["limitations"].append(
+                    "External tool cleanup could not be confirmed; execution is not successful."
                 )
             execution.update(
                 model_calls_observed=budget.used,
