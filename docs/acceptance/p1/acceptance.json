@@ -1,0 +1,424 @@
+{
+  "schema_version": 1,
+  "stage": "P1",
+  "date": "2026-10-28",
+  "conclusion": "PASS",
+  "scope": "Local adapter engineering only; no real production service or deployment acceptance",
+  "branch": "feature/production-tool-integration",
+  "baseline_head": "b76306bec67c8b975d8322a2c2ace090f98af831",
+  "b2_decision_commit": "38d723a62b299d7ae5c245a5a3043c4b5c02be35",
+  "implementation_commit": "a1c777d4e294a2a9089cb712b95d162b7cf95d07",
+  "tests": {
+    "targeted": {
+      "total": 78,
+      "passed": 78,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit_seconds": 3.676,
+      "execution": {
+        "group": "targeted",
+        "command": [
+          ".venv/bin/python",
+          "-B",
+          "artifacts/p1-external-tools-2026-10-28/run_offline_checks.py",
+          "targeted"
+        ],
+        "pytest_arguments": [
+          "-q",
+          "tests/unit/tools/integrations",
+          "tests/test_external_tool_integrations.py",
+          "--junitxml=/home/lei/project/projects/personal-agent/artifacts/p1-external-tools-2026-10-28/targeted.xml"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 3.917712759001006,
+        "blocked_connection_attempts": 0,
+        "real_arxiv_authorized": false,
+        "database_authorized": false,
+        "paid_llm_authorized": false,
+        "scope": "offline_and_loopback_fault_tests_only"
+      }
+    },
+    "related": {
+      "total": 207,
+      "passed": 207,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit_seconds": 7.011,
+      "execution": {
+        "group": "related",
+        "command": [
+          ".venv/bin/python",
+          "-B",
+          "artifacts/p1-external-tools-2026-10-28/run_offline_checks.py",
+          "related"
+        ],
+        "pytest_arguments": [
+          "-q",
+          "tests/unit/tools/test_registry.py",
+          "tests/unit/tools/test_execution_boundary.py",
+          "tests/unit/tools/test_observations.py",
+          "tests/unit/tools/test_redaction.py",
+          "tests/unit/papers",
+          "tests/test_external_discovery.py",
+          "tests/test_react_workbench.py",
+          "--junitxml=/home/lei/project/projects/personal-agent/artifacts/p1-external-tools-2026-10-28/related.xml"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 7.269606408000982,
+        "blocked_connection_attempts": 0,
+        "real_arxiv_authorized": false,
+        "database_authorized": false,
+        "paid_llm_authorized": false,
+        "scope": "offline_and_loopback_fault_tests_only"
+      }
+    },
+    "full": {
+      "total": 1757,
+      "passed": 1701,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 56,
+      "junit_seconds": 67.843,
+      "execution": {
+        "group": "full",
+        "command": [
+          ".venv/bin/python",
+          "-B",
+          "artifacts/p1-external-tools-2026-10-28/run_offline_checks.py",
+          "full"
+        ],
+        "pytest_arguments": [
+          "-q",
+          "--junitxml=/home/lei/project/projects/personal-agent/artifacts/p1-external-tools-2026-10-28/full.xml"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 68.36959232499976,
+        "blocked_connection_attempts": 0,
+        "real_arxiv_authorized": false,
+        "database_authorized": false,
+        "paid_llm_authorized": false,
+        "scope": "offline_and_loopback_fault_tests_only"
+      }
+    }
+  },
+  "skip_breakdown": {
+    "tests.integration.test_admission_postgresql": 3,
+    "tests.integration.test_arxiv_b2_live": 2,
+    "tests.integration.test_arxiv_live": 2,
+    "tests.integration.test_database_infrastructure_postgresql": 3,
+    "tests.integration.test_end_to_end_postgresql": 9,
+    "tests.integration.test_manager_persistence_postgresql": 2,
+    "tests.integration.test_persistence_write_regressions_postgresql": 9,
+    "tests.integration.test_persistent_reads_postgresql": 6,
+    "tests.integration.test_repository_postgresql": 15,
+    "tests.integration.test_writer_postgresql": 5
+  },
+  "static_checks": [
+    {
+      "check": "ruff-release",
+      "command": [
+        ".venv/bin/ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "output": "All checks passed!\n"
+    },
+    {
+      "check": "format-release",
+      "command": [
+        ".venv/bin/ruff",
+        "format",
+        "--check",
+        "app",
+        "tests",
+        "migrations"
+      ],
+      "exit_code": 0,
+      "output": "269 files already formatted\n"
+    },
+    {
+      "check": "script-format-release",
+      "command": [
+        ".venv/bin/ruff",
+        "format",
+        "--check",
+        "scripts/smoke_external_tools.py"
+      ],
+      "exit_code": 0,
+      "output": "1 file already formatted\n"
+    },
+    {
+      "check": "diff-release",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "output": ""
+    }
+  ],
+  "smoke": [
+    {
+      "scenario": "success",
+      "status": "success",
+      "issue": null,
+      "external_error": null,
+      "actual_call_processes": 1,
+      "all_reaped": true
+    },
+    {
+      "scenario": "empty",
+      "status": "empty",
+      "issue": "empty_result",
+      "external_error": null,
+      "actual_call_processes": 1,
+      "all_reaped": true
+    },
+    {
+      "scenario": "invalid_input",
+      "status": "error",
+      "issue": "invalid_arguments",
+      "external_error": null,
+      "actual_call_processes": 0,
+      "all_reaped": true
+    },
+    {
+      "scenario": "unavailable",
+      "status": "error",
+      "issue": "dependency_failure",
+      "external_error": "unavailable",
+      "actual_call_processes": 1,
+      "all_reaped": true
+    },
+    {
+      "scenario": "timeout",
+      "status": "error",
+      "issue": "dependency_failure",
+      "external_error": "timeout",
+      "actual_call_processes": 1,
+      "all_reaped": true
+    },
+    {
+      "scenario": "cancelled",
+      "status": "error",
+      "issue": "internal_failure",
+      "external_error": "cancelled",
+      "actual_call_processes": 0,
+      "all_reaped": true
+    },
+    {
+      "scenario": "output_limit",
+      "status": "error",
+      "issue": "internal_failure",
+      "external_error": "output_limit",
+      "actual_call_processes": 1,
+      "all_reaped": true
+    }
+  ],
+  "integrity": {
+    "tracked_baseline_count": 803,
+    "tracked_deltas": [
+      "app/research/react_runtime.py"
+    ],
+    "protected_history_count": 301,
+    "authorized_history_delta": [
+      "artifacts/b2-arxiv-reliability/acceptance.json"
+    ],
+    "all_other_history_unchanged": true,
+    "original_untracked": [
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/artifact_manifest.json",
+        "sha256": "ee233e77df173293c437e887f78c141c6d36dcf264d6b004c0223853fd60f223",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/findings.json",
+        "sha256": "f5590827026f11b87fbbc0729f0bbc2e6e26b4c1399af337980cf8c638cc93de",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/report.md",
+        "sha256": "9579aabe3451eae73aa949beee92133103dbc0168ede980a0f0070d4851a099f",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-frozen-trainable-scope.md",
+        "sha256": "abdec5284ce2de37d786cbd2bc66d8c49c23eb045fa1f9f64c8bdedb3b7c3f81",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-language-model.md",
+        "sha256": "51c5dada6a6cdded716bd1a0bf670dee83a33e8f64558b03dfb321b60385508c",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-training-objective.md",
+        "sha256": "b50a0e2ecc96c50e93b83e7d3bd0c2ccedb2aec1b48106539ff4bcee5bccbb29",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-vision-encoder.md",
+        "sha256": "e62e2404f29e15cf4233a319dd69952ab0cbd28b73371ad74182e4e9260f797c",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-vision-language-bridge.md",
+        "sha256": "cb0b57c84f80526ea0d89a90e2213fd261649f5ea3a57414efc732323fa48476",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-llava-frozen-trainable-scope.md",
+        "sha256": "f1422c861901636998acd0eb45a379900e8fbe5f2bc8fb9a2db6e4290eaf5d09",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-llava-language-model.md",
+        "sha256": "1156f7e4efc7ec8731be1e539753717b659aae1b76ebf398d7338fa2a219b936",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/verification.json",
+        "sha256": "f107553f46a803cd866a3d16a9892bdc5682bde958d2b4eecba98759a7f2fca3",
+        "unchanged": true
+      },
+      {
+        "path": "scripts/export_quality_failure_traces.py",
+        "sha256": "b59cbb413bad0cf93936c28fd0896f2ba952aa532f6b4d945d87804f2185c23c",
+        "unchanged": true
+      },
+      {
+        "path": "tests/research_quality/test_failure_trace_export.py",
+        "sha256": "9a84da8a40e69b3b834085fc4c2725de495dfb2893e04517d84c05cc169198bc",
+        "unchanged": true
+      }
+    ],
+    "frozen_count": 292,
+    "frozen_preexisting_exceptions": [
+      "README.md"
+    ],
+    "new_frozen_changes": [],
+    "b2_acceptance_top_level_schema_unchanged": true,
+    "b2_original_acceptance_backup_verified": true,
+    "existing_dependencies_and_migrations_unchanged": true
+  },
+  "new_dependencies": [],
+  "changed_files": [
+    {
+      "path": "app/research/react_runtime.py",
+      "sha256": "fd74674610e742d4e36cd04fd935fe0b44e42ad0ddefbb6425f9f044938c7948",
+      "bytes": 36906
+    },
+    {
+      "path": "app/tools/integrations/__init__.py",
+      "sha256": "e3fa3916a72153ffb179da69e3340b94275afc2b720ef55b4d1e13a80c47985b",
+      "bytes": 94
+    },
+    {
+      "path": "app/tools/integrations/adapter.py",
+      "sha256": "d80371f23fba0fb7d5a7fae604b0e1285ae65e02a83bbef03d10a56b8baa2e0b",
+      "bytes": 7676
+    },
+    {
+      "path": "app/tools/integrations/error_mapper.py",
+      "sha256": "dc5bc0aae24c1a2bc0826ec1a418d644f7ca21ec4476fe24c6137f50e6a90336",
+      "bytes": 2091
+    },
+    {
+      "path": "app/tools/integrations/models.py",
+      "sha256": "c5b7cc0fa0e672d12659e9d739d1e9a0a1e6a6a4dcc1c4f7275f917e2bc650fb",
+      "bytes": 3366
+    },
+    {
+      "path": "app/tools/integrations/schema_mapper.py",
+      "sha256": "0fb696a58414901b00b400afb19de1eecd6cf14a34ea673fce3259ec8f93857a",
+      "bytes": 5204
+    },
+    {
+      "path": "app/tools/integrations/transport.py",
+      "sha256": "be11cd1ca0d425ea32c6a0e6a9e2bd889d7ac90675ec736e5be0499f518422d2",
+      "bytes": 11984
+    },
+    {
+      "path": "docs/acceptance/b2-final-decision.json",
+      "sha256": "fbfda389f6848b5095e9ef2bc5953a82a1c6c2e69accbb8a3a1e38ce59ca95c7",
+      "bytes": 2304
+    },
+    {
+      "path": "docs/acceptance/p1/audit-and-plan.md",
+      "sha256": "599f7f8aa499807d5f200066259fb3a898a6b1209126a5f421d9ab1dbf5dabb5",
+      "bytes": 4577
+    },
+    {
+      "path": "docs/architecture/production-tool-integration.md",
+      "sha256": "14366173a4fcee57b7cac9466644263042e7660c100bd3e87588232c5d549359",
+      "bytes": 13459
+    },
+    {
+      "path": "scripts/smoke_external_tools.py",
+      "sha256": "2415def98a421260efe8dba14133d860d6824810c8733ee48aac0fac34b7ab10",
+      "bytes": 3493
+    },
+    {
+      "path": "tests/test_external_tool_integrations.py",
+      "sha256": "07aae64602ef7820f19d5e682808270cac2b7c0ef494ca532fd1ba6272a5a66e",
+      "bytes": 8226
+    },
+    {
+      "path": "tests/unit/tools/integrations/__init__.py",
+      "sha256": "55b4176f41863f4590c76dba43d915c3a97f0cb0425def467fac36e58cd9a689",
+      "bytes": 43
+    },
+    {
+      "path": "tests/unit/tools/integrations/conftest.py",
+      "sha256": "b86b5d57c91d0d9bc8c801772a92dff0b8ad0aafe74dbb26855b36d796ec17dc",
+      "bytes": 1187
+    },
+    {
+      "path": "tests/unit/tools/integrations/mock_service.py",
+      "sha256": "6a4b22373b4bdf75881ec7dc06078e52bfc087c5627c2e9d55d7443e60d3c85b",
+      "bytes": 4213
+    },
+    {
+      "path": "tests/unit/tools/integrations/test_adapter_contract.py",
+      "sha256": "f5b719e2d8cbd7f219ef1c9165876925df743d9a5ca141e4c028c8fa0aa5a1d8",
+      "bytes": 8848
+    },
+    {
+      "path": "tests/unit/tools/integrations/test_output_limits.py",
+      "sha256": "10cfbf3b2cfbbbba4871d5927d30e69069c54bdbf112e361b0936b405ed9017f",
+      "bytes": 1860
+    },
+    {
+      "path": "tests/unit/tools/integrations/test_schema_mapper.py",
+      "sha256": "bb391c9eafad1d7eb8fb622f40a244613797672a4413ebf108cf4cda7d88b260",
+      "bytes": 4280
+    },
+    {
+      "path": "tests/unit/tools/integrations/test_timeout_cancel.py",
+      "sha256": "185e53a7ff012669a61ec142a49d6ab5f11a0240928fdb27e7e62c778aeb0a10",
+      "bytes": 6420
+    }
+  ],
+  "boundaries": {
+    "real_arxiv_requests": 0,
+    "paid_llm_calls": 0,
+    "database_connections": 0,
+    "remote_git_operations": 0,
+    "next_stage_started": false
+  },
+  "limits": [
+    "No specified real external provider; not production deployment acceptance",
+    "Host-programmatic source injection, default disabled; environment flag alone does not create a source",
+    "Private stdio protocol, not MCP; strict JSON Schema subset only",
+    "Only read-only host-allowlisted tools; no write tools or automatic retries",
+    "WSL/Linux process supervision, not an OS sandbox or hard-real-time guarantee",
+    "External data is not verified paper evidence; Scripted tests are not real LLM quality evaluation",
+    "One preexisting Starlette/httpx warning; README retains prior authorized freeze exception"
+  ],
+  "evidence_directory": "artifacts/p1-external-tools-2026-10-28",
+  "final_documentation_commit": "Resolve with git log -1 -- docs/acceptance/p1; final delivery index records exact HEAD"
+}
