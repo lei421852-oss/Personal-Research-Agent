@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "stage": "B2",
+  "decision_date": "2026-10-28",
+  "timezone": "Asia/Shanghai",
+  "decision_authority": "User explicitly accepted B2 within original engineering scope in P1 Coding Plan",
+  "previous_conclusion": "CONDITIONAL",
+  "conclusion": "PASS",
+  "scope": "Original B2 bounded tool engineering acceptance; not long-term availability or network root-cause resolution",
+  "baseline_commit": "b76306bec67c8b975d8322a2c2ace090f98af831",
+  "review_report_filename": "2026-10-28-多模态论文研究智能体-B2-R2-独立技术审查报告.md",
+  "review_report_sha256": "e41a4e322c41987256dcc71a2b7dfc71b7e0b8df6e7c79c8058d3c623eacd3ea",
+  "acceptance_path": "artifacts/b2-arxiv-reliability/acceptance.json",
+  "acceptance_before_sha256": "75f7a25838681986e8237e913c292c2ae6a44b3f0cb98b5e489c39a531a0bba5",
+  "acceptance_after_sha256": "89b2f4306183111fde1324b4a9ed4d7ab56c9f50e96e69a845787f61859d1d29",
+  "preserved_original_acceptance": "artifacts/p1-external-tools-2026-10-28/b2-acceptance-before-decision.json",
+  "changed_existing_fields": [
+    "conclusion",
+    "real_tool_acceptance",
+    "blockers"
+  ],
+  "resolved_historical_blockers": [
+    {
+      "id": "B2-LIVE-EMPTY",
+      "severity": "acceptance_blocker",
+      "confirmed": "The second real tool call timed out under the unchanged 15-second total budget; 1 pass, 1 fail, exit 1",
+      "not_confirmed": "No empty feed was received; remote service vs network cause is undetermined",
+      "next": "Independent Review before any additional authorized query; no automatic rerun or budget/query changes"
+    }
+  ],
+  "evidence": [
+    "artifacts/b2-arxiv-reliability/postcommit-real/b2-real-tool-observations.json",
+    "artifacts/b2-r1-empty-contract/real-evidence/b2-real-tool-observations.json",
+    "artifacts/b2-r1-isolated-empty-2026-10-28/b2-real-tool-observations.json"
+  ],
+  "limitations": [
+    "Latest empty success used process-local MAX_ATTEMPTS=1; first-success code path equivalence is a qualified inference",
+    "Default MAX_ATTEMPTS=2 retry directly tested against local HTTP fault service; official second transport unverified",
+    "Historical timeouts retained; specific network phase unknown",
+    "No new real request, provider call or database access performed for this decision"
+  ]
+}
