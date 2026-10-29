@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="/workbench-static/style.css">
   <script defer src="/workbench-static/adapters.js"></script>
   <script defer src="/workbench-static/app.js"></script>
+  <script defer src="/workbench-static/memory.js"></script>
 </head>
 <body>
 <div class="app-shell">
@@ -14,6 +15,7 @@
     <button id="new-research" class="button new-research" type="button"><span aria-hidden="true">＋</span> 新建研究 <kbd>新对话</kbd></button>
     <nav class="nav-list" aria-label="工作区">
       <button class="nav-item active" data-view="chat" type="button"><span aria-hidden="true">◉</span>研究对话</button>
+      <button class="nav-item" data-view="memory" type="button"><span aria-hidden="true">◇</span>记忆</button>
       <button class="nav-item" data-view="history" type="button"><span aria-hidden="true">◷</span>历史记录</button>
       <button class="nav-item" data-view="library" type="button"><span aria-hidden="true">▤</span>论文资源库<span id="paper-count" class="nav-count">—</span></button>
       <button class="nav-item" data-view="environment" type="button"><span aria-hidden="true">⚙</span>运行配置</button>
@@ -37,6 +39,15 @@
       <section id="history-view" class="utility-view" hidden><div class="eyebrow">已保存的访问入口</div><h1>历史记录</h1><p class="muted">本机记录只保存任务入口；状态、事件和报告始终从服务端读取。未启用数据库时，进程重启后记录可能不可用。</p><div id="history-runs"></div><div class="archive-box"><h2>归档案例回放</h2><p class="small muted">读取已有真实实验归档，不重新研究、不调用模型。</p><label class="sr-only" for="replay-select">历史案例</label><select id="replay-select" disabled><option value="">正在读取…</option></select><button id="replay-button" class="button secondary" type="button" disabled>历史回放</button></div></section>
       <section id="library-view" class="utility-view" hidden><div class="eyebrow">只读资源目录</div><h1 id="papers-label">论文资源库</h1><p id="selection-mode" class="muted">不需要手动选择论文。</p><p class="report-notice">目录中的元数据不等于正文证据。只有已准备的正文和图注可用于当前证据研究。</p><div id="papers" class="paper-options" role="group" aria-labelledby="papers-label"></div></section>
       <section id="environment-view" class="utility-view" hidden><div class="eyebrow">现有服务配置 · 只读</div><h1>运行配置</h1><p class="muted">凭据在服务端配置，本页不读取或保存密钥。</p><div class="label-row"><h2>依赖就绪状态</h2><button id="refresh-health" class="text-button" type="button">刷新检查</button></div><div id="health" aria-live="polite"></div><p id="budget-hint" class="small muted"></p><label class="original-mode"><input id="original-language" type="checkbox"> 问题原文直通（排查语言转换时使用）</label><p class="small muted">默认中文输入、英文内部检索、中文阅读；语言转换不补充事实。</p></section>
+      <section id="memory-view" class="utility-view memory-view" hidden>
+        <div class="eyebrow">项目上下文 · 只读</div>
+        <div class="label-row"><div><h1>记忆</h1><p class="muted">查看 Agent 保存的项目记忆。记忆是历史上下文，不是论文证据。</p></div><button id="memory-refresh" class="text-button" type="button">刷新</button></div>
+        <div id="memory-stats" class="memory-stats" aria-live="polite"></div><p id="memory-stats-error" class="memory-error" role="alert" hidden></p>
+        <form id="memory-filter" class="memory-filter"><label>关键词 <input id="memory-query" maxlength="80" placeholder="搜索记忆"></label><label>类型 <select id="memory-type"><option value="">全部类型</option><option value="preference">用户偏好</option><option value="project_decision">项目决策</option><option value="project_fact">项目事实</option><option value="workflow_lesson">工作经验</option><option value="research_context">研究背景</option></select></label><label>状态 <select id="memory-status"><option value="active">有效</option><option value="all">全部状态</option><option value="superseded">已替代</option><option value="expired">已过期</option><option value="deleted">已删除</option></select></label><button class="button secondary" type="submit">搜索</button></form>
+        <p id="memory-list-error" class="memory-error" role="alert" hidden></p>
+        <div class="memory-columns"><div><h2>记忆列表</h2><div id="memory-list" aria-live="polite"></div><div class="memory-pages"><button id="memory-prev" class="text-button" type="button" disabled>上一页</button><span id="memory-page-label" class="small muted"></span><button id="memory-next" class="text-button" type="button" disabled>下一页</button></div></div><div id="memory-detail" class="memory-detail"><h2>记忆详情</h2><p class="muted">选择一条记忆查看内容和来源。</p></div></div>
+        <button id="memory-back" class="text-button memory-back" type="button">← 返回研究工作台</button>
+      </section>
       <article id="conversation" class="conversation" hidden>
         <div class="user-message"><span class="user-avatar" aria-hidden="true">你</span><p id="run-question"></p></div>
         <section class="final-result" aria-labelledby="result-title"><div class="assistant-heading"><span class="assistant-avatar" aria-hidden="true">✳</span><h2 id="result-title">研究回答</h2><span id="run-status" class="run-status" aria-live="polite">等待任务</span></div><div class="language-tabs" role="tablist" aria-label="报告语言"><button id="report-language-zh" class="language-tab active" role="tab" aria-selected="true" type="button">中文回答</button><button id="report-language-en" class="language-tab" role="tab" aria-selected="false" type="button">英文原文</button><button id="show-process" class="text-button" type="button">执行过程 ↗</button><button id="tab-report" class="text-button" type="button">详细报告 ↗</button></div><section id="report-panel" aria-label="最终报告"><div id="report-details"></div></section><p id="report-language-notice" class="report-notice"></p></section>

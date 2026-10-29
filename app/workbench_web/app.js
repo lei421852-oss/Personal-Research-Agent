@@ -559,12 +559,14 @@ function writeLocal(key, value) { try { if (value === null) localStorage.removeI
 function connection(text, offline = false) { $("#connection-status").textContent = text; $("#connection-status").classList.toggle("offline",offline); }
 function setView(view) {
   state.view = view;
-  for (const name of ["history","library","environment"]) $(`#${name}-view`).hidden = name !== view;
+  for (const name of ["history","library","environment","memory"]) $(`#${name}-view`).hidden = name !== view;
   $("#welcome").hidden = view !== "chat" || Boolean(state.run);
   $("#conversation").hidden = view !== "chat" || !state.run;
   document.querySelectorAll(".nav-item").forEach(button=>button.classList.toggle("active",button.dataset.view === view));
   $("#main-scroll").scrollTop = 0;
+  if (view === "memory") window.MemoryView?.show();
 }
+window.setWorkbenchView = setView;
 function stopPolling() { if (state.pollTimer) clearTimeout(state.pollTimer); state.pollTimer = null; }
 function rememberRun(id) {
   try { localStorage.setItem(STORAGE_KEY,id); } catch { /* 本机书签不可用时不阻断读取。 */ }
