@@ -29,7 +29,13 @@ async def _shutdown_persistence(coordinator):
         LOGGER.warning("persistence finalize unfinished: %s", ",".join(unfinished))
 
 
-def create_app(*, manager_factory=None, database_settings=None, database_factory=None):
+def create_app(
+    *,
+    manager_factory=None,
+    database_settings=None,
+    database_factory=None,
+    memory_settings=None,
+):
     @asynccontextmanager
     async def lifespan(application):
         # 后登记的Manager先关闭；即使构造或关闭失败，DB回调仍会执行。
@@ -49,7 +55,32 @@ def create_app(*, manager_factory=None, database_settings=None, database_factory
                 from app.research.workbench_dependencies import WorkbenchDependencies
 
                 dependencies = WorkbenchDependencies()
-                runtime = ReActWorkbenchRuntime(dependencies)
+                from app.memory.config import MemorySettings
+
+                memory_config = (
+                    MemorySettings.from_environment()
+                    if memory_settings is None
+                    else memory_settings
+                )
+                memory_service = None
+                if memory_config.enabled:
+                    from app.memory.errors import MemoryFailure
+                    from app.memory.models import MemoryScope
+                    from app.memory.service import MemoryService
+                    from app.persistence.memory_repository import MemoryRepository
+
+                    if not settings.enabled or not memory_config.project_id:
+                        raise MemoryFailure("memory_configuration_invalid")
+                    memory_repository = MemoryRepository(database)
+                    await memory_repository.check_schema()
+                    memory_service = MemoryService(
+                        memory_repository,
+                        MemoryScope(scope_id=memory_config.project_id),
+                    )
+                application.state.memory_service = memory_service
+                runtime = ReActWorkbenchRuntime(
+                    dependencies, memory_service=memory_service
+                )
                 lifecycle = None
                 if settings.enabled:
                     # 只在启用时导入持久化栈：禁用模式不得把 SQLAlchemy 带进运行时。
