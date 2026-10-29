@@ -44,6 +44,53 @@ class MemoryService:
         self._check_scope(result.memory)
         return result
 
+    async def list_for_display(self, *, query, memory_type, status, page, page_size):
+        now = self.clock()
+        records, total = await self.repository.list_for_display(
+            self.scope,
+            query=query,
+            memory_type=memory_type,
+            status=status,
+            page=page,
+            page_size=page_size,
+            now=now,
+        )
+        for record in records:
+            self._check_scope(record)
+        return [self._display(record, now) for record in records], total
+
+    async def display_stats(self):
+        counts = await self.repository.display_stats(self.scope, now=self.clock())
+        result = {
+            name: counts.get(name, 0)
+            for name in ("active", "superseded", "expired", "deleted")
+        }
+        return {"total": sum(result.values()), **result}
+
+    async def display_detail(self, memory_id):
+        now = self.clock()
+        record = await self.repository.get_memory(
+            self.scope, memory_id, now=now, include_inactive=True
+        )
+        if record is None:
+            return None
+        self._check_scope(record)
+        result = self._display(record, now)
+        result["superseded_by_id"] = await self.repository.display_successor(
+            self.scope, memory_id
+        )
+        return result
+
+    @staticmethod
+    def _display(record, now):
+        result = record.model_dump(mode="json")
+        result["effective_status"] = (
+            "expired"
+            if record.status == "active" and not record.active_at(now)
+            else record.status
+        )
+        return result
+
     def _check_scope(self, record):
         if (record.scope_type, record.scope_id) != (
             self.scope.scope_type,

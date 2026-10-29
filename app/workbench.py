@@ -10,6 +10,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
+from app.api.memories import router as memory_router
 from app.api.research_runs import router
 from app.api.storage import router as storage_router
 from app.persistence.config import DatabaseSettings
@@ -119,6 +120,7 @@ def create_app(
     application = FastAPI(title="多模态论文研究工作台", lifespan=lifespan)
     application.include_router(router)
     application.include_router(storage_router)
+    application.include_router(memory_router)
     application.mount(
         "/workbench-static", StaticFiles(directory=WEB), name="workbench-static"
     )

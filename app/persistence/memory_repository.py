@@ -226,6 +226,85 @@ class MemoryRepository:
         except (StorageError, SQLAlchemyError, OSError) as exc:
             raise _storage_failure(exc) from None
 
+    async def list_for_display(
+        self, scope, *, query, memory_type, status, page, page_size, now
+    ):
+        # 展示用过滤和所有聚合均限定为宿主项目；有效期仅在读取时计算。
+        effective = case(
+            (
+                AgentMemoryORM.status == "active",
+                case((AgentMemoryORM.expires_at <= now, "expired"), else_="active"),
+            ),
+            else_=AgentMemoryORM.status,
+        )
+        conditions = list(_scope(scope))
+        if status != "all":
+            conditions.append(effective == status)
+        if memory_type:
+            conditions.append(AgentMemoryORM.memory_type == memory_type)
+        if query:
+            pattern = literal_pattern(query.lower())
+            conditions.append(
+                or_(
+                    func.lower(AgentMemoryORM.content).like(pattern, escape="\\"),
+                    func.lower(AgentMemoryORM.memory_key).like(pattern, escape="\\"),
+                )
+            )
+        try:
+            async with self.resource.session() as session:
+                total = await session.scalar(
+                    select(func.count()).select_from(AgentMemoryORM).where(*conditions)
+                )
+                rows = (
+                    await session.scalars(
+                        select(AgentMemoryORM)
+                        .where(*conditions)
+                        .order_by(
+                            AgentMemoryORM.updated_at.desc(),
+                            AgentMemoryORM.memory_id.asc(),
+                        )
+                        .offset((page - 1) * page_size)
+                        .limit(page_size)
+                    )
+                ).all()
+                return [self._record(row) for row in rows], total
+        except MemoryFailure:
+            raise
+        except (StorageError, SQLAlchemyError, OSError) as exc:
+            raise _storage_failure(exc) from None
+
+    async def display_stats(self, scope, *, now):
+        effective = case(
+            (
+                AgentMemoryORM.status == "active",
+                case((AgentMemoryORM.expires_at <= now, "expired"), else_="active"),
+            ),
+            else_=AgentMemoryORM.status,
+        )
+        try:
+            async with self.resource.session() as session:
+                rows = (
+                    await session.execute(
+                        select(effective, func.count())
+                        .where(*_scope(scope))
+                        .group_by(effective)
+                    )
+                ).all()
+                return dict(rows)
+        except (StorageError, SQLAlchemyError, OSError) as exc:
+            raise _storage_failure(exc) from None
+
+    async def display_successor(self, scope, memory_id):
+        try:
+            async with self.resource.session() as session:
+                return await session.scalar(
+                    select(AgentMemoryORM.memory_id).where(
+                        *_scope(scope), AgentMemoryORM.supersedes_id == memory_id
+                    )
+                )
+        except (StorageError, SQLAlchemyError, OSError) as exc:
+            raise _storage_failure(exc) from None
+
     async def update_memory(self, scope, request, source, *, now):
         return await self.supersede_memory(scope, request, source, now=now)
 
