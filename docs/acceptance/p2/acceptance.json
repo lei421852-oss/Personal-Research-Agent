@@ -1,0 +1,392 @@
+{
+  "schema_version": 1,
+  "stage": "P2",
+  "date": "2026-10-29",
+  "conclusion": "PASS",
+  "acceptance_scope": "local engineering acceptance; isolated real PostgreSQL + scripted policy, not paid-provider behavior or production deployment",
+  "branch": "feature/agent-memory",
+  "baseline_branch": "feature/production-tool-integration",
+  "baseline_head": "32465578d27df95b896817240309f782ab2b9312",
+  "source_commit_note": "Tests ran on the P2 source snapshot before commits; final commit and remote verification belong to the final delivery index to avoid a self-referential certificate.",
+  "new_tests": {
+    "offline": 53,
+    "real_postgresql": 19,
+    "total": 72
+  },
+  "tests": {
+    "targeted": {
+      "tests": 53,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "passed": 53,
+      "group": "targeted",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "artifacts/p2-agent-memory-2026-10-29/run_offline_checks.py",
+        "targeted"
+      ],
+      "pytest_arguments": [
+        "-q",
+        "tests/unit/memory",
+        "tests/test_agent_memory.py",
+        "--junitxml=/home/lei/project/projects/personal-agent/artifacts/p2-agent-memory-2026-10-29/targeted.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.384659252000347,
+      "blocked_connection_attempts": 0,
+      "real_arxiv_authorized": false,
+      "database_authorized": false,
+      "paid_llm_authorized": false,
+      "scope": "offline_and_loopback_fault_tests_only"
+    },
+    "related": {
+      "tests": 427,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "passed": 427,
+      "group": "related",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "artifacts/p2-agent-memory-2026-10-29/run_offline_checks.py",
+        "related"
+      ],
+      "pytest_arguments": [
+        "-q",
+        "tests/unit/tools/test_registry.py",
+        "tests/unit/tools/test_execution_boundary.py",
+        "tests/unit/tools/test_observations.py",
+        "tests/unit/tools/test_redaction.py",
+        "tests/unit/papers",
+        "tests/unit/persistence",
+        "tests/unit/tools/integrations",
+        "tests/test_external_tool_integrations.py",
+        "tests/test_external_discovery.py",
+        "tests/test_react_workbench.py",
+        "--junitxml=/home/lei/project/projects/personal-agent/artifacts/p2-agent-memory-2026-10-29/related.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 12.303720283000075,
+      "blocked_connection_attempts": 0,
+      "real_arxiv_authorized": false,
+      "database_authorized": false,
+      "paid_llm_authorized": false,
+      "scope": "offline_and_loopback_fault_tests_only"
+    },
+    "postgresql-final": {
+      "tests": 19,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "passed": 19,
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/integration/test_memory_postgresql.py",
+        "--junitxml=/home/lei/project/projects/personal-agent/artifacts/p2-agent-memory-2026-10-29/postgresql-final.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.0706035399998655,
+      "target": {
+        "host": "127.0.0.1",
+        "port": 55437,
+        "database": "personal_agent_memory_test",
+        "username": "p2_test"
+      }
+    },
+    "full": {
+      "tests": 1829,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 75,
+      "passed": 1754,
+      "group": "full",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "artifacts/p2-agent-memory-2026-10-29/run_offline_checks.py",
+        "full"
+      ],
+      "pytest_arguments": [
+        "-q",
+        "--junitxml=/home/lei/project/projects/personal-agent/artifacts/p2-agent-memory-2026-10-29/full.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 71.34243359799984,
+      "blocked_connection_attempts": 0,
+      "real_arxiv_authorized": false,
+      "database_authorized": false,
+      "paid_llm_authorized": false,
+      "scope": "offline_and_loopback_fault_tests_only"
+    }
+  },
+  "skip_breakdown": {
+    "tests.integration.test_admission_postgresql": 3,
+    "tests.integration.test_arxiv_b2_live": 2,
+    "tests.integration.test_arxiv_live": 2,
+    "tests.integration.test_database_infrastructure_postgresql": 3,
+    "tests.integration.test_end_to_end_postgresql": 9,
+    "tests.integration.test_manager_persistence_postgresql": 2,
+    "tests.integration.test_memory_postgresql": 19,
+    "tests.integration.test_persistence_write_regressions_postgresql": 9,
+    "tests.integration.test_persistent_reads_postgresql": 6,
+    "tests.integration.test_repository_postgresql": 15,
+    "tests.integration.test_writer_postgresql": 5
+  },
+  "existing_warning": "Existing Starlette httpx TestClient deprecation, 1 warning in full regression",
+  "static_checks": [
+    {
+      "name": "ruff-current",
+      "command": [
+        ".venv/bin/ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "output": "All checks passed!\n"
+    },
+    {
+      "name": "format-current",
+      "command": [
+        ".venv/bin/ruff",
+        "format",
+        "--check",
+        "app",
+        "tests",
+        "migrations"
+      ],
+      "exit_code": 0,
+      "output": "287 files already formatted\n"
+    },
+    {
+      "name": "diff-current",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "output": ""
+    }
+  ],
+  "database": {
+    "target": {
+      "image": "postgres:16-alpine",
+      "host": "127.0.0.1",
+      "port": 55437,
+      "database": "personal_agent_memory_test",
+      "username": "p2_test",
+      "data_mount": "tmpfs_only"
+    },
+    "authorized": true,
+    "migration": {
+      "conclusion": "PASS",
+      "original_three_tables_schema_and_counts_unchanged": true,
+      "upgrade": "p2_0001",
+      "downgrade": "h2_0001",
+      "reupgrade": "p2_0001",
+      "target_database": "personal_agent_memory_test"
+    },
+    "cleanup": {
+      "temporary_target": {
+        "container_id": "43217bdd86ac2ae54dbdb2aff0636a2cd069d413c6d1190501cce91954f7d6f8",
+        "container_name": "personal-agent-p2-memory-653b1d07",
+        "host": "127.0.0.1",
+        "port": 55437,
+        "database": "personal_agent_memory_test",
+        "username": "p2_test",
+        "data_mount": "tmpfs_only"
+      },
+      "container_stop_exit_code": 0,
+      "container_removed": true,
+      "auto_remove_completion_checks": [
+        {
+          "attempt": 1,
+          "exit_code": 1
+        }
+      ],
+      "private_credential_files_removed": true,
+      "credential_directory_removed": true,
+      "existing_databases_accessed": false,
+      "production_databases_accessed": false,
+      "note": "停止命令成功后auto-remove完成有短暂延迟；后续独立检查确认容器已移除。"
+    },
+    "old_three_tables_schema_and_counts_unchanged": true,
+    "existing_development_and_production_databases_accessed": false
+  },
+  "integrity": {
+    "tracked_baseline_count": 823,
+    "intentional_baseline_changes": [
+      "app/research/react_runtime.py",
+      "app/workbench.py",
+      "migrations/env.py"
+    ],
+    "original_untracked": [
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/artifact_manifest.json",
+        "before": "ee233e77df173293c437e887f78c141c6d36dcf264d6b004c0223853fd60f223",
+        "after": "ee233e77df173293c437e887f78c141c6d36dcf264d6b004c0223853fd60f223",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/findings.json",
+        "before": "f5590827026f11b87fbbc0729f0bbc2e6e26b4c1399af337980cf8c638cc93de",
+        "after": "f5590827026f11b87fbbc0729f0bbc2e6e26b4c1399af337980cf8c638cc93de",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/report.md",
+        "before": "9579aabe3451eae73aa949beee92133103dbc0168ede980a0f0070d4851a099f",
+        "after": "9579aabe3451eae73aa949beee92133103dbc0168ede980a0f0070d4851a099f",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-frozen-trainable-scope.md",
+        "before": "abdec5284ce2de37d786cbd2bc66d8c49c23eb045fa1f9f64c8bdedb3b7c3f81",
+        "after": "abdec5284ce2de37d786cbd2bc66d8c49c23eb045fa1f9f64c8bdedb3b7c3f81",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-language-model.md",
+        "before": "51c5dada6a6cdded716bd1a0bf670dee83a33e8f64558b03dfb321b60385508c",
+        "after": "51c5dada6a6cdded716bd1a0bf670dee83a33e8f64558b03dfb321b60385508c",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-training-objective.md",
+        "before": "b50a0e2ecc96c50e93b83e7d3bd0c2ccedb2aec1b48106539ff4bcee5bccbb29",
+        "after": "b50a0e2ecc96c50e93b83e7d3bd0c2ccedb2aec1b48106539ff4bcee5bccbb29",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-vision-encoder.md",
+        "before": "e62e2404f29e15cf4233a319dd69952ab0cbd28b73371ad74182e4e9260f797c",
+        "after": "e62e2404f29e15cf4233a319dd69952ab0cbd28b73371ad74182e4e9260f797c",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-vision-language-bridge.md",
+        "before": "cb0b57c84f80526ea0d89a90e2213fd261649f5ea3a57414efc732323fa48476",
+        "after": "cb0b57c84f80526ea0d89a90e2213fd261649f5ea3a57414efc732323fa48476",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-llava-frozen-trainable-scope.md",
+        "before": "f1422c861901636998acd0eb45a379900e8fbe5f2bc8fb9a2db6e4290eaf5d09",
+        "after": "f1422c861901636998acd0eb45a379900e8fbe5f2bc8fb9a2db6e4290eaf5d09",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-llava-language-model.md",
+        "before": "1156f7e4efc7ec8731be1e539753717b659aae1b76ebf398d7338fa2a219b936",
+        "after": "1156f7e4efc7ec8731be1e539753717b659aae1b76ebf398d7338fa2a219b936",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/verification.json",
+        "before": "f107553f46a803cd866a3d16a9892bdc5682bde958d2b4eecba98759a7f2fca3",
+        "after": "f107553f46a803cd866a3d16a9892bdc5682bde958d2b4eecba98759a7f2fca3",
+        "unchanged": true
+      },
+      {
+        "path": "scripts/export_quality_failure_traces.py",
+        "before": "b59cbb413bad0cf93936c28fd0896f2ba952aa532f6b4d945d87804f2185c23c",
+        "after": "b59cbb413bad0cf93936c28fd0896f2ba952aa532f6b4d945d87804f2185c23c",
+        "unchanged": true
+      },
+      {
+        "path": "tests/research_quality/test_failure_trace_export.py",
+        "before": "9a84da8a40e69b3b834085fc4c2725de495dfb2893e04517d84c05cc169198bc",
+        "after": "9a84da8a40e69b3b834085fc4c2725de495dfb2893e04517d84c05cc169198bc",
+        "unchanged": true
+      }
+    ],
+    "protected_history_count": 398,
+    "protected_history_all_unchanged": true,
+    "stage_e": {
+      "total": 292,
+      "historical_hash_matches": 291,
+      "preexisting_documentation_exceptions": [
+        {
+          "path": "README.md",
+          "before": "ec3682b4e15768a8ce6e87f14268470fec822e506d07fd5306ac42f2bf861d43",
+          "after": "8549bd6a3da75fa292d5bbdd0625d206a2cf0bd7fa8c6bc2db6e0f8ffe3a6db0",
+          "unchanged": false
+        }
+      ],
+      "new_mismatches": []
+    },
+    "existing_orm_and_migration_files_unchanged": true
+  },
+  "environment": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "dependencies": {
+      "SQLAlchemy": "2.1.5",
+      "asyncpg": "0.32.0",
+      "alembic": "1.20.0",
+      "pydantic": "2.13.5",
+      "fastapi": "0.142.2",
+      "pytest": "8.4.2",
+      "ruff": "0.16.3"
+    }
+  },
+  "new_dependencies": [],
+  "changed_files": [
+    "app/memory/__init__.py",
+    "app/memory/config.py",
+    "app/memory/errors.py",
+    "app/memory/integration.py",
+    "app/memory/models.py",
+    "app/memory/policies.py",
+    "app/memory/retrieval.py",
+    "app/memory/service.py",
+    "app/memory/tools.py",
+    "app/persistence/memory_models.py",
+    "app/persistence/memory_repository.py",
+    "app/research/react_runtime.py",
+    "app/workbench.py",
+    "docs/acceptance/p2/acceptance.json",
+    "docs/acceptance/p2/acceptance_report.md",
+    "docs/acceptance/p2/audit-and-plan.md",
+    "docs/architecture/agent-memory.md",
+    "migrations/env.py",
+    "migrations/versions/p2_0001_agent_memory.py",
+    "tests/integration/test_memory_postgresql.py",
+    "tests/test_agent_memory.py",
+    "tests/unit/memory/__init__.py",
+    "tests/unit/memory/fakes.py",
+    "tests/unit/memory/test_memory.py",
+    "tests/unit/memory/test_memory_schema.py"
+  ],
+  "not_executed": [
+    "paid LLM",
+    "real arXiv",
+    "new true research task",
+    "production or existing development database migration",
+    "browser acceptance",
+    "clean-environment dependency installation"
+  ],
+  "limits": [
+    "host-configured project scope, no multi-user authorization",
+    "only exact excerpts of current original user question",
+    "user statement is not verified scientific evidence",
+    "literal keyword/tag retrieval",
+    "soft delete retains audit content; privacy heuristics are not exhaustive",
+    "memory argument minimization does not change original Run question retention",
+    "observation snapshot, no cross-instance invalidation",
+    "migrations.lock absent; installation not revalidated",
+    "actual user development database not migrated or memory-enabled"
+  ],
+  "evidence_directory": "artifacts/p2-agent-memory-2026-10-29",
+  "push_authorized": true,
+  "push_remote": "research-agent",
+  "push_repository": "git@github.com:lei421852-oss/Personal-Research-Agent.git",
+  "push_status_at_certificate": "pending final local commits; actual result in final delivery index",
+  "next_stage_started": false
+}

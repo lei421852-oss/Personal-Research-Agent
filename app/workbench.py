@@ -1,7 +1,9 @@
 """独立研究工作台入口；不修改被冻结的单问题应用。"""
 
-from contextlib import asynccontextmanager
+import logging
+from contextlib import AsyncExitStack, asynccontextmanager
 from pathlib import Path
+from uuid import uuid4
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
@@ -9,36 +11,114 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.api.research_runs import router
+from app.api.storage import router as storage_router
+from app.persistence.config import DatabaseSettings
+from app.persistence.database import DatabaseResource
+from app.persistence.errors import StorageError
 from app.research.run_manager import ResearchRunManager, RunManagerError
 
 WEB = Path(__file__).parent / "workbench_web"
+LOGGER = logging.getLogger(__name__)
 
 
-def create_app(*, manager_factory=None):
+async def _shutdown_persistence(coordinator):
+    """Manager 关闭后收口协调器；未完成收尾只记录，不静默丢弃。"""
+
+    unfinished = await coordinator.shutdown()
+    if unfinished:
+        LOGGER.warning("persistence finalize unfinished: %s", ",".join(unfinished))
+
+
+def create_app(
+    *,
+    manager_factory=None,
+    database_settings=None,
+    database_factory=None,
+    memory_settings=None,
+):
     @asynccontextmanager
     async def lifespan(application):
-        if manager_factory is None:
-            from app.research.react_runtime import ReActWorkbenchRuntime
-            from app.research.run_replay import ReplayRepository
-            from app.research.workbench_dependencies import WorkbenchDependencies
-
-            dependencies = WorkbenchDependencies()
-            runtime = ReActWorkbenchRuntime(dependencies)
-            created = ResearchRunManager(
-                runtime,
-                dependencies,
-                ReplayRepository(Path(__file__).resolve().parents[1]),
+        # 后登记的Manager先关闭；即使构造或关闭失败，DB回调仍会执行。
+        async with AsyncExitStack() as cleanup:
+            settings = (
+                DatabaseSettings.from_environment()
+                if database_settings is None
+                else database_settings
             )
-        else:
-            created = manager_factory()
-        application.state.research_manager = created
-        try:
+            database = (database_factory or DatabaseResource)(settings)
+            cleanup.push_async_callback(database.close)
+            await database.start()
+            application.state.database = database
+            if manager_factory is None:
+                from app.research.react_runtime import ReActWorkbenchRuntime
+                from app.research.run_replay import ReplayRepository
+                from app.research.workbench_dependencies import WorkbenchDependencies
+
+                dependencies = WorkbenchDependencies()
+                from app.memory.config import MemorySettings
+
+                memory_config = (
+                    MemorySettings.from_environment()
+                    if memory_settings is None
+                    else memory_settings
+                )
+                memory_service = None
+                if memory_config.enabled:
+                    from app.memory.errors import MemoryFailure
+                    from app.memory.models import MemoryScope
+                    from app.memory.service import MemoryService
+                    from app.persistence.memory_repository import MemoryRepository
+
+                    if not settings.enabled or not memory_config.project_id:
+                        raise MemoryFailure("memory_configuration_invalid")
+                    memory_repository = MemoryRepository(database)
+                    await memory_repository.check_schema()
+                    memory_service = MemoryService(
+                        memory_repository,
+                        MemoryScope(scope_id=memory_config.project_id),
+                    )
+                application.state.memory_service = memory_service
+                runtime = ReActWorkbenchRuntime(
+                    dependencies, memory_service=memory_service
+                )
+                lifecycle = None
+                if settings.enabled:
+                    # 只在启用时导入持久化栈：禁用模式不得把 SQLAlchemy 带进运行时。
+                    from app.persistence.coordinator import (
+                        PersistenceLatch,
+                        TerminalCoordinator,
+                    )
+                    from app.persistence.lifecycle import RunPersistence
+                    from app.persistence.repository import ResearchRepository
+
+                    repository = ResearchRepository(database)
+                    latch = PersistenceLatch()
+                    coordinator = TerminalCoordinator(repository, latch=latch)
+                    lifecycle = RunPersistence(
+                        repository,
+                        owner_instance_id=uuid4().hex,
+                        coordinator=coordinator,
+                        latch=latch,
+                    )
+                    # 先登记 database.close，再登记本回调：收尾在 Manager 之后、关库之前。
+                    cleanup.push_async_callback(_shutdown_persistence, coordinator)
+                    application.state.persistence = coordinator
+                    application.state.persistence_lifecycle = lifecycle
+                created = ResearchRunManager(
+                    runtime,
+                    dependencies,
+                    ReplayRepository(Path(__file__).resolve().parents[1]),
+                    lifecycle=lifecycle,
+                )
+            else:
+                created = manager_factory()
+            cleanup.push_async_callback(created.close)
+            application.state.research_manager = created
             yield
-        finally:
-            await created.close()
 
     application = FastAPI(title="多模态论文研究工作台", lifespan=lifespan)
     application.include_router(router)
+    application.include_router(storage_router)
     application.mount(
         "/workbench-static", StaticFiles(directory=WEB), name="workbench-static"
     )
@@ -47,12 +127,22 @@ def create_app(*, manager_factory=None):
     def home():
         return FileResponse(WEB / "index.html", media_type="text/html")
 
+    @application.exception_handler(StorageError)
+    async def storage_error(request: Request, exc: StorageError):
+        return JSONResponse(
+            status_code=503,
+            content={"status": "unavailable", "error": exc.public_error()},
+        )
+
     @application.exception_handler(RunManagerError)
     async def managed_error(request: Request, exc: RunManagerError):
-        return JSONResponse(
-            status_code=exc.status_code,
-            content={"error": {"code": exc.code, "message": exc.message}},
-        )
+        error = {"code": exc.code, "message": exc.message}
+        # 只白名扩展两个字段：调用方据此判断能否原样重试，或只能核对。
+        if exc.retry_mode is not None:
+            error["retry_mode"] = exc.retry_mode
+        if exc.run_id is not None:
+            error["run_id"] = exc.run_id
+        return JSONResponse(status_code=exc.status_code, content={"error": error})
 
     @application.exception_handler(RequestValidationError)
     async def invalid_request(request: Request, exc: RequestValidationError):

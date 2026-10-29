@@ -1,0 +1,6 @@
+# H2.2 迁移工具依赖；应用运行时不依赖 Alembic。
+#
+# 说明：带哈希的 requirements-migrations.lock 需要在联网环境用
+#   python -m pip download --no-deps -r requirements-migrations.txt ...
+# 生成后提交，本阶段未生成（无网络授权），实际使用时请以锁文件为准。
+alembic>=1.20,<1.21

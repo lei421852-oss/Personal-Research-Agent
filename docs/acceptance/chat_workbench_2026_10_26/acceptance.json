@@ -1,0 +1,713 @@
+{
+  "stage": "chat_workbench_2026_10_26",
+  "verdict": "PASS",
+  "verdict_scope": "frontend_engineering_and_real_local_execution_only",
+  "not_a_research_quality_benchmark": true,
+  "baseline_head": "8ec79f613dcb2b688c6a0550ee904694bf60c1f2",
+  "implementation_commit": "9b5d79c1b8dbb3bebbf92bc2939e843e99a5d016",
+  "branch": "feature/h2-2-research-persistence",
+  "backend_code_changed": false,
+  "schema_or_migration_source_changed": false,
+  "source_files": [
+    "app/workbench_web/index.html",
+    "app/workbench_web/style.css",
+    "app/workbench_web/app.js",
+    "app/workbench_web/adapters.js",
+    "scripts/check_chat_workbench_ui.cjs",
+    "scripts/accept_chat_workbench_real.cjs",
+    "tests/test_chat_workbench_adapters.py"
+  ],
+  "documentation_files": [
+    "docs/guides/ui-quickstart.md",
+    "docs/acceptance/chat_workbench_2026_10_26/architecture-audit.md",
+    "docs/acceptance/chat_workbench_2026_10_26/acceptance_report.md",
+    "docs/acceptance/chat_workbench_2026_10_26/acceptance.json"
+  ],
+  "tests": {
+    "scope": "workspace_full_including_preserved_untracked_diagnostic_tests",
+    "passed": 1623,
+    "failed": 0,
+    "skipped": 56,
+    "warnings": 1,
+    "new_adapter_contract_cases": 12,
+    "targeted_passed": 63,
+    "checks": [
+      {
+        "name": "pytest-full",
+        "command": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q"
+        ],
+        "exit_code": 0,
+        "latency_ms": 58465,
+        "log": "artifacts/chat-workbench-2026-10-26/pytest-full.log"
+      },
+      {
+        "name": "ruff",
+        "command": [
+          ".venv/bin/ruff",
+          "check",
+          "."
+        ],
+        "exit_code": 0,
+        "latency_ms": 42,
+        "log": "artifacts/chat-workbench-2026-10-26/ruff.log"
+      },
+      {
+        "name": "format",
+        "command": [
+          ".venv/bin/ruff",
+          "format",
+          "--check",
+          "app",
+          "tests",
+          "migrations"
+        ],
+        "exit_code": 0,
+        "latency_ms": 10,
+        "log": "artifacts/chat-workbench-2026-10-26/format.log"
+      },
+      {
+        "name": "diff-check",
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "latency_ms": 17,
+        "log": "artifacts/chat-workbench-2026-10-26/diff-check.log"
+      }
+    ],
+    "javascript_syntax_files": 4,
+    "controlled_browser": {
+      "status": "PASS",
+      "source": "controlled_browser_api_fixtures",
+      "real_provider_calls": 0,
+      "checks": [
+        "中文输入/IME/换行/防重复提交/终态停止轮询/引用/XSS/刷新只读/导航/窄屏",
+        "真实事件形状驱动的横向协作布局/仅实际 Worker 分支/折叠/长流程内部滚动",
+        "事件乱序/迟到/缺口补读/去重",
+        "UNKNOWN 不冒充回滚/刷新不重发/只读核对同键同请求/错误脱敏",
+        "真实取消接口形状/不伪造节点取消事件",
+        "数据库/服务不可用时保留书签，不伪报无记录，不重建任务"
+      ],
+      "screenshots": [
+        "initial.png",
+        "mobile.png",
+        "controlled-worker-tree.png",
+        "submission-unknown.png"
+      ]
+    }
+  },
+  "real_provider": {
+    "approved_requests": 2,
+    "executed_requests": 2,
+    "approved_model_calls": 48,
+    "actual_model_calls": 39,
+    "tool_calls": 16,
+    "vlm_calls": 0,
+    "arxiv_calls": 0,
+    "model": "deepseek-flash",
+    "reruns": 0,
+    "runs": [
+      {
+        "case": "simple",
+        "source": "real_browser_real_provider",
+        "run_id": "dafbac3f2fc945f3b6e0460bbaf2233a",
+        "question": "CLIP 使用什么训练目标对齐图像和文本？请引用当前论文库中的证据，并用中文简洁回答。",
+        "model_limit": 12,
+        "run_status": "completed",
+        "answer_status": "answered",
+        "metrics": {
+          "llm_calls": 4,
+          "vlm_calls": 0,
+          "tool_calls": 1,
+          "tool_usage": {
+            "main": 1
+          },
+          "model_calls": 4,
+          "research_calls": 0,
+          "tool_remaining": 63,
+          "main_tool_calls": 1,
+          "model_remaining": 8,
+          "role_model_calls": {
+            "main_agent": 2,
+            "query_language": 1,
+            "report_language": 1
+          },
+          "total_latency_ms": 23971.804080996662,
+          "main_decision_steps": 2,
+          "main_protocol_corrections": 0
+        },
+        "language": {
+          "status": "failed",
+          "issue_code": "invalid_report_translation",
+          "latency_ms": 0,
+          "model_calls": 1,
+          "source_sha256": "0cd04f1efd3e48451f5e5b3917e99a6ffc534039b482843aca3b6bf26efa6825",
+          "translation_review": "not_independently_reviewed",
+          "translation_source": "original"
+        },
+        "event_count": 16,
+        "citations": 4,
+        "report_headers": {
+          "status": 200,
+          "revision": "1",
+          "sha256": "c761c82163103f09faab66edb192a32f6112723e302b7dd0d7415aa5f723c254"
+        },
+        "refresh": {
+          "post_requests": 0,
+          "run_id": "dafbac3f2fc945f3b6e0460bbaf2233a",
+          "report_present": true,
+          "event_count": 16
+        },
+        "local_execution_path": "artifacts/chat-workbench-2026-10-26/real/simple-execution.json"
+      },
+      {
+        "case": "collaboration",
+        "source": "real_browser_real_provider",
+        "run_id": "1487522ff5624f0f8c2213568799b759",
+        "question": "请启动多论文协作研究，对 BLIP-2 与 Flamingo 的视觉语言连接机制分别检索论文证据并审核，再综合比较 Q-Former、Perceiver Resampler 和门控交叉注意力如何将视觉特征传入语言模型；只研究这一个维度，保留证据缺口、逐项引用，最后用中文回答。",
+        "model_limit": 36,
+        "run_status": "completed",
+        "answer_status": "partial",
+        "metrics": {
+          "llm_calls": 35,
+          "vlm_calls": 0,
+          "tool_calls": 15,
+          "tool_usage": {
+            "main": 2,
+            "research": 13
+          },
+          "model_calls": 35,
+          "report_status": "completed",
+          "research_calls": 1,
+          "tool_remaining": 49,
+          "main_tool_calls": 2,
+          "model_remaining": 1,
+          "resolution_rate": 0.7857142857142857,
+          "provider_retries": 0,
+          "review_pass_rate": 1,
+          "role_model_calls": {
+            "worker": 16,
+            "planner": 1,
+            "reviewer": 9,
+            "synthesis": 1,
+            "main_agent": 4,
+            "query_language": 1,
+            "recovery_worker": 2,
+            "report_language": 1
+          },
+          "total_latency_ms": 115908.43474000212,
+          "evidence_coverage": 0.5714285714285714,
+          "model_calls_scope": "all_physical_model_attempts_including_vlm",
+          "total_requirements": 14,
+          "degraded_generation": false,
+          "main_decision_steps": 4,
+          "missing_requirements": 6,
+          "protocol_corrections": 0,
+          "synthesis_latency_ms": 8060.26022199876,
+          "rejected_requirements": 0,
+          "resolved_requirements": 11,
+          "reviewed_requirements": 8,
+          "synthesis_model_calls": 1,
+          "verified_requirements": 8,
+          "main_protocol_corrections": 1,
+          "report_generation_attempts": 1,
+          "report_generation_successes": 1,
+          "citation_validation_failures": 0,
+          "report_generation_success_rate": 1
+        },
+        "language": {
+          "status": "failed",
+          "issue_code": "invalid_report_translation",
+          "latency_ms": 0,
+          "model_calls": 1,
+          "source_sha256": "63c5e21119b1b648db2f6e58e5e9b69def6121b1fe670321bf750333265b30ce",
+          "translation_review": "not_independently_reviewed",
+          "translation_source": "original"
+        },
+        "event_count": 137,
+        "citations": 11,
+        "report_headers": {
+          "status": 200,
+          "revision": "1",
+          "sha256": "f5d787d7337c283d1ce59e11449042176ba0cf311adc548a876d7ad2a1e32b92"
+        },
+        "refresh": {
+          "post_requests": 0,
+          "run_id": "1487522ff5624f0f8c2213568799b759",
+          "report_present": true,
+          "event_count": 137
+        },
+        "local_execution_path": "artifacts/chat-workbench-2026-10-26/real/collaboration-execution.json"
+      }
+    ]
+  },
+  "database": {
+    "host_from_windows": "127.0.0.1",
+    "host_from_wsl": "172.24.0.1",
+    "port": 5432,
+    "database": "personal_agent_ui_dev",
+    "role": "personal_agent_ui_dev",
+    "new_database": true,
+    "new_role": true,
+    "production_or_learning_access": false,
+    "migration_revision": "h2_0001",
+    "migration_exit_code": 0,
+    "row_counts": {
+      "alembic_version": 1,
+      "research_events": 153,
+      "research_reports": 2,
+      "research_runs": 2
+    },
+    "scope": "user_authorized_new_local_development_database",
+    "auth_change": {
+      "path": "D:/Apps/PostgreSQL_data/pg_hba.conf",
+      "backup": "pg_hba.before.conf",
+      "before_sha256": "15fd05f4a87f2d5d7d43adc6e7278ba26a5972f7f553dc55be926ba6e444201b",
+      "after_sha256": "dced3ec5ac36e789f26c6c0cbe545a52b09cce148440cfacc99fa5a9dd982989",
+      "rule": "host personal_agent_ui_dev personal_agent_ui_dev 172.24.6.137/32 scram-sha-256",
+      "reloaded": true,
+      "parse_errors": 0,
+      "scope": "new_development_database_only"
+    }
+  },
+  "browser_after_service_restart": {
+    "source": "real_saved_runs_read_after_service_restart",
+    "provider_calls": 0,
+    "post_requests": 0,
+    "browser_errors": [],
+    "mobile_body_overflow": false,
+    "runs": [
+      {
+        "run_id": "dafbac3f2fc945f3b6e0460bbaf2233a",
+        "run_status": "completed",
+        "answer_status": "answered",
+        "layout": "linear",
+        "event_count": 16,
+        "rendered_nodes": [
+          {
+            "id": "query_language",
+            "type": "QueryLanguage"
+          },
+          {
+            "id": "aggregate:main_agent",
+            "type": "MainAgent"
+          },
+          {
+            "id": "action:1:search_text",
+            "type": "Evidence"
+          },
+          {
+            "id": "report_language",
+            "type": "ReportLanguage"
+          }
+        ],
+        "source_event_nodes": [
+          "query_language",
+          "aggregate:main_agent",
+          "action:1:search_text",
+          "report_language"
+        ],
+        "actual_worker_nodes": [],
+        "worker_branches": 0,
+        "language_status": "failed"
+      },
+      {
+        "run_id": "1487522ff5624f0f8c2213568799b759",
+        "run_status": "completed",
+        "answer_status": "partial",
+        "layout": "tree",
+        "event_count": 137,
+        "rendered_nodes": [
+          {
+            "id": "query_language",
+            "type": "QueryLanguage"
+          },
+          {
+            "id": "aggregate:main_agent",
+            "type": "MainAgent"
+          },
+          {
+            "id": "action:1:run_multi_agent_research",
+            "type": "ResearchTool"
+          },
+          {
+            "id": "planner",
+            "type": "Planner"
+          },
+          {
+            "id": "worker:blip-2-2301.12597v1",
+            "type": "Worker"
+          },
+          {
+            "id": "recovery_worker:blip-2-2301.12597v1",
+            "type": "Recovery"
+          },
+          {
+            "id": "validator:req_a4aec8c5220fc95be55a83c3146d13c2",
+            "type": "Validator"
+          },
+          {
+            "id": "reviewer:req_a4aec8c5220fc95be55a83c3146d13c2",
+            "type": "Reviewer"
+          },
+          {
+            "id": "validator:req_22b086a9d843f891bdb6ef0b02522bba",
+            "type": "Validator"
+          },
+          {
+            "id": "reviewer:req_22b086a9d843f891bdb6ef0b02522bba",
+            "type": "Reviewer"
+          },
+          {
+            "id": "validator:req_7a6fc2199fff36ced1ca277eef3a3309",
+            "type": "Validator"
+          },
+          {
+            "id": "reviewer:req_7a6fc2199fff36ced1ca277eef3a3309",
+            "type": "Reviewer"
+          },
+          {
+            "id": "validator:req_dccb8304f7122fcc2d47fa39f527b5cc",
+            "type": "Validator"
+          },
+          {
+            "id": "reviewer:req_dccb8304f7122fcc2d47fa39f527b5cc",
+            "type": "Reviewer"
+          },
+          {
+            "id": "validator:req_1a6bb716813ea5ce99a3aba368f551a3",
+            "type": "Validator"
+          },
+          {
+            "id": "reviewer:req_1a6bb716813ea5ce99a3aba368f551a3",
+            "type": "Reviewer"
+          },
+          {
+            "id": "validator:req_f9b525ab4c267d5e6637f3d258dca67c",
+            "type": "Validator"
+          },
+          {
+            "id": "reviewer:req_f9b525ab4c267d5e6637f3d258dca67c",
+            "type": "Reviewer"
+          },
+          {
+            "id": "validator:req_244c8e4f08775d52ee2ce25a11ff93d0",
+            "type": "Validator"
+          },
+          {
+            "id": "reviewer:req_244c8e4f08775d52ee2ce25a11ff93d0",
+            "type": "Reviewer"
+          },
+          {
+            "id": "worker:flamingo-2204.14198v1",
+            "type": "Worker"
+          },
+          {
+            "id": "validator:req_559f4f388ef5526d26645eb5b4d78db8",
+            "type": "Validator"
+          },
+          {
+            "id": "reviewer:req_559f4f388ef5526d26645eb5b4d78db8",
+            "type": "Reviewer"
+          },
+          {
+            "id": "validator:req_255ef6dbcc945579f00541765d02a3f5",
+            "type": "Validator"
+          },
+          {
+            "id": "reviewer:req_255ef6dbcc945579f00541765d02a3f5",
+            "type": "Reviewer"
+          },
+          {
+            "id": "validator:req_320e944ac2f4b4d59afbcdb29ae58e29",
+            "type": "Validator"
+          },
+          {
+            "id": "reviewer:req_320e944ac2f4b4d59afbcdb29ae58e29",
+            "type": "Reviewer"
+          },
+          {
+            "id": "validator:req_8d850457640b6adfe5aef8aa8d37e461",
+            "type": "Validator"
+          },
+          {
+            "id": "reviewer:req_8d850457640b6adfe5aef8aa8d37e461",
+            "type": "Reviewer"
+          },
+          {
+            "id": "validator:req_ef96d1b74da0cd2225bb7c7f15eaba20",
+            "type": "Validator"
+          },
+          {
+            "id": "reviewer:req_ef96d1b74da0cd2225bb7c7f15eaba20",
+            "type": "Reviewer"
+          },
+          {
+            "id": "validator:req_4b6b6b29000c62dbdb45a4068f802cb6",
+            "type": "Validator"
+          },
+          {
+            "id": "reviewer:req_4b6b6b29000c62dbdb45a4068f802cb6",
+            "type": "Reviewer"
+          },
+          {
+            "id": "validator:req_75129f4d3ecd5a04521b697d70a44fbe",
+            "type": "Validator"
+          },
+          {
+            "id": "reviewer:req_75129f4d3ecd5a04521b697d70a44fbe",
+            "type": "Reviewer"
+          },
+          {
+            "id": "aggregate:reviewer",
+            "type": "Reviewer"
+          },
+          {
+            "id": "recovery",
+            "type": "Recovery"
+          },
+          {
+            "id": "synthesis",
+            "type": "Synthesis"
+          },
+          {
+            "id": "action:15:search_text",
+            "type": "Evidence"
+          },
+          {
+            "id": "report_language",
+            "type": "ReportLanguage"
+          }
+        ],
+        "source_event_nodes": [
+          "query_language",
+          "aggregate:main_agent",
+          "action:1:run_multi_agent_research",
+          "planner",
+          "worker:blip-2-2301.12597v1",
+          "worker:flamingo-2204.14198v1",
+          "aggregate:reviewer",
+          "recovery_worker:blip-2-2301.12597v1",
+          "synthesis",
+          "validator:req_a4aec8c5220fc95be55a83c3146d13c2",
+          "reviewer:req_a4aec8c5220fc95be55a83c3146d13c2",
+          "validator:req_22b086a9d843f891bdb6ef0b02522bba",
+          "reviewer:req_22b086a9d843f891bdb6ef0b02522bba",
+          "validator:req_7a6fc2199fff36ced1ca277eef3a3309",
+          "reviewer:req_7a6fc2199fff36ced1ca277eef3a3309",
+          "validator:req_dccb8304f7122fcc2d47fa39f527b5cc",
+          "reviewer:req_dccb8304f7122fcc2d47fa39f527b5cc",
+          "validator:req_1a6bb716813ea5ce99a3aba368f551a3",
+          "reviewer:req_1a6bb716813ea5ce99a3aba368f551a3",
+          "validator:req_f9b525ab4c267d5e6637f3d258dca67c",
+          "reviewer:req_f9b525ab4c267d5e6637f3d258dca67c",
+          "validator:req_244c8e4f08775d52ee2ce25a11ff93d0",
+          "reviewer:req_244c8e4f08775d52ee2ce25a11ff93d0",
+          "validator:req_559f4f388ef5526d26645eb5b4d78db8",
+          "reviewer:req_559f4f388ef5526d26645eb5b4d78db8",
+          "validator:req_255ef6dbcc945579f00541765d02a3f5",
+          "reviewer:req_255ef6dbcc945579f00541765d02a3f5",
+          "validator:req_320e944ac2f4b4d59afbcdb29ae58e29",
+          "reviewer:req_320e944ac2f4b4d59afbcdb29ae58e29",
+          "validator:req_8d850457640b6adfe5aef8aa8d37e461",
+          "reviewer:req_8d850457640b6adfe5aef8aa8d37e461",
+          "validator:req_ef96d1b74da0cd2225bb7c7f15eaba20",
+          "reviewer:req_ef96d1b74da0cd2225bb7c7f15eaba20",
+          "validator:req_4b6b6b29000c62dbdb45a4068f802cb6",
+          "reviewer:req_4b6b6b29000c62dbdb45a4068f802cb6",
+          "validator:req_75129f4d3ecd5a04521b697d70a44fbe",
+          "reviewer:req_75129f4d3ecd5a04521b697d70a44fbe",
+          "recovery",
+          "action:15:search_text",
+          "report_language"
+        ],
+        "actual_worker_nodes": [
+          "worker:blip-2-2301.12597v1",
+          "worker:flamingo-2204.14198v1"
+        ],
+        "worker_branches": 2,
+        "language_status": "failed"
+      }
+    ]
+  },
+  "restart_verification": {
+    "old_pid": 12546,
+    "new_pid": 14544,
+    "runs": [
+      {
+        "case": "simple",
+        "run_id": "dafbac3f2fc945f3b6e0460bbaf2233a",
+        "status": "completed",
+        "event_count": 16,
+        "expected_event_count": 16,
+        "report_sha256": "c761c82163103f09faab66edb192a32f6112723e302b7dd0d7415aa5f723c254",
+        "previous_report_sha256": "c761c82163103f09faab66edb192a32f6112723e302b7dd0d7415aa5f723c254",
+        "report_revision": "1",
+        "same_report": true,
+        "paper_ids": [],
+        "post_requests": 0,
+        "read_after_service_restart": true
+      },
+      {
+        "case": "collaboration",
+        "run_id": "1487522ff5624f0f8c2213568799b759",
+        "status": "completed",
+        "event_count": 137,
+        "expected_event_count": 137,
+        "report_sha256": "f5d787d7337c283d1ce59e11449042176ba0cf311adc548a876d7ad2a1e32b92",
+        "previous_report_sha256": "f5d787d7337c283d1ce59e11449042176ba0cf311adc548a876d7ad2a1e32b92",
+        "report_revision": "1",
+        "same_report": true,
+        "paper_ids": [
+          "blip-2-2301.12597v1",
+          "flamingo-2204.14198v1"
+        ],
+        "post_requests": 0,
+        "read_after_service_restart": true
+      }
+    ]
+  },
+  "integrity": {
+    "stage_e_files": 292,
+    "stage_e_changes_against_historical_manifest": [
+      {
+        "path": "README.md",
+        "historical_sha256": "ec3682b4e15768a8ce6e87f14268470fec822e506d07fd5306ac42f2bf861d43",
+        "current_sha256": "8549bd6a3da75fa292d5bbdd0625d206a2cf0bd7fa8c6bc2db6e0f8ffe3a6db0"
+      }
+    ],
+    "stage_e_changes_this_task": [],
+    "original_untracked_count": 13,
+    "original_untracked": [
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/artifact_manifest.json",
+        "before": "ee233e77df173293c437e887f78c141c6d36dcf264d6b004c0223853fd60f223",
+        "after": "ee233e77df173293c437e887f78c141c6d36dcf264d6b004c0223853fd60f223",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/findings.json",
+        "before": "f5590827026f11b87fbbc0729f0bbc2e6e26b4c1399af337980cf8c638cc93de",
+        "after": "f5590827026f11b87fbbc0729f0bbc2e6e26b4c1399af337980cf8c638cc93de",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/report.md",
+        "before": "9579aabe3451eae73aa949beee92133103dbc0168ede980a0f0070d4851a099f",
+        "after": "9579aabe3451eae73aa949beee92133103dbc0168ede980a0f0070d4851a099f",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-frozen-trainable-scope.md",
+        "before": "abdec5284ce2de37d786cbd2bc66d8c49c23eb045fa1f9f64c8bdedb3b7c3f81",
+        "after": "abdec5284ce2de37d786cbd2bc66d8c49c23eb045fa1f9f64c8bdedb3b7c3f81",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-language-model.md",
+        "before": "51c5dada6a6cdded716bd1a0bf670dee83a33e8f64558b03dfb321b60385508c",
+        "after": "51c5dada6a6cdded716bd1a0bf670dee83a33e8f64558b03dfb321b60385508c",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-training-objective.md",
+        "before": "b50a0e2ecc96c50e93b83e7d3bd0c2ccedb2aec1b48106539ff4bcee5bccbb29",
+        "after": "b50a0e2ecc96c50e93b83e7d3bd0c2ccedb2aec1b48106539ff4bcee5bccbb29",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-vision-encoder.md",
+        "before": "e62e2404f29e15cf4233a319dd69952ab0cbd28b73371ad74182e4e9260f797c",
+        "after": "e62e2404f29e15cf4233a319dd69952ab0cbd28b73371ad74182e4e9260f797c",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-vision-language-bridge.md",
+        "before": "cb0b57c84f80526ea0d89a90e2213fd261649f5ea3a57414efc732323fa48476",
+        "after": "cb0b57c84f80526ea0d89a90e2213fd261649f5ea3a57414efc732323fa48476",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-llava-frozen-trainable-scope.md",
+        "before": "f1422c861901636998acd0eb45a379900e8fbe5f2bc8fb9a2db6e4290eaf5d09",
+        "after": "f1422c861901636998acd0eb45a379900e8fbe5f2bc8fb9a2db6e4290eaf5d09",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-llava-language-model.md",
+        "before": "1156f7e4efc7ec8731be1e539753717b659aae1b76ebf398d7338fa2a219b936",
+        "after": "1156f7e4efc7ec8731be1e539753717b659aae1b76ebf398d7338fa2a219b936",
+        "unchanged": true
+      },
+      {
+        "path": "docs/diagnostics/quality_failures_2026_10_09/verification.json",
+        "before": "f107553f46a803cd866a3d16a9892bdc5682bde958d2b4eecba98759a7f2fca3",
+        "after": "f107553f46a803cd866a3d16a9892bdc5682bde958d2b4eecba98759a7f2fca3",
+        "unchanged": true
+      },
+      {
+        "path": "scripts/export_quality_failure_traces.py",
+        "before": "b59cbb413bad0cf93936c28fd0896f2ba952aa532f6b4d945d87804f2185c23c",
+        "after": "b59cbb413bad0cf93936c28fd0896f2ba952aa532f6b4d945d87804f2185c23c",
+        "unchanged": true
+      },
+      {
+        "path": "tests/research_quality/test_failure_trace_export.py",
+        "before": "9a84da8a40e69b3b834085fc4c2725de495dfb2893e04517d84c05cc169198bc",
+        "after": "9a84da8a40e69b3b834085fc4c2725de495dfb2893e04517d84c05cc169198bc",
+        "unchanged": true
+      }
+    ],
+    "additional_historical_artifact_count": 26,
+    "historical_changes": []
+  },
+  "existing_release_integrity": {
+    "status": "PASS",
+    "stage_e_files_checked": 292,
+    "unchanged_frozen_files": 291,
+    "approved_documentation_exceptions": [
+      "README.md"
+    ],
+    "historical_readme_verified_against_original_tag": true,
+    "unapproved_frozen_mismatches": [],
+    "protected_artifacts_checked": 47,
+    "protected_artifact_mismatches": [],
+    "original_verifier": {
+      "status": "FAIL",
+      "frozen_files_checked": 292,
+      "protected_artifacts_checked": 47,
+      "frozen_mismatches": [
+        "README.md"
+      ],
+      "protected_artifact_mismatches": [],
+      "frozen_manifest_root_changed": false,
+      "provider_calls": 0
+    },
+    "provider_calls": 0
+  },
+  "b2_status": "CONDITIONAL_unchanged",
+  "known_limitations": [
+    "Both real report translation attempts failed invalid_report_translation; original answers remain readable",
+    "Collaborative answer partial: 8 verified, 6 missing of 14 requirements",
+    "Single-agent answer does not have independent Reviewer or human semantic approval",
+    "No VLM or arxiv real validation in this task",
+    "Local history is browser bookmarks, not a new database listing API",
+    "WSL browser download failed; existing Windows Chromium used",
+    "No clean-environment reinstall in this run"
+  ],
+  "startup": {
+    "command": "python -m scripts.launch --host 127.0.0.1 --port 8008",
+    "url": "http://127.0.0.1:8008/",
+    "log": "artifacts/chat-workbench-2026-10-26/development-server.log",
+    "service_kept_for_user": true
+  },
+  "remote_git_operations": false,
+  "production_or_agent_learning_connections": 0,
+  "secret_scan_hits": []
+}

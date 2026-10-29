@@ -131,7 +131,7 @@ class GuardedTool(Tool):
             return self.delegate.execute(arguments)
         role = (
             "PaperSearch"
-            if self.name == "search_papers"
+            if self.name in {"search_papers", "search_arxiv"}
             else "QueryExpansion"
             if self.name == "expand_search_query"
             else "ResearchTool"
@@ -140,6 +140,16 @@ class GuardedTool(Tool):
         )
         node = f"action:{self.budget.tools_used}:{self.name}"
         started = perf_counter()
+        public_arguments = arguments.model_dump(mode="json")
+        if self.name in {
+            "memory_search",
+            "memory_save",
+            "memory_update",
+            "memory_forget",
+        }:
+            from app.memory.tools import safe_memory_arguments
+
+            public_arguments = safe_memory_arguments(public_arguments)
         self.emit(
             node_type=role,
             node_id=node,
@@ -148,7 +158,7 @@ class GuardedTool(Tool):
             summary="已校验主Agent工具动作，正在实际执行。",
             details={
                 "tool_name": self.name,
-                "arguments": arguments.model_dump(mode="json"),
+                "arguments": public_arguments,
             },
             source="live",
         )
@@ -173,6 +183,15 @@ class GuardedTool(Tool):
                         for e in observation.payload.get("evidence", [])
                     ],
                     "latency_ms": (perf_counter() - started) * 1000,
+                    **(
+                        {
+                            "transport_execution": observation.payload.get(
+                                "execution", {}
+                            )
+                        }
+                        if self.name == "search_arxiv"
+                        else {}
+                    ),
                 },
                 source="live",
             )
@@ -201,6 +220,18 @@ class ContextExecutor(ToolExecutor):
 
     def execute(self, *args, **kwargs):
         observation = super().execute(*args, **kwargs)
+        if observation.tool_name in {
+            "memory_search",
+            "memory_save",
+            "memory_update",
+            "memory_forget",
+        }:
+            from app.memory.tools import safe_memory_arguments
+
+            previous = self._traces[-1]
+            self._traces[-1] = previous.model_copy(
+                update={"arguments": safe_memory_arguments(previous.arguments)}
+            )
         self.context.observations.append(observation)
         if observation.status != "success":
             self.emit(
@@ -233,6 +264,9 @@ class ReActWorkbenchRuntime:
         vision_factory=None,
         paper_retriever=None,
         paper_catalog=None,
+        arxiv_client=None,
+        external_tool_sources=(),
+        memory_service=None,
         max_research_calls=1,
         max_tools=64,
         max_protocol_corrections=2,
@@ -242,6 +276,10 @@ class ReActWorkbenchRuntime:
         self.vision_factory = vision_factory or OpenAICompatibleVisionClient
         self.paper_retriever = paper_retriever
         self.paper_catalog = paper_catalog
+        self.arxiv_client = arxiv_client
+        self.external_tool_sources = tuple(external_tool_sources)
+        self.memory_service = memory_service
+        self._arxiv_config_loaded = arxiv_client is not None
         if type(max_research_calls) is not int or max_research_calls != 1:
             raise ValueError("research_calls_must_be_bounded_to_one")
         self.max_research_calls, self.max_tools = max_research_calls, max_tools
@@ -253,6 +291,11 @@ class ReActWorkbenchRuntime:
         started = perf_counter()
         budget = UnifiedRunBudget(request.max_model_calls, self.max_tools)
         bridge = AsyncDecisionBridge()
+        memory_bindings = None
+        arxiv_cancel = threading.Event()
+        external_sessions, external_setup = [], []
+        external_cleanup_failed = False
+        external_close_errors = set()
         adapters, clients, visions = [], [], []
         execution = {
             "question": request.question,
@@ -503,7 +546,22 @@ class ReActWorkbenchRuntime:
                     details=execution["query_language"],
                     source="live",
                 )
-            context = ResearchContext(
+            # 外部检索显式启用才接入；同一运行时复用客户端，不建立全局注册状态。
+            if not self._arxiv_config_loaded:
+                import os
+
+                from app.papers.arxiv import configured_arxiv_client
+
+                environment = getattr(self.dependencies, "environment", None)
+                environment = environment() if callable(environment) else os.environ
+                self.arxiv_client = configured_arxiv_client(environment)
+                self._arxiv_config_loaded = True
+            context_type = ResearchContext
+            if self.arxiv_client is not None:
+                from app.research.external_discovery import ExternalDiscoveryContext
+
+                context_type = ExternalDiscoveryContext
+            context = context_type(
                 request.question,
                 question,
                 catalog,
@@ -520,6 +578,56 @@ class ReActWorkbenchRuntime:
                 paper_catalog=catalog,
                 query_expander=expander,
             )
+            if self.arxiv_client is not None:
+                from app.tools.arxiv import SearchArxivTool
+
+                registry.register(
+                    SearchArxivTool(
+                        self.arxiv_client,
+                        catalog,
+                        context.prepared_ids,
+                        cancel_event=arxiv_cancel,
+                    )
+                )
+            # 只有管理员显式注入并启用的本地来源才发现；工具仍走相同Registry/预算。
+            for source in self.external_tool_sources:
+                if not source.config.enabled:
+                    continue
+                from app.tools.integrations.error_mapper import ExternalToolError
+
+                try:
+                    session = source.open(cancel_event=arxiv_cancel)
+                    external_sessions.append(session)
+                    names = await _offload(
+                        lambda session=session: session.register(registry),
+                        on_cancel=arxiv_cancel.set,
+                    )
+                    external_setup.append(
+                        {
+                            "provider": source.config.provider,
+                            "registered_tools": list(names),
+                        }
+                    )
+                except (ExternalToolError, ValueError) as exc:
+                    # 发现失败不是empty，也不阻止无关的核心工具正常使用。
+                    external_setup.append(
+                        {
+                            "provider": source.config.provider,
+                            "issue_code": "external_tools_unavailable",
+                            "external_error_code": exc.code
+                            if isinstance(exc, ExternalToolError)
+                            else "invalid_configuration",
+                        }
+                    )
+                    emit(
+                        node_type="MainAgent",
+                        node_id="aggregate:main_agent",
+                        status="running",
+                        event_type="progress",
+                        summary="配置的外部工具未能接入；核心工具继续可用。",
+                        details=external_setup[-1],
+                        source="live",
+                    )
             registry.register(
                 MultiAgentResearchTool(
                     context,
@@ -529,6 +637,13 @@ class ReActWorkbenchRuntime:
                     max_calls=self.max_research_calls,
                 )
             )
+            if self.memory_service is not None:
+                from app.memory.tools import MemoryBindings
+
+                memory_bindings = MemoryBindings(
+                    self.memory_service, request.question, bridge.invoke
+                )
+                memory_bindings.register(registry)
             from app.tools.registry import ToolRegistry
 
             guarded = ToolRegistry()
@@ -540,6 +655,10 @@ class ReActWorkbenchRuntime:
                 )
             executor = ContextExecutor(guarded, context, emit)
             proxy = SyncModelProxy(bridge, model("main_agent"))
+            if memory_bindings is not None:
+                from app.memory.integration import MemoryAwareClient
+
+                proxy = MemoryAwareClient(proxy)
             policy = MainPolicyClient(
                 proxy,
                 context,
@@ -548,6 +667,10 @@ class ReActWorkbenchRuntime:
                 max_protocol_corrections=self.max_protocol_corrections,
             )
             agent = MainResearchAgent(policy, executor, resolver, context)
+            if memory_bindings is not None:
+                from app.memory.integration import MemoryFinishAction
+
+                agent.finish = MemoryFinishAction(agent.finish, memory_bindings)
             emit(
                 node_type="MainAgent",
                 node_id="aggregate:main_agent",
@@ -564,7 +687,8 @@ class ReActWorkbenchRuntime:
                 return result
 
             result = await _offload(
-                run_sync, on_cancel=lambda: (budget.stop(), bridge.cancel())
+                run_sync,
+                on_cancel=lambda: (arxiv_cancel.set(), budget.stop(), bridge.cancel()),
             )
             if result.status == "protocol_failure" and policy.protocol_trace:
                 last = policy.protocol_trace[-1]
@@ -602,6 +726,10 @@ class ReActWorkbenchRuntime:
             answer = assemble_answer(
                 result, agent.finish.proposal, context, resolver, budget
             )
+            if memory_bindings is not None:
+                from app.memory.integration import enrich_memory_answer
+
+                enrich_memory_answer(answer, agent.finish.proposal, memory_bindings)
             execution["status"] = (
                 "failed" if answer["answer_status"] == "failed" else "completed"
             )
@@ -671,6 +799,7 @@ class ReActWorkbenchRuntime:
             execution["original_answer"] = original_answer
             return execution
         except asyncio.CancelledError as exc:
+            arxiv_cancel.set()
             budget.stop()
             bridge.cancel()
             cancellation = exc
@@ -688,6 +817,26 @@ class ReActWorkbenchRuntime:
             execution["issue_type"] = "main_agent_dependency_failure"
             return execution
         finally:
+            for session in external_sessions:
+                try:
+                    session.close()
+                except Exception:  # noqa: BLE001 - 清理失败明确记录，不伪装为正常完成
+                    external_cleanup_failed = True
+                    external_close_errors.add(id(session))
+            if self.external_tool_sources:
+                execution["external_tools"] = {
+                    "setup": external_setup,
+                    "sessions": [
+                        {
+                            "provider": session.config.provider,
+                            "calls": list(session.client.records),
+                            "cleanup_confirmed": not session.client.active_pids
+                            and id(session) not in external_close_errors,
+                        }
+                        for session in external_sessions
+                    ],
+                    "cleanup_failed": external_cleanup_failed,
+                }
             if cancellation:
                 bridge.cancel()
             await bridge.drain()
@@ -706,6 +855,23 @@ class ReActWorkbenchRuntime:
                 execution["answer_first"] = failure_answer(
                     context, resolver, budget, cancelled=bool(cancellation)
                 )
+            if external_cleanup_failed and not cancellation:
+                execution["status"] = "failed"
+                execution["issue_type"] = "external_tool_cleanup_failed"
+                execution["answer_first"].update(
+                    status="failed", answer_status="failed"
+                )
+                execution["answer_first"]["limitations"].append(
+                    "External tool cleanup could not be confirmed; execution is not successful."
+                )
+            if memory_bindings is not None:
+                execution["memory"] = memory_bindings.snapshot()
+                if memory_bindings.pending_writes and not cancellation:
+                    execution["status"] = "failed"
+                    execution["issue_type"] = "memory_write_failed"
+                    execution["answer_first"].update(
+                        status="failed", answer_status="failed"
+                    )
             execution.update(
                 model_calls_observed=budget.used,
                 llm_calls_observed=budget.llm_used,

@@ -1,52 +1,51 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>论文研究工作台</title>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>研知 · 论文研究工作台</title>
   <link rel="stylesheet" href="/workbench-static/style.css">
+  <script defer src="/workbench-static/adapters.js"></script>
   <script defer src="/workbench-static/app.js"></script>
 </head>
 <body>
-  <header class="app-header">
-    <div class="brand"><h1>论文研究工作台</h1><p>提出问题，查看执行过程与证据。</p></div>
-    <div class="replay-controls"><label class="sr-only" for="replay-select">历史案例</label><select id="replay-select" disabled><option value="">正在读取历史案例…</option></select><button id="replay-button" class="button secondary" type="button" disabled>历史回放</button></div>
-  </header>
-  <main class="workbench">
-    <aside class="config-panel panel" aria-label="研究输入">
-      <div class="section-heading"><h2>研究输入</h2><p>只需提出问题，主 Agent 自主决定是否检索或深入研究。</p></div>
-      <form id="research-form">
-        <label class="field-label" for="question">研究问题</label>
-        <textarea id="question" rows="7" maxlength="4000" placeholder="例如：比较 BLIP-2 与 Flamingo 如何将视觉特征接入语言模型，并给出论文证据。">比较 BLIP-2 与 Flamingo 的视觉语言连接机制，说明 Q-Former、Perceiver Resampler 与门控交叉注意力如何将视觉特征传递给语言模型，并引用当前论文库中的证据。</textarea>
-        <button id="start-button" class="button primary" type="submit" disabled>开始研究</button>
-        <button id="cancel-button" class="button secondary" type="button" disabled>取消当前任务</button>
-        <div class="label-row"><span class="field-label" id="papers-label">当前论文库</span><span class="small muted">只读资源</span></div>
-        <div id="papers" class="paper-options" role="group" aria-labelledby="papers-label"><p class="muted">正在读取论文库…</p></div>
-        <p id="selection-mode" class="selection-mode">论文库仅展示资源，不需要手动指定研究对象。</p>
-        <p id="form-hint" class="muted small">本地目录与正文证据分别标记；暂不支持外部实时论文搜索。</p>
-        <details class="advanced"><summary>更多设置与运行环境</summary><label class="original-mode"><input id="original-language" type="checkbox">问题原文直通（排查语言转换时使用）</label><p class="small muted">中文或中英混合问题默认进行语言适配；英文问题直接进入原有研究链。</p><div class="label-row"><h3 id="health-title">运行环境</h3><button id="refresh-health" class="text-button" type="button">刷新</button></div><div id="health" aria-live="polite"><p class="muted small">正在检查…</p></div><p id="budget-hint" class="small muted"></p></details>
-      </form>
-      <section class="task-section" aria-labelledby="task-title"><h3 id="task-title">当前任务</h3><span id="run-status" class="run-status" aria-live="polite">等待任务</span><p id="task-question" class="small muted">尚未创建任务。</p><p id="selection-result" class="small muted"></p><p id="run-id" class="run-id"></p></section>
-      <p class="execution-notice">真实研究可能产生模型调用费用。历史回放不调用模型；翻译和模型审核均不等于独立人工事实核验。</p>
-      <p id="api-error" class="error-banner" role="alert" hidden></p>
-    </aside>
-
-    <section class="workflow-panel panel" aria-labelledby="workflow-title">
-      <div class="workflow-heading"><h2 id="workflow-title">执行过程</h2><span id="mode-badge" class="badge neutral">尚未运行</span></div>
-      <p id="run-question" class="run-question muted">节点将在收到真实执行记录后出现。</p>
-      <p id="workflow-layout" class="workflow-layout" aria-live="polite">等待执行</p>
-      <div class="source-legend"><span>实时调用</span><span>记录推导</span><span>历史回放</span></div>
-      <p id="event-warning" class="report-notice" hidden></p>
-      <div class="workflow timeline" id="workflow"><div class="timeline-empty"><span aria-hidden="true">○</span><p>等待研究任务</p><p class="small muted">这里不会预先生成研究角色或模拟进度。</p></div></div>
-      <p id="workflow-note" class="graph-note">点击节点查看过程详情。仅展示已记录的状态；无原始时间时不推定时间。恢复节点仅在实际执行后出现。</p>
-      <details class="advanced execution-details"><summary>执行统计与原始事件 <span id="event-count" class="small muted">0 条</span></summary><div id="metrics" class="metrics-strip"><div><strong>—</strong><span>模型调用</span></div><div><strong>—</strong><span>工具调用</span></div><div><strong>—</strong><span>已审核需求</span></div><div><strong>—</strong><span>实际耗时</span></div></div><ol id="event-list" class="event-list"><li class="muted small empty-event">尚无执行记录。</li></ol></details>
-    </section>
-
-    <aside class="details-panel panel" aria-label="研究结果">
-      <section class="final-result" aria-labelledby="result-title"><div class="result-heading"><h2 id="result-title">研究回答</h2><button id="tab-report" class="text-button" type="button">查看全文</button></div><div class="language-tabs" role="tablist" aria-label="报告语言"><button id="report-language-zh" class="language-tab active" role="tab" aria-selected="true" type="button">中文回答</button><button id="report-language-en" class="language-tab" role="tab" aria-selected="false" type="button">英文原文</button></div><p id="report-language-notice" class="report-notice" aria-live="polite">保留权威原报告与引用，中文版本仅用于阅读。</p><section id="report-panel" aria-label="最终报告"><div id="report-details" class="empty-state"><h3>尚无研究报告</h3><p>答案完成后首先显示直接回答。执行失败时，仍保留可用事实与缺失状态。</p></div></section></section>
-      <section class="process-result" aria-labelledby="process-title"><h2 id="process-title">过程结果</h2><div class="tabs" role="tablist" aria-label="过程结果类型"><button id="tab-node" class="tab active" role="tab" aria-selected="true" aria-controls="node-panel" data-panel="node-panel">过程详情</button><button id="tab-evidence" class="tab" role="tab" aria-selected="false" aria-controls="evidence-panel" data-panel="evidence-panel">引用证据</button></div><section id="node-panel" class="detail-content" role="tabpanel" aria-labelledby="tab-node"><div id="node-details" class="empty-state"><h3>等待执行记录</h3><p>点击中间节点查看研究需求、工具调用、证据与实际错误。</p></div></section><section id="evidence-panel" class="detail-content" role="tabpanel" aria-labelledby="tab-evidence" hidden><div id="evidence-details" class="empty-state"><h3>尚无证据</h3><p>引用可追溯至论文与 PDF 页码，无记录的字段明确标注。</p></div></section></section>
-    </aside>
+<div class="app-shell">
+  <aside class="sidebar" aria-label="主导航">
+    <a class="brand" href="/" aria-label="研知首页"><span class="brand-mark" aria-hidden="true">研</span><span>研知<span class="brand-sub">RESEARCH AGENT</span></span></a>
+    <button id="new-research" class="button new-research" type="button"><span aria-hidden="true">＋</span> 新建研究 <kbd>新对话</kbd></button>
+    <nav class="nav-list" aria-label="工作区">
+      <button class="nav-item active" data-view="chat" type="button"><span aria-hidden="true">◉</span>研究对话</button>
+      <button class="nav-item" data-view="history" type="button"><span aria-hidden="true">◷</span>历史记录</button>
+      <button class="nav-item" data-view="library" type="button"><span aria-hidden="true">▤</span>论文资源库<span id="paper-count" class="nav-count">—</span></button>
+      <button class="nav-item" data-view="environment" type="button"><span aria-hidden="true">⚙</span>运行配置</button>
+    </nav>
+    <section class="recent-section"><div class="eyebrow">本机最近记录</div><div id="recent-runs" class="recent-runs"><p class="small muted">研究后会在这里留下入口。</p></div><p class="tiny muted">仅记录本浏览器访问过的任务。</p></section>
+    <div class="sidebar-bottom"><span class="local-dot" aria-hidden="true"></span><div>本地研究空间<span id="storage-label" class="tiny muted">正在读取存储状态…</span></div><span class="version">V1</span></div>
+  </aside>
+  <main class="main-column">
+    <header class="topbar"><div><span class="topbar-title">论文研究</span><span class="separator">/</span><span id="topbar-context" class="muted">新对话</span></div><button id="connection-status" class="connection-status" type="button" title="点击只读刷新当前任务" aria-live="polite">正在连接</button></header>
+    <div class="main-scroll" id="main-scroll">
+      <section id="welcome" class="welcome">
+        <div class="welcome-symbol" aria-hidden="true">✳</div><div class="eyebrow">从一个好问题开始</div><h1>让论文，成为有据可循的回答。</h1><p>提出你的研究问题。Agent 会按需查找论文、阅读证据，<br class="desktop-break">或邀请多个研究 Agent 协作。</p>
+        <div class="examples" aria-label="示例问题">
+          <button class="example-card" type="button" data-question="CLIP 使用什么训练目标对齐图像和文本？请引用当前论文库的证据。"><span>理解一个概念 <span aria-hidden="true">↗</span></span><strong>CLIP 如何对齐图像与文本？</strong><small>从文本证据获得简洁解释</small></button>
+          <button class="example-card" type="button" data-question="比较 BLIP-2 和 Flamingo 的视觉语言连接机制，并引用当前论文库中的证据。"><span>比较论文方法 <span aria-hidden="true">↗</span></span><strong>Q-Former 与 Resampler 有何不同？</strong><small>按问题需要选择研究方式</small></button>
+          <button class="example-card" type="button" data-question="请对 BLIP-2、Flamingo、LLaVA 做系统性跨论文研究，从视觉编码器、视觉语言连接、冻结与可训练范围、训练目标、语言模型五个维度逐篇收集证据，审核后比较，并保留证据缺口。"><span>展开深入研究 <span aria-hidden="true">↗</span></span><strong>三篇论文，五个研究维度</strong><small>是否启动协作由主 Agent 决定</small></button>
+          <button class="example-card" type="button" data-question="Figure 3 为什么证明 BLIP 性能更强？请核实问题前提，只使用当前证据。"><span>核实问题前提 <span aria-hidden="true">↗</span></span><strong>图表真的支持这个结论吗？</strong><small>区分已知事实与证据不足</small></button>
+        </div>
+        <div class="welcome-footnote">本地论文发现 · 证据引用 · 按需多 Agent 协作</div>
+      </section>
+      <section id="history-view" class="utility-view" hidden><div class="eyebrow">已保存的访问入口</div><h1>历史记录</h1><p class="muted">本机记录只保存任务入口；状态、事件和报告始终从服务端读取。未启用数据库时，进程重启后记录可能不可用。</p><div id="history-runs"></div><div class="archive-box"><h2>归档案例回放</h2><p class="small muted">读取已有真实实验归档，不重新研究、不调用模型。</p><label class="sr-only" for="replay-select">历史案例</label><select id="replay-select" disabled><option value="">正在读取…</option></select><button id="replay-button" class="button secondary" type="button" disabled>历史回放</button></div></section>
+      <section id="library-view" class="utility-view" hidden><div class="eyebrow">只读资源目录</div><h1 id="papers-label">论文资源库</h1><p id="selection-mode" class="muted">不需要手动选择论文。</p><p class="report-notice">目录中的元数据不等于正文证据。只有已准备的正文和图注可用于当前证据研究。</p><div id="papers" class="paper-options" role="group" aria-labelledby="papers-label"></div></section>
+      <section id="environment-view" class="utility-view" hidden><div class="eyebrow">现有服务配置 · 只读</div><h1>运行配置</h1><p class="muted">凭据在服务端配置，本页不读取或保存密钥。</p><div class="label-row"><h2>依赖就绪状态</h2><button id="refresh-health" class="text-button" type="button">刷新检查</button></div><div id="health" aria-live="polite"></div><p id="budget-hint" class="small muted"></p><label class="original-mode"><input id="original-language" type="checkbox"> 问题原文直通（排查语言转换时使用）</label><p class="small muted">默认中文输入、英文内部检索、中文阅读；语言转换不补充事实。</p></section>
+      <article id="conversation" class="conversation" hidden>
+        <div class="user-message"><span class="user-avatar" aria-hidden="true">你</span><p id="run-question"></p></div>
+        <section class="final-result" aria-labelledby="result-title"><div class="assistant-heading"><span class="assistant-avatar" aria-hidden="true">✳</span><h2 id="result-title">研究回答</h2><span id="run-status" class="run-status" aria-live="polite">等待任务</span></div><div class="language-tabs" role="tablist" aria-label="报告语言"><button id="report-language-zh" class="language-tab active" role="tab" aria-selected="true" type="button">中文回答</button><button id="report-language-en" class="language-tab" role="tab" aria-selected="false" type="button">英文原文</button><button id="show-process" class="text-button" type="button">执行过程 ↗</button><button id="tab-report" class="text-button" type="button">详细报告 ↗</button></div><section id="report-panel" aria-label="最终报告"><div id="report-details"></div></section><p id="report-language-notice" class="report-notice"></p></section>
+        <details class="workflow-panel" id="workflow-section" open><summary class="workflow-heading"><div><span class="process-icon" aria-hidden="true">⌘</span><h2 id="workflow-title">执行过程</h2><span id="workflow-layout">等待执行</span></div><span id="mode-badge" class="badge neutral">尚未运行</span></summary><div class="workflow-body"><p id="event-warning" class="report-notice" hidden></p><div id="workflow" class="workflow timeline"></div><p id="workflow-note" class="graph-note"></p><details class="execution-details"><summary>统计与原始事件 <span id="event-count" class="small muted">0 条</span></summary><div id="metrics" class="metrics-strip"><div><strong>—</strong><span>模型调用</span></div><div><strong>—</strong><span>工具调用</span></div><div><strong>—</strong><span>已审核需求</span></div><div><strong>—</strong><span>实际耗时</span></div></div><ol id="event-list" class="event-list"></ol></details><p class="tiny muted">实时调用、记录推导与历史回放分别标注；职责分支不表示并发时间线。</p></div></details>
+        <p id="selection-result" class="small muted"></p><details class="task-details"><summary>任务身份与来源</summary><p id="task-question" class="small muted"></p><code id="run-id"></code></details>
+      </article>
+    </div>
+    <div class="composer-dock"><div id="api-error" class="error-banner" role="alert" hidden></div><div id="submission-recovery" class="submission-recovery" hidden><span>提交结果尚未确定。不会自动重建任务。</span><button id="reconcile-button" class="text-button" type="button">只读核对原提交</button></div><form id="research-form" class="composer"><label class="sr-only" for="question">研究问题</label><textarea id="question" rows="2" maxlength="4000" placeholder="输入研究问题，例如：比较两篇论文的视觉语言连接机制…"></textarea><div class="composer-toolbar"><span class="composer-tag"><span aria-hidden="true">✳</span> 自主研究</span><label class="budget-label">调用上限 <input id="model-budget" type="number" min="1" max="200" value="36" aria-label="本次模型调用上限"></label><div class="send-actions"><button id="cancel-button" class="button secondary" type="button" disabled>取消当前任务</button><button id="start-button" class="button primary" type="submit" disabled>发送 ↑</button></div></div></form><div class="composer-caption"><span id="form-hint">正在连接研究服务…</span><span>Enter 发送 · Shift + Enter 换行</span></div></div>
   </main>
-  <footer>任务保存在服务进程内，重启后可能丢失。实时研究、记录推导与历史回放分别标识。</footer>
-</body>
-</html>
+  <aside class="details-panel" aria-label="论文与证据"><div class="resource-header"><span class="eyebrow">RESEARCH CONTEXT</span><h2>研究资料 <span aria-hidden="true">▧</span></h2><p class="small muted">每项结论，都应有迹可循。</p></div><div id="reference-papers" class="reference-papers"><div class="resource-empty"><span aria-hidden="true">▤</span><h3>等待研究资料</h3><p>本次采用的论文、候选元数据与引用将在这里出现。</p></div></div><section class="process-result" aria-labelledby="process-title"><h2 id="process-title">证据与过程详情</h2><div class="tabs" role="tablist" aria-label="过程结果类型"><button id="tab-evidence" class="tab active" type="button" role="tab" aria-selected="true" aria-controls="evidence-panel" data-panel="evidence-panel">引用证据</button><button id="tab-node" class="tab" type="button" role="tab" aria-selected="false" aria-controls="node-panel" data-panel="node-panel">节点详情</button></div><section id="evidence-panel" class="detail-content" role="tabpanel" aria-labelledby="tab-evidence"><div id="evidence-details" class="resource-empty"><h3>尚无证据</h3><p>不以元数据代替正文，不补写缺失的证据片段。</p></div></section><section id="node-panel" class="detail-content" role="tabpanel" aria-labelledby="tab-node" hidden><div id="node-details" class="resource-empty"><h3>选择一个节点</h3><p>查看后端记录的工作、工具调用和实际错误。</p></div></section></section><p class="evidence-footer">模型辅助审核 ≠ 独立人工事实核验</p></aside>
+</div>
+</body></html>

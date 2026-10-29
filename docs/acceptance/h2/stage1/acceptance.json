@@ -1,0 +1,307 @@
+{
+  "stage": "H2.2 stage 1",
+  "client_date": "2026-10-24",
+  "status": "CONDITIONAL",
+  "offline_engineering": "PASS",
+  "postgresql_integration": "NOT_EXECUTED_TARGET_NOT_AUTHORIZED",
+  "baseline_branch": "release/v1.0.0",
+  "baseline_head": "d7777cbde96d46285de6be6cb9d58c13e6d72a67",
+  "feature_branch": "feature/h2-2-stage1-database-infrastructure",
+  "source_commit": "e4899dcd40d914205ecb6adf7f10a3a94ad47c44",
+  "full_suite": {
+    "passed": 1317,
+    "failed": 0,
+    "skipped": 1,
+    "warning": 1,
+    "summary": "1317 passed, 1 skipped, 1 warning in 32.67s",
+    "exit_code": 0
+  },
+  "new_unit_passed": 52,
+  "existing_tests_passed": 1265,
+  "clean_suite": {
+    "passed": 77,
+    "failed": 0,
+    "skipped": 1,
+    "warning": 1,
+    "summary": "77 passed, 1 skipped, 1 warning in 3.56s",
+    "exit_code": 0
+  },
+  "disabled_environment_replay": {
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "warning": 1,
+    "summary": "1 passed, 1 warning in 1.23s",
+    "exit_code": 0
+  },
+  "clean_pip_check_exit": 0,
+  "disabled_pip_check_exit": 0,
+  "disabled_environment_database_packages_present": false,
+  "lint_exit": 0,
+  "formatter_exit": 0,
+  "formatted_files": 280,
+  "git_diff_check_exit": 0,
+  "initial_clean_failure": {
+    "failed": 4,
+    "cause": "Prepared PDF tests require existing data extra PyMuPDF; added same declared range to independent test input/lock; no production code or test expectation changed"
+  },
+  "clean_environment_packages": {
+    "SQLAlchemy": "2.1.6",
+    "asyncpg": "0.32.0",
+    "greenlet": "3.5.6",
+    "pydantic": "2.14.1",
+    "fastapi": "0.162.0",
+    "starlette": "1.9.0",
+    "pytest": "8.4.2",
+    "PyMuPDF": "1.28.2"
+  },
+  "frozen_integrity": {
+    "original_files_checked": 730,
+    "original_changed_files": [
+      "app/workbench.py"
+    ],
+    "preexisting_untracked_checked": 13,
+    "preexisting_untracked_mismatches": [],
+    "frozen_checked": 292,
+    "frozen_raw_mismatches": [
+      "README.md"
+    ],
+    "readme_exception_matches": true,
+    "protected_checked": 47,
+    "protected_mismatches": [],
+    "f31e_checked": 34,
+    "f31e_mismatches": []
+  },
+  "preexisting_untracked": [
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/artifact_manifest.json",
+      "sha256": "ee233e77df173293c437e887f78c141c6d36dcf264d6b004c0223853fd60f223"
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/findings.json",
+      "sha256": "f5590827026f11b87fbbc0729f0bbc2e6e26b4c1399af337980cf8c638cc93de"
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/report.md",
+      "sha256": "9579aabe3451eae73aa949beee92133103dbc0168ede980a0f0070d4851a099f"
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-frozen-trainable-scope.md",
+      "sha256": "abdec5284ce2de37d786cbd2bc66d8c49c23eb045fa1f9f64c8bdedb3b7c3f81"
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-language-model.md",
+      "sha256": "51c5dada6a6cdded716bd1a0bf670dee83a33e8f64558b03dfb321b60385508c"
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-training-objective.md",
+      "sha256": "b50a0e2ecc96c50e93b83e7d3bd0c2ccedb2aec1b48106539ff4bcee5bccbb29"
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-vision-encoder.md",
+      "sha256": "e62e2404f29e15cf4233a319dd69952ab0cbd28b73371ad74182e4e9260f797c"
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-flamingo-vision-language-bridge.md",
+      "sha256": "cb0b57c84f80526ea0d89a90e2213fd261649f5ea3a57414efc732323fa48476"
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-llava-frozen-trainable-scope.md",
+      "sha256": "f1422c861901636998acd0eb45a379900e8fbe5f2bc8fb9a2db6e4290eaf5d09"
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/rqv1-comparison-blip2-llava-language-model.md",
+      "sha256": "1156f7e4efc7ec8731be1e539753717b659aae1b76ebf398d7338fa2a219b936"
+    },
+    {
+      "path": "docs/diagnostics/quality_failures_2026_10_09/verification.json",
+      "sha256": "f107553f46a803cd866a3d16a9892bdc5682bde958d2b4eecba98759a7f2fca3"
+    },
+    {
+      "path": "scripts/export_quality_failure_traces.py",
+      "sha256": "b59cbb413bad0cf93936c28fd0896f2ba952aa532f6b4d945d87804f2185c23c"
+    },
+    {
+      "path": "tests/research_quality/test_failure_trace_export.py",
+      "sha256": "9a84da8a40e69b3b834085fc4c2725de495dfb2893e04517d84c05cc169198bc"
+    }
+  ],
+  "modified_original_files": [
+    "app/workbench.py"
+  ],
+  "changed_files": [
+    {
+      "path": "app/api/storage.py",
+      "sha256": "5d0f1eed4d3091ab2d589a60c14cc2551fa64ca9ed7c4114fde98ce83dfb8436",
+      "bytes": 589
+    },
+    {
+      "path": "app/persistence/__init__.py",
+      "sha256": "6e8168f83108c932e18be7ed157cf02b355b58e0dff646ca61273f9fb18927ed",
+      "bytes": 94
+    },
+    {
+      "path": "app/persistence/config.py",
+      "sha256": "c02de2973cc05ea1706c65ffa9cae8db0ebfa3030408244b15ac762d219828ee",
+      "bytes": 3568
+    },
+    {
+      "path": "app/persistence/database.py",
+      "sha256": "f4b3f59c24ee78ae20e131a7d7a6860eb10db748b6fa976401fe9d096575d841",
+      "bytes": 7985
+    },
+    {
+      "path": "app/persistence/dependencies.py",
+      "sha256": "1448dae24be1bd481ed298f1fb42065c03d1a310efd1eff770865c55235dfa0c",
+      "bytes": 524
+    },
+    {
+      "path": "app/persistence/errors.py",
+      "sha256": "751473f0db464a4041949028a5f5f1479d3efb9e023a855a9b0b1a86c4656650",
+      "bytes": 1258
+    },
+    {
+      "path": "app/workbench.py",
+      "sha256": "db34840a512a9ab74276b9e492ead8e7ece8f070bae58c198a9a55dc1c89a44d",
+      "bytes": 4199
+    },
+    {
+      "path": "docs/guides/persistence.md",
+      "sha256": "a8a4ab13f9862b3455bd4f05dea705807846ec668546d39ad9b39b58e1ddc800",
+      "bytes": 7557
+    },
+    {
+      "path": "requirements-h2-test.lock",
+      "sha256": "3d65ec41d84772821a7b7db632e61acc3c8e97341756b9b8927962cd46afb01b",
+      "bytes": 5669
+    },
+    {
+      "path": "requirements-h2-test.txt",
+      "sha256": "001ccc14dc7c9c4d32347439427bf8813569a52118380b8fe7d5a1ed0b6435b5",
+      "bytes": 131
+    },
+    {
+      "path": "requirements-persistence.lock",
+      "sha256": "b2952bcac0195a2b443ef62968773e78aed09949ff4e98d6743da8dff64c54ca",
+      "bytes": 20504
+    },
+    {
+      "path": "requirements-persistence.txt",
+      "sha256": "98cbdd636912a3d231e9b6533ef19d030c5bbada9c9e7cd9faefc7b7b78a470c",
+      "bytes": 83
+    },
+    {
+      "path": "requirements-runtime.lock",
+      "sha256": "30a57b45a546793e4ebf3d98fee0ccc62849ed196d14583096269bbcc180fda9",
+      "bytes": 26830
+    },
+    {
+      "path": "tests/integration/test_database_infrastructure_postgresql.py",
+      "sha256": "e0cc233184609b8373a4313a4bcf31cec93c3ac5a2fc9b05f073407e31f5abf6",
+      "bytes": 3300
+    },
+    {
+      "path": "tests/unit/persistence/__init__.py",
+      "sha256": "c231a2321df53864a91f4b2801ad3febcf26a433a624c49158c6d0e6b3723ebf",
+      "bytes": 55
+    },
+    {
+      "path": "tests/unit/persistence/fakes.py",
+      "sha256": "00cca384a8ef91aca5855a6bced121f2a1a05900870ae5efae8cf6ff9a88cdfb",
+      "bytes": 2612
+    },
+    {
+      "path": "tests/unit/persistence/test_config.py",
+      "sha256": "1246c14332a3dcfaf57be50e62055b5f3b803e4d4c40d46562009c395e88a023",
+      "bytes": 3739
+    },
+    {
+      "path": "tests/unit/persistence/test_database.py",
+      "sha256": "75bfdbd522ce354d46f786334b83365971dc28e15e963f7d718f30b8b61ac30f",
+      "bytes": 8071
+    },
+    {
+      "path": "tests/unit/persistence/test_health_api.py",
+      "sha256": "4fc403e54b3fe2ac1e1ee13494b4bbcb3c4cec19048f90d808681f842e83aff9",
+      "bytes": 4152
+    },
+    {
+      "path": "tests/unit/persistence/test_workbench_lifespan.py",
+      "sha256": "8cf88b4de33a1242ba7748b519fba33a00a9ccb6de00f728de066c5d0dcee5cc",
+      "bytes": 4181
+    }
+  ],
+  "commands": {
+    "full_suite": {
+      "python": ".venv/bin/python",
+      "arguments": [
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "environment_overrides": {
+        "PYTHONPATH": "<repo>/artifacts/h2-stage1/regression-tools/lib/python3.12/site-packages:<repo>",
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+        "H2_DATABASE_ENABLED": "false",
+        "H2_TEST_DATABASE_AUTHORIZED": ""
+      }
+    },
+    "clean_suite": {
+      "python": "artifacts/h2-stage1/clean-env/bin/python",
+      "arguments": [
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/persistence",
+        "tests/integration/test_database_infrastructure_postgresql.py",
+        "tests/test_research_runs_api.py",
+        "tests/test_research_replay.py",
+        "tests/unit/research/test_workbench_dependencies.py"
+      ],
+      "environment_overrides": {
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+        "H2_DATABASE_ENABLED": "false",
+        "H2_TEST_DATABASE_AUTHORIZED": ""
+      }
+    },
+    "disabled_replay": {
+      "python": "artifacts/h2-stage1/disabled-env/bin/python",
+      "arguments": [
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/persistence/test_workbench_lifespan.py::test_disabled_subprocess_blocks_database_imports_and_preserves_replay"
+      ]
+    },
+    "lint": [
+      "ruff",
+      "check",
+      "app",
+      "tests",
+      "scripts",
+      "eval"
+    ],
+    "format": [
+      "ruff",
+      "format",
+      "--check",
+      "app",
+      "tests",
+      "scripts",
+      "eval"
+    ]
+  },
+  "postgresql_connections": 0,
+  "provider_smoke_runs": 0,
+  "migrations": 0,
+  "business_orm_models_added": 0,
+  "remote_git_operations": 0,
+  "dependency_environments": "Original .venv packages not installed/upgraded; pytest/Ruff supplied through isolated tools path; clean/disabled environments are independent",
+  "known_limitations": [
+    "PostgreSQL authentication/TLS/server disconnect behavior not yet verified on explicitly authorized target",
+    "One preexisting Starlette/httpx deprecation warning; no unrelated dependency migration",
+    "Clean lock environment validates 77 stage-1/API/replay/resource tests; full 1317 suite uses original research dependency baseline with isolated pytest tools",
+    "Only connection infrastructure; no Run/Event/Report persistence or recovery",
+    "Cleanup reports bounded failure rather than guaranteeing forcible release from a non-cooperative driver"
+  ]
+}
