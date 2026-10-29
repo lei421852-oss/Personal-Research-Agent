@@ -21,9 +21,10 @@ if config.config_file_name is not None:
 
 def target_metadata():
     # 只在迁移进程内导入模型；应用运行时不受影响。
+    from app.persistence.memory_models import MemoryBase
     from app.persistence.models import Base
 
-    return Base.metadata
+    return [Base.metadata, MemoryBase.metadata]
 
 
 def run_migrations_offline() -> None:
