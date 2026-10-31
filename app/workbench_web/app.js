@@ -2,6 +2,8 @@
 "use strict";
 
 const API = "/api/research";
+// 任务所有权尚待人工核查，现有服务端 GET/HEAD 中间件仍是强制边界。
+const WORKBENCH_READ_ONLY = true;
 const STORAGE_KEY = "personal-agent-workbench-run-id";
 const ACTIVE_STATUSES = new Set(["queued", "running"]);
 const NODE_TYPES = ["MainAgent", "PaperSearch", "QueryExpansion", "Evidence", "ResearchTool", "QueryLanguage", "PaperSelection", "Planner", "Worker", "Validator", "Reviewer", "Recovery", "Synthesis", "ReportLanguage"];
@@ -15,6 +17,7 @@ const DETAIL_LABELS = {paper_id:"论文",paper_ids:"论文范围",dimension_id:"
 Object.assign(DETAIL_LABELS,{name:"名称",description:"说明",research_question:"研究问题",question:"问题",claim:"原始提交论断",required:"必要需求",dimension_count:"维度数量",dimension_ids:"研究维度",worker_task_count:"Worker 数量",candidate_paper_count:"候选论文数",worker_task_id:"Worker 任务",resolved_count:"合法终态需求",observed_evidence_ids:"已观察证据",tool_name:"工具名称",arguments:"工具参数",query:"检索问题",top_k:"返回数量",page:"PDF 页码",figure_id:"图号",figure_evidence_id:"图像证据",context_evidence_ids:"上下文证据",limitations:"限制",phase:"失败阶段",error_type:"错误类型",hint:"恢复提示",field:"参数字段",type:"字段错误",execution_status:"执行状态",retry_count:"重试次数",correction_allowed:"允许协议纠正",step:"实际步骤",requirement_ids:"需求 ID",investigated_requirement_ids:"调查需求",skip_reason:"跳过原因",record_available:"记录是否存在",generation_degraded:"是否降级",synthesis_model_calls:"综合模型调用",citation_validation_failures:"引用校验失败",evidence_coverage:"已审核证据覆盖率",resolution_rate:"合法终态率",review_pass_rate:"模型审核通过率",report_generation_success_rate:"报告生成成功率",degraded_generation:"降级生成",total_latency_ms:"实际总耗时 (ms)",synthesis_latency_ms:"综合耗时 (ms)",additional_model_calls:"额外模型调用",additional_tool_calls:"额外工具调用",recovery_eligible_count:"可恢复需求",recovery_attempted_count:"已尝试恢复",recovery_passed_count:"恢复后审核通过",recovery_failed_count:"恢复失败",recovery_skipped_count:"跳过恢复",recovery_rounds_used:"已使用恢复轮次",recovery_latency_ms:"恢复耗时 (ms)",eligible:"允许恢复",eligibility:"恢复资格",tasks:"实际恢复任务",final_requirements:"恢复后需求",final_reviews:"恢复后审核",recovery_task_id:"恢复任务",target_requirement_ids:"目标需求",attempt_index:"尝试序号",max_attempts:"最多尝试次数",protocol_recovery:"协议恢复",llm_calls:"策略模型调用",vlm_tool_attempts:"视觉工具尝试",dependency_calls:"依赖调用",retried_dependency_calls:"依赖重试",last_new_evidence_count:"新增证据数"});
 Object.assign(DETAIL_LABELS,{original_question:"原始问题",research_question:"内部研究问题",language_mode:"语言模式",selected_paper_ids:"实际选择的论文",selection_status:"论文选择状态",reasons:"选择说明",source_language:"问题语言",translation_review:"翻译审核说明",translated:"已转换",source_status:"原始状态",target_language:"展示语言",translation_status:"转换状态",evidence:"证据摘要",text:"原始证据正文",caption:"图注",score:"检索得分",retrieval_score:"检索得分",result_count:"结果数量",executed:"是否实际执行",evidence_available:"正文证据可用",unavailable_paper_ids:"缺少正文证据的论文"});
 const state = {view:"chat",pending:null,ledger:new ResearchUI.EventLedger(),readErrors:0,gapReads:0,storage:null,reportLanguage:"zh",eventTruncated:false,openGroups:new Map(),papers:[],health:null,run:null,events:[],seen:new Set(),cursor:0,nodes:new Map(),displayNodes:new Map(),selectedNode:null,report:null,reportFetched:false,pollTimer:null,polling:false,posting:false,replays:[],refreshing:false,epoch:0};
+let historyPage = 1;
 const $ = (selector) => document.querySelector(selector);
 
 // 任何模型或服务端字符串都通过 textContent 渲染，避免将论文、问题或报告执行为 HTML。
@@ -65,7 +68,7 @@ function answerProse(text) {
   return target;
 }
 function badge(text, kind = "neutral") { return element("span", `badge ${kind}`, text); }
-function hasActiveRun() { return Boolean(state.run && ACTIVE_STATUSES.has(state.run.status)); }
+function hasActiveRun() { return !WORKBENCH_READ_ONLY && Boolean(state.run && ACTIVE_STATUSES.has(state.run.status)); }
 function displayValue(value) {
   if (value === null || value === undefined) return "无记录";
   if (typeof value === "boolean") return value ? "是" : "否";
@@ -98,26 +101,50 @@ function setControls() {
   const ready = (state.health?.main_agent_ready ?? state.health?.real_research_ready) === true;
   const validScope = true;
   const valid = $("#question").value.trim().length > 0 && validScope;
-  $("#start-button").disabled = busy || Boolean(state.pending) || !ready || !valid;
+  $("#start-button").disabled = WORKBENCH_READ_ONLY || busy || Boolean(state.pending) || !ready || !valid;
   $("#start-button").textContent = state.posting ? "正在创建任务…" : hasActiveRun() ? "任务运行中" : "发送 ↑";
   $("#cancel-button").disabled = !hasActiveRun() || state.run?.mode === "replay" || state.run?.cancel_requested;
   $("#cancel-button").textContent = state.run?.cancel_requested ? "取消请求已提交" : "取消当前任务";
-  $("#replay-button").disabled = busy || Boolean(state.pending) || !state.health?.replay_ready || !$("#replay-select").value;
+  $("#replay-button").disabled = WORKBENCH_READ_ONLY || busy || Boolean(state.pending) || !state.health?.replay_ready || !$("#replay-select").value;
   $("#replay-select").disabled = busy || state.replays.length === 0;
   $("#question").disabled = busy;
   $("#original-language").disabled = busy;
   $("#selection-mode").textContent = "论文库仅供资源浏览，不要求选择论文。";
-  $("#form-hint").textContent = state.pending ? "先核对结果未知的原提交；不会自动再次启动任务。" : !validScope ? "当前研究协议支持 2–3 篇论文；可取消勾选，改用自动选择。" : !ready ? "真实研究依赖尚未就绪；仍可使用历史记录中的归档回放。" : busy ? "正在执行任务，输入已锁定，避免重复提交。" : "主 Agent 自主选择动作；本地目录元数据不等于正文证据。";
+  $("#form-hint").textContent = WORKBENCH_READ_ONLY ? "只读模式：任务所有权尚待核查，研究、取消与回放暂不可提交。" : state.pending ? "先核对结果未知的原提交；不会自动再次启动任务。" : !validScope ? "当前研究协议支持 2–3 篇论文；可取消勾选，改用自动选择。" : !ready ? "真实研究依赖尚未就绪；仍可使用历史记录中的归档回放。" : busy ? "正在执行任务，输入已锁定，避免重复提交。" : "主 Agent 自主选择动作；本地目录元数据不等于正文证据。";
 }
 function renderPapers() {
   const container = $("#papers"); container.replaceChildren();
   for (const paper of state.papers) {
     const option = element("div", "paper-option"), text = element("span");
-    text.append(element("span", "paper-name", shortPaperTitle(paper.paper_id)), element("span", "paper-info", paper.availability === "metadata_only" ? "仅元数据 · 正文未准备" : "正文证据可用"));
-    option.title = paper.title; option.append(text,element("p","paper-title-full",paper.title)); container.append(option);
+    text.append(element("span", "paper-name", shortPaperTitle(paper.paper_id)), element("span", "paper-info", paper.availability === "prepared" ? "正文证据可用" : paper.availability === "metadata_only" ? "仅元数据 · 正文未准备" : "正文状态未知"));
+    option.title = paper.title; option.append(text,element("p","paper-title-full",paper.title));
+    const link = element("a", "text-button", "查看论文详情");
+    link.href = `/?paper=${encodeURIComponent(paper.paper_id)}`;
+    link.addEventListener("click", event => { event.preventDefault(); loadPaper(paper.paper_id); });
+    option.append(link); container.append(option);
   }
   $("#paper-count").textContent = String(state.papers.length);
   if (!state.papers.length) container.append(element("p", "muted small", "论文资源暂不可用，仍可查看历史记录。"));
+}
+async function loadPaper(paperId) {
+  const body = $("#paper-detail-content");
+  setView("paper");
+  history.replaceState(null,"",`/?paper=${encodeURIComponent(paperId)}`);
+  body.replaceChildren(element("p","small muted","正在读取论文元数据…"));
+  try {
+    const item = await request(`/papers/${encodeURIComponent(paperId)}`);
+    body.replaceChildren(
+      element("div","eyebrow",item.availability === "prepared" ? "已准备正文证据" : item.availability === "metadata_only" ? "仅有论文元数据" : "正文状态未知"),
+      element("h1","",item.title),
+      element("p","",`作者：${(item.authors || []).join("、") || "无记录"}`),
+      element("p","",`发表：${[item.year,item.venue].filter(Boolean).join(" · ") || "无记录"}`),
+      element("p","small muted","以下为目录中的来源摘要，不是已检索正文证据。"),
+      element("h2","","摘要"),
+      element("p","",item.abstract || "摘要无记录")
+    );
+    const link = ResearchUI.safeLink(item.source_url);
+    if (link) { const a=element("a","","查看论文来源"); a.href=link; a.target="_blank"; a.rel="noopener noreferrer"; body.append(a); }
+  } catch { body.replaceChildren(element("p","small muted","论文详情暂不可用，请返回目录重试。")); }
 }
 function renderHealth() {
   const container = $("#health"); container.replaceChildren();
@@ -558,13 +585,17 @@ function readLocal(key, fallback) { try { return JSON.parse(localStorage.getItem
 function writeLocal(key, value) { try { if (value === null) localStorage.removeItem(key); else localStorage.setItem(key,JSON.stringify(value)); } catch { /* 隐私模式只影响本机书签，不影响当前执行。 */ } }
 function connection(text, offline = false) { $("#connection-status").textContent = text; $("#connection-status").classList.toggle("offline",offline); }
 function setView(view) {
+  if (view !== "paper" && new URLSearchParams(location.search).has("paper")) {
+    history.replaceState(null,"",location.pathname);
+  }
   state.view = view;
-  for (const name of ["history","library","environment","memory"]) $(`#${name}-view`).hidden = name !== view;
+  for (const name of ["history","library","paper","environment","memory"]) $(`#${name}-view`).hidden = name !== view;
   $("#welcome").hidden = view !== "chat" || Boolean(state.run);
   $("#conversation").hidden = view !== "chat" || !state.run;
   document.querySelectorAll(".nav-item").forEach(button=>button.classList.toggle("active",button.dataset.view === view));
   $("#main-scroll").scrollTop = 0;
   if (view === "memory") window.MemoryView?.show();
+  if (view === "history") loadHistory(1);
 }
 window.setWorkbenchView = setView;
 function stopPolling() { if (state.pollTimer) clearTimeout(state.pollTimer); state.pollTimer = null; }
@@ -577,7 +608,7 @@ function rememberRun(id) {
 }
 function renderBookmarks() {
   const bookmarks = readLocal(HISTORY_KEY,[]);
-  for (const selector of ["#recent-runs","#history-runs"]) {
+  for (const selector of ["#recent-runs"]) {
     const target = $(selector);target.replaceChildren();
     for (const record of bookmarks) {
       if (!/^[a-zA-Z0-9_-]{1,128}$/u.test(record.run_id || "")) continue;
@@ -587,6 +618,32 @@ function renderBookmarks() {
       button.addEventListener("click",()=>loadRun(record.run_id));target.append(button);
     }
     if (!target.children.length) target.append(element("p","small muted","尚无本机任务记录。这里不会列出其他浏览器或其他用户的任务。"));
+  }
+}
+async function loadHistory(page) {
+  const target = $("#history-runs");
+  target.replaceChildren(element("p","small muted","正在读取已提交任务…"));
+  try {
+    const result = await request(`/runs?page=${page}&page_size=20`);
+    historyPage = result.page;
+    target.replaceChildren();
+    for (const record of result.items || []) {
+      if (!/^[a-zA-Z0-9_-]{1,128}$/u.test(record.run_id || "")) continue;
+      const button = element("button","recent-run",record.question || "问题无记录");
+      button.type = "button";
+      button.append(element("small","",`${labelStatus(record.status)} · ${record.created_at || "时间无记录"}`));
+      button.addEventListener("click",()=>loadRun(record.run_id));
+      target.append(button);
+    }
+    if (!target.children.length) target.append(element("p","small muted","没有已提交的任务记录。"));
+    $("#history-page-label").textContent = `第 ${result.page} 页 · 共 ${result.total} 条`;
+    $("#history-prev").disabled = result.page <= 1;
+    $("#history-next").disabled = result.page * result.page_size >= result.total;
+  } catch {
+    target.replaceChildren(element("p","small muted","服务端历史暂不可用，请稍后重试；本机最近记录仍在左侧。"));
+    $("#history-page-label").textContent = "";
+    $("#history-prev").disabled = true;
+    $("#history-next").disabled = true;
   }
 }
 function renderReferences() {
@@ -674,6 +731,7 @@ async function pollRun() {
 }
 async function startRun(event) {
   event.preventDefault();
+  if(WORKBENCH_READ_ONLY) return showError("只读模式下不能提交研究。");
   if(state.posting || state.pending || hasActiveRun() || !(state.health?.main_agent_ready ?? state.health?.real_research_ready))return;
   const question=$("#question").value.trim(),budget=Number($("#model-budget").value);
   if(!question)return showError("请输入研究问题。");
@@ -693,6 +751,7 @@ async function startRun(event) {
   } finally {state.posting=false;setControls();}
 }
 async function reconcileSubmission() {
+  if(WORKBENCH_READ_ONLY) return showError("只读模式下不能提交核对请求。");
   const pending=state.pending;if(!pending||state.posting)return;
   state.posting=true;setControls();$("#reconcile-button").disabled=true;
   try {
@@ -703,12 +762,14 @@ async function reconcileSubmission() {
   finally{state.posting=false;$("#reconcile-button").disabled=false;setControls();}
 }
 async function startReplay() {
+  if(WORKBENCH_READ_ONLY) return showError("只读模式下不能创建回放任务。");
   if(state.posting || state.pending || hasActiveRun() || !$("#replay-select").value)return;
   state.posting=true;setControls();showError("");
   try{resetRun(await request(`/replays/${encodeURIComponent($("#replay-select").value)}`,{method:"POST",body:"{}"}));await pollRun();}
   catch(error){showError(error.message);}finally{state.posting=false;setControls();}
 }
 async function cancelRun() {
+  if(WORKBENCH_READ_ONLY) return showError("只读模式下不能取消任务。");
   if(!hasActiveRun() || state.run.cancel_requested)return;
   $("#cancel-button").disabled=true;
   try{const epoch=state.epoch,id=state.run.run_id;const run=await request(`/runs/${encodeURIComponent(id)}/cancel`,{method:"POST",body:"{}"});if(epoch!==state.epoch)return;state.run=run;renderRun();stopPolling();await pollRun();}
@@ -729,6 +790,9 @@ async function initialize() {
   $("#replay-button").addEventListener("click",startReplay);
   $("#replay-select").addEventListener("change",setControls);
   $("#refresh-health").addEventListener("click",refreshHealth);
+  $("#paper-back").addEventListener("click",()=>{history.replaceState(null,"",location.pathname);setView("library");});
+  $("#history-prev").addEventListener("click",()=>loadHistory(Math.max(1,historyPage-1)));
+  $("#history-next").addEventListener("click",()=>loadHistory(historyPage+1));
   $("#reconcile-button").addEventListener("click",reconcileSubmission);
   $("#new-research").addEventListener("click",newResearch);
   document.querySelectorAll("[data-view]").forEach(button=>button.addEventListener("click",()=>setView(button.dataset.view)));
@@ -748,6 +812,8 @@ async function initialize() {
   $("#storage-label").textContent=state.storage?.status === "ready" ? "数据库连接可用 · 历史以提交结果为准" : state.storage?.status === "disabled" ? "进程内模式 · 重启不保证保留" : "存储状态未确认";
   renderPapers();renderHealth();renderReplays();renderNodes();renderBookmarks();connection("已连接");
   const failure=results.slice(0,3).find(result=>result.status === "rejected");if(failure){showError(failure.reason.message);connection("部分服务不可用",true);}
+  const linkedPaper = new URLSearchParams(location.search).get("paper");
+  if (linkedPaper && /^[a-zA-Z0-9_.-]{1,128}$/u.test(linkedPaper)) { await loadPaper(linkedPaper); return; }
   let saved;try{saved=localStorage.getItem(STORAGE_KEY);}catch{/* 无书签可恢复。 */}
   const linked=new URLSearchParams(location.search).get("run");
   const identity=linked || saved;

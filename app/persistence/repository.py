@@ -19,7 +19,7 @@ from datetime import UTC, datetime
 from enum import StrEnum
 from typing import Any
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
 
 from app.persistence.errors import StorageError
@@ -523,6 +523,43 @@ class ResearchRepository:
             if conflict == "uq_research_runs_active_fingerprint":
                 raise ConflictError("duplicate_active_fingerprint", detail=conflict)
             raise ConflictError("create_conflict", detail=conflict)
+
+    async def list_run_history(
+        self, *, limit: int, offset: int
+    ) -> tuple[list[dict], int]:
+        """只读列出已提交任务的公开摘要，不加载报告或内部状态。"""
+        async with self.resource.session() as session:
+            total = await session.scalar(
+                select(func.count()).select_from(ResearchRunORM)
+            )
+            query = (
+                select(
+                    ResearchRunORM.run_id,
+                    ResearchRunORM.mode,
+                    ResearchRunORM.status,
+                    ResearchRunORM.created_at,
+                    ResearchRunORM.request_payload["question"].astext,
+                    ResearchRunORM.current_report_revision,
+                )
+                .order_by(
+                    ResearchRunORM.created_at.desc(), ResearchRunORM.run_id.desc()
+                )
+                .limit(limit)
+                .offset(offset)
+            )
+            rows = (await session.execute(query)).all()
+            items = [
+                {
+                    "run_id": row[0],
+                    "mode": row[1],
+                    "status": row[2],
+                    "created_at": row[3].isoformat() if row[3] else None,
+                    "question": row[4],
+                    "report_available": row[5] is not None,
+                }
+                for row in rows
+            ]
+            return items, int(total or 0)
 
     async def find_by_idempotency_key(self, key_hash: str) -> RunRecord | None:
         async with self.resource.session() as session:
