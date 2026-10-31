@@ -188,6 +188,8 @@ def _consume():
             if item is _STOP:
                 with _START_LOCK:
                     _stop_consumed = True
+                    # 与具体 Worker 绑定，避免旧 flush 误等待新一代线程。
+                    threading.current_thread()._persistence_stop_consumed = True
                 return
             try:
                 LOGGER.error(
@@ -272,6 +274,8 @@ def flush_diagnostics(timeout=1.0):
             return False
         with _START_LOCK:
             if _worker is not worker:
+                if getattr(worker, "_persistence_stop_consumed", False):
+                    return True
                 if _state == "STOPPED":
                     return True
                 worker = _worker

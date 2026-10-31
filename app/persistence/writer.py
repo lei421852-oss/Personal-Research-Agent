@@ -229,6 +229,8 @@ class RunWriter:
         else:
             first = not self._diagnostic_recorded
         if not first:
+            if self.latch is not None:
+                self.latch.note_unresolved_writer_failure()
             return
         self._diagnostic_recorded = True
         try:

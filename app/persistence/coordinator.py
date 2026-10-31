@@ -44,6 +44,7 @@ class PersistenceLatch:
     def __init__(self) -> None:
         self._reason: str | None = None
         self._diagnostic: dict | None = None
+        self._unresolved_writer_failure = False
         self._event = asyncio.Event()
 
     @property
@@ -72,13 +73,21 @@ class PersistenceLatch:
         if self._reason is not None and self._diagnostic is None:
             self._diagnostic = dict(diagnostic)
 
+    def note_unresolved_writer_failure(self) -> None:
+        """保留锁存期间在途 Writer 的额外故障，阻止自动核对解锁。"""
+        if self._reason is not None:
+            self._unresolved_writer_failure = True
+
     def clear(self, reason: str | None = None) -> None:
         """只允许解除由只读核对确认后才可解除的标记。"""
 
-        if reason is not None and self._reason != reason:
+        if reason is not None and (
+            self._reason != reason or self._unresolved_writer_failure
+        ):
             return
         self._reason = None
         self._diagnostic = None
+        self._unresolved_writer_failure = False
         self._event.clear()
 
     async def wait(self) -> str:
@@ -276,7 +285,10 @@ class TerminalCoordinator:
         if outcome is ReconcileOutcome.CONFIRMED:
             record.phase = TerminalPhase.COMMITTED
             record.reason = None
-            if self.latch.reason == "finalize_outcome_unknown":
+            if self.latch.reason == "finalize_outcome_unknown" and not any(
+                item.phase is TerminalPhase.UNKNOWN for item in self._records.values()
+            ):
+                # 共享 latch 必须等所有已知未知终态得到核对后才能解除。
                 self.latch.clear("finalize_outcome_unknown")
         elif outcome is ReconcileOutcome.FOREIGN_TERMINAL:
             record.phase = TerminalPhase.COMMITTED
