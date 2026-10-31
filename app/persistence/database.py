@@ -142,9 +142,11 @@ class DatabaseResource:
         try:
             yield lease.session
         except BaseException as original:
+            cleanup_succeeded = True
             try:
                 await self._release(lease)
             except StorageError as exc:
+                cleanup_succeeded = False
                 LOGGER.warning("%s", exc.code)
             if isinstance(original, Exception):
                 from sqlalchemy.exc import DBAPIError
@@ -162,8 +164,18 @@ class DatabaseResource:
                         safe_database_metadata,
                     )
 
+                    sqlstate = safe_database_metadata(original)
+                    # 仅连接池等待失败或服务器明确回滚的事务允许完整重放。
+                    # 连接故障可能发生在 COMMIT 后，不能推断事务已回滚。
+                    replay_safe = cleanup_succeeded and (
+                        isinstance(original, PoolTimeout)
+                        or sqlstate in {"40001", "40P01"}
+                    )
                     raise StorageError(
-                        code, retryable=True, sqlstate=safe_database_metadata(original)
+                        code,
+                        retryable=replay_safe,
+                        sqlstate=sqlstate,
+                        replay_safe=replay_safe,
                     ) from None
             raise
         else:

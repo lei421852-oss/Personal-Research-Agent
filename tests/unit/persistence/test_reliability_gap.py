@@ -217,15 +217,15 @@ def test_retry_keeps_sqlstate_but_not_exception_message(monkeypatch):
         repo = FakeRepository()
         repo.fail_times = 1
         repo.error = StorageError(
-            "storage_unavailable", retryable=True, sqlstate="23514"
+            "storage_unavailable", retryable=True, sqlstate="40P01", replay_safe=True
         )
         writer = RunWriter(repo, latch=PersistenceLatch())
         writer.start()
         try:
             writer.submit(append(1, 0))
             await writer.flush()
-            assert events[0]["sqlstate"] == "23514"
-            assert events[0]["category"] == "database_constraint_error"
+            assert events[0]["sqlstate"] == "40P01"
+            assert events[0]["category"] == "transaction_error"
             assert events[-1]["event"] == "persistence.write_recovered"
         finally:
             await writer.close()

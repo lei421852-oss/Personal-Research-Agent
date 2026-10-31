@@ -192,7 +192,9 @@ def test_exhausted_retries_keep_first_diagnostic_and_final_latch_reason(monkeypa
         async def append_events(self, *args, **kwargs):
             self.fail_times += 1
             if self.fail_times == 1:
-                raise StorageError("storage_pool_timeout", retryable=True)
+                raise StorageError(
+                    "storage_pool_timeout", retryable=True, replay_safe=True
+                )
             raise StorageError("storage_unavailable", retryable=True)
 
     async def scenario():

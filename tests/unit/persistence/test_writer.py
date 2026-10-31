@@ -48,7 +48,12 @@ class FakeRepository:
             self.fail_times -= 1
             if self.error is not None:
                 raise self.error
-            raise StorageError("storage_unavailable", retryable=self.retryable)
+            raise StorageError(
+                "storage_unavailable",
+                retryable=self.retryable,
+                sqlstate="40001",
+                replay_safe=self.retryable,
+            )
         seqs = [event.seq for event in events]
         self.appends.append(seqs)
         self.appended.set()

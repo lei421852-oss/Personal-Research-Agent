@@ -258,8 +258,8 @@ def test_raw_connection_error_maps_to_storage_unavailable():
         return codes
 
     assert asyncio.run(run()) == [
-        ("storage_unavailable", True),
-        ("storage_unavailable", True),
+        ("storage_unavailable", False),
+        ("storage_unavailable", False),
     ]
 
 

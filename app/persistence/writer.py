@@ -390,12 +390,17 @@ class RunWriter:
                     )
                 return
             except TimeoutError:
-                error: BaseException = WriterFailed("write_timeout")
+                # 超时可能发生在 COMMIT 之后；不能自动重新执行写入。
+                raise WriterFailed("write_timeout") from None
             except RepositoryError:
                 # 冲突类错误（幂等键、版本、序号、指针）不重试。
                 raise
             except StorageError as exc:
-                if not exc.retryable:
+                safe_cause = exc.code == "storage_pool_timeout" or exc.sqlstate in {
+                    "40001",
+                    "40P01",
+                }
+                if not exc.retryable or not exc.replay_safe or not safe_cause:
                     raise
                 error = exc
             if self._first_attempt_error is None:
