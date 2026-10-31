@@ -38,6 +38,7 @@ class PersistenceLatch:
 
     def __init__(self) -> None:
         self._reason: str | None = None
+        self._diagnostic: dict | None = None
         self._event = asyncio.Event()
 
     @property
@@ -48,10 +49,23 @@ class PersistenceLatch:
     def reason(self) -> str | None:
         return self._reason
 
-    def trip(self, reason: str) -> None:
-        if self._reason is None:
-            self._reason = reason
-            self._event.set()
+    @property
+    def diagnostic(self) -> dict | None:
+        return dict(self._diagnostic) if self._diagnostic is not None else None
+
+    def trip(self, reason: str, *, diagnostic: dict | None = None) -> bool:
+        # 调用方在所属事件循环串行调用；不声称跨进程同步。
+        if self._reason is not None:
+            return False
+        self._reason = reason
+        self._diagnostic = dict(diagnostic) if diagnostic is not None else None
+        self._event.set()
+        return True
+
+    def record_diagnostic(self, diagnostic: dict) -> None:
+        """仅在锁存后补充安全信息，不覆盖首次诊断。"""
+        if self._reason is not None and self._diagnostic is None:
+            self._diagnostic = dict(diagnostic)
 
     def clear(self, reason: str | None = None) -> None:
         """只允许解除由只读核对确认后才可解除的标记。"""
@@ -59,6 +73,7 @@ class PersistenceLatch:
         if reason is not None and self._reason != reason:
             return
         self._reason = None
+        self._diagnostic = None
         self._event.clear()
 
     async def wait(self) -> str:

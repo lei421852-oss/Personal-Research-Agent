@@ -14,10 +14,11 @@ MESSAGES = {
 
 
 class StorageError(Exception):
-    def __init__(self, code, *, retryable=False):
+    def __init__(self, code, *, retryable=False, sqlstate=None):
         self.code = code
         self.message = MESSAGES[code]
         self.retryable = retryable
+        self.sqlstate = sqlstate
         super().__init__(f"{code}: {self.message}")
 
     def public_error(self):

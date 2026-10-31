@@ -158,7 +158,13 @@ class DatabaseResource:
                         if isinstance(original, PoolTimeout)
                         else "storage_unavailable"
                     )
-                    raise StorageError(code, retryable=True) from None
+                    from app.persistence.failure_diagnostics import (
+                        safe_database_metadata,
+                    )
+
+                    raise StorageError(
+                        code, retryable=True, sqlstate=safe_database_metadata(original)
+                    ) from None
             raise
         else:
             await self._release(lease)

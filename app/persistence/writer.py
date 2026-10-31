@@ -14,6 +14,7 @@ import logging
 from dataclasses import dataclass
 
 from app.persistence.errors import StorageError
+from app.persistence.failure_diagnostics import build_failure, emit_failure
 from app.persistence.repository import (
     AppendResult,
     ConflictError,
@@ -126,6 +127,9 @@ class RunWriter:
         self._task: asyncio.Task | None = None
         self._getter: asyncio.Task | None = None
         self._last_event_seq = 0
+        self._diagnostic_recorded = False
+        self._last_run_id = None
+        self._first_attempt_error = None
 
     # ---- 生命周期 -------------------------------------------------------
 
@@ -156,8 +160,11 @@ class RunWriter:
             raise WriterClosed()
         self._require_writable()
         if self._pending >= self.capacity:
-            self._trip("writer_queue_full")
+            self._trip(
+                "writer_queue_full", command=command, exc=WriterFull(), stage="queue"
+            )
             raise WriterFull()
+        self._last_run_id = getattr(command, "run_id", None)
         self._queue.put_nowait(command)
         self._pending += 1
         self.stats.accepted += 1
@@ -174,7 +181,7 @@ class RunWriter:
                 future, self.flush_timeout if timeout is None else timeout
             )
         except TimeoutError:
-            self._trip("writer_flush_timeout")
+            self._trip("writer_flush_timeout", stage="barrier")
             raise WriterFailed("flush_timeout") from None
 
     async def flush(self, timeout: float | None = None) -> BarrierResult:
@@ -193,7 +200,7 @@ class RunWriter:
         try:
             await asyncio.wait_for(future, limit)
         except TimeoutError:
-            self._trip("writer_close_timeout")
+            self._trip("writer_close_timeout", stage="close")
             raise WriterFailed("close_timeout") from None
         finally:
             if self._getter is not None and not self._getter.done():
@@ -210,9 +217,43 @@ class RunWriter:
 
     # ---- 内部 -----------------------------------------------------------
 
-    def _trip(self, reason: str) -> None:
+    def _trip(
+        self, reason: str, *, command=None, exc=None, stage="writer_apply"
+    ) -> None:
         if self.latch is not None:
-            self.latch.trip(reason)
+            first = self.latch.trip(reason)
+        else:
+            first = not self._diagnostic_recorded
+        if not first:
+            return
+        self._diagnostic_recorded = True
+        try:
+            operation = (
+                "append_events"
+                if isinstance(command, AppendEvents)
+                else "save_report"
+                if isinstance(command, SaveReport)
+                else "save_paper_selection"
+                if isinstance(command, SavePaperSelection)
+                else "queue_submit"
+                if stage == "queue"
+                else stage
+            )
+            events = getattr(command, "events", ())
+            event_type = events[0].event_type if len(events) == 1 else None
+            diagnostic = build_failure(
+                run_id=getattr(command, "run_id", None) or self._last_run_id,
+                operation=operation,
+                stage=stage,
+                event_type=event_type,
+                exc=exc,
+                reason=reason,
+            )
+            if self.latch is not None:
+                self.latch.record_diagnostic(diagnostic)
+            emit_failure(diagnostic)
+        except Exception:  # noqa: BLE001, S110 - 诊断失败不得影响原始锁存
+            pass
 
     def _require_writable(self) -> None:
         if self.latch is not None and self.latch.tripped:
@@ -270,6 +311,7 @@ class RunWriter:
         if self._failure is not None:
             self.stats.dropped += 1
             return
+        self._first_attempt_error = None
         try:
             await self._execute(item)
             self.stats.completed += 1
@@ -279,7 +321,9 @@ class RunWriter:
             self._failure = exc
             self.stats.failed += 1
             self._trip(
-                f"writer_write_failed:{getattr(exc, 'code', type(exc).__name__)}"
+                f"writer_write_failed:{getattr(exc, 'code', type(exc).__name__)}",
+                command=item,
+                exc=self._first_attempt_error or exc,
             )
 
     @staticmethod
@@ -308,6 +352,8 @@ class RunWriter:
                 if not exc.retryable:
                     raise
                 error = exc
+            if self._first_attempt_error is None:
+                self._first_attempt_error = error
             if attempts >= self.max_attempts:
                 raise error
             self.stats.retried += 1
