@@ -250,7 +250,9 @@ def test_terminal_run_frees_fingerprint():
                 final_last_event_seq=0,
                 expected_current_revision=None,
             )
-            outcome = (await repo.finalize_run(command)).outcome
+            outcome = (
+                await repo.finalize_run(command, expected_owner_id="0" * 32)
+            ).outcome
             created = await create(repo, run_id=second, fingerprint="b" * 64)
             return outcome, created.outcome.value
         finally:
@@ -333,7 +335,7 @@ def test_cross_run_report_pointer_is_rejected():
                 snapshot_kind="answer_first",
                 public_payload={"status": "completed"},
             )
-            await repo.save_report_revision(first, report)
+            await repo.save_report_revision(first, report, expected_owner_id="0" * 32)
             with pytest.raises(IntegrityError):
                 async with resource.engine.begin() as connection:
                     await connection.execute(
@@ -360,12 +362,14 @@ def test_transition_run_uses_version_cas():
             await create(repo, run_id=run_id, fingerprint="1" * 64)
             ok = await repo.transition_run(
                 run_id,
+                expected_owner_id="0" * 32,
                 expected_version=0,
                 from_statuses=("queued",),
                 to_status="running",
             )
             stale = await repo.transition_run(
                 run_id,
+                expected_owner_id="0" * 32,
                 expected_version=0,
                 from_statuses=("queued",),
                 to_status="running",
@@ -394,8 +398,12 @@ def test_append_events_is_idempotent_and_conflict_aware():
                 source="live",
                 summary="开始",
             )
-            outcome = await repo.append_events(run_id, [first], expected_last_seq=0)
-            repeat = await repo.append_events(run_id, [first], expected_last_seq=0)
+            outcome = await repo.append_events(
+                run_id, [first], expected_last_seq=0, expected_owner_id="0" * 32
+            )
+            repeat = await repo.append_events(
+                run_id, [first], expected_last_seq=0, expected_owner_id="0" * 32
+            )
             changed = EventCommand.build(
                 seq=1,
                 node_type="MainAgent",
@@ -406,7 +414,9 @@ def test_append_events_is_idempotent_and_conflict_aware():
                 summary="被改写",
             )
             with pytest.raises(ConflictError):
-                await repo.append_events(run_id, [changed], expected_last_seq=0)
+                await repo.append_events(
+                    run_id, [changed], expected_last_seq=0, expected_owner_id="0" * 32
+                )
             return outcome.appended, repeat.duplicates
         finally:
             await cleanup(resource, [run_id])
@@ -441,7 +451,7 @@ def test_finalize_then_reconcile_confirmed_without_extra_write():
                 expected_current_revision=None,
                 report=report,
             )
-            result = await repo.finalize_run(command)
+            result = await repo.finalize_run(command, expected_owner_id="0" * 32)
             before = await repo.get_run(run_id)
             reconcile = await repo.reconcile_finalize(
                 run_id, token=TOKEN, sha256=command.finalize_sha256
@@ -484,7 +494,7 @@ def test_commit_ack_lost_maps_to_unknown_then_reconcile():
                 expected_current_revision=None,
             )
             injector.arm("post")
-            result = await repo.finalize_run(command)
+            result = await repo.finalize_run(command, expected_owner_id="0" * 32)
 
             reconcile = await repo.reconcile_finalize(
                 run_id, token=TOKEN, sha256=command.finalize_sha256
@@ -518,7 +528,7 @@ def test_uncommitted_finalize_stays_pending_and_is_not_rewritten():
                 expected_current_revision=None,
             )
             injector.arm("pre")
-            result = await repo.finalize_run(command)
+            result = await repo.finalize_run(command, expected_owner_id="0" * 32)
 
             reconcile = await repo.reconcile_finalize(
                 run_id, token=TOKEN, sha256=command.finalize_sha256
@@ -561,8 +571,8 @@ def test_report_rows_are_immutable_versions():
                 snapshot_kind="answer_first",
                 public_payload={"status": "completed", "v": 2},
             )
-            await repo.save_report_revision(run_id, first)
-            await repo.save_report_revision(run_id, second)
+            await repo.save_report_revision(run_id, first, expected_owner_id="0" * 32)
+            await repo.save_report_revision(run_id, second, expected_owner_id="0" * 32)
             async with resource.engine.connect() as connection:
                 revisions = (
                     (

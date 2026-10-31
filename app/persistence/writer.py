@@ -113,10 +113,12 @@ class RunWriter:
         write_timeout: float = DEFAULT_WRITE_TIMEOUT,
         max_attempts: int = DEFAULT_MAX_ATTEMPTS,
         flush_timeout: float = DEFAULT_FLUSH_TIMEOUT,
+        owner_instance_id: str | None = None,
     ) -> None:
         if capacity < 1 or max_attempts < 1:
             raise ValueError("invalid writer limits")
         self.repository = repository
+        self.owner_instance_id = owner_instance_id
         self.latch = latch
         self.capacity = capacity
         self.write_timeout = write_timeout
@@ -421,6 +423,11 @@ class RunWriter:
                 command.run_id,
                 list(command.events),
                 expected_last_seq=command.expected_last_seq,
+                **(
+                    {"expected_owner_id": self.owner_instance_id}
+                    if self.owner_instance_id
+                    else {}
+                ),
             )
             self._last_event_seq = max(self._last_event_seq, result.last_event_seq)
             return
@@ -438,6 +445,11 @@ class RunWriter:
             result = await self.repository.transition_run(
                 command.run_id,
                 expected_version=record.state_version,
+                **(
+                    {"expected_owner_id": self.owner_instance_id}
+                    if self.owner_instance_id
+                    else {}
+                ),
                 from_statuses=(record.status,),
                 to_status=record.status,
                 patch={"effective_paper_ids": selected, "public_state": state},
@@ -446,6 +458,14 @@ class RunWriter:
                 raise ConflictError("paper_selection_conflict", run_id=command.run_id)
             return
         if isinstance(command, SaveReport):
-            await self.repository.save_report_revision(command.run_id, command.command)
+            await self.repository.save_report_revision(
+                command.run_id,
+                command.command,
+                **(
+                    {"expected_owner_id": self.owner_instance_id}
+                    if self.owner_instance_id
+                    else {}
+                ),
+            )
             return
         raise WriterFailed("unknown_command")

@@ -117,6 +117,7 @@ class TerminalRecord:
     sha256: str | None = None
     trailing_sha256: str | None = None
     trailing_events: tuple[tuple[int, str], ...] | None = None
+    owner_instance_id: str | None = None
     last_outcome: str | None = None
     reason: str | None = None
 
@@ -192,6 +193,7 @@ class TerminalCoordinator:
         command: FinalizeCommand,
         *,
         trailing_events: Sequence[EventCommand] = (),
+        expected_owner_id: str | None = None,
     ) -> FinalizeOutcome:
         """首次提交或已证明回滚后的重试；同一 run 只有一个收尾任务。"""
 
@@ -203,6 +205,8 @@ class TerminalCoordinator:
         trailing_events = tuple(deepcopy(trailing_events))
         trailing_sha256 = sha256_hex([event.content() for event in trailing_events])
         record = self.record(command.run_id)
+        if record.owner_instance_id not in (None, expected_owner_id):
+            raise RepositoryError("owner_conflict", run_id=command.run_id)
         if record.token not in (None, command.finalize_token):
             raise RepositoryError("finalize_token_mismatch", run_id=command.run_id)
         if record.sha256 not in (None, command.finalize_sha256) or (
@@ -225,13 +229,14 @@ class TerminalCoordinator:
 
         record.token = command.finalize_token
         record.sha256 = command.finalize_sha256
+        record.owner_instance_id = expected_owner_id
         record.trailing_sha256 = trailing_sha256
         record.trailing_events = tuple(
             (event.seq, sha256_hex(event.content())) for event in trailing_events
         )
         record.phase = TerminalPhase.IN_FLIGHT
         task = asyncio.create_task(
-            self._run_finalize(command, trailing_events),
+            self._run_finalize(command, trailing_events, expected_owner_id),
             name=f"finalize:{command.run_id}",
         )
         self._tasks[command.run_id] = task
@@ -241,6 +246,7 @@ class TerminalCoordinator:
         self,
         command: FinalizeCommand,
         trailing_events: Sequence[EventCommand],
+        expected_owner_id: str | None = None,
     ) -> FinalizeOutcome:
         record = self.record(command.run_id)
         record.token = command.finalize_token
@@ -251,7 +257,13 @@ class TerminalCoordinator:
                 # 先让已接受的事件与报告落库；屏障失败等于收尾前故障。
                 await self.writer.flush()
             outcome = await self.repository.finalize_run(
-                command, trailing_events=trailing_events
+                command,
+                trailing_events=trailing_events,
+                **(
+                    {"expected_owner_id": expected_owner_id}
+                    if expected_owner_id
+                    else {}
+                ),
             )
         except asyncio.CancelledError:
             record.phase = TerminalPhase.UNKNOWN

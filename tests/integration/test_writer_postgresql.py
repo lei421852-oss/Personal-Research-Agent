@@ -104,7 +104,7 @@ def test_writer_appends_serially_and_barrier_reports_watermark():
         try:
             await create_run(repo, run_id, "a" * 64)
             latch = PersistenceLatch()
-            writer = RunWriter(repo, latch=latch)
+            writer = RunWriter(repo, latch=latch, owner_instance_id="0" * 32)
             writer.start()
             try:
                 for seq in (1, 2, 3):
@@ -134,7 +134,7 @@ def test_finalize_commits_report_events_and_terminal_atomically():
         try:
             await create_run(repo, run_id, "b" * 64)
             latch = PersistenceLatch()
-            writer = RunWriter(repo, latch=latch)
+            writer = RunWriter(repo, latch=latch, owner_instance_id="0" * 32)
             writer.start()
             writer.submit(
                 AppendEvents(
@@ -164,7 +164,7 @@ def test_finalize_commits_report_events_and_terminal_atomically():
                 report=report,
             )
             coordinator = TerminalCoordinator(repo, writer=writer, latch=latch)
-            outcome = await coordinator.finalize(command)
+            outcome = await coordinator.finalize(command, expected_owner_id="0" * 32)
             record = await repo.get_run(run_id)
             current = await repo.get_current_report(run_id)
             reconcile = await coordinator.reconcile(
@@ -270,7 +270,7 @@ def test_ack_lost_keeps_unknown_then_reconcile_confirms_once():
             command = _command(run_id, 0, 0)
 
             injector.arm("post")
-            outcome = await coordinator.finalize(command)
+            outcome = await coordinator.finalize(command, expected_owner_id="0" * 32)
             phase = coordinator.record(run_id).phase
 
             reconcile = await coordinator.reconcile(
@@ -307,7 +307,7 @@ def test_uncommitted_finalize_stays_pending_without_duplicate():
             command = _command(run_id, 0, 0)
 
             injector.arm("pre")
-            outcome = await coordinator.finalize(command)
+            outcome = await coordinator.finalize(command, expected_owner_id="0" * 32)
             reconcile = await coordinator.reconcile(
                 run_id, token=TOKEN, sha256=command.finalize_sha256
             )
@@ -329,7 +329,7 @@ def test_writer_failure_does_not_produce_durable_completed():
         try:
             await create_run(repo, run_id, "e" * 64)
             latch = PersistenceLatch()
-            writer = RunWriter(repo, latch=latch)
+            writer = RunWriter(repo, latch=latch, owner_instance_id="0" * 32)
             writer.start()
             try:
                 # 期望游标错误：制造冲突，Writer 必须失败而不是吞掉。

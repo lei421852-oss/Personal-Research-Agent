@@ -76,8 +76,10 @@ class PersistentStore(Store):
 
     async def mark_running(self, run_id):
         row = self.by_run.get(run_id)
+        from app.persistence.repository import TransitionOutcome
+
         if row is None or row.status != "queued":
-            return
+            return TransitionOutcome.STATUS_CONFLICT
         # 与真实 transition_run 一致：置位 started_at 并推进 state_version。
         self.by_run[run_id] = replace(
             row,
@@ -85,6 +87,7 @@ class PersistentStore(Store):
             started_at=datetime.now(UTC),
             state_version=row.state_version + 1,
         )
+        return TransitionOutcome.UPDATED
 
     def on_event(self, run_id, event):
         occurred_at = (

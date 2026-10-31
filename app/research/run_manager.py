@@ -132,6 +132,8 @@ class _Run:
     finalize_task: asyncio.Task | None = None
     persisted: bool = False
     persistence_error: str | None = None
+    execution_gate_failed: bool = False
+    execution_confirmed: bool = False
     delivery_lock: threading.Lock = field(default_factory=threading.Lock)
 
 
@@ -571,8 +573,21 @@ class ResearchRunManager:
         try:
             async with self._slots:
                 if self.lifecycle is not None:
-                    # 先持久化 running，成功后才调用 Provider/Runner。
-                    await self.lifecycle.mark_running(run.run_id)
+                    # 仅数据库明确批准执行资格后才调用 Runner。
+                    from app.persistence.repository import TransitionOutcome
+
+                    try:
+                        outcome = await self.lifecycle.mark_running(run.run_id)
+                        if outcome is not TransitionOutcome.UPDATED:
+                            raise RunManagerError(
+                                "run_start_rejected", "未取得研究执行资格。", 409
+                            )
+                    except BaseException:
+                        # 未取得资格或提交结果不明，禁止将其他执行者的任务收尾。
+                        run.execution_gate_failed = True
+                        run.persistence_error = "run_start_unconfirmed"
+                        raise
+                run.execution_confirmed = True
                 run.status = "running"
                 execution = await asyncio.wait_for(
                     self.runner.run(request, self._sink(run)),
@@ -663,6 +678,16 @@ class ResearchRunManager:
             run.finished_at = time.monotonic()
         elif not task.cancelled():
             task.exception()
+        if run.execution_gate_failed:
+            # 仅释放本实例 Writer；不修改可能由其他执行者持有的数据库任务。
+            discard = getattr(self.lifecycle, "discard", None)
+            if discard is not None:
+                task = asyncio.create_task(
+                    discard(run.run_id), name=f"discard:{run.run_id}"
+                )
+                run.finalize_task = task
+                self._finalize_tasks[run.run_id] = task
+            return
         # 同步 done callback 不能写库；持久化收尾交给受管理的异步任务。
         self._schedule_finalize(run)
 
@@ -764,6 +789,7 @@ class ResearchRunManager:
         return {
             "run_id": run.run_id,
             "status": run.status,
+            "finalize_requires_queued": not run.execution_confirmed,
             "error": run.error,
             "events": len(run.events),
             "late_events": run.late_events,

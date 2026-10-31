@@ -65,7 +65,9 @@ class FakeLifecycle:
         return type("Started", (), {"replayed": False, "record": None})()
 
     async def mark_running(self, run_id):
-        return None
+        from app.persistence.repository import TransitionOutcome
+
+        return TransitionOutcome.UPDATED
 
     def on_event(self, run_id, event):
         return None

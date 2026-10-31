@@ -52,6 +52,7 @@ class SelectionRepository:
             record(run_id=RUN_ID, request_digest=values["request_hash"]),
             request_payload=dict(values["request_payload"]),
             effective_paper_ids=[],
+            owner_instance_id=values["owner_instance_id"],
         )
         return CreateResult(CreateOutcome.CREATED, self.row)
 
@@ -59,6 +60,7 @@ class SelectionRepository:
         return self.row
 
     async def transition_run(self, run_id, **values):
+        assert values["expected_owner_id"] == self.row.owner_instance_id
         patch = values.get("patch", {})
         if "effective_paper_ids" in patch and self.selection_error:
             raise self.selection_error
@@ -72,7 +74,10 @@ class SelectionRepository:
         )
         return TransitionResult(TransitionOutcome.UPDATED, self.row)
 
-    async def append_events(self, run_id, events, *, expected_last_seq):
+    async def append_events(
+        self, run_id, events, *, expected_last_seq, expected_owner_id
+    ):
+        assert expected_owner_id == self.row.owner_instance_id
         assert expected_last_seq == self.row.last_event_seq
         self.row = replace(self.row, last_event_seq=events[-1].seq)
         return AppendResult(tuple(e.seq for e in events), (), self.row.last_event_seq)

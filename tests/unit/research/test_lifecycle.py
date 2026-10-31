@@ -56,7 +56,10 @@ class Recorder:
         return None
 
     async def mark_running(self, run_id):
+        from app.persistence.repository import TransitionOutcome
+
         self.running.append(run_id)
+        return TransitionOutcome.UPDATED
 
     def on_event(self, run_id, event):
         self.events.append((run_id, event.event_id))

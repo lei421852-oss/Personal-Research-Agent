@@ -5,14 +5,21 @@
 
 from __future__ import annotations
 
+import asyncio
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from uuid import uuid4
+from weakref import WeakValueDictionary
 
 from app.persistence.repository import (
+    ConflictError,
     EventCommand,
+    FinalizeOutcome,
+    ReconcileOutcome,
+    RepositoryError,
     ResearchRepository,
     RunRecord,
+    TransitionOutcome,
 )
 from app.persistence.serialization import (
     build_finalize_command,
@@ -54,6 +61,10 @@ class RunPersistence:
         self.latch = latch
         self._writer_factory = writer_factory
         self._writers: dict[str, RunWriter] = {}
+        self._active_run_ids: set[str] = set()
+        self._claim_locks: WeakValueDictionary[str, asyncio.Lock] = (
+            WeakValueDictionary()
+        )
         self._closed = False
 
     # ---- 生命周期 -------------------------------------------------------
@@ -82,7 +93,11 @@ class RunPersistence:
         writer = (
             self._writer_factory(run_id)
             if self._writer_factory is not None
-            else RunWriter(self.repository, latch=self.latch)
+            else RunWriter(
+                self.repository,
+                latch=self.latch,
+                owner_instance_id=self.owner_instance_id,
+            )
         )
         if result.outcome.value == "replayed":
             # 并发同键创建：本实例不是胜方，绝不启动第二个 Writer 或 Task。
@@ -109,16 +124,38 @@ class RunPersistence:
     async def get_current_report(self, run_id: str):
         return await self.repository.get_current_report(run_id)
 
-    async def mark_running(self, run_id: str) -> None:
+    async def mark_running(self, run_id: str) -> TransitionOutcome:
+        # 事务结果和本地登记之间不能被同一 lifecycle 的 discard 打断。
+        async with self._claim_locks.setdefault(run_id, asyncio.Lock()):
+            return await self._mark_running_locked(run_id)
+
+    async def _mark_running_locked(self, run_id: str) -> TransitionOutcome:
         record = await self.repository.get_run(run_id)
-        if record is None or record.status != "queued":
-            return
-        await self.repository.transition_run(
+        if record is None:
+            return TransitionOutcome.NOT_FOUND
+        if record.owner_instance_id != self.owner_instance_id:
+            return TransitionOutcome.OWNER_CONFLICT
+        if record.status != "queued":
+            return TransitionOutcome.STATUS_CONFLICT
+        result = await self.repository.transition_run(
             run_id,
             expected_version=record.state_version,
+            expected_owner_id=self.owner_instance_id,
             from_statuses=("queued",),
             to_status="running",
         )
+        if result.outcome is TransitionOutcome.UPDATED:
+            self._active_run_ids.add(run_id)
+        return result.outcome
+
+    async def discard(self, run_id: str) -> None:
+        """无执行资格时只释放本地 Writer，不写数据库终态。"""
+        async with self._claim_locks.setdefault(run_id, asyncio.Lock()):
+            if run_id in self._active_run_ids:
+                return
+            writer = self._writers.pop(run_id, None)
+            if writer is not None:
+                await writer.close()
 
     def on_event(self, run_id: str, event) -> None:
         """把已分配序号、已脱敏的公开事件交给该 run 的 Writer。"""
@@ -181,12 +218,27 @@ class RunPersistence:
     async def finish(self, run_id: str, snapshot: dict) -> None:
         """等待屏障后用协调器提交终态；未知结果只做只读核对。"""
 
+        # 未取得执行资格的取消，只能收尾仍在排队的记录。
+        # 后续终态 CAS 使用此状态版本，防止检查后被其他执行者领取。
+        if snapshot.get("finalize_requires_queued"):
+            queued = await self.repository.get_run(run_id)
+            if queued is None or queued.owner_instance_id != self.owner_instance_id:
+                raise ConflictError("owner_conflict", run_id=run_id)
+            if queued.status != "queued":
+                raise ConflictError("unclaimed_run_not_queued", run_id=run_id)
+
         writer = self._writers.get(run_id)
         if writer is not None:
             await writer.flush()
         record = await self.repository.get_run(run_id)
         if record is None:
             raise RuntimeError("run_not_found")
+        if record.owner_instance_id != self.owner_instance_id:
+            raise ConflictError("owner_conflict", run_id=run_id)
+        if snapshot.get("finalize_requires_queued") and (
+            record.status != "queued" or record.state_version != queued.state_version
+        ):
+            raise ConflictError("unclaimed_run_not_queued", run_id=run_id)
 
         report = None
         public_report = snapshot.get("report")
@@ -214,20 +266,32 @@ class RunPersistence:
         )
 
         if self.coordinator is None:
-            await self.repository.finalize_run(command)
-            return
-
-        outcome = await self.coordinator.finalize(command)
-        if outcome.value == "unknown":
-            await self.coordinator.reconcile(
+            result = await self.repository.finalize_run(
+                command, expected_owner_id=self.owner_instance_id
+            )
+            outcome = result.outcome
+        else:
+            outcome = await self.coordinator.finalize(
+                command, expected_owner_id=self.owner_instance_id
+            )
+        if outcome is FinalizeOutcome.UNKNOWN:
+            if self.coordinator is None:
+                raise RepositoryError("finalize_outcome_unknown", run_id=run_id)
+            reconciled = await self.coordinator.reconcile(
                 run_id, token=command.finalize_token, sha256=command.finalize_sha256
             )
+            if reconciled is not ReconcileOutcome.CONFIRMED:
+                raise RepositoryError("finalize_outcome_unknown", run_id=run_id)
+        elif outcome not in {FinalizeOutcome.NEW, FinalizeOutcome.ALREADY_COMMITTED}:
+            raise ConflictError(f"finalize_{outcome.value}", run_id=run_id)
+        self._active_run_ids.discard(run_id)
 
     async def close(self) -> None:
         self._closed = True
         for writer in self._writers.values():
             await writer.close()
         self._writers.clear()
+        self._active_run_ids.clear()
 
 
 def _terminal_status(status: str) -> str:

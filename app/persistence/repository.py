@@ -73,6 +73,7 @@ class CreateOutcome(StrEnum):
 
 
 class TransitionOutcome(StrEnum):
+    OWNER_CONFLICT = "owner_conflict"
     UPDATED = "updated"
     VERSION_CONFLICT = "version_conflict"
     STATUS_CONFLICT = "status_conflict"
@@ -80,6 +81,7 @@ class TransitionOutcome(StrEnum):
 
 
 class FinalizeOutcome(StrEnum):
+    OWNER_CONFLICT = "owner_conflict"
     NEW = "new"
     VERSION_CONFLICT = "version_conflict"
     EVENT_GAP_CONFLICT = "event_gap_conflict"
@@ -185,6 +187,7 @@ class RunRecord:
     finalize_sha256: str | None = None
     request_hash: str = ""
     request_payload: dict | None = None
+    owner_instance_id: str | None = None
 
 
 @dataclass(frozen=True)
@@ -392,6 +395,7 @@ def _run_record(row: ResearchRunORM) -> RunRecord:
         event_limit_reached=row.event_limit_reached,
         public_state=row.public_state or {},
         effective_paper_ids=list(row.effective_paper_ids or []),
+        owner_instance_id=row.owner_instance_id,
         finalize_token=row.finalize_token,
         finalize_sha256=row.finalize_sha256,
         request_hash=row.request_hash,
@@ -543,6 +547,7 @@ class ResearchRepository:
         run_id: str,
         *,
         expected_version: int,
+        expected_owner_id: str | None = None,
         from_statuses: Sequence[str],
         to_status: str,
         patch: dict | None = None,
@@ -568,6 +573,8 @@ class ResearchRepository:
             )
             if row is None:
                 return TransitionResult(TransitionOutcome.NOT_FOUND)
+            if not expected_owner_id or row.owner_instance_id != expected_owner_id:
+                return TransitionResult(TransitionOutcome.OWNER_CONFLICT)
             if row.state_version != expected_version:
                 return TransitionResult(
                     TransitionOutcome.VERSION_CONFLICT, _run_record(row)
@@ -592,6 +599,7 @@ class ResearchRepository:
         events: Sequence[EventCommand],
         *,
         expected_last_seq: int,
+        expected_owner_id: str | None = None,
     ) -> AppendResult:
         if not events:
             return AppendResult((), (), expected_last_seq)
@@ -607,6 +615,8 @@ class ResearchRepository:
             )
             if run is None:
                 raise RepositoryError("run_not_found", run_id=run_id)
+            if not expected_owner_id or run.owner_instance_id != expected_owner_id:
+                raise ConflictError("owner_conflict", run_id=run_id)
             if run.status in TERMINAL:
                 raise ConflictError("run_already_terminal", run_id=run_id)
             existing_rows = (
@@ -703,6 +713,7 @@ class ResearchRepository:
         command: ReportCommand,
         *,
         created_at: datetime | None = None,
+        expected_owner_id: str | None = None,
     ) -> ReportRecord:
         now = created_at or _utcnow()
         async with self.resource.session() as session, session.begin():
@@ -713,6 +724,8 @@ class ResearchRepository:
             )
             if run is None:
                 raise RepositoryError("run_not_found", run_id=run_id)
+            if not expected_owner_id or run.owner_instance_id != expected_owner_id:
+                raise ConflictError("owner_conflict", run_id=run_id)
             if run.status in TERMINAL:
                 raise ConflictError("run_already_terminal", run_id=run_id)
             if run.current_report_revision != command.expected_current_revision:
@@ -777,9 +790,12 @@ class ResearchRepository:
         command: FinalizeCommand,
         *,
         trailing_events: Sequence[EventCommand] = (),
+        expected_owner_id: str | None = None,
     ) -> FinalizeResult:
         try:
-            return await self._finalize_once(command, trailing_events)
+            return await self._finalize_once(
+                command, trailing_events, expected_owner_id
+            )
         except StorageError:
             # 存储层无法确认事务是否已提交；按定稿契约一律视为 unknown，
             # 由调用方转入只读核对，绝不在这里补写。
@@ -789,6 +805,7 @@ class ResearchRepository:
         self,
         command: FinalizeCommand,
         trailing_events: Sequence[EventCommand],
+        expected_owner_id: str | None,
     ) -> FinalizeResult:
         async with self.resource.session() as session, session.begin():
             run = await session.scalar(
@@ -796,6 +813,10 @@ class ResearchRepository:
                 .where(ResearchRunORM.run_id == command.run_id)
                 .with_for_update()
             )
+            if run is not None and (
+                not expected_owner_id or run.owner_instance_id != expected_owner_id
+            ):
+                return FinalizeResult(FinalizeOutcome.OWNER_CONFLICT)
             outcome = decide_finalize(None if run is None else _state(run), command)
             if outcome is FinalizeOutcome.ALREADY_COMMITTED:
                 # 原终态哈希未覆盖尾事件内容；跨实例重放时必须核对已提交事件。

@@ -151,8 +151,12 @@ class Store:
 
     async def mark_running(self, run_id):
         row = self.by_run.get(run_id)
+        from app.persistence.repository import TransitionOutcome
+
         if row is not None and row.status == "queued":
             self.by_run[run_id] = replace(row, status="running")
+            return TransitionOutcome.UPDATED
+        return TransitionOutcome.STATUS_CONFLICT
 
     def on_event(self, run_id, event):
         return None
