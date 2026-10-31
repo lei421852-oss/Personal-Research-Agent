@@ -797,6 +797,38 @@ class ResearchRepository:
                 .with_for_update()
             )
             outcome = decide_finalize(None if run is None else _state(run), command)
+            if outcome is FinalizeOutcome.ALREADY_COMMITTED:
+                # 原终态哈希未覆盖尾事件内容；跨实例重放时必须核对已提交事件。
+                tail = sorted(trailing_events, key=lambda item: item.seq)
+                expected = list(
+                    range(
+                        command.expected_last_event_seq + 1,
+                        command.final_last_event_seq + 1,
+                    )
+                )
+                if [event.seq for event in tail] != expected:
+                    return FinalizeResult(
+                        FinalizeOutcome.CONTENT_CONFLICT, _run_record(run)
+                    )
+                rows = (
+                    await session.execute(
+                        select(
+                            ResearchEventORM.seq, ResearchEventORM.payload_sha256
+                        ).where(
+                            ResearchEventORM.run_id == command.run_id,
+                            ResearchEventORM.seq.in_(expected),
+                        )
+                    )
+                ).all()
+                persisted = {seq: digest for seq, digest in rows}
+                if len(persisted) != len(tail) or any(
+                    persisted.get(event.seq) != sha256_hex(event.content())
+                    for event in tail
+                ):
+                    return FinalizeResult(
+                        FinalizeOutcome.CONTENT_CONFLICT, _run_record(run)
+                    )
+                return FinalizeResult(outcome, _run_record(run))
             if outcome is not FinalizeOutcome.NEW:
                 return FinalizeResult(
                     outcome, None if run is None else _run_record(run)
@@ -880,6 +912,26 @@ class ResearchRepository:
         except StorageError:
             return ReconcileResult(ReconcileOutcome.UNAVAILABLE)
         return ReconcileResult(outcome, record)
+
+    async def verify_trailing_events(
+        self, run_id: str, expected: Sequence[tuple[int, str]]
+    ) -> bool | None:
+        """只读核对尾事件；None 表示数据库不可用，不能解除锁存。"""
+        try:
+            async with self.resource.session() as session:
+                rows = (
+                    await session.execute(
+                        select(
+                            ResearchEventORM.seq, ResearchEventORM.payload_sha256
+                        ).where(
+                            ResearchEventORM.run_id == run_id,
+                            ResearchEventORM.seq.in_([seq for seq, _ in expected]),
+                        )
+                    )
+                ).all()
+                return len(rows) == len(expected) and dict(rows) == dict(expected)
+        except StorageError:
+            return None
 
     # ---- 内部 -----------------------------------------------------------
 

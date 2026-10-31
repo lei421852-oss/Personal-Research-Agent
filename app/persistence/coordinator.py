@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import asyncio
 from collections.abc import Sequence
+from copy import deepcopy
 from dataclasses import dataclass
 from enum import StrEnum
 
@@ -25,7 +26,7 @@ from app.persistence.repository import (
     ReconcileOutcome,
     RepositoryError,
 )
-from app.persistence.serialization import FinalizeCommand
+from app.persistence.serialization import FinalizeCommand, sha256_hex
 
 DEFAULT_SHUTDOWN_TIMEOUT = 10.0
 
@@ -114,6 +115,8 @@ class TerminalRecord:
     phase: TerminalPhase = TerminalPhase.IDLE
     token: str | None = None
     sha256: str | None = None
+    trailing_sha256: str | None = None
+    trailing_events: tuple[tuple[int, str], ...] | None = None
     last_outcome: str | None = None
     reason: str | None = None
 
@@ -196,21 +199,37 @@ class TerminalCoordinator:
             raise RepositoryError("coordinator_closed")
         self.latch.require_clear()
 
-        existing = self._tasks.get(command.run_id)
-        if existing is not None and not existing.done():
-            return await asyncio.shield(existing)
-
+        # 创建任务之前固定身份与尾事件快照，避免并发请求合并不同的操作。
+        trailing_events = tuple(deepcopy(trailing_events))
+        trailing_sha256 = sha256_hex([event.content() for event in trailing_events])
         record = self.record(command.run_id)
         if record.token not in (None, command.finalize_token):
             raise RepositoryError("finalize_token_mismatch", run_id=command.run_id)
+        if record.sha256 not in (None, command.finalize_sha256) or (
+            record.trailing_sha256 is not None
+            and record.trailing_sha256 != trailing_sha256
+        ):
+            raise RepositoryError("finalize_content_conflict", run_id=command.run_id)
+        existing = self._tasks.get(command.run_id)
+        if existing is not None and not existing.done():
+            return await asyncio.shield(existing)
         if record.phase is TerminalPhase.UNKNOWN:
             # 未知结果不允许写路径继续；调用方必须走 reconcile。
             raise RepositoryError("finalize_requires_reconcile", run_id=command.run_id)
         if record.phase is TerminalPhase.COMMITTED:
+            if record.reason == "foreign_terminal":
+                return FinalizeOutcome.FOREIGN_TERMINAL
             return FinalizeOutcome.ALREADY_COMMITTED
         if record.phase is TerminalPhase.IN_FLIGHT:
             raise RepositoryError("finalize_in_flight", run_id=command.run_id)
 
+        record.token = command.finalize_token
+        record.sha256 = command.finalize_sha256
+        record.trailing_sha256 = trailing_sha256
+        record.trailing_events = tuple(
+            (event.seq, sha256_hex(event.content())) for event in trailing_events
+        )
+        record.phase = TerminalPhase.IN_FLIGHT
         task = asyncio.create_task(
             self._run_finalize(command, trailing_events),
             name=f"finalize:{command.run_id}",
@@ -276,12 +295,60 @@ class TerminalCoordinator:
         """只读核对；不写库、不重新提交。"""
 
         record = self.record(run_id)
+        if record.token is not None and (
+            record.token != token or record.sha256 != sha256
+        ):
+            # 不借用本地缓存回答其他身份，也不据此修改本次终态或解除锁存。
+            result = await self.repository.reconcile_finalize(
+                run_id, token=token, sha256=sha256
+            )
+            # 无此身份的尾事件快照时，只能确认 token/哈希，不能确认完整操作。
+            if result.outcome is ReconcileOutcome.CONFIRMED:
+                return ReconcileOutcome.STILL_PENDING
+            return result.outcome
+        if record.phase is TerminalPhase.IN_FLIGHT:
+            # 操作仍由本进程持有；并发只读询问不能提前改变阶段或触发锁存。
+            return ReconcileOutcome.STILL_PENDING
         if record.phase is TerminalPhase.COMMITTED:
+            if record.reason == "foreign_terminal":
+                return ReconcileOutcome.FOREIGN_TERMINAL
             return ReconcileOutcome.CONFIRMED
         result = await self.repository.reconcile_finalize(
             run_id, token=token, sha256=sha256
         )
         outcome = result.outcome
+        if outcome is ReconcileOutcome.CONFIRMED and (
+            record.token is None
+            or record.sha256 is None
+            or record.trailing_events is None
+        ):
+            # 重启后缺少原始尾事件快照，不能把身份确认升级成完整提交确认。
+            outcome = ReconcileOutcome.STILL_PENDING
+        if outcome is ReconcileOutcome.CONFIRMED and record.trailing_events:
+            # 终态摘要不包含事件内容：解除锁存前须额外核对本次尾事件。
+            verify = getattr(self.repository, "verify_trailing_events", None)
+            if verify is None:
+                outcome = ReconcileOutcome.UNAVAILABLE
+            else:
+                try:
+                    matches = await verify(run_id, record.trailing_events)
+                except Exception:  # noqa: BLE001 - 无法核实时必须保持保守状态
+                    matches = None
+                if matches is False:
+                    outcome = ReconcileOutcome.CONTENT_CONFLICT
+                elif matches is not True:
+                    outcome = ReconcileOutcome.UNAVAILABLE
+        # 等待数据库时可能出现新的收尾操作；旧读不能覆盖其状态或锁存。
+        if record.phase is TerminalPhase.IN_FLIGHT or (
+            record.token is not None
+            and (record.token != token or record.sha256 != sha256)
+        ):
+            return ReconcileOutcome.STILL_PENDING
+        if record.phase is TerminalPhase.COMMITTED:
+            # 并发核对可能先完成；迟到的旧观测不能回退已确认状态。
+            if record.reason == "foreign_terminal":
+                return ReconcileOutcome.FOREIGN_TERMINAL
+            return ReconcileOutcome.CONFIRMED
         if outcome is ReconcileOutcome.CONFIRMED:
             record.phase = TerminalPhase.COMMITTED
             record.reason = None

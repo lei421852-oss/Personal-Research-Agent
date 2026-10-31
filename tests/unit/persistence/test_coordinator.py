@@ -122,7 +122,9 @@ def test_reconcile_still_pending_keeps_latch():
         )
         coordinator = TerminalCoordinator(repository)
         await coordinator.finalize(command())
-        outcome = await coordinator.reconcile(RUN, token=TOKEN, sha256="0" * 64)
+        outcome = await coordinator.reconcile(
+            RUN, token=TOKEN, sha256=command().finalize_sha256
+        )
         return outcome, coordinator.record(RUN).phase, coordinator.latch.tripped
 
     outcome, phase, latched = run(body())
@@ -138,7 +140,9 @@ def test_reconcile_unavailable_keeps_latch():
         )
         coordinator = TerminalCoordinator(repository)
         await coordinator.finalize(command())
-        outcome = await coordinator.reconcile(RUN, token=TOKEN, sha256="0" * 64)
+        outcome = await coordinator.reconcile(
+            RUN, token=TOKEN, sha256=command().finalize_sha256
+        )
         return outcome, coordinator.record(RUN).reason
 
     outcome, reason = run(body())
@@ -153,7 +157,9 @@ def test_content_conflict_keeps_unknown_and_latches():
         )
         coordinator = TerminalCoordinator(repository)
         await coordinator.finalize(command())
-        outcome = await coordinator.reconcile(RUN, token=TOKEN, sha256="1" * 64)
+        outcome = await coordinator.reconcile(
+            RUN, token=TOKEN, sha256=command().finalize_sha256
+        )
         return outcome, coordinator.record(RUN).reason
 
     outcome, reason = run(body())
