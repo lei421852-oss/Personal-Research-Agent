@@ -206,7 +206,10 @@ def test_exhausted_retries_keep_first_diagnostic_and_final_latch_reason(monkeypa
             assert latch.reason == "writer_write_failed:storage_unavailable"
             assert latch.diagnostic["internal_error_code"] == "storage_pool_timeout"
             assert latch.diagnostic["category"] == "database_timeout"
-            assert len(events) == 1
+            assert [event["event"] for event in events] == [
+                "persistence.write_retry",
+                "persistence.first_failure",
+            ]
         finally:
             await writer.close()
 

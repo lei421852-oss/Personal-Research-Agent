@@ -14,7 +14,11 @@ import logging
 from dataclasses import dataclass
 
 from app.persistence.errors import StorageError
-from app.persistence.failure_diagnostics import build_failure, emit_failure
+from app.persistence.failure_diagnostics import (
+    build_failure,
+    emit_failure,
+    record_emit_error,
+)
 from app.persistence.repository import (
     AppendResult,
     ConflictError,
@@ -252,8 +256,8 @@ class RunWriter:
             if self.latch is not None:
                 self.latch.record_diagnostic(diagnostic)
             emit_failure(diagnostic)
-        except Exception:  # noqa: BLE001, S110 - 诊断失败不得影响原始锁存
-            pass
+        except Exception:  # noqa: BLE001 - 诊断失败不得影响原始锁存
+            record_emit_error()
 
     def _require_writable(self) -> None:
         if self.latch is not None and self.latch.tripped:
@@ -336,12 +340,52 @@ class RunWriter:
         if not future.done():
             future.set_exception(error)
 
+    def _write_diagnostic(self, command, *, event_name, error, attempt):
+        """重试/恢复只发送可观测事件，不修改锁存和写入结果。"""
+        try:
+            operation = (
+                "append_events"
+                if isinstance(command, AppendEvents)
+                else "save_report"
+                if isinstance(command, SaveReport)
+                else "save_paper_selection"
+                if isinstance(command, SavePaperSelection)
+                else "unknown"
+            )
+            events = getattr(command, "events", ())
+            event = build_failure(
+                run_id=getattr(command, "run_id", None),
+                operation=operation,
+                stage="writer_apply",
+                event_type=events[0].event_type if len(events) == 1 else None,
+                exc=error,
+                reason="",
+            )
+            event["event"] = event_name
+            event.pop("first_failure", None)
+            if event_name == "persistence.write_retry":
+                event["attempt"] = attempt
+                event["max_attempts"] = self.max_attempts
+            else:
+                event["failed_attempts"] = attempt - 1
+                event["recovered_attempt"] = attempt
+            emit_failure(event)
+        except Exception:  # noqa: BLE001 - 诊断失败不能改变写入
+            record_emit_error()
+
     async def _execute(self, command) -> None:
         attempts = 0
         while True:
             attempts += 1
             try:
                 await asyncio.wait_for(self._apply(command), self.write_timeout)
+                if attempts > 1:
+                    self._write_diagnostic(
+                        command,
+                        event_name="persistence.write_recovered",
+                        error=self._first_attempt_error,
+                        attempt=attempts,
+                    )
                 return
             except TimeoutError:
                 error: BaseException = WriterFailed("write_timeout")
@@ -357,6 +401,12 @@ class RunWriter:
             if attempts >= self.max_attempts:
                 raise error
             self.stats.retried += 1
+            self._write_diagnostic(
+                command,
+                event_name="persistence.write_retry",
+                error=error,
+                attempt=attempts,
+            )
 
     async def _apply(self, command) -> None:
         if isinstance(command, AppendEvents):

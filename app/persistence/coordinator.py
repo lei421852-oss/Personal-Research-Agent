@@ -14,6 +14,11 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 from enum import StrEnum
 
+from app.persistence.failure_diagnostics import (
+    build_failure,
+    emit_failure,
+    record_emit_error,
+)
 from app.persistence.repository import (
     EventCommand,
     FinalizeOutcome,
@@ -130,6 +135,38 @@ class TerminalCoordinator:
     def record(self, run_id: str) -> TerminalRecord:
         return self._records.setdefault(run_id, TerminalRecord(run_id=run_id))
 
+    def _trip_with_diagnostic(self, reason: str, *, run_id: str) -> None:
+        """只为赢得首次锁存的调用记录一次安全诊断。"""
+        if not self.latch.trip(reason):
+            return
+        try:
+            stage = (
+                "coordinator_reconcile"
+                if reason
+                in {
+                    "finalize_content_conflict",
+                    "finalize_pending_review",
+                    "finalize_reconcile_unavailable",
+                }
+                else "coordinator_finalize"
+            )
+            event = build_failure(
+                run_id=run_id,
+                operation="reconcile"
+                if stage == "coordinator_reconcile"
+                else "finalize",
+                stage=stage,
+                event_type=None,
+                exc=asyncio.CancelledError()
+                if reason == "finalize_cancelled"
+                else None,
+                reason=reason,
+            )
+            self.latch.record_diagnostic(event)
+            emit_failure(event)
+        except Exception:  # noqa: BLE001 - 诊断错误不能影响原始锁存
+            record_emit_error()
+
     @property
     def closed(self) -> bool:
         return self._closed
@@ -191,7 +228,7 @@ class TerminalCoordinator:
         except asyncio.CancelledError:
             record.phase = TerminalPhase.UNKNOWN
             record.reason = "finalize_cancelled"
-            self.latch.trip("finalize_cancelled")
+            self._trip_with_diagnostic("finalize_cancelled", run_id=command.run_id)
             raise
         except Exception as exc:  # 统一收口为协调器状态
             record.phase = TerminalPhase.FAILED
@@ -220,7 +257,7 @@ class TerminalCoordinator:
             # 提交阶段未知：进入待核对，并置故障 latch。
             record.phase = TerminalPhase.UNKNOWN
             record.reason = "finalize_outcome_unknown"
-            self.latch.trip("finalize_outcome_unknown")
+            self._trip_with_diagnostic("finalize_outcome_unknown", run_id=record.run_id)
             return outcome
         record.phase = TerminalPhase.FAILED
         record.reason = outcome.value
@@ -247,15 +284,15 @@ class TerminalCoordinator:
         elif outcome is ReconcileOutcome.CONTENT_CONFLICT:
             record.phase = TerminalPhase.UNKNOWN
             record.reason = "finalize_content_conflict"
-            self.latch.trip("finalize_content_conflict")
+            self._trip_with_diagnostic("finalize_content_conflict", run_id=run_id)
         elif outcome is ReconcileOutcome.STILL_PENDING:
             record.phase = TerminalPhase.UNKNOWN
             record.reason = "finalize_pending_review"
-            self.latch.trip("finalize_pending_review")
+            self._trip_with_diagnostic("finalize_pending_review", run_id=run_id)
         else:  # UNAVAILABLE
             record.phase = TerminalPhase.UNKNOWN
             record.reason = "finalize_reconcile_unavailable"
-            self.latch.trip("finalize_reconcile_unavailable")
+            self._trip_with_diagnostic("finalize_reconcile_unavailable", run_id=run_id)
         return outcome
 
     async def shutdown(self, timeout: float | None = None) -> tuple[str, ...]:
