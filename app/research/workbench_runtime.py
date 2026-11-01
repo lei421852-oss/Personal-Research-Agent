@@ -591,11 +591,15 @@ class WorkbenchRuntime:
                         execution["report_language"] = translated.model_dump(
                             mode="json"
                         )
-                    except Exception:  # noqa: BLE001 - 展示失败不改写权威研究结果；取消由 BaseException 传播
+                    except Exception as exc:  # noqa: BLE001 - 只保留安全类别，取消继续传播
+                        detail = translator.exception_issue_detail(exc)
                         execution["report_language"] = translator.failure(
                             original,
-                            "report_language_dependency_failure",
-                            model_calls=0,
+                            "invalid_report_translation"
+                            if detail == "invalid_json"
+                            else "report_language_dependency_failure",
+                            model_calls=budget.used - before,
+                            issue_detail=detail,
                         ).model_dump(mode="json")
                     execution["report_language"].update(
                         source="live",

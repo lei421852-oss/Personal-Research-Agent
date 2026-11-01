@@ -128,6 +128,8 @@ async def create_run(
     idempotency_key: Annotated[str | None, Header(alias="Idempotency-Key")] = None,
     replay_only: Annotated[bool, Header(alias="Idempotency-Replay-Only")] = False,
 ):
+    if not request.app.state.research_submission_enabled and not replay_only:
+        raise RunManagerError("research_entry_disabled", "研究入口暂未开放。", 403)
     result = await manager(request).create(
         body, idempotency_key=idempotency_key, replay_only=replay_only
     )

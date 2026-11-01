@@ -509,6 +509,7 @@ def client(mgr):
     return TestClient(
         create_app(
             manager_factory=lambda: mgr,
+            research_submission_enabled=True,
             database_settings=database.settings,
             database_factory=lambda _: database,
         )

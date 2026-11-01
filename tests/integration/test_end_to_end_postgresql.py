@@ -197,6 +197,7 @@ def app_for(res, runner, *, lifecycle=None):
 
     return create_app(
         manager_factory=factory,
+        research_submission_enabled=True,
         database_settings=res.settings,
         database_factory=lambda _: res,
     )

@@ -9,7 +9,7 @@ from pathlib import Path
 from time import perf_counter
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError
 
 from app.llm.client import LLMClient
 from app.llm.models import LLMResponse
@@ -44,6 +44,7 @@ class ReportLanguageResult(BaseModel):
     model_calls: int = Field(default=0, ge=0, le=1)
     latency_ms: float = Field(default=0, ge=0)
     issue_code: str | None = None
+    issue_detail: str | None = None
     translation_source: Literal["model", "offline", "original"] = "original"
     translation_review: Literal["not_independently_reviewed"] = (
         "not_independently_reviewed"
@@ -235,6 +236,7 @@ class ReportLanguageAdapter:
         *,
         model_calls: int = 1,
         latency_ms: float = 0,
+        issue_detail: str | None = None,
     ) -> ReportLanguageResult:
         return ReportLanguageResult(
             status="failed",
@@ -243,7 +245,18 @@ class ReportLanguageAdapter:
             model_calls=model_calls,
             latency_ms=latency_ms,
             issue_code=issue_code,
+            issue_detail=issue_detail,
         )
+
+    @staticmethod
+    def exception_issue_detail(exc: Exception) -> str | None:
+        """仅返回固定类别，不保存模型原文或异常消息。"""
+        if isinstance(exc, json.JSONDecodeError):
+            return "invalid_json"
+        failure = getattr(exc, "failure", None)
+        if isinstance(failure, dict) and failure.get("error_type") == "JSONDecodeError":
+            return "invalid_json"
+        return None
 
     def not_needed(self, report: dict) -> ReportLanguageResult:
         return ReportLanguageResult(
@@ -263,22 +276,58 @@ class ReportLanguageAdapter:
         original_fields = readable_report_fields(report)
         try:
             parsed = _ReportTranslation.model_validate({"translations": translations})
-            if set(parsed.translations) != set(original_fields) or not original_fields:
-                raise ValueError("translation_fields_mismatch")
+        except (ValidationError, ValueError, TypeError):
+            return self.failure(
+                report,
+                "invalid_report_translation",
+                model_calls=model_calls,
+                issue_detail="invalid_schema",
+            )
+        supplied = set(parsed.translations)
+        expected = set(original_fields)
+        if expected - supplied:
+            return self.failure(
+                report,
+                "invalid_report_translation",
+                model_calls=model_calls,
+                issue_detail="missing_fields",
+            )
+        if supplied - expected or not expected:
+            return self.failure(
+                report,
+                "invalid_report_translation",
+                model_calls=model_calls,
+                issue_detail="unexpected_fields",
+            )
+        try:
             display = deepcopy(report)
             for pointer, original in original_fields.items():
                 translated = parsed.translations[pointer]
-                if (
-                    not translated.strip()
-                    or not contains_chinese(translated)
-                    or len(translated) > max(1000, len(original) * 4)
-                    or Counter(_ID_MARKER.findall(original))
-                    != Counter(_ID_MARKER.findall(translated))
-                    or Counter(_NUMBERS.findall(original))
-                    != Counter(_NUMBERS.findall(translated))
-                    or redact_text(translated) != translated
+                if not translated.strip():
+                    detail = "empty_translation"
+                elif not contains_chinese(translated):
+                    detail = "non_chinese"
+                elif len(translated) > max(1000, len(original) * 4):
+                    detail = "length_exceeded"
+                elif Counter(_ID_MARKER.findall(original)) != Counter(
+                    _ID_MARKER.findall(translated)
                 ):
-                    raise ValueError("translation_integrity_failure")
+                    detail = "identity_mismatch"
+                elif Counter(_NUMBERS.findall(original)) != Counter(
+                    _NUMBERS.findall(translated)
+                ):
+                    detail = "numeric_mismatch"
+                elif redact_text(translated) != translated:
+                    detail = "sensitive_content"
+                else:
+                    detail = None
+                if detail:
+                    return self.failure(
+                        report,
+                        "invalid_report_translation",
+                        model_calls=model_calls,
+                        issue_detail=detail,
+                    )
                 _replace_field(display, pointer, translated)
             display["markdown"] = render_chinese_report(display)
             return ReportLanguageResult(
@@ -290,7 +339,10 @@ class ReportLanguageAdapter:
             )
         except (ValueError, TypeError, AttributeError, KeyError):
             return self.failure(
-                report, "invalid_report_translation", model_calls=model_calls
+                report,
+                "invalid_report_translation",
+                model_calls=model_calls,
+                issue_detail="invalid_report_structure",
             )
 
     def parse_response(
@@ -306,8 +358,22 @@ class ReportLanguageAdapter:
                 raise ValueError("exactly_one_translation_required")
             parsed = _ReportTranslation.model_validate(response.tool_calls[0].arguments)
             return self.apply_translations(report, parsed.translations)
+        except ValidationError as exc:
+            detail = (
+                "missing_fields"
+                if any(
+                    item["type"] == "missing"
+                    for item in exc.errors(include_input=False)
+                )
+                else "invalid_schema"
+            )
+            return self.failure(
+                report, "invalid_report_translation", issue_detail=detail
+            )
         except (ValueError, TypeError, AttributeError):
-            return self.failure(report, "invalid_report_translation")
+            return self.failure(
+                report, "invalid_report_translation", issue_detail="invalid_action"
+            )
 
     def adapt(self, report: dict) -> ReportLanguageResult:
         prepared = self.prepare(report)
@@ -319,8 +385,16 @@ class ReportLanguageAdapter:
         try:
             messages, tools = prepared
             response = self.client.complete(messages=messages, tools=tools)
-        except Exception:  # noqa: BLE001 - 提供方异常映射为公开错误，取消信号继续传播
-            return self.failure(report, latency_ms=(perf_counter() - started) * 1000)
+        except Exception as exc:  # noqa: BLE001 - 只保留安全错误类别
+            detail = self.exception_issue_detail(exc)
+            return self.failure(
+                report,
+                "invalid_report_translation"
+                if detail == "invalid_json"
+                else "report_translation_dependency_failure",
+                latency_ms=(perf_counter() - started) * 1000,
+                issue_detail=detail,
+            )
         result = self.parse_response(report, response)
         return result.model_copy(
             update={"latency_ms": (perf_counter() - started) * 1000}

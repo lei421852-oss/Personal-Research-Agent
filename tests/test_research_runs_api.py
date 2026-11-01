@@ -8,7 +8,9 @@ from tests.test_research_run_manager import FakeDependencies, make_manager
 
 def test_workbench_http_replay_and_incremental_events():
     manager = make_manager(dependencies=FakeDependencies(False))
-    with TestClient(create_app(manager_factory=lambda: manager)) as client:
+    with TestClient(
+        create_app(manager_factory=lambda: manager, research_submission_enabled=True)
+    ) as client:
         assert client.get("/").status_code == 200
         assert client.get("/workbench-static/app.js").status_code == 200
         assert client.get("/api/research/health").json()["real_research_ready"] is False
@@ -39,7 +41,9 @@ def test_workbench_http_replay_and_incremental_events():
 
 def test_http_validation_and_unavailable_provider_have_safe_errors():
     manager = make_manager(dependencies=FakeDependencies(False))
-    with TestClient(create_app(manager_factory=lambda: manager)) as client:
+    with TestClient(
+        create_app(manager_factory=lambda: manager, research_submission_enabled=True)
+    ) as client:
         bad = client.post(
             "/api/research/runs",
             json={
@@ -73,7 +77,9 @@ def test_http_validation_and_unavailable_provider_have_safe_errors():
 
 def test_legal_http_run_duplicate_and_cancel_use_background_manager():
     manager = make_manager()
-    with TestClient(create_app(manager_factory=lambda: manager)) as client:
+    with TestClient(
+        create_app(manager_factory=lambda: manager, research_submission_enabled=True)
+    ) as client:
         payload = {
             "question": "Compare prepared architectures",
             "paper_ids": ["blip2-2301.12597v1", "flamingo-2204.14198v1"],

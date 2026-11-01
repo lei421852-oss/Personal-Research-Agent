@@ -14,6 +14,7 @@
     foreign_active_runs:"存在其他实例的非终态任务，请维护者核对，页面不会自动接管。",
     run_not_found:"没有找到该任务；它可能未持久化或已超出保留期。",
     research_unavailable:"研究依赖未就绪，请检查运行配置。",
+    research_entry_disabled:"研究入口暂未开放；仍可查看已有记录。",
     service_stopping:"服务正在停止，请稍后核对当前任务。"
   };
   class ApiError extends Error {

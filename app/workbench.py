@@ -36,7 +36,11 @@ def create_app(
     database_settings=None,
     database_factory=None,
     memory_settings=None,
+    research_submission_enabled: bool = False,
 ):
+    if type(research_submission_enabled) is not bool:
+        raise ValueError("research_submission_enabled must be boolean")
+
     @asynccontextmanager
     async def lifespan(application):
         # 后登记的Manager先关闭；即使构造或关闭失败，DB回调仍会执行。
@@ -118,6 +122,7 @@ def create_app(
             yield
 
     application = FastAPI(title="多模态论文研究工作台", lifespan=lifespan)
+    application.state.research_submission_enabled = research_submission_enabled
     application.include_router(router)
     application.include_router(storage_router)
     application.include_router(memory_router)

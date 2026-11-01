@@ -765,14 +765,21 @@ class ReActWorkbenchRuntime:
                     report_snapshot=answer
                     | {"language": {"status": "pending"}, "chinese_report": None},
                 )
+                before_translation_calls = budget.used
                 try:
                     response = await model("report_language").complete(
                         messages=translation[0], tools=translation[1], attempt_budget=1
                     )
                     language = translator.parse_response(answer, response)
-                except Exception:  # noqa: BLE001 - 语言失败保留权威原文
+                except Exception as exc:  # noqa: BLE001 - 仅公开安全类别，保留权威原文
+                    detail = translator.exception_issue_detail(exc)
                     language = translator.failure(
-                        answer, "answer_language_dependency_failure", model_calls=0
+                        answer,
+                        "invalid_report_translation"
+                        if detail == "invalid_json"
+                        else "answer_language_dependency_failure",
+                        model_calls=budget.used - before_translation_calls,
+                        issue_detail=detail,
                     )
                 answer["language"] = {
                     k: v
@@ -792,7 +799,10 @@ class ReActWorkbenchRuntime:
                     summary="中文展示已生成；答案本身没有独立语义审核。"
                     if language.status == "translated"
                     else "中文展示失败，原始答案与研究结果保留。",
-                    details={"issue_code": language.issue_code},
+                    details={
+                        "issue_code": language.issue_code,
+                        "issue_detail": language.issue_detail,
+                    },
                     source="live",
                 )
             execution["answer_first"] = answer

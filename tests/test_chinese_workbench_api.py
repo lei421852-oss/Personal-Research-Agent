@@ -86,7 +86,9 @@ def test_http_zero_selection_provider_missing_is_safe_and_single_selection_is_42
     }
     runtime, _, _ = fake_runtime()
     manager = ResearchRunManager(runtime, dependency, ReplayRepository(ROOT))
-    with TestClient(create_app(manager_factory=lambda: manager)) as client:
+    with TestClient(
+        create_app(manager_factory=lambda: manager, research_submission_enabled=True)
+    ) as client:
         missing = client.post(
             "/api/research/runs", json={"question": "比较 BLIP-2 与 Flamingo。"}
         )
